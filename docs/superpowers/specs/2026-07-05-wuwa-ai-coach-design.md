@@ -27,7 +27,8 @@ wawa-ai-coach/
       specs/
         2026-07-05-wuwa-ai-coach-design.md
   backend/
-    requirements.txt
+    pyproject.toml
+    uv.lock
     main.py
     data/
       build_rules.json
@@ -78,7 +79,7 @@ wawa-ai-coach/
 
 ## Backend Design
 
-The backend is a FastAPI app using Pydantic as the shared data contract and standard `sqlite3` for persistence. `backend/src/models.py` defines the snapshot, extraction, rule, diagnosis, session, and analyze request/response models from the implementation prompt.
+The backend is a FastAPI app using Pydantic as the shared data contract and standard `sqlite3` for persistence. Python dependencies are managed with `uv`, using `uv venv` for `.venv` creation and `uv add` for dependency changes. `backend/src/models.py` defines the snapshot, extraction, rule, diagnosis, session, and analyze request/response models from the implementation prompt.
 
 Modules:
 
@@ -183,6 +184,7 @@ Character evaluation checks weapon fit, echo set fit, key stats, role alignment,
 Backend verification:
 
 - `python -m compileall .`
+- `uv run pytest -v`
 - Start FastAPI with `uvicorn main:app --reload --port 8000`
 - Confirm `GET /health` returns `{ "ok": true }`
 - Confirm mock extraction works without `OPENAI_API_KEY`
