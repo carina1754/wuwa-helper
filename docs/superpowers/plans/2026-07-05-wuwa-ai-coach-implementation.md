@@ -1,4 +1,4 @@
-# WuWa AI Coach MVP Implementation Plan
+﻿# WuWa AI Coach MVP Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -1035,7 +1035,7 @@ def test_analyze_character_returns_diagnoses_and_report():
     assert response.status_code == 200
     data = response.json()
     assert data["diagnoses"]
-    assert "바로 할 일" in data["report"] or "Next actions" in data["report"]
+    assert "諛붾줈 ???? in data["report"] or "Next actions" in data["report"]
 ```
 
 - [ ] **Step 3: Run tests to verify they fail**
@@ -1204,20 +1204,20 @@ def generate_report(snapshot: CharacterSnapshot, diagnoses: list[Diagnosis]) -> 
     actions = actions[:3] or ["Enter more character and echo data, then run diagnosis again."]
     character = snapshot.character_name or "Current character"
     lines = [
-        "요약",
-        f"{character}의 현재 빌드는 에코와 핵심 스탯을 우선 점검해야 합니다.",
+        "?붿빟",
+        f"{character}???꾩옱 鍮뚮뱶???먯퐫? ?듭떖 ?ㅽ꺈???곗꽑 ?먭??댁빞 ?⑸땲??",
         "",
-        "현재 상태",
-        f"진단 항목 {len(diagnoses)}개를 평가했습니다.",
+        "?꾩옱 ?곹깭",
+        f"吏꾨떒 ??ぉ {len(diagnoses)}媛쒕? ?됯??덉뒿?덈떎.",
         "",
-        "가장 큰 문제 3개",
+        "媛????臾몄젣 3媛?,
     ]
     lines.extend(f"- {item.target_name or item.target_type}: {item.grade} ({item.score})" for item in biggest_problems)
-    lines.extend(["", "바로 할 일 3개"])
+    lines.extend(["", "諛붾줈 ????3媛?])
     lines.extend(f"- {action}" for action in actions)
-    lines.extend(["", "보류해도 되는 것", "- 완벽한 부옵션 파밍은 기본 세트와 주옵션을 맞춘 뒤 진행하세요."])
-    lines.extend(["", "장기 목표", "- 역할에 맞는 무기, 세트, 치명/공격/에너지 균형을 안정화하세요."])
-    lines.extend(["", "주의사항", "- 이 결과는 비공식 팬 도구의 추정이며 게임 내 실제 성능과 다를 수 있습니다."])
+    lines.extend(["", "蹂대쪟?대룄 ?섎뒗 寃?, "- ?꾨꼍??遺?듭뀡 ?뚮컢? 湲곕낯 ?명듃? 二쇱샃?섏쓣 留욎텣 ??吏꾪뻾?섏꽭??"])
+    lines.extend(["", "?κ린 紐⑺몴", "- ??븷??留욌뒗 臾닿린, ?명듃, 移섎챸/怨듦꺽/?먮꼫吏 洹좏삎???덉젙?뷀븯?몄슂."])
+    lines.extend(["", "二쇱쓽?ы빆", "- ??寃곌낵??鍮꾧났?????꾧뎄??異붿젙?대ŉ 寃뚯엫 ???ㅼ젣 ?깅뒫怨??ㅻ? ???덉뒿?덈떎."])
     return "\n".join(lines)
 ```
 
@@ -1321,7 +1321,7 @@ Run:
 
 ```powershell
 cd C:\Users\JungSu\Desktop\wawa-ai-coach\backend
-uv run python -m compileall .
+uv run python -m compileall main.py src tests
 uv run pytest -v
 ```
 
@@ -1370,10 +1370,10 @@ Create `frontend/package.json`:
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "lint": "next lint"
+    "lint": "eslint ."
   },
   "dependencies": {
-    "next": "15.3.4",
+    "next": "^15.5.20",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "lucide-react": "^0.468.0"
@@ -1385,10 +1385,15 @@ Create `frontend/package.json`:
     "@types/react-dom": "^19.0.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.18.0",
-    "eslint-config-next": "15.3.4",
-    "postcss": "^8.4.49",
+    "eslint-config-next": "^15.5.20",
+    "postcss": "^8.5.10",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.0"
+  },
+  "overrides": {
+    "next": {
+      "postcss": "8.5.10"
+    }
   }
 }
 ```
@@ -1749,7 +1754,7 @@ export function AppShell({ renderTab }: AppShellProps) {
               <p className="text-sm text-slate-600">Wuthering Waves screenshot and build coaching</p>
             </div>
             <span className="rounded-md border border-amber-300 bg-amber-50 px-3 py-1 text-sm font-medium text-amber-900">
-              비공식 팬 도구
+              鍮꾧났?????꾧뎄
             </span>
           </div>
           <nav className="flex gap-2 overflow-x-auto">
@@ -2004,7 +2009,7 @@ export function DiagnosisResult({ result }: DiagnosisResultProps) {
           <article key={`${diagnosis.target_type}-${diagnosis.target_name}-${index}`} className="rounded-md border border-slate-200 p-3">
             <div className="flex items-center justify-between gap-2">
               <h3 className="font-medium text-slate-900">{diagnosis.target_name || diagnosis.target_type}</h3>
-              <span className="rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">{diagnosis.grade} · {diagnosis.score}</span>
+              <span className="rounded-md bg-slate-100 px-2 py-1 text-sm text-slate-700">{diagnosis.grade} 쨌 {diagnosis.score}</span>
             </div>
             <ul className="mt-3 list-disc pl-5 text-sm text-slate-600">
               {diagnosis.reasons.map((reason) => <li key={reason}>{reason}</li>)}
@@ -2523,7 +2528,7 @@ Backend:
 
 ```powershell
 cd backend
-uv run python -m compileall .
+uv run python -m compileall main.py src tests
 uv run pytest -v
 ```
 
@@ -2559,7 +2564,7 @@ Run:
 
 ```powershell
 cd C:\Users\JungSu\Desktop\wawa-ai-coach\backend
-uv run python -m compileall .
+uv run python -m compileall main.py src tests
 uv run pytest -v
 ```
 
@@ -2625,7 +2630,7 @@ Verify:
 - Rules loads and saves JSON.
 - Settings export downloads JSON.
 - Settings import accepts exported JSON.
-- Header clearly shows `비공식 팬 도구`.
+- Header clearly shows `鍮꾧났?????꾧뎄`.
 - Mobile-width layout does not overlap fields.
 
 - [ ] **Step 7: Commit final docs**
