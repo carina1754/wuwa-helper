@@ -79,7 +79,7 @@ wawa-ai-coach/
 
 ## Backend Design
 
-The backend is a FastAPI app using Pydantic as the shared data contract and standard `sqlite3` for persistence. Python dependencies are managed with `uv`, using `uv venv` for `.venv` creation and `uv add` for dependency changes. `backend/src/models.py` defines the snapshot, extraction, rule, diagnosis, session, and analyze request/response models from the implementation prompt.
+The backend is a FastAPI app using Python 3.12, Pydantic as the shared data contract, and standard `sqlite3` for persistence. Python dependencies are managed with `uv`, using `uv venv --python 3.12` for `.venv` creation and `uv add` for dependency changes. `backend/src/models.py` defines the snapshot, extraction, rule, diagnosis, session, and analyze request/response models from the implementation prompt.
 
 Modules:
 

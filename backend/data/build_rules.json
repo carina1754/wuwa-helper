@@ -1,0 +1,26 @@
+[
+  {
+    "character_name": "default_main_dps",
+    "role": "main_dps",
+    "recommended_sets": ["Molten Rift", "Void Thunder", "Freezing Frost", "Sierra Gale", "Celestial Light", "Havoc Eclipse"],
+    "priority_stats": ["Crit Rate", "Crit DMG", "ATK%", "Element DMG Bonus", "Energy Regen"],
+    "useful_sub_stats": ["Crit Rate", "Crit DMG", "ATK%", "ATK", "Energy Regen", "Resonance Skill DMG Bonus", "Resonance Liberation DMG Bonus"],
+    "bad_sub_stats": ["DEF", "DEF%", "HP", "HP%"],
+    "recommended_weapons": [],
+    "notes": "Default DPS rule. Replace with character-specific rules later.",
+    "source_links": [],
+    "game_version": "manual"
+  },
+  {
+    "character_name": "default_support",
+    "role": "support",
+    "recommended_sets": ["Moonlit Clouds", "Rejuvenation Glow"],
+    "priority_stats": ["Energy Regen", "ATK%", "HP%", "Healing Bonus"],
+    "useful_sub_stats": ["Energy Regen", "ATK%", "HP%", "Crit Rate", "Crit DMG"],
+    "bad_sub_stats": ["DEF", "DEF%"],
+    "recommended_weapons": [],
+    "notes": "Default support rule.",
+    "source_links": [],
+    "game_version": "manual"
+  }
+]

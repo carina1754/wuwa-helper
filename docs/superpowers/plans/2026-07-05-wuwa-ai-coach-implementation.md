@@ -6,13 +6,13 @@
 
 **Architecture:** The backend owns the typed domain model, extraction, rules, evaluation, reporting, and persistence. The frontend is a tabbed single-page Next.js app that calls backend APIs and keeps the active analysis editable. The MVP must be fully usable without an OpenAI API key by using mock extraction data.
 
-**Tech Stack:** Python 3.10+, uv-managed `.venv`, FastAPI, Uvicorn, Pydantic, SQLite, OpenAI API, Next.js, React, TypeScript, Tailwind CSS.
+**Tech Stack:** Python 3.12, uv-managed `.venv`, FastAPI, Uvicorn, Pydantic, SQLite, OpenAI API, Next.js, React, TypeScript, Tailwind CSS.
 
 ## Global Constraints
 
 - Repository path is `C:\Users\JungSu\Desktop\wawa-ai-coach`.
 - Repository folder stays `wawa-ai-coach`; product title is `WuWa AI Coach`.
-- Python environment must be created with `uv venv`.
+- Python environment must be created with `uv venv --python 3.12`.
 - Backend dependencies must be managed with `backend/pyproject.toml`, `uv.lock`, `uv add`, and `uv add --dev`.
 - Missing `OPENAI_API_KEY` must use mock extraction and must not crash the server.
 - Uploaded images are not stored by default.
@@ -29,7 +29,7 @@
 Create or modify these files:
 
 - `.gitignore`: ignore Python/Node build artifacts, local env files, local SQLite DB, uploaded temp files, and caches.
-- `README.md`: setup, uv venv and uv add commands, backend/frontend run commands, mock mode, rule editing, export/import, legal notice.
+- `README.md`: setup, `uv venv --python 3.12` and `uv add` commands, backend/frontend run commands, mock mode, rule editing, export/import, legal notice.
 - `backend/pyproject.toml`: uv-managed FastAPI backend project metadata and dependencies.
 - `backend/uv.lock`: uv lockfile.
 - `backend/main.py`: FastAPI app and HTTP routes.
@@ -101,12 +101,12 @@ cd C:\Users\JungSu\Desktop\wawa-ai-coach
 New-Item -ItemType Directory -Force backend
 cd backend
 uv init --bare --name wuwa-ai-coach-backend --no-pin-python --no-workspace
-uv venv
+uv venv --python 3.12
 uv add "fastapi>=0.115.0" "uvicorn[standard]>=0.30.0" "pydantic>=2.8.0" "python-multipart>=0.0.9" "openai>=1.40.0"
 uv add --dev "pytest>=8.2.0" "httpx>=0.27.0"
 ```
 
-Expected: `backend/pyproject.toml`, `backend/uv.lock`, and `backend/.venv/` exist. Commit `pyproject.toml` and `uv.lock`; do not commit `.venv/`.
+Expected: `backend/pyproject.toml`, `backend/uv.lock`, and `backend/.venv/` exist, and `uv run python --version` prints Python 3.12.x. Commit `pyproject.toml` and `uv.lock`; do not commit `.venv/`.
 
 Create or update `.gitignore`:
 
@@ -154,7 +154,7 @@ Run:
 
 ```powershell
 cd C:\Users\JungSu\Desktop\wawa-ai-coach\backend
-uv venv
+uv venv --python 3.12
 uv run pytest tests/test_api.py::test_health_returns_ok -v
 ```
 
@@ -2487,7 +2487,7 @@ WuWa AI Coach is an unofficial Wuthering Waves fan tool for screenshot-based bui
 ```powershell
 cd backend
 uv init --bare --name wuwa-ai-coach-backend --no-pin-python --no-workspace
-uv venv
+uv venv --python 3.12
 uv add "fastapi>=0.115.0" "uvicorn[standard]>=0.30.0" "pydantic>=2.8.0" "python-multipart>=0.0.9" "openai>=1.40.0"
 uv add --dev "pytest>=8.2.0" "httpx>=0.27.0"
 uv run uvicorn main:app --reload --port 8000
