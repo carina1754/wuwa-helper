@@ -67,7 +67,7 @@ export function AppShell({ renderTab }: AppShellProps) {
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2">
               <a
-                href="https://discord.gg/4HdGv2WcPX"
+                href="https://discord.gg/hPhsf9GN7E"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
