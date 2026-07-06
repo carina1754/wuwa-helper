@@ -1,9 +1,10 @@
 from __future__ import annotations
 
 import os
+import secrets
 from typing import Any
 
-from fastapi import FastAPI, File, HTTPException, UploadFile
+from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.database import init_db
@@ -66,8 +67,13 @@ def health() -> dict[str, bool]:
     return {"ok": True}
 
 
+def require_internal_secret(x_internal_secret: str | None = Header(default=None)) -> None:
+    expected = os.getenv("INTERNAL_API_SECRET")
+    if not expected or not x_internal_secret or not secrets.compare_digest(x_internal_secret, expected):
+        raise HTTPException(status_code=401, detail="Invalid or missing internal API secret")
 
-@app.post("/auth/sync-user", response_model=UserRecord)
+
+@app.post("/auth/sync-user", response_model=UserRecord, dependencies=[Depends(require_internal_secret)])
 def post_auth_sync_user(payload: AuthUserSyncRequest) -> UserRecord:
     return sync_user(payload)
 

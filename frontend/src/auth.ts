@@ -24,10 +24,15 @@ async function syncUserToBackend(params: {
 }) {
   if (!params.email) return;
   const baseUrl = process.env.INTERNAL_API_BASE_URL ?? "http://127.0.0.1:8000";
+  const internalSecret = process.env.INTERNAL_API_SECRET;
+  if (!internalSecret) {
+    console.error("INTERNAL_API_SECRET is not configured; skipping backend user sync");
+    return;
+  }
   try {
     await fetch(`${baseUrl}/auth/sync-user`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "X-Internal-Secret": internalSecret },
       body: JSON.stringify({
         email: params.email,
         name: params.name,

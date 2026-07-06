@@ -13,6 +13,48 @@ def test_health_returns_ok():
     assert response.json() == {"ok": True}
 
 
+def test_sync_user_rejects_missing_or_wrong_secret(monkeypatch):
+    monkeypatch.setenv("INTERNAL_API_SECRET", "correct-secret")
+    payload = {"email": "no-secret@example.com", "role": "user"}
+
+    response = client.post("/auth/sync-user", json=payload)
+    assert response.status_code == 401
+
+    response = client.post("/auth/sync-user", json=payload, headers={"X-Internal-Secret": "wrong-secret"})
+    assert response.status_code == 401
+
+
+def test_sync_user_accepts_matching_secret(monkeypatch):
+    monkeypatch.setenv("INTERNAL_API_SECRET", "correct-secret")
+    email = "sync-user-test@example.com"
+    with get_connection() as conn:
+        conn.execute("DELETE FROM users WHERE email = %s", (email,))
+        conn.commit()
+
+    response = client.post(
+        "/auth/sync-user",
+        json={"email": email, "name": "Test User", "role": "user"},
+        headers={"X-Internal-Secret": "correct-secret"},
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["email"] == email
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM users WHERE email = %s", (email,))
+        conn.commit()
+
+
+def test_sync_user_rejects_when_secret_not_configured(monkeypatch):
+    monkeypatch.delenv("INTERNAL_API_SECRET", raising=False)
+    response = client.post(
+        "/auth/sync-user",
+        json={"email": "no-secret@example.com", "role": "user"},
+        headers={"X-Internal-Secret": "anything"},
+    )
+    assert response.status_code == 401
+
+
 def test_rules_endpoint_returns_seed_rules():
     response = client.get("/rules")
     assert response.status_code == 200
