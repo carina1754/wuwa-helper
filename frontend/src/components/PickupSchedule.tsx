@@ -62,8 +62,27 @@ export function PickupSchedule() {
   const activeMonths = useMemo(() => new Set(yearItems.map((item) => item.month)), [yearItems]);
   const characterTotal = useMemo(() => yearItems.reduce((sum, item) => sum + item.characters.length, 0), [yearItems]);
 
-  function itemsForMonth(month: number) {
-    return yearItems.filter((item) => item.month === month);
+  function itemsForMonth(month: number): PickupScheduleItem[] {
+    const monthItems = yearItems.filter((item) => item.month === month);
+    const grouped = new Map<string, PickupScheduleItem>();
+    for (const item of monthItems) {
+      const existing = grouped.get(item.category);
+      if (!existing) {
+        grouped.set(item.category, { ...item, characters: [...item.characters], source_links: [...item.source_links] });
+        continue;
+      }
+      for (const character of item.characters) {
+        if (!existing.characters.includes(character)) {
+          existing.characters.push(character);
+        }
+      }
+      for (const link of item.source_links) {
+        if (!existing.source_links.includes(link)) {
+          existing.source_links.push(link);
+        }
+      }
+    }
+    return Array.from(grouped.values());
   }
 
   return (
