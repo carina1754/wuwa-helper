@@ -218,25 +218,22 @@ def refresh_pickups_and_updates(force: bool = False) -> dict[str, object]:
             )
             conn.commit()
             return {"refreshed": False, "source": source, "reason": "no_parseable_rows"}
-        conn.execute("DELETE FROM pickup_schedule")
         for item in schedule:
             conn.execute(
                 """
-                INSERT INTO pickup_schedule (id, year, month, category, data_json, updated_at)
+                INSERT OR REPLACE INTO pickup_schedule (id, year, month, category, data_json, updated_at)
                 VALUES (?, ?, ?, ?, ?, datetime('now'))
                 """,
                 (item["id"], item["year"], item["month"], item["category"], json.dumps(item, ensure_ascii=False)),
             )
-        if updates:
-            conn.execute("DELETE FROM game_updates")
-            for item in updates:
-                conn.execute(
-                    """
-                    INSERT INTO game_updates (id, version, release_date_kst, data_json, updated_at)
-                    VALUES (?, ?, ?, ?, datetime('now'))
-                    """,
-                    (item["id"], item["version"], item.get("release_date_kst"), json.dumps(item, ensure_ascii=False)),
-                )
+        for item in updates:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO game_updates (id, version, release_date_kst, data_json, updated_at)
+                VALUES (?, ?, ?, ?, datetime('now'))
+                """,
+                (item["id"], item["version"], item.get("release_date_kst"), json.dumps(item, ensure_ascii=False)),
+            )
         conn.execute(
             """
             INSERT OR REPLACE INTO refresh_state (source, refreshed_at, status, message)
