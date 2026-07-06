@@ -60,7 +60,6 @@ export function PickupSchedule() {
 
   const yearItems = useMemo(() => items.filter((item) => item.year === year), [items, year]);
   const activeMonths = useMemo(() => new Set(yearItems.map((item) => item.month)), [yearItems]);
-  const characterTotal = useMemo(() => yearItems.reduce((sum, item) => sum + item.characters.length, 0), [yearItems]);
 
   function itemsForMonth(month: number): PickupScheduleItem[] {
     const monthItems = yearItems.filter((item) => item.month === month);
@@ -111,7 +110,7 @@ export function PickupSchedule() {
           </div>
         </div>
 
-        <div className="grid gap-3 bg-slate-50 px-4 py-4 dark:bg-slate-900/70 sm:grid-cols-3 sm:px-5">
+        <div className="grid gap-3 bg-slate-50 px-4 py-4 dark:bg-slate-900/70 sm:grid-cols-2 sm:px-5">
           <div className="rounded-md border border-slate-200 bg-white px-3 py-2 dark:border-slate-800 dark:bg-slate-950">
             <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{t.pickup.yearly}</p>
             <p className="mt-1 text-lg font-semibold text-slate-950 dark:text-slate-50">{year}</p>
@@ -119,14 +118,6 @@ export function PickupSchedule() {
           <div className="rounded-md border border-slate-200 bg-white px-3 py-2 dark:border-slate-800 dark:bg-slate-950">
             <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{t.pickup.monthly}</p>
             <p className="mt-1 text-lg font-semibold text-slate-950 dark:text-slate-50">{activeMonths.size}/12</p>
-          </div>
-          <div className="rounded-md border border-slate-200 bg-white px-3 py-2 dark:border-slate-800 dark:bg-slate-950">
-            <p className="text-xs font-medium text-slate-500 dark:text-slate-400">{t.pickup.characters}</p>
-            <div className="mt-2 flex flex-wrap gap-2 text-xs font-medium">
-              <span className="rounded-md px-2 py-1 ring-1 ring-inset bg-violet-50 text-violet-800 ring-violet-200">{t.pickup.first}</span>
-              <span className="rounded-md px-2 py-1 ring-1 ring-inset bg-amber-50 text-amber-800 ring-amber-200">{t.pickup.rerun}</span>
-              <span className="rounded-md px-2 py-1 ring-1 ring-inset bg-teal-50 text-teal-800 ring-teal-200">{characterTotal}</span>
-            </div>
           </div>
         </div>
         {error ? <p className="mx-4 mb-4 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-900 sm:mx-5">{error}</p> : null}

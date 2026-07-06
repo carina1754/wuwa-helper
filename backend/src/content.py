@@ -12,7 +12,16 @@ def load_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:
     if year is not None:
         query += " WHERE year = ?"
         params = (year,)
-    query += " ORDER BY year DESC, month ASC, CASE category WHEN 'first_pickup' THEN 1 WHEN 'rerun_1' THEN 2 ELSE 3 END"
+    query += (
+        " ORDER BY year DESC, month ASC,"
+        " CASE category"
+        " WHEN 'first_pickup' THEN 1"
+        " WHEN 'rerun_1' THEN 2"
+        " WHEN 'rerun_2' THEN 3"
+        " WHEN 'rerun_3' THEN 4"
+        " ELSE 5"
+        " END"
+    )
     with get_connection() as conn:
         rows = conn.execute(query, params).fetchall()
     return [PickupScheduleItem.model_validate_json(row["data_json"]) for row in rows]
