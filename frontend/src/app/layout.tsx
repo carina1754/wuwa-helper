@@ -3,7 +3,7 @@ import { Providers } from "./providers";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "WaWa AI Helper",
+  title: "명조 AI 헬퍼",
   description: "Unofficial Wuthering Waves account and echo coaching tool",
 };
 

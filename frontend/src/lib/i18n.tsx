@@ -7,6 +7,7 @@ export type Language = "ko" | "en";
 export const copy = {
   ko: {
     app: {
+      name: "명조 AI 헬퍼",
       tagline: "스크린샷 추출, 에코 점수, 빌드 우선순위",
       status: "비공식 가이드",
       websiteUpdates: "웹사이트 업데이트",
@@ -306,7 +307,7 @@ export const copy = {
       openAiKey: "OpenAI API 키",
       openAiKeyBody: "실제 비전 추출을 사용하려면 백엔드 환경에 OPENAI_API_KEY를 설정하세요. 없으면 mock 모드가 사용됩니다.",
       legalNotice: "법적 안내",
-      legalNoticeBody: "WaWa AI Helper는 비공식 팬 도구이며 Wuthering Waves 또는 Kuro Games와 관련이 없습니다.",
+      legalNoticeBody: "명조 AI 헬퍼는 비공식 팬 도구이며 Wuthering Waves 또는 Kuro Games와 관련이 없습니다.",
       exportJson: "JSON 내보내기",
       importJson: "JSON 가져오기",
       imported: (rules: number, history: number, characters = 0) => `규칙 ${rules}개, 캐릭터 ${characters}개, 기록 ${history}개를 가져왔습니다.`,
@@ -325,6 +326,7 @@ export const copy = {
   },
   en: {
     app: {
+      name: "WaWa AI Helper",
       tagline: "Screenshot extraction, echo scoring, and build priorities",
       status: "Unofficial guide",
       websiteUpdates: "Website updates",
