@@ -40,8 +40,18 @@ def test_pickup_schedule_seed_entries_validate():
         PickupScheduleItem.model_validate(item)
 
 
-def test_pickup_schedule_seed_keeps_existing_july_2026_entries():
+def test_pickup_schedule_seed_keeps_corrected_mid_2026_banners():
     items = _load_items()
     by_id = {item["id"]: item for item in items}
-    assert by_id["2026-07-first"]["characters"] == ["Lucy", "Rebecca"]
-    assert by_id["2026-07-rerun-1"]["characters"] == ["Lucilla", "Cartethyia"]
+    assert by_id["2026-06-08-lucy-first_pickup"]["characters"] == ["Lucy"]
+    assert by_id["2026-06-08-lucy-first_pickup"]["end_date"] == "2026-07-09"
+    assert by_id["2026-06-13-lucilla-first_pickup"]["characters"] == ["Lucilla"]
+    assert by_id["2026-06-18-cartethyia-rerun_2"]["characters"] == ["Cartethyia"]
+
+
+def test_pickup_schedule_seed_allows_rerun_3():
+    items = _load_items()
+    rerun_3_items = [item for item in items if item["category"] == "rerun_3"]
+    assert rerun_3_items
+    for item in rerun_3_items:
+        PickupScheduleItem.model_validate(item)

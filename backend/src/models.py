@@ -94,9 +94,16 @@ class PickupScheduleItem(BaseModel):
     id: str
     year: int
     month: int
-    category: Literal["first_pickup", "rerun_1", "rerun_2"]
+    day: int | None = None
+    start_date: str | None = None
+    end_date: str | None = None
+    version: str | None = None
+    phase: str | None = None
+    category: Literal["first_pickup", "rerun_1", "rerun_2", "rerun_3"]
     label_ko: str
     characters: list[str] = Field(default_factory=list)
+    appearance_no: int | None = None
+    status: str | None = None
     notes_ko: str | None = None
     source_links: list[str] = Field(default_factory=list)
 

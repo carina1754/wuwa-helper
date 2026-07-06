@@ -87,9 +87,16 @@ export interface PickupScheduleItem {
   id: string;
   year: number;
   month: number;
-  category: "first_pickup" | "rerun_1" | "rerun_2";
+  day?: number | null;
+  start_date?: string | null;
+  end_date?: string | null;
+  version?: string | null;
+  phase?: string | null;
+  category: "first_pickup" | "rerun_1" | "rerun_2" | "rerun_3";
   label_ko: string;
   characters: string[];
+  appearance_no?: number | null;
+  status?: string | null;
   notes_ko?: string | null;
   source_links: string[];
 }

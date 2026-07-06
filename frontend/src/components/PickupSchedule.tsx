@@ -27,6 +27,12 @@ const categoryStyle = {
     avatar: "border-teal-300 ring-teal-100 dark:border-teal-300 dark:ring-teal-400/20",
     icon: <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />,
   },
+  rerun_3: {
+    label: "bg-rose-50 text-rose-800 ring-rose-200 dark:bg-rose-400/10 dark:text-rose-200 dark:ring-rose-400/30",
+    border: "border-rose-200 bg-rose-50/70 dark:border-rose-400/30 dark:bg-rose-400/10",
+    avatar: "border-rose-300 ring-rose-100 dark:border-rose-300 dark:ring-rose-400/20",
+    icon: <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" />,
+  },
 } satisfies Record<PickupScheduleItem["category"], { label: string; border: string; avatar: string; icon: ReactNode }>;
 
 export function PickupSchedule() {

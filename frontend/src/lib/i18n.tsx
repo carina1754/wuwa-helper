@@ -271,6 +271,8 @@ export const copy = {
       legend: "범례",
       first: "첫 픽업",
       rerun: "복각",
+      characters: "등장 캐릭터",
+      source: "출처",
       empty: "등록된 픽업 정보가 없습니다.",
     },
     updates: {
@@ -489,6 +491,7 @@ export const copy = {
       "Whispers of Sirens": "Whispers of Sirens",
       "Wildfire Mark": "Wildfire Mark",
       "Woodland Aria": "Woodland Aria",
+      "Rime-Draped Sprouts": "Rime-Draped Sprouts",
     },
     dashboard: {
       cards: [
@@ -573,6 +576,8 @@ export const copy = {
       legend: "Legend",
       first: "First pickup",
       rerun: "Rerun",
+      characters: "Characters",
+      source: "Source",
       empty: "No pickup schedule has been added.",
     },
     updates: {
