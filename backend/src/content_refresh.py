@@ -97,6 +97,13 @@ def _extract_banner_rows(text: str) -> list[dict[str, object]]:
     return rows
 
 
+_CATEGORY_ID_SUFFIXES = {
+    "first_pickup": "first",
+    "rerun_1": "rerun-1",
+    "rerun_2": "rerun-2",
+}
+
+
 def _schedule_from_banner_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
     seen: set[str] = set()
     items: list[dict[str, object]] = []
@@ -113,9 +120,10 @@ def _schedule_from_banner_rows(rows: list[dict[str, object]]) -> list[dict[str, 
 
     for (year, month, category), characters in sorted(grouped.items()):
         label = "첫 픽업" if category == "first_pickup" else "1차 복각"
+        id_suffix = _CATEGORY_ID_SUFFIXES.get(category, category)
         items.append(
             {
-                "id": f"{year}-{month:02d}-{category}",
+                "id": f"{year}-{month:02d}-{id_suffix}",
                 "year": year,
                 "month": month,
                 "category": category,
