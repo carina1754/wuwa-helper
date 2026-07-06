@@ -35,7 +35,7 @@ interface AppShellProps {
 }
 
 export function AppShell({ renderTab }: AppShellProps) {
-  const [activeTab, setActiveTab] = useState<AppTab>("Analyzer");
+  const [activeTab, setActiveTab] = useState<AppTab>("Updates");
   const [isDark, setIsDark] = useState(false);
   const { data: session, status } = useSession();
   const { language, toggleLanguage, t } = useLanguage();
@@ -44,7 +44,7 @@ export function AppShell({ renderTab }: AppShellProps) {
 
   return (
     <main className={`min-h-screen transition-colors ${isDark ? "dark bg-slate-950 text-slate-100" : "bg-[#f4f7fb] text-slate-900"}`}>
-      <header className="border-b border-slate-200 bg-white/95 backdrop-blur transition-colors dark:border-slate-800 dark:bg-slate-950/95">
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur transition-colors dark:border-slate-800 dark:bg-slate-950/95">
         <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
@@ -97,9 +97,13 @@ export function AppShell({ renderTab }: AppShellProps) {
                   {t.app.admin}
                 </Link>
               ) : null}
-              <span className="rounded-md border border-amber-300 bg-amber-50 px-3 py-1 text-sm font-medium text-amber-900 dark:border-amber-500/50 dark:bg-amber-400/10 dark:text-amber-200">
-                {t.app.status}
-              </span>
+              <button
+                type="button"
+                onClick={() => setActiveTab("Updates")}
+                className="rounded-md border border-teal-300 bg-teal-50 px-3 py-1 text-sm font-medium text-teal-900 transition hover:bg-teal-100 dark:border-teal-400/50 dark:bg-teal-400/10 dark:text-teal-200 dark:hover:bg-teal-400/20"
+              >
+                {t.app.websiteUpdates}
+              </button>
             </div>
           </div>
           <nav className="flex gap-2 overflow-x-auto pb-1" aria-label="Primary">

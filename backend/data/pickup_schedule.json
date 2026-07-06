@@ -1,472 +1,1481 @@
 [
   {
-    "id": "2024-05-first",
+    "id": "2024-05-23-first_pickup",
     "year": 2024,
     "month": 5,
+    "day": 23,
+    "start_date": "2024-05-23",
+    "end_date": "2024-06-13",
+    "version": "1.0",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Jiyan"],
-    "notes_ko": "버전 1.0 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Jiyan"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.0 1페이즈 · Jiyan 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-06-first",
+    "id": "2024-06-06-first_pickup",
     "year": 2024,
     "month": 6,
+    "day": 6,
+    "start_date": "2024-06-06",
+    "end_date": "2024-06-26",
+    "version": "1.0",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Yinlin", "Jinhsi"],
-    "notes_ko": "버전 1.0 2페이즈(Yinlin)·1.1 1페이즈(Jinhsi) 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Yinlin"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.0 2페이즈 · Yinlin 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-07-first",
+    "id": "2024-06-28-first_pickup",
+    "year": 2024,
+    "month": 6,
+    "day": 28,
+    "start_date": "2024-06-28",
+    "end_date": "2024-07-22",
+    "version": "1.1",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Jinhsi"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.1 1페이즈 · Jinhsi 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2024-07-22-first_pickup",
     "year": 2024,
     "month": 7,
+    "day": 22,
+    "start_date": "2024-07-22",
+    "end_date": "2024-08-14",
+    "version": "1.1",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Changli"],
-    "notes_ko": "버전 1.1 2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Changli"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.1 2페이즈 · Changli 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-08-first",
+    "id": "2024-08-15-first_pickup",
     "year": 2024,
     "month": 8,
+    "day": 15,
+    "start_date": "2024-08-15",
+    "end_date": "2024-09-07",
+    "version": "1.2",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Zhezhi"],
-    "notes_ko": "버전 1.2 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Zhezhi"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.2 1페이즈 · Zhezhi 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-09-first",
+    "id": "2024-09-07-first_pickup",
     "year": 2024,
     "month": 9,
+    "day": 7,
+    "start_date": "2024-09-07",
+    "end_date": "2024-09-28",
+    "version": "1.2",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Xiangli Yao", "Shorekeeper"],
-    "notes_ko": "버전 1.2 2페이즈(Xiangli Yao)·1.3 1페이즈(Shorekeeper) 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Xiangli Yao"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.2 2페이즈 · Xiangli Yao 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-10-rerun-1",
+    "id": "2024-09-29-first_pickup",
+    "year": 2024,
+    "month": 9,
+    "day": 29,
+    "start_date": "2024-09-29",
+    "end_date": "2024-10-24",
+    "version": "1.3",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Shorekeeper"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.3 1페이즈 · Shorekeeper 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2024-10-24-rerun_1",
     "year": 2024,
     "month": 10,
+    "day": 24,
+    "start_date": "2024-10-24",
+    "end_date": "2024-11-13",
+    "version": "1.3",
+    "phase": "2페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Jiyan"],
-    "notes_ko": "버전 1.3 2페이즈 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Jiyan"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.3 2페이즈 · Jiyan 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-11-first",
+    "id": "2024-11-14-first_pickup",
     "year": 2024,
     "month": 11,
+    "day": 14,
+    "start_date": "2024-11-14",
+    "end_date": "2024-12-12",
+    "version": "1.4",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Camellya"],
-    "notes_ko": "버전 1.4 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Camellya"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.4 1페이즈 · Camellya 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2024-12-rerun-1",
+    "id": "2024-12-12-rerun_1",
     "year": 2024,
     "month": 12,
+    "day": 12,
+    "start_date": "2024-12-12",
+    "end_date": "2025-01-01",
+    "version": "1.4",
+    "phase": "2페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Yinlin", "Xiangli Yao"],
-    "notes_ko": "버전 1.4 2페이즈 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Yinlin",
+      "Xiangli Yao"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 1.4 2페이즈 · Yinlin, Xiangli Yao 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-01-first",
+    "id": "2025-01-02-first_pickup",
     "year": 2025,
     "month": 1,
+    "day": 2,
+    "start_date": "2025-01-02",
+    "end_date": "2025-01-23",
+    "version": "2.0",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Carlotta", "Roccia"],
-    "notes_ko": "버전 2.0 1·2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Carlotta"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.0 1페이즈 · Carlotta 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-01-rerun-1",
+    "id": "2025-01-02-rerun_1",
     "year": 2025,
     "month": 1,
+    "day": 2,
+    "start_date": "2025-01-02",
+    "end_date": "2025-01-23",
+    "version": "2.0",
+    "phase": "1페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Zhezhi", "Jinhsi"],
-    "notes_ko": "버전 2.0 1·2페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Zhezhi"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.0 1페이즈 · Zhezhi 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-02-first",
+    "id": "2025-01-23-first_pickup",
+    "year": 2025,
+    "month": 1,
+    "day": 23,
+    "start_date": "2025-01-23",
+    "end_date": "2025-02-12",
+    "version": "2.0",
+    "phase": "2페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Roccia"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.0 2페이즈 · Roccia 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-01-23-rerun_1",
+    "year": 2025,
+    "month": 1,
+    "day": 23,
+    "start_date": "2025-01-23",
+    "end_date": "2025-02-12",
+    "version": "2.0",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Jinhsi"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.0 2페이즈 · Jinhsi 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-02-13-first_pickup",
     "year": 2025,
     "month": 2,
+    "day": 13,
+    "start_date": "2025-02-13",
+    "end_date": "2025-03-06",
+    "version": "2.1",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Phoebe"],
-    "notes_ko": "버전 2.1 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Phoebe"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.1 1페이즈 · Phoebe 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-03-first",
+    "id": "2025-03-06-first_pickup",
     "year": 2025,
     "month": 3,
+    "day": 6,
+    "start_date": "2025-03-06",
+    "end_date": "2025-03-26",
+    "version": "2.1",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Brant", "Cantarella"],
-    "notes_ko": "버전 2.1 2페이즈(Brant)·2.2 1페이즈(Cantarella) 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Brant"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.1 2페이즈 · Brant 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-03-rerun-1",
+    "id": "2025-03-06-rerun_1",
     "year": 2025,
     "month": 3,
+    "day": 6,
+    "start_date": "2025-03-06",
+    "end_date": "2025-03-26",
+    "version": "2.1",
+    "phase": "2페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Changli", "Camellya"],
-    "notes_ko": "버전 2.1 2페이즈·2.2 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Changli"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.1 2페이즈 · Changli 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-04-first",
+    "id": "2025-03-27-first_pickup",
     "year": 2025,
-    "month": 4,
+    "month": 3,
+    "day": 27,
+    "start_date": "2025-03-27",
+    "end_date": "2025-04-17",
+    "version": "2.2",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Zani"],
-    "notes_ko": "버전 2.3 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Cantarella"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.2 1페이즈 · Cantarella 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-04-rerun-1",
+    "id": "2025-03-27-rerun_1",
     "year": 2025,
-    "month": 4,
+    "month": 3,
+    "day": 27,
+    "start_date": "2025-03-27",
+    "end_date": "2025-04-17",
+    "version": "2.2",
+    "phase": "1페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Shorekeeper"],
-    "notes_ko": "버전 2.2 2페이즈 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Camellya"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.2 1페이즈 · Camellya 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-04-rerun-2",
+    "id": "2025-04-17-rerun_1",
     "year": 2025,
     "month": 4,
+    "day": 17,
+    "start_date": "2025-04-17",
+    "end_date": "2025-04-28",
+    "version": "2.2",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Shorekeeper"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.2 2페이즈 · Shorekeeper 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-04-29-first_pickup",
+    "year": 2025,
+    "month": 4,
+    "day": 29,
+    "start_date": "2025-04-29",
+    "end_date": "2025-05-22",
+    "version": "2.3",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Zani"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.3 1페이즈 · Zani 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-04-29-rerun_2",
+    "year": 2025,
+    "month": 4,
+    "day": 29,
+    "start_date": "2025-04-29",
+    "end_date": "2025-05-22",
+    "version": "2.3",
+    "phase": "1페이즈",
     "category": "rerun_2",
     "label_ko": "2차 복각",
-    "characters": ["Jiyan", "Yinlin", "Zhezhi", "Xiangli Yao", "Phoebe"],
-    "notes_ko": "버전 2.3 1페이즈 1주년 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Jiyan",
+      "Yinlin",
+      "Zhezhi",
+      "Xiangli Yao"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.3 1페이즈 · Jiyan, Yinlin, Zhezhi, Xiangli Yao 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-05-first",
+    "id": "2025-04-29-rerun_1",
     "year": 2025,
-    "month": 5,
-    "category": "first_pickup",
-    "label_ko": "첫 픽업",
-    "characters": ["Ciaccona"],
-    "notes_ko": "버전 2.3 2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2025-05-rerun-1",
-    "year": 2025,
-    "month": 5,
+    "month": 4,
+    "day": 29,
+    "start_date": "2025-04-29",
+    "end_date": "2025-05-22",
+    "version": "2.3",
+    "phase": "1페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Jinhsi", "Changli", "Carlotta", "Roccia", "Brant"],
-    "notes_ko": "버전 2.3 2페이즈 1주년 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Phoebe"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.3 1페이즈 · Phoebe 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-06-first",
+    "id": "2025-05-22-first_pickup",
+    "year": 2025,
+    "month": 5,
+    "day": 22,
+    "start_date": "2025-05-22",
+    "end_date": "2025-06-11",
+    "version": "2.3",
+    "phase": "2페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Ciaccona"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.3 2페이즈 · Ciaccona 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-05-22-rerun_2",
+    "year": 2025,
+    "month": 5,
+    "day": 22,
+    "start_date": "2025-05-22",
+    "end_date": "2025-06-11",
+    "version": "2.3",
+    "phase": "2페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Jinhsi",
+      "Changli"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.3 2페이즈 · Jinhsi, Changli 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-05-22-rerun_1",
+    "year": 2025,
+    "month": 5,
+    "day": 22,
+    "start_date": "2025-05-22",
+    "end_date": "2025-06-11",
+    "version": "2.3",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Carlotta",
+      "Roccia",
+      "Brant"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.3 2페이즈 · Carlotta, Roccia, Brant 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-06-12-first_pickup",
     "year": 2025,
     "month": 6,
+    "day": 12,
+    "start_date": "2025-06-12",
+    "end_date": "2025-07-03",
+    "version": "2.4",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Cartethyia"],
-    "notes_ko": "버전 2.4 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Cartethyia"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.4 1페이즈 · Cartethyia 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-07-first",
+    "id": "2025-07-03-first_pickup",
     "year": 2025,
     "month": 7,
+    "day": 3,
+    "start_date": "2025-07-03",
+    "end_date": "2025-07-23",
+    "version": "2.4",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Lupa", "Phrolova"],
-    "notes_ko": "버전 2.4 2페이즈(Lupa)·2.5 1페이즈(Phrolova) 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Lupa"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.4 2페이즈 · Lupa 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-08-first",
+    "id": "2025-07-24-first_pickup",
     "year": 2025,
-    "month": 8,
+    "month": 7,
+    "day": 24,
+    "start_date": "2025-07-24",
+    "end_date": "2025-08-14",
+    "version": "2.5",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Augusta"],
-    "notes_ko": "버전 2.6 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Phrolova"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.5 1페이즈 · Phrolova 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-08-rerun-1",
+    "id": "2025-07-24-rerun_2",
+    "year": 2025,
+    "month": 7,
+    "day": 24,
+    "start_date": "2025-07-24",
+    "end_date": "2025-08-14",
+    "version": "2.5",
+    "phase": "1페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Roccia"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.5 1페이즈 · Roccia 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-08-14-rerun_1",
     "year": 2025,
     "month": 8,
+    "day": 14,
+    "start_date": "2025-08-14",
+    "end_date": "2025-08-27",
+    "version": "2.5",
+    "phase": "2페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Cantarella", "Brant"],
-    "notes_ko": "버전 2.5 2페이즈 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Cantarella"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.5 2페이즈 · Cantarella 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-09-first",
+    "id": "2025-08-14-rerun_2",
+    "year": 2025,
+    "month": 8,
+    "day": 14,
+    "start_date": "2025-08-14",
+    "end_date": "2025-08-27",
+    "version": "2.5",
+    "phase": "2페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Brant"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.5 2페이즈 · Brant 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-08-28-first_pickup",
+    "year": 2025,
+    "month": 8,
+    "day": 28,
+    "start_date": "2025-08-28",
+    "end_date": "2025-09-17",
+    "version": "2.6",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Augusta"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.6 1페이즈 · Augusta 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-08-28-rerun_2",
+    "year": 2025,
+    "month": 8,
+    "day": 28,
+    "start_date": "2025-08-28",
+    "end_date": "2025-09-17",
+    "version": "2.6",
+    "phase": "1페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Shorekeeper",
+      "Carlotta"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.6 1페이즈 · Shorekeeper, Carlotta 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-09-17-first_pickup",
     "year": 2025,
     "month": 9,
+    "day": 17,
+    "start_date": "2025-09-17",
+    "end_date": "2025-10-08",
+    "version": "2.6",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Iuno"],
-    "notes_ko": "버전 2.6 2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Iuno"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.6 2페이즈 · Iuno 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-10-first",
+    "id": "2025-09-17-rerun_1",
     "year": 2025,
-    "month": 10,
-    "category": "first_pickup",
-    "label_ko": "첫 픽업",
-    "characters": ["Galbrena", "Qiuyuan"],
-    "notes_ko": "버전 2.7 1·2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2025-10-rerun-1",
-    "year": 2025,
-    "month": 10,
+    "month": 9,
+    "day": 17,
+    "start_date": "2025-09-17",
+    "end_date": "2025-10-08",
+    "version": "2.6",
+    "phase": "2페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Lupa"],
-    "notes_ko": "버전 2.7 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Ciaccona"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.6 2페이즈 · Ciaccona 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-10-rerun-2",
+    "id": "2025-10-08-first_pickup",
     "year": 2025,
     "month": 10,
-    "category": "rerun_2",
-    "label_ko": "2차 복각",
-    "characters": ["Zani"],
-    "notes_ko": "버전 2.7 2페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "day": 8,
+    "start_date": "2025-10-08",
+    "end_date": "2025-10-30",
+    "version": "2.7",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Galbrena"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.7 1페이즈 · Galbrena 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-11-first",
+    "id": "2025-10-08-rerun_1",
+    "year": 2025,
+    "month": 10,
+    "day": 8,
+    "start_date": "2025-10-08",
+    "end_date": "2025-10-30",
+    "version": "2.7",
+    "phase": "1페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Lupa"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.7 1페이즈 · Lupa 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-10-30-first_pickup",
+    "year": 2025,
+    "month": 10,
+    "day": 30,
+    "start_date": "2025-10-30",
+    "end_date": "2025-11-19",
+    "version": "2.7",
+    "phase": "2페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Qiuyuan"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.7 2페이즈 · Qiuyuan 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-10-30-rerun_1",
+    "year": 2025,
+    "month": 10,
+    "day": 30,
+    "start_date": "2025-10-30",
+    "end_date": "2025-11-19",
+    "version": "2.7",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Zani"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.7 2페이즈 · Zani 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-11-19-first_pickup",
     "year": 2025,
     "month": 11,
+    "day": 19,
+    "start_date": "2025-11-19",
+    "end_date": "2025-12-11",
+    "version": "2.8",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Chisa"],
-    "notes_ko": "버전 2.8 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Chisa"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.8 1페이즈 · Chisa 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2025-11-rerun-1",
+    "id": "2025-11-19-rerun_2",
     "year": 2025,
     "month": 11,
-    "category": "rerun_1",
-    "label_ko": "1차 복각",
-    "characters": ["Phoebe"],
-    "notes_ko": "버전 2.8 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2025-12-first",
-    "year": 2025,
-    "month": 12,
-    "category": "first_pickup",
-    "label_ko": "첫 픽업",
-    "characters": ["Lynae"],
-    "notes_ko": "버전 3.0 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2025-12-rerun-1",
-    "year": 2025,
-    "month": 12,
-    "category": "rerun_1",
-    "label_ko": "1차 복각",
-    "characters": ["Phrolova", "Cantarella"],
-    "notes_ko": "버전 2.8 2페이즈 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2025-12-rerun-2",
-    "year": 2025,
-    "month": 12,
+    "day": 19,
+    "start_date": "2025-11-19",
+    "end_date": "2025-12-11",
+    "version": "2.8",
+    "phase": "1페이즈",
     "category": "rerun_2",
     "label_ko": "2차 복각",
-    "characters": ["Cartethyia", "Ciaccona"],
-    "notes_ko": "버전 3.0 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Phoebe"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.8 1페이즈 · Phoebe 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-01-first",
+    "id": "2025-12-11-rerun_1",
+    "year": 2025,
+    "month": 12,
+    "day": 11,
+    "start_date": "2025-12-11",
+    "end_date": "2025-12-24",
+    "version": "2.8",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Phrolova"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.8 2페이즈 · Phrolova 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-12-11-rerun_2",
+    "year": 2025,
+    "month": 12,
+    "day": 11,
+    "start_date": "2025-12-11",
+    "end_date": "2025-12-24",
+    "version": "2.8",
+    "phase": "2페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Cantarella"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 2.8 2페이즈 · Cantarella 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-12-25-first_pickup",
+    "year": 2025,
+    "month": 12,
+    "day": 25,
+    "start_date": "2025-12-25",
+    "end_date": "2026-01-15",
+    "version": "3.0",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Lynae"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.0 1페이즈 · Lynae 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-12-25-rerun_1",
+    "year": 2025,
+    "month": 12,
+    "day": 25,
+    "start_date": "2025-12-25",
+    "end_date": "2026-01-15",
+    "version": "3.0",
+    "phase": "1페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Cartethyia"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.0 1페이즈 · Cartethyia 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2025-12-25-rerun_2",
+    "year": 2025,
+    "month": 12,
+    "day": 25,
+    "start_date": "2025-12-25",
+    "end_date": "2026-01-15",
+    "version": "3.0",
+    "phase": "1페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Ciaccona"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.0 1페이즈 · Ciaccona 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-01-15-first_pickup",
     "year": 2026,
     "month": 1,
+    "day": 15,
+    "start_date": "2026-01-15",
+    "end_date": "2026-02-04",
+    "version": "3.0",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Mornye"],
-    "notes_ko": "버전 3.0 2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Mornye"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.0 2페이즈 · Mornye 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-01-rerun-1",
+    "id": "2026-01-15-rerun_1",
     "year": 2026,
     "month": 1,
+    "day": 15,
+    "start_date": "2026-01-15",
+    "end_date": "2026-02-04",
+    "version": "3.0",
+    "phase": "2페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Augusta", "Iuno"],
-    "notes_ko": "버전 3.0 2페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Augusta",
+      "Iuno"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.0 2페이즈 · Augusta, Iuno 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-02-first",
+    "id": "2026-02-05-first_pickup",
     "year": 2026,
     "month": 2,
+    "day": 5,
+    "start_date": "2026-02-05",
+    "end_date": "2026-02-26",
+    "version": "3.1",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Aemeath", "Luuk Herssen"],
-    "notes_ko": "버전 3.1 1·2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Aemeath"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.1 1페이즈 · Aemeath 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-02-rerun-1",
+    "id": "2026-02-05-rerun_1",
     "year": 2026,
     "month": 2,
+    "day": 5,
+    "start_date": "2026-02-05",
+    "end_date": "2026-02-26",
+    "version": "3.1",
+    "phase": "1페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Chisa", "Lupa"],
-    "notes_ko": "버전 3.1 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Chisa"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.1 1페이즈 · Chisa 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-02-rerun-2",
+    "id": "2026-02-05-rerun_2",
     "year": 2026,
     "month": 2,
+    "day": 5,
+    "start_date": "2026-02-05",
+    "end_date": "2026-02-26",
+    "version": "3.1",
+    "phase": "1페이즈",
     "category": "rerun_2",
     "label_ko": "2차 복각",
-    "characters": ["Galbrena"],
-    "notes_ko": "버전 3.1 2페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Lupa"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.1 1페이즈 · Lupa 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-03-first",
+    "id": "2026-02-26-first_pickup",
     "year": 2026,
-    "month": 3,
+    "month": 2,
+    "day": 26,
+    "start_date": "2026-02-26",
+    "end_date": "2026-03-18",
+    "version": "3.1",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Sigrika"],
-    "notes_ko": "버전 3.2 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Luuk Herssen"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.1 2페이즈 · Luuk Herssen 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-03-rerun-1",
+    "id": "2026-02-26-rerun_1",
+    "year": 2026,
+    "month": 2,
+    "day": 26,
+    "start_date": "2026-02-26",
+    "end_date": "2026-03-18",
+    "version": "3.1",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Galbrena"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.1 2페이즈 · Galbrena 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-03-19-first_pickup",
     "year": 2026,
     "month": 3,
-    "category": "rerun_1",
-    "label_ko": "1차 복각",
-    "characters": ["Qiuyuan"],
-    "notes_ko": "버전 3.2 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2026-04-first",
-    "year": 2026,
-    "month": 4,
+    "day": 19,
+    "start_date": "2026-03-19",
+    "end_date": "2026-04-09",
+    "version": "3.2",
+    "phase": "1페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Hiyuki"],
-    "notes_ko": "버전 3.3 1페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Sigrika"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.2 1페이즈 · Sigrika 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-04-rerun-1",
+    "id": "2026-03-19-rerun_1",
     "year": 2026,
-    "month": 4,
+    "month": 3,
+    "day": 19,
+    "start_date": "2026-03-19",
+    "end_date": "2026-04-09",
+    "version": "3.2",
+    "phase": "1페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Lynae", "Zani", "Phoebe"],
-    "notes_ko": "버전 3.2 2페이즈 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Qiuyuan"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.2 1페이즈 · Qiuyuan 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-04-rerun-2",
+    "id": "2026-04-09-rerun_1",
     "year": 2026,
     "month": 4,
+    "day": 9,
+    "start_date": "2026-04-09",
+    "end_date": "2026-04-29",
+    "version": "3.2",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Lynae"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.2 2페이즈 · Lynae 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-04-09-rerun_2",
+    "year": 2026,
+    "month": 4,
+    "day": 9,
+    "start_date": "2026-04-09",
+    "end_date": "2026-04-29",
+    "version": "3.2",
+    "phase": "2페이즈",
     "category": "rerun_2",
     "label_ko": "2차 복각",
-    "characters": ["Mornye", "Iuno"],
-    "notes_ko": "버전 3.3 1페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Zani"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.2 2페이즈 · Zani 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-05-first",
+    "id": "2026-04-09-rerun_3",
+    "year": 2026,
+    "month": 4,
+    "day": 9,
+    "start_date": "2026-04-09",
+    "end_date": "2026-04-29",
+    "version": "3.2",
+    "phase": "2페이즈",
+    "category": "rerun_3",
+    "label_ko": "3차 복각",
+    "characters": [
+      "Phoebe"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.2 2페이즈 · Phoebe 3차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-04-30-first_pickup",
+    "year": 2026,
+    "month": 4,
+    "day": 30,
+    "start_date": "2026-04-30",
+    "end_date": "2026-05-21",
+    "version": "3.3",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Hiyuki"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.3 1페이즈 · Hiyuki 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-04-30-rerun_1",
+    "year": 2026,
+    "month": 4,
+    "day": 30,
+    "start_date": "2026-04-30",
+    "end_date": "2026-05-21",
+    "version": "3.3",
+    "phase": "1페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Mornye"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.3 1페이즈 · Mornye 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-04-30-rerun_2",
+    "year": 2026,
+    "month": 4,
+    "day": 30,
+    "start_date": "2026-04-30",
+    "end_date": "2026-05-21",
+    "version": "3.3",
+    "phase": "1페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Iuno"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.3 1페이즈 · Iuno 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-05-21-first_pickup",
     "year": 2026,
     "month": 5,
+    "day": 21,
+    "start_date": "2026-05-21",
+    "end_date": "2026-06-07",
+    "version": "3.3",
+    "phase": "2페이즈",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Denia"],
-    "notes_ko": "버전 3.3 2페이즈 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Denia"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.3 2페이즈 · Denia 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-05-rerun-1",
+    "id": "2026-05-21-rerun_2",
     "year": 2026,
     "month": 5,
-    "category": "rerun_1",
-    "label_ko": "1차 복각",
-    "characters": ["Chisa", "Phrolova"],
-    "notes_ko": "버전 3.3 2페이즈 동시 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "day": 21,
+    "start_date": "2026-05-21",
+    "end_date": "2026-06-07",
+    "version": "3.3",
+    "phase": "2페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Chisa",
+      "Phrolova"
+    ],
+    "status": "ended",
+    "notes_ko": "버전 3.3 2페이즈 · Chisa, Phrolova 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   },
   {
-    "id": "2026-06-first",
+    "id": "2026-06-08-first_pickup",
     "year": 2026,
     "month": 6,
+    "day": 8,
+    "start_date": "2026-06-08",
+    "end_date": "2026-07-09",
+    "version": "3.4",
+    "phase": "콜라보",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Lucy", "Lucilla"],
-    "notes_ko": "버전 3.4 배너1(Lucy)·배너2(Lucilla) 데뷔 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
+    "characters": [
+      "Lucy",
+      "Rebecca"
+    ],
+    "status": "ongoing",
+    "notes_ko": "버전 3.4 콜라보 · Lucy, Rebecca 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/",
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4814"
+    ]
   },
   {
-    "id": "2026-06-rerun-1",
+    "id": "2026-06-13-first_pickup",
     "year": 2026,
     "month": 6,
-    "category": "rerun_1",
-    "label_ko": "1차 복각",
-    "characters": ["Cartethyia"],
-    "notes_ko": "버전 3.4 배너3 복각 배너",
-    "source_links": ["https://game8.co/games/Wuthering-Waves/archives/494979"]
-  },
-  {
-    "id": "2026-07-first",
-    "year": 2026,
-    "month": 7,
+    "day": 13,
+    "start_date": "2026-06-13",
+    "end_date": "2026-07-09",
+    "version": "3.4",
+    "phase": "추가 픽업",
     "category": "first_pickup",
     "label_ko": "첫 픽업",
-    "characters": ["Lucy", "Rebecca"],
-    "notes_ko": "2026년 7월 기준 Cyberpunk: Edgerunners 콜라보 배너로 확인된 픽업",
-    "source_links": ["https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"]
+    "characters": [
+      "Lucilla"
+    ],
+    "status": "ongoing",
+    "notes_ko": "버전 3.4 추가 픽업 · Lucilla 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/",
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4814"
+    ]
   },
   {
-    "id": "2026-07-rerun-1",
+    "id": "2026-06-18-rerun_2",
+    "year": 2026,
+    "month": 6,
+    "day": 18,
+    "start_date": "2026-06-18",
+    "end_date": "2026-07-09",
+    "version": "3.4",
+    "phase": "추가 복각",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Cartethyia"
+    ],
+    "status": "ongoing",
+    "notes_ko": "버전 3.4 추가 복각 · Cartethyia 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/",
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4814"
+    ]
+  },
+  {
+    "id": "2026-07-10-first_pickup",
     "year": 2026,
     "month": 7,
+    "day": 10,
+    "start_date": "2026-07-10",
+    "end_date": "2026-07-31",
+    "version": "3.5",
+    "phase": "1페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Yangyang: Xuanling"
+    ],
+    "status": "upcoming",
+    "notes_ko": "버전 3.5 1페이즈 · Yangyang: Xuanling 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-07-10-rerun_2",
+    "year": 2026,
+    "month": 7,
+    "day": 10,
+    "start_date": "2026-07-10",
+    "end_date": "2026-07-31",
+    "version": "3.5",
+    "phase": "1페이즈",
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": [
+      "Lynae"
+    ],
+    "status": "upcoming",
+    "notes_ko": "버전 3.5 1페이즈 · Lynae 2차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-07-10-rerun_1",
+    "year": 2026,
+    "month": 7,
+    "day": 10,
+    "start_date": "2026-07-10",
+    "end_date": "2026-07-31",
+    "version": "3.5",
+    "phase": "1페이즈",
     "category": "rerun_1",
     "label_ko": "1차 복각",
-    "characters": ["Lucilla", "Cartethyia"],
-    "notes_ko": "2026년 7월 9일까지 진행 중으로 확인된 복각/동시 배너",
-    "source_links": ["https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"]
+    "characters": [
+      "Luuk Herssen"
+    ],
+    "status": "upcoming",
+    "notes_ko": "버전 3.5 1페이즈 · Luuk Herssen 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-07-31-first_pickup",
+    "year": 2026,
+    "month": 7,
+    "day": 31,
+    "start_date": "2026-07-31",
+    "end_date": "2026-08-20",
+    "version": "3.5",
+    "phase": "2페이즈",
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": [
+      "Suisui"
+    ],
+    "status": "upcoming",
+    "notes_ko": "버전 3.5 2페이즈 · Suisui 첫 픽업",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-07-31-rerun_1",
+    "year": 2026,
+    "month": 7,
+    "day": 31,
+    "start_date": "2026-07-31",
+    "end_date": "2026-08-20",
+    "version": "3.5",
+    "phase": "2페이즈",
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": [
+      "Aemeath"
+    ],
+    "status": "upcoming",
+    "notes_ko": "버전 3.5 2페이즈 · Aemeath 1차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
+  },
+  {
+    "id": "2026-07-10-rerun_3",
+    "year": 2026,
+    "month": 7,
+    "day": 10,
+    "start_date": "2026-07-10",
+    "end_date": "2026-08-20",
+    "version": "3.5",
+    "phase": "상시 기간 복각",
+    "category": "rerun_3",
+    "label_ko": "3차 복각",
+    "characters": [
+      "Jiyan",
+      "Yinlin",
+      "Jinhsi",
+      "Changli",
+      "Zhezhi",
+      "Xiangli Yao"
+    ],
+    "status": "upcoming",
+    "notes_ko": "버전 3.5 상시 기간 복각 · Jiyan, Yinlin, Jinhsi, Changli, Zhezhi, Xiangli Yao 3차 복각",
+    "source_links": [
+      "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
+    ]
   }
 ]

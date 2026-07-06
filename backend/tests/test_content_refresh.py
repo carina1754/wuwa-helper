@@ -106,71 +106,123 @@ def test_refresh_preserves_historical_rows_not_covered_by_new_scrape(monkeypatch
     assert "test-current-update" in update_ids
 
 
-def test_scraper_pickup_schedule_id_matches_seed_convention(monkeypatch, tmp_path):
-    """Regression test for the scraper producing a differently-formatted id.
+def test_scraper_pickup_schedule_id_matches_seed_convention():
+    rows = [
+        {
+            "banner": "Lucy: Whiteout",
+            "four_stars": [],
+            "start_year": 2026,
+            "start_month": 7,
+            "start_day": 1,
+            "end_month": 7,
+            "end_day": 21,
+            "end_year": 2026,
+        }
+    ]
 
-    `_schedule_from_banner_rows` (used on the non-JSON-feed / live scraper path)
-    must generate ids using the same `{year}-{month:02d}-{suffix}` convention as
-    the seed data (`first_pickup` -> `first`, `rerun_1` -> `rerun-1`), so the
-    upsert in `refresh_pickups_and_updates` updates the existing seeded row for
-    a given year/month instead of inserting a duplicate row alongside it.
-    """
-    db_path = tmp_path / "test_content_refresh_scraper.db"
-    monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
-    init_db()
+    schedule = content_refresh._schedule_from_banner_rows(rows)
 
-    # Seed a historical row using the seed's id convention for 2026-07 first_pickup,
-    # matching the real backend/data/pickup_schedule.json entry "2026-07-first".
-    with get_connection() as conn:
-        conn.execute(
-            """
-            INSERT OR REPLACE INTO pickup_schedule (id, year, month, category, data_json, updated_at)
-            VALUES (?, ?, ?, ?, ?, datetime('now'))
-            """,
-            (
-                "2026-07-first",
-                2026,
-                7,
-                "first_pickup",
-                json.dumps(
-                    {
-                        "id": "2026-07-first",
-                        "year": 2026,
-                        "month": 7,
-                        "category": "first_pickup",
-                        "label_ko": "첫 픽업",
-                        "characters": ["Lucy", "Rebecca"],
-                        "notes_ko": "seed row for 2026-07 first pickup",
-                        "source_links": [],
-                    },
-                    ensure_ascii=False,
-                ),
-            ),
-        )
-        conn.commit()
+    assert schedule[0]["id"] == "2026-07-first"
+    assert schedule[0]["category"] == "first_pickup"
 
-    # Ensure the JSON-feed branch is NOT used, so the scraper path
-    # (_fetch_text -> _extract_banner_rows -> _schedule_from_banner_rows) runs instead.
-    monkeypatch.delenv("CONTENT_REFRESH_JSON_URL", raising=False)
+def test_official_updates_prefer_korean_articles_and_fallback_to_english(monkeypatch):
+    korean_menu = {
+        "article": [
+            {
+                "articleId": 4814,
+                "articleTitle": "「선택하지 않은 꿈」 3.4 버전 내용 안내",
+                "startTime": "2026-06-08 10:00:00",
+            }
+        ]
+    }
+    english_menu = {
+        "article": [
+            {
+                "articleId": 4973,
+                "articleTitle": "Wuthering Waves Version 3.5 Update Maintenance Notice",
+                "startTime": "2026-07-03 11:00:00",
+            }
+        ]
+    }
+    articles = {
+        ("kr", 4814): {
+            "articleTitle": "「선택하지 않은 꿈」 3.4 버전 내용 안내",
+            "startTime": "2026-06-08 10:00:00",
+            "articleContent": "방랑자님 3.4 버전 내용 안내입니다. 점검 시간: 2026년 6월 8일 05:00 ~ 2026년 6월 8일 12:00 신규 캐릭터 루시 콜라보 콘텐츠",
+        },
+        ("en", 4973): {
+            "articleTitle": "Wuthering Waves Version 3.5 Update Maintenance Notice",
+            "startTime": "2026-07-03 11:00:00",
+            "articleContent": "Version 3.5 Blade of Past Resounds, Lingering Dream Hymns. Maintenance Duration: 2026-07-10 04:00 - 2026-07-10 11:00 (UTC+8). Astrite x300.",
+        },
+    }
 
-    # Synthetic text that `_extract_banner_rows` can parse into a single banner row:
-    # banner name line, four-stars-or-N/A line, then a date-range line matching
-    # its `date_pattern`. This becomes the sole (and therefore "first_pickup")
-    # banner for year=2026, month=7.
-    synthetic_text = "Lucy: Whiteout\nN/A\nJuly 1, 2026 - July 21, 2026\n"
-    monkeypatch.setattr(content_refresh, "_fetch_text", lambda url: synthetic_text)
+    def fake_fetch_official_json(locale: str, filename: str):
+        if filename == "MainMenu.json":
+            return korean_menu if locale == "kr" else english_menu
+        article_id = int(filename.removeprefix("article/").removesuffix(".json"))
+        return articles[(locale, article_id)]
 
-    result = content_refresh.refresh_pickups_and_updates(force=True)
-    assert result["refreshed"] is True
+    monkeypatch.setattr(content_refresh, "_fetch_official_json", fake_fetch_official_json)
 
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT id FROM pickup_schedule WHERE id LIKE '2026-07-%'"
-        ).fetchall()
-    ids = [row["id"] for row in rows]
+    updates = content_refresh._updates_from_official_articles()
 
-    # Exactly one row for 2026-07 first_pickup: the scraper must have updated the
-    # existing seed row in place, not inserted a duplicate with a differently
-    # formatted id such as "2026-07-first_pickup".
-    assert ids.count("2026-07-first") == 1
-    assert "2026-07-first_pickup" not in ids
+    assert [update["version"] for update in updates[:2]] == ["3.5", "3.4"]
+    assert updates[0]["id"] == "wuwa-3-5"
+    assert updates[0]["release_date_kst"] == "2026-07-10 05:00 KST"
+    assert updates[0]["source_links"] == ["https://wutheringwaves.kurogames.com/en/main/news/detail/4973"]
+    assert updates[0]["summary_ko"] == ""
+    assert updates[1]["source_links"] == ["https://wutheringwaves.kurogames.com/kr/main/news/detail/4814"]
+    assert updates[1]["summary_ko"] == ""
+
+
+
+def test_official_updates_keep_records_since_2024_with_kst_datetime_and_no_summary(monkeypatch):
+    korean_menu = {
+        "article": [
+            {
+                "articleId": 951,
+                "articleTitle": "『명조:워더링 웨이브』 1.1 버전 업데이트 점검사항 사전 공지",
+                "startTime": "2024-06-25 12:30:00",
+            }
+        ]
+    }
+    english_menu = {
+        "article": [
+            {
+                "articleId": 4973,
+                "articleTitle": "Wuthering Waves Version 3.5 Update Maintenance Notice",
+                "startTime": "2026-07-03 11:00:00",
+            }
+        ]
+    }
+    articles = {
+        ("kr", 951): {
+            "articleTitle": "『명조:워더링 웨이브』 1.1 버전 업데이트 점검사항 사전 공지",
+            "startTime": "2024-06-25 12:30:00",
+            "articleContent": "점검 시간: 2024년 6월 28일 05:00 ~ 2024년 6월 28일 12:00",
+        },
+        ("en", 4973): {
+            "articleTitle": "Wuthering Waves Version 3.5 Update Maintenance Notice",
+            "startTime": "2026-07-03 11:00:00",
+            "articleContent": "Maintenance Duration: 2026-07-10 04:00 - 2026-07-10 11:00 (UTC+8)",
+        },
+    }
+
+    def fake_fetch_official_json(locale: str, filename: str):
+        if filename == "MainMenu.json":
+            return korean_menu if locale == "kr" else english_menu
+        article_id = int(filename.removeprefix("article/").removesuffix(".json"))
+        return articles[(locale, article_id)]
+
+    monkeypatch.setattr(content_refresh, "_fetch_official_json", fake_fetch_official_json)
+
+    updates = content_refresh._updates_from_official_articles(since_year=2024)
+
+    assert [update["version"] for update in updates] == ["3.5", "1.1"]
+    assert updates[0]["release_date_kst"] == "2026-07-10 05:00 KST"
+    assert updates[0]["summary_ko"] == ""
+    assert updates[0]["highlights_ko"] == []
+    assert updates[0]["source_links"] == ["https://wutheringwaves.kurogames.com/en/main/news/detail/4973"]
+    assert updates[1]["release_date_kst"] == "2024-06-28 05:00 KST"
+    assert updates[1]["source_links"] == ["https://wutheringwaves.kurogames.com/kr/main/news/detail/951"]

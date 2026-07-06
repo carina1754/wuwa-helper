@@ -1,0 +1,52 @@
+
+> wuwa-ai-coach-frontend@0.1.0 dev
+> next dev --hostname 127.0.0.1 --port 3000
+
+   ▲ Next.js 15.5.20
+   - Local:        http://127.0.0.1:3000
+   - Network:      http://127.0.0.1:3000
+   - Environments: .env.local
+
+ ✓ Starting...
+ ✓ Ready in 1393ms
+ ○ Compiling / ...
+ ✓ Compiled / in 2.3s (703 modules)
+ GET / 200 in 2550ms
+ GET / 200 in 51ms
+ GET / 200 in 59ms
+ ✓ Compiled /api/auth/[...nextauth] in 207ms (442 modules)
+ ✓ Compiled in 180ms (279 modules)
+ GET /icon.png?e7e45ccb884e2054 200 in 909ms
+ GET / 200 in 244ms
+ GET /api/auth/session 200 in 1334ms
+ GET /api/auth/session 200 in 45ms
+ ✓ Compiled in 190ms (845 modules)
+ GET / 200 in 82ms
+ GET / 200 in 122ms
+ GET /icon.png?e7e45ccb884e2054 200 in 55ms
+ GET /api/auth/session 200 in 100ms
+ GET /api/auth/session 200 in 10ms
+ ✓ Compiled in 321ms (710 modules)
+ GET / 200 in 126ms
+ ✓ Compiled in 190ms (710 modules)
+ GET / 200 in 92ms
+ GET / 200 in 131ms
+ ✓ Compiled in 438ms (710 modules)
+ GET / 200 in 88ms
+ GET / 200 in 123ms
+ ✓ Compiled in 439ms (690 modules)
+ GET / 200 in 83ms
+ GET / 200 in 87ms
+ ✓ Compiled in 168ms (690 modules)
+ GET / 200 in 65ms
+ GET / 200 in 75ms
+ GET / 200 in 57ms
+ ✓ Compiled /api/auth/[...nextauth] in 238ms (435 modules)
+ ✓ Compiled (559 modules)
+ GET /icon.png?e7e45ccb884e2054 200 in 529ms
+ GET /api/auth/session 200 in 441ms
+ GET /api/auth/session 200 in 10ms
+ GET / 200 in 133ms
+ GET /icon.png?e7e45ccb884e2054 200 in 28ms
+ GET /api/auth/session 200 in 46ms
+ GET /api/auth/session 200 in 11ms

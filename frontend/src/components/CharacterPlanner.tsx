@@ -14,11 +14,13 @@ export function CharacterPlanner() {
   const [element, setElement] = useState("");
   const [error, setError] = useState("");
 
-  function translateElement(value: string) {
+  function translateElement(value?: string | null) {
+    if (!value) return "-";
     return (t.elements as Record<string, string>)[value] ?? value;
   }
 
-  function translateWeaponType(value: string) {
+  function translateWeaponType(value?: string | null) {
+    if (!value) return "-";
     return (t.weaponTypes as Record<string, string>)[value] ?? value;
   }
 
