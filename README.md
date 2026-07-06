@@ -100,6 +100,49 @@ cd caddy
 
 Caddyfile은 공개 HTTPS 트래픽을 `127.0.0.1:3000`으로 프록시합니다. FastAPI는 `127.0.0.1:8000`에서 외부에 노출되지 않고 유지됩니다.
 
+## 실 배포 절차
+
+배포 PC에서 아래 순서로, 각각 별도 터미널 창에서 실행합니다 (전부 포그라운드로 계속 떠 있어야 하는 프로세스입니다).
+
+1. PostgreSQL이 실행 중인지 확인합니다. 로컬 서비스로 설치했다면 보통 Windows 부팅 시 자동으로 시작됩니다.
+
+2. 백엔드 (터미널 1) — 시드 데이터를 최신화한 뒤 API 서버를 띄웁니다:
+
+   ```powershell
+   cd backend
+   uv run python -m scripts.import_seed_data
+   uv run uvicorn main:app --host 127.0.0.1 --port 8000
+   ```
+
+3. 프론트엔드 (터미널 2) — 개발 서버(`next dev`)가 아니라 **프로덕션 빌드로 실행**합니다:
+
+   ```powershell
+   cd frontend
+   npm install
+   npm run build
+   npm run start -- --hostname 127.0.0.1 --port 3000
+   ```
+
+4. Caddy (터미널 3) — 공개 HTTPS 진입점:
+
+   ```powershell
+   cd caddy
+   .\caddy.exe run --config .\Caddyfile
+   ```
+
+5. 정상 동작 확인:
+
+   ```powershell
+   curl -I https://wuwahelper.com/
+   curl https://wuwahelper.com/backend/health
+   ```
+
+   첫 번째 명령은 Next.js가 사이트를 정상적으로 서빙하는지 확인합니다 (프론트엔드에는 `/health` 경로가 없으므로 그대로 요청하면 404가 납니다). 두 번째 명령은 Next.js가 `/backend/*` 요청을 FastAPI로 제대로 프록시하는지 확인합니다.
+
+시작 전에 `backend/.env`와 `frontend/.env.local`에 실제 값(`DATABASE_URL`, `GOOGLE_CLIENT_SECRET`, `NEXTAUTH_SECRET`/`AUTH_SECRET`, `INTERNAL_API_SECRET` 등)이 모두 채워져 있어야 합니다. 두 파일의 `INTERNAL_API_SECRET`은 반드시 서로 동일한 값이어야 하며, 다르면 구글 로그인 시 유저 동기화(`POST /auth/sync-user`)가 401로 거부됩니다.
+
+코드나 시드 데이터를 바꾼 뒤 다시 배포할 때는 백엔드/프론트엔드 프로세스를 재시작해야 반영됩니다. 프론트엔드는 소스가 바뀌었다면 `npm run build`부터 다시 실행해야 합니다 (이전 빌드 결과물이 `.next/`에 캐시되어 있기 때문입니다).
+
 ## 검증
 
 백엔드:
