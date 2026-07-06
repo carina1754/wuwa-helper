@@ -34,6 +34,8 @@ app = FastAPI(title="WaWa AI Helper API", version="0.1.0")
 default_origins = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "https://wuwahelper.com",
+    "https://www.wuwahelper.com",
     "https://wawahelper.com",
     "https://www.wawahelper.com",
 ]

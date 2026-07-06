@@ -1,22 +1,23 @@
 # Deployment
 
-This project is configured to run from this Windows PC with `wawahelper.com` as the public domain.
+This project is configured for `wuwahelper.com` with Caddy as the public HTTPS reverse proxy.
 
 ## Runtime Layout
 
-- `https://wawahelper.com` -> Next.js frontend on port `443`
-- `https://wawahelper.com/api/auth/*` -> NextAuth Google login routes
-- `https://wawahelper.com/backend/*` -> Next.js rewrite to FastAPI on `http://127.0.0.1:8000`
+- `https://wuwahelper.com` -> Caddy
+- Caddy -> Next.js on `http://127.0.0.1:3000`
+- Next.js `/backend/*` rewrite -> FastAPI on `http://127.0.0.1:8000`
+- NextAuth Google routes stay on the Next.js app: `/api/auth/*`
 
-This keeps browser API calls on the same HTTPS origin and avoids mixed-content errors.
+The app does not bind to TCP `443` directly. Do not run Next.js with `--experimental-https --port 443` for production.
 
 ## Frontend Environment
 
 Create `frontend/.env.local` with:
 
 ```env
-NEXTAUTH_URL=https://wawahelper.com
-AUTH_URL=https://wawahelper.com
+NEXTAUTH_URL=https://wuwahelper.com
+AUTH_URL=https://wuwahelper.com
 NEXTAUTH_SECRET=<random-secret>
 AUTH_SECRET=<same-random-secret>
 GOOGLE_CLIENT_ID=702566558180-f0c1hek094huhqsicrelvv5f4sfjvqun.apps.googleusercontent.com
@@ -29,21 +30,46 @@ NEXT_PUBLIC_API_BASE_URL=/backend
 
 Google OAuth settings:
 
-- Authorized JavaScript origin: `https://wawahelper.com`
-- Authorized redirect URI: `https://wawahelper.com/api/auth/callback/google`
+- Authorized JavaScript origin: `https://wuwahelper.com`
+- Authorized redirect URI: `https://wuwahelper.com/api/auth/callback/google`
 
-## Start On This PC
+## Start App Processes
 
-From the repository root:
+Backend:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start-local-server.ps1
+cd backend
+uv run uvicorn main:app --host 127.0.0.1 --port 8000
 ```
 
-This starts:
+Frontend:
 
-- FastAPI: `http://127.0.0.1:8000`
-- Next.js HTTPS: `https://wawahelper.com`
+```powershell
+cd frontend
+npm run dev -- --hostname 127.0.0.1 --port 3000
+```
+
+## Start Caddy
+
+Keep `caddy.exe` and certificate files out of Git. The expected deployment layout is:
+
+```text
+caddy/
+  Caddyfile
+  caddy.exe
+  certs/
+    wuwahelper-origin.pem
+    wuwahelper-origin-key.pem
+```
+
+Run:
+
+```powershell
+cd caddy
+.\caddy.exe run --config .\Caddyfile
+```
+
+`caddy/Caddyfile` terminates TLS with the files in `caddy/certs/` and reverse proxies to `127.0.0.1:3000`.
 
 ## Daily Content Refresh
 
@@ -64,25 +90,15 @@ If this is set, the backend uses that JSON feed instead of article scraping. Exp
 }
 ```
 
-## Cloudflare DNS
+## DNS And Firewall
 
-If you want other devices on the internet to reach this PC, Cloudflare must point `wawahelper.com` to this network.
-
-Option A: Public IP + router port forwarding
-
-- Cloudflare `A` record: `@` -> your public IP
-- Router forwards TCP `443` -> this PC
-- Windows Firewall allows inbound TCP `443`
-
-Option B: Cloudflare Tunnel
-
-- Run `cloudflared` on this PC
-- Route `wawahelper.com` to `https://localhost:443`
-- No router port forwarding is needed
+- Cloudflare `A` record: `@` -> the deployment network public IP
+- Router forwards TCP `443` -> the PC running Caddy
+- Windows Firewall allows inbound TCP `443` to Caddy only
 
 For local-only testing on this PC, add this to `C:\Windows\System32\drivers\etc\hosts` as Administrator:
 
 ```text
-127.0.0.1 wawahelper.com
-::1 wawahelper.com
+127.0.0.1 wuwahelper.com
+::1 wuwahelper.com
 ```

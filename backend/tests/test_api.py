@@ -49,10 +49,13 @@ def test_updates_endpoint_returns_korean_summaries():
     assert all("summary_ko" in item for item in data)
 
 
-def test_site_updates_endpoint_returns_empty_list_by_default():
+def test_site_updates_endpoint_returns_service_notices():
     response = client.get("/site-updates")
     assert response.status_code == 200
-    assert response.json() == []
+    data = response.json()
+    assert isinstance(data, list)
+    assert any(item["id"] == "service-prep-2026-07-06" for item in data)
+    assert any("Caddy" in item["description_ko"] for item in data)
 
 
 def test_history_round_trip():

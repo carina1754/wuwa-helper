@@ -1,0 +1,5 @@
+wuwahelper.com {
+    tls ./certs/wuwahelper-origin.pem ./certs/wuwahelper-origin-key.pem
+
+    reverse_proxy 127.0.0.1:3000
+}
