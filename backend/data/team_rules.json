@@ -1,8 +1,0 @@
-[
-  {
-    "name": "Starter balanced team",
-    "core_character": "default_main_dps",
-    "recommended_teammates": ["default_sub_dps", "default_support"],
-    "notes": "Placeholder team rule for MVP account planning."
-  }
-]

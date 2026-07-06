@@ -98,7 +98,8 @@ def test_site_updates_endpoint_returns_service_notices():
     data = response.json()
     assert isinstance(data, list)
     assert any(item["id"] == "service-prep-2026-07-06" for item in data)
-    assert any("Caddy" in item["description_ko"] for item in data)
+    infra_terms = ("Caddy", "127.0.0.1", "리버스 프록시", ":3000", ":8000")
+    assert not any(term in item["description_ko"] for item in data for term in infra_terms)
 
 
 def test_history_round_trip():

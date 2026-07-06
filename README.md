@@ -31,7 +31,6 @@ Python 3.12와 `uv`를 사용합니다.
 cd backend
 uv venv --python 3.12
 uv sync --dev
-uv run python -m scripts.import_seed_data
 uv run uvicorn main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -44,7 +43,7 @@ $env:DATABASE_URL="postgresql://postgres:<password>@127.0.0.1:5432/wuwa_ai_coach
 $env:CORS_ALLOW_ORIGINS="https://wuwahelper.com,http://localhost:3000,http://127.0.0.1:3000"
 ```
 
-`OPENAI_API_KEY`가 설정되어 있지 않으면 `/vision/extract`는 `backend/data/sample_extraction.json`을 목(mock) 모드 경고와 함께 반환합니다.
+`OPENAI_API_KEY`가 설정되어 있지 않으면 `/vision/extract`는 고정된 목(mock) 데이터를 경고 메시지와 함께 반환합니다.
 
 백엔드 의존성을 추가할 때는 `uv add` 또는 `uv add --dev`를 사용하고, `requirements.txt` 파일을 직접 수정하지 마세요.
 
@@ -106,11 +105,10 @@ Caddyfile은 공개 HTTPS 트래픽을 `127.0.0.1:3000`으로 프록시합니다
 
 1. PostgreSQL이 실행 중인지 확인합니다. 로컬 서비스로 설치했다면 보통 Windows 부팅 시 자동으로 시작됩니다.
 
-2. 백엔드 (터미널 1) — 시드 데이터를 최신화한 뒤 API 서버를 띄웁니다:
+2. 백엔드 (터미널 1) — API 서버를 띄웁니다:
 
    ```powershell
    cd backend
-   uv run python -m scripts.import_seed_data
    uv run uvicorn main:app --host 127.0.0.1 --port 8000
    ```
 
@@ -141,7 +139,7 @@ Caddyfile은 공개 HTTPS 트래픽을 `127.0.0.1:3000`으로 프록시합니다
 
 시작 전에 `backend/.env`와 `frontend/.env.local`에 실제 값(`DATABASE_URL`, `GOOGLE_CLIENT_SECRET`, `NEXTAUTH_SECRET`/`AUTH_SECRET`, `INTERNAL_API_SECRET` 등)이 모두 채워져 있어야 합니다. 두 파일의 `INTERNAL_API_SECRET`은 반드시 서로 동일한 값이어야 하며, 다르면 구글 로그인 시 유저 동기화(`POST /auth/sync-user`)가 401로 거부됩니다.
 
-코드나 시드 데이터를 바꾼 뒤 다시 배포할 때는 백엔드/프론트엔드 프로세스를 재시작해야 반영됩니다. 프론트엔드는 소스가 바뀌었다면 `npm run build`부터 다시 실행해야 합니다 (이전 빌드 결과물이 `.next/`에 캐시되어 있기 때문입니다).
+코드를 바꾼 뒤 다시 배포할 때는 백엔드/프론트엔드 프로세스를 재시작해야 반영됩니다. 프론트엔드는 소스가 바뀌었다면 `npm run build`부터 다시 실행해야 합니다 (이전 빌드 결과물이 `.next/`에 캐시되어 있기 때문입니다). 콘텐츠 데이터(공지사항, 픽업 일정, 캐릭터 정보 등)는 파일이 아니라 PostgreSQL에 직접 저장되어 있으므로, 데이터만 바꿀 때는 DB를 직접 갱신하면 되고 재배포가 필요하지 않습니다.
 
 ## 검증
 
@@ -164,12 +162,14 @@ npm run lint
 
 ## 콘텐츠 데이터
 
-- 실제 실행 데이터는 PostgreSQL에 저장되며, `backend/data/*.json` 파일들은 시드(seed) 임포트용 입력 데이터일 뿐입니다
+모든 콘텐츠 데이터는 파일이 아니라 PostgreSQL 테이블에 직접 저장됩니다. JSON 시드 파일은 더 이상 사용하지 않습니다.
+
 - 웹사이트 공지사항: `site_updates` 테이블
-- 워더링 웨이브 업데이트: `backend/data/game_updates.json`
-- 픽업 일정: `backend/data/pickup_schedule.json`
-- 캐릭터 목록: `backend/data/character_catalog.json`
-- 빌드 규칙: `backend/data/build_rules.json`
+- 워더링 웨이브 업데이트: `game_updates` 테이블
+- 픽업 일정: `pickup_schedule` 테이블
+- 캐릭터 목록: `character_catalog` 테이블
+- 빌드 규칙: `rules` 테이블
+- 팀 추천 규칙: `team_rules` 테이블
 
 ## 법적/운영 관련 안내
 
