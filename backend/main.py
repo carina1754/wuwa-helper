@@ -7,7 +7,7 @@ from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.database import init_db
-from src.content import load_game_updates, load_pickup_schedule
+from src.content import load_game_updates, load_pickup_schedule, load_site_updates
 from src.content_refresh import refresh_pickups_and_updates, start_daily_refresh_worker
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
 from src.export_import import export_all, import_all
@@ -22,6 +22,7 @@ from src.models import (
     GameUpdateSummary,
     EchoItem,
     PickupScheduleItem,
+    SiteUpdateEntry,
     VisionExtractionResult,
 )
 from src.report import generate_report
@@ -78,6 +79,11 @@ def get_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:
 @app.get("/updates", response_model=list[GameUpdateSummary])
 def get_updates() -> list[GameUpdateSummary]:
     return load_game_updates()
+
+
+@app.get("/site-updates", response_model=list[SiteUpdateEntry])
+def get_site_updates() -> list[SiteUpdateEntry]:
+    return load_site_updates()
 
 
 @app.post("/content/refresh")

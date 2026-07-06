@@ -4,6 +4,7 @@ import {
   Activity,
   BrainCircuit,
   CalendarDays,
+  Globe,
   History,
   Languages,
   LogIn,
@@ -28,6 +29,7 @@ const tabIcons: Record<AppTab, ReactNode> = {
   Updates: <Newspaper className="h-4 w-4" aria-hidden="true" />,
   Teams: <Swords className="h-4 w-4" aria-hidden="true" />,
   History: <History className="h-4 w-4" aria-hidden="true" />,
+  SiteUpdates: <Globe className="h-4 w-4" aria-hidden="true" />,
 };
 
 interface AppShellProps {
@@ -99,7 +101,7 @@ export function AppShell({ renderTab }: AppShellProps) {
               ) : null}
               <button
                 type="button"
-                onClick={() => setActiveTab("Updates")}
+                onClick={() => setActiveTab("SiteUpdates")}
                 className="rounded-md border border-teal-300 bg-teal-50 px-3 py-1 text-sm font-medium text-teal-900 transition hover:bg-teal-100 dark:border-teal-400/50 dark:bg-teal-400/10 dark:text-teal-200 dark:hover:bg-teal-400/20"
               >
                 {t.app.websiteUpdates}

@@ -8,6 +8,7 @@ import type {
   GameUpdateSummary,
   PickupScheduleItem,
   Role,
+  SiteUpdateEntry,
   VisionExtractionResult,
 } from "./types";
 
@@ -59,6 +60,10 @@ export function getPickupSchedule(year?: number): Promise<PickupScheduleItem[]> 
 
 export function getUpdates(): Promise<GameUpdateSummary[]> {
   return request("/updates");
+}
+
+export function getSiteUpdates(): Promise<SiteUpdateEntry[]> {
+  return request("/site-updates");
 }
 
 export function saveRules(rules: BuildRule[]): Promise<BuildRule[]> {

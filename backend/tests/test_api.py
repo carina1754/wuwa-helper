@@ -49,6 +49,12 @@ def test_updates_endpoint_returns_korean_summaries():
     assert all("summary_ko" in item for item in data)
 
 
+def test_site_updates_endpoint_returns_empty_list_by_default():
+    response = client.get("/site-updates")
+    assert response.status_code == 200
+    assert response.json() == []
+
+
 def test_history_round_trip():
     session = AnalysisSession(
         id="test-session",

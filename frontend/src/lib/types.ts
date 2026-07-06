@@ -111,6 +111,14 @@ export interface GameUpdateSummary {
   source_links: string[];
 }
 
+export interface SiteUpdateEntry {
+  id: string;
+  date: string;
+  version?: string | null;
+  title_ko: string;
+  description_ko: string;
+}
+
 export interface Diagnosis {
   target_type: "echo" | "character" | "account" | "team";
   target_name?: string | null;

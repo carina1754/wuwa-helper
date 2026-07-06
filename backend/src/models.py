@@ -118,6 +118,14 @@ class GameUpdateSummary(BaseModel):
     source_links: list[str] = Field(default_factory=list)
 
 
+class SiteUpdateEntry(BaseModel):
+    id: str
+    date: str
+    version: str | None = None
+    title_ko: str
+    description_ko: str = ""
+
+
 class TeamRule(BaseModel):
     name: str
     core_character: str

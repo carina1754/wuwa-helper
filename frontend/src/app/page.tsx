@@ -5,6 +5,7 @@ import { AppShell } from "@/components/AppShell";
 import { CharacterPlanner } from "@/components/CharacterPlanner";
 import { PickupSchedule } from "@/components/PickupSchedule";
 import { UpdatesSummary } from "@/components/UpdatesSummary";
+import { WebsiteUpdates } from "@/components/WebsiteUpdates";
 import type { AppTab } from "@/lib/constants";
 
 function UpdatingNotice({ label }: { label: string }) {
@@ -31,6 +32,8 @@ function renderTab(tab: AppTab) {
       return <PickupSchedule />;
     case "Updates":
       return <UpdatesSummary />;
+    case "SiteUpdates":
+      return <WebsiteUpdates />;
     case "Teams":
       return <UpdatingNotice label="팀" />;
     case "History":

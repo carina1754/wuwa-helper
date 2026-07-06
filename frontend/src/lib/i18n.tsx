@@ -282,6 +282,11 @@ export const copy = {
       source: "출처",
       empty: "등록된 업데이트 정보가 없습니다.",
     },
+    siteUpdates: {
+      title: "웹사이트 업데이트 내역",
+      body: "이 사이트에 추가되거나 바뀐 기능을 날짜와 버전별로 정리합니다.",
+      empty: "아직 등록된 업데이트 내역이 없습니다.",
+    },
     history: {
       title: "기록",
       empty: "저장한 분석이 여기에 표시됩니다.",
@@ -586,6 +591,11 @@ export const copy = {
       releaseDate: "Korea update date/time",
       source: "Source",
       empty: "No update summaries have been added.",
+    },
+    siteUpdates: {
+      title: "Website Update Log",
+      body: "Tracks features added or changed on this site, by date and version.",
+      empty: "No update log entries yet.",
     },
     history: {
       title: "History",
