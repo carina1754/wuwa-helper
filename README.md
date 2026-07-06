@@ -1,31 +1,31 @@
 # WaWa AI Helper
 
-WaWa AI Helper is an unofficial Wuthering Waves fan tool for Korean users. It provides Wuthering Waves update notices, pickup schedules, character planning, and screenshot-based build coaching. It is not affiliated with Wuthering Waves or Kuro Games.
+WaWa AI Helper는 한국 유저를 위한 비공식 워더링 웨이브(Wuthering Waves) 팬 도구입니다. 워더링 웨이브 업데이트 공지, 픽업 일정, 캐릭터 플래너, 스크린샷 기반 빌드 코칭 기능을 제공합니다. Wuthering Waves 또는 Kuro Games와 관련이 없습니다.
 
-## Current Service Scope
+## 현재 서비스 범위
 
-- Notices for this website and live-service preparation
-- Official Wuthering Waves update records shown with Korea-based date/time and source links
-- Pickup schedule viewer
-- Character planner with Korean labels
-- Google login through NextAuth
-- Screenshot analysis, dashboard, team records, and history are temporarily locked while they are being updated
+- 이 웹사이트 공지사항 및 실 서비스 준비 안내
+- 한국 기준 날짜/시간과 출처 링크가 포함된 공식 워더링 웨이브 업데이트 기록
+- 픽업 일정표
+- 한글 라벨이 적용된 캐릭터 플래너
+- NextAuth를 통한 구글 로그인
+- 스크린샷 분석, 대시보드, 팀 기록, 히스토리는 업데이트 준비 중으로 일시 잠금 상태
 
-## Runtime Layout
+## 실행 구조
 
-Production is intended to run behind Caddy as the public HTTPS reverse proxy.
+프로덕션 환경은 Caddy를 공개용 HTTPS 리버스 프록시로 두고 그 뒤에서 동작하도록 구성되어 있습니다.
 
-- Caddy listens on `https://wuwahelper.com` with the certificate files under `caddy/certs/`
-- Next.js listens on `127.0.0.1:3000`
-- FastAPI listens on `127.0.0.1:8000`
-- PostgreSQL stores users, notices, content data, rules, and analysis history
-- Browser requests to `/backend/*` are rewritten by Next.js to FastAPI
+- Caddy는 `https://wuwahelper.com`에서 대기하며, 인증서 파일은 `caddy/certs/` 아래에 있습니다
+- Next.js는 `127.0.0.1:3000`에서 대기합니다
+- FastAPI는 `127.0.0.1:8000`에서 대기합니다
+- PostgreSQL이 사용자, 공지사항, 콘텐츠 데이터, 규칙, 분석 기록을 저장합니다
+- 브라우저의 `/backend/*` 요청은 Next.js가 FastAPI로 재작성(rewrite)합니다
 
-The app process must not bind to TCP `443` directly. TLS termination belongs to Caddy.
+앱 프로세스는 TCP `443` 포트에 직접 바인딩하면 안 됩니다. TLS 종료는 Caddy가 담당합니다.
 
-## Backend Setup
+## 백엔드 설정
 
-Use Python 3.12 with `uv`.
+Python 3.12와 `uv`를 사용합니다.
 
 ```powershell
 cd backend
@@ -35,7 +35,7 @@ uv run python -m scripts.import_seed_data
 uv run uvicorn main:app --host 127.0.0.1 --port 8000
 ```
 
-Optional environment variables:
+선택적 환경 변수:
 
 ```powershell
 $env:OPENAI_API_KEY="..."
@@ -44,13 +44,13 @@ $env:DATABASE_URL="postgresql://postgres:<password>@127.0.0.1:5432/wuwa_ai_coach
 $env:CORS_ALLOW_ORIGINS="https://wuwahelper.com,http://localhost:3000,http://127.0.0.1:3000"
 ```
 
-If `OPENAI_API_KEY` is not set, `/vision/extract` returns `backend/data/sample_extraction.json` with a mock-mode warning.
+`OPENAI_API_KEY`가 설정되어 있지 않으면 `/vision/extract`는 `backend/data/sample_extraction.json`을 목(mock) 모드 경고와 함께 반환합니다.
 
-To add backend dependencies, use `uv add` or `uv add --dev`; do not edit a `requirements.txt` file.
+백엔드 의존성을 추가할 때는 `uv add` 또는 `uv add --dev`를 사용하고, `requirements.txt` 파일을 직접 수정하지 마세요.
 
-## Frontend Setup
+## 프론트엔드 설정
 
-Install Node.js with npm, then run the internal app server:
+Node.js와 npm을 설치한 뒤, 내부 앱 서버를 실행합니다:
 
 ```powershell
 cd frontend
@@ -58,7 +58,7 @@ npm install
 npm run dev -- --hostname 127.0.0.1 --port 3000
 ```
 
-Create `frontend/.env.local` from `frontend/.env.example` and set real secrets:
+`frontend/.env.example`을 복사해 `frontend/.env.local`을 만들고 실제 시크릿 값을 채워 넣습니다:
 
 ```env
 NEXTAUTH_URL=https://wuwahelper.com
@@ -71,16 +71,16 @@ ADMIN_EMAILS=wawa.ai.coach@gmail.com
 NEXT_PUBLIC_API_BASE_URL=/backend
 ```
 
-Google OAuth settings:
+구글 OAuth 설정:
 
-- Authorized JavaScript origin: `https://wuwahelper.com`
-- Authorized redirect URI: `https://wuwahelper.com/api/auth/callback/google`
+- 승인된 자바스크립트 원본(Authorized JavaScript origin): `https://wuwahelper.com`
+- 승인된 리디렉션 URI: `https://wuwahelper.com/api/auth/callback/google`
 
-## Caddy Reverse Proxy
+## Caddy 리버스 프록시
 
-The repository includes `caddy/Caddyfile` only. Do not commit `caddy.exe` or anything under `caddy/certs/`.
+저장소에는 `caddy/Caddyfile`만 포함되어 있습니다. `caddy.exe`나 `caddy/certs/` 아래 파일들은 커밋하지 마세요.
 
-Expected local layout on the deployment PC:
+배포용 PC에서 예상되는 로컬 구조:
 
 ```text
 caddy/
@@ -91,18 +91,18 @@ caddy/
     wuwahelper-origin-key.pem
 ```
 
-Start Caddy from the `caddy` directory:
+`caddy` 디렉터리에서 Caddy를 실행합니다:
 
 ```powershell
 cd caddy
 .\caddy.exe run --config .\Caddyfile
 ```
 
-The Caddyfile proxies public HTTPS traffic to `127.0.0.1:3000`. FastAPI remains private on `127.0.0.1:8000`.
+Caddyfile은 공개 HTTPS 트래픽을 `127.0.0.1:3000`으로 프록시합니다. FastAPI는 `127.0.0.1:8000`에서 외부에 노출되지 않고 유지됩니다.
 
-## Verification
+## 검증
 
-Backend:
+백엔드:
 
 ```powershell
 cd backend
@@ -110,28 +110,28 @@ uv run python -m compileall main.py src tests
 uv run pytest -v
 ```
 
-Frontend:
+프론트엔드:
 
 ```powershell
 cd frontend
 npm run lint
 ```
 
-Run a production build only when intentionally checking a release artifact.
+프로덕션 빌드는 릴리스 산출물을 의도적으로 확인할 때만 실행하세요.
 
-## Content Data
+## 콘텐츠 데이터
 
-- Runtime data lives in PostgreSQL; `backend/data/*.json` files are seed import inputs only
-- Website notices: `site_updates` table
-- Wuthering Waves updates: `backend/data/game_updates.json`
-- Pickup schedules: `backend/data/pickup_schedule.json`
-- Character catalog: `backend/data/character_catalog.json`
-- Build rules: `backend/data/build_rules.json`
+- 실제 실행 데이터는 PostgreSQL에 저장되며, `backend/data/*.json` 파일들은 시드(seed) 임포트용 입력 데이터일 뿐입니다
+- 웹사이트 공지사항: `site_updates` 테이블
+- 워더링 웨이브 업데이트: `backend/data/game_updates.json`
+- 픽업 일정: `backend/data/pickup_schedule.json`
+- 캐릭터 목록: `backend/data/character_catalog.json`
+- 빌드 규칙: `backend/data/build_rules.json`
 
-## Legal and Operational Notes
+## 법적/운영 관련 안내
 
-- This is an unofficial fan tool.
-- Do not upload screenshots containing sensitive information.
-- Uploaded images are not stored by default.
-- Official game assets are not bundled in this repository.
-- Caddy handles HTTPS; the Next.js and FastAPI processes should stay on localhost-only ports.
+- 이 도구는 비공식 팬 도구입니다.
+- 민감한 정보가 포함된 스크린샷은 업로드하지 마세요.
+- 업로드된 이미지는 기본적으로 저장되지 않습니다.
+- 공식 게임 에셋은 이 저장소에 포함되어 있지 않습니다.
+- HTTPS는 Caddy가 처리하며, Next.js와 FastAPI 프로세스는 localhost 전용 포트로만 열려 있어야 합니다.
