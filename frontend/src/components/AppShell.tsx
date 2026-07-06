@@ -2,7 +2,6 @@
 
 import {
   Activity,
-  Archive,
   BrainCircuit,
   CalendarDays,
   History,
@@ -50,7 +49,8 @@ export function AppShell({ renderTab }: AppShellProps) {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <div className="flex items-center gap-2">
-                <Archive className="h-6 w-6 text-teal-700 dark:text-teal-400" aria-hidden="true" />
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.png" alt="WuWa AI Coach" className="h-8 w-8 rounded-md object-cover" />
                 <h1 className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-slate-50">WuWa AI Coach</h1>
               </div>
               <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t.app.tagline}</p>

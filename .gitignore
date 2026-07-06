@@ -16,3 +16,4 @@ build/
 *.sqlite
 *.sqlite3
 uploads/
+certificates/

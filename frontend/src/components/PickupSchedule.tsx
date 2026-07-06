@@ -15,13 +15,13 @@ export function PickupSchedule() {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    Promise.all([getPickupSchedule(year), getCharacters()])
+    Promise.all([getPickupSchedule(), getCharacters()])
       .then(([schedule, catalog]) => {
         setItems(schedule);
         setCharacters(catalog);
       })
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
-  }, [year]);
+  }, []);
 
   const characterByName = useMemo(() => new Map(characters.map((character) => [character.name, character])), [characters]);
   const years = useMemo(() => {
@@ -31,7 +31,7 @@ export function PickupSchedule() {
   }, [items]);
 
   function itemsForMonth(month: number) {
-    return items.filter((item) => item.month === month);
+    return items.filter((item) => item.year === year && item.month === month);
   }
 
   return (
