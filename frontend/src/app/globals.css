@@ -19,6 +19,53 @@ body {
     #f4f7fb;
 }
 
+.dark {
+  color-scheme: dark;
+}
+
+.dark .bg-white {
+  background-color: #0f172a;
+}
+
+.dark .bg-white\/95 {
+  background-color: rgb(15 23 42 / 0.95);
+}
+
+.dark .bg-slate-50,
+.dark .bg-slate-100 {
+  background-color: #1e293b;
+}
+
+.dark .border-slate-200,
+.dark .border-slate-300 {
+  border-color: #334155;
+}
+
+.dark .text-slate-950,
+.dark .text-slate-900,
+.dark .text-slate-800,
+.dark .text-slate-700 {
+  color: #e2e8f0;
+}
+
+.dark .text-slate-600,
+.dark .text-slate-500 {
+  color: #cbd5e1;
+}
+
+.dark input,
+.dark select,
+.dark textarea {
+  border-color: #475569;
+  background-color: #0f172a;
+  color: #f8fafc;
+}
+
+.dark pre {
+  background-color: #020617;
+  color: #e2e8f0;
+}
+
 button,
 input,
 select,

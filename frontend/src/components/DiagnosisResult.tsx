@@ -1,3 +1,4 @@
+import { useLanguage } from "@/lib/i18n";
 import type { AnalyzeResponse } from "@/lib/types";
 
 interface DiagnosisResultProps {
@@ -5,17 +6,19 @@ interface DiagnosisResultProps {
 }
 
 export function DiagnosisResult({ result }: DiagnosisResultProps) {
+  const { t } = useLanguage();
+
   if (!result) {
     return (
       <section className="rounded-md border border-slate-200 bg-white p-4 text-sm text-slate-500 shadow-panel">
-        Run diagnosis to see results.
+        {t.diagnosis.empty}
       </section>
     );
   }
 
   return (
     <section className="rounded-md border border-slate-200 bg-white p-4 shadow-panel">
-      <h2 className="text-lg font-semibold text-slate-950">Diagnosis Result</h2>
+      <h2 className="text-lg font-semibold text-slate-950">{t.diagnosis.title}</h2>
       <div className="mt-4 grid gap-3 md:grid-cols-2">
         {result.diagnoses.map((diagnosis, index) => (
           <article key={`${diagnosis.target_type}-${diagnosis.target_name}-${index}`} className="rounded-md border border-slate-200 p-3">

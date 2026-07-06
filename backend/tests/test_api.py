@@ -18,6 +18,35 @@ def test_rules_endpoint_returns_seed_rules():
     data = response.json()
     assert isinstance(data, list)
     assert any(rule["character_name"] == "default_main_dps" for rule in data)
+    assert any(rule["character_name"] == "Changli" for rule in data)
+
+
+def test_characters_endpoint_returns_catalog():
+    response = client.get("/characters")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert len(data) >= 50
+    assert any(character["name"] == "Changli" for character in data)
+    assert all("default_sonata" in character for character in data)
+
+
+def test_pickup_schedule_endpoint_returns_korean_schedule():
+    response = client.get("/pickup-schedule?year=2026")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert any(item["month"] == 1 and item["label_ko"] == "첫 픽업" for item in data)
+    assert all("label_ko" in item for item in data)
+
+
+def test_updates_endpoint_returns_korean_summaries():
+    response = client.get("/updates")
+    assert response.status_code == 200
+    data = response.json()
+    assert isinstance(data, list)
+    assert any(item["version"] == "3.5" for item in data)
+    assert all("summary_ko" in item for item in data)
 
 
 def test_history_round_trip():

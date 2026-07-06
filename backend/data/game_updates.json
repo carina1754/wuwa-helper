@@ -1,0 +1,54 @@
+[
+  {
+    "id": "wuwa-3-5",
+    "version": "3.5",
+    "title_ko": "3.5 업데이트",
+    "release_date_kst": "2026-07-10",
+    "summary_ko": "2026년 7월 10일 시작으로 알려진 업데이트입니다. 신규 픽업과 복각 배너가 단계별로 진행됩니다.",
+    "highlights_ko": [
+      "신규 픽업: Yangyang: Xuanling, Suisui",
+      "복각 라인업: Lynae, Luuk Herssen, Aemeath 등",
+      "Starpath Reverbs / Tideforge Reverbs 계열 배너 진행"
+    ],
+    "source_links": ["https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"]
+  },
+  {
+    "id": "wuwa-3-4",
+    "version": "3.4",
+    "title_ko": "3.4 업데이트",
+    "release_date_kst": "2026-06-08",
+    "summary_ko": "Cyberpunk: Edgerunners 콜라보 배너와 3.4 후반 픽업이 함께 진행된 버전입니다.",
+    "highlights_ko": [
+      "콜라보 픽업: Lucy, Rebecca",
+      "동시 진행 배너: Lucilla, Cartethyia",
+      "콜라보 전용 재화 배너 사용"
+    ],
+    "source_links": ["https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"]
+  },
+  {
+    "id": "wuwa-3-1",
+    "version": "3.1",
+    "title_ko": "3.1 업데이트",
+    "release_date_kst": "2026-02-05",
+    "summary_ko": "2026년 2월 5일 업데이트로 보도된 버전입니다. 신규 공명자, 신규 무기 시스템, 메인 스토리 확장, 신규 지역과 에코가 포함된 대형 업데이트로 정리됩니다.",
+    "highlights_ko": [
+      "신규 공명자와 무기 시스템 추가",
+      "메인 스토리 퀘스트 확장",
+      "신규 지역, 에코, 퍼즐 및 이동 관련 콘텐츠 추가"
+    ],
+    "source_links": ["https://timesofindia.indiatimes.com/sports/esports/news/wuthering-waves-3-1-maintenance-and-server-downtime-everything-that-we-know-so-far/articleshow/127891751.cms"]
+  },
+  {
+    "id": "wuwa-3-0",
+    "version": "3.0",
+    "title_ko": "3.0 업데이트",
+    "release_date_kst": null,
+    "summary_ko": "3.0 확장 업데이트는 신규 지역과 이동 수단 중심의 대형 콘텐츠로 보도되었습니다.",
+    "highlights_ko": [
+      "신규 지역 Lahai-Roi 추가",
+      "계정 단위 이동 수단 Expedition Motorbike 추가",
+      "2D/3D 플랫폼형 콘텐츠와 신규 캐릭터 콘텐츠 추가"
+    ],
+    "source_links": ["https://www.gamesradar.com/games/open-world/open-world-rpg-wuthering-waves-pulls-a-breath-of-the-wild-adds-a-motorbike-in-3-0-expansion/"]
+  }
+]

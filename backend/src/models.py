@@ -74,6 +74,43 @@ class BuildRule(BaseModel):
     game_version: str | None = None
 
 
+class CharacterCatalogItem(BaseModel):
+    id: int
+    name: str
+    element: str | None = None
+    weapon_type: str | None = None
+    rarity: int | None = None
+    image: str | None = None
+    splash_image: str | None = None
+    default_sonata: str | None = None
+    sonata_fallbacks: list[str] = Field(default_factory=list)
+    default_weapon: str | None = None
+    bonus_stats: list[str] = Field(default_factory=list)
+    role: Role
+    source: str | None = None
+
+
+class PickupScheduleItem(BaseModel):
+    id: str
+    year: int
+    month: int
+    category: Literal["first_pickup", "rerun_1", "rerun_2"]
+    label_ko: str
+    characters: list[str] = Field(default_factory=list)
+    notes_ko: str | None = None
+    source_links: list[str] = Field(default_factory=list)
+
+
+class GameUpdateSummary(BaseModel):
+    id: str
+    version: str
+    title_ko: str
+    release_date_kst: str | None = None
+    summary_ko: str
+    highlights_ko: list[str] = Field(default_factory=list)
+    source_links: list[str] = Field(default_factory=list)
+
+
 class TeamRule(BaseModel):
     name: str
     core_character: str

@@ -67,6 +67,43 @@ export interface BuildRule {
   game_version?: string | null;
 }
 
+export interface CharacterCatalogItem {
+  id: number;
+  name: string;
+  element?: string | null;
+  weapon_type?: string | null;
+  rarity?: number | null;
+  image?: string | null;
+  splash_image?: string | null;
+  default_sonata?: string | null;
+  sonata_fallbacks: string[];
+  default_weapon?: string | null;
+  bonus_stats: string[];
+  role: Role;
+  source?: string | null;
+}
+
+export interface PickupScheduleItem {
+  id: string;
+  year: number;
+  month: number;
+  category: "first_pickup" | "rerun_1" | "rerun_2";
+  label_ko: string;
+  characters: string[];
+  notes_ko?: string | null;
+  source_links: string[];
+}
+
+export interface GameUpdateSummary {
+  id: string;
+  version: string;
+  title_ko: string;
+  release_date_kst?: string | null;
+  summary_ko: string;
+  highlights_ko: string[];
+  source_links: string[];
+}
+
 export interface Diagnosis {
   target_type: "echo" | "character" | "account" | "team";
   target_name?: string | null;

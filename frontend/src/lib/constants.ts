@@ -2,7 +2,7 @@ import type { CharacterSnapshot, EchoItem, Role } from "./types";
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 export const ROLES: Role[] = ["main_dps", "sub_dps", "support", "healer"];
-export const TABS = ["Dashboard", "Analyzer", "Planner", "Teams", "Rules", "History", "Settings"] as const;
+export const TABS = ["Dashboard", "Analyzer", "Planner", "PickupSchedule", "Updates", "Teams", "History"] as const;
 export type AppTab = (typeof TABS)[number];
 
 export function emptyEcho(slot: number): EchoItem {

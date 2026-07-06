@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import os
 from typing import Any
 
 from fastapi import FastAPI, File, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 
 from src.database import init_db
+from src.content import load_game_updates, load_pickup_schedule
+from src.content_refresh import refresh_pickups_and_updates, start_daily_refresh_worker
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
@@ -14,19 +17,34 @@ from src.models import (
     AnalyzeRequest,
     AnalyzeResponse,
     BuildRule,
+    CharacterCatalogItem,
     Diagnosis,
+    GameUpdateSummary,
     EchoItem,
+    PickupScheduleItem,
     VisionExtractionResult,
 )
 from src.report import generate_report
-from src.rules import load_build_rules, save_build_rules
+from src.rules import load_build_rules, load_character_catalog, save_build_rules
 from src.vision import extract_from_image
 
 app = FastAPI(title="WuWa AI Coach API", version="0.1.0")
 
+default_origins = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://wawahelper.com",
+    "https://www.wawahelper.com",
+]
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("CORS_ALLOW_ORIGINS", ",".join(default_origins)).split(",")
+    if origin.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,6 +52,7 @@ app.add_middleware(
 
 # Test clients and short-lived scripts do not always enter FastAPI lifespan.
 init_db()
+start_daily_refresh_worker()
 
 
 @app.get("/health")
@@ -44,6 +63,26 @@ def health() -> dict[str, bool]:
 @app.get("/rules", response_model=list[BuildRule])
 def get_rules() -> list[BuildRule]:
     return load_build_rules()
+
+
+@app.get("/characters", response_model=list[CharacterCatalogItem])
+def get_characters() -> list[CharacterCatalogItem]:
+    return load_character_catalog()
+
+
+@app.get("/pickup-schedule", response_model=list[PickupScheduleItem])
+def get_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:
+    return load_pickup_schedule(year)
+
+
+@app.get("/updates", response_model=list[GameUpdateSummary])
+def get_updates() -> list[GameUpdateSummary]:
+    return load_game_updates()
+
+
+@app.post("/content/refresh")
+def post_content_refresh() -> dict[str, object]:
+    return refresh_pickups_and_updates(force=True)
 
 
 @app.post("/rules", response_model=list[BuildRule])

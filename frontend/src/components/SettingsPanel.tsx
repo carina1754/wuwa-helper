@@ -4,8 +4,10 @@ import { Download, Upload } from "lucide-react";
 import { useState } from "react";
 import { exportData, importData } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
 
 export function SettingsPanel() {
+  const { t } = useLanguage();
   const [message, setMessage] = useState("");
 
   async function downloadExport() {
@@ -22,32 +24,32 @@ export function SettingsPanel() {
   async function uploadImport(file: File) {
     const payload = JSON.parse(await file.text());
     const result = await importData(payload);
-    setMessage(`Imported ${result.rules} rules and ${result.history} history sessions.`);
+    setMessage(t.settings.imported(result.rules, result.history, result.characters ?? 0));
   }
 
   return (
     <section className="rounded-md border border-slate-200 bg-white p-4 shadow-panel">
-      <h2 className="text-lg font-semibold text-slate-950">Settings</h2>
+      <h2 className="text-lg font-semibold text-slate-950">{t.settings.title}</h2>
       <dl className="mt-4 grid gap-3 text-sm text-slate-700">
         <div>
-          <dt className="font-medium">API base URL</dt>
+          <dt className="font-medium">{t.settings.apiBaseUrl}</dt>
           <dd>{API_BASE_URL}</dd>
         </div>
         <div>
-          <dt className="font-medium">OpenAI API key</dt>
-          <dd>Set OPENAI_API_KEY in the backend environment to enable real vision extraction. Without it, mock mode is used.</dd>
+          <dt className="font-medium">{t.settings.openAiKey}</dt>
+          <dd>{t.settings.openAiKeyBody}</dd>
         </div>
         <div>
-          <dt className="font-medium">Legal notice</dt>
-          <dd>WuWa AI Coach is an unofficial fan tool and is not affiliated with Wuthering Waves or Kuro Games.</dd>
+          <dt className="font-medium">{t.settings.legalNotice}</dt>
+          <dd>{t.settings.legalNoticeBody}</dd>
         </div>
       </dl>
       <div className="mt-4 flex flex-wrap gap-2">
         <button type="button" onClick={downloadExport} className="inline-flex items-center gap-2 rounded-md bg-slate-950 px-4 py-2 text-sm font-medium text-white">
-          <Download className="h-4 w-4" aria-hidden="true" /> Export JSON
+          <Download className="h-4 w-4" aria-hidden="true" /> {t.settings.exportJson}
         </button>
         <label className="inline-flex cursor-pointer items-center gap-2 rounded-md border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700">
-          <Upload className="h-4 w-4" aria-hidden="true" /> Import JSON
+          <Upload className="h-4 w-4" aria-hidden="true" /> {t.settings.importJson}
           <input
             type="file"
             accept="application/json"

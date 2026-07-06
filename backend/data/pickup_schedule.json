@@ -1,0 +1,112 @@
+[
+  {
+    "id": "2026-01-first",
+    "year": 2026,
+    "month": 1,
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": ["Lucilla", "Cartethyia"],
+    "notes_ko": "첨부 예시 기준 2026년 1월 첫 픽업",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-01-rerun-1",
+    "year": 2026,
+    "month": 1,
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": ["Lynae", "Lupa", "Phrolova"],
+    "notes_ko": "첨부 예시 기준 2026년 1월 1차 복각",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-01-rerun-2",
+    "year": 2026,
+    "month": 1,
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": ["Roccia"],
+    "notes_ko": "첨부 예시 기준 2026년 1월 2차 복각",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-02-first",
+    "year": 2026,
+    "month": 2,
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": ["Lucilla", "Lucy", "Aemeath"],
+    "notes_ko": "첨부 예시 기준 2026년 2월 첫 픽업",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-02-rerun-1",
+    "year": 2026,
+    "month": 2,
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": ["Lupa", "Phrolova", "Rover (F) - Havoc", "Hiyuki"],
+    "notes_ko": "첨부 예시 기준 2026년 2월 1차 복각",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-02-rerun-2",
+    "year": 2026,
+    "month": 2,
+    "category": "rerun_2",
+    "label_ko": "2차 복각",
+    "characters": ["Roccia"],
+    "notes_ko": "첨부 예시 기준 2026년 2월 2차 복각",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-03-first",
+    "year": 2026,
+    "month": 3,
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": ["Aemeath", "Lupa"],
+    "notes_ko": "첨부 예시 기준 2026년 3월 첫 픽업",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-03-rerun-1",
+    "year": 2026,
+    "month": 3,
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": ["Hiyuki"],
+    "notes_ko": "첨부 예시 기준 2026년 3월 1차 복각",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-04-first",
+    "year": 2026,
+    "month": 4,
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": ["Lupa"],
+    "notes_ko": "첨부 예시 기준 2026년 4월 첫 픽업",
+    "source_links": ["https://wuwaflex.com/"]
+  },
+  {
+    "id": "2026-07-first",
+    "year": 2026,
+    "month": 7,
+    "category": "first_pickup",
+    "label_ko": "첫 픽업",
+    "characters": ["Lucy", "Rebecca"],
+    "notes_ko": "2026년 7월 기준 Cyberpunk: Edgerunners 콜라보 배너로 확인된 픽업",
+    "source_links": ["https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"]
+  },
+  {
+    "id": "2026-07-rerun-1",
+    "year": 2026,
+    "month": 7,
+    "category": "rerun_1",
+    "label_ko": "1차 복각",
+    "characters": ["Lucilla", "Cartethyia"],
+    "notes_ko": "2026년 7월 9일까지 진행 중으로 확인된 복각/동시 배너",
+    "source_links": ["https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"]
+  }
+]

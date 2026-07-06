@@ -1,5 +1,15 @@
 import { API_BASE_URL } from "./constants";
-import type { AnalysisSession, AnalyzeResponse, BuildRule, CharacterSnapshot, Role, VisionExtractionResult } from "./types";
+import type {
+  AnalysisSession,
+  AnalyzeResponse,
+  BuildRule,
+  CharacterCatalogItem,
+  CharacterSnapshot,
+  GameUpdateSummary,
+  PickupScheduleItem,
+  Role,
+  VisionExtractionResult,
+} from "./types";
 
 export class ApiError extends Error {
   constructor(message: string, public status?: number) {
@@ -38,6 +48,19 @@ export function getRules(): Promise<BuildRule[]> {
   return request("/rules");
 }
 
+export function getCharacters(): Promise<CharacterCatalogItem[]> {
+  return request("/characters");
+}
+
+export function getPickupSchedule(year?: number): Promise<PickupScheduleItem[]> {
+  const params = year ? `?year=${year}` : "";
+  return request(`/pickup-schedule${params}`);
+}
+
+export function getUpdates(): Promise<GameUpdateSummary[]> {
+  return request("/updates");
+}
+
 export function saveRules(rules: BuildRule[]): Promise<BuildRule[]> {
   return request("/rules", {
     method: "POST",
@@ -62,7 +85,7 @@ export function exportData(): Promise<Record<string, unknown>> {
   return request("/export");
 }
 
-export function importData(payload: Record<string, unknown>): Promise<{ rules: number; history: number }> {
+export function importData(payload: Record<string, unknown>): Promise<{ rules: number; characters?: number; history: number }> {
   return request("/import", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
