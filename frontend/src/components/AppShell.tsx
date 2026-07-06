@@ -6,7 +6,6 @@ import {
   CalendarDays,
   Globe,
   History,
-  Languages,
   LogIn,
   Newspaper,
   Moon,
@@ -48,7 +47,7 @@ export function AppShell({ renderTab }: AppShellProps) {
   const [activeTab, setActiveTab] = useState<AppTab>("Updates");
   const [isDark, setIsDark] = useState(false);
   const { data: session, status } = useSession();
-  const { language, toggleLanguage, t } = useLanguage();
+  const { t } = useLanguage();
   const isSignedIn = status === "authenticated";
   const isAdmin = session?.user?.role === "admin";
 
@@ -76,16 +75,6 @@ export function AppShell({ renderTab }: AppShellProps) {
               >
                 <DiscordIcon className="h-4 w-4" aria-hidden="true" />
               </a>
-              <button
-                type="button"
-                onClick={toggleLanguage}
-                className="inline-flex min-h-10 items-center gap-2 rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
-                aria-label={t.app.languageLabel}
-                title={t.app.languageLabel}
-              >
-                <Languages className="h-4 w-4" aria-hidden="true" />
-                {language === "ko" ? "KO" : "EN"}
-              </button>
               <button
                 type="button"
                 onClick={() => setIsDark((current) => !current)}
