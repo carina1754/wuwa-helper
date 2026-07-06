@@ -120,7 +120,7 @@ export function AppShell({ renderTab }: AppShellProps) {
               <button
                 type="button"
                 onClick={() => setActiveTab("SiteUpdates")}
-                className="rounded-md border border-teal-300 bg-teal-50 px-3 py-1 text-sm font-medium text-teal-900 transition hover:bg-teal-100 dark:border-teal-400/50 dark:bg-teal-400/10 dark:text-teal-200 dark:hover:bg-teal-400/20"
+                className="inline-flex min-h-10 items-center rounded-md border border-teal-300 bg-teal-50 px-3 py-2 text-sm font-medium text-teal-900 transition hover:bg-teal-100 dark:border-teal-400/50 dark:bg-teal-400/10 dark:text-teal-200 dark:hover:bg-teal-400/20"
               >
                 {t.app.websiteUpdates}
               </button>

@@ -10,7 +10,7 @@ export const copy = {
       name: "명조 AI 헬퍼",
       tagline: "스크린샷 추출, 에코 점수, 빌드 우선순위",
       status: "비공식 가이드",
-      websiteUpdates: "웹사이트 업데이트",
+      websiteUpdates: "공지사항",
       discord: "디스코드",
       languageLabel: "언어 전환",
       themeLabel: "테마 전환",
@@ -285,9 +285,9 @@ export const copy = {
       empty: "등록된 업데이트 정보가 없습니다.",
     },
     siteUpdates: {
-      title: "웹사이트 업데이트 내역",
+      title: "공지사항",
       body: "이 사이트에 추가되거나 바뀐 기능을 날짜와 버전별로 정리합니다.",
-      empty: "아직 등록된 업데이트 내역이 없습니다.",
+      empty: "아직 등록된 공지사항이 없습니다.",
     },
     history: {
       title: "기록",
@@ -329,7 +329,7 @@ export const copy = {
       name: "WaWa AI Helper",
       tagline: "Screenshot extraction, echo scoring, and build priorities",
       status: "Unofficial guide",
-      websiteUpdates: "Website updates",
+      websiteUpdates: "Notices",
       discord: "Discord",
       languageLabel: "Switch language",
       themeLabel: "Switch theme",
@@ -597,9 +597,9 @@ export const copy = {
       empty: "No update summaries have been added.",
     },
     siteUpdates: {
-      title: "Website Update Log",
+      title: "Notices",
       body: "Tracks features added or changed on this site, by date and version.",
-      empty: "No update log entries yet.",
+      empty: "No notices yet.",
     },
     history: {
       title: "History",
