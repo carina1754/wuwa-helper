@@ -29,7 +29,7 @@ from src.report import generate_report
 from src.rules import load_build_rules, load_character_catalog, save_build_rules
 from src.vision import extract_from_image
 
-app = FastAPI(title="WuWa AI Coach API", version="0.1.0")
+app = FastAPI(title="WaWa AI Helper API", version="0.1.0")
 
 default_origins = [
     "http://localhost:3000",

@@ -26,7 +26,7 @@ export default function AdminPage() {
         <section className="mx-auto max-w-5xl rounded-md border border-slate-200 bg-white p-4 shadow-panel">
           <Link href="/" className="inline-flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-            WuWa AI Coach
+            WaWa AI Helper
           </Link>
           <h1 className="mt-6 text-2xl font-semibold text-slate-950">{t.admin.title}</h1>
           <p className="mt-2 text-sm text-slate-600">{t.admin.restricted}</p>
@@ -40,7 +40,7 @@ export default function AdminPage() {
       <div className="mx-auto grid max-w-5xl gap-4">
         <Link href="/" className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
           <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-          WuWa AI Coach
+          WaWa AI Helper
         </Link>
         <section>
           <h1 className="text-2xl font-semibold text-slate-950">{t.admin.title}</h1>

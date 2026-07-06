@@ -1,1 +1,1 @@
-"""Backend package for WuWa AI Coach."""
+"""Backend package for WaWa AI Helper."""

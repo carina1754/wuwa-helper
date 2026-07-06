@@ -1,6 +1,6 @@
-# WuWa AI Coach
+# WaWa AI Helper
 
-WuWa AI Coach is an unofficial Wuthering Waves fan tool for screenshot-based build and echo coaching. It is not affiliated with Wuthering Waves or Kuro Games.
+WaWa AI Helper is an unofficial Wuthering Waves fan tool for screenshot-based build and echo coaching. It is not affiliated with Wuthering Waves or Kuro Games.
 
 ## Features
 

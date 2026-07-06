@@ -16,7 +16,7 @@ export function SettingsPanel() {
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
     link.href = url;
-    link.download = "wuwa-ai-coach-export.json";
+    link.download = "wawa-ai-helper-export.json";
     link.click();
     URL.revokeObjectURL(url);
   }
