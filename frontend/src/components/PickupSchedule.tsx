@@ -87,13 +87,14 @@ export function PickupSchedule() {
                         <div className="flex flex-wrap gap-2">
                           {item.characters.map((name) => {
                             const character = characterByName.get(name);
+                            const displayName = (t.characterNames as Record<string, string>)[name] ?? name;
                             return (
                               <div key={`${item.id}-${name}`} className="group relative">
                                 {character?.image ? (
                                   // eslint-disable-next-line @next/next/no-img-element
-                                  <img src={character.image} alt={name} title={name} className={`h-11 w-11 rounded-full border-2 object-cover ${item.category === "first_pickup" ? "border-violet-300" : "border-amber-300"}`} />
+                                  <img src={character.image} alt={displayName} title={displayName} className={`h-11 w-11 rounded-full border-2 object-cover ${item.category === "first_pickup" ? "border-violet-300" : "border-amber-300"}`} />
                                 ) : (
-                                  <span className={`inline-flex h-11 w-11 items-center justify-center rounded-full border-2 text-xs font-semibold ${item.category === "first_pickup" ? "border-violet-300 bg-violet-50 text-violet-800" : "border-amber-300 bg-amber-50 text-amber-800"}`}>
+                                  <span className={`inline-flex h-11 w-11 items-center justify-center rounded-full border-2 text-xs font-semibold ${item.category === "first_pickup" ? "border-violet-300 bg-violet-50 text-violet-800" : "border-amber-300 bg-amber-50 text-amber-800"}`} title={displayName}>
                                     {name.slice(0, 2)}
                                   </span>
                                 )}
