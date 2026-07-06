@@ -290,7 +290,7 @@ def _updates_from_banner_text(text: str) -> list[dict[str, object]]:
 
 
 def _last_refresh(conn, source: str) -> datetime | None:
-    row = conn.execute("SELECT refreshed_at FROM refresh_state WHERE source = ?", (source,)).fetchone()
+    row = conn.execute("SELECT refreshed_at FROM refresh_state WHERE source = %s", (source,)).fetchone()
     if not row:
         return None
     try:
@@ -341,8 +341,12 @@ def refresh_pickups_and_updates(force: bool = False) -> dict[str, object]:
         if not schedule and not updates:
             conn.execute(
                 """
-                INSERT OR REPLACE INTO refresh_state (source, refreshed_at, status, message)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO refresh_state (source, refreshed_at, status, message)
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (source) DO UPDATE SET
+                    refreshed_at = EXCLUDED.refreshed_at,
+                    status = EXCLUDED.status,
+                    message = EXCLUDED.message
                 """,
                 (source, _now_iso(), "skipped", f"{source_link} fetched but no official update rows; kept existing DB data"),
             )
@@ -351,23 +355,38 @@ def refresh_pickups_and_updates(force: bool = False) -> dict[str, object]:
         for item in schedule:
             conn.execute(
                 """
-                INSERT OR REPLACE INTO pickup_schedule (id, year, month, category, data_json, updated_at)
-                VALUES (?, ?, ?, ?, ?, datetime('now'))
+                INSERT INTO pickup_schedule (id, year, month, category, data_json, updated_at)
+                VALUES (%s, %s, %s, %s, %s, now())
+                ON CONFLICT (id) DO UPDATE SET
+                    year = EXCLUDED.year,
+                    month = EXCLUDED.month,
+                    category = EXCLUDED.category,
+                    data_json = EXCLUDED.data_json,
+                    updated_at = now()
                 """,
                 (item["id"], item["year"], item["month"], item["category"], json.dumps(item, ensure_ascii=False)),
             )
         for item in updates:
             conn.execute(
                 """
-                INSERT OR REPLACE INTO game_updates (id, version, release_date_kst, data_json, updated_at)
-                VALUES (?, ?, ?, ?, datetime('now'))
+                INSERT INTO game_updates (id, version, release_date_kst, data_json, updated_at)
+                VALUES (%s, %s, %s, %s, now())
+                ON CONFLICT (id) DO UPDATE SET
+                    version = EXCLUDED.version,
+                    release_date_kst = EXCLUDED.release_date_kst,
+                    data_json = EXCLUDED.data_json,
+                    updated_at = now()
                 """,
                 (item["id"], item["version"], item.get("release_date_kst"), json.dumps(item, ensure_ascii=False)),
             )
         conn.execute(
             """
-            INSERT OR REPLACE INTO refresh_state (source, refreshed_at, status, message)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO refresh_state (source, refreshed_at, status, message)
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (source) DO UPDATE SET
+                    refreshed_at = EXCLUDED.refreshed_at,
+                    status = EXCLUDED.status,
+                    message = EXCLUDED.message
             """,
             (source, _now_iso(), "ok", f"schedule={len(schedule)} updates={len(updates)}"),
         )
@@ -383,8 +402,12 @@ def refresh_pickups_and_updates_if_stale() -> None:
             _ensure_refresh_state(conn)
             conn.execute(
                 """
-                INSERT OR REPLACE INTO refresh_state (source, refreshed_at, status, message)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO refresh_state (source, refreshed_at, status, message)
+                VALUES (%s, %s, %s, %s)
+                ON CONFLICT (source) DO UPDATE SET
+                    refreshed_at = EXCLUDED.refreshed_at,
+                    status = EXCLUDED.status,
+                    message = EXCLUDED.message
                 """,
                 ("kurogames_official_news", _now_iso(), "error", str(exc)),
             )

@@ -133,6 +133,26 @@ class TeamRule(BaseModel):
     notes: str | None = None
 
 
+
+class AuthUserSyncRequest(BaseModel):
+    email: str
+    name: str | None = None
+    image: str | None = None
+    role: Literal["admin", "user"] = "user"
+    provider: str = "google"
+    provider_account_id: str | None = None
+
+
+class UserRecord(BaseModel):
+    id: str
+    email: str
+    name: str | None = None
+    image: str | None = None
+    role: Literal["admin", "user"] = "user"
+    created_at: str
+    updated_at: str
+    last_login_at: str | None = None
+
 class Diagnosis(BaseModel):
     target_type: Literal["echo", "character", "account", "team"]
     target_name: str | None = None

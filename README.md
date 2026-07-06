@@ -18,6 +18,7 @@ Production is intended to run behind Caddy as the public HTTPS reverse proxy.
 - Caddy listens on `https://wuwahelper.com` with the certificate files under `caddy/certs/`
 - Next.js listens on `127.0.0.1:3000`
 - FastAPI listens on `127.0.0.1:8000`
+- PostgreSQL stores users, notices, content data, rules, and analysis history
 - Browser requests to `/backend/*` are rewritten by Next.js to FastAPI
 
 The app process must not bind to TCP `443` directly. TLS termination belongs to Caddy.
@@ -30,6 +31,7 @@ Use Python 3.12 with `uv`.
 cd backend
 uv venv --python 3.12
 uv sync --dev
+uv run python -m scripts.import_seed_data
 uv run uvicorn main:app --host 127.0.0.1 --port 8000
 ```
 
@@ -38,7 +40,7 @@ Optional environment variables:
 ```powershell
 $env:OPENAI_API_KEY="..."
 $env:OPENAI_MODEL="gpt-4.1-mini"
-$env:DATABASE_URL="sqlite:///./wuwa_ai_coach.db"
+$env:DATABASE_URL="postgresql://postgres:<password>@127.0.0.1:5432/wuwa_ai_coach"
 $env:CORS_ALLOW_ORIGINS="https://wuwahelper.com,http://localhost:3000,http://127.0.0.1:3000"
 ```
 
@@ -119,7 +121,8 @@ Run a production build only when intentionally checking a release artifact.
 
 ## Content Data
 
-- Website notices: `backend/data/site_updates.json`
+- Runtime data lives in PostgreSQL; `backend/data/*.json` files are seed import inputs only
+- Website notices: `site_updates` table
 - Wuthering Waves updates: `backend/data/game_updates.json`
 - Pickup schedules: `backend/data/pickup_schedule.json`
 - Character catalog: `backend/data/character_catalog.json`

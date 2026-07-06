@@ -13,6 +13,7 @@ from src.evaluator import choose_rule, evaluate_account, evaluate_character, eva
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
 from src.models import (
+    AuthUserSyncRequest,
     AnalysisSession,
     AnalyzeRequest,
     AnalyzeResponse,
@@ -24,9 +25,11 @@ from src.models import (
     PickupScheduleItem,
     SiteUpdateEntry,
     VisionExtractionResult,
+    UserRecord,
 )
 from src.report import generate_report
 from src.rules import load_build_rules, load_character_catalog, save_build_rules
+from src.users import sync_user
 from src.vision import extract_from_image
 
 app = FastAPI(title="WaWa AI Helper API", version="0.1.0")
@@ -62,6 +65,11 @@ start_daily_refresh_worker()
 def health() -> dict[str, bool]:
     return {"ok": True}
 
+
+
+@app.post("/auth/sync-user", response_model=UserRecord)
+def post_auth_sync_user(payload: AuthUserSyncRequest) -> UserRecord:
+    return sync_user(payload)
 
 @app.get("/rules", response_model=list[BuildRule])
 def get_rules() -> list[BuildRule]:

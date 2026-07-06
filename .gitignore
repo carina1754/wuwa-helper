@@ -20,4 +20,5 @@ certificates/
 *.log
 caddy/*.exe
 caddy/certs/
-
+DB/
+backend/.env

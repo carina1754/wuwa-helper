@@ -6,16 +6,27 @@ from src import content_refresh
 from src.database import get_connection, init_db
 
 
-def test_refresh_preserves_historical_rows_not_covered_by_new_scrape(monkeypatch, tmp_path):
-    db_path = tmp_path / "test_content_refresh.db"
-    monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
+def test_refresh_preserves_historical_rows_not_covered_by_new_scrape(monkeypatch):
     init_db()
+    cleanup_schedule_ids = ("test-historical-row", "test-current-row")
+    cleanup_update_ids = ("test-historical-update", "test-current-update")
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM pickup_schedule WHERE id = ANY(%s)", (list(cleanup_schedule_ids),))
+        conn.execute("DELETE FROM game_updates WHERE id = ANY(%s)", (list(cleanup_update_ids),))
+        conn.commit()
 
     with get_connection() as conn:
         conn.execute(
             """
-            INSERT OR REPLACE INTO pickup_schedule (id, year, month, category, data_json, updated_at)
-            VALUES (?, ?, ?, ?, ?, datetime('now'))
+            INSERT INTO pickup_schedule (id, year, month, category, data_json, updated_at)
+            VALUES (%s, %s, %s, %s, %s, now())
+            ON CONFLICT (id) DO UPDATE SET
+                year = EXCLUDED.year,
+                month = EXCLUDED.month,
+                category = EXCLUDED.category,
+                data_json = EXCLUDED.data_json,
+                updated_at = now()
             """,
             (
                 "test-historical-row",
@@ -39,8 +50,13 @@ def test_refresh_preserves_historical_rows_not_covered_by_new_scrape(monkeypatch
         )
         conn.execute(
             """
-            INSERT OR REPLACE INTO game_updates (id, version, release_date_kst, data_json, updated_at)
-            VALUES (?, ?, ?, ?, datetime('now'))
+            INSERT INTO game_updates (id, version, release_date_kst, data_json, updated_at)
+            VALUES (%s, %s, %s, %s, now())
+            ON CONFLICT (id) DO UPDATE SET
+                version = EXCLUDED.version,
+                release_date_kst = EXCLUDED.release_date_kst,
+                data_json = EXCLUDED.data_json,
+                updated_at = now()
             """,
             (
                 "test-historical-update",
@@ -104,6 +120,11 @@ def test_refresh_preserves_historical_rows_not_covered_by_new_scrape(monkeypatch
     assert "test-current-row" in ids
     assert "test-historical-update" in update_ids
     assert "test-current-update" in update_ids
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM pickup_schedule WHERE id = ANY(%s)", (list(cleanup_schedule_ids),))
+        conn.execute("DELETE FROM game_updates WHERE id = ANY(%s)", (list(cleanup_update_ids),))
+        conn.commit()
 
 
 def test_scraper_pickup_schedule_id_matches_seed_convention():

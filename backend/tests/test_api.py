@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 
 from main import app
+from src.database import get_connection
 from src.models import AnalysisSession, VisionExtractionResult
 
 client = TestClient(app)
@@ -59,6 +60,9 @@ def test_site_updates_endpoint_returns_service_notices():
 
 
 def test_history_round_trip():
+    with get_connection() as conn:
+        conn.execute("DELETE FROM analysis_sessions WHERE id = %s", ("test-session",))
+        conn.commit()
     session = AnalysisSession(
         id="test-session",
         created_at="2026-07-05T00:00:00Z",
@@ -79,6 +83,9 @@ def test_history_round_trip():
     detail_response = client.get("/history/test-session")
     assert detail_response.status_code == 200
     assert detail_response.json()["report"] == "test report"
+    with get_connection() as conn:
+        conn.execute("DELETE FROM analysis_sessions WHERE id = %s", ("test-session",))
+        conn.commit()
 
 
 def test_vision_extract_uses_mock_without_api_key(monkeypatch):
