@@ -18,6 +18,9 @@ from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
 from src.catalog import (
     load_character_kits,
+    load_codex_echoes,
+    load_codex_resonators,
+    load_codex_weapons,
     load_echoes,
     load_pickup_banners,
     load_sonata_sets,
@@ -139,6 +142,21 @@ def get_echoes() -> list[dict]:
 @app.get("/sonata-sets")
 def get_sonata_sets() -> list[dict]:
     return load_sonata_sets()
+
+
+@app.get("/codex/resonators")
+def get_codex_resonators() -> list[dict]:
+    return load_codex_resonators()
+
+
+@app.get("/codex/weapons")
+def get_codex_weapons() -> list[dict]:
+    return load_codex_weapons()
+
+
+@app.get("/codex/echoes")
+def get_codex_echoes() -> list[dict]:
+    return load_codex_echoes()
 
 
 @app.get("/pickup-banners", response_model=list[PickupBanner])

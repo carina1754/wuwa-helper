@@ -197,6 +197,31 @@ def load_echoes() -> list[dict]:
     return [json.loads(row["data_json"]) for row in rows]
 
 
+# --- Codex: rich wuthering.gg dataset (wuwa_* tables) --------------------------
+def load_codex_resonators() -> list[dict]:
+    with get_connection() as conn:
+        rows = conn.execute(
+            "SELECT data_json FROM wuwa_resonator ORDER BY rarity DESC NULLS LAST, name_ko"
+        ).fetchall()
+    return [json.loads(row["data_json"]) for row in rows]
+
+
+def load_codex_weapons() -> list[dict]:
+    with get_connection() as conn:
+        rows = conn.execute(
+            "SELECT data_json FROM wuwa_weapon ORDER BY rarity DESC NULLS LAST, name_ko"
+        ).fetchall()
+    return [json.loads(row["data_json"]) for row in rows]
+
+
+def load_codex_echoes() -> list[dict]:
+    with get_connection() as conn:
+        rows = conn.execute(
+            "SELECT data_json FROM wuwa_echo ORDER BY cost DESC NULLS LAST, rarity DESC NULLS LAST, name_ko"
+        ).fetchall()
+    return [json.loads(row["data_json"]) for row in rows]
+
+
 # --- Pickup banners (characters + weapons per version/phase) ------------------
 # Crawled from Namuwiki 튜닝 pages; character + weapon banners merged by
 # (version, phase). Character avatars are pulled from the banner page's own
