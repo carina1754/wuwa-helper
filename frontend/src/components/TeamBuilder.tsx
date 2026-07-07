@@ -2,10 +2,11 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
-import { getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig } from "@/lib/api";
+import { getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets } from "@/lib/api";
 import { useLanguage } from "@/lib/i18n";
-import type { CodexEcho, CodexResonator, CodexWeapon } from "@/lib/types";
+import type { CodexEcho, CodexResonator, CodexWeapon, SonataSet } from "@/lib/types";
 import {
+  activeSetBonuses,
   buildCost,
   computeStats,
   echoFromCodex,
@@ -41,6 +42,7 @@ export function TeamBuilder() {
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
   const [echoes, setEchoes] = useState<CodexEcho[]>([]);
   const [config, setConfig] = useState<GameConfig | null>(null);
+  const [sonata, setSonata] = useState<SonataSet[]>([]);
   const [party, setParty] = useState<Slot[]>(newParty);
   const [editing, setEditing] = useState<number | null>(null);
   const [picker, setPicker] = useState<null | { kind: "resonator" | "weapon" | "echo"; slot: number; echoIdx?: number }>(null);
@@ -52,6 +54,7 @@ export function TeamBuilder() {
     getGameConfig()
       .then((c) => setConfig((c?.echo_stats as GameConfig) ?? null))
       .catch(() => {});
+    getSonataSets().then(setSonata).catch(() => {});
   }, []);
   useEffect(() => {
     try {
@@ -82,6 +85,10 @@ export function TeamBuilder() {
     return [...m.values()];
   }, [echoes]);
 
+  const setByName = useMemo(() => new Map(sonata.map((s) => [s.name_ko, s])), [sonata]);
+  const echoSonata = (id: string) => echoById.get(id)?.sonata ?? [];
+  const bonusesFor = (b: ResonatorBuild) => activeSetBonuses(b, echoSonata, setByName)?.bonuses ?? [];
+
   const setSlot = (i: number, fn: (s: Slot) => Slot) => setParty((p) => p.map((s, j) => (j === i ? fn(s) : s)));
   const setBuild = (i: number, fn: (b: ResonatorBuild) => ResonatorBuild) => setSlot(i, (s) => ({ ...s, build: fn(s.build) }));
 
@@ -105,7 +112,7 @@ export function TeamBuilder() {
       <div className="grid gap-3 sm:grid-cols-3">
         {party.map((slot, i) => {
           const reso = slot.resonatorId != null ? resoById.get(slot.resonatorId) : null;
-          const stats = reso ? computeStats(reso, slot.build.weaponId ? weaponById.get(slot.build.weaponId) ?? null : null, slot.build, config) : null;
+          const stats = reso ? computeStats(reso, slot.build.weaponId ? weaponById.get(slot.build.weaponId) ?? null : null, slot.build, config, bonusesFor(slot.build)) : null;
           return (
             <div key={i} className="flex flex-col rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4" style={{ minHeight: 176 }}>
               {reso ? (
@@ -152,6 +159,7 @@ export function TeamBuilder() {
                 build={party[editing].build}
                 weaponById={weaponById}
                 echoById={echoById}
+                setByName={setByName}
                 config={config}
                 slot={editing}
                 t={t}
@@ -182,12 +190,13 @@ export function TeamBuilder() {
 
 // ---------------------------------------------------------------------------
 function BuildEditor({
-  reso, build, weaponById, echoById, config, slot, t, onChange, onPick, onClose,
+  reso, build, weaponById, echoById, setByName, config, slot, t, onChange, onPick, onClose,
 }: {
   reso: CodexResonator;
   build: ResonatorBuild;
   weaponById: Map<string, CodexWeapon>;
   echoById: Map<string, CodexEcho>;
+  setByName: Map<string, SonataSet>;
   config: GameConfig | null;
   slot: number;
   t: ReturnType<typeof useLanguage>["t"];
@@ -196,7 +205,8 @@ function BuildEditor({
   onClose: () => void;
 }) {
   const weapon = build.weaponId ? weaponById.get(build.weaponId) ?? null : null;
-  const stats = computeStats(reso, weapon, build, config);
+  const active = activeSetBonuses(build, (id) => echoById.get(id)?.sonata ?? [], setByName);
+  const stats = computeStats(reso, weapon, build, config, active?.bonuses ?? []);
   const cost = buildCost(build);
   const costBudget = config?.costBudget ?? 12;
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
@@ -301,6 +311,17 @@ function BuildEditor({
           })}
         </div>
       </div>
+
+      {/* active sonata set effect */}
+      {active ? (
+        <div className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] p-2.5 text-xs">
+          <span className="font-semibold text-[var(--fg)]">세트 효과</span>{" "}
+          <span className="text-[var(--fg-soft)]">{active.name} · {active.count >= 5 ? "5세트" : "2세트"}</span>
+          {active.bonuses.length ? (
+            <span className="text-[var(--accent)]"> · {active.bonuses.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`).join(", ")}</span>
+          ) : null}
+        </div>
+      ) : null}
 
       {/* final stats */}
       <div>

@@ -77,11 +77,63 @@ const curveAt = (curve: { level: number; value: number }[] | undefined, level: n
 };
 
 // Final stats: WuWa formula — %-stats boost the (character + weapon) base; flats add on top.
+// Parse a simple always-on set effect ("용융 피해가 10% 증가된다") into a stat delta.
+const ELEM_DMG: Record<string, StatKey> = {
+  응결: "glacioDmg", 용융: "fusionDmg", 전도: "electroDmg", 기류: "aeroDmg", 회절: "spectroDmg", 인멸: "havocDmg",
+};
+export function parseSetEffect(text: string | null | undefined): { key: StatKey; value: number } | null {
+  if (!text) return null;
+  const m = text.match(/([가-힣·\s]+?)(?:가|이)\s*([\d.]+)%\s*증가/);
+  if (!m) return null;
+  const value = parseFloat(m[2]);
+  const name = m[1].trim();
+  for (const [el, k] of Object.entries(ELEM_DMG)) if (name.includes(el)) return { key: k, value };
+  if (name.includes("공명 스킬")) return { key: "skillDmg", value };
+  if (name.includes("공명 해방")) return { key: "liberationDmg", value };
+  if (name.includes("일반 공격")) return { key: "basicDmg", value };
+  if (name.includes("강공격")) return { key: "heavyDmg", value };
+  if (name.includes("공격력")) return { key: "atkPct", value };
+  if (name.includes("방어력")) return { key: "defPct", value };
+  if (name.includes("HP")) return { key: "hpPct", value };
+  if (name.includes("크리티컬 피해")) return { key: "critDmg", value };
+  if (name.includes("크리티컬")) return { key: "crit", value };
+  if (name.includes("공명 효율")) return { key: "energyRegen", value };
+  if (name.includes("치료")) return { key: "healing", value };
+  return null;
+}
+
+export type SonataSet = { name_ko: string; two_piece?: string | null; five_piece?: string | null };
+// The set with the most equipped echoes; its 2-set (and 5-set at 5) always-on effects apply.
+export function activeSetBonuses(
+  build: ResonatorBuild,
+  echoSonata: (id: string) => string[],
+  setByName: Map<string, SonataSet>,
+): { name: string; count: number; bonuses: { key: StatKey; value: number }[] } | null {
+  const counts = new Map<string, number>();
+  for (const e of build.echoes) {
+    if (!e) continue;
+    for (const s of echoSonata(e.echoId)) counts.set(s, (counts.get(s) ?? 0) + 1);
+  }
+  let best: { name: string; count: number } | null = null;
+  for (const [name, count] of counts) if (count >= 2 && (!best || count > best.count)) best = { name, count };
+  if (!best) return null;
+  const set = setByName.get(best.name);
+  const bonuses: { key: StatKey; value: number }[] = [];
+  const two = parseSetEffect(set?.two_piece);
+  if (two) bonuses.push(two);
+  if (best.count >= 5) {
+    const five = parseSetEffect(set?.five_piece);
+    if (five) bonuses.push(five);
+  }
+  return { name: best.name, count: best.count, bonuses };
+}
+
 export function computeStats(
   reso: CodexResonator,
   weapon: CodexWeapon | null,
   build: ResonatorBuild,
   config: GameConfig | null,
+  extra: { key: StatKey; value: number }[] = [],
 ): Record<StatKey, number> {
   const out = Object.fromEntries(Object.keys(STAT_LABEL).map((k) => [k, 0])) as Record<StatKey, number>;
   const curves = reso.stat_curves ?? {};
@@ -127,6 +179,7 @@ export function computeStats(
     if (opt) addStat(e.main, echoMainValue(opt.max, e.level));
     for (const s of e.subs) addStat(s.key, s.value);
   }
+  for (const s of extra) addStat(s.key, s.value); // sonata set effects etc.
 
   out.hp = (baseHp) * (1 + pct.hpPct / 100) + flat.hp;
   out.atk = (baseAtk + weaponAtk) * (1 + pct.atkPct / 100) + flat.atk;
