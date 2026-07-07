@@ -4,6 +4,7 @@ import { Clock } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
 import { Codex } from "@/components/Codex";
 import { PickupSchedule } from "@/components/PickupSchedule";
+import { TeamBuilder } from "@/components/TeamBuilder";
 import { UpdatesSummary } from "@/components/UpdatesSummary";
 import { WebsiteUpdates } from "@/components/WebsiteUpdates";
 import type { AppTab } from "@/lib/constants";
@@ -35,7 +36,7 @@ function renderTab(tab: AppTab) {
     case "SiteUpdates":
       return <WebsiteUpdates />;
     case "Teams":
-      return <UpdatingNotice label="팀" />;
+      return <TeamBuilder />;
     case "History":
       return <UpdatingNotice label="기록" />;
   }
