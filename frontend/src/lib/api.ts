@@ -12,6 +12,7 @@ import type {
   PickupBanner,
   PickupScheduleItem,
   Role,
+  SonataSet,
   WeaponCatalogItem,
   SiteUpdateEntry,
   VisionExtractionResult,
@@ -81,6 +82,10 @@ export function getCodexWeapons(): Promise<CodexWeapon[]> {
 
 export function getCodexEchoes(): Promise<CodexEcho[]> {
   return request("/codex/echoes");
+}
+
+export function getSonataSets(): Promise<SonataSet[]> {
+  return request("/sonata-sets");
 }
 
 export function getUpdates(): Promise<GameUpdateSummary[]> {

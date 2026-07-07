@@ -214,6 +214,14 @@ export interface CodexEcho {
   icon?: string | null;
 }
 
+export interface SonataSet {
+  id: string;
+  name_ko: string;
+  icon?: string | null;
+  two_piece?: string | null;
+  five_piece?: string | null;
+}
+
 export interface Diagnosis {
   target_type: "echo" | "character" | "account" | "team";
   target_name?: string | null;

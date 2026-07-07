@@ -1,11 +1,11 @@
 "use client";
 
-import { Sparkles, Swords, UserRound, X } from "lucide-react";
-import { useEffect, useMemo, useState } from "react";
-import { getCodexEchoes, getCodexResonators, getCodexWeapons } from "@/lib/api";
+import { ChevronDown, Sparkles, Swords, UserRound, X } from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
-import type { CodexEcho, CodexResonator, CodexWeapon, Role } from "@/lib/types";
+import type { CodexEcho, CodexResonator, CodexWeapon, Role, SonataSet } from "@/lib/types";
 
 type SubTab = "resonators" | "weapons" | "echoes";
 
@@ -102,6 +102,96 @@ function FilterSelect({ label, value, onChange, options, render }: FilterSelectP
   );
 }
 
+/** Custom dropdown for the sonata filter that shows each set's crest icon
+ * (a native <select> can't render images in its options). */
+function SonataFilter({
+  value,
+  onChange,
+  options,
+  iconOf,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  options: string[];
+  iconOf: (name: string) => string | undefined;
+}) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const onDoc = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+  const selectedIcon = value ? imageSrc(iconOf(value)) : undefined;
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        aria-label="소나타 필터"
+        onClick={() => setOpen((current) => !current)}
+        className="flex min-h-9 items-center gap-1.5 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-1.5 text-sm text-[var(--fg)]"
+      >
+        {value ? (
+          <>
+            {selectedIcon ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={selectedIcon} alt="" className="h-4 w-4 shrink-0 object-contain" />
+            ) : null}
+            <span className="max-w-[9rem] truncate">{value}</span>
+          </>
+        ) : (
+          <span className="text-[var(--muted)]">전체 소나타</span>
+        )}
+        <ChevronDown className="h-3.5 w-3.5 shrink-0 text-[var(--muted)]" aria-hidden="true" />
+      </button>
+      {open ? (
+        <div className="absolute left-0 z-30 mt-1 max-h-72 w-64 overflow-y-auto rounded-md border border-[var(--line)] bg-[var(--surface)] p-1 shadow-xl">
+          <button
+            type="button"
+            onClick={() => {
+              onChange("");
+              setOpen(false);
+            }}
+            className={`flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm hover:bg-[var(--surface-2)] ${
+              value ? "text-[var(--fg-soft)]" : "bg-[var(--surface-2)] text-[var(--fg)]"
+            }`}
+          >
+            <span className="h-5 w-5 shrink-0" />
+            전체 소나타
+          </button>
+          {options.map((name) => {
+            const icon = imageSrc(iconOf(name));
+            return (
+              <button
+                key={name}
+                type="button"
+                onClick={() => {
+                  onChange(name);
+                  setOpen(false);
+                }}
+                className={`flex w-full items-center gap-2 rounded px-2 py-1.5 text-left text-sm hover:bg-[var(--surface-2)] ${
+                  value === name ? "bg-[var(--surface-2)] text-[var(--fg)]" : "text-[var(--fg-soft)]"
+                }`}
+              >
+                {icon ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={icon} alt="" className="h-5 w-5 shrink-0 object-contain" />
+                ) : (
+                  <span className="h-5 w-5 shrink-0" />
+                )}
+                <span className="truncate">{name}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 /** A single grid cell: rarity-ringed icon, truncated name, and a small hint. */
 function GridCell({
   name,
@@ -150,6 +240,7 @@ export function Codex() {
   const [resonators, setResonators] = useState<CodexResonator[]>([]);
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
   const [echoes, setEchoes] = useState<CodexEcho[]>([]);
+  const [sonataSets, setSonataSets] = useState<SonataSet[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [detail, setDetail] = useState<Detail | null>(null);
@@ -171,12 +262,13 @@ export function Codex() {
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
-    Promise.all([getCodexResonators(), getCodexWeapons(), getCodexEchoes()])
-      .then(([res, wep, ech]) => {
+    Promise.all([getCodexResonators(), getCodexWeapons(), getCodexEchoes(), getSonataSets()])
+      .then(([res, wep, ech, son]) => {
         if (cancelled) return;
         setResonators(res);
         setWeapons(wep);
         setEchoes(ech);
+        setSonataSets(son);
       })
       .catch((err) => {
         if (!cancelled) setError(err instanceof Error ? err.message : String(err));
@@ -234,6 +326,11 @@ export function Codex() {
     () => Array.from(new Set(echoes.flatMap((e) => e.sonata ?? []).filter(Boolean))).sort(),
     [echoes],
   );
+  const sonataIcon = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const set of sonataSets) if (set.name_ko && set.icon) map.set(set.name_ko, set.icon);
+    return map;
+  }, [sonataSets]);
   const echoRarities = useMemo(
     () => Array.from(new Set(echoes.map((e) => e.rarity).filter(Boolean))).sort((a, b) => b - a).map(String),
     [echoes],
@@ -352,7 +449,12 @@ export function Codex() {
           {tab === "echoes" ? (
             <>
               <FilterSelect label="전체 코스트" value={cost} onChange={setCost} options={costOptions} render={(v) => `${v} 코스트`} />
-              <FilterSelect label="전체 소나타" value={sonata} onChange={setSonata} options={sonataOptions} />
+              <SonataFilter
+                value={sonata}
+                onChange={setSonata}
+                options={sonataOptions}
+                iconOf={(name) => sonataIcon.get(name)}
+              />
               <FilterSelect label="전체 성급" value={rarityE} onChange={setRarityE} options={echoRarities} render={(v) => `${v}★`} />
             </>
           ) : null}
