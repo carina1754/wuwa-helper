@@ -91,18 +91,49 @@ def download_image(source_url: str, dest_stem: Path) -> Path:
     return dest
 
 
+HERO_MAX_WIDTH = 1280
+
+
+def _downscale_in_place(path: Path, max_width: int = HERO_MAX_WIDTH) -> None:
+    """Shrink an oversized banner to max_width and re-encode as JPEG in place.
+
+    Official hero banners are 4K-ish (10+ MB) but only render ~900px wide. No-op
+    if Pillow is unavailable or the image is already small.
+    """
+    try:
+        from PIL import Image
+    except ImportError:
+        return
+    try:
+        with Image.open(path) as im:
+            if im.width <= max_width and path.suffix.lower() in (".jpg", ".jpeg"):
+                return
+            rgb = im.convert("RGB")
+            if rgb.width > max_width:
+                height = round(rgb.height * max_width / rgb.width)
+                rgb = rgb.resize((max_width, height), Image.LANCZOS)
+        dest = path.with_suffix(".jpg")
+        rgb.save(dest, "JPEG", quality=85, optimize=True)
+        if dest != path:
+            path.unlink(missing_ok=True)
+    except Exception:  # noqa: BLE001 - best-effort; leave the original on any failure
+        return
+
+
 def ensure_hero_image(update_id: str, source_url: str | None) -> str | None:
     """Return the API-relative served path for the cached hero image, or None.
 
-    Reuses an already-cached file (no re-download). A rejected or failed
-    download yields None so the caller (refresh) can continue.
+    Reuses an already-cached file (no re-download). Freshly downloaded banners are
+    downscaled to keep them web-sized. A rejected/failed download yields None so
+    the caller (refresh) can continue.
     """
     if cached_image_path(update_id) is not None:
         return f"/updates/image/{update_id}"
     if not source_url:
         return None
     try:
-        download_image(source_url, updates_image_dir() / update_id)
+        path = download_image(source_url, updates_image_dir() / update_id)
+        _downscale_in_place(path)
     except Exception:
         return None
     return f"/updates/image/{update_id}"
