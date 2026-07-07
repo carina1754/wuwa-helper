@@ -247,3 +247,22 @@ def test_official_updates_keep_records_since_2024_with_kst_datetime_and_no_summa
     assert updates[0]["source_links"] == ["https://wutheringwaves.kurogames.com/en/main/news/detail/4973"]
     assert updates[1]["release_date_kst"] == "2024-06-28 05:00 KST"
     assert updates[1]["source_links"] == ["https://wutheringwaves.kurogames.com/kr/main/news/detail/951"]
+
+
+def test_extract_hero_image_url_finds_first_img():
+    content = 'intro <p><img src="https://cdn.example/hero.jpg" alt="x" /></p> tail'
+    assert content_refresh._extract_hero_image_url(content) == "https://cdn.example/hero.jpg"
+
+
+def test_extract_hero_image_url_none_without_img():
+    assert content_refresh._extract_hero_image_url("no images here") is None
+
+
+def test_extract_thematic_title_strips_content_notice_suffix():
+    title = "「선택하지 않은 꿈」 3.4 버전 내용 안내"
+    assert content_refresh._extract_thematic_title(title, "3.4") == "「선택하지 않은 꿈」 3.4 버전"
+
+
+def test_extract_thematic_title_falls_back_for_non_content_articles():
+    title = "Wuthering Waves Version 3.5 Update Maintenance Notice"
+    assert content_refresh._extract_thematic_title(title, "3.5") == "3.5 업데이트"

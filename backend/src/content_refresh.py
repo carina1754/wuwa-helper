@@ -72,6 +72,19 @@ def _extract_version_from_article(title: str, content: str) -> str | None:
     return match.group(1) or match.group(2)
 
 
+def _extract_hero_image_url(raw_content: str) -> str | None:
+    match = re.search(r'<img[^>]+src="([^"]+)"', raw_content, re.IGNORECASE)
+    return match.group(1) if match else None
+
+
+def _extract_thematic_title(article_title: str, version: str) -> str:
+    title = (article_title or "").strip()
+    if "내용 안내" in title:
+        stripped = re.sub(r"\s*내용\s*안내\s*$", "", title).strip()
+        return stripped or f"{version} 업데이트"
+    return f"{version} 업데이트"
+
+
 def _format_kst(year: int, month: int, day: int, hour: int, minute: int, add_utc8_offset: bool = False) -> str:
     value = datetime(year, month, day, hour, minute)
     if add_utc8_offset:
