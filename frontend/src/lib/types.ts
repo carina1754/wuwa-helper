@@ -132,6 +132,7 @@ export interface WeaponCatalogItem {
 export interface PickupBannerCharacter {
   name_ko: string;
   avatar?: string | null;
+  catalog_id?: number | null;
 }
 
 export interface PickupBannerWeapon {
@@ -147,6 +148,7 @@ export interface PickupBanner {
   phase?: number | null;
   banner_name?: string | null;
   is_rerun: boolean;
+  is_collab: boolean;
   characters: PickupBannerCharacter[];
   weapons: PickupBannerWeapon[];
   start_date?: string | null;

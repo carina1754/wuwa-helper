@@ -266,7 +266,7 @@ export const copy = {
     },
     pickup: {
       title: "역대 픽업 일정표",
-      body: "한국 기준으로 정리한 캐릭터 픽업 월별 일정입니다.",
+      body: "한국 기준으로 정리한 버전별 캐릭터·무기 픽업 기록입니다. 아이콘을 클릭하면 상세 정보를 볼 수 있습니다.",
       year: "년도",
       yearly: "연간 보기",
       monthly: "월별 달력",
@@ -578,7 +578,7 @@ export const copy = {
     },
     pickup: {
       title: "Pickup Schedule",
-      body: "Character pickup schedule organized for Korea.",
+      body: "Character and weapon pickup history by version (KST). Click an icon for details.",
       year: "Year",
       yearly: "Year view",
       monthly: "Monthly calendar",
