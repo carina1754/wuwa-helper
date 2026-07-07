@@ -19,6 +19,7 @@ import {
   STAT_LABEL,
   subMax,
   subSlots,
+  weaponDescAtRank,
 } from "@/lib/build";
 
 const PARTY_SIZE = 3;
@@ -250,6 +251,9 @@ function BuildEditor({
                 <button key={r} type="button" onClick={() => onChange((b) => ({ ...b, weaponRank: r }))} className={`h-6 w-6 rounded ${build.weaponRank === r ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "bg-[var(--surface)] text-[var(--fg-soft)]"}`}>{r}</button>
               ))}
             </div>
+            {weapon.desc ? (
+              <p className="mt-2 text-[11px] leading-5 text-[var(--fg-soft)]">{weaponDescAtRank(weapon.desc, build.weaponRank)}</p>
+            ) : null}
           </>
         ) : (
           <button type="button" onClick={() => onPick({ kind: "weapon", slot })} className="w-full py-2 text-sm text-[var(--accent)]">+ 무기 선택</button>

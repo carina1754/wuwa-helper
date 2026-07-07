@@ -130,9 +130,18 @@ export interface PickupBanner {
   end_date?: string | null;
 }
 
+export interface CodexSkillDamage {
+  type?: string | null;
+  prop?: string | null;
+  name?: string | null;
+  rates: string[]; // multiplier per skill level (index 0 = Lv.1)
+}
 export interface CodexSkill {
   SkillName?: string | null;
   SkillDescribe?: string | null;
+  SkillType?: string | null;
+  Icon?: string | null;
+  damage?: CodexSkillDamage[] | null;
 }
 
 export interface CodexResonanceNode {

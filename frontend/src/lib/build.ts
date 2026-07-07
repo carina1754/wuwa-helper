@@ -190,6 +190,16 @@ export function computeStats(
 export const buildCost = (build: ResonatorBuild) =>
   build.echoes.reduce((s, e) => s + (e?.cost ?? 0), 0);
 
+// Weapon passives scale by refine rank as slash-lists ("4%/6.2%/8.4%/10.6%/12.8%").
+// Substitute each list with the value for the given rank (1-5).
+export function weaponDescAtRank(desc: string | null | undefined, rank: number): string {
+  const text = (desc ?? "").replace(/<[^>]+>/g, "");
+  return text.replace(/(\d+(?:\.\d+)?%?)(?:\s*\/\s*\d+(?:\.\d+)?%?)+/g, (m) => {
+    const parts = m.split("/").map((p) => p.trim());
+    return parts[Math.min(Math.max(rank - 1, 0), parts.length - 1)] ?? parts[parts.length - 1];
+  });
+}
+
 // pick the default main stat for an echo of a given cost
 export function defaultMain(config: GameConfig, cost: number): StatKey {
   return echoMainOptions(config, cost)[0]?.key ?? "atkPct";

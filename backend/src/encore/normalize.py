@@ -61,15 +61,30 @@ def normalize_resonator(d: dict, name_en: str | None = None) -> dict:
         curves[key] = curve
         if curve:
             stats[key] = curve[-1]["value"]
-    skills = [
-        {
-            "SkillName": strip_tags(s.get("SkillName")),
-            "SkillDescribe": s.get("SkillDescribe"),  # keep tags; frontend strips
-            "SkillType": s.get("SkillType"),
-            "Icon": s.get("Icon"),
-        }
-        for s in d.get("Skills", [])
-    ]
+    skills = []
+    for s in d.get("Skills", []):
+        damage = []
+        for dl in s.get("DamageList", []) or []:
+            rates = dl.get("RateLv") or []
+            if not rates:
+                continue
+            damage.append(
+                {
+                    "type": dl.get("Type"),
+                    "prop": dl.get("PropertyName"),
+                    "name": strip_tags(dl.get("Condition")) or dl.get("Type"),
+                    "rates": rates,  # multiplier per skill level (1..N)
+                }
+            )
+        skills.append(
+            {
+                "SkillName": strip_tags(s.get("SkillName")),
+                "SkillDescribe": s.get("SkillDescribe"),  # keep tags; frontend strips
+                "SkillType": s.get("SkillType"),
+                "Icon": s.get("Icon"),
+                "damage": damage,
+            }
+        )
     chain = [
         {"NodeName": strip_tags(c.get("AttributesDescription")) or strip_tags(c.get("NodeName"))}
         for c in d.get("ResonantChain", [])

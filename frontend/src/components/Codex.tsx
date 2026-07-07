@@ -4,6 +4,7 @@ import { ChevronDown, Sparkles, Swords, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Portal } from "./Portal";
 import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
+import { weaponDescAtRank } from "@/lib/build";
 import { API_BASE_URL } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexWeapon, Role, SonataSet } from "@/lib/types";
@@ -643,6 +644,8 @@ export function ResonatorDetail({
 
   const maxLevel = item.max_level ?? 90;
   const [level, setLevel] = useState(maxLevel);
+  const [skillLv, setSkillLv] = useState(10);
+  const hasSkillDamage = (item.skills ?? []).some((s) => s.damage?.length);
   const curves = item.stat_curves ?? null;
   const statValue = (key: string): number | undefined => {
     const curve = curves?.[key];
@@ -665,15 +668,32 @@ export function ResonatorDetail({
 
       {item.skills?.length ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">스킬</h4>
-          <ul className="grid gap-2">
+          <div className="mb-1.5 flex items-center justify-between">
+            <h4 className="text-sm font-semibold text-[var(--fg)]">스킬</h4>
+            {hasSkillDamage ? <span className="text-xs text-[var(--muted)]">스킬 Lv.{skillLv}</span> : null}
+          </div>
+          {hasSkillDamage ? (
+            <input type="range" min={1} max={10} value={skillLv} onChange={(e) => setSkillLv(Number(e.target.value))} className="mb-2 w-full accent-[var(--accent)]" aria-label="스킬 레벨" />
+          ) : null}
+          <ul className="grid gap-2.5">
             {item.skills.map((skill, index) => (
               <li key={`${skill.SkillName ?? "skill"}-${index}`} className="text-sm">
-                {skill.SkillName ? (
-                  <span className="font-semibold text-[var(--fg)]">{stripTags(skill.SkillName)}</span>
-                ) : null}
+                <div className="flex items-baseline gap-1.5">
+                  {skill.SkillName ? <span className="font-semibold text-[var(--fg)]">{stripTags(skill.SkillName)}</span> : null}
+                  {skill.SkillType ? <span className="text-xs text-[var(--muted)]">{skill.SkillType}</span> : null}
+                </div>
                 {skill.SkillDescribe ? (
-                  <p className="mt-0.5 line-clamp-4 text-[var(--fg-soft)]">{stripTags(skill.SkillDescribe)}</p>
+                  <p className="mt-0.5 line-clamp-3 text-[var(--fg-soft)]">{stripTags(skill.SkillDescribe)}</p>
+                ) : null}
+                {skill.damage?.length ? (
+                  <div className="mt-1 flex flex-wrap gap-1">
+                    {skill.damage.slice(0, 8).map((d, di) => (
+                      <span key={di} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--fg-soft)]">
+                        {(d.name || d.type) ?? ""}: <span className="font-medium text-[var(--fg)]">{d.rates[Math.min(skillLv - 1, d.rates.length - 1)] ?? d.rates[d.rates.length - 1]}</span>
+                      </span>
+                    ))}
+                    {skill.damage.length > 8 ? <span className="px-1 text-[11px] text-[var(--muted)]">외 {skill.damage.length - 8}</span> : null}
+                  </div>
                 ) : null}
               </li>
             ))}
@@ -731,8 +751,10 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
     .filter(Boolean)
     .join(" · ");
   const resonanceName = weaponResonanceName(item);
-  const desc = stripTags(item.desc);
+  const [rank, setRank] = useState(1);
+  const desc = weaponDescAtRank(item.desc, rank);
   const lore = stripTags(item.attributes_description);
+  const hasRefine = /\d(?:\.\d+)?%?\s*\//.test(item.desc ?? "");
 
   const props = (item.properties ?? []).filter((p) => p?.curve?.length || p?.max != null);
   const maxLevel = props[0]?.curve?.at(-1)?.level ?? 90;
@@ -780,7 +802,17 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
 
       {resonanceName || desc ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">패시브{resonanceName ? ` · ${resonanceName}` : ""}</h4>
+          <div className="mb-1.5 flex items-center justify-between gap-2">
+            <h4 className="text-sm font-semibold text-[var(--fg)]">패시브{resonanceName ? ` · ${resonanceName}` : ""}</h4>
+            {hasRefine ? (
+              <div className="flex items-center gap-1 text-xs">
+                <span className="text-[var(--muted)]">정제</span>
+                {[1, 2, 3, 4, 5].map((r) => (
+                  <button key={r} type="button" onClick={() => setRank(r)} className={`h-5 w-5 rounded ${rank === r ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "bg-[var(--surface-2)] text-[var(--fg-soft)]"}`}>{r}</button>
+                ))}
+              </div>
+            ) : null}
+          </div>
           {desc ? <p className="text-sm text-[var(--fg-soft)]">{desc}</p> : null}
         </div>
       ) : null}
