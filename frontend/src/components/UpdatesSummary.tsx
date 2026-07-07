@@ -74,9 +74,10 @@ export function UpdatesSummary() {
                     {highlight}
                   </span>
                 ))}
-                {featured.source_links.map((source, index) => (
+                {featured.source_links.map((source, index, arr) => (
                   <a key={source} href={source} target="_blank" rel="noreferrer" className="tag src">
-                    {t.updates.source} {index + 1} →
+                    {t.updates.source}
+                    {arr.length > 1 ? ` ${index + 1}` : ""} →
                   </a>
                 ))}
               </div>
@@ -119,9 +120,10 @@ export function UpdatesSummary() {
                           {highlight}
                         </span>
                       ))}
-                      {update.source_links.map((source, index) => (
+                      {update.source_links.map((source, index, arr) => (
                         <a key={source} href={source} target="_blank" rel="noreferrer" className="tag src">
-                          {t.updates.source} {index + 1} →
+                          {t.updates.source}
+                          {arr.length > 1 ? ` ${index + 1}` : ""} →
                         </a>
                       ))}
                     </div>

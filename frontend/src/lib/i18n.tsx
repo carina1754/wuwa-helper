@@ -281,7 +281,7 @@ export const copy = {
       title: "명조 업데이트 정리",
       body: "한국 기준 업데이트 날짜 및 시간과 공식 출처만 표시합니다.",
       releaseDate: "한국 기준 업데이트 일시",
-      source: "출처",
+      source: "공식 사이트",
       empty: "등록된 업데이트 정보가 없습니다.",
     },
     siteUpdates: {
@@ -593,7 +593,7 @@ export const copy = {
       title: "Wuthering Waves Updates",
       body: "Shows only Korea-based update date/time and official sources.",
       releaseDate: "Korea update date/time",
-      source: "Source",
+      source: "Official site",
       empty: "No update summaries have been added.",
     },
     siteUpdates: {
