@@ -3,11 +3,11 @@
 import { CalendarDays, Handshake, RotateCcw, Sparkles, Swords, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
-import { ResonatorDetail } from "./Codex";
-import { getCodexResonators, getPickupBanners } from "@/lib/api";
+import { ResonatorDetail, WeaponDetail } from "./Codex";
+import { getCodexResonators, getCodexWeapons, getPickupBanners } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
-import type { CodexResonator, PickupBanner, PickupBannerCharacter, PickupBannerWeapon } from "@/lib/types";
+import type { CodexResonator, CodexWeapon, PickupBanner, PickupBannerCharacter, PickupBannerWeapon } from "@/lib/types";
 
 type DetailTarget =
   | { type: "character"; nameKo: string; reso: CodexResonator | null; avatar?: string | null }
@@ -85,6 +85,7 @@ export function PickupSchedule() {
   const { t } = useLanguage();
   const [banners, setBanners] = useState<PickupBanner[]>([]);
   const [resonators, setResonators] = useState<CodexResonator[]>([]);
+  const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
   const [error, setError] = useState("");
   const [showCharacters, setShowCharacters] = useState(true);
   const [showWeapons, setShowWeapons] = useState(true);
@@ -97,6 +98,9 @@ export function PickupSchedule() {
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
     getCodexResonators()
       .then(setResonators)
+      .catch(() => {});
+    getCodexWeapons()
+      .then(setWeapons)
       .catch(() => {});
   }, []);
 
@@ -124,6 +128,14 @@ export function PickupSchedule() {
     if (base && base !== nameKo) return resonatorByName.get(normalizeName(base)) ?? null;
     return null;
   };
+
+  const weaponByName = useMemo(() => {
+    const map = new Map<string, CodexWeapon>();
+    for (const w of weapons) map.set(normalizeName(w.name_ko), w);
+    return map;
+  }, [weapons]);
+  const matchWeapon = (nameKo: string): CodexWeapon | null =>
+    weaponByName.get(normalizeName(nameKo)) ?? null;
 
   const tElement = (value?: string | null) => (value ? (t.elements as Record<string, string>)[value] ?? value : "-");
   const tWeaponType = (value?: string | null) => (value ? (t.weaponTypes as Record<string, string>)[value] ?? value : "-");
@@ -349,6 +361,8 @@ export function PickupSchedule() {
                   </div>
                 </div>
               )
+            ) : matchWeapon(detail.weapon.name_ko) ? (
+              <WeaponDetail item={matchWeapon(detail.weapon.name_ko) as CodexWeapon} />
             ) : (
               <div className="grid justify-items-center gap-3 text-center">
                 {detail.weapon.icon ? (

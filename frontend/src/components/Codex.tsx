@@ -690,7 +690,7 @@ export function ResonatorDetail({
   );
 }
 
-function WeaponDetail({ item }: { item: CodexWeapon }) {
+export function WeaponDetail({ item }: { item: CodexWeapon }) {
   const meta = [item.rarity ? `${item.rarity}★` : null, item.weapon_type_ko || null]
     .filter(Boolean)
     .join(" · ");
