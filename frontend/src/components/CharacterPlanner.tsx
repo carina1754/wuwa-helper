@@ -62,20 +62,20 @@ export function CharacterPlanner() {
 
   return (
     <section className="grid gap-4">
-      <div className="rounded-md border border-slate-200 bg-white p-4 shadow-panel">
+      <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 shadow-panel">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 className="text-lg font-semibold text-slate-950">{t.planner.title}</h2>
-            <p className="mt-2 text-sm text-slate-600">{t.planner.body}</p>
+            <h2 className="text-lg font-semibold text-[var(--fg)]">{t.planner.title}</h2>
+            <p className="mt-2 text-sm text-[var(--fg-soft)]">{t.planner.body}</p>
           </div>
           <div className="flex flex-wrap gap-2">
             <input
-              className="min-h-10 rounded-md border border-slate-300 px-3 py-2 text-sm"
+              className="min-h-10 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-2 text-sm text-[var(--fg)] placeholder:text-[var(--muted)]"
               placeholder={t.planner.search}
               value={search}
               onChange={(event) => setSearch(event.target.value)}
             />
-            <select className="min-h-10 rounded-md border border-slate-300 px-3 py-2 text-sm" value={role} onChange={(event) => setRole(event.target.value)}>
+            <select className="min-h-10 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-2 text-sm text-[var(--fg)]" value={role} onChange={(event) => setRole(event.target.value)}>
               <option value="">{t.planner.allRoles}</option>
               {ROLES.map((item) => (
                 <option key={item} value={item}>
@@ -83,7 +83,7 @@ export function CharacterPlanner() {
                 </option>
               ))}
             </select>
-            <select className="min-h-10 rounded-md border border-slate-300 px-3 py-2 text-sm" value={element} onChange={(event) => setElement(event.target.value)}>
+            <select className="min-h-10 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-2 text-sm text-[var(--fg)]" value={element} onChange={(event) => setElement(event.target.value)}>
               <option value="">{t.planner.allElements}</option>
               {elements.map((item) => (
                 <option key={item} value={item}>
@@ -97,14 +97,14 @@ export function CharacterPlanner() {
       </div>
 
       {filteredCharacters.length === 0 ? (
-        <div className="rounded-md border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">{t.planner.noResults}</div>
+        <div className="rounded-lg border border-dashed border-[var(--line-2)] bg-[var(--surface)] p-8 text-center text-sm text-[var(--muted)]">{t.planner.noResults}</div>
       ) : (
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {filteredCharacters.map((character) => (
-            <article key={character.id} className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-panel">
+            <article key={character.id} className="overflow-hidden rounded-lg border border-[var(--line)] bg-[var(--surface)] shadow-panel">
               {character.splash_image ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={mediaUrl(character.splash_image)} alt="" className="w-full bg-slate-50 object-contain" style={{ aspectRatio: "696 / 960" }} />
+                <img src={mediaUrl(character.splash_image)} alt="" className="w-full bg-[var(--surface-2)] object-contain" style={{ aspectRatio: "696 / 960" }} />
               ) : null}
               <div className="grid gap-3 p-4">
                 <div className="flex items-start gap-3">
@@ -113,29 +113,29 @@ export function CharacterPlanner() {
                     <img src={mediaUrl(character.image)} alt="" className="h-14 w-14 rounded-md object-cover" />
                   ) : null}
                   <div className="min-w-0">
-                    <h3 className="truncate text-base font-semibold text-slate-950">{translateCharacterName(character.name)}</h3>
-                    <p className="mt-1 text-sm text-slate-500">
+                    <h3 className="truncate text-base font-semibold text-[var(--fg)]">{translateCharacterName(character.name)}</h3>
+                    <p className="mt-1 text-sm text-[var(--muted)]">
                       {character.rarity}★ · {translateElement(character.element)} · {translateWeaponType(character.weapon_type)} · {t.roles[character.role]}
                     </p>
                   </div>
                 </div>
-                <dl className="grid gap-2 text-sm text-slate-700">
+                <dl className="grid gap-2 text-sm text-[var(--fg-soft)]">
                   <div>
-                    <dt className="font-medium text-slate-950">{t.planner.recommendedSet}</dt>
+                    <dt className="font-medium text-[var(--fg)]">{t.planner.recommendedSet}</dt>
                     <dd>{character.default_sonata ? translateSonataSet(character.default_sonata) : "-"}</dd>
                   </div>
                   {character.sonata_fallbacks.length > 0 ? (
                     <div>
-                      <dt className="font-medium text-slate-950">{t.planner.fallbackSets}</dt>
+                      <dt className="font-medium text-[var(--fg)]">{t.planner.fallbackSets}</dt>
                       <dd>{character.sonata_fallbacks.map(translateSonataSet).join(", ")}</dd>
                     </div>
                   ) : null}
                   <div>
-                    <dt className="font-medium text-slate-950">{t.planner.weapon}</dt>
+                    <dt className="font-medium text-[var(--fg)]">{t.planner.weapon}</dt>
                     <dd>{character.default_weapon ? translateWeaponName(character.default_weapon) : "-"}</dd>
                   </div>
                   <div>
-                    <dt className="font-medium text-slate-950">{t.planner.bonusStats}</dt>
+                    <dt className="font-medium text-[var(--fg)]">{t.planner.bonusStats}</dt>
                     <dd>{character.bonus_stats.length ? character.bonus_stats.map(translateStatName).join(", ") : "-"}</dd>
                   </div>
                 </dl>
