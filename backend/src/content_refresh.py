@@ -163,7 +163,8 @@ def _updates_from_official_articles(since_year: int = 2024, limit: int | None = 
             article_id = int(article.get("articleId") or 0)
             detail = _fetch_official_json(locale, f"article/{article_id}.json")
             title = str(detail.get("articleTitle") or article.get("articleTitle") or "")
-            content = _plain_text(str(detail.get("articleContent") or ""))
+            raw_content = str(detail.get("articleContent") or "")
+            content = _plain_text(raw_content)
             version = _extract_version_from_article(title, content)
             if not version or version in by_version:
                 continue
@@ -171,11 +172,12 @@ def _updates_from_official_articles(since_year: int = 2024, limit: int | None = 
             by_version[version] = {
                 "id": f"wuwa-{version.replace('.', '-')}",
                 "version": version,
-                "title_ko": f"{version} 업데이트",
+                "title_ko": _extract_thematic_title(title, version),
                 "release_date_kst": release_datetime,
                 "summary_ko": "",
                 "highlights_ko": [],
                 "source_links": [_article_link(locale, article_id)],
+                "image_source_url": _extract_hero_image_url(raw_content),
             }
     updates = sorted(by_version.values(), key=lambda item: item.get("release_date_kst") or "", reverse=True)
     return updates[:limit] if limit is not None else updates

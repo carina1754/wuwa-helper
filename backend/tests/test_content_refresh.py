@@ -281,3 +281,41 @@ def test_extract_hero_image_url_when_src_is_not_first_attribute():
 def test_extract_hero_image_url_returns_first_of_multiple():
     content = '<img src="https://cdn.example/first.jpg" /> mid <img src="https://cdn.example/second.jpg" />'
     assert content_refresh._extract_hero_image_url(content) == "https://cdn.example/first.jpg"
+
+
+def test_official_updates_extract_title_and_image_source(monkeypatch):
+    korean_menu = {
+        "article": [
+            {
+                "articleId": 4814,
+                "articleTitle": "「선택하지 않은 꿈」 3.4 버전 내용 안내",
+                "startTime": "2026-06-08 10:00:00",
+            }
+        ]
+    }
+    english_menu = {"article": []}
+    articles = {
+        ("kr", 4814): {
+            "articleTitle": "「선택하지 않은 꿈」 3.4 버전 내용 안내",
+            "startTime": "2026-06-08 10:00:00",
+            "articleContent": (
+                '방랑자님 <img src="https://cdn.example/hero-3-4.jpg" /> '
+                "3.4 버전 내용 안내 점검 시간: 2026년 6월 8일 05:00"
+            ),
+        },
+    }
+
+    def fake_fetch_official_json(locale: str, filename: str):
+        if filename == "MainMenu.json":
+            return korean_menu if locale == "kr" else english_menu
+        article_id = int(filename.removeprefix("article/").removesuffix(".json"))
+        return articles[(locale, article_id)]
+
+    monkeypatch.setattr(content_refresh, "_fetch_official_json", fake_fetch_official_json)
+
+    updates = content_refresh._updates_from_official_articles()
+
+    assert updates[0]["version"] == "3.4"
+    assert updates[0]["title_ko"] == "「선택하지 않은 꿈」 3.4 버전"
+    assert updates[0]["image_source_url"] == "https://cdn.example/hero-3-4.jpg"
+    assert updates[0]["summary_ko"] == ""
