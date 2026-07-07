@@ -164,6 +164,47 @@ def init_db() -> None:
             )
             cur.execute(
                 """
+                CREATE TABLE IF NOT EXISTS wuwa_resonator (
+                    id INTEGER PRIMARY KEY,
+                    name_ko TEXT,
+                    name_en TEXT,
+                    element TEXT,
+                    weapon_type TEXT,
+                    rarity INTEGER,
+                    role TEXT,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS wuwa_weapon (
+                    id TEXT PRIMARY KEY,
+                    name_ko TEXT,
+                    name_en TEXT,
+                    weapon_type TEXT,
+                    rarity INTEGER,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS wuwa_echo (
+                    id TEXT PRIMARY KEY,
+                    name_ko TEXT,
+                    name_en TEXT,
+                    cost INTEGER,
+                    rarity INTEGER,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
                 CREATE TABLE IF NOT EXISTS pickup_banners (
                     id TEXT PRIMARY KEY,
                     version TEXT NOT NULL,

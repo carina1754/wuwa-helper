@@ -46,7 +46,7 @@ def test_refresh_characters_upserts(monkeypatch):
         '"Ascension":[],"Stats":{}}]'
     )
     with get_connection() as c:
-        c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+        c.execute("DELETE FROM wuwa_resonator WHERE id=%s", (1603,))
         c.commit()
     n = refresh.refresh_characters(
         fetch=lambda kind: fixture,
@@ -55,17 +55,26 @@ def test_refresh_characters_upserts(monkeypatch):
     assert n == 1
     with get_connection() as c:
         row = c.execute(
-            "SELECT data_json FROM character_catalog WHERE id=%s", (1603,)
+            "SELECT name_ko, name_en, element, weapon_type, rarity, data_json "
+            "FROM wuwa_resonator WHERE id=%s",
+            (1603,),
         ).fetchone()
+    assert row["name_ko"] == "카멜리아"
+    assert row["name_en"] == "Camellya"
+    assert row["element"] == "인멸"
+    assert row["weapon_type"] == "Sword"
+    assert row["rarity"] == 5
     d = json.loads(row["data_json"])
     assert d["name"] == "카멜리아" and d["weapon_type"] == "Sword"
     assert d["image"] == "/catalog/image/characters/x"
+    assert d["source"] == "wuthering.gg"
     with get_connection() as c:
-        c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+        c.execute("DELETE FROM wuwa_resonator WHERE id=%s", (1603,))
         c.commit()
 
 
-def test_refresh_characters_preserves_existing_role(monkeypatch):
+def test_refresh_characters_carries_over_catalog_role(monkeypatch):
+    """A curated role in character_catalog is carried into wuwa_resonator by id."""
     init_db()
     fixture = (
         '[{"Id":1603,"Name":"카멜리아","NameEn":"Camellya","QualityId":5,'
@@ -74,26 +83,110 @@ def test_refresh_characters_preserves_existing_role(monkeypatch):
         '"Ascension":[],"Stats":{}}]'
     )
     with get_connection() as c:
-        c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
-        c.execute(
-            "INSERT INTO character_catalog (id, name, role, data_json) "
-            "VALUES (%s, %s, %s, %s)",
-            (1603, "카멜리아", "support", "{}"),
-        )
+        c.execute("DELETE FROM wuwa_resonator WHERE id=%s", (1603,))
         c.commit()
-    refresh.refresh_characters(
-        fetch=lambda kind: fixture,
-        cache=lambda kind, cat, asset: None,
+    # Snapshot any pre-existing catalog row so the shared dev DB is left intact.
+    with get_connection() as c:
+        existing = c.execute(
+            "SELECT id, name, element, weapon_type, rarity, role, data_json, source "
+            "FROM character_catalog WHERE id=%s",
+            (1603,),
+        ).fetchone()
+    try:
+        with get_connection() as c:
+            c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+            c.execute(
+                "INSERT INTO character_catalog (id, name, role, data_json) "
+                "VALUES (%s, %s, %s, %s)",
+                (1603, "카멜리아", "support", "{}"),
+            )
+            c.commit()
+        refresh.refresh_characters(
+            fetch=lambda kind: fixture,
+            cache=lambda kind, cat, asset: None,
+        )
+        with get_connection() as c:
+            row = c.execute(
+                "SELECT role, data_json FROM wuwa_resonator WHERE id=%s", (1603,)
+            ).fetchone()
+        assert row["role"] == "support"  # curated role carried over
+        assert json.loads(row["data_json"])["role"] == "support"
+    finally:
+        with get_connection() as c:
+            c.execute("DELETE FROM wuwa_resonator WHERE id=%s", (1603,))
+            c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+            if existing is not None:
+                c.execute(
+                    "INSERT INTO character_catalog "
+                    "(id, name, element, weapon_type, rarity, role, data_json, source) "
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                    (
+                        existing["id"],
+                        existing["name"],
+                        existing["element"],
+                        existing["weapon_type"],
+                        existing["rarity"],
+                        existing["role"],
+                        existing["data_json"],
+                        existing["source"],
+                    ),
+                )
+            c.commit()
+
+
+def test_refresh_characters_defaults_role_when_no_catalog_row(monkeypatch):
+    """A resonator with no matching character_catalog row defaults to main_dps."""
+    init_db()
+    fixture = (
+        '[{"Id":1603,"Name":"카멜리아","NameEn":"Camellya","QualityId":5,'
+        '"Element":{"Name":"인멸"},"WeaponType":2,"RoleType":1,'
+        '"RoleHeadIconBig":"T_x.png","Skills":[],"ResonantChainGroup":[],'
+        '"Ascension":[],"Stats":{}}]'
     )
     with get_connection() as c:
-        row = c.execute(
-            "SELECT role, data_json FROM character_catalog WHERE id=%s", (1603,)
-        ).fetchone()
-    assert row["role"] == "support"  # pre-existing role preserved
-    assert json.loads(row["data_json"])["role"] == "support"
-    with get_connection() as c:
-        c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+        c.execute("DELETE FROM wuwa_resonator WHERE id=%s", (1603,))
         c.commit()
+    # Snapshot + remove any catalog row so id=1603 truly has no catalog entry.
+    with get_connection() as c:
+        existing = c.execute(
+            "SELECT id, name, element, weapon_type, rarity, role, data_json, source "
+            "FROM character_catalog WHERE id=%s",
+            (1603,),
+        ).fetchone()
+    try:
+        with get_connection() as c:
+            c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+            c.commit()
+        refresh.refresh_characters(
+            fetch=lambda kind: fixture,
+            cache=lambda kind, cat, asset: None,
+        )
+        with get_connection() as c:
+            row = c.execute(
+                "SELECT role, data_json FROM wuwa_resonator WHERE id=%s", (1603,)
+            ).fetchone()
+        assert row["role"] == "main_dps"  # default when no catalog row
+        assert json.loads(row["data_json"])["role"] == "main_dps"
+    finally:
+        with get_connection() as c:
+            c.execute("DELETE FROM wuwa_resonator WHERE id=%s", (1603,))
+            if existing is not None:
+                c.execute(
+                    "INSERT INTO character_catalog "
+                    "(id, name, element, weapon_type, rarity, role, data_json, source) "
+                    "VALUES (%s, %s, %s, %s, %s, %s, %s, %s)",
+                    (
+                        existing["id"],
+                        existing["name"],
+                        existing["element"],
+                        existing["weapon_type"],
+                        existing["rarity"],
+                        existing["role"],
+                        existing["data_json"],
+                        existing["source"],
+                    ),
+                )
+            c.commit()
 
 
 # --- Task 7: weapons + echoes ------------------------------------------------
@@ -101,7 +194,7 @@ def test_refresh_characters_preserves_existing_role(monkeypatch):
 
 def test_normalize_weapon():
     w = normalize_weapon(RAW_WEAPON)
-    assert w["id"] == "21010015"  # game Id as TEXT (weapon_catalog.id is TEXT)
+    assert w["id"] == "21010015"  # game Id as TEXT (wuwa_weapon.id is TEXT)
     assert w["name_ko"] == "푸른물결의 빛"
     assert w["name_en"] == "Lustrous Razor"
     assert w["weapon_type"] == "Broadsword"
@@ -113,7 +206,7 @@ def test_normalize_weapon():
 
 def test_normalize_echo():
     e = normalize_echo(RAW_ECHO)
-    assert e["id"] == "390080003"  # game Id as TEXT (echo_catalog.id is TEXT)
+    assert e["id"] == "390080003"  # game Id as TEXT (wuwa_echo.id is TEXT)
     assert e["name_ko"] == "뇌운의 비늘"
     assert e["name_en"] == "Thundering Mephis"
     assert e["cost"] == 4
@@ -128,7 +221,7 @@ def test_refresh_weapons_upserts():
     init_db()
     fixture = json.dumps([RAW_WEAPON], ensure_ascii=False)
     with get_connection() as c:
-        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
+        c.execute("DELETE FROM wuwa_weapon WHERE id=%s", ("21010015",))
         c.commit()
     n = refresh.refresh_weapons(
         fetch=lambda kind: fixture,
@@ -137,41 +230,20 @@ def test_refresh_weapons_upserts():
     assert n == 1
     with get_connection() as c:
         row = c.execute(
-            "SELECT name_ko, weapon_type, rarity, data_json FROM weapon_catalog WHERE id=%s",
+            "SELECT name_ko, name_en, weapon_type, rarity, data_json "
+            "FROM wuwa_weapon WHERE id=%s",
             ("21010015",),
         ).fetchone()
     assert row["name_ko"] == "푸른물결의 빛"
+    assert row["name_en"] == "Lustrous Razor"
     assert row["weapon_type"] == "Broadsword"
     assert row["rarity"] == 5
     d = json.loads(row["data_json"])
     assert d["icon"] == "/catalog/image/weapons/w"
     assert d["name_en"] == "Lustrous Razor"
+    assert d["source"] == "wuthering.gg"
     with get_connection() as c:
-        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
-        c.commit()
-
-
-def test_refresh_weapons_preserves_existing_source():
-    init_db()
-    fixture = json.dumps([RAW_WEAPON], ensure_ascii=False)
-    with get_connection() as c:
-        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
-        c.execute(
-            "INSERT INTO weapon_catalog (id, name_ko, data_json) VALUES (%s, %s, %s)",
-            ("21010015", "푸른물결의 빛", json.dumps({"source": "namu.wiki"})),
-        )
-        c.commit()
-    refresh.refresh_weapons(
-        fetch=lambda kind: fixture,
-        cache=lambda kind, cat, asset: None,
-    )
-    with get_connection() as c:
-        row = c.execute(
-            "SELECT data_json FROM weapon_catalog WHERE id=%s", ("21010015",)
-        ).fetchone()
-    assert json.loads(row["data_json"])["source"] == "namu.wiki"  # identity preserved
-    with get_connection() as c:
-        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
+        c.execute("DELETE FROM wuwa_weapon WHERE id=%s", ("21010015",))
         c.commit()
 
 
@@ -179,7 +251,7 @@ def test_refresh_echoes_upserts():
     init_db()
     fixture = json.dumps([RAW_ECHO], ensure_ascii=False)
     with get_connection() as c:
-        c.execute("DELETE FROM echo_catalog WHERE id=%s", ("390080003",))
+        c.execute("DELETE FROM wuwa_echo WHERE id=%s", ("390080003",))
         c.commit()
     n = refresh.refresh_echoes(
         fetch=lambda kind: fixture,
@@ -188,14 +260,17 @@ def test_refresh_echoes_upserts():
     assert n == 1
     with get_connection() as c:
         row = c.execute(
-            "SELECT name_ko, cost, data_json FROM echo_catalog WHERE id=%s",
+            "SELECT name_ko, name_en, cost, rarity, data_json FROM wuwa_echo WHERE id=%s",
             ("390080003",),
         ).fetchone()
     assert row["name_ko"] == "뇌운의 비늘"
+    assert row["name_en"] == "Thundering Mephis"
     assert row["cost"] == 4
+    assert row["rarity"] == 2
     d = json.loads(row["data_json"])
     assert d["icon"] == "/catalog/image/echoes/e"
     assert d["sonata"] == ["울려퍼지는 뇌음"]
+    assert d["source"] == "wuthering.gg"
     with get_connection() as c:
-        c.execute("DELETE FROM echo_catalog WHERE id=%s", ("390080003",))
+        c.execute("DELETE FROM wuwa_echo WHERE id=%s", ("390080003",))
         c.commit()
