@@ -25,7 +25,7 @@ export const copy = {
       Planner: "도감",
       PickupSchedule: "픽업 일정표",
       Updates: "명조 업데이트",
-      Teams: "팀",
+      Teams: "파티",
       History: "기록",
     },
     roles: {
@@ -261,8 +261,8 @@ export const copy = {
       source: "출처",
     },
     teams: {
-      title: "팀 빌더",
-      body: "MVP 팀 조언은 역할 기준입니다: 메인 딜러, 서브 딜러, 서포터/힐러. 보유 캐릭터 추천은 다음 단계에서 추가됩니다.",
+      title: "파티 빌더",
+      body: "MVP 파티 조언은 역할 기준입니다: 메인 딜러, 서브 딜러, 서포터/힐러. 보유 캐릭터 추천은 다음 단계에서 추가됩니다.",
     },
     pickup: {
       title: "역대 픽업 일정표",
@@ -344,7 +344,7 @@ export const copy = {
       Planner: "Codex",
       PickupSchedule: "Pickup Schedule",
       Updates: "WuWa Updates",
-      Teams: "Teams",
+      Teams: "Party",
       History: "History",
     },
     roles: {
@@ -573,8 +573,8 @@ export const copy = {
       source: "Source",
     },
     teams: {
-      title: "Team Builder",
-      body: "MVP team advice is role-based: main DPS, sub DPS, and support/healer. Owned-character recommendations come in a later phase.",
+      title: "Party Builder",
+      body: "MVP party advice is role-based: main DPS, sub DPS, and support/healer. Owned-character recommendations come in a later phase.",
     },
     pickup: {
       title: "Pickup Schedule",

@@ -48,7 +48,7 @@ def normalize_weapon(raw: dict) -> dict:
     Resonance, Ascension, First/SecondPropId, First/SecondCurve, DescParams."""
     wt = WEAPON_TYPE.get(raw.get("WeaponType"), ("", ""))
     return {
-        # weapon_catalog.id is TEXT; store the game Id as a string.
+        # wuwa_weapon.id is TEXT; store the game Id as a string.
         "id": str(raw["Id"]),
         "name_ko": raw.get("WeaponName"),
         "name_en": raw.get("WeaponNameEn"),
@@ -81,12 +81,14 @@ def normalize_echo(raw: dict) -> dict:
     ParentMonsterId. IconMiddle is a usable PNG filename; IconBig is a raw UE
     asset path, so we cache from IconMiddle."""
     return {
-        # echo_catalog.id is TEXT; store the game Id as a string.
+        # wuwa_echo.id is TEXT; store the game Id as a string.
         "id": str(raw["Id"]),
         "name_ko": raw.get("MonsterName"),
         "name_en": raw.get("MonsterNameEn"),
         "cost": raw.get("Cost"),
-        "rarity": raw.get("QualityId"),
+        # The player-facing star tier (0-3) lives in ``Rarity``/``Rare``; ``QualityId``
+        # is a constant 2 for every phantom and must NOT be used for rarity.
+        "rarity": raw.get("Rarity"),
         "phantom_type": raw.get("PhantomType"),
         "icon_asset": raw.get("IconMiddle"),
         "sonata": _sonata_names(raw.get("FetterGroup")),

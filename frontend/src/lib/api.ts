@@ -3,7 +3,6 @@ import type {
   AnalysisSession,
   AnalyzeResponse,
   BuildRule,
-  CharacterCatalogItem,
   CharacterSnapshot,
   CodexEcho,
   CodexResonator,
@@ -13,7 +12,6 @@ import type {
   PickupScheduleItem,
   Role,
   SonataSet,
-  WeaponCatalogItem,
   SiteUpdateEntry,
   VisionExtractionResult,
 } from "./types";
@@ -55,10 +53,6 @@ export function getRules(): Promise<BuildRule[]> {
   return request("/rules");
 }
 
-export function getCharacters(): Promise<CharacterCatalogItem[]> {
-  return request("/characters");
-}
-
 export function getPickupSchedule(year?: number): Promise<PickupScheduleItem[]> {
   const params = year ? `?year=${year}` : "";
   return request(`/pickup-schedule${params}`);
@@ -66,10 +60,6 @@ export function getPickupSchedule(year?: number): Promise<PickupScheduleItem[]> 
 
 export function getPickupBanners(): Promise<PickupBanner[]> {
   return request("/pickup-banners");
-}
-
-export function getWeapons(): Promise<WeaponCatalogItem[]> {
-  return request("/weapons");
 }
 
 export function getCodexResonators(): Promise<CodexResonator[]> {

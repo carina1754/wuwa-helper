@@ -2,6 +2,7 @@
 
 import { ChevronDown, Sparkles, Swords, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Portal } from "./Portal";
 import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
@@ -517,12 +518,13 @@ export function Codex() {
       )}
 
       {detail ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setDetail(null)}
-        >
+        <Portal>
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4"
+            role="dialog"
+            aria-modal="true"
+            onClick={() => setDetail(null)}
+          >
           <div
             className="relative max-h-[85vh] w-full max-w-md overflow-y-auto rounded-lg border border-[var(--line)] bg-[var(--surface)] p-5 shadow-xl"
             onClick={(event) => event.stopPropagation()}
@@ -544,7 +546,8 @@ export function Codex() {
               <EchoDetail item={detail.item} />
             )}
           </div>
-        </div>
+          </div>
+        </Portal>
       ) : null}
     </section>
   );
@@ -580,7 +583,7 @@ function DetailHeader({
   );
 }
 
-function ResonatorDetail({
+export function ResonatorDetail({
   item,
   tElement,
 }: {

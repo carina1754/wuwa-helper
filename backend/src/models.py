@@ -74,37 +74,12 @@ class BuildRule(BaseModel):
     game_version: str | None = None
 
 
-class CharacterCatalogItem(BaseModel):
-    id: int
-    name: str
-    element: str | None = None
-    weapon_type: str | None = None
-    rarity: int | None = None
-    image: str | None = None
-    splash_image: str | None = None
-    default_sonata: str | None = None
-    sonata_fallbacks: list[str] = Field(default_factory=list)
-    default_weapon: str | None = None
-    bonus_stats: list[str] = Field(default_factory=list)
-    role: Role
-    source: str | None = None
-
-
-class WeaponCatalogItem(BaseModel):
-    id: str
-    name_ko: str
-    weapon_type: str | None = None
-    rarity: int | None = None
-    icon: str | None = None
-    source: str | None = None
-
-
 class PickupBannerCharacter(BaseModel):
     name_ko: str
     avatar: str | None = None
-    # character_catalog id when the pickup name maps to a catalog entry; lets the
-    # frontend open a detail view from the pickup icon. None for characters not in
-    # the catalog (e.g. brand-new units).
+    # Linked wuwa_resonator (game) id when the pickup name matches a resonator;
+    # lets the frontend link the pickup icon to codex detail. None for characters
+    # not in the dataset (e.g. brand-new units).
     catalog_id: int | None = None
 
 

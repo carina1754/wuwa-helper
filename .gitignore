@@ -24,3 +24,4 @@ DB/
 backend/.env
 media/
 backend/media/
+.tokensave

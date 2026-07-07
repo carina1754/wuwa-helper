@@ -1,156 +1,50 @@
-"""Catalog: crawl Namuwiki → normalize → cache icons → store in PostgreSQL.
+"""Catalog helpers still sourced from Namuwiki: sonata sets + pickup banners.
 
-Covers weapons, character kits (skills/chains/builds), sonata sets and echoes.
-Everything is keyed by a stable hash of the Korean name and stored as a
-data_json blob so the schema can evolve without migrations.
+The rich resonator/weapon/echo dataset now comes from the wuthering.gg pipeline
+(``wuwa_*`` tables, loaded by the ``load_codex_*`` helpers here). Two things have
+no wuthering.gg equivalent and are still crawled from Namuwiki:
+
+* **sonata sets** — crest icon + 2/5-set bonus text (the codex sonata filter).
+* **pickup banners** — which unit ran on which version/phase. Avatars and weapon
+  icons for those banners are enriched from the ``wuwa_resonator`` / ``wuwa_weapon``
+  tables (matched by Korean name), not from the deprecated catalog tables.
+
+Everything is stored as a data_json blob keyed by a stable hash so the schema can
+evolve without migrations.
 """
 from __future__ import annotations
 
-import concurrent.futures
 import hashlib
 import json
+import re
 
 from .database import get_connection
 from .media import ensure_catalog_image
-from .models import PickupBanner, WeaponCatalogItem
-from .namu import characters as namu_characters
+from .models import PickupBanner
 from .namu import echoes as namu_echoes
 from .namu.banners import parse_banner_history
 from .namu.client import fetch_page, sub_page
-from .namu.weapons import parse_weapons
 
 
 def _hash_id(prefix: str, name_ko: str) -> str:
     return prefix + hashlib.sha1(name_ko.encode("utf-8")).hexdigest()[:12]
 
 
-def weapon_id(name_ko: str) -> str:
-    """Stable, URL/filesystem-safe id derived from the Korean weapon name."""
-    return _hash_id("w-", name_ko)
+def _norm_name(name: str | None) -> str:
+    """Normalize a Korean name for cross-source matching (drop whitespace and
+    middle-dot variants) — mirrors the frontend's resonator name matching."""
+    return re.sub(r"[\s·・]", "", name or "")
 
 
-def refresh_weapon_catalog() -> int:
-    """Crawl the Namuwiki weapon list, cache each icon locally, upsert to DB.
+# --- Sonata sets (Namuwiki-sourced: crest icon + 2/5-set bonus) ---------------
+def refresh_sonata_sets() -> int:
+    """Crawl the sonata set definitions from Namuwiki, cache crest icons, store.
 
-    Any weapon-type page embeds the full master weapon table, so one fetch is
-    enough. Returns the number of weapons upserted.
+    Returns the number of sets written. (Individual echoes now come from the
+    wuthering.gg pipeline into ``wuwa_echo``; only the set definitions remain
+    Namuwiki-sourced.)
     """
-    weapons = parse_weapons(fetch_page(sub_page("무기", "권총")))
-    if not weapons:
-        return 0
-    with get_connection() as conn:
-        for weapon in weapons:
-            wid = weapon_id(weapon["name_ko"])
-            icon = ensure_catalog_image("weapons", wid, weapon.get("icon_source"))
-            item = {
-                "id": wid,
-                "name_ko": weapon["name_ko"],
-                "weapon_type": weapon.get("weapon_type"),
-                "rarity": weapon.get("rarity"),
-                "icon": icon,
-                "source": "namu.wiki",
-            }
-            conn.execute(
-                """
-                INSERT INTO weapon_catalog (id, name_ko, weapon_type, rarity, data_json, updated_at)
-                VALUES (%s, %s, %s, %s, %s, now())
-                ON CONFLICT (id) DO UPDATE SET
-                    name_ko = EXCLUDED.name_ko,
-                    weapon_type = EXCLUDED.weapon_type,
-                    rarity = EXCLUDED.rarity,
-                    data_json = EXCLUDED.data_json,
-                    updated_at = now()
-                """,
-                (wid, item["name_ko"], item["weapon_type"], item["rarity"],
-                 json.dumps(item, ensure_ascii=False)),
-            )
-        conn.commit()
-    return len(weapons)
-
-
-def load_weapon_catalog() -> list[WeaponCatalogItem]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT data_json FROM weapon_catalog ORDER BY rarity DESC NULLS LAST, name_ko"
-        ).fetchall()
-    return [WeaponCatalogItem.model_validate_json(row["data_json"]) for row in rows]
-
-
-# --- Character kits (skills, resonance chains, recommended builds) -----------
-# Namuwiki character pages, keyed by Korean name. Rich data for the pickup
-# schedule and a future AI recommendation system.
-CHARACTER_NAMES = [
-    "경연", "구원", "금희", "도기", "레베카", "로코코", "루미", "루시", "루실라",
-    "린네", "방랑자", "벨리나", "브렌트", "산화", "샤콘", "수수", "수호신", "스카",
-    "아우구스타", "알토", "앙코", "양양", "연무", "유노", "유호", "절지", "치사",
-    "카를로타", "카멜리아", "카카루", "칸타렐라", "황룡",
-]
-
-
-def character_page_title(name_ko: str) -> str:
-    return f"{name_ko}(명조: 워더링 웨이브)"
-
-
-def refresh_character_kits(max_workers: int = 6) -> int:
-    """Fetch every character page (concurrently), parse, store the kit."""
-
-    def fetch_parse(name_ko: str):
-        try:
-            kit = namu_characters.parse_character(fetch_page(character_page_title(name_ko)))
-        except Exception:
-            return None
-        return kit if kit and kit.get("name_ko") else None
-
-    kits: list[dict] = []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=max_workers) as pool:
-        for kit in pool.map(fetch_parse, CHARACTER_NAMES):
-            if kit:
-                kits.append(kit)
-
-    with get_connection() as conn:
-        for kit in kits:
-            cid = _hash_id("c-", kit["name_ko"])
-            kit = {**kit, "id": cid}
-            conn.execute(
-                """
-                INSERT INTO character_kit (id, name_ko, data_json, updated_at)
-                VALUES (%s, %s, %s, now())
-                ON CONFLICT (id) DO UPDATE SET
-                    name_ko = EXCLUDED.name_ko,
-                    data_json = EXCLUDED.data_json,
-                    updated_at = now()
-                """,
-                (cid, kit["name_ko"], json.dumps(kit, ensure_ascii=False)),
-            )
-        conn.commit()
-    return len(kits)
-
-
-def load_character_kits() -> list[dict]:
-    with get_connection() as conn:
-        rows = conn.execute("SELECT data_json FROM character_kit ORDER BY name_ko").fetchall()
-    return [json.loads(row["data_json"]) for row in rows]
-
-
-# --- Echoes (sonata sets + individual echoes) --------------------------------
-_ECHO_TIER_PAGES = ["해일급", "노도급", "거랑급", "경파급"]
-
-
-def refresh_echo_catalog() -> int:
-    """Crawl sonata sets + all echoes, cache icons, store. Returns rows written."""
     sonata_sets = namu_echoes.parse_sonata_sets(fetch_page(sub_page("데이터 스테이션")))
-    echoes: list[dict] = []
-    seen: set[str] = set()
-    for tier in _ECHO_TIER_PAGES:
-        try:
-            parsed = namu_echoes.parse_echoes(fetch_page(sub_page("적", tier)), sonata_sets)
-        except Exception:
-            continue
-        for echo in parsed:
-            if echo.get("name_ko") and echo["name_ko"] not in seen:
-                seen.add(echo["name_ko"])
-                echoes.append(echo)
-
     with get_connection() as conn:
         for setinfo in sonata_sets:
             sid = _hash_id("s-", setinfo["name_ko"])
@@ -165,35 +59,13 @@ def refresh_echo_catalog() -> int:
                 """,
                 (sid, item["name_ko"], json.dumps(item, ensure_ascii=False)),
             )
-        for echo in echoes:
-            eid = _hash_id("e-", echo["name_ko"])
-            icon = ensure_catalog_image("echoes", eid, echo.get("icon"))
-            item = {**echo, "id": eid, "icon": icon}
-            conn.execute(
-                """
-                INSERT INTO echo_catalog (id, name_ko, cost, data_json, updated_at)
-                VALUES (%s, %s, %s, %s, now())
-                ON CONFLICT (id) DO UPDATE SET
-                    name_ko = EXCLUDED.name_ko, cost = EXCLUDED.cost,
-                    data_json = EXCLUDED.data_json, updated_at = now()
-                """,
-                (eid, item["name_ko"], echo.get("cost"), json.dumps(item, ensure_ascii=False)),
-            )
         conn.commit()
-    return len(sonata_sets) + len(echoes)
+    return len(sonata_sets)
 
 
 def load_sonata_sets() -> list[dict]:
     with get_connection() as conn:
         rows = conn.execute("SELECT data_json FROM sonata_set ORDER BY name_ko").fetchall()
-    return [json.loads(row["data_json"]) for row in rows]
-
-
-def load_echoes() -> list[dict]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT data_json FROM echo_catalog ORDER BY cost DESC NULLS LAST, name_ko"
-        ).fetchall()
     return [json.loads(row["data_json"]) for row in rows]
 
 
@@ -223,10 +95,11 @@ def load_codex_echoes() -> list[dict]:
 
 
 # --- Pickup banners (characters + weapons per version/phase) ------------------
-# Crawled from Namuwiki 튜닝 pages; character + weapon banners merged by
-# (version, phase). Character avatars are pulled from the banner page's own
-# icons (alt names the character) and cached; weapons are matched to
-# weapon_catalog by Korean name for their icon/rarity/type.
+# Banner history (which unit ran when) is crawled from Namuwiki 튜닝 pages and
+# merged by (version, phase). Character avatars and weapon icons are enriched
+# from the wuthering.gg dataset (wuwa_resonator / wuwa_weapon) by Korean-name
+# match; unmatched names (e.g. an unreleased unit) fall back to the banner's own
+# extracted art / no icon.
 def _char_avatar_source(name_ko: str, icons: list[dict] | None) -> str | None:
     for icon in icons or []:
         alt = icon.get("alt") or ""
@@ -235,61 +108,42 @@ def _char_avatar_source(name_ko: str, icons: list[dict] | None) -> str | None:
     return None
 
 
-# Maps Namuwiki pickup character names (Korean) to character_catalog names
-# (English) so pickup avatars reuse the planner's clean head icons instead of
-# the banner-extracted art. Names absent here (e.g. newer characters that have
-# a Namuwiki page but are not yet in the catalog) fall back to the Namuwiki
-# banner avatar.
-PICKUP_NAME_TO_CATALOG: dict[str, str] = {
-    "갈브레나": "Galbrena",
-    "구원": "Qiuyuan",
-    "금희": "Jinhsi",
-    "기염": "Jiyan",
-    "데니아": "Denia",
-    "루실라": "Lucilla",
-    "루크·헤르센": "Luuk Herssen",
-    "루파": "Lupa",
-    "린네": "Lynae",
-    "모니에": "Mornye",
-    "상리요": "Xiangli Yao",
-    "샤콘": "Ciaccona",
-    "시그리카": "Sigrika",
-    "아우구스타": "Augusta",
-    "에이메스": "Aemeath",
-    "유노": "Iuno",
-    "음림": "Yinlin",
-    "장리": "Changli",
-    "절지": "Zhezhi",
-    "젠니": "Zani",
-    "치사": "Chisa",
-    "카르티시아": "Cartethyia",
-    "페비": "Phoebe",
-    "플로로": "Phrolova",
-    "히유키": "Hiyuki",
-    # pre-3.0 (1.x / 2.x) pickup characters
-    "로코코": "Roccia",
-    "브렌트": "Brant",
-    "카를로타": "Carlotta",
-    "카멜리아": "Camellya",
-    "칸타렐라": "Cantarella",
-    "파수인": "Shorekeeper",
-    # Cyberpunk 2077 collab (3.4)
-    "루시": "Lucy",
-    "레베카": "Rebecca",
-}
-
-
-def _catalog_by_name() -> dict[str, dict]:
-    """Map character_catalog name (English) -> {id, image} for its cached small
-    image path and detail-view lookup."""
+def _resonator_by_name() -> dict[str, dict]:
+    """Map normalized wuwa_resonator KO name -> {id, image} for pickup avatars."""
     with get_connection() as conn:
-        rows = conn.execute("SELECT data_json FROM character_catalog").fetchall()
+        rows = conn.execute("SELECT id, name_ko, data_json FROM wuwa_resonator").fetchall()
     out: dict[str, dict] = {}
     for row in rows:
         data = json.loads(row["data_json"])
-        if data.get("name") and data.get("image"):
-            out[data["name"]] = {"id": data.get("id"), "image": data["image"]}
+        out[_norm_name(row["name_ko"])] = {"id": row["id"], "image": data.get("image")}
     return out
+
+
+def _weapon_by_name() -> dict[str, dict]:
+    """Map normalized wuwa_weapon KO name -> {icon, rarity, weapon_type} for pickup weapons."""
+    with get_connection() as conn:
+        rows = conn.execute("SELECT name_ko, data_json FROM wuwa_weapon").fetchall()
+    out: dict[str, dict] = {}
+    for row in rows:
+        data = json.loads(row["data_json"])
+        out[_norm_name(row["name_ko"])] = {
+            "icon": data.get("icon"),
+            "rarity": data.get("rarity"),
+            "weapon_type": data.get("weapon_type_ko") or data.get("weapon_type"),
+        }
+    return out
+
+
+def _match_resonator(name: str, by_name: dict[str, dict]) -> dict | None:
+    """Normalized match, then retry on the pre-middle-dot base name (e.g. the
+    pickup title '양양·현령' resolves to the resonator '양양')."""
+    hit = by_name.get(_norm_name(name))
+    if hit:
+        return hit
+    base = re.split(r"[·・]", name, 1)[0]
+    if base and base != name:
+        return by_name.get(_norm_name(base))
+    return None
 
 
 # The master 튜닝 page details only the current era (3.x); older eras live in
@@ -317,8 +171,8 @@ def refresh_pickup_banners() -> int:
     weapon_banners = _all_banner_history("무기 이벤트 튜닝", "weapon")
     char_collab = _collab_banner_history("캐릭터 콜라보 튜닝", "character")
     weapon_collab = _collab_banner_history("무기 콜라보 튜닝", "weapon")
-    weapon_by_name = {w.name_ko: w for w in load_weapon_catalog()}
-    catalog_by_name = _catalog_by_name()
+    resonator_by_name = _resonator_by_name()
+    weapon_by_name = _weapon_by_name()
 
     merged: dict[tuple, dict] = {}
 
@@ -343,9 +197,8 @@ def refresh_pickup_banners() -> int:
         for banner in banners:
             entry = slot(banner, is_collab)
             for name in banner.get("items", []):
-                catalog_name = PICKUP_NAME_TO_CATALOG.get(name)
-                catalog = catalog_by_name.get(catalog_name) if catalog_name else None
-                avatar = catalog["image"] if catalog else None
+                reso = _match_resonator(name, resonator_by_name)
+                avatar = reso["image"] if reso else None
                 if not avatar:
                     cid = _hash_id("c-", name)
                     avatar = ensure_catalog_image(
@@ -355,7 +208,7 @@ def refresh_pickup_banners() -> int:
                     {
                         "name_ko": name,
                         "avatar": avatar,
-                        "catalog_id": catalog["id"] if catalog else None,
+                        "catalog_id": reso["id"] if reso else None,
                     }
                 )
 
@@ -363,13 +216,13 @@ def refresh_pickup_banners() -> int:
         for banner in banners:
             entry = slot(banner, is_collab)
             for name in banner.get("items", []):
-                weapon = weapon_by_name.get(name)
+                weapon = weapon_by_name.get(_norm_name(name))
                 entry["weapons"].append(
                     {
                         "name_ko": name,
-                        "icon": weapon.icon if weapon else None,
-                        "rarity": weapon.rarity if weapon else None,
-                        "weapon_type": weapon.weapon_type if weapon else None,
+                        "icon": weapon["icon"] if weapon else None,
+                        "rarity": weapon["rarity"] if weapon else None,
+                        "weapon_type": weapon["weapon_type"] if weapon else None,
                     }
                 )
 
@@ -392,33 +245,6 @@ def refresh_pickup_banners() -> int:
             )
         conn.commit()
     return len(merged)
-
-
-def refresh_character_catalog_images() -> int:
-    """Cache the character_catalog avatar/splash images locally and rewrite the
-    stored URLs to our served paths (idempotent — skips already-local paths)."""
-    with get_connection() as conn:
-        rows = conn.execute("SELECT id, data_json FROM character_catalog").fetchall()
-        updated = 0
-        for row in rows:
-            data = json.loads(row["data_json"])
-            base = f"cat-{data.get('id')}"
-            changed = False
-            for field, item_id in (("image", base), ("splash_image", f"{base}-splash")):
-                src = data.get(field)
-                if isinstance(src, str) and src.startswith("http"):
-                    local = ensure_catalog_image("characters", item_id, src)
-                    if local:
-                        data[field] = local
-                        changed = True
-            if changed:
-                conn.execute(
-                    "UPDATE character_catalog SET data_json = %s, updated_at = now() WHERE id = %s",
-                    (json.dumps(data, ensure_ascii=False), row["id"]),
-                )
-                updated += 1
-        conn.commit()
-    return updated
 
 
 def load_pickup_banners() -> list[PickupBanner]:

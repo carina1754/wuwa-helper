@@ -67,22 +67,6 @@ export interface BuildRule {
   game_version?: string | null;
 }
 
-export interface CharacterCatalogItem {
-  id: number;
-  name: string;
-  element?: string | null;
-  weapon_type?: string | null;
-  rarity?: number | null;
-  image?: string | null;
-  splash_image?: string | null;
-  default_sonata?: string | null;
-  sonata_fallbacks: string[];
-  default_weapon?: string | null;
-  bonus_stats: string[];
-  role: Role;
-  source?: string | null;
-}
-
 export interface PickupScheduleItem {
   id: string;
   year: number;
@@ -118,15 +102,6 @@ export interface SiteUpdateEntry {
   version?: string | null;
   title_ko: string;
   description_ko: string;
-}
-
-export interface WeaponCatalogItem {
-  id: string;
-  name_ko: string;
-  weapon_type?: string | null;
-  rarity?: number | null;
-  icon?: string | null;
-  source?: string | null;
 }
 
 export interface PickupBannerCharacter {

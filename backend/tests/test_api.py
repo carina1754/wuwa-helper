@@ -64,16 +64,6 @@ def test_rules_endpoint_returns_seed_rules():
     assert any(rule["character_name"] == "Changli" for rule in data)
 
 
-def test_characters_endpoint_returns_catalog():
-    response = client.get("/characters")
-    assert response.status_code == 200
-    data = response.json()
-    assert isinstance(data, list)
-    assert len(data) >= 50
-    assert any(character["name"] == "Changli" for character in data)
-    assert all("default_sonata" in character for character in data)
-
-
 def test_pickup_schedule_endpoint_returns_korean_schedule():
     response = client.get("/pickup-schedule?year=2026")
     assert response.status_code == 200

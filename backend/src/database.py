@@ -106,57 +106,9 @@ def init_db() -> None:
             )
             cur.execute(
                 """
-                CREATE TABLE IF NOT EXISTS character_catalog (
-                    id INTEGER PRIMARY KEY,
-                    name TEXT NOT NULL,
-                    element TEXT,
-                    weapon_type TEXT,
-                    rarity INTEGER,
-                    role TEXT NOT NULL,
-                    data_json TEXT NOT NULL,
-                    source TEXT,
-                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-                )
-                """
-            )
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS weapon_catalog (
-                    id TEXT PRIMARY KEY,
-                    name_ko TEXT NOT NULL,
-                    weapon_type TEXT,
-                    rarity INTEGER,
-                    data_json TEXT NOT NULL,
-                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-                )
-                """
-            )
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS character_kit (
-                    id TEXT PRIMARY KEY,
-                    name_ko TEXT NOT NULL,
-                    data_json TEXT NOT NULL,
-                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-                )
-                """
-            )
-            cur.execute(
-                """
                 CREATE TABLE IF NOT EXISTS sonata_set (
                     id TEXT PRIMARY KEY,
                     name_ko TEXT NOT NULL,
-                    data_json TEXT NOT NULL,
-                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
-                )
-                """
-            )
-            cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS echo_catalog (
-                    id TEXT PRIMARY KEY,
-                    name_ko TEXT NOT NULL,
-                    cost INTEGER,
                     data_json TEXT NOT NULL,
                     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
                 )
@@ -273,8 +225,6 @@ def init_db() -> None:
             )
             cur.execute("CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_analysis_sessions_user_id ON analysis_sessions(user_id)")
-            cur.execute("CREATE INDEX IF NOT EXISTS idx_character_catalog_name ON character_catalog(name)")
-            cur.execute("CREATE INDEX IF NOT EXISTS idx_character_catalog_role ON character_catalog(role)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_pickup_schedule_year_month ON pickup_schedule(year, month)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_game_updates_release_date ON game_updates(release_date_kst)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_site_updates_date ON site_updates(date)")

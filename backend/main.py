@@ -17,14 +17,11 @@ from src.evaluator import choose_rule, evaluate_account, evaluate_character, eva
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
 from src.catalog import (
-    load_character_kits,
     load_codex_echoes,
     load_codex_resonators,
     load_codex_weapons,
-    load_echoes,
     load_pickup_banners,
     load_sonata_sets,
-    load_weapon_catalog,
 )
 from src.media import CATALOG_KINDS, cached_catalog_image_path, cached_image_path
 from src.models import (
@@ -33,11 +30,9 @@ from src.models import (
     AnalyzeRequest,
     AnalyzeResponse,
     BuildRule,
-    CharacterCatalogItem,
     Diagnosis,
     GameUpdateSummary,
     PickupBanner,
-    WeaponCatalogItem,
     EchoItem,
     PickupScheduleItem,
     SiteUpdateEntry,
@@ -45,7 +40,7 @@ from src.models import (
     UserRecord,
 )
 from src.report import generate_report
-from src.rules import load_build_rules, load_character_catalog, save_build_rules
+from src.rules import load_build_rules, save_build_rules
 from src.users import sync_user
 from src.vision import extract_from_image
 
@@ -99,11 +94,6 @@ def get_rules() -> list[BuildRule]:
     return load_build_rules()
 
 
-@app.get("/characters", response_model=list[CharacterCatalogItem])
-def get_characters() -> list[CharacterCatalogItem]:
-    return load_character_catalog()
-
-
 @app.get("/pickup-schedule", response_model=list[PickupScheduleItem])
 def get_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:
     return load_pickup_schedule(year)
@@ -122,21 +112,6 @@ def get_update_image(update_id: str) -> FileResponse:
     if path is None:
         raise HTTPException(status_code=404, detail="Update image not found")
     return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
-
-
-@app.get("/weapons", response_model=list[WeaponCatalogItem])
-def get_weapons() -> list[WeaponCatalogItem]:
-    return load_weapon_catalog()
-
-
-@app.get("/character-kits")
-def get_character_kits() -> list[dict]:
-    return load_character_kits()
-
-
-@app.get("/echoes")
-def get_echoes() -> list[dict]:
-    return load_echoes()
 
 
 @app.get("/sonata-sets")

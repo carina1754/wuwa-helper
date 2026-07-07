@@ -2,13 +2,15 @@
 
 import { CalendarDays, Handshake, RotateCcw, Sparkles, Swords, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
-import { getCharacters, getPickupBanners } from "@/lib/api";
-import { API_BASE_URL, mediaUrl } from "@/lib/constants";
+import { Portal } from "./Portal";
+import { ResonatorDetail } from "./Codex";
+import { getCodexResonators, getPickupBanners } from "@/lib/api";
+import { API_BASE_URL } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
-import type { CharacterCatalogItem, PickupBanner, PickupBannerCharacter, PickupBannerWeapon } from "@/lib/types";
+import type { CodexResonator, PickupBanner, PickupBannerCharacter, PickupBannerWeapon } from "@/lib/types";
 
 type DetailTarget =
-  | { type: "character"; nameKo: string; entry?: CharacterCatalogItem }
+  | { type: "character"; nameKo: string; reso: CodexResonator | null; avatar?: string | null }
   | { type: "weapon"; weapon: PickupBannerWeapon };
 
 type BannerGroup = {
@@ -74,10 +76,15 @@ function toggleClass(active: boolean): string {
     : "border-[var(--line)] bg-[var(--surface)] text-[var(--fg-soft)] hover:border-[var(--line-2)]";
 }
 
+/** 픽업 배너 캐릭터명과 wuwa_resonator 이름을 매칭하기 위한 정규화 (공백·가운뎃점 제거). */
+function normalizeName(name: string): string {
+  return name.replace(/[\s·・]/g, "");
+}
+
 export function PickupSchedule() {
   const { t } = useLanguage();
   const [banners, setBanners] = useState<PickupBanner[]>([]);
-  const [characters, setCharacters] = useState<CharacterCatalogItem[]>([]);
+  const [resonators, setResonators] = useState<CodexResonator[]>([]);
   const [error, setError] = useState("");
   const [showCharacters, setShowCharacters] = useState(true);
   const [showWeapons, setShowWeapons] = useState(true);
@@ -88,8 +95,8 @@ export function PickupSchedule() {
     getPickupBanners()
       .then(setBanners)
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
-    getCharacters()
-      .then(setCharacters)
+    getCodexResonators()
+      .then(setResonators)
       .catch(() => {});
   }, []);
 
@@ -102,17 +109,24 @@ export function PickupSchedule() {
     return () => window.removeEventListener("keydown", onKey);
   }, [detail]);
 
-  const charById = useMemo(() => {
-    const map = new Map<number, CharacterCatalogItem>();
-    for (const character of characters) map.set(character.id, character);
+  const resonatorByName = useMemo(() => {
+    const map = new Map<string, CodexResonator>();
+    for (const r of resonators) map.set(normalizeName(r.name), r);
     return map;
-  }, [characters]);
+  }, [resonators]);
+
+  /** 배너 캐릭터명을 resonator에 매칭. 정규화 직접 매칭 우선, 실패 시
+   * '양양·현령'처럼 칭호가 붙은 이름은 가운뎃점 앞 기본명으로 재시도. */
+  const matchResonator = (nameKo: string): CodexResonator | null => {
+    const direct = resonatorByName.get(normalizeName(nameKo));
+    if (direct) return direct;
+    const base = nameKo.split(/[·・]/)[0];
+    if (base && base !== nameKo) return resonatorByName.get(normalizeName(base)) ?? null;
+    return null;
+  };
 
   const tElement = (value?: string | null) => (value ? (t.elements as Record<string, string>)[value] ?? value : "-");
   const tWeaponType = (value?: string | null) => (value ? (t.weaponTypes as Record<string, string>)[value] ?? value : "-");
-  const tSonata = (value: string) => (t.sonataSets as Record<string, string>)[value] ?? value;
-  const tWeaponName = (value: string) => (t.weaponNames as Record<string, string>)[value] ?? value;
-  const tStat = (value: string) => (t.statNames as Record<string, string>)[value] ?? value;
 
   const hasCollab = useMemo(() => banners.some((banner) => banner.is_collab), [banners]);
 
@@ -231,7 +245,8 @@ export function PickupSchedule() {
                             setDetail({
                               type: "character",
                               nameKo: character.name_ko,
-                              entry: character.catalog_id != null ? charById.get(character.catalog_id) : undefined,
+                              reso: matchResonator(character.name_ko),
+                              avatar: character.avatar,
                             })
                           }
                           title={`${character.name_ko} 상세 보기`}
@@ -295,14 +310,15 @@ export function PickupSchedule() {
       ))}
 
       {detail ? (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4"
-          role="dialog"
-          aria-modal="true"
-          onClick={() => setDetail(null)}
-        >
+        <Portal>
           <div
-            className="relative max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-lg border border-[var(--line)] bg-[var(--surface)] p-5 shadow-xl"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4"
+            role="dialog"
+            aria-modal="true"
+            onClick={() => setDetail(null)}
+          >
+          <div
+            className="relative max-h-[85vh] w-full max-w-md overflow-y-auto rounded-lg border border-[var(--line)] bg-[var(--surface)] p-5 shadow-xl"
             onClick={(event) => event.stopPropagation()}
           >
             <button
@@ -315,59 +331,24 @@ export function PickupSchedule() {
             </button>
 
             {detail.type === "character" ? (
-              <div className="grid gap-3">
-                {detail.entry?.splash_image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={mediaUrl(detail.entry.splash_image)}
-                    alt=""
-                    className="w-full rounded-md bg-[var(--surface-2)] object-contain"
-                    style={{ aspectRatio: "696 / 960" }}
-                  />
-                ) : detail.entry?.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={mediaUrl(detail.entry.image)} alt="" className="h-24 w-24 self-center rounded-md object-cover" />
-                ) : null}
-                <div>
-                  <h3 className="text-lg font-semibold text-[var(--fg)]">{detail.nameKo}</h3>
-                  {detail.entry ? (
-                    <p className="mt-1 text-sm text-[var(--muted)]">
-                      {detail.entry.rarity ? `${detail.entry.rarity}★ · ` : ""}
-                      {tElement(detail.entry.element)} · {tWeaponType(detail.entry.weapon_type)} · {t.roles[detail.entry.role]}
-                    </p>
-                  ) : (
+              detail.reso ? (
+                <ResonatorDetail item={detail.reso} tElement={tElement} />
+              ) : (
+                <div className="grid justify-items-center gap-3 text-center">
+                  {detail.avatar ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img
+                      src={`${API_BASE_URL}${detail.avatar}`}
+                      alt=""
+                      className="h-24 w-24 rounded-md bg-[var(--surface-2)] object-cover"
+                    />
+                  ) : null}
+                  <div>
+                    <h3 className="text-lg font-semibold text-[var(--fg)]">{detail.nameKo}</h3>
                     <p className="mt-1 text-sm text-[var(--muted)]">상세 정보가 아직 없습니다.</p>
-                  )}
+                  </div>
                 </div>
-                {detail.entry ? (
-                  <dl className="grid gap-2 text-sm">
-                    <div>
-                      <dt className="font-medium text-[var(--fg)]">{t.planner.recommendedSet}</dt>
-                      <dd className="text-[var(--fg-soft)]">
-                        {detail.entry.default_sonata ? tSonata(detail.entry.default_sonata) : "-"}
-                      </dd>
-                    </div>
-                    {detail.entry.sonata_fallbacks.length > 0 ? (
-                      <div>
-                        <dt className="font-medium text-[var(--fg)]">{t.planner.fallbackSets}</dt>
-                        <dd className="text-[var(--fg-soft)]">{detail.entry.sonata_fallbacks.map(tSonata).join(", ")}</dd>
-                      </div>
-                    ) : null}
-                    <div>
-                      <dt className="font-medium text-[var(--fg)]">{t.planner.weapon}</dt>
-                      <dd className="text-[var(--fg-soft)]">
-                        {detail.entry.default_weapon ? tWeaponName(detail.entry.default_weapon) : "-"}
-                      </dd>
-                    </div>
-                    <div>
-                      <dt className="font-medium text-[var(--fg)]">{t.planner.bonusStats}</dt>
-                      <dd className="text-[var(--fg-soft)]">
-                        {detail.entry.bonus_stats.length ? detail.entry.bonus_stats.map(tStat).join(", ") : "-"}
-                      </dd>
-                    </div>
-                  </dl>
-                ) : null}
-              </div>
+              )
             ) : (
               <div className="grid justify-items-center gap-3 text-center">
                 {detail.weapon.icon ? (
@@ -388,7 +369,8 @@ export function PickupSchedule() {
               </div>
             )}
           </div>
-        </div>
+          </div>
+        </Portal>
       ) : null}
     </section>
   );
