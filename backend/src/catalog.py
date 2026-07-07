@@ -241,32 +241,64 @@ PICKUP_NAME_TO_CATALOG: dict[str, str] = {
     "페비": "Phoebe",
     "플로로": "Phrolova",
     "히유키": "Hiyuki",
+    # pre-3.0 (1.x / 2.x) pickup characters
+    "로코코": "Roccia",
+    "브렌트": "Brant",
+    "카를로타": "Carlotta",
+    "카멜리아": "Camellya",
+    "칸타렐라": "Cantarella",
+    "파수인": "Shorekeeper",
+    # Cyberpunk 2077 collab (3.4)
+    "루시": "Lucy",
+    "레베카": "Rebecca",
 }
 
 
-def _catalog_images_by_name() -> dict[str, str]:
-    """Map character_catalog name (English) -> its cached small image path."""
+def _catalog_by_name() -> dict[str, dict]:
+    """Map character_catalog name (English) -> {id, image} for its cached small
+    image path and detail-view lookup."""
     with get_connection() as conn:
         rows = conn.execute("SELECT data_json FROM character_catalog").fetchall()
-    images: dict[str, str] = {}
+    out: dict[str, dict] = {}
     for row in rows:
         data = json.loads(row["data_json"])
         if data.get("name") and data.get("image"):
-            images[data["name"]] = data["image"]
-    return images
+            out[data["name"]] = {"id": data.get("id"), "image": data["image"]}
+    return out
+
+
+# The master 튜닝 page details only the current era (3.x); older eras live in
+# per-era sub-articles. Collab banners live on their own pages and run
+# concurrently with a version's regular banners, so they must not merge into the
+# same (version, phase) slot -- they are tracked separately (is_collab=True).
+_BANNER_ERAS = (None, "1.X 버전", "2.X 버전")
+
+
+def _all_banner_history(page: str, kind: str) -> list[dict]:
+    banners: list[dict] = []
+    for era in _BANNER_ERAS:
+        title = sub_page("튜닝", page) if era is None else sub_page("튜닝", page, era)
+        banners.extend(parse_banner_history(fetch_page(title), kind))
+    return banners
+
+
+def _collab_banner_history(page: str, kind: str) -> list[dict]:
+    return parse_banner_history(fetch_page(sub_page("튜닝", page)), kind)
 
 
 def refresh_pickup_banners() -> int:
-    """Crawl character + weapon banner history, merge, cache avatars, store."""
-    char_banners = parse_banner_history(fetch_page(sub_page("튜닝", "캐릭터 이벤트 튜닝")), "character")
-    weapon_banners = parse_banner_history(fetch_page(sub_page("튜닝", "무기 이벤트 튜닝")), "weapon")
+    """Crawl character + weapon banner history (regular + collab), merge, store."""
+    char_banners = _all_banner_history("캐릭터 이벤트 튜닝", "character")
+    weapon_banners = _all_banner_history("무기 이벤트 튜닝", "weapon")
+    char_collab = _collab_banner_history("캐릭터 콜라보 튜닝", "character")
+    weapon_collab = _collab_banner_history("무기 콜라보 튜닝", "weapon")
     weapon_by_name = {w.name_ko: w for w in load_weapon_catalog()}
-    catalog_images = _catalog_images_by_name()
+    catalog_by_name = _catalog_by_name()
 
     merged: dict[tuple, dict] = {}
 
-    def slot(banner: dict) -> dict:
-        key = (banner["version"], banner.get("phase"))
+    def slot(banner: dict, is_collab: bool) -> dict:
+        key = (banner["version"], banner.get("phase"), is_collab)
         return merged.setdefault(
             key,
             {
@@ -274,6 +306,7 @@ def refresh_pickup_banners() -> int:
                 "phase": banner.get("phase"),
                 "banner_name": banner.get("banner_name"),
                 "is_rerun": banner.get("is_rerun", False),
+                "is_collab": is_collab,
                 "characters": [],
                 "weapons": [],
                 "start_date": banner.get("start_date"),
@@ -281,35 +314,49 @@ def refresh_pickup_banners() -> int:
             },
         )
 
-    for banner in char_banners:
-        entry = slot(banner)
-        for name in banner.get("items", []):
-            catalog_name = PICKUP_NAME_TO_CATALOG.get(name)
-            avatar = catalog_images.get(catalog_name) if catalog_name else None
-            if not avatar:
-                cid = _hash_id("c-", name)
-                avatar = ensure_catalog_image(
-                    "characters", cid, _char_avatar_source(name, banner.get("icons"))
+    def add_characters(banners: list[dict], is_collab: bool) -> None:
+        for banner in banners:
+            entry = slot(banner, is_collab)
+            for name in banner.get("items", []):
+                catalog_name = PICKUP_NAME_TO_CATALOG.get(name)
+                catalog = catalog_by_name.get(catalog_name) if catalog_name else None
+                avatar = catalog["image"] if catalog else None
+                if not avatar:
+                    cid = _hash_id("c-", name)
+                    avatar = ensure_catalog_image(
+                        "characters", cid, _char_avatar_source(name, banner.get("icons"))
+                    )
+                entry["characters"].append(
+                    {
+                        "name_ko": name,
+                        "avatar": avatar,
+                        "catalog_id": catalog["id"] if catalog else None,
+                    }
                 )
-            entry["characters"].append({"name_ko": name, "avatar": avatar})
 
-    for banner in weapon_banners:
-        entry = slot(banner)
-        for name in banner.get("items", []):
-            weapon = weapon_by_name.get(name)
-            entry["weapons"].append(
-                {
-                    "name_ko": name,
-                    "icon": weapon.icon if weapon else None,
-                    "rarity": weapon.rarity if weapon else None,
-                    "weapon_type": weapon.weapon_type if weapon else None,
-                }
-            )
+    def add_weapons(banners: list[dict], is_collab: bool) -> None:
+        for banner in banners:
+            entry = slot(banner, is_collab)
+            for name in banner.get("items", []):
+                weapon = weapon_by_name.get(name)
+                entry["weapons"].append(
+                    {
+                        "name_ko": name,
+                        "icon": weapon.icon if weapon else None,
+                        "rarity": weapon.rarity if weapon else None,
+                        "weapon_type": weapon.weapon_type if weapon else None,
+                    }
+                )
+
+    add_characters(char_banners, False)
+    add_characters(char_collab, True)
+    add_weapons(weapon_banners, False)
+    add_weapons(weapon_collab, True)
 
     with get_connection() as conn:
         conn.execute("DELETE FROM pickup_banners")
-        for (version, phase), entry in merged.items():
-            bid = f"{version}-p{phase}"
+        for (version, phase, is_collab), entry in merged.items():
+            bid = f"{version}-collab-p{phase}" if is_collab else f"{version}-p{phase}"
             entry["id"] = bid
             conn.execute(
                 """

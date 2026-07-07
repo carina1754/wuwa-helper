@@ -255,23 +255,37 @@ def parse_banner_history(html: str, kind: str) -> list:
     results: list[dict] = []
 
     current_version: Optional[str] = None
+    version_level: Optional[int] = None
     phase_counter = 0
 
-    for idx, h in enumerate(all_headings):
+    for h in all_headings:
         raw_text = h.get_text(" ", strip=True)
+        level = int(h.name[1])  # "h4" -> 4
 
-        if h.name == "h4":
-            m = _VERSION_RE.search(raw_text)
-            if m:
-                current_version = m.group(1)
-                phase_counter = 0
+        # A "X.X 버전" heading opens a version group. Its heading depth varies by
+        # page: the master 튜닝 page nests versions at h4 (banners at h5), while the
+        # per-era sub-articles (.../튜닝/캐릭터 이벤트 튜닝/1.X 버전, /2.X 버전) nest
+        # versions at h2 (banners at h3). We detect the version depth dynamically and
+        # treat any deeper heading as a banner within it. Roll-up headings like
+        # "1.X 버전"/"3.X 버전" carry no absolute version number (X is not a digit) and
+        # never match, so they never open a group.
+        m = _VERSION_RE.search(raw_text)
+        if m:
+            current_version = m.group(1)
+            version_level = level
+            phase_counter = 0
             continue
 
-        if h.name != "h5":
+        # A non-version heading at or above the version's depth (e.g. "개요",
+        # "관련 틀") closes the current group; only strictly-deeper headings are its
+        # banners.
+        if version_level is not None and level <= version_level:
+            current_version = None
+            version_level = None
             continue
 
         if current_version is None:
-            # Banner heading outside any recognised "X.X 버전" h4 -- skip defensively.
+            # Banner heading outside any recognised "X.X 버전" group -- skip defensively.
             continue
 
         phase_counter += 1

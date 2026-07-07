@@ -102,6 +102,10 @@ class WeaponCatalogItem(BaseModel):
 class PickupBannerCharacter(BaseModel):
     name_ko: str
     avatar: str | None = None
+    # character_catalog id when the pickup name maps to a catalog entry; lets the
+    # frontend open a detail view from the pickup icon. None for characters not in
+    # the catalog (e.g. brand-new units).
+    catalog_id: int | None = None
 
 
 class PickupBannerWeapon(BaseModel):
@@ -117,6 +121,7 @@ class PickupBanner(BaseModel):
     phase: int | None = None
     banner_name: str | None = None
     is_rerun: bool = False
+    is_collab: bool = False
     characters: list[PickupBannerCharacter] = Field(default_factory=list)
     weapons: list[PickupBannerWeapon] = Field(default_factory=list)
     start_date: str | None = None

@@ -143,9 +143,7 @@ def test_refresh_pickup_banners_merges_char_and_weapon(monkeypatch):
         saved = conn.execute("SELECT id, version, phase, data_json FROM pickup_banners").fetchall()
 
     try:
-        monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
-
-        def fake_banners(html, kind):
+        def fake_all(page, kind):
             if kind == "character":
                 return [
                     {
@@ -156,7 +154,8 @@ def test_refresh_pickup_banners_merges_char_and_weapon(monkeypatch):
                 ]
             return [{"version": "9.9", "phase": 1, "items": ["테스트권총"], "icons": []}]
 
-        monkeypatch.setattr(catalog, "parse_banner_history", fake_banners)
+        monkeypatch.setattr(catalog, "_all_banner_history", fake_all)
+        monkeypatch.setattr(catalog, "_collab_banner_history", lambda page, kind: [])
         monkeypatch.setattr(
             catalog, "ensure_catalog_image", lambda kind, iid, src: f"/catalog/image/{kind}/{iid}" if src else None
         )
@@ -169,6 +168,7 @@ def test_refresh_pickup_banners_merges_char_and_weapon(monkeypatch):
 
         assert catalog.refresh_pickup_banners() == 1
         banner = next(b for b in catalog.load_pickup_banners() if b.version == "9.9")
+        assert len(banner.characters) == 1  # each era crawled once, no double-count
         assert banner.characters[0].name_ko == "테스트캐릭"
         assert banner.characters[0].avatar == f"/catalog/image/characters/{catalog._hash_id('c-', '테스트캐릭')}"
         assert banner.weapons[0].name_ko == "테스트권총"
@@ -209,9 +209,8 @@ def test_refresh_pickup_banners_prefers_catalog_image(monkeypatch):
 
     try:
         monkeypatch.setattr(catalog, "PICKUP_NAME_TO_CATALOG", {"테스트캐릭": "TestCatChar"})
-        monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
 
-        def fake_banners(html, kind):
+        def fake_all(page, kind):
             if kind == "character":
                 return [{
                     "version": "9.9", "phase": 1, "banner_name": "b", "is_rerun": False,
@@ -220,7 +219,8 @@ def test_refresh_pickup_banners_prefers_catalog_image(monkeypatch):
                 }]
             return []
 
-        monkeypatch.setattr(catalog, "parse_banner_history", fake_banners)
+        monkeypatch.setattr(catalog, "_all_banner_history", fake_all)
+        monkeypatch.setattr(catalog, "_collab_banner_history", lambda page, kind: [])
         monkeypatch.setattr(catalog, "load_weapon_catalog", lambda: [])
         # If the mapping worked this must NOT be called; make it loud if it is.
         monkeypatch.setattr(
@@ -231,9 +231,50 @@ def test_refresh_pickup_banners_prefers_catalog_image(monkeypatch):
         assert catalog.refresh_pickup_banners() == 1
         banner = next(b for b in catalog.load_pickup_banners() if b.version == "9.9")
         assert banner.characters[0].avatar == "/catalog/image/characters/cat-777777"
+        assert banner.characters[0].catalog_id == 777777
     finally:
         with get_connection() as conn:
             conn.execute("DELETE FROM character_catalog WHERE id = %s", (777777,))
+            conn.execute("DELETE FROM pickup_banners")
+            for row in saved:
+                conn.execute(
+                    "INSERT INTO pickup_banners (id, version, phase, data_json, updated_at) VALUES (%s, %s, %s, %s, now())",
+                    (row["id"], row["version"], row["phase"], row["data_json"]),
+                )
+            conn.commit()
+
+
+def test_refresh_pickup_banners_collab_track_no_collision(monkeypatch):
+    """A collab banner sharing a version+phase with a regular banner must not
+    merge into the same slot -- it gets a distinct id and its own row."""
+    init_db()
+    with get_connection() as conn:
+        saved = conn.execute("SELECT id, version, phase, data_json FROM pickup_banners").fetchall()
+
+    try:
+        monkeypatch.setattr(
+            catalog, "_all_banner_history",
+            lambda page, kind: [{"version": "3.4", "phase": 1, "banner_name": "일반",
+                                 "items": ["정규캐릭"] if kind == "character" else [], "icons": []}],
+        )
+        monkeypatch.setattr(
+            catalog, "_collab_banner_history",
+            lambda page, kind: [{"version": "3.4", "phase": 1, "banner_name": "콜라보",
+                                 "items": ["콜라보캐릭"] if kind == "character" else [], "icons": []}],
+        )
+        monkeypatch.setattr(catalog, "load_weapon_catalog", lambda: [])
+        monkeypatch.setattr(catalog, "ensure_catalog_image", lambda kind, iid, src: None)
+
+        assert catalog.refresh_pickup_banners() == 2  # regular + collab, not merged
+        v34 = [b for b in catalog.load_pickup_banners() if b.version == "3.4"]
+        by_id = {b.id: b for b in v34}
+        assert set(by_id) == {"3.4-p1", "3.4-collab-p1"}
+        assert by_id["3.4-p1"].is_collab is False
+        assert by_id["3.4-p1"].characters[0].name_ko == "정규캐릭"
+        assert by_id["3.4-collab-p1"].is_collab is True
+        assert by_id["3.4-collab-p1"].characters[0].name_ko == "콜라보캐릭"
+    finally:
+        with get_connection() as conn:
             conn.execute("DELETE FROM pickup_banners")
             for row in saved:
                 conn.execute(
