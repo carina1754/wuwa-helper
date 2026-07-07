@@ -137,41 +137,52 @@ def test_refresh_pickup_banners_merges_char_and_weapon(monkeypatch):
     from src.models import WeaponCatalogItem
 
     init_db()
-    monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
-
-    def fake_banners(html, kind):
-        if kind == "character":
-            return [
-                {
-                    "version": "9.9", "phase": 1, "banner_name": "테스트배너", "is_rerun": False,
-                    "items": ["테스트캐릭"], "start_date": "2099-01-01", "end_date": "2099-01-15",
-                    "icons": [{"alt": "명조 9.9 테스트캐릭", "src": "https://i/c.webp"}],
-                }
-            ]
-        return [{"version": "9.9", "phase": 1, "items": ["테스트권총"], "icons": []}]
-
-    monkeypatch.setattr(catalog, "parse_banner_history", fake_banners)
-    monkeypatch.setattr(
-        catalog, "ensure_catalog_image", lambda kind, iid, src: f"/catalog/image/{kind}/{iid}" if src else None
-    )
-    monkeypatch.setattr(
-        catalog,
-        "load_weapon_catalog",
-        lambda: [WeaponCatalogItem(id="w-x", name_ko="테스트권총", weapon_type="권총", rarity=5,
-                                   icon="/catalog/image/weapons/w-x")],
-    )
-
-    assert catalog.refresh_pickup_banners() == 1
-    banner = next(b for b in catalog.load_pickup_banners() if b.version == "9.9")
-    assert banner.characters[0].name_ko == "테스트캐릭"
-    assert banner.characters[0].avatar == f"/catalog/image/characters/{catalog._hash_id('c-', '테스트캐릭')}"
-    assert banner.weapons[0].name_ko == "테스트권총"
-    assert banner.weapons[0].icon == "/catalog/image/weapons/w-x"
-    assert banner.weapons[0].rarity == 5
-
+    # refresh_pickup_banners() full-replaces the table; save real rows so this
+    # test never wipes the app's crawled data in the shared dev DB.
     with get_connection() as conn:
-        conn.execute("DELETE FROM pickup_banners")
-        conn.commit()
+        saved = conn.execute("SELECT id, version, phase, data_json FROM pickup_banners").fetchall()
+
+    try:
+        monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
+
+        def fake_banners(html, kind):
+            if kind == "character":
+                return [
+                    {
+                        "version": "9.9", "phase": 1, "banner_name": "테스트배너", "is_rerun": False,
+                        "items": ["테스트캐릭"], "start_date": "2099-01-01", "end_date": "2099-01-15",
+                        "icons": [{"alt": "명조 9.9 테스트캐릭", "src": "https://i/c.webp"}],
+                    }
+                ]
+            return [{"version": "9.9", "phase": 1, "items": ["테스트권총"], "icons": []}]
+
+        monkeypatch.setattr(catalog, "parse_banner_history", fake_banners)
+        monkeypatch.setattr(
+            catalog, "ensure_catalog_image", lambda kind, iid, src: f"/catalog/image/{kind}/{iid}" if src else None
+        )
+        monkeypatch.setattr(
+            catalog,
+            "load_weapon_catalog",
+            lambda: [WeaponCatalogItem(id="w-x", name_ko="테스트권총", weapon_type="권총", rarity=5,
+                                       icon="/catalog/image/weapons/w-x")],
+        )
+
+        assert catalog.refresh_pickup_banners() == 1
+        banner = next(b for b in catalog.load_pickup_banners() if b.version == "9.9")
+        assert banner.characters[0].name_ko == "테스트캐릭"
+        assert banner.characters[0].avatar == f"/catalog/image/characters/{catalog._hash_id('c-', '테스트캐릭')}"
+        assert banner.weapons[0].name_ko == "테스트권총"
+        assert banner.weapons[0].icon == "/catalog/image/weapons/w-x"
+        assert banner.weapons[0].rarity == 5
+    finally:
+        with get_connection() as conn:
+            conn.execute("DELETE FROM pickup_banners")
+            for row in saved:
+                conn.execute(
+                    "INSERT INTO pickup_banners (id, version, phase, data_json, updated_at) VALUES (%s, %s, %s, %s, now())",
+                    (row["id"], row["version"], row["phase"], row["data_json"]),
+                )
+            conn.commit()
 
 
 def test_refresh_character_catalog_images_rewrites_to_local(monkeypatch):
