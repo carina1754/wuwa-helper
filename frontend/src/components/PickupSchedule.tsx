@@ -29,6 +29,7 @@ export function PickupSchedule() {
   const [error, setError] = useState("");
   const [showCharacters, setShowCharacters] = useState(true);
   const [showWeapons, setShowWeapons] = useState(true);
+  const [showCollab, setShowCollab] = useState(true);
   const [detail, setDetail] = useState<DetailTarget | null>(null);
 
   useEffect(() => {
@@ -61,15 +62,23 @@ export function PickupSchedule() {
   const tWeaponName = (value: string) => (t.weaponNames as Record<string, string>)[value] ?? value;
   const tStat = (value: string) => (t.statNames as Record<string, string>)[value] ?? value;
 
+  const hasCollab = useMemo(() => banners.some((banner) => banner.is_collab), [banners]);
+
   const versions = useMemo(() => {
     const map = new Map<string, PickupBanner[]>();
     for (const banner of banners) {
+      if (!showCollab && banner.is_collab) continue;
       const list = map.get(banner.version) ?? [];
       list.push(banner);
       map.set(banner.version, list);
     }
+    // Keep a version's regular banners first, then its collab banners, so the
+    // two tracks never interleave within a version block.
+    for (const list of map.values()) {
+      list.sort((a, b) => Number(a.is_collab) - Number(b.is_collab) || (a.phase ?? 0) - (b.phase ?? 0));
+    }
     return Array.from(map, ([version, list]) => ({ version, banners: list }));
-  }, [banners]);
+  }, [banners, showCollab]);
 
   return (
     <section className="grid gap-5">
@@ -97,6 +106,17 @@ export function PickupSchedule() {
               <Swords className="h-4 w-4" aria-hidden="true" />
               무기
             </button>
+            {hasCollab ? (
+              <button
+                type="button"
+                aria-pressed={showCollab}
+                onClick={() => setShowCollab((value) => !value)}
+                className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${toggleClass(showCollab)}`}
+              >
+                <Handshake className="h-4 w-4" aria-hidden="true" />
+                콜라보
+              </button>
+            ) : null}
           </div>
         </div>
         {error ? (
