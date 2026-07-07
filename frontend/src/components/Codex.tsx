@@ -381,24 +381,30 @@ export function Codex() {
   }, [echoes, query, cost, sonata]);
 
   // Echoes are shown grouped by sonata set; an echo appears under each of its sets.
+  // encore lists a monster's echo as several id/rarity variants, so within a set we
+  // dedupe by name (keeping the highest-rarity record) — one card per echo per set.
   const echoGroups = useMemo(() => {
-    const groups = new Map<string, CodexEcho[]>();
-    const noSet: CodexEcho[] = [];
+    const groups = new Map<string, Map<string, CodexEcho>>();
+    const noSet = new Map<string, CodexEcho>();
+    const keepBetter = (bucket: Map<string, CodexEcho>, e: CodexEcho) => {
+      const cur = bucket.get(e.name_ko);
+      if (!cur || (e.rarity ?? 0) > (cur.rarity ?? 0)) bucket.set(e.name_ko, e);
+    };
     for (const e of filteredEchoes) {
       const sets = (e.sonata ?? []).filter(Boolean);
-      if (sets.length === 0) noSet.push(e);
+      if (sets.length === 0) keepBetter(noSet, e);
       for (const s of sets) {
-        const list = groups.get(s);
-        if (list) list.push(e);
-        else groups.set(s, [e]);
+        let bucket = groups.get(s);
+        if (!bucket) groups.set(s, (bucket = new Map()));
+        keepBetter(bucket, e);
       }
     }
     // When a sonata is selected in the filter, show only that set's group.
     const names = sonata ? [sonata] : sonataOptions;
     const ordered = names
-      .map((name) => ({ name, echoes: groups.get(name) ?? [] }))
+      .map((name) => ({ name, echoes: [...(groups.get(name)?.values() ?? [])] }))
       .filter((g) => g.echoes.length > 0);
-    if (!sonata && noSet.length) ordered.push({ name: "", echoes: noSet });
+    if (!sonata && noSet.size) ordered.push({ name: "", echoes: [...noSet.values()] });
     return ordered;
   }, [filteredEchoes, sonataOptions, sonata]);
 
