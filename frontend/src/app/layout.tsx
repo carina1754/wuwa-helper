@@ -12,7 +12,7 @@ const themeScript = `(function(){try{var s=localStorage.getItem('mj:theme');docu
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="ko" data-theme="dark">
+    <html lang="ko" data-theme="dark" suppressHydrationWarning>
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
