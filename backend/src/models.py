@@ -99,6 +99,30 @@ class WeaponCatalogItem(BaseModel):
     source: str | None = None
 
 
+class PickupBannerCharacter(BaseModel):
+    name_ko: str
+    avatar: str | None = None
+
+
+class PickupBannerWeapon(BaseModel):
+    name_ko: str
+    icon: str | None = None
+    rarity: int | None = None
+    weapon_type: str | None = None
+
+
+class PickupBanner(BaseModel):
+    id: str
+    version: str
+    phase: int | None = None
+    banner_name: str | None = None
+    is_rerun: bool = False
+    characters: list[PickupBannerCharacter] = Field(default_factory=list)
+    weapons: list[PickupBannerWeapon] = Field(default_factory=list)
+    start_date: str | None = None
+    end_date: str | None = None
+
+
 class PickupScheduleItem(BaseModel):
     id: str
     year: int

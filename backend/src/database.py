@@ -164,6 +164,17 @@ def init_db() -> None:
             )
             cur.execute(
                 """
+                CREATE TABLE IF NOT EXISTS pickup_banners (
+                    id TEXT PRIMARY KEY,
+                    version TEXT NOT NULL,
+                    phase INTEGER,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
                 CREATE TABLE IF NOT EXISTS team_rules (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL,

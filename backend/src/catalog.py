@@ -12,9 +12,10 @@ import json
 
 from .database import get_connection
 from .media import ensure_catalog_image
-from .models import WeaponCatalogItem
+from .models import PickupBanner, WeaponCatalogItem
 from .namu import characters as namu_characters
 from .namu import echoes as namu_echoes
+from .namu.banners import parse_banner_history
 from .namu.client import fetch_page, sub_page
 from .namu.weapons import parse_weapons
 
@@ -194,3 +195,94 @@ def load_echoes() -> list[dict]:
             "SELECT data_json FROM echo_catalog ORDER BY cost DESC NULLS LAST, name_ko"
         ).fetchall()
     return [json.loads(row["data_json"]) for row in rows]
+
+
+# --- Pickup banners (characters + weapons per version/phase) ------------------
+# Crawled from Namuwiki 튜닝 pages; character + weapon banners merged by
+# (version, phase). Character avatars are pulled from the banner page's own
+# icons (alt names the character) and cached; weapons are matched to
+# weapon_catalog by Korean name for their icon/rarity/type.
+def _char_avatar_source(name_ko: str, icons: list[dict] | None) -> str | None:
+    for icon in icons or []:
+        alt = icon.get("alt") or ""
+        if name_ko in alt and "아이콘" not in alt and "패턴" not in alt and "로고" not in alt:
+            return icon.get("src")
+    return None
+
+
+def refresh_pickup_banners() -> int:
+    """Crawl character + weapon banner history, merge, cache avatars, store."""
+    char_banners = parse_banner_history(fetch_page(sub_page("튜닝", "캐릭터 이벤트 튜닝")), "character")
+    weapon_banners = parse_banner_history(fetch_page(sub_page("튜닝", "무기 이벤트 튜닝")), "weapon")
+    weapon_by_name = {w.name_ko: w for w in load_weapon_catalog()}
+
+    merged: dict[tuple, dict] = {}
+
+    def slot(banner: dict) -> dict:
+        key = (banner["version"], banner.get("phase"))
+        return merged.setdefault(
+            key,
+            {
+                "version": banner["version"],
+                "phase": banner.get("phase"),
+                "banner_name": banner.get("banner_name"),
+                "is_rerun": banner.get("is_rerun", False),
+                "characters": [],
+                "weapons": [],
+                "start_date": banner.get("start_date"),
+                "end_date": banner.get("end_date"),
+            },
+        )
+
+    for banner in char_banners:
+        entry = slot(banner)
+        for name in banner.get("items", []):
+            cid = _hash_id("c-", name)
+            avatar = ensure_catalog_image(
+                "characters", cid, _char_avatar_source(name, banner.get("icons"))
+            )
+            entry["characters"].append({"name_ko": name, "avatar": avatar})
+
+    for banner in weapon_banners:
+        entry = slot(banner)
+        for name in banner.get("items", []):
+            weapon = weapon_by_name.get(name)
+            entry["weapons"].append(
+                {
+                    "name_ko": name,
+                    "icon": weapon.icon if weapon else None,
+                    "rarity": weapon.rarity if weapon else None,
+                    "weapon_type": weapon.weapon_type if weapon else None,
+                }
+            )
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM pickup_banners")
+        for (version, phase), entry in merged.items():
+            bid = f"{version}-p{phase}"
+            entry["id"] = bid
+            conn.execute(
+                """
+                INSERT INTO pickup_banners (id, version, phase, data_json, updated_at)
+                VALUES (%s, %s, %s, %s, now())
+                """,
+                (bid, version, phase, json.dumps(entry, ensure_ascii=False)),
+            )
+        conn.commit()
+    return len(merged)
+
+
+def load_pickup_banners() -> list[PickupBanner]:
+    with get_connection() as conn:
+        rows = conn.execute("SELECT data_json FROM pickup_banners").fetchall()
+    banners = [PickupBanner.model_validate_json(row["data_json"]) for row in rows]
+    # newest version first, then phase ascending (numeric-aware version sort)
+    def sort_key(b: PickupBanner):
+        try:
+            major, minor = (b.version.split(".") + ["0"])[:2]
+            ver = (int(major), int(minor))
+        except (ValueError, AttributeError):
+            ver = (0, 0)
+        return (-ver[0], -ver[1], b.phase or 0)
+
+    return sorted(banners, key=sort_key)

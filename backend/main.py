@@ -19,6 +19,7 @@ from src.history import get_session, list_sessions, save_session
 from src.catalog import (
     load_character_kits,
     load_echoes,
+    load_pickup_banners,
     load_sonata_sets,
     load_weapon_catalog,
 )
@@ -32,6 +33,7 @@ from src.models import (
     CharacterCatalogItem,
     Diagnosis,
     GameUpdateSummary,
+    PickupBanner,
     WeaponCatalogItem,
     EchoItem,
     PickupScheduleItem,
@@ -137,6 +139,11 @@ def get_echoes() -> list[dict]:
 @app.get("/sonata-sets")
 def get_sonata_sets() -> list[dict]:
     return load_sonata_sets()
+
+
+@app.get("/pickup-banners", response_model=list[PickupBanner])
+def get_pickup_banners() -> list[PickupBanner]:
+    return load_pickup_banners()
 
 
 @app.get("/catalog/image/{kind}/{item_id}")
