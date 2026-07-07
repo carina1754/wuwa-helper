@@ -3,7 +3,9 @@ name = "wuwa-ai-coach-backend"
 version = "0.1.0"
 requires-python = ">=3.12,<3.13"
 dependencies = [
+    "beautifulsoup4>=4.15.0",
     "fastapi>=0.115.0",
+    "lxml>=6.1.1",
     "openai>=1.40.0",
     "psycopg[binary]>=3.2.0",
     "pydantic>=2.8.0",
