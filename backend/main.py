@@ -16,7 +16,12 @@ from src.curated_updates import apply_curated_update_summaries
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
-from src.catalog import load_weapon_catalog
+from src.catalog import (
+    load_character_kits,
+    load_echoes,
+    load_sonata_sets,
+    load_weapon_catalog,
+)
 from src.media import CATALOG_KINDS, cached_catalog_image_path, cached_image_path
 from src.models import (
     AuthUserSyncRequest,
@@ -117,6 +122,21 @@ def get_update_image(update_id: str) -> FileResponse:
 @app.get("/weapons", response_model=list[WeaponCatalogItem])
 def get_weapons() -> list[WeaponCatalogItem]:
     return load_weapon_catalog()
+
+
+@app.get("/character-kits")
+def get_character_kits() -> list[dict]:
+    return load_character_kits()
+
+
+@app.get("/echoes")
+def get_echoes() -> list[dict]:
+    return load_echoes()
+
+
+@app.get("/sonata-sets")
+def get_sonata_sets() -> list[dict]:
+    return load_sonata_sets()
 
 
 @app.get("/catalog/image/{kind}/{item_id}")

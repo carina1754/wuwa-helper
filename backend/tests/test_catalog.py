@@ -64,3 +64,69 @@ def test_catalog_image_route_404_when_missing(monkeypatch, tmp_path):
 def test_catalog_image_route_rejects_unknown_kind(monkeypatch, tmp_path):
     monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
     assert client.get("/catalog/image/evil/x").status_code == 404
+
+
+def test_refresh_character_kits_stores_and_loads(monkeypatch):
+    init_db()
+    monkeypatch.setattr(catalog, "CHARACTER_NAMES", ["테스트캐릭"])
+    monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
+    monkeypatch.setattr(
+        catalog.namu_characters,
+        "parse_character",
+        lambda html: {"name_ko": "테스트캐릭", "element": "회절", "skills": [{"slot": "기본 공격"}]},
+    )
+    cid = catalog._hash_id("c-", "테스트캐릭")
+    with get_connection() as conn:
+        conn.execute("DELETE FROM character_kit WHERE id = %s", (cid,))
+        conn.commit()
+
+    assert catalog.refresh_character_kits() == 1
+    kit = next(k for k in catalog.load_character_kits() if k["name_ko"] == "테스트캐릭")
+    assert kit["element"] == "회절"
+    assert kit["id"] == cid
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM character_kit WHERE id = %s", (cid,))
+        conn.commit()
+
+
+def test_refresh_echo_catalog_stores_sonata_and_echoes(monkeypatch):
+    init_db()
+    monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
+    monkeypatch.setattr(catalog, "_ECHO_TIER_PAGES", ["해일급"])
+    monkeypatch.setattr(
+        catalog.namu_echoes,
+        "parse_sonata_sets",
+        lambda html: [{"name_ko": "테스트소나타", "two_piece": "x", "icon": "https://i/s.webp"}],
+    )
+    monkeypatch.setattr(
+        catalog.namu_echoes,
+        "parse_echoes",
+        lambda html, sonata=None: [{"name_ko": "테스트에코", "cost": 4, "icon": "https://i/e.webp"}],
+    )
+    monkeypatch.setattr(
+        catalog, "ensure_catalog_image", lambda kind, item_id, src: f"/catalog/image/{kind}/{item_id}"
+    )
+    sid = catalog._hash_id("s-", "테스트소나타")
+    eid = catalog._hash_id("e-", "테스트에코")
+    with get_connection() as conn:
+        conn.execute("DELETE FROM sonata_set WHERE id = %s", (sid,))
+        conn.execute("DELETE FROM echo_catalog WHERE id = %s", (eid,))
+        conn.commit()
+
+    assert catalog.refresh_echo_catalog() == 2
+    assert any(s["name_ko"] == "테스트소나타" for s in catalog.load_sonata_sets())
+    echo = next(e for e in catalog.load_echoes() if e["name_ko"] == "테스트에코")
+    assert echo["cost"] == 4
+    assert echo["icon"] == f"/catalog/image/echoes/{eid}"
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM sonata_set WHERE id = %s", (sid,))
+        conn.execute("DELETE FROM echo_catalog WHERE id = %s", (eid,))
+        conn.commit()
+
+
+def test_data_endpoints_return_lists():
+    assert isinstance(client.get("/character-kits").json(), list)
+    assert isinstance(client.get("/echoes").json(), list)
+    assert isinstance(client.get("/sonata-sets").json(), list)

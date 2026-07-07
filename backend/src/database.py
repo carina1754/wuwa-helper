@@ -133,6 +133,37 @@ def init_db() -> None:
             )
             cur.execute(
                 """
+                CREATE TABLE IF NOT EXISTS character_kit (
+                    id TEXT PRIMARY KEY,
+                    name_ko TEXT NOT NULL,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS sonata_set (
+                    id TEXT PRIMARY KEY,
+                    name_ko TEXT NOT NULL,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS echo_catalog (
+                    id TEXT PRIMARY KEY,
+                    name_ko TEXT NOT NULL,
+                    cost INTEGER,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
                 CREATE TABLE IF NOT EXISTS team_rules (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL,
