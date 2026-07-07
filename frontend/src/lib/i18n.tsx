@@ -22,7 +22,7 @@ export const copy = {
     tabs: {
       Dashboard: "대시보드",
       Analyzer: "분석",
-      Planner: "플래너",
+      Planner: "도감",
       PickupSchedule: "픽업 일정표",
       Updates: "명조 업데이트",
       Teams: "팀",
@@ -341,7 +341,7 @@ export const copy = {
     tabs: {
       Dashboard: "Dashboard",
       Analyzer: "Analyzer",
-      Planner: "Planner",
+      Planner: "Codex",
       PickupSchedule: "Pickup Schedule",
       Updates: "WuWa Updates",
       Teams: "Teams",

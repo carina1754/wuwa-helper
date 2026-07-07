@@ -5,6 +5,9 @@ import type {
   BuildRule,
   CharacterCatalogItem,
   CharacterSnapshot,
+  CodexEcho,
+  CodexResonator,
+  CodexWeapon,
   GameUpdateSummary,
   PickupBanner,
   PickupScheduleItem,
@@ -66,6 +69,18 @@ export function getPickupBanners(): Promise<PickupBanner[]> {
 
 export function getWeapons(): Promise<WeaponCatalogItem[]> {
   return request("/weapons");
+}
+
+export function getCodexResonators(): Promise<CodexResonator[]> {
+  return request("/codex/resonators");
+}
+
+export function getCodexWeapons(): Promise<CodexWeapon[]> {
+  return request("/codex/weapons");
+}
+
+export function getCodexEchoes(): Promise<CodexEcho[]> {
+  return request("/codex/echoes");
 }
 
 export function getUpdates(): Promise<GameUpdateSummary[]> {

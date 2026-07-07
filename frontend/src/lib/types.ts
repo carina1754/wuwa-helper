@@ -155,6 +155,65 @@ export interface PickupBanner {
   end_date?: string | null;
 }
 
+export interface CodexSkill {
+  SkillName?: string | null;
+  SkillDescribe?: string | null;
+}
+
+export interface CodexResonanceNode {
+  NodeName?: string | null;
+  AttributesDescription?: string | null;
+}
+
+export interface CodexResonator {
+  id: number;
+  name: string;
+  name_en?: string | null;
+  rarity: number;
+  element?: string | null;
+  weapon_type?: string | null;
+  weapon_type_ko?: string | null;
+  role: Role;
+  image?: string | null;
+  skills: CodexSkill[];
+  resonance_chain: CodexResonanceNode[];
+  stats: Record<string, number>;
+  introduction?: string | null;
+}
+
+export interface CodexWeaponResonance {
+  Name?: string | null;
+}
+
+export interface CodexWeapon {
+  id: string;
+  name_ko: string;
+  name_en?: string | null;
+  weapon_type?: string | null;
+  weapon_type_ko?: string | null;
+  rarity: number;
+  desc?: string | null;
+  attributes_description?: string | null;
+  resonance?: CodexWeaponResonance | CodexWeaponResonance[] | null;
+  icon?: string | null;
+}
+
+export interface CodexEchoSkill {
+  DescriptionEx?: string | null;
+  SkillCD?: number | null;
+}
+
+export interface CodexEcho {
+  id: string;
+  name_ko: string;
+  name_en?: string | null;
+  cost: number;
+  rarity: number;
+  sonata: string[];
+  skill?: CodexEchoSkill | null;
+  icon?: string | null;
+}
+
 export interface Diagnosis {
   target_type: "echo" | "character" | "account" | "team";
   target_name?: string | null;

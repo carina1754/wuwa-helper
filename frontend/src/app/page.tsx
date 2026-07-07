@@ -2,7 +2,7 @@
 
 import { Clock } from "lucide-react";
 import { AppShell } from "@/components/AppShell";
-import { CharacterPlanner } from "@/components/CharacterPlanner";
+import { Codex } from "@/components/Codex";
 import { PickupSchedule } from "@/components/PickupSchedule";
 import { UpdatesSummary } from "@/components/UpdatesSummary";
 import { WebsiteUpdates } from "@/components/WebsiteUpdates";
@@ -27,7 +27,7 @@ function renderTab(tab: AppTab) {
     case "Analyzer":
       return <UpdatingNotice label="분석" />;
     case "Planner":
-      return <CharacterPlanner />;
+      return <Codex />;
     case "PickupSchedule":
       return <PickupSchedule />;
     case "Updates":
