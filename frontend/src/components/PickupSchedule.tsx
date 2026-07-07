@@ -1,6 +1,6 @@
 "use client";
 
-import { Handshake, RotateCcw, Sparkles, Swords, UserRound, X } from "lucide-react";
+import { CalendarDays, Handshake, RotateCcw, Sparkles, Swords, UserRound, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import { getCharacters, getPickupBanners } from "@/lib/api";
 import { API_BASE_URL, mediaUrl } from "@/lib/constants";
@@ -10,6 +10,16 @@ import type { CharacterCatalogItem, PickupBanner, PickupBannerWeapon } from "@/l
 type DetailTarget =
   | { type: "character"; nameKo: string; entry?: CharacterCatalogItem }
   | { type: "weapon"; weapon: PickupBannerWeapon };
+
+/** Phase-1 banners start when the version launches; Namuwiki records that as a
+ * relative phrase ("3.5 버전 업데이트 이후") rather than a date. Show a short label
+ * for those and the raw date otherwise. */
+function formatPeriod(start?: string | null, end?: string | null): string | null {
+  const startLabel = start ? (/버전 업데이트 이후/.test(start) ? "버전 출시" : start) : null;
+  if (!startLabel && !end) return null;
+  if (startLabel && end) return `${startLabel} ~ ${end}`;
+  return startLabel ? `${startLabel} ~` : `~ ${end}`;
+}
 
 const rarityRing: Record<number, string> = {
   5: "ring-amber-300 dark:ring-amber-400/50",
@@ -149,29 +159,30 @@ export function PickupSchedule() {
                     : "border-violet-200 bg-violet-50/60 dark:border-violet-400/30 dark:bg-violet-400/5"
                 }`}
               >
-                <div className="mb-3 flex items-center justify-between gap-2">
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    <span
-                      className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold ring-1 ring-inset ${
-                        banner.is_rerun
-                          ? "bg-amber-50 text-amber-800 ring-amber-200 dark:bg-amber-400/10 dark:text-amber-200 dark:ring-amber-400/30"
-                          : "bg-violet-50 text-violet-800 ring-violet-200 dark:bg-violet-400/10 dark:text-violet-200 dark:ring-violet-400/30"
-                      }`}
-                    >
-                      {banner.is_rerun ? <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> : <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />}
-                      {banner.is_rerun ? "복각" : "신규"}
+                <div className="mb-2 flex flex-wrap items-center gap-1.5">
+                  <span
+                    className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold ring-1 ring-inset ${
+                      banner.is_rerun
+                        ? "bg-amber-50 text-amber-800 ring-amber-200 dark:bg-amber-400/10 dark:text-amber-200 dark:ring-amber-400/30"
+                        : "bg-violet-50 text-violet-800 ring-violet-200 dark:bg-violet-400/10 dark:text-violet-200 dark:ring-violet-400/30"
+                    }`}
+                  >
+                    {banner.is_rerun ? <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> : <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />}
+                    {banner.is_rerun ? "복각" : "신규"}
+                  </span>
+                  {banner.is_collab ? (
+                    <span className="inline-flex items-center gap-1 rounded-md bg-fuchsia-50 px-2 py-1 text-xs font-semibold text-fuchsia-800 ring-1 ring-inset ring-fuchsia-200 dark:bg-fuchsia-400/10 dark:text-fuchsia-200 dark:ring-fuchsia-400/30">
+                      <Handshake className="h-3.5 w-3.5" aria-hidden="true" />
+                      콜라보
                     </span>
-                    {banner.is_collab ? (
-                      <span className="inline-flex items-center gap-1 rounded-md bg-fuchsia-50 px-2 py-1 text-xs font-semibold text-fuchsia-800 ring-1 ring-inset ring-fuchsia-200 dark:bg-fuchsia-400/10 dark:text-fuchsia-200 dark:ring-fuchsia-400/30">
-                        <Handshake className="h-3.5 w-3.5" aria-hidden="true" />
-                        콜라보
-                      </span>
-                    ) : null}
-                  </div>
-                  {banner.end_date ? (
-                    <span className="text-xs text-slate-500 dark:text-slate-400">~ {banner.end_date}</span>
                   ) : null}
                 </div>
+                {formatPeriod(banner.start_date, banner.end_date) ? (
+                  <p className="mb-3 flex items-start gap-1 text-xs text-slate-500 dark:text-slate-400">
+                    <CalendarDays className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    <span>{formatPeriod(banner.start_date, banner.end_date)}</span>
+                  </p>
+                ) : null}
 
                 <div className="flex flex-wrap gap-3">
                   {showCharacters
