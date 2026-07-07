@@ -698,9 +698,49 @@ function WeaponDetail({ item }: { item: CodexWeapon }) {
   const desc = stripTags(item.desc);
   const lore = stripTags(item.attributes_description);
 
+  const props = (item.properties ?? []).filter((p) => p?.curve?.length || p?.max != null);
+  const maxLevel = props[0]?.curve?.at(-1)?.level ?? 90;
+  const [level, setLevel] = useState(maxLevel);
+  const propAt = (p: NonNullable<CodexWeapon["properties"]>[number]): number | undefined => {
+    if (p.curve?.length) return (p.curve.find((c) => c.level === level) ?? p.curve.at(-1))?.value;
+    return p.max ?? undefined;
+  };
+
   return (
     <div className="grid gap-4">
       <DetailHeader name={item.name_ko} image={item.icon} rarity={item.rarity} meta={meta} />
+
+      {props.length ? (
+        <div>
+          <div className="mb-2 flex items-center justify-between">
+            <h4 className="text-sm font-semibold text-[var(--fg)]">스탯</h4>
+            <span className="text-xs text-[var(--muted)]">Lv. {level}</span>
+          </div>
+          <input
+            type="range"
+            min={1}
+            max={maxLevel}
+            value={level}
+            onChange={(e) => setLevel(Number(e.target.value))}
+            className="mb-3 w-full accent-[var(--accent)]"
+            aria-label="레벨"
+          />
+          <dl className="grid grid-cols-2 gap-2 text-sm">
+            {props.map((p, i) => {
+              const v = propAt(p);
+              if (v == null) return null;
+              return (
+                <div key={i} className="flex items-center justify-between rounded-md bg-[var(--surface-2)] px-2.5 py-1.5">
+                  <dt className="text-[var(--muted)]">{p.name}</dt>
+                  <dd className="font-medium text-[var(--fg)]">
+                    {i === 0 ? Math.round(Number(v)).toLocaleString() : `${Number(v).toFixed(1)}%`}
+                  </dd>
+                </div>
+              );
+            })}
+          </dl>
+        </div>
+      ) : null}
 
       {resonanceName || desc ? (
         <div>

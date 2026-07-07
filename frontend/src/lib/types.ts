@@ -173,6 +173,12 @@ export interface CodexWeapon {
   attributes_description?: string | null;
   resonance?: CodexWeaponResonance | CodexWeaponResonance[] | null;
   icon?: string | null;
+  properties?: {
+    name?: string | null;
+    base?: number | null;
+    curve?: { level: number; value: number }[] | null;
+    max?: number | null;
+  }[] | null;
 }
 
 export interface CodexEchoSkill {
