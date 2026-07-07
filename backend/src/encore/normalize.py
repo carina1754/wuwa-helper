@@ -71,7 +71,7 @@ def normalize_resonator(d: dict, name_en: str | None = None) -> dict:
         for s in d.get("Skills", [])
     ]
     chain = [
-        strip_tags(c.get("AttributesDescription")) or strip_tags(c.get("NodeName"))
+        {"NodeName": strip_tags(c.get("AttributesDescription")) or strip_tags(c.get("NodeName"))}
         for c in d.get("ResonantChain", [])
     ]
     return {

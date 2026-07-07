@@ -605,7 +605,21 @@ export function ResonatorDetail({
     .map((node) => node.NodeName)
     .filter(Boolean) as string[];
 
-  const stats = STAT_KEYS.map((key) => ({ key, value: item.stats?.[key] })).filter(
+  const maxLevel = item.max_level ?? 90;
+  const [level, setLevel] = useState(maxLevel);
+  const curves = item.stat_curves ?? null;
+  const statValue = (key: string): number | undefined => {
+    const curve = curves?.[key];
+    if (curve?.length) {
+      return (curve.find((c) => c.level === level) ?? curve[curve.length - 1])?.value;
+    }
+    return item.stats?.[key];
+  };
+  const fmtStat = (key: string, value: number): string =>
+    key === "Crit" || key === "CritDamage"
+      ? `${Number(value).toFixed(1)}%`
+      : Math.round(Number(value)).toLocaleString();
+  const stats = STAT_KEYS.map((key) => ({ key, value: statValue(key) })).filter(
     (entry) => entry.value != null,
   );
 
@@ -647,12 +661,26 @@ export function ResonatorDetail({
 
       {stats.length ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">스탯</h4>
+          <div className="mb-2 flex items-center justify-between">
+            <h4 className="text-sm font-semibold text-[var(--fg)]">스탯</h4>
+            {curves ? <span className="text-xs text-[var(--muted)]">Lv. {level}</span> : null}
+          </div>
+          {curves ? (
+            <input
+              type="range"
+              min={1}
+              max={maxLevel}
+              value={level}
+              onChange={(e) => setLevel(Number(e.target.value))}
+              className="mb-3 w-full accent-[var(--accent)]"
+              aria-label="레벨"
+            />
+          ) : null}
           <dl className="grid grid-cols-2 gap-2 text-sm">
             {stats.map((entry) => (
               <div key={entry.key} className="flex items-center justify-between rounded-md bg-[var(--surface-2)] px-2.5 py-1.5">
                 <dt className="text-[var(--muted)]">{STAT_LABELS[entry.key]}</dt>
-                <dd className="font-medium text-[var(--fg)]">{entry.value}</dd>
+                <dd className="font-medium text-[var(--fg)]">{fmtStat(entry.key, entry.value as number)}</dd>
               </div>
             ))}
           </dl>

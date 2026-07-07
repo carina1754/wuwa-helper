@@ -153,6 +153,8 @@ export interface CodexResonator {
   skills: CodexSkill[];
   resonance_chain: CodexResonanceNode[];
   stats: Record<string, number>;
+  stat_curves?: Record<string, { level: number; value: number }[]> | null;
+  max_level?: number | null;
   introduction?: string | null;
 }
 
