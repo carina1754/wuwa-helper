@@ -71,7 +71,8 @@ export function AppShell({ renderTab }: AppShellProps) {
               </button>
               <button type="button" className="iconbtn" onClick={() => selectTab("SiteUpdates")} aria-label={t.app.websiteUpdates} title={t.app.websiteUpdates}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M12 8v5M12 16h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+                  <path d="m3 11 18-5v12L3 14v-3z" />
+                  <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
                 </svg>
               </button>
               {isAdmin ? (
