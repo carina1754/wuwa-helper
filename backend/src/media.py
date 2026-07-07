@@ -1,13 +1,48 @@
 from __future__ import annotations
 
+import ipaddress
 import os
+import socket
 from pathlib import Path
-from urllib.request import Request, urlopen
+from urllib.parse import urlparse
+from urllib.request import HTTPRedirectHandler, Request, build_opener
 
 DEFAULT_MEDIA_DIR = Path(__file__).resolve().parents[1] / "media"
 MAX_IMAGE_BYTES = 20 * 1024 * 1024  # 20 MB safety cap
 _USER_AGENT = "WuWaHelper/1.0"
-_KNOWN_EXTS = (".jpg", ".jpeg", ".png", ".webp", ".gif")
+
+_ALLOWED_SCHEMES = ("http", "https")
+_CONTENT_TYPE_EXT = {
+    "image/jpeg": ".jpg",
+    "image/jpg": ".jpg",
+    "image/png": ".png",
+    "image/webp": ".webp",
+    "image/gif": ".gif",
+}
+
+
+class _NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, *args, **kwargs):  # pragma: no cover - trivial
+        return None
+
+
+def _host_is_public(host: str) -> bool:
+    try:
+        infos = socket.getaddrinfo(host, None)
+    except socket.gaierror:
+        return False
+    for info in infos:
+        ip = ipaddress.ip_address(info[4][0])
+        if (
+            ip.is_private
+            or ip.is_loopback
+            or ip.is_link_local
+            or ip.is_reserved
+            or ip.is_multicast
+            or ip.is_unspecified
+        ):
+            return False
+    return True
 
 
 def media_dir() -> Path:
@@ -27,37 +62,47 @@ def cached_image_path(update_id: str) -> Path | None:
     return matches[0] if matches else None
 
 
-def _extension_for(source_url: str) -> str:
-    lowered = source_url.lower().split("?", 1)[0]
-    for ext in _KNOWN_EXTS:
-        if lowered.endswith(ext):
-            return ext
-    return ".jpg"
+def download_image(source_url: str, dest_stem: Path) -> Path:
+    """Download an image to dest_stem + a content-type-derived extension.
 
+    Rejects non-http(s) schemes, private/loopback/metadata hosts, redirects,
+    and non-image content types (SSRF hardening). Returns the written path.
+    """
+    parsed = urlparse(source_url)
+    if parsed.scheme not in _ALLOWED_SCHEMES:
+        raise ValueError(f"disallowed url scheme: {parsed.scheme!r}")
+    if not parsed.hostname or not _host_is_public(parsed.hostname):
+        raise ValueError(f"disallowed url host: {parsed.hostname!r}")
 
-def download_image(source_url: str, dest: Path) -> None:
+    opener = build_opener(_NoRedirect)
     request = Request(source_url, headers={"User-Agent": _USER_AGENT})
-    with urlopen(request, timeout=30) as response:
+    with opener.open(request, timeout=30) as response:
+        content_type = (response.headers.get("Content-Type") or "").split(";", 1)[0].strip().lower()
+        ext = _CONTENT_TYPE_EXT.get(content_type)
+        if ext is None:
+            raise ValueError(f"disallowed content-type: {content_type!r}")
         data = response.read(MAX_IMAGE_BYTES + 1)
     if len(data) > MAX_IMAGE_BYTES:
         raise ValueError(f"image exceeds {MAX_IMAGE_BYTES} bytes: {source_url}")
+
+    dest = dest_stem.with_suffix(ext)
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_bytes(data)
+    return dest
 
 
 def ensure_hero_image(update_id: str, source_url: str | None) -> str | None:
     """Return the API-relative served path for the cached hero image, or None.
 
-    Reuses an already-cached file (no re-download). A failed download yields
-    None so the caller (refresh) can continue rather than aborting.
+    Reuses an already-cached file (no re-download). A rejected or failed
+    download yields None so the caller (refresh) can continue.
     """
     if cached_image_path(update_id) is not None:
         return f"/updates/image/{update_id}"
     if not source_url:
         return None
-    dest = updates_image_dir() / f"{update_id}{_extension_for(source_url)}"
     try:
-        download_image(source_url, dest)
+        download_image(source_url, updates_image_dir() / update_id)
     except Exception:
         return None
     return f"/updates/image/{update_id}"

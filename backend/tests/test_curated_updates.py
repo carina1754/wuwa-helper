@@ -18,11 +18,11 @@ def test_curated_summaries_have_valid_shape():
 
 def test_apply_fills_matching_row_and_is_idempotent(monkeypatch):
     init_db()
-    update_id = "test-curated-3-4"
+    update_id = "test-curated-99-9"
     monkeypatch.setattr(
         curated_updates,
         "CURATED_UPDATE_SUMMARIES",
-        {"3.4": {"summary_ko": "테스트 요약", "highlights_ko": ["항목1", "항목2"]}},
+        {"99.9": {"summary_ko": "테스트 요약", "highlights_ko": ["항목1", "항목2"]}},
     )
     with get_connection() as conn:
         conn.execute("DELETE FROM game_updates WHERE id = %s", (update_id,))
@@ -31,13 +31,13 @@ def test_apply_fills_matching_row_and_is_idempotent(monkeypatch):
             " VALUES (%s, %s, %s, %s, now())",
             (
                 update_id,
-                "3.4",
+                "99.9",
                 "2026-06-08",
                 json.dumps(
                     {
                         "id": update_id,
-                        "version": "3.4",
-                        "title_ko": "「選択しなかった夢」3.4 バージョン",
+                        "version": "99.9",
+                        "title_ko": "「選択しなかった夢」99.9 バージョン",
                         "release_date_kst": "2026-06-08",
                         "summary_ko": "",
                         "highlights_ko": [],

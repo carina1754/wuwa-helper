@@ -179,5 +179,9 @@ def test_update_image_route_404_when_missing(monkeypatch, tmp_path):
 
 def test_update_image_route_rejects_path_traversal(monkeypatch, tmp_path):
     monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
-    response = client.get("/updates/image/..%2F..%2Fsecret")
+    # Starlette's router decodes/normalizes "..%2F.." style segments before
+    # they reach the handler, so that no longer exercises the guard. Use an
+    # id that reaches the handler but fails the `[A-Za-z0-9_-]+` regex guard
+    # in main.py directly (the "." is disallowed).
+    response = client.get("/updates/image/bad.name")
     assert response.status_code == 404
