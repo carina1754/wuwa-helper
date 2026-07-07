@@ -43,7 +43,9 @@ function rarityRing(rarity?: number | null): string {
 /** The image URL is served from the API host; both resonator `image` and
  * weapon/echo `icon` are stored as "/catalog/image/..." paths. */
 function imageSrc(path?: string | null): string | undefined {
-  return path ? `${API_BASE_URL}${path}` : undefined;
+  if (!path) return undefined;
+  // encore.moe images are absolute URLs; local cached assets are /catalog/... paths.
+  return /^https?:\/\//.test(path) ? path : `${API_BASE_URL}${path}`;
 }
 
 function subTabClass(active: boolean): string {

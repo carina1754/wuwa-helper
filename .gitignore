@@ -25,3 +25,4 @@ backend/.env
 media/
 backend/media/
 .tokensave
+backend/.encore_cache/
