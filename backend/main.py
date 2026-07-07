@@ -1,18 +1,22 @@
 from __future__ import annotations
 
 import os
+import re
 import secrets
 from typing import Any
 
 from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 from src.database import init_db
 from src.content import load_game_updates, load_pickup_schedule, load_site_updates
 from src.content_refresh import refresh_pickups_and_updates, start_daily_refresh_worker
+from src.curated_updates import apply_curated_update_summaries
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
+from src.media import cached_image_path
 from src.models import (
     AuthUserSyncRequest,
     AnalysisSession,
@@ -59,6 +63,7 @@ app.add_middleware(
 
 # Test clients and short-lived scripts do not always enter FastAPI lifespan.
 init_db()
+apply_curated_update_summaries()
 start_daily_refresh_worker()
 
 
@@ -95,6 +100,16 @@ def get_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:
 @app.get("/updates", response_model=list[GameUpdateSummary])
 def get_updates() -> list[GameUpdateSummary]:
     return load_game_updates()
+
+
+@app.get("/updates/image/{update_id}")
+def get_update_image(update_id: str) -> FileResponse:
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", update_id):
+        raise HTTPException(status_code=404, detail="Update image not found")
+    path = cached_image_path(update_id)
+    if path is None:
+        raise HTTPException(status_code=404, detail="Update image not found")
+    return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
 
 
 @app.get("/site-updates", response_model=list[SiteUpdateEntry])

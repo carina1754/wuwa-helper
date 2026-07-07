@@ -158,3 +158,26 @@ def test_analyze_character_returns_diagnoses_and_report(monkeypatch):
     data = response.json()
     assert data["diagnoses"]
     assert "바로 할 일" in data["report"] or "Next actions" in data["report"]
+
+
+def test_update_image_route_serves_cached_file(monkeypatch, tmp_path):
+    monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
+    updates_dir = tmp_path / "updates"
+    updates_dir.mkdir(parents=True)
+    (updates_dir / "wuwa-3-4.jpg").write_bytes(b"img-bytes")
+
+    response = client.get("/updates/image/wuwa-3-4")
+    assert response.status_code == 200
+    assert response.content == b"img-bytes"
+
+
+def test_update_image_route_404_when_missing(monkeypatch, tmp_path):
+    monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
+    response = client.get("/updates/image/does-not-exist")
+    assert response.status_code == 404
+
+
+def test_update_image_route_rejects_path_traversal(monkeypatch, tmp_path):
+    monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
+    response = client.get("/updates/image/..%2F..%2Fsecret")
+    assert response.status_code == 404
