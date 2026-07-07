@@ -210,11 +210,58 @@ def _char_avatar_source(name_ko: str, icons: list[dict] | None) -> str | None:
     return None
 
 
+# Maps Namuwiki pickup character names (Korean) to character_catalog names
+# (English) so pickup avatars reuse the planner's clean head icons instead of
+# the banner-extracted art. Names absent here (e.g. newer characters that have
+# a Namuwiki page but are not yet in the catalog) fall back to the Namuwiki
+# banner avatar.
+PICKUP_NAME_TO_CATALOG: dict[str, str] = {
+    "갈브레나": "Galbrena",
+    "구원": "Qiuyuan",
+    "금희": "Jinhsi",
+    "기염": "Jiyan",
+    "데니아": "Denia",
+    "루실라": "Lucilla",
+    "루크·헤르센": "Luuk Herssen",
+    "루파": "Lupa",
+    "린네": "Lynae",
+    "모니에": "Mornye",
+    "상리요": "Xiangli Yao",
+    "샤콘": "Ciaccona",
+    "시그리카": "Sigrika",
+    "아우구스타": "Augusta",
+    "에이메스": "Aemeath",
+    "유노": "Iuno",
+    "음림": "Yinlin",
+    "장리": "Changli",
+    "절지": "Zhezhi",
+    "젠니": "Zani",
+    "치사": "Chisa",
+    "카르티시아": "Cartethyia",
+    "페비": "Phoebe",
+    "플로로": "Phrolova",
+    "히유키": "Hiyuki",
+}
+
+
+def _catalog_images_by_name() -> dict[str, str]:
+    """Map character_catalog name (English) -> its cached small image path."""
+    with get_connection() as conn:
+        rows = conn.execute("SELECT data_json FROM character_catalog").fetchall()
+    images: dict[str, str] = {}
+    for row in rows:
+        data = json.loads(row["data_json"])
+        if data.get("name") and data.get("image"):
+            images[data["name"]] = data["image"]
+    return images
+
+
 def refresh_pickup_banners() -> int:
     """Crawl character + weapon banner history, merge, cache avatars, store."""
     char_banners = parse_banner_history(fetch_page(sub_page("튜닝", "캐릭터 이벤트 튜닝")), "character")
     weapon_banners = parse_banner_history(fetch_page(sub_page("튜닝", "무기 이벤트 튜닝")), "weapon")
     weapon_by_name = {w.name_ko: w for w in load_weapon_catalog()}
+    catalog_images = _catalog_images_by_name()
 
     merged: dict[tuple, dict] = {}
 
@@ -237,10 +284,13 @@ def refresh_pickup_banners() -> int:
     for banner in char_banners:
         entry = slot(banner)
         for name in banner.get("items", []):
-            cid = _hash_id("c-", name)
-            avatar = ensure_catalog_image(
-                "characters", cid, _char_avatar_source(name, banner.get("icons"))
-            )
+            catalog_name = PICKUP_NAME_TO_CATALOG.get(name)
+            avatar = catalog_images.get(catalog_name) if catalog_name else None
+            if not avatar:
+                cid = _hash_id("c-", name)
+                avatar = ensure_catalog_image(
+                    "characters", cid, _char_avatar_source(name, banner.get("icons"))
+                )
             entry["characters"].append({"name_ko": name, "avatar": avatar})
 
     for banner in weapon_banners:

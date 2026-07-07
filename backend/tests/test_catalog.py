@@ -185,6 +185,64 @@ def test_refresh_pickup_banners_merges_char_and_weapon(monkeypatch):
             conn.commit()
 
 
+def test_refresh_pickup_banners_prefers_catalog_image(monkeypatch):
+    """A pickup character mapped to a character_catalog entry reuses the
+    planner's cached small image instead of the Namuwiki banner avatar."""
+    import json as _json
+
+    init_db()
+    with get_connection() as conn:
+        saved = conn.execute("SELECT id, version, phase, data_json FROM pickup_banners").fetchall()
+        conn.execute("DELETE FROM character_catalog WHERE id = %s", (777777,))
+        conn.execute(
+            "INSERT INTO character_catalog (id, name, role, data_json, updated_at) VALUES (%s, %s, %s, %s, now())",
+            (
+                777777, "TestCatChar", "main_dps",
+                _json.dumps(
+                    {"id": 777777, "name": "TestCatChar", "role": "main_dps",
+                     "image": "/catalog/image/characters/cat-777777"},
+                    ensure_ascii=False,
+                ),
+            ),
+        )
+        conn.commit()
+
+    try:
+        monkeypatch.setattr(catalog, "PICKUP_NAME_TO_CATALOG", {"테스트캐릭": "TestCatChar"})
+        monkeypatch.setattr(catalog, "fetch_page", lambda title: "<html/>")
+
+        def fake_banners(html, kind):
+            if kind == "character":
+                return [{
+                    "version": "9.9", "phase": 1, "banner_name": "b", "is_rerun": False,
+                    "items": ["테스트캐릭"], "start_date": None, "end_date": None,
+                    "icons": [{"alt": "명조 9.9 테스트캐릭", "src": "https://i/c.webp"}],
+                }]
+            return []
+
+        monkeypatch.setattr(catalog, "parse_banner_history", fake_banners)
+        monkeypatch.setattr(catalog, "load_weapon_catalog", lambda: [])
+        # If the mapping worked this must NOT be called; make it loud if it is.
+        monkeypatch.setattr(
+            catalog, "ensure_catalog_image",
+            lambda *a, **k: (_ for _ in ()).throw(AssertionError("should use catalog image")),
+        )
+
+        assert catalog.refresh_pickup_banners() == 1
+        banner = next(b for b in catalog.load_pickup_banners() if b.version == "9.9")
+        assert banner.characters[0].avatar == "/catalog/image/characters/cat-777777"
+    finally:
+        with get_connection() as conn:
+            conn.execute("DELETE FROM character_catalog WHERE id = %s", (777777,))
+            conn.execute("DELETE FROM pickup_banners")
+            for row in saved:
+                conn.execute(
+                    "INSERT INTO pickup_banners (id, version, phase, data_json, updated_at) VALUES (%s, %s, %s, %s, now())",
+                    (row["id"], row["version"], row["phase"], row["data_json"]),
+                )
+            conn.commit()
+
+
 def test_refresh_character_catalog_images_rewrites_to_local(monkeypatch):
     import json as _json
 
