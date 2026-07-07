@@ -17,66 +17,90 @@ export function UpdatesSummary() {
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   }, []);
 
+  const [featured, ...archive] = updates;
+
   return (
-    <section className="grid gap-4">
-      <div className="rounded-md border border-slate-200 bg-white p-4 shadow-panel">
-        <h2 className="text-lg font-semibold text-slate-950">{t.updates.title}</h2>
-        <p className="mt-2 text-sm text-slate-600">{t.updates.body}</p>
-        {error ? <p className="mt-3 rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-900">{error}</p> : null}
+    <>
+      <div className="bhead">
+        <div className="kick">{t.tabs.Updates}</div>
+        <h1>{t.updates.title}</h1>
+        <p>{t.updates.body}</p>
       </div>
 
-      {updates.length === 0 ? (
-        <div className="rounded-md border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">{t.updates.empty}</div>
-      ) : (
-        <div className="grid gap-4 lg:grid-cols-2">
-          {updates.map((update) => (
-            <article key={update.id} className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-panel">
-              {update.image_url ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={`${API_BASE_URL}${update.image_url}`}
-                  alt={update.title_ko}
-                  loading="lazy"
-                  className="w-full border-b border-slate-200 bg-slate-50 object-cover"
-                  style={{ aspectRatio: "16 / 9" }}
-                />
-              ) : null}
-              <div className="p-4">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <span className="rounded-md bg-slate-950 px-2 py-1 text-sm font-semibold text-white">v{update.version}</span>
-                    <h3 className="mt-3 text-lg font-semibold text-slate-950">{update.title_ko}</h3>
-                  </div>
-                  {update.release_date_kst ? (
-                    <span className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm text-slate-600">
-                      {t.updates.releaseDate}: {update.release_date_kst}
-                    </span>
-                  ) : null}
-                </div>
-                <p className="mt-3 text-sm leading-6 text-slate-700">{update.summary_ko}</p>
-                {update.highlights_ko.length > 0 ? (
-                  <ul className="mt-4 grid gap-2 text-sm text-slate-700">
-                    {update.highlights_ko.map((highlight) => (
-                      <li key={highlight} className="rounded-md bg-slate-50 px-3 py-2">
-                        {highlight}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-                {update.source_links.length > 0 ? (
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {update.source_links.map((source, index) => (
-                      <a key={source} href={source} target="_blank" rel="noreferrer" className="text-sm font-medium text-teal-700 hover:text-teal-900">
-                        {t.updates.source} {index + 1}
-                      </a>
-                    ))}
-                  </div>
-                ) : null}
+      {error ? (
+        <p className="mt-3 rounded-md border border-red-500/40 bg-red-500/10 p-3 text-sm text-red-400">{error}</p>
+      ) : null}
+
+      {featured ? (
+        <article className="feat">
+          <div className="art">
+            {featured.image_url ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={`${API_BASE_URL}${featured.image_url}`}
+                alt={featured.title_ko}
+                loading="lazy"
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            ) : (
+              <>
+                <span className="cnr tl" />
+                <span className="cnr br" />
+                <span className="v">{featured.version}</span>
+                <span className="vt">VERSION</span>
+              </>
+            )}
+          </div>
+          <div className="body">
+            <span className="now">
+              <i />
+              {t.tabs.Updates}
+            </span>
+            {featured.release_date_kst ? (
+              <time>
+                {featured.release_date_kst} {t.updates.releaseDate}
+              </time>
+            ) : null}
+            <h2>{featured.title_ko}</h2>
+            <p>{featured.summary_ko}</p>
+            {featured.highlights_ko.length > 0 || featured.source_links.length > 0 ? (
+              <div className="tags">
+                {featured.highlights_ko.map((highlight) => (
+                  <span key={highlight} className="tag">
+                    {highlight}
+                  </span>
+                ))}
+                {featured.source_links.map((source, index) => (
+                  <a key={source} href={source} target="_blank" rel="noreferrer" className="tag src">
+                    {t.updates.source} {index + 1} →
+                  </a>
+                ))}
               </div>
-            </article>
-          ))}
+            ) : null}
+          </div>
+        </article>
+      ) : null}
+
+      {updates.length === 0 && !error ? <div className="soon">{t.updates.empty}</div> : null}
+
+      {archive.length > 0 ? <div className="arch">{t.tabs.Updates}</div> : null}
+      {archive.map((update) => (
+        <div key={update.id} className="urow" style={{ cursor: "default" }}>
+          <span className="ver">{update.version}</span>
+          <span className="um">
+            <b>{update.title_ko}</b>
+            <p>{update.summary_ko}</p>
+          </span>
+          {update.source_links[0] ? (
+            <a className="ud" href={update.source_links[0]} target="_blank" rel="noreferrer">
+              {update.release_date_kst ?? ""}
+              <span className="arw">→</span>
+            </a>
+          ) : (
+            <span className="ud">{update.release_date_kst ?? ""}</span>
+          )}
         </div>
-      )}
-    </section>
+      ))}
+    </>
   );
 }

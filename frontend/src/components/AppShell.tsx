@@ -1,19 +1,5 @@
 "use client";
 
-import {
-  Activity,
-  BrainCircuit,
-  CalendarDays,
-  Globe,
-  History,
-  LogIn,
-  Newspaper,
-  Moon,
-  Sun,
-  Swords,
-  Upload,
-  UserCircle,
-} from "lucide-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
@@ -28,64 +14,76 @@ function DiscordIcon({ className }: { className?: string }) {
   );
 }
 
-const tabIcons: Record<AppTab, ReactNode> = {
-  Dashboard: <Activity className="h-4 w-4" aria-hidden="true" />,
-  Analyzer: <Upload className="h-4 w-4" aria-hidden="true" />,
-  Planner: <BrainCircuit className="h-4 w-4" aria-hidden="true" />,
-  PickupSchedule: <CalendarDays className="h-4 w-4" aria-hidden="true" />,
-  Updates: <Newspaper className="h-4 w-4" aria-hidden="true" />,
-  Teams: <Swords className="h-4 w-4" aria-hidden="true" />,
-  History: <History className="h-4 w-4" aria-hidden="true" />,
-  SiteUpdates: <Globe className="h-4 w-4" aria-hidden="true" />,
-};
-
 interface AppShellProps {
   renderTab: (tab: AppTab) => ReactNode;
 }
 
+/** Flip and persist the theme exactly like the mockup's themeBtn script. */
+function toggleTheme() {
+  const root = document.documentElement;
+  const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  root.setAttribute("data-theme", next);
+  try {
+    localStorage.setItem("mj:theme", next);
+  } catch {
+    /* localStorage unavailable — ignore */
+  }
+}
+
 export function AppShell({ renderTab }: AppShellProps) {
   const [activeTab, setActiveTab] = useState<AppTab>("Updates");
-  const [isDark, setIsDark] = useState(false);
   const { data: session, status } = useSession();
   const { t } = useLanguage();
   const isSignedIn = status === "authenticated";
   const isAdmin = session?.user?.role === "admin";
 
+  const selectTab = (tab: AppTab) => {
+    setActiveTab(tab);
+    window.scrollTo({ top: 0 });
+  };
+
   return (
-    <main className={`min-h-screen transition-colors ${isDark ? "dark bg-slate-950 text-slate-100" : "bg-[#f4f7fb] text-slate-900"}`}>
-      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/95 backdrop-blur transition-colors dark:border-slate-800 dark:bg-slate-950/95">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div>
-              <div className="flex items-center gap-2">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/logo.png" alt={t.app.name} className="h-8 w-8 rounded-md object-cover" />
-                <h1 className="text-2xl font-semibold tracking-normal text-slate-950 dark:text-slate-50">{t.app.name}</h1>
-              </div>
-              <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">{t.app.tagline}</p>
-            </div>
-            <div className="flex flex-wrap items-center justify-end gap-2">
-              <a
-                href="https://discord.gg/hPhsf9GN7E"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
-                aria-label={t.app.discord}
-                title={t.app.discord}
-              >
-                <DiscordIcon className="h-4 w-4" aria-hidden="true" />
+    <>
+      <header>
+        <div className="wrap">
+          <div className="htop">
+            <Link className="brand" href="/">
+              <span className="seal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="#5fd3c3" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
+                  <path d="M2 13c2.4 0 2.4-3 4.8-3s2.4 3 4.8 3 2.4-3 4.8-3 2.4 3 4.8 3" />
+                  <path d="M2 17c2.4 0 2.4-3 4.8-3s2.4 3 4.8 3 2.4-3 4.8-3 2.4 3 4.8 3" opacity=".5" />
+                </svg>
+              </span>
+              <b>{t.app.name}</b>
+            </Link>
+            <div className="hactions">
+              <a className="iconbtn" href="https://discord.gg/hPhsf9GN7E" target="_blank" rel="noreferrer" aria-label={t.app.discord} title={t.app.discord}>
+                <DiscordIcon />
               </a>
-              <button
-                type="button"
-                onClick={() => setIsDark((current) => !current)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-slate-300 bg-white text-slate-700 transition hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
-                aria-label={t.app.themeLabel}
-                title={t.app.themeLabel}
-              >
-                {isDark ? <Sun className="h-4 w-4" aria-hidden="true" /> : <Moon className="h-4 w-4" aria-hidden="true" />}
+              <button type="button" className="iconbtn tgl" onClick={toggleTheme} aria-label={t.app.themeLabel} title={t.app.themeLabel}>
+                <svg className="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z" />
+                </svg>
+                <svg className="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="4.5" />
+                  <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" />
+                </svg>
               </button>
+              <button type="button" className="iconbtn" onClick={() => selectTab("SiteUpdates")} aria-label={t.app.websiteUpdates} title={t.app.websiteUpdates}>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M12 8v5M12 16h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+                </svg>
+              </button>
+              {isAdmin ? (
+                <Link className="iconbtn" href="/admin" aria-label={t.app.admin} title={t.app.admin}>
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                    <path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z" />
+                  </svg>
+                </Link>
+              ) : null}
               <button
                 type="button"
+                className="login"
                 onClick={() => {
                   if (isSignedIn) {
                     void signOut({ callbackUrl: "/" });
@@ -94,47 +92,38 @@ export function AppShell({ renderTab }: AppShellProps) {
 
                   void signIn("google", { callbackUrl: "/" });
                 }}
-                className="inline-flex min-h-10 items-center gap-2 rounded-md bg-slate-950 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-800 dark:bg-teal-500 dark:!text-slate-950 dark:hover:bg-teal-400"
               >
-                {isSignedIn ? <UserCircle className="h-4 w-4" aria-hidden="true" /> : <LogIn className="h-4 w-4" aria-hidden="true" />}
-                <span className="hidden sm:inline">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
+                  <path d="M10 17l5-5-5-5M15 12H3" />
+                </svg>
+                <span>
                   {isSignedIn ? session.user?.name ?? session.user?.email ?? t.app.signOut : status === "loading" ? t.app.loading : t.app.signIn}
                 </span>
               </button>
-              {isAdmin ? (
-                <Link href="/admin" className="rounded-md border border-teal-300 bg-teal-50 px-3 py-1 text-sm font-medium text-teal-900 transition hover:bg-teal-100 dark:border-teal-400/50 dark:bg-teal-400/10 dark:text-teal-200 dark:hover:bg-teal-400/20">
-                  {t.app.admin}
-                </Link>
-              ) : null}
-              <button
-                type="button"
-                onClick={() => setActiveTab("SiteUpdates")}
-                className="inline-flex min-h-10 items-center rounded-md border border-teal-300 bg-teal-50 px-3 py-2 text-sm font-medium text-teal-900 transition hover:bg-teal-100 dark:border-teal-400/50 dark:bg-teal-400/10 dark:text-teal-200 dark:hover:bg-teal-400/20"
-              >
-                {t.app.websiteUpdates}
-              </button>
             </div>
           </div>
-          <nav className="flex gap-2 overflow-x-auto pb-1" aria-label="Primary">
+          <nav className="tabs" aria-label="Primary">
             {TABS.map((tab) => (
-              <button
-                key={tab}
-                type="button"
-                onClick={() => setActiveTab(tab)}
-                className={`flex min-h-10 items-center gap-2 rounded-md px-3 py-2 text-sm font-medium transition ${
-                  activeTab === tab
-                    ? "bg-slate-950 text-white dark:bg-teal-500 dark:!text-slate-950"
-                    : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
-                }`}
-              >
-                {tabIcons[tab]}
+              <button key={tab} type="button" className={`tab${activeTab === tab ? " on" : ""}`} onClick={() => selectTab(tab)}>
                 {t.tabs[tab]}
               </button>
             ))}
           </nav>
         </div>
       </header>
-      <section className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{renderTab(activeTab)}</section>
-    </main>
+
+      <main>
+        <div className="wrap">
+          <section key={activeTab} className="view on">
+            {renderTab(activeTab)}
+          </section>
+        </div>
+      </main>
+
+      <footer>
+        <p className="disc">Wuthering Waves / Kuro Games와 무관한 비공식 팬 도구입니다.</p>
+      </footer>
+    </>
   );
 }

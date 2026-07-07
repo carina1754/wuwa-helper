@@ -1,16 +1,26 @@
 import { useLanguage } from "@/lib/i18n";
 
+const PRIORITY_CHIPS = ["壹", "貳", "參"];
+
 export function Dashboard() {
   const { t } = useLanguage();
 
   return (
-    <div className="grid gap-4 md:grid-cols-3">
-      {t.dashboard.cards.map(([title, body]) => (
-        <section key={title} className="rounded-md border border-slate-200 bg-white p-4 shadow-panel">
-          <h2 className="font-semibold text-slate-950">{title}</h2>
-          <p className="mt-2 text-sm text-slate-600">{body}</p>
-        </section>
+    <>
+      <div className="bhead">
+        <div className="kick">{t.tabs.Dashboard}</div>
+        <h1>{t.dashboard.cards[0]?.[0]}</h1>
+        <p>{t.dashboard.cards[0]?.[1]}</p>
+      </div>
+      {t.dashboard.cards.map(([title, body], index) => (
+        <div key={title} className="urow" style={{ cursor: "default" }}>
+          <span className="ver pchip">{PRIORITY_CHIPS[index] ?? index + 1}</span>
+          <span className="um">
+            <b>{title}</b>
+            <p>{body}</p>
+          </span>
+        </div>
       ))}
-    </div>
+    </>
   );
 }
