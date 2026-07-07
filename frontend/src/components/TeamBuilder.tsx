@@ -432,8 +432,6 @@ function BuildEditor({
               <span className="ml-auto font-medium text-[var(--fg)]">{Math.round(tuneDmg).toLocaleString()}</span>
             </div>
           </div>
-
-          <p className="text-[10px] leading-4 text-[var(--muted)]">phro.love 공식 · 크리 기대값 · 콤보 계수 합 · 상수는 DB(game_config)</p>
         </div>
       ) : null}
     </div>
