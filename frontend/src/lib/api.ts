@@ -6,8 +6,10 @@ import type {
   CharacterCatalogItem,
   CharacterSnapshot,
   GameUpdateSummary,
+  PickupBanner,
   PickupScheduleItem,
   Role,
+  WeaponCatalogItem,
   SiteUpdateEntry,
   VisionExtractionResult,
 } from "./types";
@@ -56,6 +58,14 @@ export function getCharacters(): Promise<CharacterCatalogItem[]> {
 export function getPickupSchedule(year?: number): Promise<PickupScheduleItem[]> {
   const params = year ? `?year=${year}` : "";
   return request(`/pickup-schedule${params}`);
+}
+
+export function getPickupBanners(): Promise<PickupBanner[]> {
+  return request("/pickup-banners");
+}
+
+export function getWeapons(): Promise<WeaponCatalogItem[]> {
+  return request("/weapons");
 }
 
 export function getUpdates(): Promise<GameUpdateSummary[]> {

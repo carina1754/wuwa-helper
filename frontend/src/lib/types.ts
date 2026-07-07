@@ -120,6 +120,39 @@ export interface SiteUpdateEntry {
   description_ko: string;
 }
 
+export interface WeaponCatalogItem {
+  id: string;
+  name_ko: string;
+  weapon_type?: string | null;
+  rarity?: number | null;
+  icon?: string | null;
+  source?: string | null;
+}
+
+export interface PickupBannerCharacter {
+  name_ko: string;
+  avatar?: string | null;
+}
+
+export interface PickupBannerWeapon {
+  name_ko: string;
+  icon?: string | null;
+  rarity?: number | null;
+  weapon_type?: string | null;
+}
+
+export interface PickupBanner {
+  id: string;
+  version: string;
+  phase?: number | null;
+  banner_name?: string | null;
+  is_rerun: boolean;
+  characters: PickupBannerCharacter[];
+  weapons: PickupBannerWeapon[];
+  start_date?: string | null;
+  end_date?: string | null;
+}
+
 export interface Diagnosis {
   target_type: "echo" | "character" | "account" | "team";
   target_name?: string | null;
