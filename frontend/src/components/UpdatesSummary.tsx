@@ -36,25 +36,18 @@ export function UpdatesSummary() {
       ) : null}
 
       {featured ? (
-        <article className="feat">
-          <div className="art">
-            {featured.image_url ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={`${API_BASE_URL}${featured.image_url}`}
-                alt={featured.title_ko}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : (
-              <>
-                <span className="cnr tl" />
-                <span className="cnr br" />
-                <span className="v">{featured.version}</span>
-                <span className="vt">VERSION</span>
-              </>
-            )}
-          </div>
+        <article className={`feat${featured.image_url ? " has-bg" : ""}`}>
+          {featured.image_url ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img className="feat-bg" src={`${API_BASE_URL}${featured.image_url}`} alt="" loading="lazy" />
+          ) : (
+            <div className="art">
+              <span className="cnr tl" />
+              <span className="cnr br" />
+              <span className="v">{featured.version}</span>
+              <span className="vt">VERSION</span>
+            </div>
+          )}
           <div className="body">
             <span className="now">
               <i />
