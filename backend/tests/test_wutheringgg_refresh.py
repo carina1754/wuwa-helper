@@ -2,6 +2,39 @@ import json
 
 from src.database import get_connection, init_db
 from src.wutheringgg import refresh
+from src.wutheringgg.normalize import normalize_echo, normalize_weapon
+
+# Real captured weapon object (live chunk CaGhi8-P.js), trimmed.
+RAW_WEAPON = {
+    "Id": 21010015,
+    "WeaponName": "푸른물결의 빛",
+    "WeaponNameEn": "Lustrous Razor",
+    "WeaponType": 1,
+    "QualityId": 5,
+    "Icon": "T_IconWeapon21010015_UI.png",
+    "Desc": "d",
+    "AttributesDescription": "attr",
+    "TypeDescription": "type",
+    "Resonance": [{"x": 1}],
+    "Ascension": [],
+}
+
+# Real captured echo object (live chunk BcbUvbl9.js), trimmed.
+RAW_ECHO = {
+    "Id": 390080003,
+    "MonsterName": "뇌운의 비늘",
+    "MonsterNameEn": "Thundering Mephis",
+    "Cost": 4,
+    "QualityId": 2,
+    "Rarity": 0,
+    "PhantomType": 1,
+    "IconMiddle": "T_IconMonsterGoods160_222_UI.png",
+    "IconBig": "/Game/Aki/UI/.../T_IconMonsterHead732_x_UI",
+    "Skill": {"Name": "sk"},
+    "MainProp": {"RandGroupId": 1},
+    "Desc": "d",
+    "FetterGroup": [{"FetterGroupName": "울려퍼지는 뇌음", "Id": 3}],
+}
 
 
 def test_refresh_characters_upserts(monkeypatch):
@@ -60,4 +93,109 @@ def test_refresh_characters_preserves_existing_role(monkeypatch):
     assert json.loads(row["data_json"])["role"] == "support"
     with get_connection() as c:
         c.execute("DELETE FROM character_catalog WHERE id=%s", (1603,))
+        c.commit()
+
+
+# --- Task 7: weapons + echoes ------------------------------------------------
+
+
+def test_normalize_weapon():
+    w = normalize_weapon(RAW_WEAPON)
+    assert w["id"] == "21010015"  # game Id as TEXT (weapon_catalog.id is TEXT)
+    assert w["name_ko"] == "푸른물결의 빛"
+    assert w["name_en"] == "Lustrous Razor"
+    assert w["weapon_type"] == "Broadsword"
+    assert w["weapon_type_ko"] == "대검"
+    assert w["rarity"] == 5
+    assert w["icon_asset"] == "T_IconWeapon21010015_UI.png"
+    assert w["resonance"] == [{"x": 1}]
+
+
+def test_normalize_echo():
+    e = normalize_echo(RAW_ECHO)
+    assert e["id"] == "390080003"  # game Id as TEXT (echo_catalog.id is TEXT)
+    assert e["name_ko"] == "뇌운의 비늘"
+    assert e["name_en"] == "Thundering Mephis"
+    assert e["cost"] == 4
+    assert e["rarity"] == 2
+    assert e["phantom_type"] == 1
+    assert e["icon_asset"] == "T_IconMonsterGoods160_222_UI.png"
+    assert e["sonata"] == ["울려퍼지는 뇌음"]
+    assert e["skill"] == {"Name": "sk"}
+
+
+def test_refresh_weapons_upserts():
+    init_db()
+    fixture = json.dumps([RAW_WEAPON], ensure_ascii=False)
+    with get_connection() as c:
+        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
+        c.commit()
+    n = refresh.refresh_weapons(
+        fetch=lambda kind: fixture,
+        cache=lambda kind, cat, asset: f"/catalog/image/{kind}/w",
+    )
+    assert n == 1
+    with get_connection() as c:
+        row = c.execute(
+            "SELECT name_ko, weapon_type, rarity, data_json FROM weapon_catalog WHERE id=%s",
+            ("21010015",),
+        ).fetchone()
+    assert row["name_ko"] == "푸른물결의 빛"
+    assert row["weapon_type"] == "Broadsword"
+    assert row["rarity"] == 5
+    d = json.loads(row["data_json"])
+    assert d["icon"] == "/catalog/image/weapons/w"
+    assert d["name_en"] == "Lustrous Razor"
+    with get_connection() as c:
+        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
+        c.commit()
+
+
+def test_refresh_weapons_preserves_existing_source():
+    init_db()
+    fixture = json.dumps([RAW_WEAPON], ensure_ascii=False)
+    with get_connection() as c:
+        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
+        c.execute(
+            "INSERT INTO weapon_catalog (id, name_ko, data_json) VALUES (%s, %s, %s)",
+            ("21010015", "푸른물결의 빛", json.dumps({"source": "namu.wiki"})),
+        )
+        c.commit()
+    refresh.refresh_weapons(
+        fetch=lambda kind: fixture,
+        cache=lambda kind, cat, asset: None,
+    )
+    with get_connection() as c:
+        row = c.execute(
+            "SELECT data_json FROM weapon_catalog WHERE id=%s", ("21010015",)
+        ).fetchone()
+    assert json.loads(row["data_json"])["source"] == "namu.wiki"  # identity preserved
+    with get_connection() as c:
+        c.execute("DELETE FROM weapon_catalog WHERE id=%s", ("21010015",))
+        c.commit()
+
+
+def test_refresh_echoes_upserts():
+    init_db()
+    fixture = json.dumps([RAW_ECHO], ensure_ascii=False)
+    with get_connection() as c:
+        c.execute("DELETE FROM echo_catalog WHERE id=%s", ("390080003",))
+        c.commit()
+    n = refresh.refresh_echoes(
+        fetch=lambda kind: fixture,
+        cache=lambda kind, cat, asset: f"/catalog/image/{kind}/e",
+    )
+    assert n == 1
+    with get_connection() as c:
+        row = c.execute(
+            "SELECT name_ko, cost, data_json FROM echo_catalog WHERE id=%s",
+            ("390080003",),
+        ).fetchone()
+    assert row["name_ko"] == "뇌운의 비늘"
+    assert row["cost"] == 4
+    d = json.loads(row["data_json"])
+    assert d["icon"] == "/catalog/image/echoes/e"
+    assert d["sonata"] == ["울려퍼지는 뇌음"]
+    with get_connection() as c:
+        c.execute("DELETE FROM echo_catalog WHERE id=%s", ("390080003",))
         c.commit()

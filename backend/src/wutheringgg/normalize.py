@@ -40,3 +40,57 @@ def normalize_character(raw: dict) -> dict:
         "stats": raw.get("Stats") or {},
         "introduction": raw.get("Introduction"),
     }
+
+
+def normalize_weapon(raw: dict) -> dict:
+    """Normalize a live weapon record. Live keys: Id, WeaponName, WeaponNameEn,
+    WeaponType, QualityId, Icon, Desc, AttributesDescription, TypeDescription,
+    Resonance, Ascension, First/SecondPropId, First/SecondCurve, DescParams."""
+    wt = WEAPON_TYPE.get(raw.get("WeaponType"), ("", ""))
+    return {
+        # weapon_catalog.id is TEXT; store the game Id as a string.
+        "id": str(raw["Id"]),
+        "name_ko": raw.get("WeaponName"),
+        "name_en": raw.get("WeaponNameEn"),
+        "weapon_type": wt[0],
+        "weapon_type_ko": wt[1],
+        "rarity": raw.get("QualityId"),
+        "icon_asset": raw.get("Icon"),
+        "desc": raw.get("Desc"),
+        "attributes_description": raw.get("AttributesDescription"),
+        "type_description": raw.get("TypeDescription"),
+        "resonance": raw.get("Resonance") or [],
+        "ascension": raw.get("Ascension") or [],
+    }
+
+
+def _sonata_names(fetter_group: object) -> list[str]:
+    """An echo's Sonata set names live in FetterGroup[].FetterGroupName."""
+    names: list[str] = []
+    if isinstance(fetter_group, list):
+        for g in fetter_group:
+            if isinstance(g, dict) and g.get("FetterGroupName"):
+                names.append(g["FetterGroupName"])
+    return names
+
+
+def normalize_echo(raw: dict) -> dict:
+    """Normalize a live echo (phantom) record. Live keys: Id, MonsterName,
+    MonsterNameEn, Cost, QualityId, Rarity, Rare, PhantomType, IconMiddle,
+    IconBig, Skill, MainProp, Desc, FetterGroup, LevelUpGroupId, PolishCost,
+    ParentMonsterId. IconMiddle is a usable PNG filename; IconBig is a raw UE
+    asset path, so we cache from IconMiddle."""
+    return {
+        # echo_catalog.id is TEXT; store the game Id as a string.
+        "id": str(raw["Id"]),
+        "name_ko": raw.get("MonsterName"),
+        "name_en": raw.get("MonsterNameEn"),
+        "cost": raw.get("Cost"),
+        "rarity": raw.get("QualityId"),
+        "phantom_type": raw.get("PhantomType"),
+        "icon_asset": raw.get("IconMiddle"),
+        "sonata": _sonata_names(raw.get("FetterGroup")),
+        "skill": raw.get("Skill"),
+        "main_prop": raw.get("MainProp"),
+        "desc": raw.get("Desc"),
+    }
