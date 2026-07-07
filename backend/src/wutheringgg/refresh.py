@@ -20,11 +20,12 @@ from src.wutheringgg.normalize import (
     normalize_weapon,
 )
 
-# Image categories (the `<category>` path segment under images/). Only exercised
-# by the real cache during the live load; unit tests inject a fake cache.
+# Image categories (the `<category>` path segment under images/), verified live
+# against real asset URLs. Only exercised by the real cache during the live load;
+# unit tests inject a fake cache.
 _CHARACTER_ICON_CATEGORY = "iconrolehead150"
-_WEAPON_ICON_CATEGORY = "iconweapon"
-_ECHO_ICON_CATEGORY = "iconmonstergoods160"
+_WEAPON_ICON_CATEGORY = "items"
+_ECHO_ICON_CATEGORY = "iconmonstergoods"
 
 # Provenance stamp kept in every record's data_json.
 _SOURCE = "wuthering.gg"
