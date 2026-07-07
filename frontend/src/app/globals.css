@@ -103,8 +103,8 @@ main{flex:1;padding:34px 0 60px}
 .arch{font-family:ui-monospace,monospace;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);
   margin:22px 2px 8px;display:flex;align-items:center;gap:12px}
 .arch::after{content:"";flex:1;height:1px;background:var(--line)}
-.urow{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:15px 8px;
-  border-bottom:1px solid var(--line);border-radius:11px;transition:.16s}
+.urow{display:grid;grid-template-columns:64px 1fr auto;gap:16px;align-items:center;padding:15px 8px;width:100%;
+  text-align:left;border-bottom:1px solid var(--line);border-radius:11px;transition:.16s}
 .urow:hover{background:var(--surface)}
 .urow .ver{font-family:'Pretendard',sans-serif;font-weight:800;font-size:19px}
 .urow .um b{font-size:15px}

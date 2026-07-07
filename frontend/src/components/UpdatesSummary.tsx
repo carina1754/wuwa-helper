@@ -10,6 +10,7 @@ export function UpdatesSummary() {
   const { t } = useLanguage();
   const [updates, setUpdates] = useState<GameUpdateSummary[]>([]);
   const [error, setError] = useState("");
+  const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
 
   useEffect(() => {
     getUpdates()
@@ -17,7 +18,17 @@ export function UpdatesSummary() {
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   }, []);
 
-  const [featured, ...archive] = updates;
+  // The featured card shows the selected version (default: the latest). Every
+  // other version is listed below and can be clicked to become featured.
+  const featured =
+    (selectedVersion ? updates.find((update) => update.version === selectedVersion) : undefined) ?? updates[0];
+  const archive = updates.filter((update) => update !== featured);
+  const isLatest = Boolean(featured) && featured === updates[0];
+
+  function selectVersion(version: string) {
+    setSelectedVersion(version);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <>
@@ -52,10 +63,12 @@ export function UpdatesSummary() {
             )}
           </div>
           <div className="body">
-            <span className="now">
-              <i />
-              {t.tabs.Updates}
-            </span>
+            {isLatest ? (
+              <span className="now">
+                <i />
+                {t.tabs.Updates}
+              </span>
+            ) : null}
             {featured.release_date_kst ? (
               <time>
                 {featured.release_date_kst} {t.updates.releaseDate}
@@ -85,21 +98,23 @@ export function UpdatesSummary() {
 
       {archive.length > 0 ? <div className="arch">{t.tabs.Updates}</div> : null}
       {archive.map((update) => (
-        <div key={update.id} className="urow" style={{ cursor: "default" }}>
+        <button
+          key={update.id}
+          type="button"
+          className="urow"
+          onClick={() => selectVersion(update.version)}
+          aria-label={`${update.version} ${update.title_ko}`}
+        >
           <span className="ver">{update.version}</span>
           <span className="um">
             <b>{update.title_ko}</b>
             <p>{update.summary_ko}</p>
           </span>
-          {update.source_links[0] ? (
-            <a className="ud" href={update.source_links[0]} target="_blank" rel="noreferrer">
-              {update.release_date_kst ?? ""}
-              <span className="arw">→</span>
-            </a>
-          ) : (
-            <span className="ud">{update.release_date_kst ?? ""}</span>
-          )}
-        </div>
+          <span className="ud">
+            {update.release_date_kst ?? ""}
+            <span className="arw">→</span>
+          </span>
+        </button>
       ))}
     </>
   );
