@@ -15,6 +15,7 @@ import {
   fmtStat,
   type GameConfig,
   type ResonatorBuild,
+  skillDamage,
   type StatKey,
   STAT_LABEL,
   subMax,
@@ -210,6 +211,17 @@ function BuildEditor({
   const stats = computeStats(reso, weapon, build, config, active?.bonuses ?? []);
   const cost = buildCost(build);
   const costBudget = config?.costBudget ?? 12;
+  const [skillLv, setSkillLv] = useState(10);
+  const damages = (reso.skills ?? [])
+    .filter((s) => s.damage?.length)
+    .map((s) => {
+      const mult = (s.damage ?? []).reduce((a, d) => {
+        const r = d.rates[Math.min(skillLv - 1, d.rates.length - 1)] ?? "0";
+        return a + (parseFloat(r) || 0);
+      }, 0);
+      return { name: s.SkillName ?? "", type: s.SkillType ?? "", dmg: skillDamage(stats, mult, reso.element, s.SkillType) };
+    })
+    .filter((d) => d.dmg > 0);
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
     onChange((b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === idx && e ? fn(e) : e)) }));
 
@@ -339,6 +351,26 @@ function BuildEditor({
           ))}
         </dl>
       </div>
+
+      {/* estimated damage (phro.love formula) */}
+      {damages.length ? (
+        <div>
+          <div className="mb-1.5 flex items-center justify-between">
+            <h4 className="text-sm font-semibold text-[var(--fg)]">예상 데미지</h4>
+            <span className="text-xs text-[var(--muted)]">스킬 Lv.{skillLv} · 적 90</span>
+          </div>
+          <input type="range" min={1} max={10} value={skillLv} onChange={(e) => setSkillLv(Number(e.target.value))} className="mb-2 w-full accent-[var(--accent)]" aria-label="스킬 레벨" />
+          <dl className="grid gap-1.5 text-sm">
+            {damages.map((d, i) => (
+              <div key={i} className="flex items-center justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5">
+                <dt className="min-w-0 truncate text-[var(--muted)]">{d.name}{d.type ? ` · ${d.type}` : ""}</dt>
+                <dd className="font-medium text-[var(--fg)]">{Math.round(d.dmg).toLocaleString()}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-1 text-[10px] leading-4 text-[var(--muted)]">크리 기대값 · 적 90레벨 20% 저항 기준 · 콤보 전체 계수 합 · 버프/부스트 미포함</p>
+        </div>
+      ) : null}
     </div>
   );
 }

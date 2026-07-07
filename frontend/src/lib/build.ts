@@ -209,3 +209,42 @@ export function echoFromCodex(e: CodexEcho, config: GameConfig): EchoBuild {
   const cost = e.cost ?? 1;
   return { echoId: e.id, cost, grade: e.rarity >= 3 ? 5 : e.rarity + 2, level: 25, main: defaultMain(config, cost), subs: [] };
 }
+
+// --- Damage (normal skill) — phro.love formula --------------------------------
+// Damage = Multiplier × FinalATK × Crit × DMGbonus × Boost × RES × DEF × Taken × Total
+export const ELEMENT_DMG_KEY: Record<string, StatKey> = {
+  응결: "glacioDmg", 용융: "fusionDmg", 전도: "electroDmg", 기류: "aeroDmg", 회절: "spectroDmg", 인멸: "havocDmg",
+};
+export function skillTypeDmgKey(type: string | null | undefined): StatKey | null {
+  const t = type ?? "";
+  if (t.includes("강공격")) return "heavyDmg";
+  if (t.includes("일반") || t.includes("기본")) return "basicDmg";
+  if (t.includes("공명 스킬") || t.includes("공명스킬")) return "skillDmg";
+  if (t.includes("공명 해방") || t.includes("공명해방")) return "liberationDmg";
+  return null; // 변주/반주/협동/에코 등은 표준 보너스 스탯이 없음
+}
+
+export const critMultiplier = (stats: Record<StatKey, number>) =>
+  1 + (stats.crit / 100) * (stats.critDmg / 100 - 1);
+
+// (800 + 8·myLv) / (800 + 8·myLv + (792 + 8·enemyLv)(1-ignore)(1-reduce))
+export function defMultiplier(myLevel = 90, enemyLevel = 90, defIgnore = 0, defReduce = 0): number {
+  return (800 + 8 * myLevel) / (800 + 8 * myLevel + (792 + 8 * enemyLevel) * (1 - defIgnore) * (1 - defReduce));
+}
+
+export type DamageOpts = { myLevel?: number; enemyLevel?: number; enemyRes?: number };
+export function skillDamage(
+  stats: Record<StatKey, number>,
+  multiplierPct: number,
+  element: string | null | undefined,
+  skillType: string | null | undefined,
+  opts: DamageOpts = {},
+): number {
+  const { myLevel = 90, enemyLevel = 90, enemyRes = 0.2 } = opts;
+  const elemKey = element ? ELEMENT_DMG_KEY[element] : undefined;
+  const typeKey = skillTypeDmgKey(skillType);
+  const dmgBonus = 1 + ((elemKey ? stats[elemKey] : 0) + (typeKey ? stats[typeKey] : 0)) / 100;
+  const res = Math.max(0, 1 - enemyRes); // 0.8 at 20% enemy RES, no shred
+  const def = defMultiplier(myLevel, enemyLevel);
+  return (multiplierPct / 100) * stats.atk * critMultiplier(stats) * dmgBonus * res * def;
+}
