@@ -2,23 +2,22 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
-import { getCodexEchoes, getCodexResonators, getCodexWeapons } from "@/lib/api";
+import { getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig } from "@/lib/api";
 import { useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexWeapon } from "@/lib/types";
 import {
   buildCost,
   computeStats,
-  ECHO_COST_BUDGET,
-  ECHO_MAIN,
-  ECHO_SUB,
   echoFromCodex,
+  echoMainOptions,
   emptyBuild,
   fmtStat,
+  type GameConfig,
   type ResonatorBuild,
   type StatKey,
   STAT_LABEL,
-  SUB_SLOTS,
   subMax,
+  subSlots,
 } from "@/lib/build";
 
 const PARTY_SIZE = 3;
@@ -41,6 +40,7 @@ export function TeamBuilder() {
   const [resos, setResos] = useState<CodexResonator[]>([]);
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
   const [echoes, setEchoes] = useState<CodexEcho[]>([]);
+  const [config, setConfig] = useState<GameConfig | null>(null);
   const [party, setParty] = useState<Slot[]>(newParty);
   const [editing, setEditing] = useState<number | null>(null);
   const [picker, setPicker] = useState<null | { kind: "resonator" | "weapon" | "echo"; slot: number; echoIdx?: number }>(null);
@@ -49,6 +49,9 @@ export function TeamBuilder() {
     getCodexResonators().then(setResos).catch(() => {});
     getCodexWeapons().then(setWeapons).catch(() => {});
     getCodexEchoes().then(setEchoes).catch(() => {});
+    getGameConfig()
+      .then((c) => setConfig((c?.echo_stats as GameConfig) ?? null))
+      .catch(() => {});
   }, []);
   useEffect(() => {
     try {
@@ -87,8 +90,8 @@ export function TeamBuilder() {
     const { kind, slot, echoIdx } = picker;
     if (kind === "resonator") setSlot(slot, (s) => ({ ...s, resonatorId: (r as CodexResonator).id }));
     else if (kind === "weapon") setBuild(slot, (b) => ({ ...b, weaponId: (r as CodexWeapon).id }));
-    else if (kind === "echo" && echoIdx != null)
-      setBuild(slot, (b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === echoIdx ? echoFromCodex(r as CodexEcho) : e)) }));
+    else if (kind === "echo" && echoIdx != null && config)
+      setBuild(slot, (b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === echoIdx ? echoFromCodex(r as CodexEcho, config) : e)) }));
     setPicker(null);
   };
 
@@ -102,7 +105,7 @@ export function TeamBuilder() {
       <div className="grid gap-3 sm:grid-cols-3">
         {party.map((slot, i) => {
           const reso = slot.resonatorId != null ? resoById.get(slot.resonatorId) : null;
-          const stats = reso ? computeStats(reso, slot.build.weaponId ? weaponById.get(slot.build.weaponId) ?? null : null, slot.build) : null;
+          const stats = reso ? computeStats(reso, slot.build.weaponId ? weaponById.get(slot.build.weaponId) ?? null : null, slot.build, config) : null;
           return (
             <div key={i} className="flex flex-col rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4" style={{ minHeight: 176 }}>
               {reso ? (
@@ -149,6 +152,7 @@ export function TeamBuilder() {
                 build={party[editing].build}
                 weaponById={weaponById}
                 echoById={echoById}
+                config={config}
                 slot={editing}
                 t={t}
                 onChange={(fn) => setBuild(editing, fn)}
@@ -178,12 +182,13 @@ export function TeamBuilder() {
 
 // ---------------------------------------------------------------------------
 function BuildEditor({
-  reso, build, weaponById, echoById, slot, t, onChange, onPick, onClose,
+  reso, build, weaponById, echoById, config, slot, t, onChange, onPick, onClose,
 }: {
   reso: CodexResonator;
   build: ResonatorBuild;
   weaponById: Map<string, CodexWeapon>;
   echoById: Map<string, CodexEcho>;
+  config: GameConfig | null;
   slot: number;
   t: ReturnType<typeof useLanguage>["t"];
   onChange: (fn: (b: ResonatorBuild) => ResonatorBuild) => void;
@@ -191,8 +196,9 @@ function BuildEditor({
   onClose: () => void;
 }) {
   const weapon = build.weaponId ? weaponById.get(build.weaponId) ?? null : null;
-  const stats = computeStats(reso, weapon, build);
+  const stats = computeStats(reso, weapon, build, config);
   const cost = buildCost(build);
+  const costBudget = config?.costBudget ?? 12;
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
     onChange((b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === idx && e ? fn(e) : e)) }));
 
@@ -244,7 +250,7 @@ function BuildEditor({
       <div>
         <div className="mb-2 flex items-center justify-between text-sm">
           <span className="font-semibold text-[var(--fg)]">에코</span>
-          <span className={cost > ECHO_COST_BUDGET ? "text-[var(--gold)]" : "text-[var(--muted)]"}>코스트 {cost}/{ECHO_COST_BUDGET}</span>
+          <span className={cost > costBudget ? "text-[var(--gold)]" : "text-[var(--muted)]"}>코스트 {cost}/{costBudget}</span>
         </div>
         <div className="grid gap-2">
           {build.echoes.map((e, idx) => {
@@ -266,7 +272,7 @@ function BuildEditor({
                   </label>
                   <label className="flex items-center gap-1">메인
                     <select value={e.main} onChange={(ev) => setEcho(idx, (x) => ({ ...x, main: ev.target.value as StatKey }))} className="rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
-                      {(ECHO_MAIN[e.cost] ?? []).map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
+                      {(config ? echoMainOptions(config, e.cost) : []).map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
                     </select>
                   </label>
                   <label className="flex flex-1 items-center gap-1">Lv.{e.level}
@@ -277,15 +283,15 @@ function BuildEditor({
                 <div className="mt-2 grid gap-1">
                   {e.subs.map((s, si) => (
                     <div key={si} className="flex items-center gap-1.5 text-[11px]">
-                      <select value={s.key} onChange={(ev) => setEcho(idx, (x) => ({ ...x, subs: x.subs.map((y, k) => (k === si ? { key: ev.target.value as StatKey, value: subMax(ev.target.value as StatKey) } : y)) }))} className="flex-1 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
-                        {ECHO_SUB.map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
+                      <select value={s.key} onChange={(ev) => setEcho(idx, (x) => ({ ...x, subs: x.subs.map((y, k) => (k === si ? { key: ev.target.value as StatKey, value: config ? subMax(config, ev.target.value as StatKey) : 0 } : y)) }))} className="flex-1 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
+                        {(config?.sub ?? []).map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
                       </select>
                       <input type="number" step="0.1" value={s.value} onChange={(ev) => setEcho(idx, (x) => ({ ...x, subs: x.subs.map((y, k) => (k === si ? { ...y, value: Number(ev.target.value) } : y)) }))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-right text-[var(--fg)]" />
                       <button type="button" onClick={() => setEcho(idx, (x) => ({ ...x, subs: x.subs.filter((_, k) => k !== si) }))} className="text-[var(--muted)] hover:text-[var(--fg)]">✕</button>
                     </div>
                   ))}
-                  {e.subs.length < (SUB_SLOTS[e.grade] ?? 0) ? (
-                    <button type="button" onClick={() => setEcho(idx, (x) => ({ ...x, subs: [...x.subs, { key: "crit", value: subMax("crit") }] }))} className="justify-self-start text-[11px] text-[var(--accent)] hover:underline">+ 추가옵션</button>
+                  {e.subs.length < (config ? subSlots(config, e.grade) : 0) ? (
+                    <button type="button" onClick={() => setEcho(idx, (x) => ({ ...x, subs: [...x.subs, { key: "crit", value: config ? subMax(config, "crit") : 0 }] }))} className="justify-self-start text-[11px] text-[var(--accent)] hover:underline">+ 추가옵션</button>
                   ) : null}
                 </div>
               </div>

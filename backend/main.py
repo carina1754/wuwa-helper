@@ -10,7 +10,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
 from src.database import init_db
-from src.content import load_game_updates, load_pickup_schedule, load_site_updates
+from src.content import load_game_config, load_game_updates, load_pickup_schedule, load_site_updates
 from src.content_refresh import refresh_pickups_and_updates, start_daily_refresh_worker
 from src.curated_updates import apply_curated_update_summaries
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
@@ -152,6 +152,11 @@ def get_catalog_image(kind: str, item_id: str) -> FileResponse:
 @app.get("/site-updates", response_model=list[SiteUpdateEntry])
 def get_site_updates() -> list[SiteUpdateEntry]:
     return load_site_updates()
+
+
+@app.get("/game-config")
+def get_game_config() -> dict:
+    return load_game_config()
 
 
 @app.post("/content/refresh")

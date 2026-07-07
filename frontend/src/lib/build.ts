@@ -30,54 +30,25 @@ export const isPct = (k: StatKey) => PCT_STATS.has(k);
 export const fmtStat = (k: StatKey, v: number) =>
   isPct(k) ? `${v.toFixed(1)}%` : Math.round(v).toLocaleString();
 
-// --- Echo main-stat options + max (level-25, 5★) values, by cost ------------
-// value = the level-25 maximum; lower levels scale linearly (WuWa echo curve is
-// ~linear from a small base to the L25 max).
-type MainOpt = { key: StatKey; max: number };
-export const ECHO_MAIN: Record<number, MainOpt[]> = {
-  1: [
-    { key: "hp", max: 2280 }, { key: "atkPct", max: 18.0 },
-    { key: "hpPct", max: 22.8 }, { key: "defPct", max: 18.0 },
-  ],
-  3: [
-    { key: "atkPct", max: 30.0 }, { key: "hpPct", max: 30.0 }, { key: "defPct", max: 38.0 },
-    { key: "energyRegen", max: 32.0 },
-    { key: "glacioDmg", max: 30.0 }, { key: "fusionDmg", max: 30.0 }, { key: "electroDmg", max: 30.0 },
-    { key: "aeroDmg", max: 30.0 }, { key: "spectroDmg", max: 30.0 }, { key: "havocDmg", max: 30.0 },
-  ],
-  4: [
-    { key: "crit", max: 22.0 }, { key: "critDmg", max: 44.0 },
-    { key: "atkPct", max: 33.0 }, { key: "hpPct", max: 33.0 }, { key: "defPct", max: 41.8 },
-    { key: "atk", max: 150 }, { key: "healing", max: 26.4 },
-  ],
+// --- Echo stat config: sourced from the DB (/game-config), NOT hardcoded -----
+export type EchoMainOpt = { key: StatKey; max: number };
+export type EchoSubDef = { key: StatKey; min: number; max: number };
+export type GameConfig = {
+  costBudget: number;
+  main: Record<string, EchoMainOpt[]>; // cost -> main-stat options (max at L25)
+  sub: EchoSubDef[]; // sub-stat pool + per-roll range
+  subSlots: Record<string, number>; // grade -> sub-stat slots
 };
+
+export const echoMainOptions = (cfg: GameConfig, cost: number): EchoMainOpt[] => cfg.main[String(cost)] ?? [];
+export const subMax = (cfg: GameConfig, key: StatKey): number => cfg.sub.find((s) => s.key === key)?.max ?? 0;
+export const subSlots = (cfg: GameConfig, grade: number): number => cfg.subSlots[String(grade)] ?? 0;
 
 // main stat value at a given echo level (0-25), linear from ~14% of max at L0.
 export function echoMainValue(max: number, level: number): number {
   const t = Math.max(0, Math.min(25, level)) / 25;
   return max * (0.14 + 0.86 * t);
 }
-
-// --- Echo sub-stat pool + roll range (per single roll) ----------------------
-export const ECHO_SUB: { key: StatKey; min: number; max: number }[] = [
-  { key: "hp", min: 320, max: 580 },
-  { key: "atk", min: 30, max: 70 },
-  { key: "def", min: 30, max: 70 },
-  { key: "hpPct", min: 6.4, max: 11.6 },
-  { key: "atkPct", min: 6.4, max: 11.6 },
-  { key: "defPct", min: 8.1, max: 14.7 },
-  { key: "crit", min: 6.3, max: 10.5 },
-  { key: "critDmg", min: 12.6, max: 21.0 },
-  { key: "energyRegen", min: 5.6, max: 14.9 },
-  { key: "skillDmg", min: 6.4, max: 12.4 },
-  { key: "basicDmg", min: 6.4, max: 11.6 },
-  { key: "heavyDmg", min: 6.4, max: 11.6 },
-  { key: "liberationDmg", min: 6.4, max: 11.6 },
-];
-export const subMax = (key: StatKey) => ECHO_SUB.find((s) => s.key === key)?.max ?? 0;
-// sub-stat slots by echo grade (rarity/star)
-export const SUB_SLOTS: Record<number, number> = { 5: 5, 4: 4, 3: 3, 2: 2, 1: 1 };
-export const ECHO_COST_BUDGET = 12;
 
 // --- Build model ------------------------------------------------------------
 export type EchoBuild = {
@@ -110,6 +81,7 @@ export function computeStats(
   reso: CodexResonator,
   weapon: CodexWeapon | null,
   build: ResonatorBuild,
+  config: GameConfig | null,
 ): Record<StatKey, number> {
   const out = Object.fromEntries(Object.keys(STAT_LABEL).map((k) => [k, 0])) as Record<StatKey, number>;
   const curves = reso.stat_curves ?? {};
@@ -151,7 +123,7 @@ export function computeStats(
 
   for (const e of build.echoes) {
     if (!e) continue;
-    const opt = (ECHO_MAIN[e.cost] ?? []).find((o) => o.key === e.main);
+    const opt = config ? echoMainOptions(config, e.cost).find((o) => o.key === e.main) : undefined;
     if (opt) addStat(e.main, echoMainValue(opt.max, e.level));
     for (const s of e.subs) addStat(s.key, s.value);
   }
@@ -166,12 +138,11 @@ export const buildCost = (build: ResonatorBuild) =>
   build.echoes.reduce((s, e) => s + (e?.cost ?? 0), 0);
 
 // pick the default main stat for an echo of a given cost
-export function defaultMain(cost: number): StatKey {
-  const opts = ECHO_MAIN[cost] ?? ECHO_MAIN[1];
-  return opts[0].key;
+export function defaultMain(config: GameConfig, cost: number): StatKey {
+  return echoMainOptions(config, cost)[0]?.key ?? "atkPct";
 }
 
-export function echoFromCodex(e: CodexEcho): EchoBuild {
+export function echoFromCodex(e: CodexEcho, config: GameConfig): EchoBuild {
   const cost = e.cost ?? 1;
-  return { echoId: e.id, cost, grade: e.rarity >= 3 ? 5 : e.rarity + 2, level: 25, main: defaultMain(cost), subs: [] };
+  return { echoId: e.id, cost, grade: e.rarity >= 3 ? 5 : e.rarity + 2, level: 25, main: defaultMain(config, cost), subs: [] };
 }

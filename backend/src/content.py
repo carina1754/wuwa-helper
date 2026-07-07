@@ -1,8 +1,17 @@
 from __future__ import annotations
 
+import json
+
 from .content_refresh import refresh_pickups_and_updates_if_stale
 from .database import get_connection
 from .models import GameUpdateSummary, PickupScheduleItem, SiteUpdateEntry
+
+
+def load_game_config() -> dict:
+    """Game-math constants (echo stat tables etc.) keyed by config id."""
+    with get_connection() as conn:
+        rows = conn.execute("SELECT id, data_json FROM game_config").fetchall()
+    return {row["id"]: json.loads(row["data_json"]) for row in rows}
 
 
 def load_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:

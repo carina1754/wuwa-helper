@@ -86,6 +86,10 @@ export function getSiteUpdates(): Promise<SiteUpdateEntry[]> {
   return request("/site-updates");
 }
 
+export function getGameConfig(): Promise<Record<string, unknown>> {
+  return request("/game-config");
+}
+
 export function saveRules(rules: BuildRule[]): Promise<BuildRule[]> {
   return request("/rules", {
     method: "POST",
