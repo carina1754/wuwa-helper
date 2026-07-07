@@ -393,12 +393,14 @@ export function Codex() {
         else groups.set(s, [e]);
       }
     }
-    const ordered = sonataOptions
+    // When a sonata is selected in the filter, show only that set's group.
+    const names = sonata ? [sonata] : sonataOptions;
+    const ordered = names
       .map((name) => ({ name, echoes: groups.get(name) ?? [] }))
       .filter((g) => g.echoes.length > 0);
-    if (noSet.length) ordered.push({ name: "", echoes: noSet });
+    if (!sonata && noSet.length) ordered.push({ name: "", echoes: noSet });
     return ordered;
-  }, [filteredEchoes, sonataOptions]);
+  }, [filteredEchoes, sonataOptions, sonata]);
 
   const count =
     tab === "resonators"

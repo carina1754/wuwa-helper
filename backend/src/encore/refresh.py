@@ -10,6 +10,7 @@ from __future__ import annotations
 import json
 
 from ..database import get_connection
+from ..media import ensure_catalog_image
 from ..wutheringgg.refresh import _CURATED_ROLE
 from . import client
 from .normalize import normalize_echo, normalize_resonator, normalize_weapon
@@ -36,6 +37,7 @@ def refresh_resonators(*, use_cache: bool = True) -> int:
         for d in details:
             rec = normalize_resonator(d, en.get(d.get("Id")))
             rec["role"] = _CURATED_ROLE.get(rec["id"], "main_dps")
+            rec["image"] = ensure_catalog_image("characters", str(rec["id"]), rec.get("image")) or rec.get("image")
             conn.execute(
                 """
                 INSERT INTO wuwa_resonator
@@ -75,6 +77,7 @@ def refresh_weapons(*, use_cache: bool = True) -> int:
             rec["weapon_type_ko"] = wtype_ko.get(rec["weapon_type"]) or _WTYPE_KO.get(rec["weapon_type"])
             rec["icon"] = icon_map.get(rec["id"]) or rec["icon"]
             wid = str(rec["id"])
+            rec["icon"] = ensure_catalog_image("weapons", wid, rec.get("icon")) or rec.get("icon")
             conn.execute(
                 """
                 INSERT INTO wuwa_weapon
@@ -110,6 +113,7 @@ def refresh_echoes(*, use_cache: bool = True) -> int:
             if not rec["name_ko"] or rec["name_ko"] in reso_names:
                 continue
             eid = str(rec["id"])
+            rec["icon"] = ensure_catalog_image("echoes", eid, rec.get("icon")) or rec.get("icon")
             conn.execute(
                 """
                 INSERT INTO wuwa_echo

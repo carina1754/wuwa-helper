@@ -49,10 +49,8 @@ export function AppShell({ renderTab }: AppShellProps) {
           <div className="htop">
             <Link className="brand" href="/">
               <span className="seal">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#5fd3c3" strokeWidth="1.6" strokeLinecap="round" aria-hidden="true">
-                  <path d="M2 13c2.4 0 2.4-3 4.8-3s2.4 3 4.8 3 2.4-3 4.8-3 2.4 3 4.8 3" />
-                  <path d="M2 17c2.4 0 2.4-3 4.8-3s2.4 3 4.8 3 2.4-3 4.8-3 2.4 3 4.8 3" opacity=".5" />
-                </svg>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/logo.png" alt="" aria-hidden="true" />
               </span>
               <b>{t.app.name}</b>
             </Link>

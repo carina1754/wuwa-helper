@@ -36,9 +36,9 @@ header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 8
   backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .htop{display:flex;align-items:center;gap:14px;padding:16px 0 13px}
 .brand{display:flex;align-items:center;gap:11px}
-.brand .seal{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;
-  background:var(--surface-2);border:1px solid var(--line-2);box-shadow:inset 0 0 0 1px var(--accent-glow)}
-.brand .seal svg{width:21px;height:21px}
+.brand .seal{width:38px;height:38px;border-radius:11px;overflow:hidden;display:grid;place-items:center;
+  background:var(--surface-2);border:1px solid var(--line-2)}
+.brand .seal img{width:100%;height:100%;object-fit:cover}
 .brand b{font-family:'Pretendard',sans-serif;font-weight:800;font-size:21px;letter-spacing:.01em}
 .hactions{margin-left:auto;display:flex;align-items:center;gap:9px}
 .iconbtn{width:40px;height:40px;border-radius:11px;border:1px solid var(--line-2);display:grid;place-items:center;
@@ -57,6 +57,22 @@ header{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--bg) 8
   border-bottom:2px solid transparent;white-space:nowrap;transition:.16s}
 .tab:hover{color:var(--fg)}
 .tab.on{color:var(--fg);border-bottom-color:var(--accent)}
+
+/* ---------- MOBILE ---------- */
+@media(max-width:640px){
+  .wrap{padding:0 14px}
+  .htop{gap:8px;padding:12px 0 10px}
+  .brand{gap:9px}
+  .brand .seal{width:32px;height:32px;border-radius:9px}
+  .brand b{font-size:17px}
+  .hactions{gap:6px}
+  .iconbtn{width:34px;height:34px;border-radius:9px}
+  .iconbtn svg{width:16px;height:16px}
+  .login{padding:9px}
+  .login span{display:none}
+  .tab{padding:10px 11px;font-size:13.5px}
+  main{padding:22px 0 46px}
+}
 
 /* ---------- MAIN ---------- */
 main{flex:1;padding:34px 0 60px}
