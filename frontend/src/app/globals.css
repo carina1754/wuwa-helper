@@ -113,6 +113,20 @@ main{flex:1;padding:34px 0 60px}
 .urow .ud .arw{margin-left:9px;color:var(--faint);display:inline-block;transition:.16s}
 .urow:hover .ud .arw{color:var(--accent);transform:translateX(3px)}
 
+/* 업데이트 아코디언: 클릭한 자리에서 쫙 펼쳐지는 모션 */
+.acc{border-bottom:1px solid var(--line);border-radius:11px;transition:background .18s}
+.acc .urow{border-bottom:0}
+.acc.open{background:var(--surface)}
+.acc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.7,.2,1)}
+.acc.open .acc-panel{grid-template-rows:1fr}
+.acc-panel>.acc-inner{overflow:hidden}
+.acc-body{padding:0 12px 18px 88px;opacity:0;transform:translateY(-4px);transition:opacity .28s .04s,transform .28s .04s}
+.acc.open .acc-body{opacity:1;transform:none}
+.acc-body>p{color:var(--fg-soft);font-size:14px;line-height:1.65}
+.acc-body .tags{margin-top:12px}
+.acc.open .urow .arw{color:var(--accent);transform:rotate(90deg)}
+@media(max-width:620px){.acc-body{padding-left:64px}}
+
 /* 대시보드 우선순위 */
 .pchip{font-family:'Pretendard',sans-serif;font-weight:800;color:var(--gold);font-size:20px}
 

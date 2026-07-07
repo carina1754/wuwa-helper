@@ -10,7 +10,8 @@ export function UpdatesSummary() {
   const { t } = useLanguage();
   const [updates, setUpdates] = useState<GameUpdateSummary[]>([]);
   const [error, setError] = useState("");
-  const [selectedVersion, setSelectedVersion] = useState<string | null>(null);
+  // Which past-version row is expanded in place (accordion). null = all closed.
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     getUpdates()
@@ -18,17 +19,9 @@ export function UpdatesSummary() {
       .catch((err) => setError(err instanceof Error ? err.message : String(err)));
   }, []);
 
-  // The featured card shows the selected version (default: the latest). Every
-  // other version is listed below and can be clicked to become featured.
-  const featured =
-    (selectedVersion ? updates.find((update) => update.version === selectedVersion) : undefined) ?? updates[0];
-  const archive = updates.filter((update) => update !== featured);
-  const isLatest = Boolean(featured) && featured === updates[0];
-
-  function selectVersion(version: string) {
-    setSelectedVersion(version);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }
+  // The featured card is always the latest; older versions are listed below and
+  // expand in place when clicked.
+  const [featured, ...archive] = updates;
 
   return (
     <>
@@ -63,12 +56,10 @@ export function UpdatesSummary() {
             )}
           </div>
           <div className="body">
-            {isLatest ? (
-              <span className="now">
-                <i />
-                {t.tabs.Updates}
-              </span>
-            ) : null}
+            <span className="now">
+              <i />
+              {t.tabs.Updates}
+            </span>
             {featured.release_date_kst ? (
               <time>
                 {featured.release_date_kst} {t.updates.releaseDate}
@@ -97,25 +88,50 @@ export function UpdatesSummary() {
       {updates.length === 0 && !error ? <div className="soon">{t.updates.empty}</div> : null}
 
       {archive.length > 0 ? <div className="arch">{t.tabs.Updates}</div> : null}
-      {archive.map((update) => (
-        <button
-          key={update.id}
-          type="button"
-          className="urow"
-          onClick={() => selectVersion(update.version)}
-          aria-label={`${update.version} ${update.title_ko}`}
-        >
-          <span className="ver">{update.version}</span>
-          <span className="um">
-            <b>{update.title_ko}</b>
-            <p>{update.summary_ko}</p>
-          </span>
-          <span className="ud">
-            {update.release_date_kst ?? ""}
-            <span className="arw">→</span>
-          </span>
-        </button>
-      ))}
+      {archive.map((update) => {
+        const open = expandedId === update.id;
+        return (
+          <div key={update.id} className={`acc${open ? " open" : ""}`}>
+            <button
+              type="button"
+              className="urow"
+              aria-expanded={open}
+              onClick={() => setExpandedId(open ? null : update.id)}
+              aria-label={`${update.version} ${update.title_ko}`}
+            >
+              <span className="ver">{update.version}</span>
+              <span className="um">
+                <b>{update.title_ko}</b>
+              </span>
+              <span className="ud">
+                {update.release_date_kst ?? ""}
+                <span className="arw">→</span>
+              </span>
+            </button>
+            <div className="acc-panel">
+              <div className="acc-inner">
+                <div className="acc-body">
+                  <p>{update.summary_ko}</p>
+                  {update.highlights_ko.length > 0 || update.source_links.length > 0 ? (
+                    <div className="tags">
+                      {update.highlights_ko.map((highlight) => (
+                        <span key={highlight} className="tag">
+                          {highlight}
+                        </span>
+                      ))}
+                      {update.source_links.map((source, index) => (
+                        <a key={source} href={source} target="_blank" rel="noreferrer" className="tag src">
+                          {t.updates.source} {index + 1} →
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
     </>
   );
 }
