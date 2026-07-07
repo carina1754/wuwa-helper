@@ -266,3 +266,18 @@ def test_extract_thematic_title_strips_content_notice_suffix():
 def test_extract_thematic_title_falls_back_for_non_content_articles():
     title = "Wuthering Waves Version 3.5 Update Maintenance Notice"
     assert content_refresh._extract_thematic_title(title, "3.5") == "3.5 업데이트"
+
+
+def test_extract_hero_image_url_handles_single_quotes():
+    content = "intro <img src='https://cdn.example/hero.png' /> tail"
+    assert content_refresh._extract_hero_image_url(content) == "https://cdn.example/hero.png"
+
+
+def test_extract_hero_image_url_when_src_is_not_first_attribute():
+    content = '<img alt="banner" src="https://cdn.example/hero2.jpg" />'
+    assert content_refresh._extract_hero_image_url(content) == "https://cdn.example/hero2.jpg"
+
+
+def test_extract_hero_image_url_returns_first_of_multiple():
+    content = '<img src="https://cdn.example/first.jpg" /> mid <img src="https://cdn.example/second.jpg" />'
+    assert content_refresh._extract_hero_image_url(content) == "https://cdn.example/first.jpg"

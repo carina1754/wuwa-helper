@@ -73,7 +73,7 @@ def _extract_version_from_article(title: str, content: str) -> str | None:
 
 
 def _extract_hero_image_url(raw_content: str) -> str | None:
-    match = re.search(r'<img[^>]+src="([^"]+)"', raw_content, re.IGNORECASE)
+    match = re.search(r'<img[^>]+src=["\']([^"\']+)["\']', raw_content, re.IGNORECASE)
     return match.group(1) if match else None
 
 
