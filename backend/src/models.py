@@ -116,6 +116,7 @@ class GameUpdateSummary(BaseModel):
     summary_ko: str
     highlights_ko: list[str] = Field(default_factory=list)
     source_links: list[str] = Field(default_factory=list)
+    image_url: str | None = None
 
 
 class SiteUpdateEntry(BaseModel):
