@@ -16,7 +16,8 @@ from src.curated_updates import apply_curated_update_summaries
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
-from src.media import cached_image_path
+from src.catalog import load_weapon_catalog
+from src.media import CATALOG_KINDS, cached_catalog_image_path, cached_image_path
 from src.models import (
     AuthUserSyncRequest,
     AnalysisSession,
@@ -26,6 +27,7 @@ from src.models import (
     CharacterCatalogItem,
     Diagnosis,
     GameUpdateSummary,
+    WeaponCatalogItem,
     EchoItem,
     PickupScheduleItem,
     SiteUpdateEntry,
@@ -109,6 +111,21 @@ def get_update_image(update_id: str) -> FileResponse:
     path = cached_image_path(update_id)
     if path is None:
         raise HTTPException(status_code=404, detail="Update image not found")
+    return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
+
+
+@app.get("/weapons", response_model=list[WeaponCatalogItem])
+def get_weapons() -> list[WeaponCatalogItem]:
+    return load_weapon_catalog()
+
+
+@app.get("/catalog/image/{kind}/{item_id}")
+def get_catalog_image(kind: str, item_id: str) -> FileResponse:
+    if kind not in CATALOG_KINDS or not re.fullmatch(r"[A-Za-z0-9_-]+", item_id):
+        raise HTTPException(status_code=404, detail="Image not found")
+    path = cached_catalog_image_path(kind, item_id)
+    if path is None:
+        raise HTTPException(status_code=404, detail="Image not found")
     return FileResponse(path, headers={"Cache-Control": "public, max-age=86400"})
 
 

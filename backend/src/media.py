@@ -106,3 +106,42 @@ def ensure_hero_image(update_id: str, source_url: str | None) -> str | None:
     except Exception:
         return None
     return f"/updates/image/{update_id}"
+
+
+# --- Catalog images (character avatars, weapon icons, echo icons) -----------
+# Cached locally by (kind, id) and served from our own domain via
+# GET /catalog/image/{kind}/{id}, mirroring the update-hero-image pattern.
+CATALOG_KINDS = ("characters", "weapons", "echoes")
+
+
+def catalog_image_dir(kind: str) -> Path:
+    if kind not in CATALOG_KINDS:
+        raise ValueError(f"unknown catalog image kind: {kind!r}")
+    return media_dir() / kind
+
+
+def cached_catalog_image_path(kind: str, item_id: str) -> Path | None:
+    if kind not in CATALOG_KINDS:
+        return None
+    directory = media_dir() / kind
+    if not directory.exists():
+        return None
+    matches = sorted(directory.glob(f"{item_id}.*"))
+    return matches[0] if matches else None
+
+
+def ensure_catalog_image(kind: str, item_id: str, source_url: str | None) -> str | None:
+    """Cache a catalog image locally; return its API-relative served path or None.
+
+    Reuses an already-cached file (no re-download). A rejected/failed download
+    yields None so the caller can continue.
+    """
+    if cached_catalog_image_path(kind, item_id) is not None:
+        return f"/catalog/image/{kind}/{item_id}"
+    if not source_url:
+        return None
+    try:
+        download_image(source_url, catalog_image_dir(kind) / item_id)
+    except Exception:
+        return None
+    return f"/catalog/image/{kind}/{item_id}"

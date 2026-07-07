@@ -121,6 +121,18 @@ def init_db() -> None:
             )
             cur.execute(
                 """
+                CREATE TABLE IF NOT EXISTS weapon_catalog (
+                    id TEXT PRIMARY KEY,
+                    name_ko TEXT NOT NULL,
+                    weapon_type TEXT,
+                    rarity INTEGER,
+                    data_json TEXT NOT NULL,
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+                )
+                """
+            )
+            cur.execute(
+                """
                 CREATE TABLE IF NOT EXISTS team_rules (
                     id TEXT PRIMARY KEY,
                     name TEXT NOT NULL,

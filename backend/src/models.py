@@ -90,6 +90,15 @@ class CharacterCatalogItem(BaseModel):
     source: str | None = None
 
 
+class WeaponCatalogItem(BaseModel):
+    id: str
+    name_ko: str
+    weapon_type: str | None = None
+    rarity: int | None = None
+    icon: str | None = None
+    source: str | None = None
+
+
 class PickupScheduleItem(BaseModel):
     id: str
     year: int
