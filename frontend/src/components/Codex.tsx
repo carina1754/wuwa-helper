@@ -260,7 +260,6 @@ export function Codex() {
   // Echo filters
   const [cost, setCost] = useState("");
   const [sonata, setSonata] = useState("");
-  const [rarityE, setRarityE] = useState("");
 
   useEffect(() => {
     let cancelled = false;
@@ -334,10 +333,6 @@ export function Codex() {
     for (const set of sonataSets) if (set.name_ko && set.icon) map.set(set.name_ko, set.icon);
     return map;
   }, [sonataSets]);
-  const echoRarities = useMemo(
-    () => Array.from(new Set(echoes.map((e) => e.rarity).filter(Boolean))).sort((a, b) => b - a).map(String),
-    [echoes],
-  );
 
   const query = search.trim().toLowerCase();
 
@@ -380,11 +375,30 @@ export function Codex() {
       return (
         matchesSearch &&
         (!cost || String(e.cost) === cost) &&
-        (!sonata || (e.sonata ?? []).includes(sonata)) &&
-        (!rarityE || String(e.rarity) === rarityE)
+        (!sonata || (e.sonata ?? []).includes(sonata))
       );
     });
-  }, [echoes, query, cost, sonata, rarityE]);
+  }, [echoes, query, cost, sonata]);
+
+  // Echoes are shown grouped by sonata set; an echo appears under each of its sets.
+  const echoGroups = useMemo(() => {
+    const groups = new Map<string, CodexEcho[]>();
+    const noSet: CodexEcho[] = [];
+    for (const e of filteredEchoes) {
+      const sets = (e.sonata ?? []).filter(Boolean);
+      if (sets.length === 0) noSet.push(e);
+      for (const s of sets) {
+        const list = groups.get(s);
+        if (list) list.push(e);
+        else groups.set(s, [e]);
+      }
+    }
+    const ordered = sonataOptions
+      .map((name) => ({ name, echoes: groups.get(name) ?? [] }))
+      .filter((g) => g.echoes.length > 0);
+    if (noSet.length) ordered.push({ name: "", echoes: noSet });
+    return ordered;
+  }, [filteredEchoes, sonataOptions]);
 
   const count =
     tab === "resonators"
@@ -458,7 +472,6 @@ export function Codex() {
                 options={sonataOptions}
                 iconOf={(name) => sonataIcon.get(name)}
               />
-              <FilterSelect label="전체 성급" value={rarityE} onChange={setRarityE} options={echoRarities} render={(v) => `${v}★`} />
             </>
           ) : null}
         </div>
@@ -475,6 +488,33 @@ export function Codex() {
       ) : count === 0 ? (
         <div className="rounded-lg border border-dashed border-[var(--line-2)] bg-[var(--surface)] p-8 text-center text-sm text-[var(--muted)]">
           {t.planner.noResults}
+        </div>
+      ) : tab === "echoes" ? (
+        <div className="grid gap-4">
+          {echoGroups.map((group) => (
+            <div key={group.name || "_none"} className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 shadow-panel">
+              <div className="mb-3 flex items-center gap-2">
+                {group.name && sonataIcon.get(group.name) ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={imageSrc(sonataIcon.get(group.name))} alt="" className="h-6 w-6 shrink-0 object-contain" />
+                ) : null}
+                <h3 className="text-sm font-semibold text-[var(--fg)]">{group.name || "기타"}</h3>
+                <span className="text-xs text-[var(--muted)]">{group.echoes.length}</span>
+              </div>
+              <div className={GRID_CLASS}>
+                {group.echoes.map((item) => (
+                  <GridCell
+                    key={item.id}
+                    name={item.name_ko}
+                    image={item.icon}
+                    rarity={item.rarity}
+                    hint={item.cost != null ? `${item.cost} 코스트` : ""}
+                    onClick={() => setDetail({ type: "echo", item })}
+                  />
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
       ) : (
         <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 shadow-panel">
@@ -500,18 +540,6 @@ export function Codex() {
                     rarity={item.rarity}
                     hint={item.weapon_type_ko ?? ""}
                     onClick={() => setDetail({ type: "weapon", item })}
-                  />
-                ))
-              : null}
-            {tab === "echoes"
-              ? filteredEchoes.map((item) => (
-                  <GridCell
-                    key={item.id}
-                    name={item.name_ko}
-                    image={item.icon}
-                    rarity={item.rarity}
-                    hint={item.cost != null ? `${item.cost} 코스트` : ""}
-                    onClick={() => setDetail({ type: "echo", item })}
                   />
                 ))
               : null}
