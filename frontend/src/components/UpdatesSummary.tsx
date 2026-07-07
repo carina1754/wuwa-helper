@@ -111,23 +111,29 @@ export function UpdatesSummary() {
             </button>
             <div className="acc-panel">
               <div className="acc-inner">
-                <div className="acc-body">
-                  <p>{update.summary_ko}</p>
-                  {update.highlights_ko.length > 0 || update.source_links.length > 0 ? (
-                    <div className="tags">
-                      {update.highlights_ko.map((highlight) => (
-                        <span key={highlight} className="tag">
-                          {highlight}
-                        </span>
-                      ))}
-                      {update.source_links.map((source, index, arr) => (
-                        <a key={source} href={source} target="_blank" rel="noreferrer" className="tag src">
-                          {t.updates.source}
-                          {arr.length > 1 ? ` ${index + 1}` : ""} →
-                        </a>
-                      ))}
-                    </div>
+                <div className={`acc-media${update.image_url ? " has-bg" : ""}`}>
+                  {update.image_url ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img className="acc-bg" src={`${API_BASE_URL}${update.image_url}`} alt="" loading="lazy" />
                   ) : null}
+                  <div className="acc-body">
+                    <p>{update.summary_ko}</p>
+                    {update.highlights_ko.length > 0 || update.source_links.length > 0 ? (
+                      <div className="tags">
+                        {update.highlights_ko.map((highlight) => (
+                          <span key={highlight} className="tag">
+                            {highlight}
+                          </span>
+                        ))}
+                        {update.source_links.map((source, index, arr) => (
+                          <a key={source} href={source} target="_blank" rel="noreferrer" className="tag src">
+                            {t.updates.source}
+                            {arr.length > 1 ? ` ${index + 1}` : ""} →
+                          </a>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
               </div>
             </div>
