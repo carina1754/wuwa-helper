@@ -45,3 +45,23 @@ def extract_array(text: str, anchor: str) -> list[dict]:
                         return json.loads(text[start : j + 1])
         j += 1
     raise ValueError("no enclosing array found for anchor")
+
+
+# Content signatures that identify each entity's data array within its chunk.
+# Each anchor is a key/token that only appears on the entity objects we want, so
+# the enclosing top-level array `extract_array` returns is that entity's list.
+CHARACTER_ANCHOR = '"ResonantChainGroup"'
+WEAPON_ANCHOR = '"WeaponType":'  # weapon objects also carry stat + skill fields
+ECHO_ANCHOR = '"Cost"'  # phantom/echo objects carry Cost + Sonata
+
+
+def parse_characters(text: str) -> list[dict]:
+    return extract_array(text, CHARACTER_ANCHOR)
+
+
+def parse_weapons(text: str) -> list[dict]:
+    return extract_array(text, WEAPON_ANCHOR)
+
+
+def parse_echoes(text: str) -> list[dict]:
+    return extract_array(text, ECHO_ANCHOR)
