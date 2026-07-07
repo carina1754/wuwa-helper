@@ -319,3 +319,75 @@ def test_official_updates_extract_title_and_image_source(monkeypatch):
     assert updates[0]["title_ko"] == "「선택하지 않은 꿈」 3.4 버전"
     assert updates[0]["image_source_url"] == "https://cdn.example/hero-3-4.jpg"
     assert updates[0]["summary_ko"] == ""
+
+
+def test_refresh_preserves_summary_and_sets_image(monkeypatch, tmp_path):
+    init_db()
+    monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
+    update_id = "test-preserve-update"
+    with get_connection() as conn:
+        conn.execute("DELETE FROM game_updates WHERE id = %s", (update_id,))
+        conn.execute(
+            "INSERT INTO game_updates (id, version, release_date_kst, data_json, updated_at)"
+            " VALUES (%s, %s, %s, %s, now())",
+            (
+                update_id,
+                "9.9",
+                "2099-01-01",
+                json.dumps(
+                    {
+                        "id": update_id,
+                        "version": "9.9",
+                        "title_ko": "9.9 버전",
+                        "release_date_kst": "2099-01-01",
+                        "summary_ko": "AUTHORED SUMMARY",
+                        "highlights_ko": ["h1"],
+                        "source_links": [],
+                        "image_url": None,
+                    },
+                    ensure_ascii=False,
+                ),
+            ),
+        )
+        conn.commit()
+
+    monkeypatch.setenv("CONTENT_REFRESH_JSON_URL", "https://example.com/feed.json")
+    monkeypatch.setattr(
+        content_refresh,
+        "_fetch_json",
+        lambda url: {
+            "pickup_schedule": [],
+            "game_updates": [
+                {
+                    "id": update_id,
+                    "version": "9.9",
+                    "title_ko": "9.9 버전",
+                    "release_date_kst": "2099-01-01",
+                    "summary_ko": "",
+                    "highlights_ko": [],
+                    "source_links": [],
+                    "image_source_url": "https://cdn.example/x.jpg",
+                }
+            ],
+        },
+    )
+    monkeypatch.setattr(
+        content_refresh,
+        "ensure_hero_image",
+        lambda update_id, source_url: f"/updates/image/{update_id}" if source_url else None,
+    )
+
+    result = content_refresh.refresh_pickups_and_updates(force=True)
+    assert result["refreshed"] is True
+
+    with get_connection() as conn:
+        row = conn.execute("SELECT data_json FROM game_updates WHERE id = %s", (update_id,)).fetchone()
+    data = json.loads(row["data_json"])
+    assert data["summary_ko"] == "AUTHORED SUMMARY"
+    assert data["highlights_ko"] == ["h1"]
+    assert data["image_url"] == f"/updates/image/{update_id}"
+    assert "image_source_url" not in data  # transient key must not persist
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM game_updates WHERE id = %s", (update_id,))
+        conn.commit()

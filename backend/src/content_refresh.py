@@ -10,7 +10,9 @@ from html import unescape
 from html.parser import HTMLParser
 from urllib.request import Request, urlopen
 
+from .curated_updates import apply_curated_update_summaries
 from .database import get_connection
+from .media import ensure_hero_image
 
 OFFICIAL_JSON_BASE_URL = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152"
 OFFICIAL_SITE_BASE_URL = "https://wutheringwaves.kurogames.com"
@@ -382,6 +384,23 @@ def refresh_pickups_and_updates(force: bool = False) -> dict[str, object]:
                 (item["id"], item["year"], item["month"], item["category"], json.dumps(item, ensure_ascii=False)),
             )
         for item in updates:
+            source_image_url = item.pop("image_source_url", None)
+            existing_row = conn.execute(
+                "SELECT data_json FROM game_updates WHERE id = %s", (item["id"],)
+            ).fetchone()
+            previous = json.loads(existing_row["data_json"]) if existing_row else {}
+
+            # Preserve authored fields the scrape leaves empty.
+            if not item.get("summary_ko"):
+                item["summary_ko"] = previous.get("summary_ko", "")
+            if not item.get("highlights_ko"):
+                item["highlights_ko"] = previous.get("highlights_ko", [])
+
+            # Cache the hero image (no-op if already cached); keep a previously
+            # cached image when this refresh has no new source.
+            image_url = ensure_hero_image(item["id"], source_image_url)
+            item["image_url"] = image_url or previous.get("image_url")
+
             conn.execute(
                 """
                 INSERT INTO game_updates (id, version, release_date_kst, data_json, updated_at)
@@ -406,6 +425,7 @@ def refresh_pickups_and_updates(force: bool = False) -> dict[str, object]:
             (source, _now_iso(), "ok", f"schedule={len(schedule)} updates={len(updates)}"),
         )
         conn.commit()
+    apply_curated_update_summaries()
     return {"refreshed": True, "source": source, "schedule": len(schedule), "updates": len(updates)}
 
 
