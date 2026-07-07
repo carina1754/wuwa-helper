@@ -277,8 +277,18 @@ export function skillDamage(
 }
 
 // --- Anomaly (이상) damage — phro.love ----------------------------------------
-export type AnomalyType = { key: string; mode: string; coef?: number; maxStack?: number; overBonus?: number; stack1?: number; perStack?: number; stack1Mult?: number; base?: number };
+export type AnomalyType = { key: string; mode: string; coef?: number; maxStack?: number; overBonus?: number; stack1?: number; perStack?: number; stack1Mult?: number; base?: number; defPerStack?: number; maxDef?: number };
 export type AnomalyConfig = { base: Record<string, number>; types: Record<string, AnomalyType> };
+// 원소 → 이상 유형 (phro.love 이상 페이지 기준). 캐릭터 속성으로 자동 결정.
+export const ELEMENT_ANOMALY: Record<string, string> = {
+  응결: "서리", 용융: "불꽃", 전도: "전자", 기류: "풍식", 회절: "광학", 인멸: "암흑",
+};
+// 암흑(디버프형) 방어 감소 = 스택 × 2% (최대 6%). 직접 피해는 없음.
+export function anomalyDefReduce(cfg: AnomalyConfig, type: string, stacks: number): number {
+  const t = cfg.types[type];
+  if (!t || t.mode !== "debuff") return 0;
+  return Math.min(t.maxDef ?? 0.06, (t.defPerStack ?? 0.02) * Math.max(0, stacks));
+}
 // base value B(L) × element coefficient / stack function
 export function anomalyBase(cfg: AnomalyConfig, type: string, stacks: number, myLevel = 90): number {
   const B = cfg.base[String(myLevel)] ?? cfg.base["90"] ?? 3674;
@@ -289,8 +299,11 @@ export function anomalyBase(cfg: AnomalyConfig, type: string, stacks: number, my
     return B * (t.coef ?? 0) * (1 + (t.overBonus ?? 0.33) * over);
   }
   if (t.mode === "tick_decay") {
-    // 3674 × coef × n, halving stacks per tick (decay series ~ ×2 total)
-    return B * (t.coef ?? 0) * stacks * 2;
+    // 3674 × coef × Σ스택, 매 틱 스택 절반(내림)으로 감쇠 (예: 10→5→2→1 = 18)
+    let s = Math.max(0, Math.floor(stacks));
+    let sum = 0;
+    while (s > 0) { sum += s; s = Math.floor(s / 2); }
+    return B * (t.coef ?? 0) * sum;
   }
   if (t.mode === "tick") {
     if (stacks <= 1) return t.stack1 ?? (t.base ?? 0) * (t.stack1Mult ?? 1);

@@ -9,11 +9,13 @@ import {
   activeSetBonuses,
   type AnomalyConfig,
   anomalyDamage,
+  anomalyDefReduce,
   buildCost,
   computeStats,
   type DamageOpts,
   echoFromCodex,
   echoMainOptions,
+  ELEMENT_ANOMALY,
   emptyBuild,
   fmtStat,
   type GameConfig,
@@ -223,7 +225,7 @@ function BuildEditor({
   const costBudget = config?.costBudget ?? 12;
   const [skillLv, setSkillLv] = useState(10);
   const [dmg, setDmg] = useState({ enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, dmgTaken: 0, totalDmg: 0, bonusPct: 0 });
-  const [anom, setAnom] = useState({ type: "서리", stacks: 10, occurrences: 1 });
+  const [anom, setAnom] = useState(() => ({ type: ELEMENT_ANOMALY[reso.element ?? ""] ?? "서리", stacks: 10, occurrences: 1 }));
   const [tune, setTune] = useState({ mult: 1600, boost: 0 });
   const dmgOpts: DamageOpts = {
     myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100,
@@ -239,6 +241,8 @@ function BuildEditor({
       return { name: s.SkillName ?? "", type: s.SkillType ?? "", dmg: skillDamage(stats, mult, reso.element, s.SkillType, dmgOpts) };
     })
     .filter((d) => d.dmg > 0);
+  const anomMode = anomaly?.types?.[anom.type]?.mode;
+  const anomDefDown = anomaly ? anomalyDefReduce(anomaly, anom.type, anom.stacks) : 0;
   const anomDmg = anomaly ? anomalyDamage(anomaly, anom.type, anom.stacks, stats, { ...dmgOpts, occurrences: anom.occurrences }) : 0;
   const tuneDmg = tuneBreakDamage(tune.mult, { myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100, defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100, boostPoints: tune.boost, critRate: stats.crit, critDmg: stats.critDmg, repeat: 1 });
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
@@ -418,8 +422,10 @@ function BuildEditor({
                   {Object.keys(anomaly.types).map((k) => <option key={k} value={k}>{k}</option>)}
                 </select>
                 <label className="flex items-center gap-1">스택<input type="number" value={anom.stacks} onChange={(e) => setAnom((a) => ({ ...a, stacks: Number(e.target.value) }))} className="w-11 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
-                <label className="flex items-center gap-1">횟수<input type="number" value={anom.occurrences} onChange={(e) => setAnom((a) => ({ ...a, occurrences: Number(e.target.value) }))} className="w-10 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
-                <span className="ml-auto font-medium text-[var(--fg)]">{Math.round(anomDmg).toLocaleString()}</span>
+                {anomMode !== "debuff" ? (
+                  <label className="flex items-center gap-1">횟수<input type="number" value={anom.occurrences} onChange={(e) => setAnom((a) => ({ ...a, occurrences: Number(e.target.value) }))} className="w-10 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
+                ) : null}
+                <span className="ml-auto font-medium text-[var(--fg)]">{anomMode === "debuff" ? `방어 -${Math.round(anomDefDown * 100)}%` : Math.round(anomDmg).toLocaleString()}</span>
               </div>
             </div>
           ) : null}

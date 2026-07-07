@@ -66,6 +66,7 @@ ANOMALY = {
         "전자": {"mode": "tick_decay", "coef": 0.41585},
         "풍식": {"mode": "tick", "stack1": 1654, "perStack": 4134},
         "광학": {"mode": "tick", "base": 898, "stack1Mult": 1.235, "perStack": 898},
+        "암흑": {"mode": "debuff", "defPerStack": 0.02, "maxDef": 0.06},
     },
 }
 
