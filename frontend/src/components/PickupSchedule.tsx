@@ -5,11 +5,53 @@ import { useEffect, useMemo, useState } from "react";
 import { getCharacters, getPickupBanners } from "@/lib/api";
 import { API_BASE_URL, mediaUrl } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
-import type { CharacterCatalogItem, PickupBanner, PickupBannerWeapon } from "@/lib/types";
+import type { CharacterCatalogItem, PickupBanner, PickupBannerCharacter, PickupBannerWeapon } from "@/lib/types";
 
 type DetailTarget =
   | { type: "character"; nameKo: string; entry?: CharacterCatalogItem }
   | { type: "weapon"; weapon: PickupBannerWeapon };
+
+type BannerGroup = {
+  key: string;
+  isRerun: boolean;
+  isCollab: boolean;
+  startDate?: string | null;
+  endDate?: string | null;
+  minPhase: number;
+  characters: PickupBannerCharacter[];
+  weapons: PickupBannerWeapon[];
+};
+
+/** Merge a version's banners that share the same run period and category
+ * (rerun/collab) into one card — e.g. two reruns running concurrently, or the
+ * collab pair — combining their featured characters and weapons. */
+function groupBanners(list: PickupBanner[]): BannerGroup[] {
+  const groups = new Map<string, BannerGroup>();
+  for (const banner of list) {
+    const key = `${banner.is_collab ? "c" : "r"}|${banner.is_rerun ? "1" : "0"}|${banner.start_date ?? ""}|${banner.end_date ?? ""}`;
+    let group = groups.get(key);
+    if (!group) {
+      group = {
+        key,
+        isRerun: banner.is_rerun,
+        isCollab: banner.is_collab,
+        startDate: banner.start_date,
+        endDate: banner.end_date,
+        minPhase: banner.phase ?? 0,
+        characters: [],
+        weapons: [],
+      };
+      groups.set(key, group);
+    }
+    group.characters.push(...banner.characters);
+    group.weapons.push(...banner.weapons);
+    group.minPhase = Math.min(group.minPhase, banner.phase ?? 0);
+  }
+  // regular groups before collab, then chronological by earliest phase
+  return [...groups.values()].sort(
+    (a, b) => Number(a.isCollab) - Number(b.isCollab) || a.minPhase - b.minPhase,
+  );
+}
 
 /** Phase-1 banners start when the version launches; Namuwiki records that as a
  * relative phrase ("3.5 버전 업데이트 이후") rather than a date. Show a short label
@@ -82,12 +124,7 @@ export function PickupSchedule() {
       list.push(banner);
       map.set(banner.version, list);
     }
-    // Keep a version's regular banners first, then its collab banners, so the
-    // two tracks never interleave within a version block.
-    for (const list of map.values()) {
-      list.sort((a, b) => Number(a.is_collab) - Number(b.is_collab) || (a.phase ?? 0) - (b.phase ?? 0));
-    }
-    return Array.from(map, ([version, list]) => ({ version, banners: list }));
+    return Array.from(map, ([version, list]) => ({ version, groups: groupBanners(list) }));
   }, [banners, showCollab]);
 
   return (
@@ -140,7 +177,7 @@ export function PickupSchedule() {
         </div>
       ) : null}
 
-      {versions.map(({ version, banners: versionBanners }) => (
+      {versions.map(({ version, groups }) => (
         <div key={version} className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-panel dark:border-slate-800 dark:bg-slate-950">
           <div className="flex items-center gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-900">
             <span className="inline-flex h-9 items-center justify-center rounded-md bg-slate-950 px-2.5 text-sm font-semibold text-white dark:bg-teal-500 dark:text-slate-950">
@@ -150,11 +187,11 @@ export function PickupSchedule() {
           </div>
 
           <div className="grid gap-3 p-4 sm:grid-cols-2 xl:grid-cols-3">
-            {versionBanners.map((banner) => (
+            {groups.map((group) => (
               <article
-                key={banner.id}
+                key={`${version}-${group.key}`}
                 className={`rounded-md border p-3 ${
-                  banner.is_rerun
+                  group.isRerun
                     ? "border-amber-200 bg-amber-50/60 dark:border-amber-400/30 dark:bg-amber-400/5"
                     : "border-violet-200 bg-violet-50/60 dark:border-violet-400/30 dark:bg-violet-400/5"
                 }`}
@@ -162,34 +199,34 @@ export function PickupSchedule() {
                 <div className="mb-2 flex flex-wrap items-center gap-1.5">
                   <span
                     className={`inline-flex items-center gap-1.5 rounded-md px-2 py-1 text-xs font-semibold ring-1 ring-inset ${
-                      banner.is_rerun
+                      group.isRerun
                         ? "bg-amber-50 text-amber-800 ring-amber-200 dark:bg-amber-400/10 dark:text-amber-200 dark:ring-amber-400/30"
                         : "bg-violet-50 text-violet-800 ring-violet-200 dark:bg-violet-400/10 dark:text-violet-200 dark:ring-violet-400/30"
                     }`}
                   >
-                    {banner.is_rerun ? <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> : <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />}
-                    {banner.is_rerun ? "복각" : "신규"}
+                    {group.isRerun ? <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> : <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />}
+                    {group.isRerun ? "복각" : "신규"}
                   </span>
-                  {banner.is_collab ? (
+                  {group.isCollab ? (
                     <span className="inline-flex items-center gap-1 rounded-md bg-fuchsia-50 px-2 py-1 text-xs font-semibold text-fuchsia-800 ring-1 ring-inset ring-fuchsia-200 dark:bg-fuchsia-400/10 dark:text-fuchsia-200 dark:ring-fuchsia-400/30">
                       <Handshake className="h-3.5 w-3.5" aria-hidden="true" />
                       콜라보
                     </span>
                   ) : null}
                 </div>
-                {formatPeriod(banner.start_date, banner.end_date) ? (
+                {formatPeriod(group.startDate, group.endDate) ? (
                   <p className="mb-3 flex items-start gap-1 text-xs text-slate-500 dark:text-slate-400">
                     <CalendarDays className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                    <span>{formatPeriod(banner.start_date, banner.end_date)}</span>
+                    <span>{formatPeriod(group.startDate, group.endDate)}</span>
                   </p>
                 ) : null}
 
                 <div className="flex flex-wrap gap-3">
                   {showCharacters
-                    ? banner.characters.map((character) => (
+                    ? group.characters.map((character, ci) => (
                         <button
                           type="button"
-                          key={`c-${character.name_ko}`}
+                          key={`c-${character.name_ko}-${ci}`}
                           onClick={() =>
                             setDetail({
                               type: "character",
@@ -220,10 +257,10 @@ export function PickupSchedule() {
                     : null}
 
                   {showWeapons
-                    ? banner.weapons.map((weapon) => (
+                    ? group.weapons.map((weapon, wi) => (
                         <button
                           type="button"
-                          key={`w-${weapon.name_ko}`}
+                          key={`w-${weapon.name_ko}-${wi}`}
                           onClick={() => setDetail({ type: "weapon", weapon })}
                           title={`${weapon.name_ko} 상세 보기`}
                           className="flex w-16 flex-col items-center gap-1 rounded-md text-center transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-400"
