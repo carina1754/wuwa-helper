@@ -272,6 +272,33 @@ def refresh_pickup_banners() -> int:
     return len(merged)
 
 
+def refresh_character_catalog_images() -> int:
+    """Cache the character_catalog avatar/splash images locally and rewrite the
+    stored URLs to our served paths (idempotent — skips already-local paths)."""
+    with get_connection() as conn:
+        rows = conn.execute("SELECT id, data_json FROM character_catalog").fetchall()
+        updated = 0
+        for row in rows:
+            data = json.loads(row["data_json"])
+            base = f"cat-{data.get('id')}"
+            changed = False
+            for field, item_id in (("image", base), ("splash_image", f"{base}-splash")):
+                src = data.get(field)
+                if isinstance(src, str) and src.startswith("http"):
+                    local = ensure_catalog_image("characters", item_id, src)
+                    if local:
+                        data[field] = local
+                        changed = True
+            if changed:
+                conn.execute(
+                    "UPDATE character_catalog SET data_json = %s, updated_at = now() WHERE id = %s",
+                    (json.dumps(data, ensure_ascii=False), row["id"]),
+                )
+                updated += 1
+        conn.commit()
+    return updated
+
+
 def load_pickup_banners() -> list[PickupBanner]:
     with get_connection() as conn:
         rows = conn.execute("SELECT data_json FROM pickup_banners").fetchall()

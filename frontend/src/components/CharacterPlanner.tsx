@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { getCharacters } from "@/lib/api";
-import { ROLES } from "@/lib/constants";
+import { ROLES, mediaUrl } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import type { CharacterCatalogItem } from "@/lib/types";
 
@@ -104,13 +104,13 @@ export function CharacterPlanner() {
             <article key={character.id} className="overflow-hidden rounded-md border border-slate-200 bg-white shadow-panel">
               {character.splash_image ? (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={character.splash_image} alt="" className="w-full bg-slate-50 object-contain" style={{ aspectRatio: "696 / 960" }} />
+                <img src={mediaUrl(character.splash_image)} alt="" className="w-full bg-slate-50 object-contain" style={{ aspectRatio: "696 / 960" }} />
               ) : null}
               <div className="grid gap-3 p-4">
                 <div className="flex items-start gap-3">
                   {character.image ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={character.image} alt="" className="h-14 w-14 rounded-md object-cover" />
+                    <img src={mediaUrl(character.image)} alt="" className="h-14 w-14 rounded-md object-cover" />
                   ) : null}
                   <div className="min-w-0">
                     <h3 className="truncate text-base font-semibold text-slate-950">{translateCharacterName(character.name)}</h3>

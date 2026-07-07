@@ -1,6 +1,14 @@
 import type { CharacterSnapshot, EchoItem, Role } from "./types";
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
+
+/** Resolve a stored image path: absolute URLs pass through; our locally-cached
+ * paths (e.g. "/catalog/image/...") are prefixed with the API base. */
+export function mediaUrl(path?: string | null): string | undefined {
+  if (!path) return undefined;
+  return path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
+}
+
 export const ROLES: Role[] = ["main_dps", "sub_dps", "support", "healer"];
 export const TABS = ["Dashboard", "Analyzer", "Planner", "PickupSchedule", "Updates", "Teams", "History"] as const;
 export type AppTab = (typeof TABS)[number] | "SiteUpdates";

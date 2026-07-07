@@ -172,3 +172,35 @@ def test_refresh_pickup_banners_merges_char_and_weapon(monkeypatch):
     with get_connection() as conn:
         conn.execute("DELETE FROM pickup_banners")
         conn.commit()
+
+
+def test_refresh_character_catalog_images_rewrites_to_local(monkeypatch):
+    import json as _json
+
+    init_db()
+    monkeypatch.setattr(catalog, "ensure_catalog_image", lambda kind, iid, src: f"/catalog/image/{kind}/{iid}")
+    with get_connection() as conn:
+        conn.execute("DELETE FROM character_catalog WHERE id = %s", (999999,))
+        conn.execute(
+            "INSERT INTO character_catalog (id, name, role, data_json, updated_at) VALUES (%s, %s, %s, %s, now())",
+            (
+                999999, "테스트", "main_dps",
+                _json.dumps(
+                    {"id": 999999, "name": "테스트", "role": "main_dps",
+                     "image": "https://cdn.example/x.webp", "splash_image": "https://cdn.example/y.webp"},
+                    ensure_ascii=False,
+                ),
+            ),
+        )
+        conn.commit()
+
+    assert catalog.refresh_character_catalog_images() >= 1
+    with get_connection() as conn:
+        row = conn.execute("SELECT data_json FROM character_catalog WHERE id = %s", (999999,)).fetchone()
+    data = _json.loads(row["data_json"])
+    assert data["image"] == "/catalog/image/characters/cat-999999"
+    assert data["splash_image"] == "/catalog/image/characters/cat-999999-splash"
+
+    with get_connection() as conn:
+        conn.execute("DELETE FROM character_catalog WHERE id = %s", (999999,))
+        conn.commit()
