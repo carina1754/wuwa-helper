@@ -22,3 +22,5 @@ caddy/*.exe
 caddy/certs/
 DB/
 backend/.env
+media/
+backend/media/
