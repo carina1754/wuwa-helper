@@ -99,17 +99,14 @@ main{flex:1;padding:34px 0 60px}
 .tag{font-size:12px;color:var(--fg-soft);border:1px solid var(--line-2);border-radius:8px;padding:4px 11px;background:var(--surface-2)}
 .tag.src{color:var(--accent);border-color:var(--accent-glow)}
 
-/* 대표 카드: 배너를 배경으로 (히어로) */
-.feat.has-bg{display:block;position:relative;overflow:hidden;padding:0;min-height:308px;border-color:var(--line-2)}
-.feat-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 20%;
+/* 대표 카드: 배너를 은은한 배경으로 (히어로) */
+.feat.has-bg{display:block;position:relative;overflow:hidden;border-color:var(--line-2)}
+.feat-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 24%;opacity:.5;
   transform:scale(1.02);transition:transform 9s ease}
-.feat.has-bg:hover .feat-bg{transform:scale(1.06)}
+.feat.has-bg:hover .feat-bg{transform:scale(1.05)}
 .feat.has-bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:
-  linear-gradient(to top,var(--surface) 5%,color-mix(in srgb,var(--surface) 60%,transparent) 30%,color-mix(in srgb,var(--surface) 8%,transparent) 60%,transparent 88%),
-  linear-gradient(100deg,color-mix(in srgb,var(--surface) 34%,transparent),transparent 52%)}
-.feat.has-bg .body{position:relative;z-index:1;justify-content:flex-end;padding:26px 28px;min-height:308px}
-.feat.has-bg .body h2{font-size:26px}
-.feat.has-bg .body>p{color:var(--fg);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  linear-gradient(180deg,color-mix(in srgb,var(--surface) 46%,transparent),color-mix(in srgb,var(--surface) 74%,transparent))}
+.feat.has-bg>.body{position:relative;z-index:1}
 
 /* 지난 버전 리스트 */
 .arch{font-family:ui-monospace,monospace;font-size:11.5px;letter-spacing:.15em;text-transform:uppercase;color:var(--faint);
@@ -136,19 +133,16 @@ main{flex:1;padding:34px 0 60px}
 .acc-media.has-bg{min-height:150px}
 .acc-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 28%;
   opacity:0;transform:scale(1.05);transition:opacity .6s ease .12s,transform 7s ease}
-.acc.open .acc-bg{opacity:1;transform:scale(1)}
-/* 배너 위 그라디언트 스크림: 좌측(글자·태그)은 불투명, 우측으로 갈수록 배너가 선명하게 드러남 */
+.acc.open .acc-bg{opacity:.5;transform:scale(1)}
+/* 배너를 은은한 배경으로: 전체에 부드러운 서페이스 베일 */
 .acc-media.has-bg::after{content:"";position:absolute;inset:0;pointer-events:none;background:
-  linear-gradient(100deg,var(--surface) 28%,color-mix(in srgb,var(--surface) 46%,transparent) 56%,color-mix(in srgb,var(--surface) 4%,transparent) 82%,transparent 100%),
-  linear-gradient(to top,var(--surface) 3%,transparent 62%)}
+  linear-gradient(180deg,color-mix(in srgb,var(--surface) 46%,transparent),color-mix(in srgb,var(--surface) 72%,transparent))}
 .acc-body{position:relative;z-index:1;padding:15px 14px 18px 88px;
   opacity:0;transform:translateY(-4px);transition:opacity .28s .04s,transform .28s .04s}
 .acc.open .acc-body{opacity:1;transform:none}
 .acc-body>p{color:var(--fg-soft);font-size:14px;line-height:1.65}
-.acc-media.has-bg .acc-body{max-width:min(64%,580px)}
 .acc-media.has-bg .acc-body>p{color:var(--fg)}
 .acc-body .tags{margin-top:12px}
-@media(max-width:620px){.acc-media.has-bg .acc-body{max-width:none}}
 .acc.open .urow .arw{color:var(--accent);transform:rotate(90deg)}
 @media(max-width:620px){.acc-body{padding-left:64px}}
 
