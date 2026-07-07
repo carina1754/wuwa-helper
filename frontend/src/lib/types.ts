@@ -109,6 +109,7 @@ export interface GameUpdateSummary {
   summary_ko: string;
   highlights_ko: string[];
   source_links: string[];
+  image_url?: string | null;
 }
 
 export interface SiteUpdateEntry {
