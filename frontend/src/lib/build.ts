@@ -232,7 +232,28 @@ export function defMultiplier(myLevel = 90, enemyLevel = 90, defIgnore = 0, defR
   return (800 + 8 * myLevel) / (800 + 8 * myLevel + (792 + 8 * enemyLevel) * (1 - defIgnore) * (1 - defReduce));
 }
 
-export type DamageOpts = { myLevel?: number; enemyLevel?: number; enemyRes?: number };
+// All adjustable conditions from the phro.love formula.
+export type DamageOpts = {
+  myLevel?: number;
+  enemyLevel?: number;
+  enemyRes?: number; // 0.2 = 20%
+  resShred?: number; // 저항 무시 (adds to 0.8 base)
+  defIgnore?: number; // 방어 무시 (0..1)
+  defReduce?: number; // 방어 감소 (0..1)
+  boost?: number; // 부스트 % (independent)
+  dmgTaken?: number; // 받는 피해 % (independent)
+  totalDmg?: number; // 최종 피해 % (independent)
+  bonusPct?: number; // extra 피해증가 % (buffs)
+  fixedDmg?: number; // 고정 추가 피해 (added last)
+};
+
+function resMultiplier(enemyRes: number, resShred: number): number {
+  // phro.love sim: 0.8 + 저항무시, overpen (negative net res) counts half.
+  const net = enemyRes - resShred; // effective enemy resistance
+  const raw = 1 - net; // = 0.8 at 20% with no shred
+  return raw > 1 ? 1 + (raw - 1) * 0.5 : raw;
+}
+
 export function skillDamage(
   stats: Record<StatKey, number>,
   multiplierPct: number,
@@ -240,11 +261,68 @@ export function skillDamage(
   skillType: string | null | undefined,
   opts: DamageOpts = {},
 ): number {
-  const { myLevel = 90, enemyLevel = 90, enemyRes = 0.2 } = opts;
+  const {
+    myLevel = 90, enemyLevel = 90, enemyRes = 0.2, resShred = 0,
+    defIgnore = 0, defReduce = 0, boost = 0, dmgTaken = 0, totalDmg = 0, bonusPct = 0, fixedDmg = 0,
+  } = opts;
   const elemKey = element ? ELEMENT_DMG_KEY[element] : undefined;
   const typeKey = skillTypeDmgKey(skillType);
-  const dmgBonus = 1 + ((elemKey ? stats[elemKey] : 0) + (typeKey ? stats[typeKey] : 0)) / 100;
-  const res = Math.max(0, 1 - enemyRes); // 0.8 at 20% enemy RES, no shred
-  const def = defMultiplier(myLevel, enemyLevel);
-  return (multiplierPct / 100) * stats.atk * critMultiplier(stats) * dmgBonus * res * def;
+  const dmgBonus = 1 + ((elemKey ? stats[elemKey] : 0) + (typeKey ? stats[typeKey] : 0) + bonusPct) / 100;
+  const res = resMultiplier(enemyRes, resShred);
+  const def = defMultiplier(myLevel, enemyLevel, defIgnore, defReduce);
+  const base =
+    (multiplierPct / 100) * stats.atk * critMultiplier(stats) * dmgBonus *
+    (1 + boost / 100) * res * def * (1 + dmgTaken / 100) * (1 + totalDmg / 100);
+  return base + fixedDmg;
+}
+
+// --- Anomaly (이상) damage — phro.love ----------------------------------------
+export type AnomalyType = { key: string; mode: string; coef?: number; maxStack?: number; overBonus?: number; stack1?: number; perStack?: number; stack1Mult?: number; base?: number };
+export type AnomalyConfig = { base: Record<string, number>; types: Record<string, AnomalyType> };
+// base value B(L) × element coefficient / stack function
+export function anomalyBase(cfg: AnomalyConfig, type: string, stacks: number, myLevel = 90): number {
+  const B = cfg.base[String(myLevel)] ?? cfg.base["90"] ?? 3674;
+  const t = cfg.types[type];
+  if (!t) return 0;
+  if (t.mode === "burst") {
+    const over = Math.max(0, stacks - (t.maxStack ?? 10));
+    return B * (t.coef ?? 0) * (1 + (t.overBonus ?? 0.33) * over);
+  }
+  if (t.mode === "tick_decay") {
+    // 3674 × coef × n, halving stacks per tick (decay series ~ ×2 total)
+    return B * (t.coef ?? 0) * stacks * 2;
+  }
+  if (t.mode === "tick") {
+    if (stacks <= 1) return t.stack1 ?? (t.base ?? 0) * (t.stack1Mult ?? 1);
+    return (t.perStack ?? t.base ?? 0) * (stacks - 1);
+  }
+  return 0;
+}
+export function anomalyDamage(
+  cfg: AnomalyConfig, type: string, stacks: number,
+  stats: Record<StatKey, number>, opts: DamageOpts & { occurrences?: number } = {},
+): number {
+  const baseVal = anomalyBase(cfg, type, stacks, opts.myLevel ?? 90);
+  const { enemyLevel = 90, enemyRes = 0.2, resShred = 0, defReduce = 0, boost = 0, totalDmg = 0, occurrences = 1 } = opts;
+  // anomaly ignores 방어무시 (only 방어감소), uses 이상치명 (=1 unless a crit stat), RES same rule
+  const res = resMultiplier(enemyRes, resShred);
+  const def = defMultiplier(opts.myLevel ?? 90, enemyLevel, 0, defReduce);
+  return baseVal * occurrences * (1 + boost / 100) * 1 * def * res * (1 + totalDmg / 100);
+}
+
+// --- Concerto/Tune break (조화도 파괴) damage — phro.love ----------------------
+// 10000 × multiplier × boost × crit × RES × DEF × tuneDmgBonus × repeat
+export function tuneBreakDamage(
+  multiplierPct: number,
+  opts: DamageOpts & { boostPoints?: number; tuneDmgPct?: number; critRate?: number; critDmg?: number; repeat?: number } = {},
+): number {
+  const {
+    myLevel = 90, enemyLevel = 90, enemyRes = 0.2, resShred = 0, defIgnore = 0, defReduce = 0,
+    boostPoints = 0, tuneDmgPct = 0, critRate = 0, critDmg = 0, repeat = 1,
+  } = opts;
+  const boost = (100 + boostPoints) / 100;
+  const crit = 1 + (critRate / 100) * (critDmg / 100 - 1); // expected-value crit (base 150% ⇒ ×0.5)
+  const res = resMultiplier(enemyRes, resShred);
+  const def = defMultiplier(myLevel, enemyLevel, defIgnore, defReduce);
+  return 10000 * (multiplierPct / 100) * boost * crit * res * def * (1 + tuneDmgPct / 100) * repeat;
 }

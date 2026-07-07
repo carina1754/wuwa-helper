@@ -7,8 +7,11 @@ import { useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexWeapon, SonataSet } from "@/lib/types";
 import {
   activeSetBonuses,
+  type AnomalyConfig,
+  anomalyDamage,
   buildCost,
   computeStats,
+  type DamageOpts,
   echoFromCodex,
   echoMainOptions,
   emptyBuild,
@@ -20,6 +23,7 @@ import {
   STAT_LABEL,
   subMax,
   subSlots,
+  tuneBreakDamage,
   weaponDescAtRank,
 } from "@/lib/build";
 
@@ -44,6 +48,7 @@ export function TeamBuilder() {
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
   const [echoes, setEchoes] = useState<CodexEcho[]>([]);
   const [config, setConfig] = useState<GameConfig | null>(null);
+  const [anomaly, setAnomaly] = useState<AnomalyConfig | null>(null);
   const [sonata, setSonata] = useState<SonataSet[]>([]);
   const [party, setParty] = useState<Slot[]>(newParty);
   const [editing, setEditing] = useState<number | null>(null);
@@ -54,7 +59,10 @@ export function TeamBuilder() {
     getCodexWeapons().then(setWeapons).catch(() => {});
     getCodexEchoes().then(setEchoes).catch(() => {});
     getGameConfig()
-      .then((c) => setConfig((c?.echo_stats as GameConfig) ?? null))
+      .then((c) => {
+        setConfig((c?.echo_stats as GameConfig) ?? null);
+        setAnomaly((c?.anomaly as AnomalyConfig) ?? null);
+      })
       .catch(() => {});
     getSonataSets().then(setSonata).catch(() => {});
   }, []);
@@ -163,6 +171,7 @@ export function TeamBuilder() {
                 echoById={echoById}
                 setByName={setByName}
                 config={config}
+                anomaly={anomaly}
                 slot={editing}
                 t={t}
                 onChange={(fn) => setBuild(editing, fn)}
@@ -192,7 +201,7 @@ export function TeamBuilder() {
 
 // ---------------------------------------------------------------------------
 function BuildEditor({
-  reso, build, weaponById, echoById, setByName, config, slot, t, onChange, onPick, onClose,
+  reso, build, weaponById, echoById, setByName, config, anomaly, slot, t, onChange, onPick, onClose,
 }: {
   reso: CodexResonator;
   build: ResonatorBuild;
@@ -200,6 +209,7 @@ function BuildEditor({
   echoById: Map<string, CodexEcho>;
   setByName: Map<string, SonataSet>;
   config: GameConfig | null;
+  anomaly: AnomalyConfig | null;
   slot: number;
   t: ReturnType<typeof useLanguage>["t"];
   onChange: (fn: (b: ResonatorBuild) => ResonatorBuild) => void;
@@ -212,6 +222,13 @@ function BuildEditor({
   const cost = buildCost(build);
   const costBudget = config?.costBudget ?? 12;
   const [skillLv, setSkillLv] = useState(10);
+  const [dmg, setDmg] = useState({ enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, dmgTaken: 0, totalDmg: 0, bonusPct: 0 });
+  const [anom, setAnom] = useState({ type: "서리", stacks: 10, occurrences: 1 });
+  const [tune, setTune] = useState({ mult: 1600, boost: 0 });
+  const dmgOpts: DamageOpts = {
+    myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100,
+    defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100, boost: dmg.boost, dmgTaken: dmg.dmgTaken, totalDmg: dmg.totalDmg, bonusPct: dmg.bonusPct,
+  };
   const damages = (reso.skills ?? [])
     .filter((s) => s.damage?.length)
     .map((s) => {
@@ -219,9 +236,11 @@ function BuildEditor({
         const r = d.rates[Math.min(skillLv - 1, d.rates.length - 1)] ?? "0";
         return a + (parseFloat(r) || 0);
       }, 0);
-      return { name: s.SkillName ?? "", type: s.SkillType ?? "", dmg: skillDamage(stats, mult, reso.element, s.SkillType) };
+      return { name: s.SkillName ?? "", type: s.SkillType ?? "", dmg: skillDamage(stats, mult, reso.element, s.SkillType, dmgOpts) };
     })
     .filter((d) => d.dmg > 0);
+  const anomDmg = anomaly ? anomalyDamage(anomaly, anom.type, anom.stacks, stats, { ...dmgOpts, occurrences: anom.occurrences }) : 0;
+  const tuneDmg = tuneBreakDamage(tune.mult, { myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100, defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100, boostPoints: tune.boost, critRate: stats.crit, critDmg: stats.critDmg, repeat: 1 });
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
     onChange((b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === idx && e ? fn(e) : e)) }));
 
@@ -352,23 +371,69 @@ function BuildEditor({
         </dl>
       </div>
 
-      {/* estimated damage (phro.love formula) */}
-      {damages.length ? (
-        <div>
-          <div className="mb-1.5 flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-[var(--fg)]">예상 데미지</h4>
-            <span className="text-xs text-[var(--muted)]">스킬 Lv.{skillLv} · 적 90</span>
+      {/* damage calculator (phro.love formulas) */}
+      {damages.length || anomaly ? (
+        <div className="grid gap-3">
+          <h4 className="text-sm font-semibold text-[var(--fg)]">데미지 계산</h4>
+
+          <div className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] p-2.5">
+            <div className="mb-1.5 text-[11px] font-medium text-[var(--muted)]">적 / 버프 조건</div>
+            <div className="grid grid-cols-3 gap-1.5 text-[11px]">
+              {([
+                ["적 레벨", "enemyLevel"], ["저항%", "enemyRes"], ["저항무시%", "resShred"],
+                ["방어무시%", "defIgnore"], ["방어감소%", "defReduce"], ["부스트%", "boost"],
+                ["받는피해%", "dmgTaken"], ["최종피해%", "totalDmg"], ["피해증가%", "bonusPct"],
+              ] as [string, keyof typeof dmg][]).map(([label, key]) => (
+                <label key={key} className="flex items-center justify-between gap-1 rounded bg-[var(--surface)] px-1.5 py-1">
+                  <span className="text-[var(--muted)]">{label}</span>
+                  <input type="number" value={dmg[key]} onChange={(e) => setDmg((d0) => ({ ...d0, [key]: Number(e.target.value) }))} className="w-11 rounded border border-[var(--line-2)] bg-[var(--surface-2)] px-1 text-right text-[var(--fg)]" />
+                </label>
+              ))}
+            </div>
           </div>
-          <input type="range" min={1} max={10} value={skillLv} onChange={(e) => setSkillLv(Number(e.target.value))} className="mb-2 w-full accent-[var(--accent)]" aria-label="스킬 레벨" />
-          <dl className="grid gap-1.5 text-sm">
-            {damages.map((d, i) => (
-              <div key={i} className="flex items-center justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5">
-                <dt className="min-w-0 truncate text-[var(--muted)]">{d.name}{d.type ? ` · ${d.type}` : ""}</dt>
-                <dd className="font-medium text-[var(--fg)]">{Math.round(d.dmg).toLocaleString()}</dd>
+
+          {damages.length ? (
+            <div>
+              <div className="mb-1 flex items-center justify-between text-xs">
+                <span className="font-medium text-[var(--fg-soft)]">일반 데미지</span>
+                <span className="text-[var(--muted)]">스킬 Lv.{skillLv}</span>
               </div>
-            ))}
-          </dl>
-          <p className="mt-1 text-[10px] leading-4 text-[var(--muted)]">크리 기대값 · 적 90레벨 20% 저항 기준 · 콤보 전체 계수 합 · 버프/부스트 미포함</p>
+              <input type="range" min={1} max={10} value={skillLv} onChange={(e) => setSkillLv(Number(e.target.value))} className="mb-1.5 w-full accent-[var(--accent)]" aria-label="스킬 레벨" />
+              <dl className="grid gap-1 text-sm">
+                {damages.map((d, i) => (
+                  <div key={i} className="flex items-center justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5">
+                    <dt className="min-w-0 truncate text-[var(--muted)]">{d.name}{d.type ? ` · ${d.type}` : ""}</dt>
+                    <dd className="font-medium text-[var(--fg)]">{Math.round(d.dmg).toLocaleString()}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+          ) : null}
+
+          {anomaly ? (
+            <div>
+              <div className="mb-1 text-xs font-medium text-[var(--fg-soft)]">이상 데미지</div>
+              <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
+                <select value={anom.type} onChange={(e) => setAnom((a) => ({ ...a, type: e.target.value }))} className="rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
+                  {Object.keys(anomaly.types).map((k) => <option key={k} value={k}>{k}</option>)}
+                </select>
+                <label className="flex items-center gap-1">스택<input type="number" value={anom.stacks} onChange={(e) => setAnom((a) => ({ ...a, stacks: Number(e.target.value) }))} className="w-11 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
+                <label className="flex items-center gap-1">횟수<input type="number" value={anom.occurrences} onChange={(e) => setAnom((a) => ({ ...a, occurrences: Number(e.target.value) }))} className="w-10 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
+                <span className="ml-auto font-medium text-[var(--fg)]">{Math.round(anomDmg).toLocaleString()}</span>
+              </div>
+            </div>
+          ) : null}
+
+          <div>
+            <div className="mb-1 text-xs font-medium text-[var(--fg-soft)]">조화도 파괴</div>
+            <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
+              <label className="flex items-center gap-1">배율%<input type="number" value={tune.mult} onChange={(e) => setTune((x) => ({ ...x, mult: Number(e.target.value) }))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
+              <label className="flex items-center gap-1">부스트pt<input type="number" value={tune.boost} onChange={(e) => setTune((x) => ({ ...x, boost: Number(e.target.value) }))} className="w-12 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
+              <span className="ml-auto font-medium text-[var(--fg)]">{Math.round(tuneDmg).toLocaleString()}</span>
+            </div>
+          </div>
+
+          <p className="text-[10px] leading-4 text-[var(--muted)]">phro.love 공식 · 크리 기대값 · 콤보 계수 합 · 상수는 DB(game_config)</p>
         </div>
       ) : null}
     </div>

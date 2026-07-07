@@ -57,7 +57,22 @@ ECHO_STATS = {
     "subSlots": {"1": 1, "2": 2, "3": 3, "4": 4, "5": 5},
 }
 
-CONFIGS = {"echo_stats": ECHO_STATS}
+# Anomaly (이상) constants from phro.love. B(L) base × element coefficient / stack fn.
+ANOMALY = {
+    "base": {"90": 3674},
+    "types": {
+        "서리": {"mode": "burst", "coef": 2.0377, "maxStack": 10, "overBonus": 0.33},
+        "불꽃": {"mode": "burst", "coef": 6.9863, "maxStack": 10, "overBonus": 0.33},
+        "전자": {"mode": "tick_decay", "coef": 0.41585},
+        "풍식": {"mode": "tick", "stack1": 1654, "perStack": 4134},
+        "광학": {"mode": "tick", "base": 898, "stack1Mult": 1.235, "perStack": 898},
+    },
+}
+
+# Concerto / tune break (조화도 파괴): fixed base + default skill multiplier.
+TUNE_BREAK = {"base": 10000, "defaultMultiplier": 16.0}
+
+CONFIGS = {"echo_stats": ECHO_STATS, "anomaly": ANOMALY, "tune_break": TUNE_BREAK}
 
 
 def main() -> None:
