@@ -121,8 +121,8 @@ def test_history_round_trip():
         conn.commit()
 
 
-def test_vision_extract_uses_mock_without_api_key(monkeypatch):
-    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+def test_vision_extract_uses_mock_without_llm(monkeypatch):
+    monkeypatch.delenv("LLM_BASE_URL", raising=False)
     response = client.post(
         "/vision/extract",
         files={"file": ("sample.png", b"not-a-real-image", "image/png")},
@@ -135,7 +135,7 @@ def test_vision_extract_uses_mock_without_api_key(monkeypatch):
 
 
 def test_analyze_character_returns_diagnoses_and_report(monkeypatch):
-    monkeypatch.delenv("OPENAI_API_KEY", raising=False)
+    monkeypatch.delenv("LLM_BASE_URL", raising=False)
     extraction = client.post(
         "/vision/extract",
         files={"file": ("sample.png", b"sample", "image/png")},

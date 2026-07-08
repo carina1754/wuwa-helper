@@ -37,13 +37,14 @@ uv run uvicorn main:app --host 127.0.0.1 --port 8000
 선택적 환경 변수:
 
 ```powershell
-$env:OPENAI_API_KEY="..."
-$env:OPENAI_MODEL="gpt-4.1-mini"
+$env:LLM_BASE_URL="http://127.0.0.1:8080/v1"   # llama.cpp llama-server (OpenAI 호환)
+$env:LLM_MODEL="wuwa-vlm"
+$env:LLM_API_KEY="sk-local"
 $env:DATABASE_URL="postgresql://postgres:<password>@127.0.0.1:5432/wuwa_ai_coach"
 $env:CORS_ALLOW_ORIGINS="https://wuwahelper.com,http://localhost:3000,http://127.0.0.1:3000"
 ```
 
-`OPENAI_API_KEY`가 설정되어 있지 않으면 `/vision/extract`는 고정된 목(mock) 데이터를 경고 메시지와 함께 반환합니다.
+비전 추출은 로컬 멀티모달 LLM(llama.cpp `llama-server`)의 OpenAI 호환 엔드포인트를 사용합니다. `LLM_BASE_URL`이 설정되어 있지 않으면 `/vision/extract`는 고정된 목(mock) 데이터를 경고 메시지와 함께 반환합니다.
 
 백엔드 의존성을 추가할 때는 `uv add` 또는 `uv add --dev`를 사용하고, `requirements.txt` 파일을 직접 수정하지 마세요.
 

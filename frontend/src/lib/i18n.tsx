@@ -304,8 +304,8 @@ export const copy = {
     settings: {
       title: "설정",
       apiBaseUrl: "API 기본 URL",
-      openAiKey: "OpenAI API 키",
-      openAiKeyBody: "실제 비전 추출을 사용하려면 백엔드 환경에 OPENAI_API_KEY를 설정하세요. 없으면 mock 모드가 사용됩니다.",
+      openAiKey: "로컬 LLM (비전)",
+      openAiKeyBody: "실제 비전 추출을 사용하려면 백엔드에 LLM_BASE_URL(llama.cpp llama-server)을 설정하세요. 없으면 mock 모드가 사용됩니다.",
       legalNotice: "법적 안내",
       legalNoticeBody: "명조 AI 헬퍼는 비공식 팬 도구이며 Wuthering Waves 또는 Kuro Games와 관련이 없습니다.",
       exportJson: "JSON 내보내기",
@@ -616,8 +616,8 @@ export const copy = {
     settings: {
       title: "Settings",
       apiBaseUrl: "API base URL",
-      openAiKey: "OpenAI API key",
-      openAiKeyBody: "Set OPENAI_API_KEY in the backend environment to enable real vision extraction. Without it, mock mode is used.",
+      openAiKey: "Local LLM (vision)",
+      openAiKeyBody: "Set LLM_BASE_URL (llama.cpp llama-server) in the backend to enable real vision extraction. Without it, mock mode is used.",
       legalNotice: "Legal notice",
       legalNoticeBody: "WaWa AI Helper is an unofficial fan tool and is not affiliated with Wuthering Waves or Kuro Games.",
       exportJson: "Export JSON",
