@@ -179,9 +179,7 @@ export function computeStats(
     if (opt) addStat(e.main, echoMainValue(opt.max, e.level));
     for (const s of e.subs) addStat(s.key, s.value);
   }
-  for (const s of extra) addStat(s.key, s.value); // sonata set effects etc.
-  const wp = weaponPassiveBonus(weapon, build.weaponRank); // 무기 패시브 항상-적용 버프
-  if (wp) addStat(wp.key, wp.value);
+  for (const s of extra) addStat(s.key, s.value); // sonata sets + weapon passive buffs (from caller)
 
   out.hp = (baseHp) * (1 + pct.hpPct / 100) + flat.hp;
   out.atk = (baseAtk + weaponAtk) * (1 + pct.atkPct / 100) + flat.atk;
@@ -202,29 +200,70 @@ export function weaponDescAtRank(desc: string | null | undefined, rank: number):
   });
 }
 
-// Weapon passive: apply the LEADING unconditional buff, e.g. "공격력이 24% 증가된다".
-// Conditional clauses (~시 / ~경우 / ~이상 / ~이하 등)은 전투 상태 의존이라 자동 적용하지 않고
-// 수동 피해증가/부스트 칸으로 남긴다. 값은 정제(refine) 랭크 기준.
-export function weaponPassiveBonus(
+// Parse weapon passive stat/boost buffs from the description, split into
+// ALWAYS-on (unconditional leading clauses) vs CONDITIONAL (trigger-gated), each
+// scaled by refine rank and multiplied by its max stack count. The party builder
+// applies `always` unconditionally and `conditional`+`boost` only under the
+// "full uptime" assumption. Free-text parse → conservative: only recognized stat
+// phrases are captured; anything ambiguous is left out.
+export type WeaponBuff = { key: StatKey; value: number };
+const WEAPON_ELEM_DMG: [string, StatKey][] = [
+  ["응결", "glacioDmg"], ["용융", "fusionDmg"], ["전도", "electroDmg"],
+  ["기류", "aeroDmg"], ["회절", "spectroDmg"], ["인멸", "havocDmg"],
+];
+// A sentence is conditional if it names a trigger/gate rather than a flat buff.
+const WEAPON_COND_RE = /시|경우|후|때|이상|이하|발동|추가|입힌|입힐|명중|처치|소모|획득|전환|스택|중첩|상태|동안/;
+export function weaponBuffs(
   weapon: CodexWeapon | null,
   rank: number,
-): { key: StatKey; value: number } | null {
-  if (!weapon?.desc) return null;
-  const text = weaponDescAtRank(weapon.desc, rank).trimStart();
-  const m = text.match(/^(크리티컬\s*피해|크리티컬|공격력|방어력|HP|생명력|공명\s*효율)[이가]?\s*([\d.]+)\s*%\s*증가/);
-  if (!m) return null;
-  const value = parseFloat(m[2]);
-  if (!Number.isFinite(value)) return null;
-  const label = m[1];
-  const key: StatKey | null =
-    /크리티컬\s*피해/.test(label) ? "critDmg"
-    : label.startsWith("크리티컬") ? "crit"
-    : label.startsWith("공격력") ? "atkPct"
-    : label.startsWith("방어력") ? "defPct"
-    : /^(HP|생명력)/.test(label) ? "hpPct"
-    : /공명\s*효율/.test(label) ? "energyRegen"
-    : null;
-  return key ? { key, value } : null;
+): { always: WeaponBuff[]; conditional: WeaponBuff[]; boost: number } {
+  const always: Partial<Record<StatKey, number>> = {};
+  const cond: Partial<Record<StatKey, number>> = {};
+  let boost = 0;
+  if (!weapon?.desc) return { always: [], conditional: [], boost: 0 };
+  const text = weaponDescAtRank(weapon.desc, rank);
+  // split on sentence boundaries, but NOT on the "." inside decimals (25.6%)
+  for (const sentence of text.split(/[。\n]+|\.(?!\d)/)) {
+    if (!sentence.trim()) continue;
+    const conditional = WEAPON_COND_RE.test(sentence);
+    const bucket = conditional ? cond : always;
+    const stackM = sentence.match(/최대\s*(\d+)\s*스택/);
+    const stacks = stackM ? Math.max(1, parseInt(stackM[1], 10)) : 1;
+    const add = (key: StatKey, v: number) => { bucket[key] = (bucket[key] ?? 0) + v * stacks; };
+    // "전체 속성 피해 보너스가 N% 증가" → all six element keys (char uses only its own)
+    for (const m of sentence.matchAll(/전체\s*속성\s*피해\s*보너스[가이을를]?\s*([\d.]+)\s*%\s*증가/g))
+      for (const [, key] of WEAPON_ELEM_DMG) add(key, parseFloat(m[1]));
+    // "일반 공격, 강공격 피해 보너스가 N% 증가" → both; consume so singles don't double-count
+    const rest = sentence.replace(
+      /일반\s*공격,\s*강공격\s*피해\s*보너스[가이을를]?\s*([\d.]+)\s*%\s*증가/g,
+      (_m, v: string) => { add("basicDmg", parseFloat(v)); add("heavyDmg", parseFloat(v)); return " "; },
+    );
+    const singles: [RegExp, StatKey][] = [
+      [/일반\s*공격\s*피해\s*보너스[가이을를]?\s*([\d.]+)\s*%\s*증가/g, "basicDmg"],
+      [/강공격\s*피해\s*보너스[가이을를]?\s*([\d.]+)\s*%\s*증가/g, "heavyDmg"],
+      [/공명\s*스킬\s*피해\s*보너스[가이을를]?\s*([\d.]+)\s*%\s*증가/g, "skillDmg"],
+      [/공명\s*해방\s*피해\s*보너스[가이을를]?\s*([\d.]+)\s*%\s*증가/g, "liberationDmg"],
+      [/공격력[이가]\s*([\d.]+)\s*%\s*증가/g, "atkPct"],
+      [/방어력[이가]\s*([\d.]+)\s*%\s*증가/g, "defPct"],
+      [/(?:HP|생명력)[이가]\s*([\d.]+)\s*%\s*증가/g, "hpPct"],
+      [/크리티컬\s*피해[를이가을]?\s*([\d.]+)\s*%\s*증가/g, "critDmg"],
+      [/크리티컬[이가]\s*([\d.]+)\s*%\s*증가/g, "crit"],
+      [/공명\s*효율[이가]?\s*([\d.]+)\s*%\s*증가/g, "energyRegen"],
+    ];
+    for (const [re, key] of singles) {
+      for (const m of rest.matchAll(re)) add(key, parseFloat(m[1]));
+    }
+    for (const [name, key] of WEAPON_ELEM_DMG) {
+      for (const m of rest.matchAll(new RegExp(`${name}\\s*(?:효과\\s*)?피해\\s*보너스[가이을를]?\\s*([\\d.]+)\\s*%\\s*증가`, "g"))) add(key, parseFloat(m[1]));
+    }
+    // boost clauses ("... N% 부스트") — treated as conditional (trigger-gated)
+    for (const m of rest.matchAll(/([\d.]+)\s*%\s*부스트/g)) boost += parseFloat(m[1]) * stacks;
+  }
+  const toArr = (o: Partial<Record<StatKey, number>>): WeaponBuff[] =>
+    (Object.entries(o) as [StatKey, number][])
+      .filter(([, v]) => Number.isFinite(v) && v !== 0)
+      .map(([key, value]) => ({ key, value }));
+  return { always: toArr(always), conditional: toArr(cond), boost };
 }
 
 // pick the default main stat for an echo of a given cost

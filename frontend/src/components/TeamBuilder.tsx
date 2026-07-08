@@ -26,8 +26,9 @@ import {
   subMax,
   subSlots,
   tuneBreakDamage,
+  type WeaponBuff,
+  weaponBuffs,
   weaponDescAtRank,
-  weaponPassiveBonus,
 } from "@/lib/build";
 
 const PARTY_SIZE = 3;
@@ -131,7 +132,8 @@ export function TeamBuilder() {
       <div className="grid gap-3 sm:grid-cols-3">
         {party.map((slot, i) => {
           const reso = slot.resonatorId != null ? resoById.get(slot.resonatorId) : null;
-          const stats = reso ? computeStats(reso, slot.build.weaponId ? weaponById.get(slot.build.weaponId) ?? null : null, slot.build, config, bonusesFor(slot.build)) : null;
+          const slotWeapon = slot.build.weaponId ? weaponById.get(slot.build.weaponId) ?? null : null;
+          const stats = reso ? computeStats(reso, slotWeapon, slot.build, config, [...bonusesFor(slot.build), ...weaponBuffs(slotWeapon, slot.build.weaponRank).always]) : null;
           return (
             <div key={i} className="flex flex-col rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4" style={{ minHeight: 176 }}>
               {reso ? (
@@ -210,6 +212,20 @@ export function TeamBuilder() {
 }
 
 // ---------------------------------------------------------------------------
+const WEAPON_ELEM_KEYS: StatKey[] = ["glacioDmg", "fusionDmg", "electroDmg", "aeroDmg", "spectroDmg", "havocDmg"];
+// compact label for weapon buffs; collapse the six element-dmg keys into "속성 피해"
+function weaponBuffSummary(buffs: WeaponBuff[]): string {
+  const elem = buffs.filter((b) => WEAPON_ELEM_KEYS.includes(b.key));
+  const nonElem = buffs.filter((b) => !WEAPON_ELEM_KEYS.includes(b.key));
+  const parts = nonElem.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`);
+  if (elem.length === WEAPON_ELEM_KEYS.length && elem.every((b) => b.value === elem[0].value)) {
+    parts.push(`속성 피해 +${elem[0].value}%`);
+  } else {
+    parts.push(...elem.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`));
+  }
+  return parts.join(" · ");
+}
+
 function BuildEditor({
   reso, build, weaponById, echoById, setByName, config, anomaly, partyDefShred, slot, t, onChange, onPick, onClose,
 }: {
@@ -229,8 +245,11 @@ function BuildEditor({
 }) {
   const weapon = build.weaponId ? weaponById.get(build.weaponId) ?? null : null;
   const active = activeSetBonuses(build, (id) => echoById.get(id)?.sonata ?? [], setByName);
-  const stats = computeStats(reso, weapon, build, config, active?.bonuses ?? []);
-  const wpBonus = weaponPassiveBonus(weapon, build.weaponRank);
+  const [fullUptime, setFullUptime] = useState(false);
+  const wb = weaponBuffs(weapon, build.weaponRank); // { always, conditional, boost }
+  const weaponExtra = fullUptime ? [...wb.always, ...wb.conditional] : wb.always;
+  const weaponBoost = fullUptime ? wb.boost : 0;
+  const stats = computeStats(reso, weapon, build, config, [...(active?.bonuses ?? []), ...weaponExtra]);
   const cost = buildCost(build);
   const costBudget = config?.costBudget ?? 12;
   const [skillLv, setSkillLv] = useState(10);
@@ -239,7 +258,7 @@ function BuildEditor({
   const [tune, setTune] = useState({ mult: 1600, boost: 0 });
   const dmgOpts: DamageOpts = {
     myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100,
-    defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100 + partyDefShred, boost: dmg.boost, dmgTaken: dmg.dmgTaken, totalDmg: dmg.totalDmg, bonusPct: dmg.bonusPct,
+    defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100 + partyDefShred, boost: dmg.boost + weaponBoost, dmgTaken: dmg.dmgTaken, totalDmg: dmg.totalDmg, bonusPct: dmg.bonusPct,
   };
   const damages = (reso.skills ?? [])
     .filter((s) => s.damage?.length)
@@ -296,10 +315,24 @@ function BuildEditor({
                 <button key={r} type="button" onClick={() => onChange((b) => ({ ...b, weaponRank: r }))} className={`h-6 w-6 rounded ${build.weaponRank === r ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "bg-[var(--surface)] text-[var(--fg-soft)]"}`}>{r}</button>
               ))}
             </div>
-            {wpBonus ? (
+            {wb.always.length ? (
               <p className="mt-2 inline-flex items-center gap-1 rounded bg-[var(--accent-soft,var(--surface-2))] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">
-                패시브 적용 · {STAT_LABEL[wpBonus.key]} +{wpBonus.value}%
+                패시브 · {weaponBuffSummary(wb.always)}
               </p>
+            ) : null}
+            {wb.conditional.length || wb.boost ? (
+              <label className="mt-2 flex cursor-pointer items-start gap-2 text-[11px] leading-5 text-[var(--fg-soft)]">
+                <input type="checkbox" checked={fullUptime} onChange={(e) => setFullUptime(e.target.checked)} className="mt-0.5 accent-[var(--accent)]" />
+                <span>
+                  조건부 효과 풀 업타임 가정 <span className="text-[var(--muted)]">(최대 스택)</span>
+                  {fullUptime ? (
+                    <span className="mt-0.5 block text-[var(--accent)]">
+                      {wb.conditional.length ? `+${weaponBuffSummary(wb.conditional)}` : ""}
+                      {wb.boost ? `${wb.conditional.length ? " · " : ""}부스트 +${wb.boost}%` : ""}
+                    </span>
+                  ) : null}
+                </span>
+              </label>
             ) : null}
             {weapon.desc ? (
               <p className="mt-2 text-[11px] leading-5 text-[var(--fg-soft)]">{weaponDescAtRank(weapon.desc, build.weaponRank)}</p>
