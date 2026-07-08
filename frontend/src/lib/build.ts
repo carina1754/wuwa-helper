@@ -180,6 +180,8 @@ export function computeStats(
     for (const s of e.subs) addStat(s.key, s.value);
   }
   for (const s of extra) addStat(s.key, s.value); // sonata set effects etc.
+  const wp = weaponPassiveBonus(weapon, build.weaponRank); // 무기 패시브 항상-적용 버프
+  if (wp) addStat(wp.key, wp.value);
 
   out.hp = (baseHp) * (1 + pct.hpPct / 100) + flat.hp;
   out.atk = (baseAtk + weaponAtk) * (1 + pct.atkPct / 100) + flat.atk;
@@ -198,6 +200,31 @@ export function weaponDescAtRank(desc: string | null | undefined, rank: number):
     const parts = m.split("/").map((p) => p.trim());
     return parts[Math.min(Math.max(rank - 1, 0), parts.length - 1)] ?? parts[parts.length - 1];
   });
+}
+
+// Weapon passive: apply the LEADING unconditional buff, e.g. "공격력이 24% 증가된다".
+// Conditional clauses (~시 / ~경우 / ~이상 / ~이하 등)은 전투 상태 의존이라 자동 적용하지 않고
+// 수동 피해증가/부스트 칸으로 남긴다. 값은 정제(refine) 랭크 기준.
+export function weaponPassiveBonus(
+  weapon: CodexWeapon | null,
+  rank: number,
+): { key: StatKey; value: number } | null {
+  if (!weapon?.desc) return null;
+  const text = weaponDescAtRank(weapon.desc, rank).trimStart();
+  const m = text.match(/^(크리티컬\s*피해|크리티컬|공격력|방어력|HP|생명력|공명\s*효율)[이가]?\s*([\d.]+)\s*%\s*증가/);
+  if (!m) return null;
+  const value = parseFloat(m[2]);
+  if (!Number.isFinite(value)) return null;
+  const label = m[1];
+  const key: StatKey | null =
+    /크리티컬\s*피해/.test(label) ? "critDmg"
+    : label.startsWith("크리티컬") ? "crit"
+    : label.startsWith("공격력") ? "atkPct"
+    : label.startsWith("방어력") ? "defPct"
+    : /^(HP|생명력)/.test(label) ? "hpPct"
+    : /공명\s*효율/.test(label) ? "energyRegen"
+    : null;
+  return key ? { key, value } : null;
 }
 
 // pick the default main stat for an echo of a given cost

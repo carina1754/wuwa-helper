@@ -27,6 +27,7 @@ import {
   subSlots,
   tuneBreakDamage,
   weaponDescAtRank,
+  weaponPassiveBonus,
 } from "@/lib/build";
 
 const PARTY_SIZE = 3;
@@ -229,6 +230,7 @@ function BuildEditor({
   const weapon = build.weaponId ? weaponById.get(build.weaponId) ?? null : null;
   const active = activeSetBonuses(build, (id) => echoById.get(id)?.sonata ?? [], setByName);
   const stats = computeStats(reso, weapon, build, config, active?.bonuses ?? []);
+  const wpBonus = weaponPassiveBonus(weapon, build.weaponRank);
   const cost = buildCost(build);
   const costBudget = config?.costBudget ?? 12;
   const [skillLv, setSkillLv] = useState(10);
@@ -294,6 +296,11 @@ function BuildEditor({
                 <button key={r} type="button" onClick={() => onChange((b) => ({ ...b, weaponRank: r }))} className={`h-6 w-6 rounded ${build.weaponRank === r ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "bg-[var(--surface)] text-[var(--fg-soft)]"}`}>{r}</button>
               ))}
             </div>
+            {wpBonus ? (
+              <p className="mt-2 inline-flex items-center gap-1 rounded bg-[var(--accent-soft,var(--surface-2))] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">
+                패시브 적용 · {STAT_LABEL[wpBonus.key]} +{wpBonus.value}%
+              </p>
+            ) : null}
             {weapon.desc ? (
               <p className="mt-2 text-[11px] leading-5 text-[var(--fg-soft)]">{weaponDescAtRank(weapon.desc, build.weaponRank)}</p>
             ) : null}
