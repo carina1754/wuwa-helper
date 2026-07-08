@@ -100,6 +100,12 @@ export function TeamBuilder() {
   const setByName = useMemo(() => new Map(sonata.map((s) => [s.name_ko, s])), [sonata]);
   const echoSonata = (id: string) => echoById.get(id)?.sonata ?? [];
   const bonusesFor = (b: ResonatorBuild) => activeSetBonuses(b, echoSonata, setByName)?.bonuses ?? [];
+  // 파티에 인멸(암흑) 공명자가 있으면 적에게 암흑 디버프(방어 −6%) → 파티 전원 피해에 적용
+  const partyDefShred = useMemo(() => {
+    if (!anomaly) return 0;
+    const hasHavoc = party.some((s) => (s.resonatorId != null ? resoById.get(s.resonatorId)?.element : null) === "인멸");
+    return hasHavoc ? anomalyDefReduce(anomaly, "암흑", 100) : 0;
+  }, [party, resoById, anomaly]);
 
   const setSlot = (i: number, fn: (s: Slot) => Slot) => setParty((p) => p.map((s, j) => (j === i ? fn(s) : s)));
   const setBuild = (i: number, fn: (b: ResonatorBuild) => ResonatorBuild) => setSlot(i, (s) => ({ ...s, build: fn(s.build) }));
@@ -174,6 +180,7 @@ export function TeamBuilder() {
                 setByName={setByName}
                 config={config}
                 anomaly={anomaly}
+                partyDefShred={partyDefShred}
                 slot={editing}
                 t={t}
                 onChange={(fn) => setBuild(editing, fn)}
@@ -203,7 +210,7 @@ export function TeamBuilder() {
 
 // ---------------------------------------------------------------------------
 function BuildEditor({
-  reso, build, weaponById, echoById, setByName, config, anomaly, slot, t, onChange, onPick, onClose,
+  reso, build, weaponById, echoById, setByName, config, anomaly, partyDefShred, slot, t, onChange, onPick, onClose,
 }: {
   reso: CodexResonator;
   build: ResonatorBuild;
@@ -212,6 +219,7 @@ function BuildEditor({
   setByName: Map<string, SonataSet>;
   config: GameConfig | null;
   anomaly: AnomalyConfig | null;
+  partyDefShred: number;
   slot: number;
   t: ReturnType<typeof useLanguage>["t"];
   onChange: (fn: (b: ResonatorBuild) => ResonatorBuild) => void;
@@ -229,7 +237,7 @@ function BuildEditor({
   const [tune, setTune] = useState({ mult: 1600, boost: 0 });
   const dmgOpts: DamageOpts = {
     myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100,
-    defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100, boost: dmg.boost, dmgTaken: dmg.dmgTaken, totalDmg: dmg.totalDmg, bonusPct: dmg.bonusPct,
+    defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100 + partyDefShred, boost: dmg.boost, dmgTaken: dmg.dmgTaken, totalDmg: dmg.totalDmg, bonusPct: dmg.bonusPct,
   };
   const damages = (reso.skills ?? [])
     .filter((s) => s.damage?.length)
@@ -244,7 +252,7 @@ function BuildEditor({
   const anomMode = anomaly?.types?.[anom.type]?.mode;
   const anomDefDown = anomaly ? anomalyDefReduce(anomaly, anom.type, anom.stacks) : 0;
   const anomDmg = anomaly ? anomalyDamage(anomaly, anom.type, anom.stacks, stats, { ...dmgOpts, occurrences: anom.occurrences }) : 0;
-  const tuneDmg = tuneBreakDamage(tune.mult, { myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100, defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100, boostPoints: tune.boost, critRate: stats.crit, critDmg: stats.critDmg, repeat: 1 });
+  const tuneDmg = tuneBreakDamage(tune.mult, { myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100, defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100 + partyDefShred, boostPoints: tune.boost, critRate: stats.crit, critDmg: stats.critDmg, repeat: 1 });
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
     onChange((b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === idx && e ? fn(e) : e)) }));
 
@@ -394,6 +402,9 @@ function BuildEditor({
                 </label>
               ))}
             </div>
+            {partyDefShred > 0 ? (
+              <p className="mt-1.5 text-[10px] text-[var(--accent)]">암흑(인멸) 자동 적용 · 적 방어 −{Math.round(partyDefShred * 100)}% (방어감소에 합산)</p>
+            ) : null}
           </div>
 
           {damages.length ? (
