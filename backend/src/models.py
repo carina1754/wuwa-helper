@@ -195,3 +195,77 @@ class AnalyzeResponse(BaseModel):
     snapshot: CharacterSnapshot
     diagnoses: list[Diagnosis]
     report: str
+
+
+# --- AI coach ---------------------------------------------------------------
+
+class AiProfile(BaseModel):
+    union_level: int | None = None
+    owned_characters: list[str] = Field(default_factory=list)
+    desired_characters: list[str] = Field(default_factory=list)
+    play_style: str | None = None
+    note: str | None = None
+
+
+class AiMessage(BaseModel):
+    role: Literal["user", "assistant"]
+    content: str
+
+
+class WeaponPick(BaseModel):
+    id: str
+    alt_ids: list[str] = Field(default_factory=list)
+    reason: str | None = None
+
+
+class EchoPick(BaseModel):
+    sonata_ids: list[str] = Field(default_factory=list)
+    main_echo_id: str | None = None
+    main_stats: dict[str, str] = Field(default_factory=dict)
+    # 추천 추가옵션(추옵) — 우선순위 순 한국어 스탯명, 최대 5개.
+    sub_stats: list[str] = Field(default_factory=list)
+
+
+class TeamPick(BaseModel):
+    resonator_id: str
+    role: Role | None = None
+    reason: str | None = None
+    weapon: WeaponPick | None = None
+    echo: EchoPick | None = None
+    priority: int | None = None
+
+
+class Recommendation(BaseModel):
+    summary: str = ""
+    team: list[TeamPick] = Field(default_factory=list)
+    upgrade_order: list[str] = Field(default_factory=list)
+
+
+class AiChatRequest(BaseModel):
+    messages: list[AiMessage] = Field(default_factory=list)
+    profile: AiProfile = Field(default_factory=AiProfile)
+
+
+class AiChatResponse(BaseModel):
+    reply: str
+    recommendation: Recommendation | None = None
+    is_final: bool = False
+
+
+class AiRecommendationRecord(BaseModel):
+    id: str
+    user_id: str | None = None
+    created_at: str
+    profile: AiProfile = Field(default_factory=AiProfile)
+    conversation: list[AiMessage] = Field(default_factory=list)
+    recommendation: Recommendation
+    title: str | None = None
+
+
+class AiRecommendationCreate(BaseModel):
+    """확정 저장 요청(id·created_at은 서버가 생성)."""
+    user_id: str | None = None
+    profile: AiProfile = Field(default_factory=AiProfile)
+    conversation: list[AiMessage] = Field(default_factory=list)
+    recommendation: Recommendation
+    title: str | None = None

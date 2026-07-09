@@ -7,7 +7,7 @@ export type Language = "ko" | "en";
 export const copy = {
   ko: {
     app: {
-      name: "명조 AI 헬퍼",
+      name: "띵조 AI",
       tagline: "스크린샷 추출, 에코 점수, 빌드 우선순위",
       status: "비공식 가이드",
       websiteUpdates: "공지사항",
@@ -21,7 +21,7 @@ export const copy = {
     },
     tabs: {
       Dashboard: "대시보드",
-      Analyzer: "분석",
+      Ai: "AI",
       Planner: "도감",
       PickupSchedule: "픽업 일정표",
       Updates: "명조 업데이트",
@@ -261,7 +261,7 @@ export const copy = {
       source: "출처",
     },
     teams: {
-      title: "파티 빌더",
+      title: "파티 빌딩",
       body: "MVP 파티 조언은 역할 기준입니다: 메인 딜러, 서브 딜러, 서포터/힐러. 보유 캐릭터 추천은 다음 단계에서 추가됩니다.",
     },
     pickup: {
@@ -307,7 +307,7 @@ export const copy = {
       openAiKey: "로컬 LLM (비전)",
       openAiKeyBody: "실제 비전 추출을 사용하려면 백엔드에 LLM_BASE_URL(llama.cpp llama-server)을 설정하세요. 없으면 mock 모드가 사용됩니다.",
       legalNotice: "법적 안내",
-      legalNoticeBody: "명조 AI 헬퍼는 비공식 팬 도구이며 Wuthering Waves 또는 Kuro Games와 관련이 없습니다.",
+      legalNoticeBody: "띵조 AI는 비공식 팬 도구이며 Wuthering Waves 또는 Kuro Games와 관련이 없습니다.",
       exportJson: "JSON 내보내기",
       importJson: "JSON 가져오기",
       imported: (rules: number, history: number, characters = 0) => `규칙 ${rules}개, 캐릭터 ${characters}개, 기록 ${history}개를 가져왔습니다.`,
@@ -340,7 +340,7 @@ export const copy = {
     },
     tabs: {
       Dashboard: "Dashboard",
-      Analyzer: "Analyzer",
+      Ai: "AI",
       Planner: "Codex",
       PickupSchedule: "Pickup Schedule",
       Updates: "WuWa Updates",

@@ -238,3 +238,69 @@ export interface AnalyzeResponse {
   diagnoses: Diagnosis[];
   report: string;
 }
+
+// --- AI coach ---
+export interface AiProfile {
+  union_level?: number | null;
+  owned_characters: string[];
+  desired_characters: string[];
+  play_style?: string | null;
+  note?: string | null;
+}
+
+export interface AiMessage {
+  role: "user" | "assistant";
+  content: string;
+}
+
+export interface WeaponPick {
+  id: string;
+  alt_ids: string[];
+  reason?: string | null;
+}
+
+export interface EchoPick {
+  sonata_ids: string[];
+  main_echo_id?: string | null;
+  main_stats: Record<string, string>;
+  sub_stats?: string[];
+}
+
+export interface TeamPick {
+  resonator_id: string;
+  role?: Role | null;
+  reason?: string | null;
+  weapon?: WeaponPick | null;
+  echo?: EchoPick | null;
+  priority?: number | null;
+}
+
+export interface Recommendation {
+  summary: string;
+  team: TeamPick[];
+  upgrade_order: string[];
+}
+
+export interface AiChatResponse {
+  reply: string;
+  recommendation?: Recommendation | null;
+  is_final: boolean;
+}
+
+export interface AiRecommendationRecord {
+  id: string;
+  user_id?: string | null;
+  created_at: string;
+  profile: AiProfile;
+  conversation: AiMessage[];
+  recommendation: Recommendation;
+  title?: string | null;
+}
+
+export interface AiRecommendationCreate {
+  user_id?: string | null;
+  profile: AiProfile;
+  conversation: AiMessage[];
+  recommendation: Recommendation;
+  title?: string | null;
+}

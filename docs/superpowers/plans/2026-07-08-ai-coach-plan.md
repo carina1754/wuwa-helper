@@ -11,9 +11,9 @@
 
 **목표:** 도감 인덱스가 프롬프트에 들어갈 형태로 뽑히는지 실데이터로 확인.
 
-- [ ] 0.1 `wuwa_resonator`/`wuwa_weapon`/`sonata_set`/`wuwa_echo`의 컬럼 스키마 확인(id, 이름, 속성/타입/코스트/소나타 필드명 파악). `catalog.py`의 기존 SELECT 재사용.
-- [ ] 0.2 에코 인덱스 축소 기준 확정: 3~4코스트 메인 에코만 필터하는 쿼리 조건 확인(cost 필드).
-- [ ] **검증:** 임시 스크립트로 인덱스 문자열 길이/토큰 추정 출력 → ~4k 이내 확인.
+- [x] 0.1 스키마 확정: 공명자(id·name_ko·element·weapon_type·rarity·role), 무기(id·name_ko·weapon_type·rarity), 에코(id·name_ko·cost·rarity), 소나타(id·name_ko·data_json→two_piece/five_piece).
+- [x] 0.2 메인 에코 = **cost 4 (75개)**. cost 1·3은 이름 인덱싱 불필요(소나타 세트+메인스탯으로 추천). 무기는 3성↑만 인덱싱.
+- [x] **검증 완료:** 인덱스 실측 **7,840 토큰**(llama /tokenize), 서버 `n_ctx=32768` → 트리밍 불필요. 검증 쿼리는 Phase 2 `build_catalog_index()` 기반.
 
 ---
 

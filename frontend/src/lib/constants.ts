@@ -10,7 +10,7 @@ export function mediaUrl(path?: string | null): string | undefined {
 }
 
 export const ROLES: Role[] = ["main_dps", "sub_dps", "support", "healer"];
-export const TABS = ["Dashboard", "Analyzer", "Planner", "PickupSchedule", "Updates", "Teams", "History"] as const;
+export const TABS = ["Ai", "Planner", "PickupSchedule", "Updates", "Teams", "History"] as const;
 export type AppTab = (typeof TABS)[number] | "SiteUpdates";
 
 export function emptyEcho(slot: number): EchoItem {

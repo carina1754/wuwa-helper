@@ -167,6 +167,58 @@ def test_update_image_route_404_when_missing(monkeypatch, tmp_path):
     assert response.status_code == 404
 
 
+def test_ai_chat_returns_mock_without_llm(monkeypatch):
+    monkeypatch.delenv("LLM_BASE_URL", raising=False)
+    response = client.post(
+        "/ai/chat",
+        json={
+            "messages": [{"role": "user", "content": "딜러 추천해줘"}],
+            "profile": {"union_level": 40},
+        },
+    )
+    assert response.status_code == 200
+    data = response.json()
+    assert data["is_final"] is False
+    assert data["recommendation"] is None
+    assert isinstance(data["reply"], str) and data["reply"]
+
+
+def test_ai_recommendation_round_trip():
+    payload = {
+        "user_id": None,
+        "profile": {"union_level": 45},
+        "conversation": [{"role": "user", "content": "저장 테스트"}],
+        "recommendation": {
+            "summary": "테스트 빌드",
+            "team": [{"resonator_id": "1402", "role": "support"}],
+            "upgrade_order": ["무기 강화"],
+        },
+        "title": "저장 테스트 빌드",
+    }
+    save = client.post("/ai/recommendations", json=payload)
+    assert save.status_code == 200
+    rec_id = save.json()["id"]
+    assert rec_id
+    try:
+        listing = client.get("/ai/recommendations")
+        assert listing.status_code == 200
+        assert any(item["id"] == rec_id for item in listing.json())
+
+        detail = client.get(f"/ai/recommendations/{rec_id}")
+        assert detail.status_code == 200
+        assert detail.json()["title"] == "저장 테스트 빌드"
+        assert detail.json()["recommendation"]["team"][0]["resonator_id"] == "1402"
+    finally:
+        with get_connection() as conn:
+            conn.execute("DELETE FROM ai_recommendations WHERE id = %s", (rec_id,))
+            conn.commit()
+
+
+def test_ai_recommendation_detail_404_when_missing():
+    response = client.get("/ai/recommendations/does-not-exist")
+    assert response.status_code == 404
+
+
 def test_update_image_route_rejects_path_traversal(monkeypatch, tmp_path):
     monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
     # Starlette's router decodes/normalizes "..%2F.." style segments before

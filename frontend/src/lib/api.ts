@@ -1,5 +1,10 @@
 import { API_BASE_URL } from "./constants";
 import type {
+  AiChatResponse,
+  AiMessage,
+  AiProfile,
+  AiRecommendationCreate,
+  AiRecommendationRecord,
   AnalysisSession,
   AnalyzeResponse,
   BuildRule,
@@ -108,6 +113,39 @@ export function saveHistory(session: AnalysisSession): Promise<AnalysisSession> 
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(session),
   });
+}
+
+export function aiChat(messages: AiMessage[], profile: AiProfile): Promise<AiChatResponse> {
+  return request("/ai/chat", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ messages, profile }),
+  });
+}
+
+export function saveRecommendation(payload: AiRecommendationCreate): Promise<AiRecommendationRecord> {
+  return request("/ai/recommendations", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+}
+
+export function getRecommendations(userId?: string): Promise<AiRecommendationRecord[]> {
+  const params = userId ? `?user_id=${encodeURIComponent(userId)}` : "";
+  return request(`/ai/recommendations${params}`);
+}
+
+export function getRecommendation(id: string): Promise<AiRecommendationRecord> {
+  return request(`/ai/recommendations/${id}`);
+}
+
+export async function deleteRecommendation(id: string): Promise<void> {
+  const response = await fetch(`${API_BASE_URL}/ai/recommendations/${id}`, { method: "DELETE" });
+  if (!response.ok) {
+    const text = await response.text();
+    throw new ApiError(text || "삭제에 실패했습니다.", response.status);
+  }
 }
 
 export function exportData(): Promise<Record<string, unknown>> {

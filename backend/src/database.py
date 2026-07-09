@@ -232,7 +232,21 @@ def init_db() -> None:
                 )
                 """
             )
+            cur.execute(
+                """
+                CREATE TABLE IF NOT EXISTS ai_recommendations (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT REFERENCES users(id) ON DELETE SET NULL,
+                    created_at TEXT NOT NULL,
+                    profile_json TEXT NOT NULL,
+                    conversation_json TEXT NOT NULL,
+                    recommendation_json TEXT NOT NULL,
+                    title TEXT
+                )
+                """
+            )
             cur.execute("CREATE INDEX IF NOT EXISTS idx_users_email ON users(email)")
+            cur.execute("CREATE INDEX IF NOT EXISTS idx_ai_recommendations_user_id ON ai_recommendations(user_id)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_analysis_sessions_user_id ON analysis_sessions(user_id)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_pickup_schedule_year_month ON pickup_schedule(year, month)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_game_updates_release_date ON game_updates(release_date_kst)")

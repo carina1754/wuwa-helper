@@ -3,9 +3,17 @@ from __future__ import annotations
 import os
 import re
 import secrets
+from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any
 
-from fastapi import Depends, FastAPI, File, Header, HTTPException, UploadFile
+from dotenv import load_dotenv
+
+# backend/.env 를 프로세스 환경에 로드한다. 이게 없으면 INTERNAL_API_SECRET 등이
+# os.getenv 로 안 잡혀 sync-user 가 401 → users 테이블이 비고 → 저장이 FK 위반으로 500난다.
+load_dotenv(Path(__file__).resolve().parent / ".env")
+
+from fastapi import Depends, FastAPI, File, Header, HTTPException, Response, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 
@@ -16,6 +24,8 @@ from src.curated_updates import apply_curated_update_summaries
 from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
 from src.export_import import export_all, import_all
 from src.history import get_session, list_sessions, save_session
+from src import ai_coach
+from src.ai_store import delete_recommendation, get_recommendation, list_recommendations, save_recommendation
 from src.catalog import (
     load_codex_echoes,
     load_codex_resonators,
@@ -25,6 +35,10 @@ from src.catalog import (
 )
 from src.media import CATALOG_KINDS, cached_catalog_image_path, cached_image_path
 from src.models import (
+    AiChatRequest,
+    AiChatResponse,
+    AiRecommendationCreate,
+    AiRecommendationRecord,
     AuthUserSyncRequest,
     AnalysisSession,
     AnalyzeRequest,
@@ -217,6 +231,45 @@ def get_history_detail(session_id: str) -> AnalysisSession:
     if session is None:
         raise HTTPException(status_code=404, detail="Analysis session not found")
     return session
+
+
+@app.post("/ai/chat", response_model=AiChatResponse)
+def post_ai_chat(request: AiChatRequest) -> AiChatResponse:
+    return ai_coach.chat(request)
+
+
+@app.get("/ai/recommendations", response_model=list[AiRecommendationRecord])
+def get_ai_recommendations(user_id: str | None = None) -> list[AiRecommendationRecord]:
+    return list_recommendations(user_id=user_id)
+
+
+@app.post("/ai/recommendations", response_model=AiRecommendationRecord)
+def post_ai_recommendation(payload: AiRecommendationCreate) -> AiRecommendationRecord:
+    record = AiRecommendationRecord(
+        id=secrets.token_hex(12),
+        user_id=payload.user_id,
+        created_at=datetime.now(timezone.utc).isoformat(),
+        profile=payload.profile,
+        conversation=payload.conversation,
+        recommendation=payload.recommendation,
+        title=payload.title,
+    )
+    return save_recommendation(record)
+
+
+@app.get("/ai/recommendations/{recommendation_id}", response_model=AiRecommendationRecord)
+def get_ai_recommendation_detail(recommendation_id: str) -> AiRecommendationRecord:
+    record = get_recommendation(recommendation_id)
+    if record is None:
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    return record
+
+
+@app.delete("/ai/recommendations/{recommendation_id}", status_code=204)
+def delete_ai_recommendation(recommendation_id: str) -> Response:
+    if not delete_recommendation(recommendation_id):
+        raise HTTPException(status_code=404, detail="Recommendation not found")
+    return Response(status_code=204)
 
 
 @app.get("/export")

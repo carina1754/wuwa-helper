@@ -1,6 +1,7 @@
 "use client";
 
-import { Clock } from "lucide-react";
+import { AiCoach } from "@/components/AiCoach";
+import { AiHistory } from "@/components/AiHistory";
 import { AppShell } from "@/components/AppShell";
 import { Codex } from "@/components/Codex";
 import { PickupSchedule } from "@/components/PickupSchedule";
@@ -9,24 +10,10 @@ import { UpdatesSummary } from "@/components/UpdatesSummary";
 import { WebsiteUpdates } from "@/components/WebsiteUpdates";
 import type { AppTab } from "@/lib/constants";
 
-function UpdatingNotice({ label }: { label: string }) {
-  return (
-    <div className="soon">
-      <span className="sl">
-        <Clock aria-hidden="true" />
-      </span>
-      <h2>{label}</h2>
-      <p>지금 준비 중입니다. 먼저 명조 업데이트를 확인해 보세요.</p>
-    </div>
-  );
-}
-
 function renderTab(tab: AppTab) {
   switch (tab) {
-    case "Dashboard":
-      return <UpdatingNotice label="대시보드" />;
-    case "Analyzer":
-      return <UpdatingNotice label="분석" />;
+    case "Ai":
+      return <AiCoach />;
     case "Planner":
       return <Codex />;
     case "PickupSchedule":
@@ -38,7 +25,7 @@ function renderTab(tab: AppTab) {
     case "Teams":
       return <TeamBuilder />;
     case "History":
-      return <UpdatingNotice label="기록" />;
+      return <AiHistory />;
   }
 }
 

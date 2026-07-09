@@ -2,9 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
-import { getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets } from "@/lib/api";
+import { signIn, useSession } from "next-auth/react";
+import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation } from "@/lib/api";
 import { useLanguage } from "@/lib/i18n";
-import type { CodexEcho, CodexResonator, CodexWeapon, SonataSet } from "@/lib/types";
+import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SonataSet } from "@/lib/types";
 import {
   activeSetBonuses,
   type AnomalyConfig,
@@ -57,6 +58,10 @@ export function TeamBuilder() {
   const [party, setParty] = useState<Slot[]>(newParty);
   const [editing, setEditing] = useState<number | null>(null);
   const [picker, setPicker] = useState<null | { kind: "resonator" | "weapon" | "echo"; slot: number; echoIdx?: number }>(null);
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiStatus, setAiStatus] = useState("");
+  const { data: session } = useSession();
+  const userId = session?.user?.email ?? null;
 
   useEffect(() => {
     getCodexResonators().then(setResos).catch(() => {});
@@ -122,6 +127,74 @@ export function TeamBuilder() {
     setPicker(null);
   };
 
+  const partyFilled = party.every((s) => s.resonatorId != null);
+
+  /** 선택한 파티 구성을 한국어로 직렬화(기록에 남길 옵션 원문). */
+  const describeParty = (): { names: string[]; text: string } => {
+    const names: string[] = [];
+    const lines: string[] = [];
+    party.forEach((slot, i) => {
+      const reso = slot.resonatorId != null ? resoById.get(slot.resonatorId) : null;
+      if (!reso) return;
+      names.push(reso.name);
+      const b = slot.build;
+      const weapon = b.weaponId ? weaponById.get(b.weaponId) : null;
+      const wpart = weapon ? `무기 ${weapon.name_ko} R${b.weaponRank} Lv.${b.weaponLevel}` : "무기 미선택";
+      const echoParts = b.echoes
+        .filter((e): e is NonNullable<typeof e> => !!e)
+        .map((e) => {
+          const en = echoById.get(e.echoId)?.name_ko ?? "에코";
+          const subs = e.subs.map((s) => STAT_LABEL[s.key]).join("·");
+          return `${en}(메인 ${STAT_LABEL[e.main]}${subs ? `, 추옵 ${subs}` : ""})`;
+        });
+      const epart = echoParts.length ? `에코 ${echoParts.join(", ")}` : "에코 미선택";
+      lines.push(`${i + 1}. ${reso.name} (Lv.${b.level}, ${reso.element}, ${t.roles[reso.role]}) — ${wpart}; ${epart}`);
+    });
+    return { names, text: lines.join("\n") };
+  };
+
+  /** 3명 완성된 파티를 LLM에 태워 AI 빌더와 동일 포맷으로 기록에 저장. */
+  const analyzeAndSave = async () => {
+    if (aiBusy || !partyFilled) return;
+    if (!userId) {
+      setAiStatus("기록을 저장하려면 구글 로그인이 필요해요.");
+      return;
+    }
+    setAiBusy(true);
+    setAiStatus("AI가 파티를 분석하는 중… (최대 30초)");
+    const { names, text } = describeParty();
+    const firstMessage =
+      "파티 빌딩에서 직접 구성한 파티입니다. 아래 구성을 평가하고, 각 캐릭터의 역할·무기·에코(소나타)·추천 추옵(최대 5개)과 파티 업그레이드 순서를 추천해줘. 정보가 충분하니 최종 추천으로 확정(is_final)해줘.\n\n[선택한 구성]\n" +
+      text;
+    const profile: AiProfile = {
+      owned_characters: names,
+      desired_characters: names,
+      play_style: null,
+      note: "파티 빌딩 선택 구성:\n" + text,
+    };
+    const messages: AiMessage[] = [{ role: "user", content: firstMessage }];
+    try {
+      const res = await aiChat(messages, profile);
+      if (!res.recommendation) {
+        setAiStatus("추천을 생성하지 못했어요. 잠시 후 다시 시도해 주세요.");
+        return;
+      }
+      const convo: AiMessage[] = [...messages, { role: "assistant", content: res.reply }];
+      const saved = await saveRecommendation({
+        user_id: userId,
+        profile,
+        conversation: convo,
+        recommendation: res.recommendation,
+        title: res.recommendation.summary || `${names.join(", ")} 파티`,
+      });
+      setAiStatus(`기록 탭에 저장했어요: ${saved.title ?? saved.recommendation.summary ?? "저장됨"}`);
+    } catch {
+      setAiStatus("분석에 실패했어요. 잠시 후 다시 시도해 주세요.");
+    } finally {
+      setAiBusy(false);
+    }
+  };
+
   return (
     <section className="grid gap-5">
       <div>
@@ -168,6 +241,38 @@ export function TeamBuilder() {
             </div>
           );
         })}
+      </div>
+
+      {/* AI 파티 분석 → 기록 저장 */}
+      <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div>
+            <div className="text-sm font-semibold text-[var(--fg)]">AI 파티 분석</div>
+            <p className="mt-0.5 text-xs text-[var(--muted)]">
+              공명자 3명을 모두 선택하면 구성을 AI가 평가해 추천 형식으로 기록에 저장합니다.
+              {userId ? null : " 기록 저장은 구글 로그인이 필요해요."}
+            </p>
+          </div>
+          {userId ? (
+            <button
+              type="button"
+              onClick={analyzeAndSave}
+              disabled={!partyFilled || aiBusy}
+              className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50"
+            >
+              {aiBusy ? "분석 중…" : "AI로 분석·기록"}
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => void signIn("google", { callbackUrl: "/" })}
+              className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90"
+            >
+              구글 로그인하고 기록
+            </button>
+          )}
+        </div>
+        {aiStatus ? <p className="mt-2 text-xs text-[var(--fg-soft)]">{aiStatus}</p> : null}
       </div>
 
       {/* build editor */}
