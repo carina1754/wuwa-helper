@@ -9,6 +9,8 @@ import psycopg
 from psycopg import Connection
 from psycopg.rows import dict_row
 
+from .datamine.schema import init_datamine_schema
+
 DEFAULT_DATABASE_URL = "postgresql://postgres:postgres@127.0.0.1:5432/wuwa_ai_coach"
 ENV_PATH = Path(__file__).resolve().parents[1] / ".env"
 
@@ -251,4 +253,5 @@ def init_db() -> None:
             cur.execute("CREATE INDEX IF NOT EXISTS idx_pickup_schedule_year_month ON pickup_schedule(year, month)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_game_updates_release_date ON game_updates(release_date_kst)")
             cur.execute("CREATE INDEX IF NOT EXISTS idx_site_updates_date ON site_updates(date)")
+            init_datamine_schema(cur)
         conn.commit()
