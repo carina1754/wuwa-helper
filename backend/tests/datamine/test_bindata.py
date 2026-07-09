@@ -37,3 +37,21 @@ def test_ingest_bindata_is_idempotent(conn):
     with conn.cursor() as cur:
         cur.execute("SELECT count(*) AS n FROM datamine_bindata")
         assert cur.fetchone()["n"] == 6
+
+
+def test_ingest_bindata_skips_unparseable(conn):
+    # A malformed BinData file (real cases: furniture.json control-char, LFS stubs)
+    # must be skipped, not abort the whole ingest — and must not disturb the good files.
+    total = ingest_bindata(conn)
+    assert total == 6  # 3 good fixture files still load; the broken file contributes 0
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT COUNT(*) AS n FROM datamine_bindata WHERE table_name = %s",
+            ("_broken/broken",),
+        )
+        assert cur.fetchone()["n"] == 0
+        cur.execute(
+            "SELECT COUNT(*) AS n FROM datamine_bindata WHERE table_name = %s",
+            ("role/roleinfo",),
+        )
+        assert cur.fetchone()["n"] == 2

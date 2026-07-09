@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Iterable
 
@@ -8,6 +9,8 @@ from psycopg import Connection
 from psycopg.types.json import Jsonb
 
 from .paths import datamine_root
+
+logger = logging.getLogger(__name__)
 
 
 def _iter_bindata_files(root: Path) -> Iterable[Path]:
@@ -29,7 +32,11 @@ def ingest_bindata(conn: Connection, root: Path | None = None) -> int:
     total = 0
     for path in _iter_bindata_files(root):
         table = _table_name(root, path)
-        data = json.loads(path.read_text(encoding="utf-8"))
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            logger.warning("skipping unparseable BinData file %s: %s", path, exc)
+            continue
         rows = _rows(data)
         with conn.cursor() as cur:
             cur.execute("DELETE FROM datamine_bindata WHERE table_name = %s", (table,))

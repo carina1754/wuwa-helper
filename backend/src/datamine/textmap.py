@@ -1,12 +1,15 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Iterable
 
 from psycopg import Connection
 
 from .paths import datamine_root
+
+logger = logging.getLogger(__name__)
 
 
 def _iter_textmap_files(root: Path) -> Iterable[Path]:
@@ -25,7 +28,11 @@ def ingest_textmap(conn: Connection, root: Path | None = None) -> int:
     total = 0
     for path in _iter_textmap_files(root):
         lang, category = _lang_and_category(root, path)
-        data = json.loads(path.read_text(encoding="utf-8"))
+        try:
+            data = json.loads(path.read_text(encoding="utf-8"))
+        except (json.JSONDecodeError, UnicodeDecodeError) as exc:
+            logger.warning("skipping unparseable Textmap file %s: %s", path, exc)
+            continue
         if not isinstance(data, list):
             continue
         rows = [
