@@ -1,0 +1,4 @@
+[
+  {"Id": 1108, "QualityId": 5, "RoleType": 1, "IsTrial": false, "Name": "RoleInfo_1108_Name", "NickName": "RoleInfo_1108_Name", "Introduction": "FavorRoleInfo_1108_Info", "ElementId": 1, "PropertyId": 1108, "WeaponType": 2, "MaxLevel": 90, "SkillId": 1108, "SkillTreeGroupId": 1108, "ResonantChainGroupId": 1108},
+  {"Id": 9999, "QualityId": 2, "RoleType": 1, "IsTrial": true, "Name": "RoleInfo_9999_Name", "ElementId": 3, "PropertyId": 9999, "WeaponType": 1, "MaxLevel": 90}
+]

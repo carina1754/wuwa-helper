@@ -1,0 +1,4 @@
+[
+  {"Id": 1, "Level": 1, "BreachLevel": 0, "LifeMaxRatio": 10000, "AtkRatio": 10000, "DefRatio": 10000},
+  {"Id": 96, "Level": 90, "BreachLevel": 6, "LifeMaxRatio": 125000, "AtkRatio": 125000, "DefRatio": 122222}
+]
