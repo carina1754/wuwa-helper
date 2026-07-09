@@ -427,6 +427,30 @@ export function TeamBuilder() {
                 ) : noSkillData(reso) ? (
                   <div className="mt-2 rounded bg-[var(--surface-2)] px-2.5 py-1.5 text-xs leading-relaxed text-[#e0a04d]">⚠ 스킬 배율 데이터가 없어 개인 피해를 계산할 수 없습니다. 방랑자(로버)는 버프·힐 서포터로 활용하세요.</div>
                 ) : null}
+
+                {((m.anomaly_dmg ?? 0) > 0 || (m.anomaly_def_down ?? 0) > 0 || (m.tune_break_dmg ?? 0) > 0) ? (
+                  <dl className="mt-2 grid gap-1 border-t border-dashed border-[var(--line)] pt-2 text-xs">
+                    <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">상황부 · 딜 총합 미포함</div>
+                    {m.anomaly_type && (m.anomaly_dmg ?? 0) > 0 ? (
+                      <div className="flex items-center justify-between gap-2">
+                        <dt className="text-[var(--muted)]">이상 피해 · {m.anomaly_type}</dt>
+                        <dd className="shrink-0 tabular-nums text-[var(--fg-soft)]">{Math.round(m.anomaly_dmg!).toLocaleString()}</dd>
+                      </div>
+                    ) : null}
+                    {(m.anomaly_def_down ?? 0) > 0 ? (
+                      <div className="flex items-center justify-between gap-2">
+                        <dt className="text-[var(--muted)]">이상 방깎 · {m.anomaly_type ?? "암흑"}</dt>
+                        <dd className="shrink-0 tabular-nums text-[var(--fg-soft)]">-{((m.anomaly_def_down ?? 0) * 100).toFixed(0)}%</dd>
+                      </div>
+                    ) : null}
+                    {(m.tune_break_dmg ?? 0) > 0 ? (
+                      <div className="flex items-center justify-between gap-2">
+                        <dt className="text-[var(--muted)]">조화도 파괴</dt>
+                        <dd className="shrink-0 tabular-nums text-[var(--fg-soft)]">{Math.round(m.tune_break_dmg!).toLocaleString()}</dd>
+                      </div>
+                    ) : null}
+                  </dl>
+                ) : null}
               </div>
             );
           })}

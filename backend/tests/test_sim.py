@@ -31,6 +31,7 @@ from src.sim.buffs import (
 from src.sim.loader import (
     EngineData,
     character_damages,
+    member_extra_damages,
     rate_at,
     resolve_buffs,
     to_game_config,
@@ -270,6 +271,37 @@ def test_character_damages_per_skill_level_override() -> None:
     assert basic["level"] == 1  # override honored
     from src.sim.formula import skill_damage as _sd
     assert basic["dmg"] == pytest.approx(_sd(result["stats"], 50, "용융", "일반 공격"))  # Lv.1 rate = 50
+
+
+def test_member_extra_damages_burst_debuff_and_none() -> None:
+    data = EngineData(
+        config=to_game_config({}),
+        anomaly=ANOM_CFG,
+        tune_break={"base": 10000, "defaultMultiplier": 16.0},
+    )
+    stats = _stats(crit=50, critDmg=200)
+    opts = DamageOpts()
+    # default multiplier 16.0 × 100 → 1600; both branches share this tune-break value
+    tune = tune_break_damage(1600, opts, crit_rate=50, crit_dmg=200)
+
+    # 용융 → 불꽃 (burst): direct anomaly damage, no DEF-down
+    burst = member_extra_damages(data, "용융", stats, opts)
+    assert burst["anomaly_type"] == "불꽃"
+    assert burst["anomaly_def_down"] == 0
+    assert burst["anomaly_dmg"] == pytest.approx(anomaly_damage(ANOM_CFG, "불꽃", 10, stats, opts))
+    assert burst["tune_break_dmg"] == pytest.approx(tune)
+
+    # 인멸 → 암흑 (debuff): DEF-down only, no direct hit
+    debuff = member_extra_damages(data, "인멸", stats, opts)
+    assert debuff["anomaly_type"] == "암흑"
+    assert debuff["anomaly_dmg"] == 0
+    assert debuff["anomaly_def_down"] == pytest.approx(anomaly_def_reduce(ANOM_CFG, "암흑", 10))
+
+    # unknown element → no anomaly at all; tune break still computed
+    none = member_extra_damages(data, "??", stats, opts)
+    assert none["anomaly_type"] is None
+    assert none["anomaly_dmg"] == 0 and none["anomaly_def_down"] == 0
+    assert none["tune_break_dmg"] == pytest.approx(tune)
 
 
 # --- buff-semantics layer (sim_buff / A2) ------------------------------------

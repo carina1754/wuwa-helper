@@ -17,7 +17,7 @@ from pydantic import BaseModel, Field
 
 from ..models import CharacterSnapshot
 from .formula import DamageOpts
-from .loader import EngineData, character_damages, load_engine_data
+from .loader import EngineData, character_damages, load_engine_data, member_extra_damages
 from .snapshot import snapshot_damage
 from .stats import EchoBuild, ResonatorBuild, build_cost
 
@@ -84,6 +84,11 @@ class MemberOut(BaseModel):
     skills: list[SkillOut]
     total: float  # one pass of every listed skill
     cost: int
+    # Situational sources — reported for reference, NOT part of ``total``.
+    anomaly_type: str | None = None  # 이상 type derived from element (없으면 None)
+    anomaly_dmg: float = 0  # 이상 direct damage at full stacks
+    anomaly_def_down: float = 0  # 암흑-type debuff: DEF reduction fraction (no direct hit)
+    tune_break_dmg: float = 0  # 조화도 파괴 reference damage
 
 
 class TeamCalcResponse(BaseModel):
@@ -152,6 +157,7 @@ def team_calculate(req: TeamCalcRequest, data: EngineData | None = None) -> Team
         )
         total = sum(s["dmg"] for s in res["skills"])
         team_total += total
+        extra = member_extra_damages(data, reso.get("element"), res["stats"], opts)
         members_out.append(
             MemberOut(
                 reso_id=str(m.reso_id),
@@ -161,6 +167,10 @@ def team_calculate(req: TeamCalcRequest, data: EngineData | None = None) -> Team
                 skills=[SkillOut(**s) for s in res["skills"]],
                 total=total,
                 cost=build_cost(build),
+                anomaly_type=extra["anomaly_type"],
+                anomaly_dmg=round(extra["anomaly_dmg"], 2),
+                anomaly_def_down=round(extra["anomaly_def_down"], 4),
+                tune_break_dmg=round(extra["tune_break_dmg"], 2),
             )
         )
     return TeamCalcResponse(members=members_out, team_total=team_total)

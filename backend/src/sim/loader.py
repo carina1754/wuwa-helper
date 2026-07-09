@@ -16,7 +16,14 @@ from dataclasses import dataclass, field, replace
 from typing import Any, Mapping, Sequence
 
 from .buffs import active_set_bonuses, weapon_buffs
-from .formula import DamageOpts, skill_damage
+from .formula import (
+    ELEMENT_ANOMALY,
+    DamageOpts,
+    anomaly_damage,
+    anomaly_def_reduce,
+    skill_damage,
+    tune_break_damage,
+)
 from .stats import Buff, EchoMainOpt, GameConfig, ResonatorBuild, compute_stats
 
 
@@ -51,6 +58,7 @@ class EngineData:
 
     config: GameConfig
     anomaly: dict | None
+    tune_break: dict | None = None
     resonators_by_id: dict[str, dict] = field(default_factory=dict)
     weapons_by_id: dict[str, dict] = field(default_factory=dict)
     echoes_by_id: dict[str, dict] = field(default_factory=dict)
@@ -72,6 +80,7 @@ def load_engine_data() -> EngineData:
     return EngineData(
         config=to_game_config(cfg.get("echo_stats") or {}),
         anomaly=cfg.get("anomaly"),
+        tune_break=cfg.get("tune_break"),
         resonators_by_id={str(r.get("id")): r for r in load_codex_resonators()},
         weapons_by_id={str(w.get("id")): w for w in load_codex_weapons()},
         echoes_by_id={str(e.get("id")): e for e in load_codex_echoes()},
@@ -158,3 +167,51 @@ def character_damages(
                 {"name": s.get("SkillName") or "", "type": s.get("SkillType") or "", "level": lv, "dmg": dmg}
             )
     return {"stats": stats, "skills": skills}
+
+
+# Fixed reference conditions for the situational damage sources, matching the
+# frontend's former per-character panel defaults: full anomaly stacks (10, one
+# occurrence) and the concerto-break reference multiplier. These are reported
+# alongside the rotation — never folded into it — because they only apply in
+# anomaly/break-focused play.
+_ANOMALY_STACKS = 10
+_ANOMALY_OCCURRENCES = 1
+_TUNE_DEFAULT_MULT = 16.0  # ×100 → multiplier_pct; overridden by game_config tune_break
+
+
+def member_extra_damages(
+    data: EngineData,
+    element: str | None,
+    stats: Mapping[str, float],
+    opts: DamageOpts | None = None,
+) -> dict:
+    """Situational damage for one member: elemental anomaly (이상) + tune break (조화도 파괴).
+
+    The anomaly type is auto-picked from ``element`` (debuff-type 암흑 yields no
+    direct hit, only a DEF-down figure). Tune break uses the catalog's default
+    concerto multiplier. Both are evaluated at the same ``opts`` the skills use so
+    the numbers stay consistent, and neither is added to the rotation total.
+    """
+    o = opts or DamageOpts()
+    anomaly_type = ELEMENT_ANOMALY.get(element or "")
+    anom_dmg = 0.0
+    anom_def_down = 0.0
+    if anomaly_type and data.anomaly:
+        mode = ((data.anomaly.get("types") or {}).get(anomaly_type) or {}).get("mode")
+        if mode == "debuff":
+            anom_def_down = anomaly_def_reduce(data.anomaly, anomaly_type, _ANOMALY_STACKS)
+        else:
+            anom_dmg = anomaly_damage(
+                data.anomaly, anomaly_type, _ANOMALY_STACKS, stats, o,
+                occurrences=_ANOMALY_OCCURRENCES,
+            )
+    mult = float((data.tune_break or {}).get("defaultMultiplier", _TUNE_DEFAULT_MULT)) * 100
+    tune_dmg = tune_break_damage(
+        mult, o, crit_rate=stats.get("crit", 0.0), crit_dmg=stats.get("critDmg", 0.0)
+    )
+    return {
+        "anomaly_type": anomaly_type,
+        "anomaly_dmg": anom_dmg,
+        "anomaly_def_down": anom_def_down,
+        "tune_break_dmg": tune_dmg,
+    }

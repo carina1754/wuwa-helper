@@ -108,6 +108,11 @@ export interface SimMemberResult {
   skills: SimSkillDamage[];
   total: number;
   cost: number;
+  // 상황부 피해 — total에 포함되지 않는 참고값 (이상/조화도 파괴)
+  anomaly_type?: string | null;
+  anomaly_dmg?: number;
+  anomaly_def_down?: number;
+  tune_break_dmg?: number;
 }
 
 export interface TeamCalcRequestBody {
