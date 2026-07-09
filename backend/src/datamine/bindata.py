@@ -27,16 +27,39 @@ def _rows(data: object) -> list[tuple[str, object]]:
     return [("0", data)]
 
 
+_NUL = chr(0)  # U+0000; PostgreSQL jsonb/text cannot store NUL characters.
+_NUL_ESCAPE = chr(92) + "u0000"  # its JSON escape form in raw file text.
+
+
+def _strip_nul(value: object) -> object:
+    """Recursively drop NUL (U+0000) code points from decoded JSON.
+
+    Some real BinData strings (binary blobs rendered as text, e.g. LockHint)
+    contain NUL escapes that decode to U+0000, which Postgres jsonb/text rejects
+    with UntranslatableCharacter. Stripping the NUL loses nothing meaningful.
+    """
+    if isinstance(value, str):
+        return value.replace(_NUL, "")
+    if isinstance(value, dict):
+        return {_strip_nul(k): _strip_nul(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_strip_nul(v) for v in value]
+    return value
+
+
 def ingest_bindata(conn: Connection, root: Path | None = None) -> int:
     root = root or datamine_root()
     total = 0
     for path in _iter_bindata_files(root):
         table = _table_name(root, path)
         try:
-            data = json.loads(path.read_text(encoding="utf-8"))
+            text = path.read_text(encoding="utf-8")
+            data = json.loads(text)
         except (json.JSONDecodeError, UnicodeDecodeError) as exc:
             logger.warning("skipping unparseable BinData file %s: %s", path, exc)
             continue
+        if _NUL_ESCAPE in text:
+            data = _strip_nul(data)
         rows = _rows(data)
         with conn.cursor() as cur:
             cur.execute("DELETE FROM datamine_bindata WHERE table_name = %s", (table,))

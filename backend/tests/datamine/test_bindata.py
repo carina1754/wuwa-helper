@@ -55,3 +55,19 @@ def test_ingest_bindata_skips_unparseable(conn):
             ("role/roleinfo",),
         )
         assert cur.fetchone()["n"] == 2
+
+
+def test_ingest_bindata_strips_nul(conn):
+    # Real BinData files (DirectTrain, QuestMultiLine) embed NUL (U+0000) escapes in
+    # string values. Postgres jsonb/text cannot store NUL, so it must be stripped
+    # on ingest rather than aborting the whole run. The 9999 fixture entry carries
+    # such a probe ("ab").
+    ingest_bindata(conn)
+    with conn.cursor() as cur:
+        cur.execute(
+            "SELECT data FROM datamine_bindata WHERE table_name = %s AND data->>'Id' = %s",
+            ("role/roleinfo", "9999"),
+        )
+        row = cur.fetchone()
+    assert row is not None
+    assert row["data"]["NulProbe"] == "ab"  # NUL removed, surrounding chars intact
