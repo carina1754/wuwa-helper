@@ -54,6 +54,93 @@ export interface VisionExtractionResult {
   raw_model_output?: string | null;
 }
 
+// --- damage simulator (POST /sim/*) ------------------------------------------
+export interface SimOpts {
+  my_level?: number;
+  enemy_level?: number;
+  enemy_res?: number;
+  res_shred?: number;
+  def_ignore?: number;
+  def_reduce?: number;
+  boost?: number;
+  dmg_taken?: number;
+  total_dmg?: number;
+  bonus_pct?: number;
+}
+
+export interface SimSubIn {
+  key: string;
+  value: number;
+}
+
+export interface SimEchoIn {
+  echo_id: string;
+  cost: number;
+  grade?: number;
+  level?: number;
+  main: string;
+  subs?: SimSubIn[];
+}
+
+export interface SimMemberIn {
+  reso_id: string;
+  level?: number;
+  weapon_id?: string | null;
+  weapon_level?: number;
+  weapon_rank?: number;
+  echoes?: SimEchoIn[];
+  skill_levels?: Record<number, number>;
+  full_uptime?: boolean;
+}
+
+export interface SimSkillDamage {
+  name: string;
+  type: string;
+  level: number;
+  dmg: number;
+}
+
+export interface SimMemberResult {
+  reso_id: string;
+  name?: string | null;
+  element?: string | null;
+  stats: Record<string, number>;
+  skills: SimSkillDamage[];
+  total: number;
+  cost: number;
+}
+
+export interface TeamCalcRequestBody {
+  members: SimMemberIn[];
+  opts?: SimOpts;
+  party_def_shred?: number;
+  team_buffs?: SimSubIn[];
+}
+
+export interface TeamCalcResult {
+  members: SimMemberResult[];
+  team_total: number;
+}
+
+export interface SnapshotDamageRequestBody {
+  snapshot: CharacterSnapshot;
+  opts?: SimOpts;
+  skill_levels?: Record<number, number>;
+  full_uptime?: boolean;
+}
+
+export interface SnapshotDamageResult {
+  reso_id: string;
+  name?: string | null;
+  element?: string | null;
+  set_name?: string | null;
+  stats: Record<string, number>;
+  skills: SimSkillDamage[];
+  total: number;
+  cost: number;
+  unresolved: string[];
+}
+
 export interface BuildRule {
   character_name: string;
   role: Role;

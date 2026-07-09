@@ -3,49 +3,57 @@
 import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
 import { signIn, useSession } from "next-auth/react";
-import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation } from "@/lib/api";
+import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation, teamCalculate } from "@/lib/api";
 import { useLanguage } from "@/lib/i18n";
-import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SonataSet } from "@/lib/types";
+import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SimMemberIn, SimOpts, SonataSet, TeamCalcRequestBody, TeamCalcResult } from "@/lib/types";
 import {
   activeSetBonuses,
   type AnomalyConfig,
-  anomalyDamage,
   anomalyDefReduce,
   buildCost,
   computeStats,
-  type DamageOpts,
   echoFromCodex,
   echoMainOptions,
-  ELEMENT_ANOMALY,
   emptyBuild,
   fmtStat,
   type GameConfig,
   type ResonatorBuild,
-  skillDamage,
   type StatKey,
   STAT_LABEL,
   subMax,
   subSlots,
-  tuneBreakDamage,
   type WeaponBuff,
   weaponBuffs,
   weaponDescAtRank,
 } from "@/lib/build";
 
-const PARTY_SIZE = 3;
-const STORAGE_KEY = "mj:party:v2";
+export const PARTY_SIZE = 3;
+export const STORAGE_KEY = "mj:party:v2";
 const PANEL_KEYS: StatKey[] = ["hp", "atk", "def", "crit", "critDmg", "energyRegen"];
+// 결과 카드에 항상 표시하는 핵심 스탯(그 외 0이 아닌 피해 보너스는 동적으로 추가)
+const STAT_ROWS: StatKey[] = ["hp", "atk", "def", "crit", "critDmg", "energyRegen"];
+// 팀 공유 버프로 자주 쓰는 스탯을 앞에 노출
+const BUFF_KEYS: StatKey[] = ["atkPct", "atk", "critDmg", "crit", "skillDmg", "basicDmg", "heavyDmg", "liberationDmg", "fusionDmg", "glacioDmg", "electroDmg", "aeroDmg", "spectroDmg", "havocDmg"];
 
-function img(p?: string | null): string | undefined {
+type UiOpts = { enemyLevel: number; enemyRes: number; resShred: number; defIgnore: number; defReduce: number; boost: number; bonusPct: number };
+const DEFAULT_OPTS: UiOpts = { enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, bonusPct: 0 };
+
+export function img(p?: string | null): string | undefined {
   if (!p) return undefined;
   return /^https?:\/\//.test(p) ? p : `/backend${p}`;
 }
-function ring(r: number): string {
+export function ring(r: number): string {
   return r >= 5 ? "ring-[var(--gold)]" : "ring-[color-mix(in_srgb,var(--accent)_60%,transparent)]";
 }
 
-type Slot = { resonatorId: number | null; build: ResonatorBuild };
-const newParty = (): Slot[] => Array.from({ length: PARTY_SIZE }, () => ({ resonatorId: null, build: emptyBuild() }));
+export type Slot = { resonatorId: number | null; build: ResonatorBuild };
+export const newParty = (): Slot[] => Array.from({ length: PARTY_SIZE }, () => ({ resonatorId: null, build: emptyBuild() }));
+
+// 코덱스에 스킬 배율 데이터가 없는 공명자(예: 방랑자/로버 — 소스가 주인공 스킬을 제공하지 않음)는
+// 엔진이 개인 피해를 0으로 반환한다. 오해를 부르는 "0" 대신 명확한 안내를 띄우려고 미리 감지한다.
+function noSkillData(reso: CodexResonator | null | undefined): boolean {
+  return !!reso && !(reso.skills ?? []).some((s) => (s.damage?.length ?? 0) > 0);
+}
 
 export function TeamBuilder() {
   const { t } = useLanguage();
@@ -62,6 +70,14 @@ export function TeamBuilder() {
   const [aiStatus, setAiStatus] = useState("");
   const { data: session } = useSession();
   const userId = session?.user?.email ?? null;
+
+  // 시뮬 조건(파티 전체 공유 — 적 조건·팀 버프)
+  const [opts, setOpts] = useState<UiOpts>(DEFAULT_OPTS);
+  const [defShredPct, setDefShredPct] = useState<number | null>(null); // null = 자동(암흑 감지)
+  const [teamBuffs, setTeamBuffs] = useState<{ key: StatKey; value: number }[]>([]);
+  const [result, setResult] = useState<TeamCalcResult | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     getCodexResonators().then(setResos).catch(() => {});
@@ -94,7 +110,7 @@ export function TeamBuilder() {
   const resoById = useMemo(() => new Map(resos.map((r) => [r.id, r])), [resos]);
   const weaponById = useMemo(() => new Map(weapons.map((w) => [w.id, w])), [weapons]);
   const echoById = useMemo(() => new Map(echoes.map((e) => [e.id, e])), [echoes]);
-  // one representative echo per name (encore lists id/rarity variants)
+  // one representative echo per name (source lists id/rarity variants)
   const echoList = useMemo(() => {
     const m = new Map<string, CodexEcho>();
     for (const e of echoes) {
@@ -108,11 +124,12 @@ export function TeamBuilder() {
   const echoSonata = (id: string) => echoById.get(id)?.sonata ?? [];
   const bonusesFor = (b: ResonatorBuild) => activeSetBonuses(b, echoSonata, setByName)?.bonuses ?? [];
   // 파티에 인멸(암흑) 공명자가 있으면 적에게 암흑 디버프(방어 −6%) → 파티 전원 피해에 적용
-  const partyDefShred = useMemo(() => {
+  const autoDefShred = useMemo(() => {
     if (!anomaly) return 0;
     const hasHavoc = party.some((s) => (s.resonatorId != null ? resoById.get(s.resonatorId)?.element : null) === "인멸");
     return hasHavoc ? anomalyDefReduce(anomaly, "암흑", 100) : 0;
   }, [party, resoById, anomaly]);
+  const shredPct = defShredPct ?? Math.round(autoDefShred * 100);
 
   const setSlot = (i: number, fn: (s: Slot) => Slot) => setParty((p) => p.map((s, j) => (j === i ? fn(s) : s)));
   const setBuild = (i: number, fn: (b: ResonatorBuild) => ResonatorBuild) => setSlot(i, (s) => ({ ...s, build: fn(s.build) }));
@@ -128,6 +145,66 @@ export function TeamBuilder() {
   };
 
   const partyFilled = party.every((s) => s.resonatorId != null);
+  const filled = party.filter((s) => s.resonatorId != null).length;
+
+  // 슬롯 → 서버 엔진 입력. 스킬 레벨은 전부 Lv.10(생략 시 서버 기본), 무기 조건부 버프는 미적용(always-on만).
+  const slotToMember = (s: Slot): SimMemberIn | null => {
+    if (s.resonatorId == null) return null;
+    const b = s.build;
+    return {
+      reso_id: String(s.resonatorId),
+      level: b.level,
+      weapon_id: b.weaponId == null ? null : String(b.weaponId),
+      weapon_level: b.weaponLevel,
+      weapon_rank: b.weaponRank,
+      echoes: b.echoes
+        .filter((e): e is NonNullable<typeof e> => !!e)
+        .map((e) => ({ echo_id: String(e.echoId), cost: e.cost, grade: e.grade, level: e.level, main: e.main, subs: e.subs.map((x) => ({ key: x.key, value: x.value })) })),
+    };
+  };
+
+  const calculate = async () => {
+    const members = party.map(slotToMember).filter((m): m is SimMemberIn => m !== null);
+    if (!members.length) return;
+    setBusy(true);
+    setError("");
+    const simOpts: SimOpts = {
+      enemy_level: opts.enemyLevel,
+      enemy_res: opts.enemyRes / 100,
+      res_shred: opts.resShred / 100,
+      def_ignore: opts.defIgnore / 100,
+      def_reduce: opts.defReduce / 100,
+      boost: opts.boost,
+      bonus_pct: opts.bonusPct,
+    };
+    const body: TeamCalcRequestBody = {
+      members,
+      opts: simOpts,
+      party_def_shred: shredPct / 100,
+      team_buffs: teamBuffs.filter((b) => b.value !== 0),
+    };
+    try {
+      setResult(await teamCalculate(body));
+    } catch (e) {
+      setResult(null);
+      setError(e instanceof Error ? e.message : "계산에 실패했습니다.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  const setOpt = (k: keyof UiOpts, v: number) => setOpts((o) => ({ ...o, [k]: v }));
+  const OPT_FIELDS: { key: keyof UiOpts; label: string }[] = [
+    { key: "enemyLevel", label: "적 레벨" },
+    { key: "enemyRes", label: "적 저항%" },
+    { key: "resShred", label: "저항 무시%" },
+    { key: "defIgnore", label: "방어 무시%" },
+    { key: "defReduce", label: "방어 감소%" },
+    { key: "boost", label: "부스트%" },
+    { key: "bonusPct", label: "피해증가%" },
+  ];
+
+  const ranked = result ? [...result.members].sort((a, b) => b.total - a.total) : [];
 
   /** 선택한 파티 구성을 한국어로 직렬화(기록에 남길 옵션 원문). */
   const describeParty = (): { names: string[]; text: string } => {
@@ -199,7 +276,7 @@ export function TeamBuilder() {
     <section className="grid gap-5">
       <div>
         <h2 className="text-xl font-semibold text-[var(--fg)]">{t.teams.title}</h2>
-        <p className="mt-1 text-sm text-[var(--muted)]">공명자 3명의 캐릭터·무기·에코를 설정해 파티 빌드를 꾸리고 최종 스탯을 확인하세요.</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">공명자 3명의 캐릭터·무기·에코를 설정하면 서버 엔진이 파티 전체 피해와 기여도를 계산합니다.</p>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3">
@@ -230,6 +307,9 @@ export function TeamBuilder() {
                       ))}
                     </dl>
                   ) : null}
+                  {noSkillData(reso) ? (
+                    <div className="mt-2 rounded bg-[var(--surface-2)] px-2 py-1 text-[11px] leading-tight text-[#e0a04d]">⚠ 스킬 배율 데이터 없음 · 개인 피해 계산 불가</div>
+                  ) : null}
                   <button type="button" onClick={() => setEditing(i)} className="mt-3 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] py-1.5 text-xs font-medium text-[var(--accent)] hover:border-[var(--accent)]">빌드 편집</button>
                 </>
               ) : (
@@ -242,6 +322,116 @@ export function TeamBuilder() {
           );
         })}
       </div>
+
+      {/* 시뮬 조건 — 파티 전체 공유(적 조건 + 팀 버프) */}
+      <div className="grid gap-4 rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 md:grid-cols-2">
+        <div>
+          <div className="mb-2 text-sm font-semibold text-[var(--fg)]">적 조건</div>
+          <div className="grid grid-cols-2 gap-1.5 text-xs sm:grid-cols-3">
+            {OPT_FIELDS.map((f) => (
+              <label key={f.key} className="flex items-center justify-between gap-1 rounded bg-[var(--surface-2)] px-2 py-1">
+                <span className="text-[var(--muted)]">{f.label}</span>
+                <input type="number" value={opts[f.key]} onChange={(e) => setOpt(f.key, Number(e.target.value))} className="w-14 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" />
+              </label>
+            ))}
+            <label className="flex items-center justify-between gap-1 rounded bg-[var(--surface-2)] px-2 py-1">
+              <span className="text-[var(--muted)]">방어감소%{defShredPct == null ? "·자동" : ""}</span>
+              <input type="number" value={shredPct} onChange={(e) => setDefShredPct(Number(e.target.value))} className="w-14 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" />
+            </label>
+          </div>
+          {autoDefShred > 0 && defShredPct == null ? (
+            <p className="mt-1.5 text-[10px] text-[var(--accent)]">암흑(인멸) 자동 적용 · 적 방어 −{Math.round(autoDefShred * 100)}%</p>
+          ) : null}
+        </div>
+
+        {/* 팀 공유 버프 */}
+        <div>
+          <div className="mb-2 flex items-center justify-between text-sm">
+            <span className="font-semibold text-[var(--fg)]">팀 공유 버프</span>
+            <button type="button" onClick={() => setTeamBuffs((b) => [...b, { key: "atkPct", value: 0 }])} className="text-xs text-[var(--accent)] hover:underline">+ 버프 추가</button>
+          </div>
+          <p className="mb-2 text-[11px] text-[var(--muted)]">서포터가 파티 전원에게 주는 버프(예: 공격력% +20). 모든 공명자 스탯에 더해집니다.</p>
+          <div className="grid gap-1.5">
+            {teamBuffs.length === 0 ? <div className="rounded bg-[var(--surface-2)] px-2 py-2 text-center text-xs text-[var(--muted)]">추가된 버프가 없습니다.</div> : null}
+            {teamBuffs.map((b, i) => (
+              <div key={i} className="flex items-center gap-1.5 text-xs">
+                <select value={b.key} onChange={(e) => setTeamBuffs((arr) => arr.map((x, j) => (j === i ? { ...x, key: e.target.value as StatKey } : x)))} className="flex-1 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
+                  {BUFF_KEYS.map((k) => <option key={k} value={k}>{STAT_LABEL[k]}</option>)}
+                  {(Object.keys(STAT_LABEL) as StatKey[]).filter((k) => !BUFF_KEYS.includes(k)).map((k) => <option key={k} value={k}>{STAT_LABEL[k]}</option>)}
+                </select>
+                <input type="number" step="0.1" value={b.value} onChange={(e) => setTeamBuffs((arr) => arr.map((x, j) => (j === i ? { ...x, value: Number(e.target.value) } : x)))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-right text-[var(--fg)]" />
+                <button type="button" onClick={() => setTeamBuffs((arr) => arr.filter((_, j) => j !== i))} className="text-[var(--muted)] hover:text-[var(--fg)]" aria-label="삭제">✕</button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* 계산 */}
+      <div className="flex flex-wrap items-center gap-3">
+        <button type="button" onClick={calculate} disabled={!filled || busy} className="rounded-md bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50">
+          {busy ? "계산 중…" : "서버 엔진으로 계산"}
+        </button>
+        <span className="text-xs text-[var(--muted)]">공명자 {filled}명 · 스킬 Lv.10 기준</span>
+        {error ? <span className="text-xs text-[var(--danger,#e5484d)]">{error}</span> : null}
+      </div>
+
+      {/* 결과 */}
+      {result ? (
+        <div className="grid gap-3">
+          <div className="flex items-baseline justify-between rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-3">
+            <span className="text-sm font-semibold text-[var(--fg)]">팀 총 피해 (1사이클)</span>
+            <span className="text-2xl font-bold tabular-nums text-[var(--accent)]">{Math.round(result.team_total).toLocaleString()}</span>
+          </div>
+          {ranked.map((m, rank) => {
+            const reso = resoById.get(Number(m.reso_id));
+            const share = result.team_total > 0 ? (m.total / result.team_total) * 100 : 0;
+            const extras = (Object.keys(STAT_LABEL) as StatKey[]).filter((k) => !STAT_ROWS.includes(k) && Math.abs(m.stats[k] ?? 0) > 0.05);
+            return (
+              <div key={m.reso_id + rank} className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
+                <div className="flex items-center gap-2">
+                  <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-[var(--surface-2)] text-xs font-bold text-[var(--fg-soft)]">{rank + 1}</span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={img(reso?.image)} alt="" className={`h-10 w-10 rounded-md bg-[var(--surface-2)] object-cover ring-2 ${reso ? ring(reso.rarity) : ""}`} />
+                  <div className="min-w-0">
+                    <div className="truncate text-sm font-semibold text-[var(--fg)]">{m.name ?? reso?.name ?? m.reso_id}</div>
+                    <div className="text-xs text-[var(--muted)]">{m.element ?? reso?.element} · 코스트 {m.cost}</div>
+                  </div>
+                  <div className="ml-auto text-right">
+                    <div className="font-bold tabular-nums text-[var(--fg)]">{Math.round(m.total).toLocaleString()}</div>
+                    <div className="text-xs text-[var(--muted)]">{share.toFixed(1)}%</div>
+                  </div>
+                </div>
+                <div className="mt-2 h-1.5 w-full overflow-hidden rounded-full bg-[var(--surface-2)]">
+                  <div className="h-full rounded-full bg-[var(--accent)]" style={{ width: `${share}%` }} />
+                </div>
+
+                <dl className="mt-3 grid grid-cols-2 gap-1.5 text-xs sm:grid-cols-3">
+                  {STAT_ROWS.map((k) => (
+                    <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium tabular-nums text-[var(--fg)]">{fmtStat(k, m.stats[k] ?? 0)}</dd></div>
+                  ))}
+                  {extras.map((k) => (
+                    <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium tabular-nums text-[var(--accent)]">{fmtStat(k, m.stats[k] ?? 0)}</dd></div>
+                  ))}
+                </dl>
+
+                {m.skills.length ? (
+                  <dl className="mt-2 grid gap-1 text-sm">
+                    {m.skills.map((s, j) => (
+                      <div key={j} className="flex items-center justify-between gap-2 rounded bg-[var(--surface-2)] px-2.5 py-1.5">
+                        <dt className="min-w-0 truncate text-[var(--muted)]">{s.name}{s.type ? ` · ${s.type}` : ""} <span className="text-[11px]">Lv.{s.level}</span></dt>
+                        <dd className="shrink-0 font-medium tabular-nums text-[var(--fg)]">{Math.round(s.dmg).toLocaleString()}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                ) : noSkillData(reso) ? (
+                  <div className="mt-2 rounded bg-[var(--surface-2)] px-2.5 py-1.5 text-xs leading-relaxed text-[#e0a04d]">⚠ 스킬 배율 데이터가 없어 개인 피해를 계산할 수 없습니다. 방랑자(로버)는 버프·힐 서포터로 활용하세요.</div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      ) : null}
 
       {/* AI 파티 분석 → 기록 저장 */}
       <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
@@ -287,8 +477,6 @@ export function TeamBuilder() {
                 echoById={echoById}
                 setByName={setByName}
                 config={config}
-                anomaly={anomaly}
-                partyDefShred={partyDefShred}
                 slot={editing}
                 t={t}
                 onChange={(fn) => setBuild(editing, fn)}
@@ -331,8 +519,8 @@ function weaponBuffSummary(buffs: WeaponBuff[]): string {
   return parts.join(" · ");
 }
 
-function BuildEditor({
-  reso, build, weaponById, echoById, setByName, config, anomaly, partyDefShred, slot, t, onChange, onPick, onClose,
+export function BuildEditor({
+  reso, build, weaponById, echoById, setByName, config, slot, t, onChange, onPick, onClose,
 }: {
   reso: CodexResonator;
   build: ResonatorBuild;
@@ -340,8 +528,6 @@ function BuildEditor({
   echoById: Map<string, CodexEcho>;
   setByName: Map<string, SonataSet>;
   config: GameConfig | null;
-  anomaly: AnomalyConfig | null;
-  partyDefShred: number;
   slot: number;
   t: ReturnType<typeof useLanguage>["t"];
   onChange: (fn: (b: ResonatorBuild) => ResonatorBuild) => void;
@@ -350,35 +536,11 @@ function BuildEditor({
 }) {
   const weapon = build.weaponId ? weaponById.get(build.weaponId) ?? null : null;
   const active = activeSetBonuses(build, (id) => echoById.get(id)?.sonata ?? [], setByName);
-  const [fullUptime, setFullUptime] = useState(false);
   const wb = weaponBuffs(weapon, build.weaponRank); // { always, conditional, boost }
-  const weaponExtra = fullUptime ? [...wb.always, ...wb.conditional] : wb.always;
-  const weaponBoost = fullUptime ? wb.boost : 0;
-  const stats = computeStats(reso, weapon, build, config, [...(active?.bonuses ?? []), ...weaponExtra]);
+  // 무기 조건부 버프(풀 업타임)는 제거됨 — 상시(always-on) 패시브만 스탯에 반영한다.
+  const stats = computeStats(reso, weapon, build, config, [...(active?.bonuses ?? []), ...wb.always]);
   const cost = buildCost(build);
   const costBudget = config?.costBudget ?? 12;
-  const [skillLv, setSkillLv] = useState(10);
-  const [dmg, setDmg] = useState({ enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, dmgTaken: 0, totalDmg: 0, bonusPct: 0 });
-  const [anom, setAnom] = useState(() => ({ type: ELEMENT_ANOMALY[reso.element ?? ""] ?? "서리", stacks: 10, occurrences: 1 }));
-  const [tune, setTune] = useState({ mult: 1600, boost: 0 });
-  const dmgOpts: DamageOpts = {
-    myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100,
-    defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100 + partyDefShred, boost: dmg.boost + weaponBoost, dmgTaken: dmg.dmgTaken, totalDmg: dmg.totalDmg, bonusPct: dmg.bonusPct,
-  };
-  const damages = (reso.skills ?? [])
-    .filter((s) => s.damage?.length)
-    .map((s) => {
-      const mult = (s.damage ?? []).reduce((a, d) => {
-        const r = d.rates[Math.min(skillLv - 1, d.rates.length - 1)] ?? "0";
-        return a + (parseFloat(r) || 0);
-      }, 0);
-      return { name: s.SkillName ?? "", type: s.SkillType ?? "", dmg: skillDamage(stats, mult, reso.element, s.SkillType, dmgOpts) };
-    })
-    .filter((d) => d.dmg > 0);
-  const anomMode = anomaly?.types?.[anom.type]?.mode;
-  const anomDefDown = anomaly ? anomalyDefReduce(anomaly, anom.type, anom.stacks) : 0;
-  const anomDmg = anomaly ? anomalyDamage(anomaly, anom.type, anom.stacks, stats, { ...dmgOpts, occurrences: anom.occurrences }) : 0;
-  const tuneDmg = tuneBreakDamage(tune.mult, { myLevel: build.level, enemyLevel: dmg.enemyLevel, enemyRes: dmg.enemyRes / 100, resShred: dmg.resShred / 100, defIgnore: dmg.defIgnore / 100, defReduce: dmg.defReduce / 100 + partyDefShred, boostPoints: tune.boost, critRate: stats.crit, critDmg: stats.critDmg, repeat: 1 });
   const setEcho = (idx: number, fn: (e: NonNullable<ResonatorBuild["echoes"][number]>) => ResonatorBuild["echoes"][number]) =>
     onChange((b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === idx && e ? fn(e) : e)) }));
 
@@ -424,20 +586,6 @@ function BuildEditor({
               <p className="mt-2 inline-flex items-center gap-1 rounded bg-[var(--accent-soft,var(--surface-2))] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">
                 패시브 · {weaponBuffSummary(wb.always)}
               </p>
-            ) : null}
-            {wb.conditional.length || wb.boost ? (
-              <label className="mt-2 flex cursor-pointer items-start gap-2 text-[11px] leading-5 text-[var(--fg-soft)]">
-                <input type="checkbox" checked={fullUptime} onChange={(e) => setFullUptime(e.target.checked)} className="mt-0.5 accent-[var(--accent)]" />
-                <span>
-                  조건부 효과 풀 업타임 가정 <span className="text-[var(--muted)]">(최대 스택)</span>
-                  {fullUptime ? (
-                    <span className="mt-0.5 block text-[var(--accent)]">
-                      {wb.conditional.length ? `+${weaponBuffSummary(wb.conditional)}` : ""}
-                      {wb.boost ? `${wb.conditional.length ? " · " : ""}부스트 +${wb.boost}%` : ""}
-                    </span>
-                  ) : null}
-                </span>
-              </label>
             ) : null}
             {weapon.desc ? (
               <p className="mt-2 text-[11px] leading-5 text-[var(--fg-soft)]">{weaponDescAtRank(weapon.desc, build.weaponRank)}</p>
@@ -527,81 +675,12 @@ function BuildEditor({
           ))}
         </dl>
       </div>
-
-      {/* damage calculator (phro.love formulas) */}
-      {damages.length || anomaly ? (
-        <div className="grid gap-3">
-          <h4 className="text-sm font-semibold text-[var(--fg)]">데미지 계산</h4>
-
-          <div className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] p-2.5">
-            <div className="mb-1.5 text-[11px] font-medium text-[var(--muted)]">적 / 버프 조건</div>
-            <div className="grid grid-cols-3 gap-1.5 text-[11px]">
-              {([
-                ["적 레벨", "enemyLevel"], ["저항%", "enemyRes"], ["저항무시%", "resShred"],
-                ["방어무시%", "defIgnore"], ["방어감소%", "defReduce"], ["부스트%", "boost"],
-                ["받는피해%", "dmgTaken"], ["최종피해%", "totalDmg"], ["피해증가%", "bonusPct"],
-              ] as [string, keyof typeof dmg][]).map(([label, key]) => (
-                <label key={key} className="flex items-center justify-between gap-1 rounded bg-[var(--surface)] px-1.5 py-1">
-                  <span className="text-[var(--muted)]">{label}</span>
-                  <input type="number" value={dmg[key]} onChange={(e) => setDmg((d0) => ({ ...d0, [key]: Number(e.target.value) }))} className="w-11 rounded border border-[var(--line-2)] bg-[var(--surface-2)] px-1 text-right text-[var(--fg)]" />
-                </label>
-              ))}
-            </div>
-            {partyDefShred > 0 ? (
-              <p className="mt-1.5 text-[10px] text-[var(--accent)]">암흑(인멸) 자동 적용 · 적 방어 −{Math.round(partyDefShred * 100)}% (방어감소에 합산)</p>
-            ) : null}
-          </div>
-
-          {damages.length ? (
-            <div>
-              <div className="mb-1 flex items-center justify-between text-xs">
-                <span className="font-medium text-[var(--fg-soft)]">일반 데미지</span>
-                <span className="text-[var(--muted)]">스킬 Lv.{skillLv}</span>
-              </div>
-              <input type="range" min={1} max={10} value={skillLv} onChange={(e) => setSkillLv(Number(e.target.value))} className="mb-1.5 w-full accent-[var(--accent)]" aria-label="스킬 레벨" />
-              <dl className="grid gap-1 text-sm">
-                {damages.map((d, i) => (
-                  <div key={i} className="flex items-center justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5">
-                    <dt className="min-w-0 truncate text-[var(--muted)]">{d.name}{d.type ? ` · ${d.type}` : ""}</dt>
-                    <dd className="font-medium text-[var(--fg)]">{Math.round(d.dmg).toLocaleString()}</dd>
-                  </div>
-                ))}
-              </dl>
-            </div>
-          ) : null}
-
-          {anomaly ? (
-            <div>
-              <div className="mb-1 text-xs font-medium text-[var(--fg-soft)]">이상 데미지</div>
-              <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-                <select value={anom.type} onChange={(e) => setAnom((a) => ({ ...a, type: e.target.value }))} className="rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
-                  {Object.keys(anomaly.types).map((k) => <option key={k} value={k}>{k}</option>)}
-                </select>
-                <label className="flex items-center gap-1">스택<input type="number" value={anom.stacks} onChange={(e) => setAnom((a) => ({ ...a, stacks: Number(e.target.value) }))} className="w-11 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
-                {anomMode !== "debuff" ? (
-                  <label className="flex items-center gap-1">횟수<input type="number" value={anom.occurrences} onChange={(e) => setAnom((a) => ({ ...a, occurrences: Number(e.target.value) }))} className="w-10 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
-                ) : null}
-                <span className="ml-auto font-medium text-[var(--fg)]">{anomMode === "debuff" ? `방어 -${Math.round(anomDefDown * 100)}%` : Math.round(anomDmg).toLocaleString()}</span>
-              </div>
-            </div>
-          ) : null}
-
-          <div>
-            <div className="mb-1 text-xs font-medium text-[var(--fg-soft)]">조화도 파괴</div>
-            <div className="flex flex-wrap items-center gap-1.5 text-[11px]">
-              <label className="flex items-center gap-1">배율%<input type="number" value={tune.mult} onChange={(e) => setTune((x) => ({ ...x, mult: Number(e.target.value) }))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
-              <label className="flex items-center gap-1">부스트pt<input type="number" value={tune.boost} onChange={(e) => setTune((x) => ({ ...x, boost: Number(e.target.value) }))} className="w-12 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" /></label>
-              <span className="ml-auto font-medium text-[var(--fg)]">{Math.round(tuneDmg).toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
 
 // ---------------------------------------------------------------------------
-function PickerModal({
+export function PickerModal({
   kind, resos, weapons, echoes, onChoose, onClose, t,
 }: {
   kind: "resonator" | "weapon" | "echo";

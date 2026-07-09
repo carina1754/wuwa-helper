@@ -144,6 +144,13 @@ def ensure_hero_image(update_id: str, source_url: str | None) -> str | None:
 # GET /catalog/image/{kind}/{id}, mirroring the update-hero-image pattern.
 CATALOG_KINDS = ("characters", "weapons", "echoes")
 
+# The datamine catalog's own icons (resonator/weapon/echo/sonata images actually
+# served) are versioned in-repo so a fresh deploy serves them with zero upstream
+# CDN dependency. media_dir() (gitignored) remains the fallback for runtime-cached
+# extras that are not part of the committed catalog: pickup-banner avatars for
+# unreleased units and Namuwiki sonata refreshes.
+COMMITTED_CATALOG_ICON_DIR = Path(__file__).resolve().parents[1] / "data" / "catalog" / "icons"
+
 
 def catalog_image_dir(kind: str) -> Path:
     if kind not in CATALOG_KINDS:
@@ -154,11 +161,13 @@ def catalog_image_dir(kind: str) -> Path:
 def cached_catalog_image_path(kind: str, item_id: str) -> Path | None:
     if kind not in CATALOG_KINDS:
         return None
-    directory = media_dir() / kind
-    if not directory.exists():
-        return None
-    matches = sorted(directory.glob(f"{item_id}.*"))
-    return matches[0] if matches else None
+    # Committed in-repo icons win; the gitignored media cache is the fallback.
+    for directory in (COMMITTED_CATALOG_ICON_DIR / kind, media_dir() / kind):
+        if directory.exists():
+            matches = sorted(directory.glob(f"{item_id}.*"))
+            if matches:
+                return matches[0]
+    return None
 
 
 def ensure_catalog_image(kind: str, item_id: str, source_url: str | None) -> str | None:

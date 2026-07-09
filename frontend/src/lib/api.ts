@@ -18,6 +18,10 @@ import type {
   Role,
   SonataSet,
   SiteUpdateEntry,
+  SnapshotDamageRequestBody,
+  SnapshotDamageResult,
+  TeamCalcRequestBody,
+  TeamCalcResult,
   VisionExtractionResult,
 } from "./types";
 
@@ -93,6 +97,24 @@ export function getSiteUpdates(): Promise<SiteUpdateEntry[]> {
 
 export function getGameConfig(): Promise<Record<string, unknown>> {
   return request("/game-config");
+}
+
+// Server-side party damage from real builds (our engine, not phro's default assumptions).
+export function teamCalculate(body: TeamCalcRequestBody): Promise<TeamCalcResult> {
+  return request("/sim/team-calculate", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
+}
+
+// Absolute damage from a real-account OCR snapshot — the "내 실제 빌드 기준" differentiator.
+export function snapshotDamage(body: SnapshotDamageRequestBody): Promise<SnapshotDamageResult> {
+  return request("/sim/snapshot-damage", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(body),
+  });
 }
 
 export function saveRules(rules: BuildRule[]): Promise<BuildRule[]> {

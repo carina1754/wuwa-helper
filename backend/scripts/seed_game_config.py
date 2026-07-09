@@ -1,6 +1,6 @@
 """Seed game-math constants into the local DB (game_config table).
 
-These are Wuthering Waves game constants the encore API does not expose (echo
+These are Wuthering Waves game constants not carried in the datamine catalog (echo
 main-stat max values by cost, sub-stat roll ranges, sub-stat slots by grade,
 echo cost budget). Storing them in the DB keeps all game data server-side; the
 party builder fetches them via /game-config instead of hardcoding.

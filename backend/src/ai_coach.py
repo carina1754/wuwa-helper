@@ -5,7 +5,6 @@ import os
 
 from openai import OpenAI
 
-from .database import get_connection
 from .models import (
     AiChatRequest,
     AiChatResponse,
@@ -55,32 +54,61 @@ OUTPUT_CONTRACT = """[출력 계약]
 
 
 def _fetch_catalog() -> dict[str, dict[str, dict]]:
-    """카탈로그 원본을 id→행 dict로 반환(필터/검증 공용)."""
+    """카탈로그 원본을 id→행 dict로 반환(필터/검증 공용). 파일 정본(data/catalog)에서 로드.
+
+    필드/정렬은 기존 SQL(ORDER BY, cost=4·rarity>=3 필터)과 동치로 유지한다. 무기의
+    weapon_type은 옛 컬럼과 동일하게 blob의 weapon_type_ko(한글)를 쓴다.
+    """
+    from .catalog import (
+        load_codex_echoes,
+        load_codex_resonators,
+        load_codex_weapons,
+        load_sonata_sets,
+    )
+
+    def _int(value) -> int:
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return 0
+
     resonators: dict[str, dict] = {}
+    for r in sorted(load_codex_resonators(), key=lambda x: (-_int(x.get("rarity")), _int(x.get("id")))):
+        resonators[str(r["id"])] = {
+            "id": str(r["id"]),
+            "name_ko": r.get("name"),
+            "element": r.get("element"),
+            "weapon_type": r.get("weapon_type"),
+            "rarity": _int(r.get("rarity")),
+            "role": r.get("role"),
+        }
     weapons: dict[str, dict] = {}
+    for w in sorted(
+        (x for x in load_codex_weapons() if _int(x.get("rarity")) >= 3),
+        key=lambda x: (-_int(x.get("rarity")), str(x.get("id"))),
+    ):
+        weapons[str(w["id"])] = {
+            "id": str(w["id"]),
+            "name_ko": w.get("name_ko"),
+            "weapon_type": w.get("weapon_type_ko") or w.get("weapon_type"),
+            "rarity": _int(w.get("rarity")),
+        }
     echoes: dict[str, dict] = {}
+    for e in sorted((x for x in load_codex_echoes() if _int(x.get("cost")) == 4), key=lambda x: str(x.get("id"))):
+        echoes[str(e["id"])] = {
+            "id": str(e["id"]),
+            "name_ko": e.get("name_ko"),
+            "cost": _int(e.get("cost")),
+            "rarity": _int(e.get("rarity")),
+        }
     sonatas: dict[str, dict] = {}
-    with get_connection() as conn:
-        for row in conn.execute(
-            "SELECT id, name_ko, element, weapon_type, rarity, role FROM wuwa_resonator ORDER BY rarity DESC, id"
-        ).fetchall():
-            resonators[str(row["id"])] = dict(row)
-        for row in conn.execute(
-            "SELECT id, name_ko, weapon_type, rarity FROM wuwa_weapon WHERE rarity >= 3 ORDER BY rarity DESC, id"
-        ).fetchall():
-            weapons[str(row["id"])] = dict(row)
-        for row in conn.execute(
-            "SELECT id, name_ko, cost, rarity FROM wuwa_echo WHERE cost = 4 ORDER BY id"
-        ).fetchall():
-            echoes[str(row["id"])] = dict(row)
-        for row in conn.execute("SELECT id, name_ko, data_json FROM sonata_set ORDER BY id").fetchall():
-            data = json.loads(row["data_json"])
-            sonatas[str(row["id"])] = {
-                "id": str(row["id"]),
-                "name_ko": row["name_ko"],
-                "two_piece": data.get("two_piece"),
-                "five_piece": data.get("five_piece"),
-            }
+    for s in sorted(load_sonata_sets(), key=lambda x: str(x.get("id"))):
+        sonatas[str(s["id"])] = {
+            "id": str(s["id"]),
+            "name_ko": s.get("name_ko"),
+            "two_piece": s.get("two_piece"),
+            "five_piece": s.get("five_piece"),
+        }
     return {"resonators": resonators, "weapons": weapons, "echoes": echoes, "sonatas": sonatas}
 
 

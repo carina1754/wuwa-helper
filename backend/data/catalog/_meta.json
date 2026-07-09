@@ -1,0 +1,10 @@
+{
+  "sim_source": "datamine-3.5.0",
+  "counts": {
+    "resonators": 56,
+    "weapons": 118,
+    "echoes": 245,
+    "sonata_sets": 34
+  },
+  "note": "Generated from Postgres datamine-3.5.0 snapshot; file is the runtime source of truth."
+}

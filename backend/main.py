@@ -55,6 +55,14 @@ from src.models import (
 )
 from src.report import generate_report
 from src.rules import load_build_rules, save_build_rules
+from src.sim.api import (
+    SnapshotDamageRequest,
+    SnapshotDamageResponse,
+    TeamCalcRequest,
+    TeamCalcResponse,
+    snapshot_damage_api,
+    team_calculate,
+)
 from src.users import sync_user
 from src.vision import extract_from_image
 
@@ -171,6 +179,24 @@ def get_site_updates() -> list[SiteUpdateEntry]:
 @app.get("/game-config")
 def get_game_config() -> dict:
     return load_game_config()
+
+
+@app.post("/sim/team-calculate", response_model=TeamCalcResponse)
+def post_team_calculate(request: TeamCalcRequest) -> TeamCalcResponse:
+    """Server-side party damage calc from real builds (our engine, not phro assumptions)."""
+    try:
+        return team_calculate(request)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
+
+
+@app.post("/sim/snapshot-damage", response_model=SnapshotDamageResponse)
+def post_snapshot_damage(request: SnapshotDamageRequest) -> SnapshotDamageResponse:
+    """Absolute damage from a real-account OCR snapshot — our '내 실제 빌드 기준' differentiator."""
+    try:
+        return snapshot_damage_api(request)
+    except KeyError as exc:
+        raise HTTPException(status_code=404, detail=str(exc))
 
 
 @app.post("/content/refresh")

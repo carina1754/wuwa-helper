@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 from fastapi.testclient import TestClient
 
 from main import app
@@ -46,9 +48,14 @@ def test_refresh_sonata_sets_stores_sets(monkeypatch):
         conn.commit()
 
     assert catalog.refresh_sonata_sets() == 1
-    sset = next(s for s in catalog.load_sonata_sets() if s["name_ko"] == "테스트소나타")
-    assert sset["id"] == sid
-    assert sset["icon"] == f"/catalog/image/echoes/{sid}"
+    # load_sonata_sets() now serves the file-primary catalog (data/catalog), so
+    # verify the (dormant Namuwiki) writer landed the row via a direct table read.
+    with get_connection() as conn:
+        row = conn.execute("SELECT data_json FROM sonata_set WHERE id = %s", (sid,)).fetchone()
+    assert row is not None
+    stored = json.loads(row["data_json"])
+    assert stored["id"] == sid
+    assert stored["icon"] == f"/catalog/image/echoes/{sid}"
 
     with get_connection() as conn:
         conn.execute("DELETE FROM sonata_set WHERE id = %s", (sid,))

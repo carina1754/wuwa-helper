@@ -17,6 +17,8 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from functools import lru_cache
+from pathlib import Path
 
 from .database import get_connection
 from .media import ensure_catalog_image
@@ -63,35 +65,50 @@ def refresh_sonata_sets() -> int:
     return len(sonata_sets)
 
 
+# --- Datamine catalog artifacts (files = runtime source of truth) -------------
+# The sim/codex catalog (resonators, weapons, echoes, sonata sets) is served from
+# versioned JSON files under data/catalog/, generated from the datamine
+# (WutheringWaves_Data-3.5). These files are the runtime source of truth; the
+# wuwa_*/sonata_set tables are retained only for rollback and the (serving-
+# irrelevant) refresh writers. Regenerate with scripts/export_catalog_to_files.py.
+# Memoized -> data changes require a process restart (same model as the sim _ENGINE).
+_CATALOG_DIR = Path(__file__).resolve().parents[1] / "data" / "catalog"
+
+
+@lru_cache(maxsize=None)
+def _load_catalog_file(name: str) -> tuple[dict, ...]:
+    """Load one catalog artifact as an immutable tuple of dicts (shared, read-only).
+
+    Files are written in the same order the old ORDER BY queries produced, so
+    file-primary serving is a byte-faithful, zero-regression swap.
+    """
+    path = _CATALOG_DIR / f"{name}.json"
+    return tuple(json.loads(path.read_text(encoding="utf-8")))
+
+
+def _maybe_int(value):
+    """Preserve legacy integer typing for numeric ids without failing on TEXT ids."""
+    try:
+        return int(value)
+    except (TypeError, ValueError):
+        return value
+
+
 def load_sonata_sets() -> list[dict]:
-    with get_connection() as conn:
-        rows = conn.execute("SELECT data_json FROM sonata_set ORDER BY name_ko").fetchall()
-    return [json.loads(row["data_json"]) for row in rows]
+    return list(_load_catalog_file("sonata_sets"))
 
 
-# --- Codex: rich wuthering.gg dataset (wuwa_* tables) --------------------------
+# --- Codex: rich datamine dataset (served from data/catalog/*.json) ------------
 def load_codex_resonators() -> list[dict]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT data_json FROM wuwa_resonator ORDER BY rarity DESC NULLS LAST, name_ko"
-        ).fetchall()
-    return [json.loads(row["data_json"]) for row in rows]
+    return list(_load_catalog_file("resonators"))
 
 
 def load_codex_weapons() -> list[dict]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT data_json FROM wuwa_weapon ORDER BY rarity DESC NULLS LAST, name_ko"
-        ).fetchall()
-    return [json.loads(row["data_json"]) for row in rows]
+    return list(_load_catalog_file("weapons"))
 
 
 def load_codex_echoes() -> list[dict]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            "SELECT data_json FROM wuwa_echo ORDER BY cost DESC NULLS LAST, rarity DESC NULLS LAST, name_ko"
-        ).fetchall()
-    return [json.loads(row["data_json"]) for row in rows]
+    return list(_load_catalog_file("echoes"))
 
 
 # --- Pickup banners (characters + weapons per version/phase) ------------------
@@ -109,27 +126,21 @@ def _char_avatar_source(name_ko: str, icons: list[dict] | None) -> str | None:
 
 
 def _resonator_by_name() -> dict[str, dict]:
-    """Map normalized wuwa_resonator KO name -> {id, image} for pickup avatars."""
-    with get_connection() as conn:
-        rows = conn.execute("SELECT id, name_ko, data_json FROM wuwa_resonator").fetchall()
+    """Map normalized resonator KO name -> {id, image} for pickup avatars."""
     out: dict[str, dict] = {}
-    for row in rows:
-        data = json.loads(row["data_json"])
-        out[_norm_name(row["name_ko"])] = {"id": row["id"], "image": data.get("image")}
+    for r in load_codex_resonators():
+        out[_norm_name(r.get("name"))] = {"id": _maybe_int(r.get("id")), "image": r.get("image")}
     return out
 
 
 def _weapon_by_name() -> dict[str, dict]:
-    """Map normalized wuwa_weapon KO name -> {icon, rarity, weapon_type} for pickup weapons."""
-    with get_connection() as conn:
-        rows = conn.execute("SELECT name_ko, data_json FROM wuwa_weapon").fetchall()
+    """Map normalized weapon KO name -> {icon, rarity, weapon_type} for pickup weapons."""
     out: dict[str, dict] = {}
-    for row in rows:
-        data = json.loads(row["data_json"])
-        out[_norm_name(row["name_ko"])] = {
-            "icon": data.get("icon"),
-            "rarity": data.get("rarity"),
-            "weapon_type": data.get("weapon_type_ko") or data.get("weapon_type"),
+    for w in load_codex_weapons():
+        out[_norm_name(w.get("name_ko"))] = {
+            "icon": w.get("icon"),
+            "rarity": w.get("rarity"),
+            "weapon_type": w.get("weapon_type_ko") or w.get("weapon_type"),
         }
     return out
 
