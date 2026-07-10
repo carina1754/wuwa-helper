@@ -13,15 +13,19 @@ free-text parsers that derive them are the buff-semantics layer (``sim_buff`` / 
 from __future__ import annotations
 
 from dataclasses import dataclass, field, replace
-from typing import Any, Mapping, Sequence
+from typing import TYPE_CHECKING, Any, Mapping, Sequence
 
 from .buffs import active_set_bonuses, weapon_buffs
+
+if TYPE_CHECKING:
+    from .chains import ChainResolved
 from .formula import (
     ELEMENT_ANOMALY,
     DamageOpts,
     anomaly_damage,
     anomaly_def_reduce,
     skill_damage,
+    skill_type_dmg_key,
     tune_break_damage,
 )
 from .stats import Buff, EchoMainOpt, GameConfig, ResonatorBuild, compute_stats
@@ -125,6 +129,8 @@ def character_damages(
     extra: Sequence[Buff] | None = None,
     extra_add: Sequence[Buff] | None = None,
     full_uptime: bool = False,
+    chain: "ChainResolved | None" = None,
+    type_boosts: Mapping[str, float] | None = None,
 ) -> dict:
     """Final stats + per-skill damage for one character — mirrors the frontend list.
 
@@ -134,7 +140,11 @@ def character_damages(
     explicit list (even empty) to override. ``extra_add`` is appended on top of
     whichever ``extra`` is used — the seam for shared team buffs that support
     members grant the whole party. ``full_uptime`` includes conditional weapon
-    buffs + boost.
+    buffs + boost. ``chain`` carries resolved resonance-sequence (공명 사슬) deltas:
+    self stat buffs fold into ``extra``; a general damage% / DEF-ignore / RES-shred
+    fold into the shared opts; per-skill mult/damage boosts and extra-hit instances
+    (summons / 추가타) adjust the skill list. Team-wide sequence buffs are the
+    caller's job (collect across members, pass via ``extra_add``).
     """
     reso = data.resonators_by_id.get(str(reso_id))
     if reso is None:
@@ -144,16 +154,27 @@ def character_damages(
     resolved_boost = 0.0
     if extra is None:
         extra, resolved_boost = resolve_buffs(data, build, full_uptime)
+    extra = list(extra)
     if extra_add:
-        extra = list(extra) + list(extra_add)
+        extra += list(extra_add)
+    if chain and chain.self_stats:
+        extra += list(chain.self_stats)
     stats = compute_stats(reso, weapon, build, data.config, extra=extra)
 
     o = opts or DamageOpts()
+    if chain:
+        o = replace(
+            o,
+            bonus_pct=o.bonus_pct + chain.dmg_pct,
+            def_ignore=min(0.95, o.def_ignore + chain.def_ignore),
+            res_shred=o.res_shred + chain.res_shred,
+        )
     if resolved_boost:
         o = replace(o, boost=o.boost + resolved_boost)
 
     element = reso.get("element")
     levels = skill_levels or {}
+    per_skill = (chain.per_skill if chain else None) or None
     skills: list[dict] = []
     for i, s in enumerate(reso.get("skills") or []):
         dmgs = s.get("damage") or []
@@ -161,12 +182,50 @@ def character_damages(
             continue
         lv = levels.get(i, 10)
         mult = sum(rate_at(d.get("rates") or [], lv) for d in dmgs)
-        dmg = skill_damage(stats, mult, element, s.get("SkillType"), o)
+        so = o
+        if per_skill:
+            name = s.get("SkillName") or ""
+            bonus = 0.0
+            for ps in per_skill:
+                nm = ps.get("skill_name") or ""
+                if nm and (nm in name or name in nm):
+                    if ps["kind"] == "mult":
+                        mult *= 1 + ps["amount"] / 100.0
+                    else:  # per-skill damage%
+                        bonus += ps["amount"]
+            if bonus:
+                so = replace(o, bonus_pct=o.bonus_pct + bonus)
+        # Skill-type-specific team boosts (e.g. 강공격/공명해방 "부스트") add into
+        # the boost bucket only for the matching skill type — folding them into
+        # the global opts.boost would over-credit this member's other skills.
+        if type_boosts:
+            tk = skill_type_dmg_key(s.get("SkillType"))
+            if tk and type_boosts.get(tk):
+                so = replace(so, boost=so.boost + type_boosts[tk])
+        dmg = skill_damage(stats, mult, element, s.get("SkillType"), so)
         if dmg > 0:
             skills.append(
                 {"name": s.get("SkillName") or "", "type": s.get("SkillType") or "", "level": lv, "dmg": dmg}
             )
-    return {"stats": stats, "skills": skills}
+
+    if chain and chain.extra_hits:
+        for eh in chain.extra_hits:
+            st = stats
+            if eh.get("always_crit"):
+                st = dict(stats)
+                st["crit"] = 100.0
+            oeh = o
+            if type_boosts:
+                tk = skill_type_dmg_key(eh.get("skill_type"))
+                if tk and type_boosts.get(tk):
+                    oeh = replace(o, boost=o.boost + type_boosts[tk])
+            dmg = skill_damage(st, eh["mult"], eh.get("element"), eh.get("skill_type"), oeh) * (eh.get("hits") or 1)
+            if dmg > 0:
+                skills.append(
+                    {"name": eh.get("name") or "추가타", "type": eh.get("skill_type") or "", "level": 0, "dmg": dmg}
+                )
+
+    return {"stats": stats, "skills": skills, "chain_notes": chain.notes if chain else []}
 
 
 # Fixed reference conditions for the situational damage sources, matching the

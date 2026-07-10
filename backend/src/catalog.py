@@ -1,13 +1,13 @@
 """Catalog helpers still sourced from Namuwiki: sonata sets + pickup banners.
 
-The rich resonator/weapon/echo dataset now comes from the wuthering.gg pipeline
-(``wuwa_*`` tables, loaded by the ``load_codex_*`` helpers here). Two things have
-no wuthering.gg equivalent and are still crawled from Namuwiki:
+The rich resonator/weapon/echo dataset now comes from the datamine catalog files
+(``data/catalog/*.json``, loaded by the ``load_codex_*`` helpers here). Two things
+aren't in that dataset and are still crawled from Namuwiki:
 
 * **sonata sets** — crest icon + 2/5-set bonus text (the codex sonata filter).
 * **pickup banners** — which unit ran on which version/phase. Avatars and weapon
-  icons for those banners are enriched from the ``wuwa_resonator`` / ``wuwa_weapon``
-  tables (matched by Korean name), not from the deprecated catalog tables.
+  icons for those banners are enriched from that same datamine catalog (matched
+  by Korean name), falling back to the banner's own extracted art when unmatched.
 
 Everything is stored as a data_json blob keyed by a stable hash so the schema can
 evolve without migrations.
@@ -43,7 +43,7 @@ def refresh_sonata_sets() -> int:
     """Crawl the sonata set definitions from Namuwiki, cache crest icons, store.
 
     Returns the number of sets written. (Individual echoes now come from the
-    wuthering.gg pipeline into ``wuwa_echo``; only the set definitions remain
+    datamine catalog (``echoes.json``); only the set definitions remain
     Namuwiki-sourced.)
     """
     sonata_sets = namu_echoes.parse_sonata_sets(fetch_page(sub_page("데이터 스테이션")))
@@ -114,8 +114,8 @@ def load_codex_echoes() -> list[dict]:
 # --- Pickup banners (characters + weapons per version/phase) ------------------
 # Banner history (which unit ran when) is crawled from Namuwiki 튜닝 pages and
 # merged by (version, phase). Character avatars and weapon icons are enriched
-# from the wuthering.gg dataset (wuwa_resonator / wuwa_weapon) by Korean-name
-# match; unmatched names (e.g. an unreleased unit) fall back to the banner's own
+# from the datamine catalog (resonators / weapons) by Korean-name match;
+# unmatched names (e.g. an unreleased unit) fall back to the banner's own
 # extracted art / no icon.
 def _char_avatar_source(name_ko: str, icons: list[dict] | None) -> str | None:
     for icon in icons or []:

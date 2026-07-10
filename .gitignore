@@ -28,5 +28,6 @@ backend/media/
 backend/.encore_cache/
 backend/scratchpad/
 # Game datamine (user-maintained per patch, ~1GB — reference data, never commit)
+/WutheringWaves_Data/
 /WutheringWaves_Data-*/
 /WutheringWaves_Data-*.zip

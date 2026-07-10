@@ -43216,7 +43216,7 @@
       {
         "SkillName": "울림의 연주",
         "SkillType": "공명 해방",
-        "SkillDescribe": "회절 에너지를 모아 목표 구역을 공격하면 잠시 지연 후 목표 구역에 폭발을 발생시켜 <color=Light>회절 피해</color>를 가한다",
+        "SkillDescribe": "회절 에너지를 모아 목표 구역을 공격하며 잠시의 지연 후 목표 구역에는 폭발이 터져 <color=Light>회절 피해</color>를 입히고 6스택의 <color=Highlight>「<te href=850008>광학 효과</te>」</color>를 추가한다",
         "damage": [
           {
             "name": "공명 해방",
@@ -43249,12 +43249,6 @@
             ]
           }
         ]
-      },
-      {
-        "SkillName": "울림의 연주",
-        "SkillType": "공명 해방",
-        "SkillDescribe": "회절 에너지를 모아 목표 구역을 공격하며 잠시의 지연 후 목표 구역에는 폭발이 터져 <color=Light>회절 피해</color>를 입히고 6스택의 <color=Highlight>「<te href=850008>광학 효과</te>」</color>를 추가한다",
-        "damage": []
       },
       {
         "SkillName": "진동 소리",
@@ -43293,7 +43287,7 @@
       {
         "SkillName": "미세한 세계",
         "SkillType": "공명 회로",
-        "SkillDescribe": "<size=40><color=Title>공명 스킬·공명 참격·선음</color></size> \n<color=Highlight>공명 스킬</color> 발동 시, 「미세한 소리」가 50pt를 초과하면 「미세한 소리」 50pt를 소모하여 <color=Highlight>공명 참격·선음</color>을 발동하며, 전방을 향해 선회 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다.\n<size=10> </size>\n<size=40><color=Title>일반 공격·공명 참격·메아리</color></size>\n공명 스킬 <color=Highlight>공명 참격·선음</color> 종료 후, <color=Highlight>일반 공격</color>을  짧게 누르면, <color=Highlight>공명 참격·메아리</color>를 발동할 수 있다. \n전방을 향해 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다. \n<size=10> </size> \n<size=40><color=Title>「미세한 소리」 획득 규칙</color></size> \n「미세한 소리」 최대 누적 가능: 100pt\n기본 공격 <color=Highlight>소리의 변화</color>로 목표 명중 시, 「미세한 소리」가 회복된다.\n강공격 <color=Highlight>여음</color>으로 목표 명중 시, 「미세한 소리」가 회복된다.\n변주 스킬 <color=Highlight>진동 소리</color> 발동 시, 「미세한 소리」가 회복된다",
+        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 공명 참격 · 선음</color></size> \n<color=Highlight>공명 스킬</color> 발동 시, 「미세한 소리」가 50pt를 초과하면 「미세한 소리」 50pt를 소모하여 <color=Highlight>공명 참격 · 선음</color>을 발동하며, 전방을 향해 선회 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용되며 2스택 <color=Highlight>「<te href=850008>광학 효과</te>」</color>와 <color=Highlight>「희미한 빛」</color> 효과를 추가한다.\n<size=10> </size>\n<size=40><color=Title>「희미한 빛」</color></size>\n<color=Highlight>「희미한 빛」</color>을 지닌 목표의 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 스택은 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 원래의 스택 감소 효과에 따라 감소하지 않는다.\n<size=10> </size>\n<size=40><color=Title>일반 공격 · 공명 참격 · 메아리</color></size>\n공명 스킬 <color=Highlight>공명 참격 · 선음</color> 종료 후, <color=Highlight>일반 공격</color>을 짧게 누르면, <color=Highlight>공명 참격 · 메아리</color>를 발동할 수 있다. \n전방을 향해 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다. \n<size=10> </size> \n<size=40><color=Title>「미세한 소리」 획득 규칙</color></size> \n「미세한 소리」 최대 누적 가능: 100pt\n기본 공격 <color=Highlight>소리의 변화</color>로 목표 명중 시, 「미세한 소리」가 회복된다.\n강공격 <color=Highlight>여음</color>으로 목표 명중 시, 「미세한 소리」가 회복된다.\n변주 스킬 <color=Highlight>진동 소리</color> 발동 시, 「미세한 소리」가 회복된다",
         "damage": [
           {
             "name": "공명 회로",
@@ -43356,12 +43350,6 @@
             ]
           }
         ]
-      },
-      {
-        "SkillName": "미세한 세계",
-        "SkillType": "공명 회로",
-        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 공명 참격 · 선음</color></size> \n<color=Highlight>공명 스킬</color> 발동 시, 「미세한 소리」가 50pt를 초과하면 「미세한 소리」 50pt를 소모하여 <color=Highlight>공명 참격 · 선음</color>을 발동하며, 전방을 향해 선회 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용되며 2스택 <color=Highlight>「<te href=850008>광학 효과</te>」</color>와 <color=Highlight>「희미한 빛」</color> 효과를 추가한다.\n<size=10> </size>\n<size=40><color=Title>「희미한 빛」</color></size>\n<color=Highlight>「희미한 빛」</color>을 지닌 목표의 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 스택은 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 원래의 스택 감소 효과에 따라 감소하지 않는다.\n<size=10> </size>\n<size=40><color=Title>일반 공격 · 공명 참격 · 메아리</color></size>\n공명 스킬 <color=Highlight>공명 참격 · 선음</color> 종료 후, <color=Highlight>일반 공격</color>을 짧게 누르면, <color=Highlight>공명 참격 · 메아리</color>를 발동할 수 있다. \n전방을 향해 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다. \n<size=10> </size> \n<size=40><color=Title>「미세한 소리」 획득 규칙</color></size> \n「미세한 소리」 최대 누적 가능: 100pt\n기본 공격 <color=Highlight>소리의 변화</color>로 목표 명중 시, 「미세한 소리」가 회복된다.\n강공격 <color=Highlight>여음</color>으로 목표 명중 시, 「미세한 소리」가 회복된다.\n변주 스킬 <color=Highlight>진동 소리</color> 발동 시, 「미세한 소리」가 회복된다",
-        "damage": []
       },
       {
         "SkillName": "과묵",

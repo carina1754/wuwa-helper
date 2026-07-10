@@ -1,11 +1,13 @@
 """VERIFIED extractor core: build catalog-shaped skills[] for a role from datamine
 via skill.json DamageList -> damage.json RateLv. Reusable; parity_v2 imports it."""
 import json
+import os
 import sys
 from collections import defaultdict
 from pathlib import Path
 
-DM = Path(r"C:\Users\JungSu\Desktop\wawa-ai-coach\WutheringWaves_Data-3.5")
+# Datamine root: DATAMINE_ROOT env override, else the frozen 3.5 snapshot.
+DM = Path(os.getenv("DATAMINE_ROOT") or r"C:\Users\JungSu\Desktop\wawa-ai-coach\WutheringWaves_Data-3.5")
 BIN = DM / "BinData"
 
 
@@ -157,6 +159,33 @@ def damage_rates(damage_id, maxlv):
     return [_fmt(rl[i]) for i in range(n)]
 
 
+def _skill_desc(sk):
+    """catalog SkillDescribe: KO template with {i} -> detail-num[i] (a flat list
+    of pre-formatted strings, e.g. ['20%','1','300%']). Leaves {i} as-is if the
+    index is out of range so a missing param never becomes a bogus value.
+
+    Some passive/exploration skills leave SkillDescribe blank and carry their only
+    text in SkillResume (e.g. swim-stamina traits) -> fall back to that real text."""
+    import re as _re
+
+    def interp(text_key, params):
+        raw = KO.get(str(text_key), "") or ""
+        params = params or []
+
+        def sub(m):
+            i = int(m.group(1))
+            if i < len(params) and params[i] not in (None, ""):
+                return str(params[i])
+            return m.group(0)
+
+        return _re.sub(r"\{(\d+)\}", sub, raw)
+
+    desc = interp(sk.get("SkillDescribe"), sk.get("SkillDetailNum"))
+    if desc.strip():
+        return desc
+    return interp(sk.get("SkillResume"), sk.get("SkillResumeNum"))
+
+
 def build_skills(rid):
     """Return catalog-shaped skills[] for role id `rid`."""
     ri = ROLEINFO.get(rid)
@@ -176,7 +205,7 @@ def build_skills(rid):
         out.append({
             "SkillName": KO.get(str(sk.get("SkillName")), "") or KO.get(str(sk.get("Name")), ""),
             "SkillType": label,
-            "SkillDescribe": KO.get(str(sk.get("SkillDescribe")), ""),
+            "SkillDescribe": _skill_desc(sk),
             "damage": dmgs,
         })
     return out
