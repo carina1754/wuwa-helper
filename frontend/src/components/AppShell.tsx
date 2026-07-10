@@ -67,6 +67,13 @@ export function AppShell({ renderTab }: AppShellProps) {
                   <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" />
                 </svg>
               </button>
+              <Link className="iconbtn" href="/guide" aria-label="이용 가이드" title="이용 가이드">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9.5" />
+                  <path d="M9.2 9a2.9 2.9 0 0 1 5.6 1c0 1.8-2.8 2.2-2.8 3.6" />
+                  <circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none" />
+                </svg>
+              </Link>
               <button type="button" className="iconbtn" onClick={() => selectTab("SiteUpdates")} aria-label={t.app.websiteUpdates} title={t.app.websiteUpdates}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="m3 11 18-5v12L3 14v-3z" />
