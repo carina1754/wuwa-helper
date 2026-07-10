@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { TABS, type AppTab } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
+import { SupportModal } from "./SupportModal";
 
 function DiscordIcon({ className }: { className?: string }) {
   return (
@@ -32,6 +33,7 @@ function toggleTheme() {
 
 export function AppShell({ renderTab }: AppShellProps) {
   const [activeTab, setActiveTab] = useState<AppTab>("Updates");
+  const [supportOpen, setSupportOpen] = useState(false);
   const { data: session, status } = useSession();
   const { t } = useLanguage();
   const isSignedIn = status === "authenticated";
@@ -74,6 +76,13 @@ export function AppShell({ renderTab }: AppShellProps) {
                   <circle cx="12" cy="17.2" r="0.6" fill="currentColor" stroke="none" />
                 </svg>
               </Link>
+              <button type="button" className="iconbtn" onClick={() => setSupportOpen(true)} aria-label="커피 한 잔 보태기" title="커피 한 잔 보태기">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M17 8h1a3 3 0 0 1 0 6h-1" />
+                  <path d="M3 8h14v6a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z" />
+                  <path d="M7 2v2M11 2v2M15 2v2" />
+                </svg>
+              </button>
               <button type="button" className="iconbtn" onClick={() => selectTab("SiteUpdates")} aria-label={t.app.websiteUpdates} title={t.app.websiteUpdates}>
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="m3 11 18-5v12L3 14v-3z" />
@@ -130,6 +139,8 @@ export function AppShell({ renderTab }: AppShellProps) {
       <footer>
         <p className="disc">Wuthering Waves / Kuro Games와 무관한 비공식 팬 도구입니다.</p>
       </footer>
+
+      {supportOpen ? <SupportModal onClose={() => setSupportOpen(false)} /> : null}
     </>
   );
 }
