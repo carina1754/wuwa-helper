@@ -7,7 +7,7 @@ import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } fr
 import { weaponDescAtRank } from "@/lib/build";
 import { API_BASE_URL } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
-import type { CodexEcho, CodexResonator, CodexWeapon, Role, SonataSet } from "@/lib/types";
+import type { CodexEcho, CodexResonator, CodexSkillDamage, CodexWeapon, Role, SonataSet } from "@/lib/types";
 
 type SubTab = "resonators" | "weapons" | "echoes";
 
@@ -47,6 +47,30 @@ function imageSrc(path?: string | null): string | undefined {
   if (!path) return undefined;
   // encore.moe images are absolute URLs; local cached assets are /catalog/... paths.
   return /^https?:\/\//.test(path) ? path : `${API_BASE_URL}${path}`;
+}
+
+/** 같은 라벨(예: "기본 공격")의 배율 항목들을 합산해 총 배율 하나로 표시(전 히트 합). 퍼센트가 아닌 값이 섞이면 합산 대신 "a + b"로 나열. */
+function groupSkillDamage(damage: CodexSkillDamage[], level: number): { label: string; value: string }[] {
+  const order: string[] = [];
+  const byLabel = new Map<string, string[]>();
+  for (const d of damage) {
+    const label = (d.name || d.type) ?? "";
+    const v = d.rates[Math.min(level - 1, d.rates.length - 1)] ?? d.rates[d.rates.length - 1];
+    if (v == null) continue;
+    if (!byLabel.has(label)) {
+      byLabel.set(label, []);
+      order.push(label);
+    }
+    byLabel.get(label)!.push(v);
+  }
+  return order.map((label) => {
+    const values = byLabel.get(label)!;
+    const nums = values.map((v) => (/^\d+(\.\d+)?%$/.test(v.trim()) ? Number.parseFloat(v) : null));
+    const value = nums.every((n): n is number => n != null)
+      ? `${Number(nums.reduce((a, b) => a + b, 0).toFixed(2))}%`
+      : values.join(" + ");
+    return { label, value };
+  });
 }
 
 function subTabClass(active: boolean): string {
@@ -696,12 +720,11 @@ export function ResonatorDetail({
                       aria-label={`${stripTags(skill.SkillName ?? "스킬")} 레벨`}
                     />
                     <div className="mt-1 flex flex-wrap gap-1">
-                      {skill.damage.slice(0, 8).map((d, di) => (
-                        <span key={di} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--fg-soft)]">
-                          {(d.name || d.type) ?? ""}: <span className="font-medium text-[var(--fg)]">{d.rates[Math.min(skillLvOf(index) - 1, d.rates.length - 1)] ?? d.rates[d.rates.length - 1]}</span>
+                      {groupSkillDamage(skill.damage, skillLvOf(index)).map((g, gi) => (
+                        <span key={gi} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--fg-soft)]">
+                          {g.label}: <span className="font-medium text-[var(--fg)]">{g.value}</span>
                         </span>
                       ))}
-                      {skill.damage.length > 8 ? <span className="px-1 text-[11px] text-[var(--muted)]">외 {skill.damage.length - 8}</span> : null}
                     </div>
                   </>
                 ) : null}
