@@ -5,7 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Portal } from "./Portal";
 import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
 import { weaponDescAtRank } from "@/lib/build";
-import { API_BASE_URL } from "@/lib/constants";
+import { mediaUrl as imageSrc } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexSkillDamage, CodexWeapon, Role, SonataSet } from "@/lib/types";
 
@@ -43,11 +43,6 @@ function rarityRing(rarity?: number | null): string {
 
 /** The image URL is served from the API host; both resonator `image` and
  * weapon/echo `icon` are stored as "/catalog/image/..." paths. */
-function imageSrc(path?: string | null): string | undefined {
-  if (!path) return undefined;
-  // encore.moe images are absolute URLs; local cached assets are /catalog/... paths.
-  return /^https?:\/\//.test(path) ? path : `${API_BASE_URL}${path}`;
-}
 
 /** 같은 라벨(예: "기본 공격")의 배율 항목들을 합산해 총 배율 하나로 표시(전 히트 합). 퍼센트가 아닌 값이 섞이면 합산 대신 "a + b"로 나열. */
 function groupSkillDamage(damage: CodexSkillDamage[], level: number): { label: string; value: string }[] {

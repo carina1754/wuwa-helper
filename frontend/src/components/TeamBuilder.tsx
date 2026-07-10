@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
 import { signIn, useSession } from "next-auth/react";
 import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation, teamCalculate } from "@/lib/api";
+import { mediaUrl } from "@/lib/constants";
 import { useLanguage } from "@/lib/i18n";
 import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SimMemberIn, SimOpts, SonataSet, TeamCalcRequestBody, TeamCalcResult } from "@/lib/types";
 import {
@@ -39,10 +40,7 @@ type UiOpts = { enemyLevel: number; enemyRes: number; resShred: number; defIgnor
 type NumericOptKey = Exclude<keyof UiOpts, "fullUptime">;
 const DEFAULT_OPTS: UiOpts = { enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, bonusPct: 0, fullUptime: true };
 
-export function img(p?: string | null): string | undefined {
-  if (!p) return undefined;
-  return /^https?:\/\//.test(p) ? p : `/backend${p}`;
-}
+const img = mediaUrl;
 export function ring(r: number): string {
   return r >= 5 ? "ring-[var(--gold)]" : "ring-[color-mix(in_srgb,var(--accent)_60%,transparent)]";
 }
