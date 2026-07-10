@@ -5,17 +5,12 @@ import type {
   AiProfile,
   AiRecommendationCreate,
   AiRecommendationRecord,
-  AnalysisSession,
-  AnalyzeResponse,
   BuildRule,
-  CharacterSnapshot,
   CodexEcho,
   CodexResonator,
   CodexWeapon,
   GameUpdateSummary,
   PickupBanner,
-  PickupScheduleItem,
-  Role,
   SonataSet,
   SiteUpdateEntry,
   SnapshotDamageRequestBody,
@@ -40,31 +35,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export function health(): Promise<{ ok: boolean }> {
-  return request("/health");
-}
-
 export function extractVision(file: File): Promise<VisionExtractionResult> {
   const form = new FormData();
   form.append("file", file);
   return request("/vision/extract", { method: "POST", body: form });
 }
 
-export function analyzeCharacter(snapshot: CharacterSnapshot, fallbackRole: Role): Promise<AnalyzeResponse> {
-  return request("/analyze/character", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ snapshot, fallback_role: fallbackRole }),
-  });
-}
-
 export function getRules(): Promise<BuildRule[]> {
   return request("/rules");
-}
-
-export function getPickupSchedule(year?: number): Promise<PickupScheduleItem[]> {
-  const params = year ? `?year=${year}` : "";
-  return request(`/pickup-schedule${params}`);
 }
 
 export function getPickupBanners(): Promise<PickupBanner[]> {
@@ -125,18 +103,6 @@ export function saveRules(rules: BuildRule[]): Promise<BuildRule[]> {
   });
 }
 
-export function getHistory(): Promise<AnalysisSession[]> {
-  return request("/history");
-}
-
-export function saveHistory(session: AnalysisSession): Promise<AnalysisSession> {
-  return request("/history", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(session),
-  });
-}
-
 export function aiChat(messages: AiMessage[], profile: AiProfile): Promise<AiChatResponse> {
   return request("/ai/chat", {
     method: "POST",
@@ -156,10 +122,6 @@ export function saveRecommendation(payload: AiRecommendationCreate): Promise<AiR
 export function getRecommendations(userId?: string): Promise<AiRecommendationRecord[]> {
   const params = userId ? `?user_id=${encodeURIComponent(userId)}` : "";
   return request(`/ai/recommendations${params}`);
-}
-
-export function getRecommendation(id: string): Promise<AiRecommendationRecord> {
-  return request(`/ai/recommendations/${id}`);
 }
 
 export async function deleteRecommendation(id: string): Promise<void> {

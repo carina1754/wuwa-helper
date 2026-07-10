@@ -345,63 +345,9 @@ export function skillDamage(
 // --- Anomaly (이상) damage — phro.love ----------------------------------------
 export type AnomalyType = { key: string; mode: string; coef?: number; maxStack?: number; overBonus?: number; stack1?: number; perStack?: number; stack1Mult?: number; base?: number; defPerStack?: number; maxDef?: number };
 export type AnomalyConfig = { base: Record<string, number>; types: Record<string, AnomalyType> };
-// 원소 → 이상 유형 (phro.love 이상 페이지 기준). 캐릭터 속성으로 자동 결정.
-export const ELEMENT_ANOMALY: Record<string, string> = {
-  응결: "서리", 용융: "불꽃", 전도: "전자", 기류: "풍식", 회절: "광학", 인멸: "암흑",
-};
 // 암흑(디버프형) 방어 감소 = 스택 × 2% (최대 6%). 직접 피해는 없음.
 export function anomalyDefReduce(cfg: AnomalyConfig, type: string, stacks: number): number {
   const t = cfg.types[type];
   if (!t || t.mode !== "debuff") return 0;
   return Math.min(t.maxDef ?? 0.06, (t.defPerStack ?? 0.02) * Math.max(0, stacks));
-}
-// base value B(L) × element coefficient / stack function
-export function anomalyBase(cfg: AnomalyConfig, type: string, stacks: number, myLevel = 90): number {
-  const B = cfg.base[String(myLevel)] ?? cfg.base["90"] ?? 3674;
-  const t = cfg.types[type];
-  if (!t) return 0;
-  if (t.mode === "burst") {
-    const over = Math.max(0, stacks - (t.maxStack ?? 10));
-    return B * (t.coef ?? 0) * (1 + (t.overBonus ?? 0.33) * over);
-  }
-  if (t.mode === "tick_decay") {
-    // 3674 × coef × Σ스택, 매 틱 스택 절반(내림)으로 감쇠 (예: 10→5→2→1 = 18)
-    let s = Math.max(0, Math.floor(stacks));
-    let sum = 0;
-    while (s > 0) { sum += s; s = Math.floor(s / 2); }
-    return B * (t.coef ?? 0) * sum;
-  }
-  if (t.mode === "tick") {
-    if (stacks <= 1) return t.stack1 ?? (t.base ?? 0) * (t.stack1Mult ?? 1);
-    return (t.perStack ?? t.base ?? 0) * (stacks - 1);
-  }
-  return 0;
-}
-export function anomalyDamage(
-  cfg: AnomalyConfig, type: string, stacks: number,
-  stats: Record<StatKey, number>, opts: DamageOpts & { occurrences?: number } = {},
-): number {
-  const baseVal = anomalyBase(cfg, type, stacks, opts.myLevel ?? 90);
-  const { enemyLevel = 90, enemyRes = 0.2, resShred = 0, defReduce = 0, boost = 0, totalDmg = 0, occurrences = 1 } = opts;
-  // anomaly ignores 방어무시 (only 방어감소), uses 이상치명 (=1 unless a crit stat), RES same rule
-  const res = resMultiplier(enemyRes, resShred);
-  const def = defMultiplier(opts.myLevel ?? 90, enemyLevel, 0, defReduce);
-  return baseVal * occurrences * (1 + boost / 100) * 1 * def * res * (1 + totalDmg / 100);
-}
-
-// --- Concerto/Tune break (조화도 파괴) damage — phro.love ----------------------
-// 10000 × multiplier × boost × crit × RES × DEF × tuneDmgBonus × repeat
-export function tuneBreakDamage(
-  multiplierPct: number,
-  opts: DamageOpts & { boostPoints?: number; tuneDmgPct?: number; critRate?: number; critDmg?: number; repeat?: number } = {},
-): number {
-  const {
-    myLevel = 90, enemyLevel = 90, enemyRes = 0.2, resShred = 0, defIgnore = 0, defReduce = 0,
-    boostPoints = 0, tuneDmgPct = 0, critRate = 0, critDmg = 0, repeat = 1,
-  } = opts;
-  const boost = (100 + boostPoints) / 100;
-  const crit = 1 + (critRate / 100) * (critDmg / 100 - 1); // expected-value crit (base 150% ⇒ ×0.5)
-  const res = resMultiplier(enemyRes, resShred);
-  const def = defMultiplier(myLevel, enemyLevel, defIgnore, defReduce);
-  return 10000 * (multiplierPct / 100) * boost * crit * res * def * (1 + tuneDmgPct / 100) * repeat;
 }

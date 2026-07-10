@@ -1,4 +1,4 @@
-import type { CharacterSnapshot, EchoItem, Role } from "./types";
+import type { CharacterSnapshot, EchoItem } from "./types";
 
 export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL ?? "http://localhost:8000";
 
@@ -9,8 +9,7 @@ export function mediaUrl(path?: string | null): string | undefined {
   return path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
 }
 
-export const ROLES: Role[] = ["main_dps", "sub_dps", "support", "healer"];
-export const TABS = ["Ai", "Planner", "PickupSchedule", "Updates", "Teams", "History"] as const;
+export const TABS = ["Ai", "Planner", "PickupSchedule", "Updates", "Teams", "Snapshot", "History"] as const;
 export type AppTab = (typeof TABS)[number] | "SiteUpdates";
 
 export function emptyEcho(slot: number): EchoItem {

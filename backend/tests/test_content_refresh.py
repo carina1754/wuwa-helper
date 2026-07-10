@@ -127,25 +127,6 @@ def test_refresh_preserves_historical_rows_not_covered_by_new_scrape(monkeypatch
         conn.commit()
 
 
-def test_scraper_pickup_schedule_id_matches_seed_convention():
-    rows = [
-        {
-            "banner": "Lucy: Whiteout",
-            "four_stars": [],
-            "start_year": 2026,
-            "start_month": 7,
-            "start_day": 1,
-            "end_month": 7,
-            "end_day": 21,
-            "end_year": 2026,
-        }
-    ]
-
-    schedule = content_refresh._schedule_from_banner_rows(rows)
-
-    assert schedule[0]["id"] == "2026-07-first"
-    assert schedule[0]["category"] == "first_pickup"
-
 def test_official_updates_prefer_korean_articles_and_fallback_to_english(monkeypatch):
     korean_menu = {
         "article": [

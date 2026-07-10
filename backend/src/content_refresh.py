@@ -7,7 +7,6 @@ import threading
 import time
 from datetime import datetime, timedelta, timezone
 from html import unescape
-from html.parser import HTMLParser
 from urllib.request import Request, urlopen
 
 from .curated_updates import apply_curated_update_summaries
@@ -17,32 +16,11 @@ from .media import ensure_hero_image
 OFFICIAL_JSON_BASE_URL = "https://hw-media-cdn-mingchao.kurogame.com/akiwebsite/website2.0/json/G152"
 OFFICIAL_SITE_BASE_URL = "https://wutheringwaves.kurogames.com"
 OFFICIAL_NEWS_URL = f"{OFFICIAL_SITE_BASE_URL}/kr/main/news"
-PC_GAMER_BANNERS_URL = "https://www.pcgamer.com/games/rpg/wuthering-waves-banner-next-current/"
 REFRESH_INTERVAL_SECONDS = 24 * 60 * 60
-
-
-class TextExtractor(HTMLParser):
-    def __init__(self) -> None:
-        super().__init__()
-        self.parts: list[str] = []
-
-    def handle_data(self, data: str) -> None:
-        text = " ".join(data.split())
-        if text:
-            self.parts.append(text)
 
 
 def _now_iso() -> str:
     return datetime.now(timezone.utc).isoformat()
-
-
-def _fetch_text(url: str) -> str:
-    request = Request(url, headers={"User-Agent": "WuWaHelper/1.0"})
-    with urlopen(request, timeout=20) as response:
-        html = response.read().decode("utf-8", errors="ignore")
-    parser = TextExtractor()
-    parser.feed(html)
-    return "\n".join(parser.parts)
 
 
 def _fetch_json(url: str) -> dict[str, object]:
@@ -120,10 +98,6 @@ def _extract_release_datetime_kst(text: str) -> str | None:
     return None
 
 
-def _extract_release_date_kst(text: str) -> str | None:
-    return _extract_release_datetime_kst(text)
-
-
 def _is_version_update_article(title: str) -> bool:
     patterns = [
         r"\d+\.\d+\s*버전.*(?:내용 안내|업데이트 점검)",
@@ -183,127 +157,6 @@ def _updates_from_official_articles(since_year: int = 2024, limit: int | None = 
             }
     updates = sorted(by_version.values(), key=lambda item: item.get("release_date_kst") or "", reverse=True)
     return updates[:limit] if limit is not None else updates
-
-
-def _parse_month(name: str) -> int:
-    months = {
-        "january": 1,
-        "february": 2,
-        "march": 3,
-        "april": 4,
-        "may": 5,
-        "june": 6,
-        "july": 7,
-        "august": 8,
-        "september": 9,
-        "october": 10,
-        "november": 11,
-        "december": 12,
-    }
-    return months[name.lower()]
-
-
-def _extract_banner_rows(text: str) -> list[dict[str, object]]:
-    date_pattern = re.compile(
-        r"(?P<start_month>January|February|March|April|May|June|July|August|September|October|November|December)"
-        r"\s+(?P<start_day>\d{1,2}),?\s*(?P<start_year>\d{4})?\s*-\s*"
-        r"(?P<end_month>January|February|March|April|May|June|July|August|September|October|November|December)"
-        r"\s+(?P<end_day>\d{1,2})(?:,?\s*(?P<end_year>\d{4}))?",
-        re.IGNORECASE,
-    )
-    lines = [line.strip() for line in text.splitlines() if line.strip()]
-    rows: list[dict[str, object]] = []
-    for index, line in enumerate(lines):
-        match = date_pattern.fullmatch(line)
-        if not match:
-            continue
-        banner = lines[index - 2] if index >= 2 else ""
-        four_stars = lines[index - 1] if index >= 1 else ""
-        if not banner or banner.lower() in {"banner", "four-star characters", "dates"}:
-            continue
-        start_year = int(match.group("start_year") or match.group("end_year") or datetime.now().year)
-        rows.append(
-            {
-                "banner": banner.strip(),
-                "four_stars": [item.strip() for item in four_stars.split(",") if item.strip() and four_stars != "N/A"],
-                "start_year": start_year,
-                "start_month": _parse_month(match.group("start_month")),
-                "start_day": int(match.group("start_day")),
-                "end_month": _parse_month(match.group("end_month")),
-                "end_day": int(match.group("end_day")),
-                "end_year": int(match.group("end_year") or start_year),
-            }
-        )
-    return rows
-
-
-_CATEGORY_ID_SUFFIXES = {
-    "first_pickup": "first",
-    "rerun_1": "rerun-1",
-    "rerun_2": "rerun-2",
-}
-
-
-def _schedule_from_banner_rows(rows: list[dict[str, object]]) -> list[dict[str, object]]:
-    seen: set[str] = set()
-    items: list[dict[str, object]] = []
-    rows = sorted(rows, key=lambda row: (int(row["start_year"]), int(row["start_month"]), int(row["start_day"]), str(row["banner"])))
-    grouped: dict[tuple[int, int, str], list[str]] = {}
-    for row in rows:
-        banner = str(row["banner"])
-        if "(" in banner and "," in banner:
-            continue
-        category = "rerun_1" if banner in seen else "first_pickup"
-        seen.add(banner)
-        key = (int(row["start_year"]), int(row["start_month"]), category)
-        grouped.setdefault(key, []).append(banner)
-
-    for (year, month, category), characters in sorted(grouped.items()):
-        label = "첫 픽업" if category == "first_pickup" else "1차 복각"
-        id_suffix = _CATEGORY_ID_SUFFIXES.get(category, category)
-        items.append(
-            {
-                "id": f"{year}-{month:02d}-{id_suffix}",
-                "year": year,
-                "month": month,
-                "category": category,
-                "label_ko": label,
-                "characters": sorted(set(characters)),
-                "notes_ko": "PC Gamer 배너 히스토리에서 자동 갱신됨",
-                "source_links": [PC_GAMER_BANNERS_URL],
-            }
-        )
-    return items
-
-
-def _updates_from_banner_text(text: str) -> list[dict[str, object]]:
-    updates: list[dict[str, object]] = []
-    version_matches = re.finditer(r"version\s+(?P<version>\d+\.\d+).*?(?P<date>July\s+10|June\s+8|February\s+5)?", text, re.IGNORECASE)
-    seen: set[str] = set()
-    for match in version_matches:
-        version = match.group("version")
-        if version in seen:
-            continue
-        seen.add(version)
-        release = None
-        if match.group("date") == "July 10":
-            release = "2026-07-10"
-        elif match.group("date") == "June 8":
-            release = "2026-06-08"
-        elif match.group("date") == "February 5":
-            release = "2026-02-05"
-        updates.append(
-            {
-                "id": f"wuwa-{version}",
-                "version": version,
-                "title_ko": f"{version} 업데이트",
-                "release_date_kst": release,
-                "summary_ko": "외부 배너/업데이트 문서에서 자동 확인된 명조 업데이트 항목입니다.",
-                "highlights_ko": ["픽업 및 복각 배너 정보 갱신", "한국 기준 표시용 데이터 갱신"],
-                "source_links": [PC_GAMER_BANNERS_URL],
-            }
-        )
-    return updates
 
 
 def _last_refresh(conn, source: str) -> datetime | None:

@@ -26,6 +26,7 @@ export const copy = {
       PickupSchedule: "픽업 일정표",
       Updates: "명조 업데이트",
       Teams: "파티",
+      Snapshot: "실측 딜",
       History: "기록",
     },
     roles: {
@@ -345,6 +346,7 @@ export const copy = {
       PickupSchedule: "Pickup Schedule",
       Updates: "WuWa Updates",
       Teams: "Party",
+      Snapshot: "Real DMG",
       History: "History",
     },
     roles: {

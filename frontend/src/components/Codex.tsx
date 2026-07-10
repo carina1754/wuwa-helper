@@ -644,8 +644,10 @@ export function ResonatorDetail({
 
   const maxLevel = item.max_level ?? 90;
   const [level, setLevel] = useState(maxLevel);
-  const [skillLv, setSkillLv] = useState(10);
-  const hasSkillDamage = (item.skills ?? []).some((s) => s.damage?.length);
+  const [skillLevels, setSkillLevels] = useState<Record<number, number>>({});
+  const skillLvOf = (i: number) => skillLevels[i] ?? 10;
+  const setSkillLvOf = (i: number, v: number) =>
+    setSkillLevels((prev) => ({ ...prev, [i]: v }));
   const curves = item.stat_curves ?? null;
   const statValue = (key: string): number | undefined => {
     const curve = curves?.[key];
@@ -668,32 +670,40 @@ export function ResonatorDetail({
 
       {item.skills?.length ? (
         <div>
-          <div className="mb-1.5 flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-[var(--fg)]">스킬</h4>
-            {hasSkillDamage ? <span className="text-xs text-[var(--muted)]">스킬 Lv.{skillLv}</span> : null}
-          </div>
-          {hasSkillDamage ? (
-            <input type="range" min={1} max={10} value={skillLv} onChange={(e) => setSkillLv(Number(e.target.value))} className="mb-2 w-full accent-[var(--accent)]" aria-label="스킬 레벨" />
-          ) : null}
+          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">스킬</h4>
           <ul className="grid gap-2.5">
             {item.skills.map((skill, index) => (
               <li key={`${skill.SkillName ?? "skill"}-${index}`} className="text-sm">
-                <div className="flex items-baseline gap-1.5">
-                  {skill.SkillName ? <span className="font-semibold text-[var(--fg)]">{stripTags(skill.SkillName)}</span> : null}
-                  {skill.SkillType ? <span className="text-xs text-[var(--muted)]">{skill.SkillType}</span> : null}
+                <div className="flex items-baseline justify-between gap-1.5">
+                  <div className="flex items-baseline gap-1.5">
+                    {skill.SkillName ? <span className="font-semibold text-[var(--fg)]">{stripTags(skill.SkillName)}</span> : null}
+                    {skill.SkillType ? <span className="text-xs text-[var(--muted)]">{skill.SkillType}</span> : null}
+                  </div>
+                  {skill.damage?.length ? <span className="shrink-0 text-xs text-[var(--muted)]">Lv.{skillLvOf(index)}</span> : null}
                 </div>
                 {skill.SkillDescribe ? (
                   <p className="mt-0.5 line-clamp-3 text-[var(--fg-soft)]">{stripTags(skill.SkillDescribe)}</p>
                 ) : null}
                 {skill.damage?.length ? (
-                  <div className="mt-1 flex flex-wrap gap-1">
-                    {skill.damage.slice(0, 8).map((d, di) => (
-                      <span key={di} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--fg-soft)]">
-                        {(d.name || d.type) ?? ""}: <span className="font-medium text-[var(--fg)]">{d.rates[Math.min(skillLv - 1, d.rates.length - 1)] ?? d.rates[d.rates.length - 1]}</span>
-                      </span>
-                    ))}
-                    {skill.damage.length > 8 ? <span className="px-1 text-[11px] text-[var(--muted)]">외 {skill.damage.length - 8}</span> : null}
-                  </div>
+                  <>
+                    <input
+                      type="range"
+                      min={1}
+                      max={10}
+                      value={skillLvOf(index)}
+                      onChange={(e) => setSkillLvOf(index, Number(e.target.value))}
+                      className="mb-1 mt-1.5 w-full accent-[var(--accent)]"
+                      aria-label={`${stripTags(skill.SkillName ?? "스킬")} 레벨`}
+                    />
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {skill.damage.slice(0, 8).map((d, di) => (
+                        <span key={di} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--fg-soft)]">
+                          {(d.name || d.type) ?? ""}: <span className="font-medium text-[var(--fg)]">{d.rates[Math.min(skillLvOf(index) - 1, d.rates.length - 1)] ?? d.rates[d.rates.length - 1]}</span>
+                        </span>
+                      ))}
+                      {skill.damage.length > 8 ? <span className="px-1 text-[11px] text-[var(--muted)]">외 {skill.damage.length - 8}</span> : null}
+                    </div>
+                  </>
                 ) : null}
               </li>
             ))}
@@ -804,15 +814,19 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
         <div>
           <div className="mb-1.5 flex items-center justify-between gap-2">
             <h4 className="text-sm font-semibold text-[var(--fg)]">패시브{resonanceName ? ` · ${resonanceName}` : ""}</h4>
-            {hasRefine ? (
-              <div className="flex items-center gap-1 text-xs">
-                <span className="text-[var(--muted)]">정제</span>
-                {[1, 2, 3, 4, 5].map((r) => (
-                  <button key={r} type="button" onClick={() => setRank(r)} className={`h-5 w-5 rounded ${rank === r ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "bg-[var(--surface-2)] text-[var(--fg-soft)]"}`}>{r}</button>
-                ))}
-              </div>
-            ) : null}
+            {hasRefine ? <span className="text-xs text-[var(--muted)]">정제 R{rank}</span> : null}
           </div>
+          {hasRefine ? (
+            <input
+              type="range"
+              min={1}
+              max={5}
+              value={rank}
+              onChange={(e) => setRank(Number(e.target.value))}
+              className="mb-2 w-full accent-[var(--accent)]"
+              aria-label="정제"
+            />
+          ) : null}
           {desc ? <p className="text-sm text-[var(--fg-soft)]">{desc}</p> : null}
         </div>
       ) : null}

@@ -600,12 +600,10 @@ export function BuildEditor({
               <span className="flex justify-between text-xs text-[var(--muted)]"><span>무기 레벨</span><span className="text-[var(--fg)]">Lv.{build.weaponLevel}</span></span>
               <input type="range" min={1} max={90} value={build.weaponLevel} onChange={(e) => onChange((b) => ({ ...b, weaponLevel: Number(e.target.value) }))} className="w-full accent-[var(--accent)]" />
             </label>
-            <div className="mt-2 flex items-center gap-1.5 text-xs">
-              <span className="text-[var(--muted)]">정제</span>
-              {[1, 2, 3, 4, 5].map((r) => (
-                <button key={r} type="button" onClick={() => onChange((b) => ({ ...b, weaponRank: r }))} className={`h-6 w-6 rounded ${build.weaponRank === r ? "bg-[var(--accent)] text-[var(--accent-ink)]" : "bg-[var(--surface)] text-[var(--fg-soft)]"}`}>{r}</button>
-              ))}
-            </div>
+            <label className="mt-2 grid gap-1">
+              <span className="flex justify-between text-xs text-[var(--muted)]"><span>정제</span><span className="text-[var(--fg)]">R{build.weaponRank}</span></span>
+              <input type="range" min={1} max={5} value={build.weaponRank} onChange={(e) => onChange((b) => ({ ...b, weaponRank: Number(e.target.value) }))} className="w-full accent-[var(--accent)]" />
+            </label>
             {wb.always.length ? (
               <p className="mt-2 inline-flex items-center gap-1 rounded bg-[var(--accent-soft,var(--surface-2))] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">
                 패시브 · {weaponBuffSummary(wb.always)}
