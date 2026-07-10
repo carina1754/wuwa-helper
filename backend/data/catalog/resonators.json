@@ -43216,7 +43216,7 @@
       {
         "SkillName": "울림의 연주",
         "SkillType": "공명 해방",
-        "SkillDescribe": "회절 에너지를 모아 목표 구역을 공격하며 잠시의 지연 후 목표 구역에는 폭발이 터져 <color=Light>회절 피해</color>를 입히고 6스택의 <color=Highlight>「<te href=850008>광학 효과</te>」</color>를 추가한다",
+        "SkillDescribe": "회절 에너지를 모아 목표 구역을 공격하면 잠시 지연 후 목표 구역에 폭발을 발생시켜 <color=Light>회절 피해</color>를 가한다",
         "damage": [
           {
             "name": "공명 해방",
@@ -43249,6 +43249,12 @@
             ]
           }
         ]
+      },
+      {
+        "SkillName": "울림의 연주",
+        "SkillType": "공명 해방",
+        "SkillDescribe": "회절 에너지를 모아 목표 구역을 공격하며 잠시의 지연 후 목표 구역에는 폭발이 터져 <color=Light>회절 피해</color>를 입히고 6스택의 <color=Highlight>「<te href=850008>광학 효과</te>」</color>를 추가한다",
+        "damage": []
       },
       {
         "SkillName": "진동 소리",
@@ -43287,7 +43293,7 @@
       {
         "SkillName": "미세한 세계",
         "SkillType": "공명 회로",
-        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 공명 참격 · 선음</color></size> \n<color=Highlight>공명 스킬</color> 발동 시, 「미세한 소리」가 50pt를 초과하면 「미세한 소리」 50pt를 소모하여 <color=Highlight>공명 참격 · 선음</color>을 발동하며, 전방을 향해 선회 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용되며 2스택 <color=Highlight>「<te href=850008>광학 효과</te>」</color>와 <color=Highlight>「희미한 빛」</color> 효과를 추가한다.\n<size=10> </size>\n<size=40><color=Title>「희미한 빛」</color></size>\n<color=Highlight>「희미한 빛」</color>을 지닌 목표의 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 스택은 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 원래의 스택 감소 효과에 따라 감소하지 않는다.\n<size=10> </size>\n<size=40><color=Title>일반 공격 · 공명 참격 · 메아리</color></size>\n공명 스킬 <color=Highlight>공명 참격 · 선음</color> 종료 후, <color=Highlight>일반 공격</color>을 짧게 누르면, <color=Highlight>공명 참격 · 메아리</color>를 발동할 수 있다. \n전방을 향해 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다. \n<size=10> </size> \n<size=40><color=Title>「미세한 소리」 획득 규칙</color></size> \n「미세한 소리」 최대 누적 가능: 100pt\n기본 공격 <color=Highlight>소리의 변화</color>로 목표 명중 시, 「미세한 소리」가 회복된다.\n강공격 <color=Highlight>여음</color>으로 목표 명중 시, 「미세한 소리」가 회복된다.\n변주 스킬 <color=Highlight>진동 소리</color> 발동 시, 「미세한 소리」가 회복된다",
+        "SkillDescribe": "<size=40><color=Title>공명 스킬·공명 참격·선음</color></size> \n<color=Highlight>공명 스킬</color> 발동 시, 「미세한 소리」가 50pt를 초과하면 「미세한 소리」 50pt를 소모하여 <color=Highlight>공명 참격·선음</color>을 발동하며, 전방을 향해 선회 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다.\n<size=10> </size>\n<size=40><color=Title>일반 공격·공명 참격·메아리</color></size>\n공명 스킬 <color=Highlight>공명 참격·선음</color> 종료 후, <color=Highlight>일반 공격</color>을  짧게 누르면, <color=Highlight>공명 참격·메아리</color>를 발동할 수 있다. \n전방을 향해 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다. \n<size=10> </size> \n<size=40><color=Title>「미세한 소리」 획득 규칙</color></size> \n「미세한 소리」 최대 누적 가능: 100pt\n기본 공격 <color=Highlight>소리의 변화</color>로 목표 명중 시, 「미세한 소리」가 회복된다.\n강공격 <color=Highlight>여음</color>으로 목표 명중 시, 「미세한 소리」가 회복된다.\n변주 스킬 <color=Highlight>진동 소리</color> 발동 시, 「미세한 소리」가 회복된다",
         "damage": [
           {
             "name": "공명 회로",
@@ -43352,6 +43358,12 @@
         ]
       },
       {
+        "SkillName": "미세한 세계",
+        "SkillType": "공명 회로",
+        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 공명 참격 · 선음</color></size> \n<color=Highlight>공명 스킬</color> 발동 시, 「미세한 소리」가 50pt를 초과하면 「미세한 소리」 50pt를 소모하여 <color=Highlight>공명 참격 · 선음</color>을 발동하며, 전방을 향해 선회 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용되며 2스택 <color=Highlight>「<te href=850008>광학 효과</te>」</color>와 <color=Highlight>「희미한 빛」</color> 효과를 추가한다.\n<size=10> </size>\n<size=40><color=Title>「희미한 빛」</color></size>\n<color=Highlight>「희미한 빛」</color>을 지닌 목표의 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 스택은 <color=Highlight>「<te href=850008>광학 효과</te>」</color> 원래의 스택 감소 효과에 따라 감소하지 않는다.\n<size=10> </size>\n<size=40><color=Title>일반 공격 · 공명 참격 · 메아리</color></size>\n공명 스킬 <color=Highlight>공명 참격 · 선음</color> 종료 후, <color=Highlight>일반 공격</color>을 짧게 누르면, <color=Highlight>공명 참격 · 메아리</color>를 발동할 수 있다. \n전방을 향해 공격을 가하여 <color=Light>회절 피해</color>를 입힌다. 해당 피해는 공명 스킬 피해로 적용된다. \n<size=10> </size> \n<size=40><color=Title>「미세한 소리」 획득 규칙</color></size> \n「미세한 소리」 최대 누적 가능: 100pt\n기본 공격 <color=Highlight>소리의 변화</color>로 목표 명중 시, 「미세한 소리」가 회복된다.\n강공격 <color=Highlight>여음</color>으로 목표 명중 시, 「미세한 소리」가 회복된다.\n변주 스킬 <color=Highlight>진동 소리</color> 발동 시, 「미세한 소리」가 회복된다",
+        "damage": []
+      },
+      {
         "SkillName": "과묵",
         "SkillType": "고유 스킬",
         "SkillDescribe": "일반 공격 <color=Highlight>공명 참격 · 메아리</color>의 피해가 60% 증가한다",
@@ -43366,7 +43378,7 @@
       {
         "SkillName": "보측명영",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "",
+        "SkillDescribe": "수영 시, 스태미나 소모가 20% 감소한다",
         "damage": []
       }
     ],
@@ -146154,7 +146166,7 @@
     "sim_source": "datamine-3.5.0"
   },
   {
-    "id": "1110",
+    "id": 1110,
     "name": "수수",
     "name_en": "Suisui",
     "nickname": "",
@@ -146172,7 +146184,7 @@
       {
         "SkillName": "녹아든 봄바람",
         "SkillType": "기본 공격",
-        "SkillDescribe": "<size=40><color=Title>일반 공격 · 먼지를 씻어낼 무렵</color></size>\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르거나 혹은 길게 누르면, 최대 4단 연속 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 먼지를 씻어낼 무렵</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고, <color=Ice>응결 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>회피 반격 · 먼지를 씻어낼 무렵</color></size>\n회피 성공 후 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면, 목표를 공격하여 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n해당 스킬 발동 후 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 먼지를 씻어낼 무렵 4단</color>을 발동한다",
+        "SkillDescribe": "<size=40><color=Title>일반 공격 · 먼지를 씻어낼 무렵</color></size>\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르거나 혹은 길게 누르면, 최대 4단 연속 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 먼지를 씻어낼 무렵</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>회피 반격 · 먼지를 씻어낼 무렵</color></size>\n회피 성공 후 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면, 목표를 공격하여 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n해당 스킬 발동 후 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 먼지를 씻어낼 무렵 4단</color>을 발동한다",
         "damage": [
           {
             "name": "기본 공격",
@@ -146359,7 +146371,7 @@
       {
         "SkillName": "병풍에 내린 초록빛",
         "SkillType": "공명 스킬",
-        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 먼지를 씻어낼 무렵</color></size>\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>이 가득 차 있지 않을 시, <color=Highlight>공명 스킬</color>을 짧게 눌러 발동한다. 수수가 앞으로 돌진하여 <color=Ice>응결 피해</color>를 입힌다. 발동 기간 동안 수수가 파티 내 등장 캐릭터일 경우, <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n해당 스킬과 <color=Highlight>공명 스킬 · 비에 젖어들 무렵</color>은 같은 쿨타임을 공유한다.\n<size=10></size>\n<size=40><color=Title>깨어난 봄기운</color></size>\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>이 가득 찰 시, <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color>이 <color=Highlight>깨어난 봄기운</color>으로 대체된다. 발동 시, 모든 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 소모하여 주변 목표를 끌어당기고, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>에 진입하며, <color=Ice>응결 피해</color>를 입힌다. 명중된 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 1회 추가한다.\n<color=Highlight>깨어난 봄기운</color> 발동 시, 근처 파티 내 모든 캐릭터가 1스택의 <color=Highlight><te href=111001>만물의 윤기</te></color>를 획득하게 되며, 25초마다 최대 1회 발생할 수 있다. 캐릭터 등장 시 <color=Highlight><te href=111001>만물의 윤기</te></color>를 소모하여 수수가 해당 캐릭터의 HP를 회복시킨다.\n<size=10></size>\n<size=40><color=Title>공명 스킬 · 비에 젖어들 무렵</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color>이 <color=Highlight>공명 스킬 · 비에 젖어들 무렵</color>으로 대체된다.\n<color=Highlight>공명 스킬</color>을 짧게 눌러 발동한다. 수수가 앞으로 돌진하여 <color=Ice>응결 피해</color>를 입힌다. 발동 기간 동안 수수가 파티 내 등장 캐릭터일 경우, <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n해당 스킬과 <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color>은 같은 쿨타임을 공유한다",
+        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 먼지를 씻어낼 무렵</color></size>\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>이 가득 차 있지 않을 시, <color=Highlight>공명 스킬</color>을 짧게 눌러 발동한다. 수수가 앞으로 돌진하여 <color=Ice>응결 피해</color>를 입힌다. 발동 기간 동안 수수가 파티 내 등장 캐릭터일 경우, <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n낮은 공중에서 발동 가능하다.\n해당 스킬과 <color=Highlight>공명 스킬 · 비에 젖어들 무렵</color>은 같은 쿨타임을 공유한다.\n<size=10></size>\n<size=40><color=Title>깨어난 봄기운</color></size>\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>이 가득 찰 시, <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color>이 <color=Highlight>깨어난 봄기운</color>으로 대체된다. 발동 시, 모든 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 소모하여 주변 목표를 끌어당기고, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>에 진입하며, <color=Ice>응결 피해</color>를 입힌다. 명중된 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 1회 추가한다.\n<size=10></size>\n<size=40><color=Title>만물의 윤기</color></size>\n<color=Highlight>깨어난 봄기운</color>과 <color=Highlight>변주 스킬 · 청량한 옥소리</color> 발동 시, 근처 파티 내 모든 캐릭터가 1스택의 <color=Highlight><te href=111001>만물의 윤기</te></color>를 획득하게 되며, 25초마다 최대 1회 발생할 수 있다. 캐릭터 등장 시, <color=Highlight><te href=111001>만물의 윤기</te></color>가 소모되고 수수가 해당 캐릭터의 HP를 회복시킨다.\n<size=10></size>\n<size=40><color=Title>공명 스킬 · 비에 젖어들 무렵</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color>이 <color=Highlight>공명 스킬 · 비에 젖어들 무렵</color>으로 대체된다.\n<color=Highlight>공명 스킬</color>을 짧게 눌러 발동한다. 수수가 앞으로 돌진하여 <color=Ice>응결 피해</color>를 입힌다. 발동 기간 동안 수수가 파티 내 등장 캐릭터일 경우, <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n낮은 공중에서 발동 가능하다.\n해당 스킬과 <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color>은 같은 쿨타임을 공유한다",
         "damage": [
           {
             "name": "공명 스킬",
@@ -146471,7 +146483,7 @@
       {
         "SkillName": "태평의 노래",
         "SkillType": "공명 해방",
-        "SkillDescribe": "발동 시, 필드에서 <color=Highlight><te href=111003>천리강산</te></color>을 펼치며 25초간 지속된다. <color=Highlight><te href=111003>천리강산</te></color>이 존재하는 기간 동안, 수수가 <color=Highlight>반주 스킬 · 일렁이는 맑은 물결</color>을 발동하면 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에 진입한다.\n<color=Highlight><te href=111003>천리강산</te></color>에 있는 근처 파티 내 모든 캐릭터는 다음과 같은 효과를 획득한다.\n· 목표에게 <color=Highlight>「<te href=850008>광학 효과</te>」</color>, <color=Highlight>「<te href=850011>불꽃 효과</te>」</color>, <color=Highlight>「<te href=850010>서리 효과</te>」</color>, <color=Highlight>「<te href=850009>풍식 효과</te>」</color> 추가하거나 혹은 해당하는 이상 효과 피해를 입힐 시, 목표의 해당하는 <color=Highlight>「<te href=850180>이상 효과</te>」</color> 스택 최대치를 3스택 증가시키며, {0}초간 지속된다. 해당 효과는 중첩이 불가하다.\n· 목표에게 <color=Highlight>「<te href=850013>전자 효과</te>」</color> 추가하거나 혹은 해당하는 이상 효과 피해를 입힐 시, 목표의 <color=Highlight>「<te href=850013>전자 효과</te>」</color>와 <color=Highlight>「<te href=150806>자기 폭발</te>」</color> 스택 최대치를 3스택 증가시키며, {1}초간 지속된다. 해당 효과는 중첩이 불가하다.\n· 스킬로 목표를 명중하여 목표의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 스택이 소모될 시, 자신이 입히는 인멸 피해가 목표의 {0} 방어력을 무시하고 목표의 {1} 인멸 저항을 무시하며, 15초간 지속된다. 해당 효과는 중첩이 불가하다",
+        "SkillDescribe": "발동 시, 필드에서 <color=Highlight><te href=111003>천리강산</te></color>을 펼치며 30초간 지속된다. <color=Highlight><te href=111003>천리강산</te></color>이 존재하는 기간 동안, 수수가 <color=Highlight>반주 스킬 · 일렁이는 맑은 물결</color> 발동 시 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에 진입한다.\n<color=Highlight><te href=111003>천리강산</te></color>에 있는 근처 파티 내 모든 캐릭터는 다음과 같은 효과를 획득한다.\n· 목표에게 <color=Highlight>「<te href=850008>광학 효과</te>」</color>, <color=Highlight>「<te href=850011>불꽃 효과</te>」</color>, <color=Highlight>「<te href=850010>서리 효과</te>」</color>, <color=Highlight>「<te href=850009>풍식 효과</te>」</color>를 추가하거나 혹은 해당하는 이상 효과 피해를 입힌 후, 목표의 해당하는 <color=Highlight>「<te href=850180>이상 효과</te>」</color> 스택 최대치를 3스택 증가시키며, 15초간 지속된다. 해당 효과는 중첩이 불가하다.\n· 목표에게 <color=Highlight>「<te href=850013>전자 효과</te>」</color>를 추가하거나 혹은 해당하는 이상 효과 피해를 입힌 후, 목표의 <color=Highlight>「<te href=850013>전자 효과</te>」</color>와 <color=Highlight>「<te href=150806>자기 폭발</te>」</color> 스택 최대치를 3스택 증가시키며, 15초간 지속된다. 해당 효과는 중첩이 불가하다.\n· 목표의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 스택을 소모한 후, 자신이 입히는 인멸 피해가 목표의 6% 방어력을 무시하고 목표의 12% 인멸 저항을 무시하며, 30초간 지속된다. 해당 효과는 중첩이 불가하다.\n낮은 공중에서 발동 가능하다",
         "damage": [
           {
             "name": "공명 해방",
@@ -146493,7 +146505,7 @@
       {
         "SkillName": "청량한 옥소리",
         "SkillType": "변주 스킬",
-        "SkillDescribe": "목표를 공격하여 <color=Ice>응결 피해</color>를 입히고, 명중된 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 1회 추가한다.\n발동 시, 모든 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 소모하여 주변 목표를 끌어당기고, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>에 진입하며, 근처 파티 내 모든 캐릭터가 <color=Highlight><te href=111001>만물의 윤기</te></color>를 획득하게 된다",
+        "SkillDescribe": "목표를 공격하여 <color=Ice>응결 피해</color>를 입히고, 명중된 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 1회 추가한다.\n발동 시, 모든 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 소모하여 주변 목표를 끌어당기고, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>에 진입한다",
         "damage": [
           {
             "name": "변주 스킬",
@@ -146530,11 +146542,11 @@
       {
         "SkillName": "일렁이는 맑은 물결",
         "SkillType": "반주 스킬",
-        "SkillDescribe": "파티 내 캐릭터의 전체 피해가 {0} 부스트되고, 30초간 지속된다.\n<size=10></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color>이 종료되고 모든 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>가 소모된다. 현재 필드에 <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, 수수는 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에 진입하며, 소모된 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>에 따라 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 기간 동안 다음과 같은 효과를 순차적으로 해제한다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 0pt 소모:\n· 근처 파티 내 모든 캐릭터가 6초 동안 지속되는 <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 획득하게 된다. <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 보유한 캐릭터는 경직 저항력이 증가된다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 200pt 소모:\n· <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color>가 6초까지 지속될 시 첫 번째 <color=Highlight>가벼운 춤</color>을 진행할 수 있다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 400pt 소모:\n· <color=Highlight><te href=111003>천리강산</te></color>에 있는 등장 캐릭터가 다음과 같은 추가 효과를 획득하게 된다. <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 보유한 경우, 입히는 피해가 증가된다. 수수 자신의 공명 효율이 {1}를 초과할 경우, 초과한 공명 효율 {2} 당 피해를 {3} 증가시키고, 최대 {4}까지 증가시킬 수 있다.\n· <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color>가 12초까지 지속될 시 두 번째 <color=Highlight>가벼운 춤</color>을 진행할 수 있다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 600pt 소모:\n· 첫 번째 <color=Highlight>가벼운 춤</color>을 진행 시, <color=Highlight><te href=111003>천리강산</te></color>에 있는 근처 파티 등장 캐릭터가 다음과 같은 추가 효과를 획득하게 된다. 반주 스킬 발동 시, 다음 캐릭터가 자신이 스킬 명중을 통해 목표의 이상 효과 스택을 소모할 시 공격력이 증가되는 효과를 획득한다. 수수 자신의 공명 효율이 {5}를 초과할 경우, 초과한 공명 효율 {6} 당 공격력을 {7} 증가시키고, 최대 {8}까지 증가시키며, {9}초간 지속된다. 해당 캐릭터가 등장한 지 14초가 되면 모든 효과가 제거되며, 다른 캐릭터로 전환하면 해당 효과는 즉시 종료된다.\n· <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color>가 18초까지 지속될 시 세 번째 <color=Highlight>가벼운 춤</color>을 진행할 수 있다.\n<size=10></size>\n<size=40><color=Title>가벼운 춤</color></size>\n<color=Highlight>가벼운 춤</color>을 진행할 때마다 근처 파티 내 모든 캐릭터가 6초 동안 지속되는 <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 획득하게 되고, <color=Highlight><te href=111003>천리강산</te></color>에 있는 적군 목표에게 1스택의 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 추가하며, <color=Highlight><te href=111003>천리강산</te></color>에 있는 근처 파티 내 등장 캐릭터의 HP를 회복한다",
+        "SkillDescribe": "파티 내 캐릭터의 전체 피해가 25% 부스트되고, 30초간 지속된다.\n<size=10></size>\n발동 시 필드에 <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, 수수가 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에 진입한다.\n발동 시, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>이 종료되고 모든 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>가 소모된다. 소모된 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>에 따라 다음과 같은 효과가 해제된다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 0pt 소모:\n· 근처 파티 내 모든 캐릭터가 6초 동안 지속되는 <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 획득하게 된다. <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 보유한 캐릭터는 경직 저항력이 증가된다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 200pt 소모:\n· <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에서 우아한 춤을 일정 시간까지 진행한 후 첫 번째 <color=Highlight><te href=111010>가벼운 춤</te></color>을 진행할 수 있다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 400pt 소모:\n· 이번 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태 기간 동안, <color=Highlight><te href=111003>천리강산</te></color>에 있는 등장 캐릭터가 다음과 같은 추가 효과를 획득하게 된다. <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 보유한 경우, 입히는 피해가 증가된다. 수수 자신의 공명 효율이 200%를 초과할 경우, 초과한 공명 효율 1% 당 피해를 0.2% 증가시키고, 최대 12%까지 증가시킬 수 있다.\n· <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에서 우아한 춤을 일정 시간까지 진행한 후 두 번째 <color=Highlight><te href=111010>가벼운 춤</te></color>을 진행할 수 있다.\n<size=10></size>\n<color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color> 최소 600pt 소모:\n· 첫 번째 <color=Highlight><te href=111010>가벼운 춤</te></color>을 진행 시, <color=Highlight><te href=111003>천리강산</te></color>에 있는 근처 파티 내 등장 캐릭터는 수수의 이번 <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 기간 동안 다음과 같은 추가 효과를 획득하게 된다. 다음번 반주 스킬 발동 시, 수수는 다음 등장 캐릭터에게 <color=Highlight><te href=111011>산안개</te></color>를 부여하고 14초간 지속된다. <color=Highlight><te href=111011>산안개</te></color>를 보유한 캐릭터가 목표의 <color=Highlight>「<te href=850180>이상 효과</te>」</color> 혹은 <color=Highlight>「<te href=150806>자기 폭발</te>」</color> 스택을 소모한 후, 공격력이 증가된다. 수수 자신의 공명 효율이 200%를 초과할 경우, 초과한 공명 효율 0.12% 당 공격력을 0.1% 증가시키고, 최대 50%까지 증가시키며, 6초간 지속된다. <color=Highlight><te href=111011>산안개</te></color>가 제거될 시 공격력 증가 효과도 제거된다. 다른 캐릭터로 전환하면 <color=Highlight><te href=111011>산안개</te></color>는 즉시 제거된다.\n· <color=Highlight><te href=111003>천리강산</te></color>이 존재할 경우, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태에서 우아한 춤을 일정 시간까지 진행한 후 세 번째 <color=Highlight><te href=111010>가벼운 춤</te></color>을 진행할 수 있다.\n<size=10></size>\n<size=40><color=Title>푸른 하늘을 노닐며</color></size>\n지속 시간: 30초\n<color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태 기간 동안 수수가 파티 내 등장 캐릭터가 아닐 시, <color=Highlight><te href=111003>천리강산</te></color> 위에서 우아한 춤을 펼치며, <color=Highlight>반주 스킬 · 일렁이는 맑은 물결</color>을 발동 시 소모한 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>에 따라 일정 기간마다 <color=Highlight><te href=111010>가벼운 춤</te></color>을 1회 진행한다.\n수수가 파티 내 등장 캐릭터일 시, 우아한 춤을 일시적으로 멈춘다.\n<color=Highlight><te href=111003>천리강산</te></color>이 존재하지 않을 시, <color=Highlight><te href=111004>푸른 하늘을 노닐며</te></color> 상태가 종료된다.\n<size=10></size>\n<size=40><color=Title>가벼운 춤</color></size>\n<color=Highlight><te href=111010>가벼운 춤</te></color>을 진행할 때마다 근처 파티 내 모든 캐릭터가 6초 동안 지속되는 <color=Highlight><te href=111009>그늘을 밝힌 중명조</te></color>를 획득하게 되고, <color=Highlight><te href=111003>천리강산</te></color>에 있는 적군 목표에게 1스택의 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 추가하며, <color=Highlight><te href=111003>천리강산</te></color>에 있는 근처 파티 내 등장 캐릭터의 HP를 회복시킨다",
         "damage": []
       },
       {
-        "SkillName": "조화도 파괴 · 권갑",
+        "SkillName": "조화도 파괴 · 증폭기",
         "SkillType": "조화도 파괴",
         "SkillDescribe": "목표의 <color=Highlight>「부조화 수치」</color>가 가득 찰 시, 해당 목표에게 <color=Highlight><te href=100001>「조화도 파괴」</te></color>를 발동한다",
         "damage": []
@@ -146542,7 +146554,7 @@
       {
         "SkillName": "흩날리는 금빛 이삭",
         "SkillType": "공명 회로",
-        "SkillDescribe": "<size=40><color=Title>먼지를 씻어낼 무렵</color></size>\n수수는 기본적으로 <color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color>에 처해있다. <color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 특정 스킬을 통해 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복할 수 있다.\n<size=10></size>\n<size=40><color=Title>비에 젖어들 무렵</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 진입 시, 모든 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>가 제거된다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 새로운 전투 형태가 해제되며, 특정 스킬을 통해 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복할 수 있다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 수수의 경직 저항력이 증가된다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color>에 진입하고 15초가 지난 후, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>이 종료된다. 종료 시, 모든 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>가 제거된다.\n<size=10></size>\n<size=40><color=Title>회피 · 걷힌 안개 구름</color></size>\n특정 공격을 가하는 기간 동안 <color=Highlight>회피</color>를 짧게 누르면 스태미나를 소모하여 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동한다.\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 시, <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복하고, 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>회피 반격 · 먼지를 씻어낼 무렵</color>을 발동한다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 시, <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복하고, 일정 시간 내에 <color=Highlight>일반 공격 · 비에 젖어들 무렵</color>의 다단 공격이 리셋되지 않는다.\n<size=10></size>\n<size=40><color=Title>일반 공격 · 비에 젖어들 무렵</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>일반 공격 · 먼지를 씻어낼 무렵</color>이 <color=Highlight>일반 공격 · 비에 젖어들 무렵</color>으로 대체된다.\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르면, 최대 4단 연속 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n<color=Highlight>일반 공격 · 비에 젖어들 무렵 3단</color> 기간 동안, 주변 목표를 지속적으로 끌어당긴다.\n<color=Highlight>일반 공격 · 비에 젖어들 무렵 4단</color>은 명중된 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 1회 추가한다.\n<size=10></size>\n<size=40><color=Title>강공격 · 비에 젖어들 무렵</color></size>\n스태미나를 소모하여 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n<size=10></size>\n<size=40><color=Title>이슬에 기댄 중명조</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>강공격 · 비에 젖어들 무렵</color> 발동 후 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 눌러 발동한다.\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>바람을 가르는 제비</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 다음 방식을 통해 발동할 수 있다.\n· <color=Highlight>강공격 · 비에 젖어들 무렵</color> 발동 기간 동안 <color=Highlight>일반 공격</color>에서 손을 떼어 발동한다.\n· 수수가 공중에 있을 시, <color=Highlight>일반 공격</color>을 짧게 눌러 발동한다.\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>비구름의 숨결</color></size>\n비구름의 숨결 최대 누적 가능: {0}pt\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>일반 공격 · 먼지를 씻어낼 무렵</color>, <color=Highlight>회피 반격 · 먼지를 씻어낼 무렵</color>으로 목표 명중 시, 혹은 <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color> 발동 기간 동안 파티 내 등장 캐릭터일 경우, 혹은 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 시 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n<size=10></size>\n<size=40><color=Title>꽃향기의 편지</color></size>\n꽃향기의 편지 최대 누적 가능: {1}pt\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>일반 공격 · 비에 젖어들 무렵</color>, <color=Highlight>강공격 · 비에 젖어들 무렵</color>으로 목표 명중 시, 혹은 <color=Highlight>공명 스킬 · 비에 젖어들 무렵</color> 발동 기간 동안 파티 내 등장 캐릭터일 경우, 혹은 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 시 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다",
+        "SkillDescribe": "<size=40><color=Title>먼지를 씻어낼 무렵</color></size>\n수수는 기본적으로 <color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color>에 처해있다. <color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 특정 스킬을 통해 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복할 수 있다.\n<size=10></size>\n<size=40><color=Title>비에 젖어들 무렵</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 진입 시, 모든 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>가 제거된다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안:\n· 새로운 전투 형태가 해제되며, 특정 스킬을 통해 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복할 수 있다.\n· 수수의 경직 저항력이 증가된다.\n· 수수가 <color=Highlight>회피 스킬</color>을 발동하여 회피 성공을 발생시킨 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 비에 젖어들 무렵 1단</color>을 발동한다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color>에 진입하고 15초가 지난 후, <color=Highlight><te href=111006>비에 젖어들 무렵</te></color>이 종료된다. 종료 시, 모든 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>가 제거된다.\n<size=10></size>\n<size=40><color=Title>회피 · 걷힌 안개 구름</color></size>\n지면에서 공격을 가하는 기간 동안 <color=Highlight>회피</color>를 짧게 누르면 스태미나를 소모하여 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동한다.\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 발생 시, <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복하고, 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>회피 반격 · 먼지를 씻어낼 무렵</color>을 발동한다.\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 발생 시, <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복하고, 일정 시간 내에 <color=Highlight>일반 공격 · 비에 젖어들 무렵</color>의 다단 공격이 리셋되지 않는다.\n<size=10></size>\n<size=40><color=Title>일반 공격 · 비에 젖어들 무렵</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>일반 공격 · 먼지를 씻어낼 무렵</color>이 <color=Highlight>일반 공격 · 비에 젖어들 무렵</color>으로 대체된다.\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르면, 최대 4단 연속 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n<color=Highlight>일반 공격 · 비에 젖어들 무렵 3단</color> 발동 기간 동안, 주변 목표를 지속적으로 끌어당긴다.\n<color=Highlight>일반 공격 · 비에 젖어들 무렵 4단</color>은 명중된 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>를 1회 추가한다.\n<size=10></size>\n<size=40><color=Title>강공격 · 비에 젖어들 무렵</color></size>\n스태미나를 소모하여 <color=Ice>응결 피해</color>를 입힌다. 목표 명중 시 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n<size=10></size>\n<size=40><color=Title>이슬에 기댄 중명조</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 <color=Highlight>강공격 · 비에 젖어들 무렵</color> 발동 후, <color=Highlight>일반 공격</color>을 계속 누르고 있으면 발동한다.\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>바람을 가르는 제비</color></size>\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안 다음 방식을 통해 발동할 수 있다.\n· <color=Highlight>강공격 · 비에 젖어들 무렵</color> 발동 기간 동안 <color=Highlight>일반 공격</color>에서 손을 떼어 발동한다.\n· 수수가 공중에 있을 시, <color=Highlight>일반 공격</color>을 짧게 눌러 발동한다.\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Ice>응결 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>「비구름의 숨결」 획득 규칙</color></size>\n최대 누적 가능: 120pt\n<color=Highlight><te href=111005>먼지를 씻어낼 무렵</te></color> 기간 동안:\n· <color=Highlight>일반 공격 · 먼지를 씻어낼 무렵</color>, <color=Highlight>회피 반격 · 먼지를 씻어낼 무렵</color>으로 목표 명중 시, <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n· <color=Highlight>공명 스킬 · 먼지를 씻어낼 무렵</color> 발동 기간 동안 파티 내 등장 캐릭터일 경우, 40pt의 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n· <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 발생 시 35pt의 <color=Highlight>「<te href=111007>비구름의 숨결</te>」</color>을 회복한다.\n<size=10></size>\n<size=40><color=Title>「꽃향기의 편지」 획득 규칙</color></size>\n최대 누적 가능: 600pt\n<color=Highlight><te href=111006>비에 젖어들 무렵</te></color> 기간 동안:\n· <color=Highlight>일반 공격 · 비에 젖어들 무렵</color>, <color=Highlight>강공격 · 비에 젖어들 무렵</color>으로 목표 명중 시, <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n· <color=Highlight>공명 스킬 · 비에 젖어들 무렵</color> 발동 기간 동안 파티 내 등장 캐릭터일 경우, 100pt의 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다.\n· <color=Highlight>회피 · 걷힌 안개 구름</color>을 발동하여 회피 성공 발생 시 102pt의 <color=Highlight>「<te href=111008>꽃향기의 편지</te>」</color>를 회복한다",
         "damage": [
           {
             "name": "공명 회로",
@@ -146999,13 +147011,13 @@
       {
         "SkillName": "물가에 닿은 하늘빛",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "<color=Highlight><te href=111001>만물의 윤기</te></color>가 소모될 시, 해당 캐릭터는 추가로 {0}스택의 <color=Highlight><te href=111002>봄날의 생기</te></color>를 획득하고, 최대치는 {1}스택이다. <color=Highlight><te href=111002>봄날의 생기</te></color>를 보유한 캐릭터의 현재 HP가 HP 최대치에 미도달 시, {2}초마다 1스택의 <color=Highlight><te href=111002>봄날의 생기</te></color>를 소모하여 수수가 해당 캐릭터에게 수수 HP 최대치의 {3}+{4}에 해당하는 HP를 회복시킨다.\n<size=10></size>\n<color=Highlight>공명 스킬 · 깨어난 봄기운</color>과 <color=Highlight>변주 스킬 · 청량한 옥소리</color>로 목표 명중 시, 추가로 {5}pt의 협주 에너지와 {6}pt의 공명 에너지를 회복하고, 해당 공격의 크리티컬을 {7} 증가시키며, 입히는 응결 피해를 {8} 증가시킨다. 25초마다 최대 1회 발생할 수 있다",
+        "SkillDescribe": "<color=Highlight><te href=111001>만물의 윤기</te></color>가 소모될 시, 해당 캐릭터는 추가로 10스택의 <color=Highlight><te href=111002>봄날의 생기</te></color>를 획득하고, 최대치는 10스택이다. <color=Highlight><te href=111002>봄날의 생기</te></color>를 보유한 캐릭터의 현재 HP가 HP 최대치에 미도달 시, 2초마다 1스택의 <color=Highlight><te href=111002>봄날의 생기</te></color>가 소모되고 수수가 수수 HP 최대치의 0.34%+62에 해당하는 HP를 회복시킨다.\n<size=10></size>\n<color=Highlight>공명 스킬 · 깨어난 봄기운</color>과 <color=Highlight>변주 스킬 · 청량한 옥소리</color>로 목표 명중 시, 추가로 18pt의 협주 에너지와 13pt의 공명 에너지를 회복하고, 해당 공격의 크리티컬을 80% 증가시키며, 입히는 응결 피해를 240% 증가시킨다. 25초마다 최대 1회 발생할 수 있다",
         "damage": []
       },
       {
         "SkillName": "윤슬에 떠오른 금빛",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "파티 내 수수를 제외한 캐릭터가 치명적인 피해를 입었을 경우, 해당 피해로 인해 캐릭터는 의식을 잃지 않고 수수 현재 HP의 {0}에 해당하는 HP를 회복하게 되며, 수수는 그에 상응하는 양의 HP를 상실하게 된다. 수수는 최소 HP {1}pt를 유지하며, 해당 효과는 {2}분마다 1회 발생할 수 있다",
+        "SkillDescribe": "파티 내 수수를 제외한 캐릭터가 치명적인 피해를 입었을 경우, 해당 피해로 인해 캐릭터는 의식을 잃지 않고 수수 현재 HP의 50%에 해당하는 HP를 회복하게 되며, 수수는 그에 상응하는 양의 HP를 상실하게 된다. 수수는 최소 HP 1pt를 유지하며, 해당 효과는 10분마다 1회 발생할 수 있다",
         "damage": []
       },
       {
@@ -148976,7 +148988,7 @@
     ]
   },
   {
-    "id": "1310",
+    "id": 1310,
     "name": "방랑자 · 전도",
     "name_en": "Rover: Electro",
     "nickname": "",
@@ -148994,7 +149006,7 @@
       {
         "SkillName": "종결",
         "SkillType": "기본 공격",
-        "SkillDescribe": "<size=40><color=Title>일반 공격</color></size>\n최대 {0}단 연속 공격을 가하여 <color=Thunder>전도 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>가드 자세</color></size>\n<color=Highlight>일반 공격</color>을 길게 누르면 스태미나를 소모하여 <color=Highlight>가드 자세</color>에 진입한다.\n<color=Highlight>가드 자세</color>에 있을 시, 적의 공격에 의해 중단되지 않고 받는 피해가 {1}% 감소되며, 스태미나를 지속적으로 소모한다. <color=Highlight>일반 공격</color> 버튼에서 손을 떼면 <color=Highlight>가드 자세</color>를 종료하고, <color=Highlight>일반 공격 · 역전의 일격</color>을 발동하여 <color=Thunder>전도 피해</color>를 입힌다. 목표의 공격을 받을 시, <color=Highlight>일반 공격 · 역전의 일격</color>을 발동하면 목표를 잠시 정체시키고, <color=Highlight>일반 공격 · 역전의 일격 · 붕괴</color>를 발동하여 <color=Thunder>전도 피해</color>를 입힌다.\n<color=Highlight>일반 공격 · 역전의 일격</color> 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격</color> 2단을 발동한다.\n<color=Highlight>가드 자세</color>에 있을 시, 스태미나를 소모하여 해당 방향으로 <color=Highlight>순간 이동</color>을 할 수 있으며, <color=Highlight>순간 이동</color> 기간 동안 공격을 받을 시, 회피 성공으로 간주된다.\n<size=10></size>\n<size=40><color=Title>공중 공격</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Thunder>전도 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>회피 반격</color></size>\n<color=Highlight>회피</color> 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 목표를 공격하고, <color=Thunder>전도 피해</color>를 입힌다.\n해당 스킬 발동 후 일정 시간 내에, 일반 공격을 짧게 누르면 <color=Highlight>일반 공격 {2}단</color>을 발동한다",
+        "SkillDescribe": "<size=40><color=Title>일반 공격</color></size>\n최대 4단 연속 공격을 가하여 <color=Thunder>전도 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>가드 자세</color></size>\n<color=Highlight>일반 공격</color>을 길게 누르면 스태미나를 소모하여 <color=Highlight>가드 자세</color>에 진입한다.\n<color=Highlight>가드 자세</color>에 있을 시, 적의 공격에 의해 중단되지 않고 받는 피해가 60% 감소되며, 스태미나가 지속적으로 소모된다. <color=Highlight>일반 공격</color>에서 손을 떼면, <color=Highlight>가드 자세</color>가 종료되고, <color=Highlight>일반 공격 · 역전의 일격</color>을 발동하여 <color=Thunder>전도 피해</color>를 입힌다.\n<color=Highlight>일반 공격 · 역전의 일격</color>을 발동하는 일정 시간 내에 적의 공격을 받을 경우, 이번 피해를 면역하고 목표를 잠시 정체시킨다. 이후 자동으로 <color=Highlight>일반 공격 · 역전의 일격 · 붕괴</color>를 발동하여 <color=Thunder>전도 피해</color>를 입힌다.\n<color=Highlight>일반 공격 · 역전의 일격</color> 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격</color> 2단을 발동한다.\n<color=Highlight>일반 공격 · 역전의 일격 · 붕괴</color> 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>공중 공격 · 인멸</color>을 발동한다.\n<color=Highlight>가드 자세</color>에 있을 시, 스태미나를 소모하여 해당 방향으로 <color=Highlight>회피 · 순간 이동</color>을 할 수 있으며, 해당 스킬을 발동하는 일정 기간 내에,  <color=Highlight>회피</color> 성공을 발생시킬 수 있다.\n<size=10></size>\n<size=40><color=Title>공중 공격</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Thunder>전도 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 인멸</color></size>\n최대 3단 연속 공격을 가하여 <color=Dark>인멸 피해</color>를 입힌다. 해당 스킬 3단 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격</color> 4단을 발동한다.\n<size=10></size>\n<size=40><color=Title>회피 반격</color></size>\n<color=Highlight>회피</color> 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 목표를 공격하고, <color=Thunder>전도 피해</color>를 입힌다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격</color> 3단을 발동한다.\n<size=10></size>\n<size=40><color=Title>공중 회피 반격</color></size>\n공중에서 <color=Highlight>회피</color> 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 스태미나를 소모하여 공중 낙하 공격을 가하고, <color=Thunder>전도 피해</color>를 입힌다",
         "damage": [
           {
             "name": "기본 공격",
@@ -149044,16 +149056,16 @@
           {
             "name": "기본 공격",
             "rates": [
-              "7.79%",
-              "8.42%",
-              "9.06%",
-              "9.96%",
+              "6.67%",
+              "7.22%",
+              "7.77%",
+              "8.53%",
+              "9.08%",
+              "9.71%",
               "10.59%",
-              "11.33%",
-              "12.35%",
-              "13.37%",
-              "14.39%",
-              "15.48%"
+              "11.46%",
+              "12.34%",
+              "13.27%"
             ]
           },
           {
@@ -149145,13 +149157,118 @@
               "52.03%",
               "55.95%"
             ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "29.89%",
+              "32.35%",
+              "34.8%",
+              "38.23%",
+              "40.68%",
+              "43.5%",
+              "47.42%",
+              "51.34%",
+              "55.26%",
+              "59.43%"
+            ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "16.31%",
+              "17.65%",
+              "18.99%",
+              "20.86%",
+              "22.2%",
+              "23.74%",
+              "25.88%",
+              "28.02%",
+              "30.16%",
+              "32.43%"
+            ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "18.69%",
+              "20.23%",
+              "21.76%",
+              "23.91%",
+              "25.44%",
+              "27.2%",
+              "29.65%",
+              "32.11%",
+              "34.56%",
+              "37.16%"
+            ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "18.88%",
+              "20.43%",
+              "21.98%",
+              "24.15%",
+              "25.7%",
+              "27.48%",
+              "29.95%",
+              "32.43%",
+              "34.91%",
+              "37.54%"
+            ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "18.88%",
+              "20.43%",
+              "21.98%",
+              "24.15%",
+              "25.7%",
+              "27.48%",
+              "29.95%",
+              "32.43%",
+              "34.91%",
+              "37.54%"
+            ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "19.46%",
+              "21.05%",
+              "22.65%",
+              "24.88%",
+              "26.47%",
+              "28.31%",
+              "30.86%",
+              "33.41%",
+              "35.97%",
+              "38.68%"
+            ]
+          },
+          {
+            "name": "기본 공격",
+            "rates": [
+              "94.78%",
+              "102.56%",
+              "110.33%",
+              "121.21%",
+              "128.98%",
+              "137.92%",
+              "150.35%",
+              "162.79%",
+              "175.22%",
+              "188.44%"
+            ]
           }
         ]
       },
       {
         "SkillName": "번개의 인도",
         "SkillType": "공명 스킬",
-        "SkillDescribe": "구름 사이의 밧줄을 발동하여 자신을 목표 방향으로 끌어당기고, <color=Thunder>전도 피해</color>를 입힌다. 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 적군 제압</color>을 발동하고, 전도 피해를 입힌다. 해당 피해는 일반 공격 피해로 적용된다",
+        "SkillDescribe": "구름 사이의 밧줄을 발동하여 자신을 목표 방향으로 끌어당기고, <color=Thunder>전도 피해</color>를 입힌다. 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 적군 제압</color>을 발동하고, <color=Thunder>전도 피해</color>를 입힌다. 해당 피해는 <color=Highlight>일반 공격 피해</color>로 적용된다",
         "damage": [
           {
             "name": "공명 스킬",
@@ -149256,84 +149373,54 @@
               "31.06%",
               "33.41%"
             ]
+          },
+          {
+            "name": "변주 스킬",
+            "rates": [
+              "50.4%",
+              "54.54%",
+              "58.67%",
+              "64.46%",
+              "68.59%",
+              "73.34%",
+              "79.95%",
+              "86.57%",
+              "93.18%",
+              "100.21%"
+            ]
           }
         ]
       },
       {
         "SkillName": "천둥의 울림",
         "SkillType": "반주 스킬",
-        "SkillDescribe": "다음 등장 캐릭터는 <color=Highlight>번개의 정수</color>를 획득하고, {0}초간 지속된다. <color=Highlight>번개의 정수</color>를 보유한 캐릭터가 이상 효과를 추가 시, <color=Highlight>번개의 정수</color>를 소모하고 전체 피해를 {1}% 부스트시키며, {2}초간 <color=Highlight>지속</color>된다. 다른 캐릭터로 전환하면 해당 효과는 즉시 종료된다",
+        "SkillDescribe": "다음 등장 캐릭터는 <color=Highlight>번개의 정수</color>를 획득하고, 20초간 지속된다. 다른 캐릭터로 전환 시 <color=Highlight>번개의 정수</color>가 제거된다. <color=Highlight>번개의 정수</color>를 보유한 캐릭터가 이상 효과 추가 후, <color=Highlight>번개의 정수</color>를 소모하고 전체 피해를 25% 부스트시키며, 14초간 지속된다. 다른 캐릭터로 전환하면 해당 효과는 즉시 종료된다.\n반주 스킬 발동 시, <color=Highlight><te href=130903>임계 공명</te></color> 상태가 종료되고 모든 <color=Highlight>「<te href=130902>천둥의 분노</te>」</color>가 제거된다",
         "damage": []
       },
       {
         "SkillName": "조화도 파괴 · 직검",
         "SkillType": "조화도 파괴",
-        "SkillDescribe": "목표의 「부조화 수치」가 가득 찰 시, 해당 목표에게 「조화도 파괴」를 발동할 수 있다",
+        "SkillDescribe": "목표의 <color=Highlight>부조화 수치</color>가 가득 찰 시, 해당 목표에게 <color=Highlight><te href=100001>「조화도 파괴」</te></color>를 발동할 수 있다",
         "damage": []
       },
       {
         "SkillName": "천기만상",
         "SkillType": "공명 회로",
-        "SkillDescribe": "<size=40><color=Title>과부하</color></size>\n<color=Highlight>「솟구치는 번개」</color>가 최대치에 도달 시, <color=Highlight>공명 스킬</color>이 공명 스킬 <color=Highlight>과부하</color>로 대체되어 <color=Thunder>전도 피해</color>를 입힌다.\n공명 스킬 <color=Highlight>과부하</color>를 짧게 눌러 발동한 후, 모든 <color=Highlight>「솟구치는 번개」</color>를 소모하고 파티가 {0}% 공격력 보너스를 획득하게 되며, {1}초간 지속된다.\n공명 스킬 <color=Highlight>과부하</color>를 길게 눌러 발동한 후, 모든 <color=Highlight>「솟구치는 번개」</color>를 소모하고 <color=Highlight>임계 공명</color> 상태에 진입한다.\n<size=10></size>\n<size=40><color=Title>임계 공명</color></size>\n<color=Highlight>임계 공명</color> 상태에 있을 시, 공명 스킬 <color=Highlight>밀려온 천개의 소리</color>를 해제하여 1초마다 {2}%의 <color=Highlight>「천둥의 분노」</color>를 소모한다. \n· 지면에서 <color=Highlight>공명 스킬</color>을 누르면 최대 {3}단 연속 공격을 가한다. 처음 {4}단은 <color=Highlight>밀려온 천개의 소리 · 회절</color>이며, <color=Light>회절 피해</color>를 입힌다. 다음 {5}단은 <color=Highlight>밀려온 천개의 소리 · 인멸</color>이며, <color=Dark>인멸 피해</color>를 입힌다. 마지막 {6}단은 <color=Highlight>밀려온 천개의 소리 · 만율을 베는 검</color>이며, <color=Wind>기류 피해</color>를 입힌다. 지면에서 <color=Highlight>밀려온 천개의 소리</color> 발동 시 목표와 거리가 멀면 <color=Highlight>밀려온 천개의 소리 · 회절 추격</color>만 발동하여 <color=Light>회절 피해</color>를 입힌다.\n· 지면에서 <color=Highlight>공명 스킬</color>을 길게 누르면 <color=Highlight>밀려온 천개의 소리 · 기류</color>를 발동하여 <color=Wind>기류 피해</color>를 입히고 공중으로 떠오른다.\n· 공중에서 <color=Highlight>공명 스킬</color>을 누르면 최대 {7}단 공중 공격을 가한다. 처음 {8}단은 <color=Highlight>밀려온 천개의 소리 · 인멸 공중 공격</color>이며, <color=Light>인멸 피해</color>를 입힌다. 다음 {9}단은 <color=Highlight>밀려온 천개의 소리 · 기류 공중 공격</color>이며, <color=Dark>기류 피해</color>를 입히고 근처 파티 내 모든 캐릭터의 HP를 회복시킨다. 마지막 {10}단은 <color=Highlight>밀려온 천개의 소리 · 기류 낙하 공격</color>이며, <color=Wind>기류 피해</color>를 입힌다. 착지 후 <color=Highlight>공명 스킬</color>을 누르면 <color=Highlight>밀려온 천개의 소리 · 만율을 베는 검</color>을 파생시킬 수 있다.\n· 공중에서 <color=Highlight>공명 스킬</color>을 길게 눌러도 <color=Highlight>밀려온 천개의 소리 · 기류 낙하 공격</color>을 발동할 수 있다.\n· 모든 <color=Highlight>밀려온 천개의 소리</color>는 <color=Highlight>천둥의 추락</color>을 발생시켜 목표에게 전도 피해를 입히고, 공명 스킬 <color=Highlight>과부하</color>의 쿨타임을 {11}초 감소시킨다.\n<size=10></size>\n<size=40><color=Title>「솟구치는 번개」 획득 규칙</color></size>\n<color=Highlight>「솟구치는 번개」</color> 최대 누적 가능: 120pt\n기본 공격과 <color=Highlight>공명 스킬</color>로 피해를 입힐 시, <color=Highlight>「솟구치는 번개」</color>를 회복한다.\n<size=10></size>\n<size=40><color=Title>「천둥의 분노」 획득 규칙</color></size>\n<color=Highlight>「천둥의 분노」</color> 최대 누적 가능: 100pt\n<color=Highlight>임계 공명</color> 상태에 진입 시, <color=Highlight>「천둥의 분노」</color>를 획득한다. <color=Highlight>밀려온 천개의 소리</color>로 피해를 입힐 시, <color=Highlight>「천둥의 분노」</color>를 회복한다.\n<size=10></size>",
+        "SkillDescribe": "<size=40><color=Title>과부하</color></size>\n<color=Highlight>「<te href=130901>솟구치는 번개</te>」</color>가 최대치에 도달 시, <color=Highlight>공명 스킬</color>은 공명 스킬 <color=Highlight>과부하</color>로 대체된다.\n해당 스킬 발동 후 일정 시간 내에 <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격</color> 4단을 발동한다.\n공중에서 발동 가능하다.\n공명 스킬 <color=Highlight>과부하</color>를 짧게 눌러 발동하면, <color=Thunder>전도 피해</color>를 입힌 후 모든 <color=Highlight>「<te href=130901>솟구치는 번개</te>」</color>를 제거하고 파티 내 캐릭터가 10%의 공격력 보너스를 획득하게 되며, 20초간 지속된다.\n공명 스킬 <color=Highlight>과부하</color>를 길게 눌러 발동하면 60pt의 협주 에너지를 소모하여 <color=Thunder>전도 피해</color>를 입힌 후, 모든 <color=Highlight>「<te href=130901>솟구치는 번개</te>」</color>를 제거하고 <color=Highlight><te href=130903>임계 공명</te></color> 상태에 진입한다.\n<size=10></size>\n<size=40><color=Title>임계 공명</color></size>\n<color=Highlight><te href=130903>임계 공명</te></color> 상태에 있을 시, 공명 스킬 <color=Highlight>밀려온 천개의 소리</color>가 해제되며 전투 상태에 있을 경우 1초마다 <color=Highlight>「<te href=130902>천둥의 분노</te>」</color> 최대치의 10%를 소모한다.\n지면에서 <color=Highlight>공명 스킬</color>을 짧게 누르면 최대 7단 연속 공격을 가한다. 처음 3단은 <color=Highlight>밀려온 천개의 소리 · 회절</color>이며, <color=Light>회절 피해</color>를 입힌다. 다음 3단은 <color=Highlight>밀려온 천개의 소리 · 인멸</color>이며, <color=Dark>인멸 피해</color>를 입힌다. 마지막 1단은 <color=Highlight>밀려온 천개의 소리 · 만율을 베는 검</color>이며, <color=Wind>기류 피해</color>를 입힌다.\n지면에서 <color=Highlight>공명 스킬</color>을 길게 누르면 <color=Highlight>밀려온 천개의 소리 · 기류</color>를 발동하여 <color=Wind>기류 피해</color>를 입히고 공중으로 떠오른다.\n공중에서 <color=Highlight>공명 스킬</color>을 짧게 누르면 최대 6단 공중 공격을 가한다. 처음 3단은 <color=Highlight>밀려온 천개의 소리 · 인멸 공중 공격</color>이며, <color=Dark>인멸 피해</color>를 입힌다. 다음 2단은 <color=Highlight>밀려온 천개의 소리 · 기류 공중 공격</color>이며, <color=Wind>기류 피해</color>를 입히고 근처 파티 내 모든 캐릭터의 HP를 회복시킨다. 마지막 1단은 <color=Highlight>밀려온 천개의 소리 · 기류 낙하 공격</color>이며, <color=Wind>기류 피해</color>를 입힌다. 착지 후 일정 시간 내에 <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>밀려온 천개의 소리 · 만율을 베는 검</color>을 발동할 수 있다.\n공중에서 <color=Highlight>공명 스킬</color>을 길게 눌러 <color=Highlight>밀려온 천개의 소리 · 기류 낙하 공격</color>을 발동해도 된다.\n<color=Highlight>밀려온 천개의 소리</color>로 목표 명중 시, <color=Highlight>천둥의 추락</color>을 발생시켜 범위 내의 목표에게 <color=Thunder>전도 피해</color>를 입힌다. 해당 피해는 <color=Highlight>공명 스킬 피해</color>로 적용된다.\n<color=Highlight><te href=130903>임계 공명</te></color> 상태에 있을 시, 일반 공격 발동 후 일정 시간 내에, <color=Highlight>공명 스킬</color>을 짧게 누르면 일반 공격 단수에 따라 서로 다른 형태의 <color=Highlight>밀려온 천개의 소리</color>를 발동한다.\n<size=10></size>\n<size=40><color=Title>「솟구치는 번개」 획득 규칙</color></size>\n<color=Highlight>「<te href=130901>솟구치는 번개</te>」</color> 최대 누적 가능: 120pt\n<color=Highlight>변주 스킬 · 몰아치는 뇌전</color>, <color=Highlight>기본 공격 · 종결</color>, <color=Highlight>공명 스킬 · 번개의 인도</color>, <color=Highlight>일반 공격 · 적군 제압</color>으로 피해를 입힐 시, <color=Highlight>「<te href=130901>솟구치는 번개</te>」</color>를 회복한다.\n<size=10></size>\n<size=40><color=Title>「천둥의 분노」 획득 규칙</color></size>\n<color=Highlight>「<te href=130902>천둥의 분노</te>」</color> 최대 누적 가능: 100pt\n<color=Highlight><te href=130903>임계 공명</te></color> 상태에 진입 시, <color=Highlight>「<te href=130902>천둥의 분노</te>」</color>를 최대치까지 획득한다. <color=Highlight>밀려온 천개의 소리</color>로 피해를 입힐 시, <color=Highlight>「<te href=130902>천둥의 분노</te>」</color>를 회복한다",
         "damage": [
           {
             "name": "공명 회로",
             "rates": [
-              "71.05%",
-              "76.88%",
-              "82.71%",
-              "90.86%",
-              "96.69%",
-              "103.39%",
-              "112.71%",
-              "122.03%",
-              "131.36%",
-              "141.26%"
-            ]
-          },
-          {
-            "name": "공명 회로",
-            "rates": [
-              "71.05%",
-              "76.88%",
-              "82.71%",
-              "90.86%",
-              "96.69%",
-              "103.39%",
-              "112.71%",
-              "122.03%",
-              "131.36%",
-              "141.26%"
-            ]
-          },
-          {
-            "name": "공명 회로",
-            "rates": [
-              "71.05%",
-              "76.88%",
-              "82.71%",
-              "90.86%",
-              "96.69%",
-              "103.39%",
-              "112.71%",
-              "122.03%",
-              "131.36%",
-              "141.26%"
-            ]
-          },
-          {
-            "name": "공명 회로",
-            "rates": [
-              "71.05%",
-              "76.88%",
-              "82.71%",
-              "90.86%",
-              "96.69%",
-              "103.39%",
-              "112.71%",
-              "122.03%",
-              "131.36%",
-              "141.26%"
+              "40.6%",
+              "43.93%",
+              "47.26%",
+              "51.92%",
+              "55.25%",
+              "59.08%",
+              "64.41%",
+              "69.74%",
+              "75.06%",
+              "80.72%"
             ]
           },
           {
@@ -149759,61 +149846,16 @@
           {
             "name": "공명 회로",
             "rates": [
-              "85.26%",
-              "92.26%",
-              "99.25%",
-              "109.04%",
-              "116.03%",
-              "124.07%",
-              "135.25%",
-              "146.44%",
-              "157.63%",
-              "169.51%"
-            ]
-          },
-          {
-            "name": "공명 회로",
-            "rates": [
-              "85.26%",
-              "92.26%",
-              "99.25%",
-              "109.04%",
-              "116.03%",
-              "124.07%",
-              "135.25%",
-              "146.44%",
-              "157.63%",
-              "169.51%"
-            ]
-          },
-          {
-            "name": "공명 회로",
-            "rates": [
-              "85.26%",
-              "92.26%",
-              "99.25%",
-              "109.04%",
-              "116.03%",
-              "124.07%",
-              "135.25%",
-              "146.44%",
-              "157.63%",
-              "169.51%"
-            ]
-          },
-          {
-            "name": "공명 회로",
-            "rates": [
-              "85.26%",
-              "92.26%",
-              "99.25%",
-              "109.04%",
-              "116.03%",
-              "124.07%",
-              "135.25%",
-              "146.44%",
-              "157.63%",
-              "169.51%"
+              "48.72%",
+              "52.72%",
+              "56.72%",
+              "62.31%",
+              "66.3%",
+              "70.9%",
+              "77.29%",
+              "83.68%",
+              "90.07%",
+              "96.87%"
             ]
           },
           {
@@ -150316,13 +150358,13 @@
       {
         "SkillName": "해명",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "공명 스킬 <color=Highlight>과부하</color>의 마지막 1단으로 목표 명중 후, 목표에게 {0}스택의 <color=Highlight>「<te href=850013>전자 효과</te>」</color>를 추가한다",
+        "SkillDescribe": "공명 스킬 <color=Highlight>과부하</color>로 목표에게 피해를 입힌 후, 10스택의 <color=Highlight>「<te href=850013>전자 효과</te>」</color>를 추가한다",
         "damage": []
       },
       {
         "SkillName": "중추 귀환",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "공명 스킬 <color=Highlight>과부하</color>를 길게 눌러 발동한 후, 자신이 {0}의 공명 스킬 피해 보너스를 획득하고, {1}초간 지속된다. 다른 캐릭터로 전환하면 해당 효과는 즉시 종료된다",
+        "SkillDescribe": "공명 스킬 <color=Highlight>과부하</color>를 길게 눌러 발동 후, 자신의 공명 스킬 피해 보너스가 20% 증가되고, 20초간 지속된다. 다른 캐릭터로 전환하면 해당 효과는 즉시 종료된다",
         "damage": []
       },
       {
@@ -152293,7 +152335,7 @@
     ]
   },
   {
-    "id": "1610",
+    "id": 1610,
     "name": "양양 · 현령",
     "name_en": "Yangyang: Xuanling",
     "nickname": "",
@@ -152311,7 +152353,7 @@
       {
         "SkillName": "권선징악",
         "SkillType": "기본 공격",
-        "SkillDescribe": "<size=40><color=Title>일반 공격 · 검술 · 푸름</color></size>\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르거나 혹은 길게 누르면, 최대 4단 연속 공격을 가하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「흐르는 소리」</color>를 소모한다. <color=Highlight>일반 공격 · 검술 · 푸름</color>으로 피해를 입힐 시, <color=Highlight>「흐르는 소리」</color>가 소진되지 않았을 경우, 공명 효율이 {0} 증가된다.\n<color=Highlight>일반 공격 · 검술 · 푸름</color> 4단으로 피해를 입힐 시, 목표에게 1스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>일반 공격 · 검술 · 깃털</color></size>\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르거나 혹은 길게 누르면, 최대 4단 연속 공격을 가하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「흐르는 소리」</color>를 소모한다. <color=Highlight>일반 공격 · 검술 · 깃털</color>로 피해를 입힐 시, <color=Highlight>「흐르는 소리」</color>가 소진되지 않았을 경우, 공명 효율이 {1} 증가된다.\n<color=Highlight>일반 공격 · 검술 · 깃털</color> 4단으로 피해를 입힐 시, 목표에게 1스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 검술 · 푸름</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Dark>인멸 피해</color>를 입히며, <color=Highlight>「흐르는 소리」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 푸름</color> 2단을 발동한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 검술 · 깃털</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Dark>인멸 피해</color>를 입히며, <color=Highlight>「흐르는 소리」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 깃털</color> 2단을 발동한다.\n<size=10></size>\n<size=40><color=Title>회피 반격 · 검술 · 푸름</color></size>\n회피 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 목표를 공격하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「흐르는 소리」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 푸름</color> 3단을 발동한다.\n<color=Highlight>회피 반격 · 검술 · 푸름</color> 발동 시, <color=Highlight>일반 공격 · 검술 · 푸름</color> 다단 공격의 2단을 발동한 것으로 간주한다.\n<size=10></size>\n<size=40><color=Title>회피 반격 · 검술 · 깃털</color></size>\n회피 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 목표를 공격하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「흐르는 소리」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 깃털</color> 3단을 발동한다.\n<color=Highlight>회피 반격 · 검술 · 깃털</color> 발동 시, <color=Highlight>일반 공격 · 검술 · 깃털</color> 2단을 발동한 것으로 간주한다",
+        "SkillDescribe": "<size=40><color=Title>일반 공격 · 검술 · 푸름</color></size>\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르거나 혹은 길게 누르면, 최대 4단 연속 공격을 가하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다. <color=Highlight>일반 공격 · 검술 · 푸름</color>으로 피해를 입힐 시, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>가 소모되지 않았을 경우, 공명 효율이 20% 증가된다.\n<color=Highlight>일반 공격 · 검술 · 푸름</color> 4단으로 피해를 입힐 시, 목표에게 1스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>일반 공격 · 검술 · 깃털</color></size>\n<color=Highlight>일반 공격</color>을 연속으로 짧게 누르거나 혹은 길게 누르면, 최대 4단 연속 공격을 가하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다. <color=Highlight>일반 공격 · 검술 · 깃털</color>로 피해를 입힐 시, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>가 소모되지 않았을 경우, 공명 효율이 20% 증가된다.\n<color=Highlight>일반 공격 · 검술 · 깃털</color> 4단으로 피해를 입힐 시, 목표에게 1스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 검술 · 푸름</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Dark>인멸 피해</color>를 입히며, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 푸름</color> 2단을 발동한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 검술 · 깃털</color></size>\n스태미나를 소모하여 공중 낙하 공격을 가하고 <color=Dark>인멸 피해</color>를 입히며, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 깃털</color> 2단을 발동한다.\n<size=10></size>\n<size=40><color=Title>회피 반격 · 검술 · 푸름</color></size>\n회피 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 목표를 공격하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 푸름</color> 3단을 발동한다.\n<color=Highlight>회피 반격 · 검술 · 푸름</color> 발동 시, <color=Highlight>일반 공격 · 검술 · 푸름</color> 다단 공격의 2단을 발동한 것으로 간주한다.\n<size=10></size>\n<size=40><color=Title>회피 반격 · 검술 · 깃털</color></size>\n회피 성공 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 목표를 공격하여 <color=Dark>인멸 피해</color>를 입히고, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, <color=Highlight>일반 공격</color>을 짧게 누르면 <color=Highlight>일반 공격 · 검술 · 깃털</color> 3단을 발동한다.\n<color=Highlight>회피 반격 · 검술 · 깃털</color> 발동 시, <color=Highlight>일반 공격 · 검술 · 깃털</color> 다단 공격의 2단을 발동한 것으로 간주한다",
         "damage": [
           {
             "name": "기본 공격",
@@ -152616,25 +152658,61 @@
           {
             "name": "기본 공격",
             "rates": [
-              "0%"
+              "19.73%",
+              "21.35%",
+              "22.97%",
+              "25.23%",
+              "26.85%",
+              "28.71%",
+              "31.3%",
+              "33.89%",
+              "36.48%",
+              "39.23%"
             ]
           },
           {
             "name": "기본 공격",
             "rates": [
-              "0%"
+              "19.73%",
+              "21.35%",
+              "22.97%",
+              "25.23%",
+              "26.85%",
+              "28.71%",
+              "31.3%",
+              "33.89%",
+              "36.48%",
+              "39.23%"
             ]
           },
           {
             "name": "기본 공격",
             "rates": [
-              "0%"
+              "59.19%",
+              "64.04%",
+              "68.9%",
+              "75.69%",
+              "80.54%",
+              "86.12%",
+              "93.89%",
+              "101.65%",
+              "109.42%",
+              "117.67%"
             ]
           },
           {
             "name": "기본 공격",
             "rates": [
-              "0%"
+              "32.88%",
+              "35.58%",
+              "38.28%",
+              "42.05%",
+              "44.75%",
+              "47.85%",
+              "52.16%",
+              "56.48%",
+              "60.79%",
+              "65.37%"
             ]
           }
         ]
@@ -152642,7 +152720,7 @@
       {
         "SkillName": "깃털로 닦은 푸른 검날",
         "SkillType": "공명 스킬",
-        "SkillDescribe": "<size=40><color=Title>검술의 전환</color></size>\n<color=Highlight>검술 · 푸름</color>에 있을 시, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술 · 깃털</color>로 전환하고, <color=Highlight>일반 공격 · 검술 · 깃털</color> 1단을 발동하여 <color=Dark>인멸 피해</color>를 입힌다.\n<size=10></size>\n<color=Highlight>검술 · 깃털</color>에 있을 시, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술 · 푸름</color>으로 전환하고, <color=Highlight>일반 공격 · 검술 · 푸름</color> 1단을 발동하여 <color=Dark>인멸 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>검술의 전환 · 푸름</color></size>\n<color=Highlight>일반 공격 · 검술 · 깃털</color> 발동 후 일정 시간 내에, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술의 전환 · 푸름</color>을 발동하여 목표를 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n해당 스킬 발동 후 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 {0}pt의 <color=Highlight>「흐르는 소리」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, 일반 공격의 다단 공격이 리셋되지 않는다.\n<size=10></size>\n<size=40><color=Title>검술의 전환 · 깃털</color></size>\n<color=Highlight>일반 공격 · 검술 · 푸름</color> 발동 후 일정 시간 내에, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술의 전환 · 깃털</color>을 발동하여 목표를 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n해당 스킬 발동 후 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 {1}pt의 <color=Highlight>「흐르는 소리」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, 일반 공격의 다단 공격이 리셋되지 않는다",
+        "SkillDescribe": "<size=40><color=Title>검술의 전환</color></size>\n<color=Highlight>검술 · 푸름</color>에 있을 시, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술 · 깃털</color>로 전환되고, <color=Highlight>일반 공격 · 검술 · 깃털</color> 1단을 발동하여 <color=Dark>인멸 피해</color>를 입힌다.\n<size=10></size>\n<color=Highlight>검술 · 깃털</color>에 있을 시, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술 · 푸름</color>으로 전환되고, <color=Highlight>일반 공격 · 검술 · 푸름</color> 1단을 발동하여 <color=Dark>인멸 피해</color>를 입힌다.\n<size=10></size>\n<size=40><color=Title>검술의 전환 · 푸름</color></size>\n<color=Highlight>일반 공격 · 검술 · 깃털</color> 발동 후 일정 시간 내에, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술 · 푸름</color>으로 전환되고, <color=Highlight>검술의 전환 · 푸름</color>을 발동하여 목표를 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n해당 스킬을 발동하는 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 50pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, 일반 공격의 다단 공격이 리셋되지 않는다.\n<size=10></size>\n<size=40><color=Title>검술의 전환 · 깃털</color></size>\n<color=Highlight>일반 공격 · 검술 · 푸름</color> 발동 후 일정 시간 내에, <color=Highlight>공명 스킬</color>을 짧게 누르면 <color=Highlight>검술 · 깃털</color>로 전환되고, <color=Highlight>검술의 전환 · 깃털</color>을 발동하여 목표를 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n해당 스킬을 발동하는 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 50pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n해당 스킬 발동 후 일정 시간 내에, 일반 공격의 다단 공격이 리셋되지 않는다",
         "damage": [
           {
             "name": "공명 스킬",
@@ -152694,7 +152772,7 @@
       {
         "SkillName": "만음을 잠재운 깃털",
         "SkillType": "공명 해방",
-        "SkillDescribe": "<size=40><color=Title>만음을 잠재운 깃털</color></size>\n모든 <color=Highlight>「흐르는 소리」</color>를 소모하여 <color=Dark>인멸 피해</color>를 입히고, {0}pt의 <color=Highlight>「푸른 현령」</color>을 회복한다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<size=10></size>\n해당 스킬 발동 시, <color=Highlight>맴도는 소리</color> 상태를 획득한다. <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color> 혹은 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 시, <color=Highlight>현령의 그림자</color>를 소환하여 목표를 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>맴도는 소리</color> 상태는 중첩이 불가하며, <color=Highlight>현령의 그림자</color> 소환 성공 후 <color=Highlight>맴도는 소리</color> 상태가 제거된다",
+        "SkillDescribe": "<size=40><color=Title>만음을 잠재운 깃털</color></size>\n모든 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모하여 <color=Dark>인멸 피해</color>를 입히고, 1pt의 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 회복한다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<size=10></size>\n해당 스킬 발동 시, <color=Highlight>맴도는 소리</color> 상태를 획득한다. <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color> 혹은 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 시, <color=Highlight>현령의 그림자</color>를 소환하여 목표를 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>맴도는 소리</color> 상태는 중첩이 불가하며, <color=Highlight>현령의 그림자</color> 소환 후 <color=Highlight>맴도는 소리</color> 상태가 제거된다",
         "damage": [
           {
             "name": "공명 해방",
@@ -152731,7 +152809,7 @@
       {
         "SkillName": "깃털에 품은 창공",
         "SkillType": "변주 스킬",
-        "SkillDescribe": "<color=Dark>인멸 피해</color>를 입히고, {0}pt의 <color=Highlight>「푸른 현령」</color>을 회복한다.\n<color=Highlight>변주 스킬 · 깃털에 품은 창공</color>으로 피해를 입힐 시, 목표에게 1스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다",
+        "SkillDescribe": "<color=Dark>인멸 피해</color>를 입히고, 1pt의 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 회복한다.\n<color=Highlight>변주 스킬 · 깃털에 품은 창공</color>으로 피해를 입힐 시, 목표에게 1스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다",
         "damage": [
           {
             "name": "변주 스킬",
@@ -152768,7 +152846,7 @@
       {
         "SkillName": "바람이 이끄는 대로",
         "SkillType": "반주 스킬",
-        "SkillDescribe": "목표를 공격하여 양양 · 현령 공격력의 {3}에 해당하는 <color=Dark>인멸 피해</color>를 입힌다.\n파티 내 양양 · 현령을 제외한 캐릭터가 {2}초 내에 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가 시, 해당 캐릭터의 인멸 피해가 {0} 부스트되고, {1}초간 지속된다",
+        "SkillDescribe": "목표를 공격하여 양양 · 현령 공격력의 300%에 해당하는 <color=Dark>인멸 피해</color>를 입힌다.\n파티 내 양양 · 현령을 제외한 캐릭터가 <color=Highlight>음률 변환</color> 상태를 획득하고, 20초간 지속된다. <color=Highlight>음률 변환</color> 지속 기간 동안 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한 후, 해당 캐릭터의 인멸 피해가 20% 부스트된다.\n해당 스킬 발동 시, 해당 스킬 효과가 리셋된다",
         "damage": [
           {
             "name": "반주 스킬",
@@ -152787,7 +152865,7 @@
       {
         "SkillName": "만음이 떠오른 길",
         "SkillType": "공명 회로",
-        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 검술의 흐름 · 푸름</color></size>\n<color=Highlight>「흐르는 소리」</color>가 모두 소모될 시, <color=Highlight>검술 · 깃털</color>에 있을 경우, <color=Highlight>공명 스킬 · 깃털로 닦은 푸른 검날</color>이 <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>으로 대체된다.\n공명 스킬을 짧게 눌러 <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>을 발동하고 <color=Dark>인멸 피해</color>를 입히며, {0}pt의 <color=Highlight>「흐르는 소리」</color>와 {1}pt의 <color=Highlight>「푸른 현령」</color>을 회복한다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>으로 목표 명중 시, 목표의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> {2}스택을 소모한다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color> 발동 후, 일정 시간 내에 다단 공격이 리셋되지 않는다. <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>을 발동하여 <color=Highlight>일반 공격 · 검술 · 깃털</color>의 다단 공격을 중단시킬 경우, <color=Highlight>소리의 환영</color>을 소환하여 현재 공격을 완료하고 고정 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>일반 공격 피해</color>로 적용되며, 해당 공격으로 입히는 피해는 피해 보너스의 영향을 받지 않고, 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가할 수 없다.\n해당 스킬 발동 후 일정 시간 내에 회피 성공 효과를 발생시킬 수 있으며, 회피 성공 효과 발생 시 {3}pt의 <color=Highlight>「흐르는 소리」</color>를 소모한다.\n<size=10></size>\n<size=40><color=Title>공명 스킬 · 검술의 흐름 · 깃털</color></size>\n<color=Highlight>「흐르는 소리」</color>가 모두 소모될 시, <color=Highlight>검술 · 푸름</color>에 있을 경우, <color=Highlight>공명 스킬 · 깃털로 닦은 푸른 검날</color>이 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>로 대체된다.\n공명 스킬을 짧게 눌러 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>을 발동하면, <color=Highlight>검술 · 깃털</color>로 전환되고 <color=Dark>인멸 피해</color>를 입히며, {4}pt의 <color=Highlight>「흐르는 소리」</color>와 {5}pt의 <color=Highlight>「푸른 현령」</color>을 회복한다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>로 목표 명중 시, 목표의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> {6}스택을 소모한다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 후, 일정 시간 내에 다단 공격이 리셋되지 않는다. <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>을 발동하여 <color=Highlight>일반 공격 · 검술 · 푸름</color>의 다단 공격을 중단시킬 경우, <color=Highlight>소리의 환영</color>을 소환하여 현재 공격을 완료하고 고정 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>일반 공격 피해</color>로 적용되며, 해당 공격으로 입히는 피해는 피해 보너스의 영향을 받지 않고, 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가할 수 없다.\n해당 스킬 발동 후 일정 시간 내에 회피 성공 효과를 발생시킬 수 있으며, 회피 성공 효과 발생 시 {7}pt의 <color=Highlight>「흐르는 소리」</color>를 소모한다.\n<size=10></size>\n<size=40><color=Title>강공격 · 검술 · 푸름</color></size>\n<color=Highlight>「푸른 현령」</color>이 최대치까지 회복될 시, <color=Highlight>검술 · 푸름</color>에 있을 경우, 일반 공격을 길게 누르면 모든 <color=Highlight>「푸른 현령」</color>을 소모하고, 스태미나를 소모하여 <color=Highlight>강공격 · 검술 · 푸름</color>을 발동한다. 거대한 회오리를 생성하여 전방을 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>강공격 · 검술 · 푸름</color> 발동 시, <color=Highlight>끊어진 숨결</color>을 획득한다. <color=Highlight>끊어진 숨결</color>은 {8}초간 지속된다. 양양 · 현령이 파티 내 등장 캐릭터일 경우, 이번 <color=Highlight>강공격 · 검술 · 푸름</color>의 크리티컬 피해가 {9} 증가된다. <color=Highlight>강공격 · 검술 · 푸름</color> 종료 시, <color=Highlight>끊어진 숨결</color>은 제거된다. <color=Highlight>끊어진 숨결</color>은 {10}초마다 1회만 획득 가능하다.\n<color=Highlight>강공격 · 검술 · 푸름</color>은 명중된 목표에게 {11}스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>강공격 · 검술 · 깃털</color></size>\n<color=Highlight>「푸른 현령」</color>이 최대치까지 회복될 시, <color=Highlight>검술 · 깃털</color>에 있고 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color> 다단 공격에 있지 않을 경우, 지면에서 일반 공격을 길게 누르면 스태미나를 소모하여 <color=Highlight>강공격 · 검술 · 깃털</color>을 발동하고, <color=Dark>인멸 피해</color>를 입힌다. 목표에 명중 후 자동으로 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>을 발동한다.\n<color=Highlight>강공격 · 검술 · 깃털</color> 발동 시, <color=Highlight>흐르는 산안개</color>를 획득한다. <color=Highlight>흐르는 산안개</color>는 {8}초간 지속된다. 양양 · 현령이 파티 내 등장 캐릭터일 경우, 이번 <color=Highlight>강공격 · 검술 · 깃털</color>, <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>, <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>, <color=Highlight>회피 반격 · 만물을 뒤덮은 찬란함</color>의 크리티컬 피해가 {13} 증가된다. <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color> 3단 혹은 <color=Highlight>회피 반격 · 만물을 뒤덮은 찬란함</color> 3단 종료 시, <color=Highlight>흐르는 산안개</color>는 제거된다. <color=Highlight>흐르는 산안개</color>는 {14}초마다 1회만 획득 가능하다.\n<color=Highlight>강공격 · 검술 · 깃털</color>은 명중된 목표에게 {15}스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 바람을 따라 내려앉은 깃털</color></size>\n<color=Highlight>「푸른 현령」</color>이 최대치까지 회복될 시, <color=Highlight>검술 · 깃털</color>에 있고 공중에 있을 경우, <color=Highlight>공중 공격 · 검술 · 깃털</color>이 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>로 대체된다. 다른 캐릭터로 전환 시, 자동으로 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>을 발동한다.\n일반 공격을 짧게 누르거나 혹은 길게 눌러 모든 <color=Highlight>「푸른 현령」</color>을 소모하고, 스태미나를 소모하여 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>을 발동하고 <color=Dark>인멸 피해</color>를 입힌다. <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color> 발동 시, <color=Highlight>바람에 올리는 기도 소리</color>에 진입하고 {16}초간 지속된다.\n<size=10></size>\n<size=40><color=Title>바람에 올리는 기도 소리</color></size>\n<color=Highlight>검술 · 깃털</color>에 있을 시, <color=Highlight>일반 공격 · 검술 · 깃털</color>이 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>으로 대체된다. 스태미나를 소모하여 최대 3단 공격을 가하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>의 2, 3단은 낮은 공중에서 발동 가능하며, 3단 발동 후 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>이 종료된다. 해당 연속 공격 단수는 리셋되지 않는다.\n<color=Highlight>바람에 올리는 기도 소리</color> 기간 동안 회피 반격을 발동하면 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color> 다단 공격을 발동한 것으로 간주된다.\n<size=10></size>\n<size=40><color=Title>깃털의 맹세</color></size>\n파티 내 캐릭터가 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가 시, 양양 · 현령은 1스택의 <color=Highlight>깃털의 맹세</color>를 획득하고, {17}초간 지속된다. <color=Highlight>깃털의 맹세</color>는 {18}초마다 획득 가능하며, 최대 {19}스택까지 중첩이 가능하다. 양양 · 현령이 등장 캐릭터일 시, 스택마다 <color=Highlight>강공격 · 검술 · 푸름</color>, <color=Highlight>강공격 · 검술 · 깃털</color>, <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>, <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>, <color=Highlight>회피 반격 · 만물을 뒤덮은 찬란함</color>의 크리티컬 피해를 {20} 증가시키고, 최대 {21}까지 증가시킬 수 있다.\n<size=10></size>\n<size=40><color=Title>겹겹이 쌓인 울림</color></size>\n양양 · 현령의 <color=Highlight>일반 공격 · 검술 · 푸름</color> 4단, <color=Highlight>일반 공격 · 검술 · 깃털</color> 4단, <color=Highlight>강공격 · 검술 · 푸름</color>, <color=Highlight>강공격 · 검술 · 깃털</color>로 목표 명중 전, 일정 범위 내의 목표에게 추가된 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>의 현재 최대 스택을 복사하고 일정 시간 후 범위 내의 모든 목표에게 추가한다.\n<size=10></size>\n<size=40><color=Title>「흐르는 소리」 획득 규칙</color></size>\n<color=Highlight>「흐르는 소리」</color> 최대 누적 가능: {22}pt\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 시, {23}pt의 <color=Highlight>「흐르는 소리」</color>를 회복한다.\n공명 해방<color=Highlight>만음을 잠재운 깃털</color>을 발동할 경우, <color=Highlight>「흐르는 소리」</color>가 모두 소모된다.\n<color=Highlight>일반 공격 · 검술 · 푸름</color>, <color=Highlight>회피 반격 · 검술 · 푸름</color>, <color=Highlight>일반 공격 · 검술 · 깃털</color>, <color=Highlight>회피 반격 · 검술 · 깃털</color>을 발동하여 피해를 입힐 경우, <color=Highlight>「흐르는 소리」</color>가 소모된다.\n<size=10></size>\n<size=40><color=Title>「푸른 현령」 획득 규칙</color></size>\n<color=Highlight>「푸른 현령」</color> 최대 누적 가능: {24}pt\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>, <color=Highlight>변주 스킬 · 깃털에 품은 창공</color>을 발동할 경우, {25}pt의 <color=Highlight>「푸른 현령」</color>을 회복한다.\n<color=Highlight>강공격 · 검술 · 푸름</color>, <color=Highlight>강공격 · 검술 · 깃털</color>을 발동할 경우, <color=Highlight>「푸른 현령」</color>이 모두 소모된다",
+        "SkillDescribe": "<size=40><color=Title>공명 스킬 · 검술의 흐름 · 푸름</color></size>\n양양 · 현령은 기본적으로 <color=Highlight>검술 · 푸름</color>에 처해있다. <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>가 모두 소모될 시, <color=Highlight>검술 · 깃털</color>에 있을 경우, <color=Highlight>공명 스킬 · 깃털로 닦은 푸른 검날</color>이 <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>으로 대체된다.\n공명 스킬을 짧게 누르면 <color=Highlight>검술 · 푸름</color>으로 전환되고, <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>을 발동하여 <color=Dark>인멸 피해</color>를 입히며, 100pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>와 1pt의 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 회복한다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>으로 목표 명중 시, 목표의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 1스택을 소모한다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color> 발동 후, 일정 시간 내에 다단 공격이 리셋되지 않는다. <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>을 발동하여 <color=Highlight>일반 공격 · 검술 · 깃털</color>의 다단 공격을 중단시킬 경우, <color=Highlight>소리의 환영</color>을 소환하여 현재 공격을 완료하고 고정 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>일반 공격 피해</color>로 적용되며, 해당 공격으로 입히는 피해는 피해 보너스의 영향을 받지 않고, 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가할 수 없다.\n해당 스킬을 발동하는 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 50pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n<size=10></size>\n<size=40><color=Title>공명 스킬 · 검술의 흐름 · 깃털</color></size>\n<color=Highlight>「<te href=161001>흐르는 소리</te>」</color>가 모두 소모될 시, <color=Highlight>검술 · 푸름</color>에 있을 경우, <color=Highlight>공명 스킬 · 깃털로 닦은 푸른 검날</color>이 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>로 대체된다.\n공명 스킬을 짧게 누르면 <color=Highlight>검술 · 깃털</color>로 전환되고, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>을 발동하여 <color=Dark>인멸 피해</color>를 입히며, 100pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>와 1pt의 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 회복한다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>로 목표 명중 시, 목표의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 1스택을 소모한다.\n<color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 후, 일정 시간 내에 다단 공격이 리셋되지 않는다. <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>을 발동하여 <color=Highlight>일반 공격 · 검술 · 푸름</color>의 다단 공격을 중단시킬 경우, <color=Highlight>소리의 환영</color>을 소환하여 현재 공격을 완료하고 고정 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>일반 공격 피해</color>로 적용되며, 해당 공격으로 입히는 피해는 피해 보너스의 영향을 받지 않고, 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가할 수 없다.\n해당 스킬을 발동하는 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 50pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n<size=10></size>\n<size=40><color=Title>강공격 · 검술 · 푸름</color></size>\n<color=Highlight>「<te href=161002>푸른 현령</te>」</color>이 최대치까지 회복될 시, <color=Highlight>검술 · 푸름</color>에 있을 경우, 일반 공격을 길게 누르면 모든 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 소모하며, 스태미나를 소모하여 <color=Highlight>강공격 · 검술 · 푸름</color>을 발동한다. 거대한 회오리를 생성하여 전방을 공격하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>강공격 · 검술 · 푸름</color> 발동 시, <color=Highlight>「<te href=161003>끊어진 숨결</te>」</color>을 획득하며, 양양 · 현령이 파티 내 등장 캐릭터일 경우, 이번 <color=Highlight>강공격 · 검술 · 푸름</color>의 크리티컬 피해가 160% 증가된다. <color=Highlight>강공격 · 검술 · 푸름</color> 종료 시, <color=Highlight>「<te href=161003>끊어진 숨결</te>」</color>은 제거된다. <color=Highlight>「<te href=161003>끊어진 숨결</te>」</color>은 25초마다 1회만 획득 가능하다.\n<color=Highlight>강공격 · 검술 · 푸름</color>은 명중된 목표에게 2스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>강공격 · 검술 · 깃털</color></size>\n<color=Highlight>「<te href=161002>푸른 현령</te>」</color>이 최대치까지 회복될 시, <color=Highlight>검술 · 깃털</color>에 있고 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color> 다단 공격에 있지 않으며 지면에 있을 경우, 일반 공격을 길게 누르면 스태미나를 소모하여 <color=Highlight>강공격 · 검술 · 깃털</color>을 발동하고, <color=Dark>인멸 피해</color>를 입힌다. 목표 명중 후 자동으로 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>을 발동한다.\n<color=Highlight>강공격 · 검술 · 깃털</color> 발동 시, <color=Highlight>「<te href=161004>흐르는 산안개</te>」</color>를 획득하고, <color=Highlight>「<te href=161004>흐르는 산안개</te>」</color>는 15초간 지속되며, 양양 · 현령이 파티 내 등장 캐릭터일 경우, 이번 <color=Highlight>강공격 · 검술 · 깃털</color>, <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>, <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>, <color=Highlight>회피 반격 · 만물을 뒤덮은 찬란함</color>의 크리티컬 피해가 160% 증가된다. <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color> 3단 혹은 <color=Highlight>회피 반격 · 만물을 뒤덮은 찬란함</color> 3단 종료 시, <color=Highlight>「<te href=161004>흐르는 산안개</te>」</color>는 제거된다. <color=Highlight>「<te href=161004>흐르는 산안개</te>」</color>는 25초마다 1회만 획득 가능하다.\n<color=Highlight>강공격 · 검술 · 깃털</color>은 명중된 목표에게 2스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<size=10></size>\n<size=40><color=Title>공중 공격 · 바람을 따라 내려앉은 깃털</color></size>\n<color=Highlight>「<te href=161002>푸른 현령</te>」</color>이 최대치까지 회복될 시, <color=Highlight>검술 · 깃털</color>에 있고 공중에 있을 경우, <color=Highlight>공중 공격 · 검술 · 깃털</color>이 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>로 대체된다.\n일반 공격을 짧게 누르거나 혹은 길게 누르면 모든 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 소모하며, 스태미나를 소모하여 <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>을 발동하고 <color=Dark>인멸 피해</color>를 입힌다. <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color> 발동 시, <color=Highlight>바람에 올리는 기도 소리</color>에 진입하고 12초간 지속된다.\n<size=10></size>\n<size=40><color=Title>바람에 올리는 기도 소리</color></size>\n<color=Highlight>검술 · 깃털</color>에 있을 시, <color=Highlight>일반 공격 · 검술 · 깃털</color>이 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>으로 대체되어, 최대 3단 연속 공격을 가하고 <color=Dark>인멸 피해</color>를 입힌다. 해당 피해는 <color=Highlight>강공격 피해</color>로 적용된다.\n<color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>의 2, 3단은 낮은 공중에서 발동 가능하고, 3단 발동 후 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>이 종료되며, 해당 연속 공격 단수는 리셋되지 않는다.\n<color=Highlight>바람에 올리는 기도 소리</color> 기간 동안 회피 반격을 발동하면 <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color> 다단 공격을 발동한 것으로 간주된다.\n<size=10></size>\n<size=40><color=Title>깃털의 맹세</color></size>\n근처 파티 내 캐릭터가 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가 시, 양양 · 현령은 1스택의 <color=Highlight>깃털의 맹세</color>를 획득하고, 4초간 지속된다. <color=Highlight>깃털의 맹세</color>의 획득 간격은 1초이며, 최대 6스택까지 중첩이 가능하다. 양양 · 현령이 파티 내 등장 캐릭터일 경우, 1스택 당 <color=Highlight>강공격 · 검술 · 푸름</color>, <color=Highlight>강공격 · 검술 · 깃털</color>, <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color>, <color=Highlight>일반 공격 · 만물을 뒤덮은 찬란함</color>, <color=Highlight>회피 반격 · 만물을 뒤덮은 찬란함</color>의 크리티컬 피해를 25% 증가시키고, 최대 150%까지 증가시킬 수 있다.\n<size=10></size>\n<size=40><color=Title>겹겹이 쌓인 울림</color></size>\n양양 · 현령의 <color=Highlight>일반 공격 · 검술 · 푸름</color> 4단, <color=Highlight>일반 공격 · 검술 · 깃털</color> 4단, <color=Highlight>강공격 · 검술 · 푸름</color>, <color=Highlight>강공격 · 검술 · 깃털</color>로 목표 명중 전, 일정 범위 내의 목표에게 추가된 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>의 현재 최대 스택을 복사하고 일정 시간 후 범위 내의 모든 목표에게 추가한다.\n<size=10></size>\n<size=40><color=Title>「흐르는 소리」 획득 규칙</color></size>\n<color=Highlight>「<te href=161001>흐르는 소리</te>」</color> 최대 누적 가능: 100pt\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 시, 100pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 회복한다.\n공명 해방 <color=Highlight>만음을 잠재운 깃털</color> 발동 시, 모든 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n<color=Highlight>기본 공격</color>으로 피해를 입힐 시, <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n<color=Highlight>공명 스킬 · 검술의 전환 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 전환 · 깃털</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>을 발동하는 일정 시간 내에 회피 성공을 발생시킬 수 있으며, 회피 성공 발생 시 50pt의 <color=Highlight>「<te href=161001>흐르는 소리</te>」</color>를 소모한다.\n<size=10></size>\n<size=40><color=Title>「푸른 현령」 획득 규칙</color></size>\n<color=Highlight>「<te href=161002>푸른 현령</te>」</color> 최대 누적 가능: 2pt\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>, <color=Highlight>변주 스킬 · 깃털에 품은 창공</color> 발동 시, 1pt의 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 회복한다.\n<color=Highlight>공명 해방 · 만음을 잠재운 깃털</color> 발동 시, 1pt의 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 회복한다.\n<color=Highlight>강공격 · 검술 · 푸름</color>, <color=Highlight>공중 공격 · 바람을 따라 내려앉은 깃털</color> 발동 시, 모든 <color=Highlight>「<te href=161002>푸른 현령</te>」</color>을 소모한다",
         "damage": [
           {
             "name": "공명 회로",
@@ -153103,23 +153181,38 @@
               "260.08%",
               "279.69%"
             ]
+          },
+          {
+            "name": "공명 회로",
+            "rates": [
+              "7.82%",
+              "8.46%",
+              "9.11%",
+              "10%",
+              "10.64%",
+              "11.38%",
+              "12.41%",
+              "13.43%",
+              "14.46%",
+              "15.55%"
+            ]
           }
         ]
       },
       {
         "SkillName": "영원한 맹세",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "목표가 1~3스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 보유 시, <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 1스택당 양양 · 현령이 목표에게 입히는 피해를 {0} 부스트시키고, 최대 {1}까지 부스트시킨다.\n<size=10></size>\n목표가 4~6스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 보유 시, 4~6스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 1스택당 양양 · 현령이 목표에게 입히는 피해를 {2} 부스트시키고, 최대 {3}까지 부스트시킨다",
+        "SkillDescribe": "목표가 1~3스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 보유한 후, <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 1스택 당 양양 · 현령이 해당 목표에게 입히는 피해를 10% 부스트시키고, 최대 30%까지 부스트시킨다.\n<size=10></size>\n목표가 4~6스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 보유한 후, 4~6스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 1스택 당 양양 · 현령이 해당 목표에게 입히는 피해를 12% 부스트시키고, 최대 36%까지 부스트시킨다",
         "damage": []
       },
       {
         "SkillName": "인생의 악기",
         "SkillType": "고유 스킬",
-        "SkillDescribe": "양양 · 현령이 공명 해방 <color=Highlight>만음을 잠재운 깃털</color>을 발동하여 명중한 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 스택 최대치까지 추가한다.\n<size=10></size>\n파티 내 캐릭터가 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가 시, 양양 · 현령은 1스택의 <color=Highlight>바람의 숨결에 기대어</color>를 획득한다. <color=Highlight>바람의 숨결에 기대어</color>는 1초마다 획득 가능하며, 최대 {0}스택까지 중첩이 가능하다.\n<size=10></size>\n<color=Highlight>바람의 숨결에 기대어</color>가 {1}스택까지 중첩될 시, 양양 · 현령은 모든 <color=Highlight>바람의 숨결에 기대어</color>를 제거하고 <color=Highlight>바람을 나란히 맞대고</color>를 획득한다.\n<color=Highlight>바람을 나란히 맞대고</color>를 보유 시, 양양 · 현령이 <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color> 혹은 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color>을 발동하면 <color=Highlight>해방된 깃털 · 현령</color>을 소환하여 목표를 공격하고, 목표에게 {2}스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다. <color=Highlight>해방된 깃털 · 현령</color>의 발생 간격은 {3}초이다.\n<size=10></size>\n<color=Highlight>해방된 깃털 · 현령</color> 소환 성공 후, <color=Highlight>바람을 나란히 맞대고</color> 상태가 제거된다",
+        "SkillDescribe": "양양 · 현령이 공명 해방 <color=Highlight>만음을 잠재운 깃털</color>로 목표 명중 시, 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가할 수 있는 최대 스택까지 추가한다.\n<size=10></size>\n근처 파티 내 캐릭터가 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가 시, 양양 · 현령은 1스택의 <color=Highlight>바람의 숨결에 기대어</color>를 획득한다. <color=Highlight>바람의 숨결에 기대어</color>의 획득 간격은 1초이며, 최대 6스택까지 중첩이 가능하다.\n<size=10></size>\n<color=Highlight>바람의 숨결에 기대어</color>가 6스택까지 중첩될 시, 양양 · 현령은 모든 <color=Highlight>바람의 숨결에 기대어</color>를 제거하고 <color=Highlight>바람을 나란히 맞대고</color>를 획득한다.\n<color=Highlight>바람을 나란히 맞대고</color>를 보유할 경우, 양양 · 현령이 <color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color> 혹은 <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 시 <color=Highlight>해방된 깃털 · 현령</color>을 소환하고, 목표에게 6스택의 <color=Highlight>「<te href=850012>암흑 효과</te>」</color>를 추가한다.\n<color=Highlight>바람을 나란히 맞대고</color>를 보유할 경우, <color=Highlight>바람의 숨결에 기대어</color>를 획득할 수 없다.\n<size=10></size>\n<color=Highlight>해방된 깃털 · 현령</color>을 소환한 후, <color=Highlight>바람을 나란히 맞대고</color> 상태가 제거된다",
         "damage": []
       },
       {
-        "SkillName": "",
+        "SkillName": "요리의 달인",
         "SkillType": "고유 스킬",
         "SkillDescribe": "현재 캐릭터가 요리할 때 일정 확률로 특색 요리를 획득할 수 있다",
         "damage": []
