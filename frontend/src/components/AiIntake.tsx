@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { extractVision } from "@/lib/api";
+import { mediaUrl } from "@/lib/constants";
 import type { AiProfile, CodexResonator } from "@/lib/types";
 
 const PLAY_STYLES = ["고점 딜(뽕맛)", "편하게 자동", "지속 딜/생존", "서포트/힐 위주"];
@@ -18,18 +19,22 @@ export function AiIntake({
   const [desired, setDesired] = useState<string[]>([]);
   const [owned, setOwned] = useState<string[]>([]);
   const [charQuery, setCharQuery] = useState("");
+  const [pickerOpen, setPickerOpen] = useState(false);
   const [playStyle, setPlayStyle] = useState<string>("");
+  const [customStyle, setCustomStyle] = useState("");
   const [note, setNote] = useState("");
   const [visionStatus, setVisionStatus] = useState("");
   const [visionBusy, setVisionBusy] = useState(false);
 
-  const names = useMemo(() => resonators.map((r) => r.name).filter(Boolean), [resonators]);
+  const byName = useMemo(() => new Map(resonators.map((r) => [r.name, r])), [resonators]);
+  const filtered = useMemo(
+    () => (charQuery.trim() ? resonators.filter((r) => r.name.includes(charQuery.trim())) : resonators),
+    [resonators, charQuery],
+  );
 
-  const addDesired = (name: string) => {
-    const clean = name.trim();
-    if (!clean || desired.includes(clean)) return;
-    setDesired([...desired, clean]);
-    setCharQuery("");
+  /** 아이콘 탭으로 추가/제거 토글 — 입력·Enter 불필요(모바일 우선). */
+  const toggleDesired = (name: string) => {
+    setDesired((prev) => (prev.includes(name) ? prev.filter((x) => x !== name) : [...prev, name]));
   };
 
   const handleScreenshot = async (file: File | null) => {
@@ -53,16 +58,17 @@ export function AiIntake({
   };
 
   const submit = () => {
+    const effectiveStyle = customStyle.trim() || playStyle; // 직접 입력이 프리셋보다 우선
     const profile: AiProfile = {
       owned_characters: owned,
       desired_characters: desired,
-      play_style: playStyle || null,
+      play_style: effectiveStyle || null,
       note: note.trim() || null,
     };
     const parts = [
       desired.length ? `쓰고 싶은 캐릭터: ${desired.join(", ")}` : null,
       owned.length ? `보유 캐릭터: ${owned.join(", ")}` : null,
-      playStyle ? `플레이 스타일: ${playStyle}` : null,
+      effectiveStyle ? `플레이 스타일: ${effectiveStyle}` : null,
       note.trim() || null,
     ].filter(Boolean);
     const firstMessage = parts.length
@@ -82,36 +88,85 @@ export function AiIntake({
 
       <div className="grid gap-1">
         <span className="text-sm font-medium">사용하고 싶은 캐릭터</span>
-        <input
-          list="ai-resonator-list"
-          value={charQuery}
-          onChange={(e) => setCharQuery(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              e.preventDefault();
-              addDesired(charQuery);
-            }
-          }}
-          placeholder="이름 입력 후 Enter"
-          className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
-        />
-        <datalist id="ai-resonator-list">
-          {names.map((n) => (
-            <option key={n} value={n} />
-          ))}
-        </datalist>
+        <div className="relative">
+          <button
+            type="button"
+            onClick={() => setPickerOpen((o) => !o)}
+            className="flex w-full items-center justify-between rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
+          >
+            <span className={desired.length ? "" : "text-slate-400 dark:text-neutral-500"}>
+              {desired.length ? `${desired.length}명 선택됨` : "눌러서 캐릭터 선택"}
+            </span>
+            <span className="text-slate-400 dark:text-neutral-500">{pickerOpen ? "▲" : "▼"}</span>
+          </button>
+          {pickerOpen ? (
+            <>
+              <div className="fixed inset-0 z-10" onClick={() => setPickerOpen(false)} />
+              <div className="absolute left-0 right-0 z-20 mt-1 overflow-hidden rounded-lg border border-slate-300 bg-white shadow-xl dark:border-neutral-700 dark:bg-neutral-900">
+                <div className="flex items-center gap-2 border-b border-slate-200 p-2 dark:border-neutral-800">
+                  <input
+                    value={charQuery}
+                    onChange={(e) => setCharQuery(e.target.value)}
+                    placeholder="이름 검색"
+                    className="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-1.5 text-sm dark:border-neutral-700 dark:bg-neutral-950"
+                  />
+                  <button type="button" onClick={() => setPickerOpen(false)} className="rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white">
+                    완료
+                  </button>
+                </div>
+                <div className="grid max-h-72 grid-cols-4 gap-1 overflow-y-auto p-2 sm:grid-cols-6">
+                  {filtered.map((r) => {
+                    const on = desired.includes(r.name);
+                    return (
+                      <button
+                        key={r.id}
+                        type="button"
+                        onClick={() => toggleDesired(r.name)}
+                        title={r.name}
+                        className={`flex flex-col items-center gap-1 rounded-md border p-1.5 text-center transition ${
+                          on
+                            ? "border-indigo-500 bg-indigo-50 dark:bg-indigo-950/50"
+                            : "border-transparent hover:border-slate-300 hover:bg-slate-50 dark:hover:border-neutral-700 dark:hover:bg-neutral-800"
+                        }`}
+                      >
+                        <span className="relative">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img src={mediaUrl(r.image)} alt="" className="h-11 w-11 rounded-md bg-slate-100 object-cover dark:bg-neutral-800" />
+                          {on ? (
+                            <span className="absolute -right-1 -top-1 grid h-4 w-4 place-items-center rounded-full bg-indigo-600 text-[10px] text-white">✓</span>
+                          ) : null}
+                        </span>
+                        <span className="line-clamp-1 text-[11px] text-slate-700 dark:text-neutral-300">{r.name}</span>
+                      </button>
+                    );
+                  })}
+                  {filtered.length === 0 ? (
+                    <p className="col-span-full py-6 text-center text-sm text-slate-400 dark:text-neutral-500">결과가 없습니다.</p>
+                  ) : null}
+                </div>
+              </div>
+            </>
+          ) : null}
+        </div>
         {desired.length > 0 ? (
           <div className="mt-1 flex flex-wrap gap-1.5">
-            {desired.map((n) => (
-              <button
-                key={n}
-                type="button"
-                onClick={() => setDesired(desired.filter((x) => x !== n))}
-                className="rounded-full bg-indigo-100 px-2.5 py-1 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
-              >
-                {n} ✕
-              </button>
-            ))}
+            {desired.map((n) => {
+              const r = byName.get(n);
+              return (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setDesired(desired.filter((x) => x !== n))}
+                  className="flex items-center gap-1.5 rounded-full bg-indigo-100 py-1 pl-1 pr-2.5 text-xs text-indigo-700 dark:bg-indigo-950 dark:text-indigo-300"
+                >
+                  {r?.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={mediaUrl(r.image)} alt="" className="h-5 w-5 rounded-full object-cover" />
+                  ) : null}
+                  {n} ✕
+                </button>
+              );
+            })}
           </div>
         ) : null}
       </div>
@@ -123,9 +178,12 @@ export function AiIntake({
             <button
               key={s}
               type="button"
-              onClick={() => setPlayStyle(playStyle === s ? "" : s)}
+              onClick={() => {
+                setPlayStyle(playStyle === s ? "" : s);
+                setCustomStyle("");
+              }}
               className={
-                playStyle === s
+                playStyle === s && !customStyle.trim()
                   ? "rounded-full bg-indigo-600 px-3 py-1 text-xs text-white"
                   : "rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700 dark:bg-neutral-800 dark:text-neutral-300"
               }
@@ -134,6 +192,12 @@ export function AiIntake({
             </button>
           ))}
         </div>
+        <input
+          value={customStyle}
+          onChange={(e) => setCustomStyle(e.target.value)}
+          placeholder="직접 입력 (예: 조작 간단한 원버튼 위주, 순간 폭딜 좋아함)"
+          className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
+        />
       </div>
 
       <label className="grid gap-1">
