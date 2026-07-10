@@ -91,6 +91,7 @@ export interface SimMemberIn {
   echoes?: SimEchoIn[];
   skill_levels?: Record<number, number>;
   full_uptime?: boolean;
+  sequence?: number; // 공명 사슬 S0-S6
 }
 
 export interface SimSkillDamage {
@@ -108,6 +109,12 @@ export interface SimMemberResult {
   skills: SimSkillDamage[];
   total: number;
   cost: number;
+  sequence?: number; // 적용된 공명 사슬 S0-S6
+  // 시퀀스가 부여하지만 딜에 반영되지 않은 효과(메커니즘/조건부/생존) — 투명성 표기용
+  chain_notes?: { text?: string; reason?: string; node?: number }[];
+  // 캐릭터 특성으로 이 멤버에게 자동 적용된 팀 버프(읽기용) + 수치화 불가 팀 효과 note
+  applied_team_buffs?: string[];
+  team_notes?: string[];
   // 상황부 피해 — total에 포함되지 않는 참고값 (이상/조화도 파괴)
   anomaly_type?: string | null;
   anomaly_dmg?: number;

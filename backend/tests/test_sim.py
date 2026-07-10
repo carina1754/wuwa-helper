@@ -434,6 +434,53 @@ def test_team_calculate_unknown_resonator() -> None:
         )
 
 
+# --- character-kit TEAM effects (src/sim/kits) --------------------------------
+def test_resolve_kit_parses_kinds_and_gates_conditionals() -> None:
+    from src.sim.kits import resolve_kit
+
+    effects = {
+        "X": {"name": "테스트", "element": "용융", "effects": [
+            {"kind": "team_stat", "key": "atkPct", "value": 20, "cond": True},
+            {"kind": "team_boost", "value": 25, "element": "용융", "cond": True},
+            {"kind": "team_boost", "value": 30, "skill_type": "liberation", "cond": True},
+            {"kind": "team_boost", "value": 15, "cond": False},  # unconditional global
+            {"kind": "enemy_debuff", "sub": "res_shred", "value": 10, "element": "용융", "cond": True},
+            {"kind": "note", "reason": "heal-shield", "text": "힐"},
+        ]}
+    }
+    # full uptime → every conditional resolves; skill_type / element preserved
+    k = resolve_kit("X", full_uptime=True, effects=effects)
+    assert ("atkPct", 20.0) in k.team_stats
+    assert any(b.value == 25.0 and b.element == "용융" and b.skill_type is None for b in k.team_boosts)
+    assert any(b.value == 30.0 and b.skill_type == "liberation" for b in k.team_boosts)
+    assert any(d.sub == "res_shred" and d.value == 10.0 and d.element == "용융" for d in k.enemy_debuffs)
+    assert k.notes == ["힐"]
+
+    # no full uptime → conditional effects drop; unconditional + notes remain
+    k0 = resolve_kit("X", full_uptime=False, effects=effects)
+    assert k0.team_stats == []
+    assert [b.value for b in k0.team_boosts] == [15.0]
+    assert k0.enemy_debuffs == []
+    assert k0.notes == ["힐"]
+
+    # unknown id → empty resolution (safe when data file lacks the entry)
+    assert resolve_kit("ZZZ", effects=effects).team_stats == []
+
+
+def test_character_damages_type_boost_only_affects_matching_skill_type() -> None:
+    data = _engine_data()
+    build = ResonatorBuild(level=90, weapon_level=90, weapon_id="w1")
+    base = character_damages(data, "r1", build)
+    boosted = character_damages(data, "r1", build, type_boosts={"basicDmg": 50})
+    b_basic = next(s for s in base["skills"] if s["name"] == "평타")["dmg"]
+    x_basic = next(s for s in boosted["skills"] if s["name"] == "평타")["dmg"]
+    b_var = next(s for s in base["skills"] if s["name"] == "변주기")["dmg"]
+    x_var = next(s for s in boosted["skills"] if s["name"] == "변주기")["dmg"]
+    # 일반 공격 skill picks up the boost (0→50 ⇒ ×1.5); 변주 has no type key ⇒ untouched
+    assert x_basic == pytest.approx(b_basic * 1.5)
+    assert x_var == pytest.approx(b_var)
+
+
 # --- real-account snapshot → absolute damage (subproject D) ------------------
 def test_stat_key_from_ko_flat_vs_percent_and_special() -> None:
     from src.sim.snapshot import stat_key_from_ko as k

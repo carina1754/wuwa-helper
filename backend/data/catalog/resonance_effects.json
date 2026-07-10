@@ -1,0 +1,4019 @@
+{
+ "1208": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 80,
+     "cond": true,
+     "source_param": "80%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "내부 연소가 제공하는 공격력 보너스를 350% 증가(기존 메커니즘 보너스의 배수 증가, 기준값 없음)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "연옥 정화",
+     "add_pct": 130,
+     "cond": false,
+     "source_param": "130%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "fusionDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "에코 어빌리티 발동 시 파티 전원 전체 속성 피해 보너스 20% 증가(20초); 모든 원소에 적용",
+     "reason": "conditional-complex"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "임박·어둠 날개의 비상·기습 약탈(모두 공명 스킬)의 피해 배율 150% 상승; 해당 세부 스킬명이 파일 스킬과 매칭되지 않아 수치화 불가",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "fusionDmg",
+     "value": 35,
+     "cond": true,
+     "source_param": "35%"
+    },
+    {
+     "kind": "note",
+     "text": "불멸의 자격 동안 데빌 헌터의 처형·불타는 깃털의 단죄·불지옥 폭풍·죄와 벌의 피해 배율 60% 상승(여러 공격 타입의 세부 스킬, 파일 스킬 미매칭)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1405": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "변주 스킬 후 일반 공격 「기」 획득량 100% 증가(10초)",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 순환의 기 사용 횟수 1회 증가",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "자세 2.5초 유지 시 기의 반격·행 자동 발동",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "바람장의 정화",
+     "value": 80,
+     "cond": true,
+     "source_param": "80%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "공명 해방 바람장의 정화 범위 33% 증가",
+     "reason": "utility"
+    }
+   ],
+   "6": [
+    {
+     "kind": "extra_hit",
+     "name": "특수·기의 반격·행",
+     "skill_type": "강공격",
+     "element": "기류",
+     "mult": 556.67,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "556.67%"
+    },
+    {
+     "kind": "note",
+     "text": "대주일·외단계 실드 획득",
+     "reason": "shield-heal"
+    }
+   ]
+  }
+ },
+ "1411": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "검의 회답 3종이 목표 공격에 중단되지 않음",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "「대나무 빛」 획득 시 근처 파티원 에코 어빌리티 피해 30% 부스트",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "진중한 한 수",
+     "add_pct": 500,
+     "cond": false,
+     "source_param": "500%"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "대나무숲의 은둔자",
+     "skill_type": "없음",
+     "element": "기류",
+     "mult": 500,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "500%"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "반주 스킬 새로이 드러난 푸르름",
+     "skill_type": "없음",
+     "element": "기류",
+     "mult": 500,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "500%"
+    },
+    {
+     "kind": "note",
+     "text": "대나무숲의 은둔자 발동 후 검의 회답 끝없는음률/헌신의서약/변치않는충절 피해 배율 600% 증가",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "협주 에너지 60pt 소모·검의 독백 400pt 회복·변치않는 충절 명중 시 협주 에너지 30pt 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "def_ignore",
+     "value": 15,
+     "cond": false,
+     "source_param": "15%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "강공격 변치않는 충절 발동 시 주변 목표 5초 정체(CC)",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "묵향에 물들어 종료 피해",
+     "skill_type": "없음",
+     "element": "기류",
+     "mult": 600,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "600%"
+    },
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 100,
+     "cond": true,
+     "source_param": "100%"
+    }
+   ]
+  }
+ },
+ "1304": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 '승천하는 용' 발동 시 경칩 스택(최대 4)을 소진, 소진 스택당 승천하는 용 피해 20% 증가",
+     "reason": "conditional-complex"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "비전투 4초 초과 시 봄의 빛 50pt 회복(4초당 1회)",
+     "reason": "utility"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "spectroDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "만물의 정화",
+     "add_pct": 120,
+     "cond": false,
+     "source_param": "120%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 '승천하는 용' 피해 배율 45% 상승 + 봄의 빛 소모 시 배율 증가 효과 추가 45% 상승",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1404": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 돌진의 창 사용 횟수 +1, 파진치 소모 15pt 감소",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 28,
+     "cond": true,
+     "source_param": "28%"
+    },
+    {
+     "kind": "note",
+     "text": "변주 스킬 발동 시 파진치 30pt 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 16,
+     "cond": true,
+     "source_param": "16%"
+    },
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 32,
+     "cond": true,
+     "source_param": "32%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "heavyDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "반주 스킬 극기의 각오 피해 배율 +120% (미등록 스킬)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 3,
+     "cond": true,
+     "source_param": "3%"
+    },
+    {
+     "kind": "note",
+     "text": "명중 시 공격력 3% 스택, 최대 15스택 중첩",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "예리한 기세 스택당 승천하는 청룡·처형 배율 +120% (최대 2스택), 처형 스킬 미등록",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1104": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "사자의 질주 동안 경직 저항력 증가",
+     "reason": "survivability"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "변주 스킬 발동 시 공명 에너지 10pt 회복(20초 쿨)",
+     "reason": "utility"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "glacioDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "extra_hit",
+     "name": "칠성북 추가 응결 피해",
+     "skill_type": "없음",
+     "element": "응결",
+     "mult": 200,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "200%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 100,
+     "cond": true,
+     "source_param": "100%"
+    }
+   ]
+  }
+ },
+ "1211": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 30,
+     "cond": false,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "특정 공격 발동 중 경직 면역 + 전투 진입 시 엔트로피 변이 강화 획득(30초/12초 지속)",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "fusionDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    },
+    {
+     "kind": "res_shred",
+     "value": 1,
+     "cond": true,
+     "source_param": "1%"
+    },
+    {
+     "kind": "skill_mult",
+     "skill_name": "거품의 달콤한 미끼",
+     "add_pct": 40,
+     "cond": true,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "타락한 보이드매터 최대 10스택, 스택당 용융 저항 1% 무시(조화도 파괴 밀집 모드는 조화도 파괴 전용 메커닉)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "막이 내리는 순간",
+     "add_pct": 80,
+     "cond": true,
+     "source_param": "80%"
+    },
+    {
+     "kind": "note",
+     "text": "어둠의 핵심 최대치 도달 시 일반공격 4단/공명스킬 발동이 코어 전부 소모하여 이번 배율 1200% 증가(공명 해방 피해로 적용) — 1회성 버스트라 상시 배율로 계상 불가",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "어둠의 핵심 최대 5개·6초 간격, 보이드매터 입자 4pt, 협주 에너지 30pt, 12초 자원 회복 등 자원/게이지 강화",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "침식 영역 공격 간격 3초로 단축(딜 빈도 증가, ATK% 배율 미제공)",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "막이 내리는 순간",
+     "value": 100,
+     "cond": true,
+     "source_param": "100%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 60,
+     "cond": true,
+     "source_param": "60%"
+    },
+    {
+     "kind": "stat",
+     "key": "fusionDmg",
+     "value": 60,
+     "cond": true,
+     "source_param": "60%"
+    },
+    {
+     "kind": "note",
+     "text": "불꽃 효과 폭발이 메인 목표에게 입히는 피해 배율 200% 상승(명명된 스킬에 귀속 불가한 필드 폭발)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "조화 밀집 모드: 조화 소실 목표에 조화 밀집·간섭 1스택 추가(조화도 파괴 전용)",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1308": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "다음 스킬(헌트리스/거츠 계열 일반·강공격 등)의 피해 배율 50% 상승",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "둘 다 내 거야! 획득 시 부랑아의 직감 3스택(12초) 획득 및 회피 시 스태미나 20pt 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "변주/공명 해방 발동 시 파티 전체 속성 피해 보너스 20% 증가(30초) — 전 속성 버프라 단일 키로 표현 불가",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "「해킹·이탈」 추가 시 파티 전체 피해 15% 부스트(30초) — 파티 전역 일반 피해라 dmg_pct(자기 한정) 키로 표현 불가",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "비전투 상태 시 「나한테 딱이야」 회복 속도 2배",
+     "reason": "utility"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "파티 타임!",
+     "add_pct": 60,
+     "cond": false,
+     "source_param": "60%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 화끈한 불꽃놀이! 피해 배율 60% 상승 — 스킬 목록에 없어 명명 스킬로 귀속 불가",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "파티 타임! 폭발 범위 30% 증가(범위, 피해 아님)",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "변주 스킬 발동 시 120pt 「나한테 딱이야」 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "「둘 다 내 거야!」의 속성 피해 보너스 효과가 추가로 60% 상승(전 속성 버프 증폭이라 단일 키로 표현 불가)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "모든 출처에서 획득하는 일반 공격 피해 보너스 수치가 40% 상승(기존 보너스 증폭이라 flat stat으로 표현 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "강공격 발동 중 추가 전도 피해",
+     "skill_type": "기본 공격",
+     "element": "전도",
+     "mult": 900,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "900%"
+    },
+    {
+     "kind": "note",
+     "text": "강공격 발동 시 20pt 「나한테 딱이야」 회복",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "치명적 피해 시 사망하지 않고 2077pt HP 5회 회복(10분 1회)",
+     "reason": "survivability"
+    },
+    {
+     "kind": "note",
+     "text": "비전투 4초 초과 시 120pt 「광란」 회복(4초마다 1회)",
+     "reason": "utility"
+    }
+   ]
+  }
+ },
+ "1606": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 발동 시 상상력 100pt·협주 에너지 10pt 회복",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "일반 공격 현실에 비추는 환상 상태가 적 공격에 중단되지 않음",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "havocDmg",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "team_stat",
+     "key": "havocDmg",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "note",
+     "text": "일반 공격 발동 시 파티 인멸 피해 보너스 최대 3스택(30초) 중첩",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 60,
+     "cond": true,
+     "source_param": "60%",
+     "reason": "일반 공격 현실에 비추는 환상 배율 60% 상승(명명 불가 스킬이라 basicDmg로 근사)"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "즉흥 공연",
+     "add_pct": 20,
+     "cond": false,
+     "source_param": "20%"
+    },
+    {
+     "kind": "stat",
+     "key": "heavyDmg",
+     "value": 80,
+     "cond": false,
+     "source_param": "80%",
+     "reason": "강공격 배율 80% 상승을 heavyDmg로 근사"
+    }
+   ],
+   "6": [
+    {
+     "kind": "def_ignore",
+     "value": 60,
+     "cond": true,
+     "source_param": "60%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 후 12초 내 일반 공격 현실 구축이 현실에 비추는 환상 3단 피해량의 100%를 강공격 피해로 추가",
+     "reason": "summon-unquantifiable"
+    }
+   ]
+  }
+ },
+ "1511": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20"
+    },
+    {
+     "kind": "note",
+     "text": "격파 시 스푸핑 프로그램 기록·빠른 응답으로 범위 내 목표에 상태효과 추가(디버프 전개)",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "extra_hit",
+     "name": "펄스 교란 추가타",
+     "skill_type": "강공격",
+     "element": "회절",
+     "mult": 450,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "450"
+    },
+    {
+     "kind": "note",
+     "text": "넷러너/올드넷 딥 다이브 발동 시 기본 램 32pt까지 증가",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "멀티 스레드 발동 시 SQL 보유하면 피해 배율 상승효과 270%→560%",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "넷러너",
+     "add_pct": 50,
+     "cond": true,
+     "source_param": "50"
+    },
+    {
+     "kind": "note",
+     "text": "넷러너/올드넷 딥 다이브 오버라이드 크리티컬 피해 +100%",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "스푸핑 프로그램·이동 제한 피해 배율 +65%",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "해킹 대응·데이터 크래시 피해 배율 +65%",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "spectroDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "옵티컬 일루전 최대 2스택 + HP 50% 미만 시 공격력 150% 실드(생존)",
+     "reason": "shield-heal"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "heavyDmg",
+     "value": 40,
+     "cond": true,
+     "source_param": "40"
+    },
+    {
+     "kind": "note",
+     "text": "해킹·이탈/간섭 목표가 루시에게 받는 해킹 피해 +60%",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "데이터 크래시 정체 효과 1.5초까지 연장",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1109": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "환상 프레임/플래시 백 3단 공격 중단 불가",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 모드 서리 시 파티 서리 효과 피해 80% 부스트",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공명 모드 에코 시 파티 에코 어빌리티 피해 보너스 40% 증가",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "추억 종료 후 위 효과 30초 유지",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "내려놓기 피해 배율 100% 상승(내려놓기 미등재 스킬)",
+     "reason": "uncertain"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "note",
+     "text": "망각 발동 시 공격력 증가 최대 3스택(6초)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "플래시 백 3단 시 받는 피해 30% 감소",
+     "reason": "survivability"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "망각 피해 배율 50% 상승(망각 미등재 스킬)",
+     "reason": "uncertain"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "명심 1스택당 내려놓기 피해 200% 증가, 최대 600%(내려놓기 미등재 스킬)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "그리움 소모로 인상 150pt 회복",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1510": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공중 공격 피해 보너스 150% 증가(공중 공격 전용 키 없음)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "「햇살의 비호」 스택 최대치 +1 및 조건부 스택 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "얼음 속의 의미",
+     "add_pct": 60,
+     "cond": true,
+     "source_param": "60%"
+    },
+    {
+     "kind": "note",
+     "text": "조화도 파괴 증폭 10pt마다 피해 부스트 증가, 최대 60%",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 햇무리 참살·공중 공격·이코르 배열 피해 배율 136% 상승(대상 스킬명 미매칭)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "「연이어 쓰여진 한낮」 최대 4스택",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_pct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "새벽빛을 주입하기 전에",
+     "value": 80,
+     "cond": true,
+     "source_param": "80%"
+    },
+    {
+     "kind": "note",
+     "text": "반주 스킬 죽음으로 내린 답 피해 보너스 80% 증가(스킬 목록 미포함)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬 되살아난 금빛의 흐름 배율 50% 상승(대상 스킬명 미매칭)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "되살아난 금빛의 흐름 쿨타임 2초 감소·발동 횟수 +1",
+     "reason": "mechanical"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "조화도 파괴 시 대상이 햇무리 참살·이코르 배열·공중 공격으로부터 받는 피해 30% 증가(대상 스킬명 미매칭)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "skill_dmg",
+     "skill_name": "얼음 속의 의미",
+     "value": 120,
+     "cond": true,
+     "source_param": "120%"
+    },
+    {
+     "kind": "note",
+     "text": "조화 밀집·간섭 대상 타격 시 2스택 증가(스택 최대치 무시)",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1207": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 발동 시 협주 에너지 10pt 회복",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "늑대의 춤에 비롯된 결심·극이 적 공격에 중단되지 않음",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "fusionDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "용융 피해 보너스 최대 2스택 중첩(30초 지속)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "res_shred",
+     "value": 15,
+     "element": "용융",
+     "cond": true,
+     "source_param": "15%"
+    },
+    {
+     "kind": "note",
+     "text": "변주 스킬 '넌 도망칠 수 없어!' 피해 배율 100% 상승(스킬 목록에 없어 미접목)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "파티 용융 캐릭터 3명 미만이어도 추적 사냥 추가 효과 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "공명 회로 '늑대의 춤에 비롯된 결심·극' 피해 배율 125% 상승(스킬 목록에 없어 미접목)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "def_ignore",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬 명중 시 늑대의 불 100pt 회복(20초 쿨)",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "결심이 결심·극으로 대체, 매치포인트 아니어도 발동 가능",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "변주 스킬 발동 후에도 추적 사냥·영광 효과 유지",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1509": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "일반 공격·환각빛의 피해 배율 120% 상승 (변주 공격, 스킬 목록에 없어 skill_mult로 접지 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "페인트 지속시간 100% 증가·6초마다 목표 끌어당김·중단 저항·스펙트럼 회복 (딜 미접지 메커닉)",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "dmg_pct",
+     "value": 25,
+     "cond": false,
+     "source_param": "25%"
+    },
+    {
+     "kind": "note",
+     "text": "반주 스킬 발동 시 다음 등장 캐릭터의 전체 피해 25% 부스트(14초) — 파티 지원버프, 대상이 린네가 아니라 표현 불가",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "일반 공격·시각적 충격/레인보우 스플래시 피해 배율 90% 상승 (변주 공격, 스킬 목록에 없어 접지 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "컬러 프리믹싱 1스택당 색 더하기의 회절 피해 보너스 55% 증가(최대 25스택) — 특정 액션 한정·스택 합산치 미접지",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "컬러 스프레이 폭발",
+     "add_pct": 70,
+     "cond": false,
+     "source_param": "70%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "마음의 색 1스택당 목표가 받는 레인보우 스플래시·시각적 충격 피해 30% 증가(최대 3스택) — 변주 공격 한정, 스킬 목록에 없어 접지 불가",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공중 강공격 피해 30% 감소·흐르는 빛 최대치 120→360·변주 스킬 시 120pt 회복 (생존·자원 메커닉)",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1209": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "간섭 표기 지속시간 150% 연장 및 피해증가 발동조건 완화, 관측 표기와 간섭 표기 동시 부여",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "critDmg",
+     "value": 32,
+     "cond": true,
+     "source_param": "32%"
+    },
+    {
+     "kind": "note",
+     "text": "파티 부조화 수치 누적 효율 20% 추가 증가",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "협주 에너지 25pt·상대 운동 에너지 100pt 회복(25초 쿨)",
+     "reason": "utility"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "강력 공진 필드 치료량 30% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "임계 프로토콜",
+     "add_pct": 40,
+     "cond": false,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "조화 파동 대응·입자 분사 피해 배율 160% 상승(스킬명 파일 미존재)",
+     "reason": "uncertain"
+    }
+   ],
+   "6": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "임계 프로토콜",
+     "value": 400,
+     "cond": false,
+     "source_param": "400%"
+    },
+    {
+     "kind": "note",
+     "text": "비전투 4초 초과 후 0.2초마다 공명 에너지 최대치 10% 회복",
+     "reason": "utility"
+    }
+   ]
+  }
+ },
+ "1502": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "spectroDmg",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "energyRegen",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "공명 해방 발동 시 파티 전체에 공격력 20% 비례 초당 HP 지속 회복(5초)",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 40,
+     "cond": false,
+     "source_param": "40%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "res_shred",
+     "value": 10,
+     "cond": true,
+     "element": "회절",
+     "source_param": "10%"
+    }
+   ]
+  }
+ },
+ "1408": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공중 공격 시 경직 저항력 증가(3초)",
+     "reason": "survivability"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 발동 시 파티 지속 HP 회복 및 저체력 긴급 회복",
+     "reason": "shield-heal"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "aeroDmg",
+     "value": 15,
+     "cond": false,
+     "source_param": "15%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "만물의 허상",
+     "add_pct": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "분열 형상",
+     "add_pct": 30,
+     "cond": false,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "텍스트의 '허무맹랑'은 공명 스킬(분열 형상)을 지칭",
+     "reason": "uncertain"
+    }
+   ]
+  }
+ },
+ "1604": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 30,
+     "cond": false,
+     "source_param": "30%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "다크 서지 진입 시 공명 스킬 쿨타임 리셋",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "다크 서지 중 일반 공격 5단 명중 시 손실 HP 10% 회복",
+     "reason": "survivability"
+    }
+   ],
+   "4": [
+    {
+     "kind": "res_shred",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "다크 서지 중 일반 공격 5단이 추가로 5단 피해의 50%에 해당하는 인멸 피해 1회",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ]
+  }
+ },
+ "1503": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "파티에 HP 지속 회복(공격력 20%의 HP) 부여",
+     "reason": "shield-heal"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "광합성 에너지 1pt와 협주 에너지 10pt 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 해방 치료 효과 보너스 12% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "spectroDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "HP 50% 미만 캐릭터 치료 시 치료 효과 보너스 20% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "6": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "별꽃의 개화",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "명중 시 협동 공격 1회 발동 및 파티 HP 회복(피해량=광합성 표식과 동일)",
+     "reason": "summon-unquantifiable"
+    }
+   ]
+  }
+ },
+ "1206": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "dmg_pct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "입히는 피해 20% 증가가 최대 3스택 중첩(합계 최대 60%)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "폭발",
+     "skill_type": "기본 공격",
+     "element": "용융",
+     "mult": 440,
+     "hits": 2,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "440%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "화염 귀멸의 서곡 피해 배율 42% 상승",
+     "reason": "uncertain"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "실드량 20% 증가 및 파티 HP 회복",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "공중 공격 배율 30% 상승",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "화염 귀멸의 서곡 발동 후 재연 1회로 해당 피해량의 30% 용융 피해(일반 공격 피해로 적용)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1305": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "만물의 법칙 발동 시 추가 회선 매트릭스 6개 생성, 피해 배율=만물의 법칙의 8%(공명 해방 피해로 적용)",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "기본 추론",
+     "value": 63,
+     "cond": true,
+     "source_param": "63%"
+    },
+    {
+     "kind": "note",
+     "text": "해답/하나의 이치/만물의 법칙 공명 스킬 피해도 각 63% 증가, 최대 5회 스택(24초)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "liberationDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "사고의 배열",
+     "add_pct": 100,
+     "cond": false,
+     "source_param": "100%"
+    },
+    {
+     "kind": "note",
+     "text": "반주 스킬 연쇄 법칙 피해 배율 222% 증가(스킬 미등록)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 만물의 법칙 피해 배율 76% 상승(스킬 미등록)+판타지 큐브 강화",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1407": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 35,
+     "cond": true,
+     "source_param": "35%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬 발동 시 3초간 중단 불가",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "aeroDmg",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "일반 공격 4단 시 음률 1칸·하모니의 속주 사용 횟수 1회 추가",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "def_ignore",
+     "value": 45,
+     "cond": true,
+     "source_param": "45%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 40,
+     "cond": false,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 범위 내 캐릭터 받는 피해 30% 감소",
+     "reason": "survivability"
+    }
+   ],
+   "6": [
+    {
+     "kind": "extra_hit",
+     "name": "음률의 독주 추가타",
+     "skill_type": "공명 해방",
+     "element": "기류",
+     "mult": 220,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "220%"
+    }
+   ]
+  }
+ },
+ "1412": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "일반공격·깨달음/회피반격·해독/공명스킬·쿠쿵팡!/공명스킬·태양의정령 도와줘 피해 배율 70% 상승",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "함의 응축 스택 최대치 3으로 변경 + 반주 스킬 발동 시 1스택 추가, 중단 저항",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 회로·나 곧 함의이니 피해 배율 120% 상승 (해당 스킬명이 스킬 목록에 없어 배율 귀속 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "비전투 4초 초과 시 집중 획득(4초당 1회)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "「타고난 재능?」 스택 최대치 4로 변경 및 스택 유지(회로 발동·전환 후에도 유지)",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "바라던 대로!",
+     "add_pct": 30,
+     "cond": false,
+     "source_param": "30%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "dmg_pct",
+     "value": 30,
+     "cond": false,
+     "source_param": "30%"
+    },
+    {
+     "kind": "def_ignore",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "「타고난 재능?」 스택마다 룬·폭발/룬·뒤얽힌사슬/룬·태양의정령/공명회로 피해 15% 부스트(최대 60%)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1306": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%",
+     "reason": "「영광의 왕관」 스택당 크리티컬 피해 +15% (스택 기반)"
+    },
+    {
+     "kind": "note",
+     "text": "「영광의 왕관」 최대 스택 2로 증가",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "변주 스킬 발동 시에도 왕관 1스택 획득, 특정 공명 스킬 중단 불가",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%",
+     "reason": "「영광의 왕관」 스택당 크리티컬(확률) +20% (스택 기반)"
+    },
+    {
+     "kind": "note",
+     "text": "크리티컬 100% 초과 시 초과 1%당 크리티컬 피해 2% 증가(최대 100%) 전환",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "강공격·섬뢰/회피반격, 공명 스킬 습격, 공명 해방 뜨거운 태양 스킬들의 피해 배율 25% 상승 (파일 skills[].name과 매칭 불가)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%",
+     "reason": "변주 스킬 발동 시 파티 공격력 20% 증가, 30초 지속"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "고유 스킬 영예의 가호 실드량 50% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "「영광의 왕관」 최대 스택 4로 증가",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "크리티컬 150% 초과 시 초과 1%당 크리티컬 피해 2% 증가(최대 50%) 전환",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "강공격 회전베기/올려치기 발동 시 왕관 2스택 획득 및 1초마다 2스택 획득",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "분노의 번개",
+     "skill_type": "강공격",
+     "element": "전도",
+     "mult": 100,
+     "hits": 2,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "100%",
+     "reason": "강공격 회전베기/올려치기 중 공격력 100% 전도 피해 2회, 강공격 피해로 적용"
+    }
+   ]
+  }
+ },
+ "1203": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "fusionDmg",
+     "value": 3,
+     "cond": true,
+     "source_param": "3%"
+    },
+    {
+     "kind": "note",
+     "text": "일반 공격 명중 시 용융 피해 보너스 스택(최대 4스택, 6초)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "일반/공명 스킬 발동 시 공명 에너지 10pt 회복(10초당 1회)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "구름이",
+     "add_pct": 40,
+     "cond": false,
+     "source_param": "40%"
+    },
+    {
+     "kind": "skill_mult",
+     "skill_name": "그늘이",
+     "add_pct": 40,
+     "cond": false,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "강공격 구름이·제어불가의 화염 및 강공격 그늘이·폭주하는 화염 배율 40% 상승",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "fusionDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 35,
+     "cond": false,
+     "source_param": "35%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 5,
+     "cond": true,
+     "source_param": "5%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 기간 피해 시 「길 잃은 새끼양」 스택(공격력 5%/스택, 최대 5스택, 10초)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1210": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 300,
+     "cond": true,
+     "source_param": "300%"
+    },
+    {
+     "kind": "note",
+     "text": "차지 중 목표 끌어당김, 100pt 동기화율 획득, 궤적 봉인 상태 관리",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 빛나는 날개의 합주·강림/등장 피해 배율 100% 상승(스킬명 미매칭)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "조화 파동 모드: 추가 조화 파동 피해 배율 20%씩 최대 5스택 상승",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "불꽃 모드: 불꽃 효과 메인 목표 배율 400%/스택당 15% 상승",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 60,
+     "cond": true,
+     "source_param": "60%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 경계를 부순 별빛·종결 피해 배율 100% 상승(스킬명 미매칭)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 경계를 부순 별빛·과부하 피해 배율 40% 상승(스킬명 미매칭)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "경계를 부순 별빛·종결 피해 25% 부스트(특정 스킬, 스킬명 미매칭)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "fusionDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "치명적 피해 시 실드(공격력 360%)·HP/에너지 회복 등 생존 효과",
+     "reason": "shield-heal"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 40,
+     "cond": false,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "조화 파동 모드: 조화 파동 피해 크리티컬 80%·크리티컬 피해 275% 고정",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "불꽃 모드+전투 시: 불꽃 효과 피해 크리티컬 80%·크리티컬 피해 275% 고정",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "궤적 스택 2배·최대치 60스택·합주 중 10스택 추가 등 스택 메커니즘",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1410": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "보름달 영역에서 1초마다 공명 에너지 1pt 추가 회복",
+     "reason": "utility"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬·강공격이 적 공격에 중단되지 않음",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "dmg_pct",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 65,
+     "cond": true,
+     "source_param": "65%"
+    },
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 65,
+     "cond": true,
+     "source_param": "65%"
+    },
+    {
+     "kind": "note",
+     "text": "조건 충족 시 달의 활·일반 공격 다단 공격 리셋 방지",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "강공격 발동 시 파티에 유노 공격력 160%의 실드 부여(30초)",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "강공격·완벽한 결말의 피해 배율 1600% 증가(스킬명이 스킬 목록과 불일치해 skill_mult로 근거화 불가)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "강공격 발동 시 초승달 재진입·영성 100pt 획득·공명 스킬 쿨타임 리셋",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1302": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "자기장의 포효",
+     "value": 70,
+     "cond": true,
+     "source_param": "70%"
+    },
+    {
+     "kind": "note",
+     "text": "천둥의 폭발 피해도 70% 증가하나 해당 스킬은 파일에 미등재",
+     "reason": "uncertain"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "자기장의 폭발 명중 시 심판 게이지 5pt·공명 에너지 5pt 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 회로 심판의 뇌전 피해 배율 55% 상승(스킬 이름이 파일 skills에 미등재라 skill_mult 접지 불가)",
+     "reason": "uncertain"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "파천의 뇌격",
+     "value": 100,
+     "cond": true,
+     "source_param": "100%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "파천의 뇌격 후 30초 내 일반 공격 명중 시 추가 전도 피해(공명 스킬 피해, 최대 4회)이나 419.59% 배율·4회 수치가 params에 없어 접지 불가",
+     "reason": "summon-unquantifiable"
+    }
+   ]
+  }
+ },
+ "1205": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "dmg_pct",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "이화의 충성심",
+     "value": 80,
+     "cond": false,
+     "source_param": "80%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "이화의 화신",
+     "add_pct": 50,
+     "cond": false,
+     "source_param": "50%"
+    },
+    {
+     "kind": "skill_dmg",
+     "skill_name": "이화의 화신",
+     "value": 50,
+     "cond": false,
+     "source_param": "50%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "def_ignore",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    }
+   ]
+  }
+ },
+ "1105": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "note",
+     "text": "궁극·천재의 붓놀림 발동 시 공명 에너지 15pt 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "재두루미 소환 가능 수량 6마리 증가(딜 소환 증가지만 ATK% 배율 없음)",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬 발동 시 공격력 15% 증가, 최대 3스택(풀스택 45%는 params에 없음)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "상상과 현실 중 재두루미 3마리 소환마다 재두루미 피해 140%의 협동 공격(일반 공격 적용); ATK% 아닌 소환 피해 비율",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "천재의 붓놀림 발동 시 흰두루미 소환, 천재의 붓놀림 피해 120% 추가타(일반 공격 적용); ATK% 아닌 스킬 피해 비율",
+     "reason": "summon-unquantifiable"
+    }
+   ]
+  }
+ },
+ "1507": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "spectroDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    },
+    {
+     "kind": "note",
+     "text": "중참·온밤이 적 공격에 중단되지 않음",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "집중 압박·습격 반격 배율 80% 상승(해당 서브스킬명이 skills 목록에 없음)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "화염 형태에서 「불빛」 1pt 소모마다 공명 해방 최후의 순간 마지막 1단 배율 8%씩 상승(최대 1200%)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "공명 해방 재연소 배율 120% 상승(재연소 서브스킬명이 skills 목록에 없음)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "중참·파효/해오름/온밤/섬광 배율 40% 상승, 온밤 명중 시 소모 「불빛」 1pt마다 추가 40%(해당 서브스킬명이 skills 목록에 없음)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "화염 형태 「불빛」 70pt 이하 시 70pt 회복(1회), 진입 8초 내 치명 피해 시 HP 1 유지",
+     "reason": "survivability"
+    }
+   ]
+  }
+ },
+ "1508": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "목표에게 61803pt 고정 인멸 피해(일반 공격 피해로 적용, 피해 보너스 미적용, 대상당 1회)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "목표 HP를 최대 61.80%로 감소",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "res_shred",
+     "value": 10,
+     "cond": false,
+     "source_param": "10%"
+    },
+    {
+     "kind": "dmg_pct",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "톱니바퀴·속공/종결·전기톱 회피반격 피해 배율 120% 상승(스킬명 미매칭)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "톱니바퀴·종결에 제공되는 배율 증가 효과 추가 120% 상승",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공진 수치 감소 효과 50% 증가",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "직접 피해 시 목표에게 암흑 효과 1스택 부여(1초당 최대 1회)",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "초기화",
+     "value": 100,
+     "cond": false,
+     "source_param": "100%"
+    },
+    {
+     "kind": "note",
+     "text": "생명의 현·본류 소모량 50% 감소",
+     "reason": "mechanical"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "치명적 피해 시 의식 잃지 않고 최소 1pt HP 유지",
+     "reason": "survivability"
+    },
+    {
+     "kind": "note",
+     "text": "공허히 얽힌 흔적·종말 목표가 받는 이상 효과 피해 30% 부스트",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "dmg_pct",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    }
+   ]
+  }
+ },
+ "1409": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%",
+     "reason": "플뢰르 드 리스 결의 30/60/90/120pt 도달마다 크리티컬 피해 25% 증가"
+    },
+    {
+     "kind": "note",
+     "text": "플뢰르 드 리스 크리티컬 피해 증가는 최대 4스택(최대 100%)이며 폭풍의 울음을 가르는 칼날 발동 시 제거된다(스택 수 4는 params에 없음)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "전심전력 상태에서 풍식 효과 최대 스택을 유지하고 다음 스킬이 즉시 해당 스택을 부여",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "내 자신을 바친 검",
+     "add_pct": 50,
+     "cond": true,
+     "source_param": "50%",
+     "reason": "일반 공격(기본 공격) 피해 배율 50% 상승"
+    },
+    {
+     "kind": "skill_mult",
+     "skill_name": "지나간 폭풍을 위한 검",
+     "add_pct": 50,
+     "cond": true,
+     "source_param": "50%",
+     "reason": "변주 스킬 피해 배율 50% 상승"
+    },
+    {
+     "kind": "note",
+     "text": "강공격·회피 반격 피해 배율 50% 상승, 공중 공격 피해 배율 200% 상승(명명 스킬이 아니라 미수치화)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방 후 풍식 효과 스택 최대치 +3, 다음 직접 피해 시 3스택 추가·즉시 풍식 피해 1회 발동, 공명 스킬 쿨타임 감소",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 해방·폭풍의 울음을 가르는 칼날 피해 배율 100% 상승(해당 스킬이 스킬 목록에 없어 미수치화)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "플뢰르 드 리스 일반 5단·공중 2단·강화 강공격·바람을 빌려서 돌파가 풍식 효과 2스택 추가",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "aeroDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%",
+     "reason": "파티 전원 전체 속성 피해 보너스 20% 증가(본 캐릭터 기류 기준 프록시 매핑)"
+    },
+    {
+     "kind": "note",
+     "text": "버프는 전 원소 속성 피해 보너스로 파티 전원에게 20초간 적용(단일 원소 키로 완전 매핑 불가)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "치명적 피해 시 사망 방지 및 HP 최대치 20% 실드 획득(10초, 10분당 1회)",
+     "reason": "survivability"
+    },
+    {
+     "kind": "note",
+     "text": "공명 해방·기사의 소원대로 발동 소모 HP가 최대치 25%로 감소",
+     "reason": "utility"
+    }
+   ],
+   "6": [
+    {
+     "kind": "dmg_pct",
+     "value": 40,
+     "cond": false,
+     "source_param": "40%",
+     "reason": "목표가 플뢰르 드 리스로부터 받는 피해 40% 증가(취약 증폭)"
+    },
+    {
+     "kind": "note",
+     "text": "폭풍의 울음 발동 시 풍식 효과 스택 최대치 부여·미제거, 30초 내 최대 스택 목표에 재추가 시 즉시 풍식 피해 1회 발동",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1107": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 12.5,
+     "cond": true,
+     "source_param": "12.5%"
+    },
+    {
+     "kind": "note",
+     "text": "해리 목표 명중 시 영민 30pt 추가 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 해방 피할 수 없는 죽음 피해 배율 126% 상승 (스킬명이 skills[]에 없음)",
+     "reason": "uncertain"
+    }
+   ],
+   "3": [
+    {
+     "kind": "extra_hit",
+     "name": "만화경의 불꽃",
+     "skill_type": "없음",
+     "element": "응결",
+     "mult": 1032.18,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "1032.18%"
+    },
+    {
+     "kind": "skill_mult",
+     "skill_name": "폭력 미학",
+     "add_pct": 93,
+     "cond": false,
+     "source_param": "93%"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬 눈부시는 현란함 피해 배율 93% 상승 (스킬명이 skills[]에 없음)",
+     "reason": "uncertain"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "skillDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "강공격 마지막 길 피해 배율 47% 상승 (스킬명이 skills[]에 없음)",
+     "reason": "uncertain"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "공명 해방 죽음의 징조 피해 배율 186.6% 상승 (스킬명이 skills[]에 없음)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "죽음의 징조 명중 시 넘쳐나는 반짝임(행동 불가) 부여",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1603": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 28,
+     "cond": true,
+     "source_param": "28%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "공명 회로 '일순의 꽃' 피해 배율 120% 상승",
+     "reason": "uncertain"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "아름다운 결말",
+     "add_pct": 50,
+     "cond": false,
+     "source_param": "50%"
+    },
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 58,
+     "cond": true,
+     "source_param": "58%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "basicDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "팔천의 춘추",
+     "add_pct": 303,
+     "cond": false,
+     "source_param": "303%"
+    },
+    {
+     "kind": "note",
+     "text": "반주 스킬 '뒤엉킨 넝쿨' 피해 배율 68% 상승 (스킬 목록에 없어 배율 매핑 불가)",
+     "reason": "uncertain"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "공명 회로 '달콤한 꿈' 피해 배율 상승 효과 추가 150% 상승 및 250%까지 상승",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "'시들지 않는 꽃': 일순의 꽃 피해량의 100%에 해당하는 인멸 피해(일반 공격으로 적용), 25초마다 1회 (ATK% 비율이 아닌 타 스킬 피해량 기반이라 정량화 불가)",
+     "reason": "summon-unquantifiable"
+    }
+   ]
+  }
+ },
+ "1301": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 명중 시 공명 에너지 10pt 회복 (20초마다 1회)",
+     "reason": "utility"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "electroDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "electroDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "전역 수배",
+     "value": 50,
+     "cond": false,
+     "source_param": "50%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "extra_hit",
+     "name": "사냥의 그림자",
+     "skill_type": "공명 해방",
+     "element": "전도",
+     "mult": 100,
+     "hits": 2,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "100.00%"
+    }
+   ]
+  }
+ },
+ "1607": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 민첩·뒤섞인 꿈·공명 회로 감각 흡수 피해 배율 50% 상승",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "공명 스킬 발동 시 몽롱 1pt 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "놀람 피해 배율 245% 상승 및 환몽 상태 진입",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 해방 함몰 피해 배율 370% 상승, 함몰 후 신기루 상태 진입",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "신기루 상태 동안 치료 효과 보너스 25% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "공명 해방 해파리 소환 가능 수량 5 증가",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "6": [
+    {
+     "kind": "def_ignore",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "일반 공격 기이한 환상 피해 배율 80% 증가",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1505": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "별의 영역 강화: 치료·버프 효과 범위 150% 증가, 지속 10초 증가, 통찰 발동 후에도 유지",
+     "reason": "utility"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 해방 발동 시 협주 에너지 20pt 회복(25초마다 1회)",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 발동 시 치료 효과 보너스 70% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "일반 공격 3단·공명 회로 연역의 견인 범위 증가",
+     "reason": "utility"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 500,
+     "cond": true,
+     "source_param": "500%"
+    },
+    {
+     "kind": "note",
+     "text": "변주 스킬 통찰의 피해 배율 42% 상승(스킬명 '통찰'이 파일 skills와 불일치하여 skill_mult로 매핑 불가)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1506": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "샛별의 소원",
+     "add_pct": 90,
+     "cond": true,
+     "source_param": "90%"
+    },
+    {
+     "kind": "note",
+     "text": "사죄 상태에서 공명 해방 샛별의 소원 배율이 255%에서 480%로 상승(절대 배율 교체, add_pct 산출 불가)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "사죄 상태: 반주 스킬로 광학 효과 목표에게 입히는 피해 120% 부스트",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "고해 상태: 묵념의 광학 효과 피해 부스트 추가 120% 증가",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "사죄 상태: 강공격 별빛 배율 91% 상승(별빛은 스킬 목록에 없어 skill_mult 매칭 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "고해 상태: 강공격 별빛 배율 249% 상승(별빛은 스킬 목록에 없어 skill_mult 매칭 불가)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "res_shred",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "spectroDmg",
+     "value": 12,
+     "cond": true,
+     "source_param": "12%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "note",
+     "text": "거울의 고리 소환 시 강공격 별빛 1회 추가 발동(복음 미소모, 배율 미기재로 정량화 불가)",
+     "reason": "summon-unquantifiable"
+    },
+    {
+     "kind": "note",
+     "text": "거울의 고리 정체 효과 2초 증가 및 진입 목표에 정체 부여",
+     "reason": "mechanical"
+    }
+   ]
+  }
+ },
+ "1608": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "죽음의 악장",
+     "add_pct": 80,
+     "cond": true,
+     "source_param": "80%"
+    },
+    {
+     "kind": "skill_mult",
+     "skill_name": "잠꼬대",
+     "add_pct": 80,
+     "cond": true,
+     "source_param": "80%"
+    },
+    {
+     "kind": "note",
+     "text": "비전투 4초 후 흔들리는 음이 2개 미만이면 흔들리는 음·카덴차 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "마지막 작곡 피해 배율 75% 상승 및 잔음의 마지막 작곡 배율 증가 효과 75% 상승",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "마지막 작곡 발동 시 14스택 잔음 획득",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "에코 어빌리티 피해 80% 부스트",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "마지막 작곡 발동 기간 모든 흔들리는 음이 카덴차로 전환",
+     "reason": "mechanical"
+    },
+    {
+     "kind": "note",
+     "text": "강화 공격·카덴차·헤카테 명중 시 적 공격력 20% 감소(15초)",
+     "reason": "survivability"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "havocDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "지휘 상태 진입 시 정체 영역 생성, 지휘 상태 중 받는 피해 30% 감소",
+     "reason": "survivability"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "강화된 공격·헤카테 피해 배율 24% 상승(둘 다 스킬 목록에 없어 미매칭)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "뒤얽힌 세계의 환상 · 헤카테",
+     "skill_type": "없음",
+     "element": "인멸",
+     "mult": 216.42,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "216.42%"
+    },
+    {
+     "kind": "stat",
+     "key": "havocDmg",
+     "value": 60,
+     "cond": true,
+     "source_param": "60%"
+    },
+    {
+     "kind": "note",
+     "text": "지휘 상태·오프필드 시 헤카테와 플로로가 가하는 피해 40% 증가(온필드 60%와 배타)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1108": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "일반/강/공중/회피반격 · 선견력의 피해 배율 120% 상승 (선견력 스탠스명이 파일 스킬명의 부분문자열이 아니라 named skill로 매핑 불가)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "일반 공격 · 선견력 3단 범위 확대·끌어당김, 4/5단 중단 불가, 독심 발동 시 강화 및 서리 효과 추가 (메커닉)",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "일반 공격 · 거합의 피해 배율 125% 상승 (거합 스탠스명이 파일 스킬명의 부분문자열이 아니라 매핑 불가)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "비전투 4초 시 서리 단조/서리의 힘 회복, 찰나의 백옥빛 쿨타임 2회 리셋, 한기 50pt 회복 (자원/쿨 메커닉)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "강공격 · 서리 결정 · 현세의 나 및 강공격 · 서리 나무 · 선견력의 피해 배율 160% 상승 (스탠스명이 파일 스킬명의 부분문자열이 아니라 매핑 불가)",
+     "reason": "uncertain"
+    },
+    {
+     "kind": "note",
+     "text": "눈의 침식 2스택 시 서리 효과 추가할 때마다 추가 이상 효과 피해의 배율 488% 상승 (조건부 이상 효과 딜, kind로 매핑 불가)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "dmg_pct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    },
+    {
+     "kind": "note",
+     "text": "찰나의 백옥빛/낙화 발동 시 HP 최대치 18% 회복",
+     "reason": "survivability"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "서리의 징벌",
+     "add_pct": 80,
+     "cond": false,
+     "source_param": "80%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "끌어온 내 가능성 · 독심/납도의 크리티컬 피해 500% 증가 (해당 공명 해방 스킬에만 한정된 스킬별 크리티컬 피해 → 전역 critDmg kind로 적용 시 과대 계산되어 note 처리)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "눈의 침식 3스택 시 파티 등장 캐릭터 대상 냉해 효과 최종 피해 25% 증가 (냉해 효과 한정 최종딜 증가, 전역 kind로 매핑 불가)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1602": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 5,
+     "cond": true,
+     "source_param": "5%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "dmg_pct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 30,
+     "cond": false,
+     "source_param": "30%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    },
+    {
+     "kind": "note",
+     "text": "단화 60pt 적립·강공격 혼란 소모 메커니즘",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "havocDmg",
+     "value": 15,
+     "cond": false,
+     "source_param": "15%"
+    },
+    {
+     "kind": "stat",
+     "key": "havocDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ]
+  }
+ },
+ "1601": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공방전환 실드량 40% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%",
+     "reason": "공명 해방 불굴의 의지 크리티컬 20% 증가"
+    },
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%",
+     "reason": "공명 해방 불굴의 의지 크리티컬 피해 20% 증가"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "철벽의 실드 지속시간 30초까지 연장",
+     "reason": "shield-heal"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "후발제인 성공 시 HP 25% 회복 및 방어력 50% 증가",
+     "reason": "survivability"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "공방전환",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%",
+     "reason": "공명 회로 공방전환 피해 50% 증가"
+    },
+    {
+     "kind": "note",
+     "text": "공방전환 명중 시 공명 에너지 20pt 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%",
+     "reason": "실드 지속 동안 일반 공격 피해 40% 증가"
+    },
+    {
+     "kind": "stat",
+     "key": "heavyDmg",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%",
+     "reason": "실드 지속 동안 강공격 피해 40% 증가"
+    }
+   ]
+  }
+ },
+ "1504": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "스태미나 60pt 회복",
+     "reason": "survivability"
+    }
+   ],
+   "2": [
+    {
+     "kind": "def_ignore",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "찍찍 특송",
+     "value": 30,
+     "cond": false,
+     "source_param": "30%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 30,
+     "cond": false,
+     "source_param": "30%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "「불빛 에너지」 가득 시 강한 빛의 투사 피해 배율 100% 상승",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ]
+  }
+ },
+ "1204": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "협동 공격 및 공명 해방 강화음 2발 추가 발사(용융 피해)",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "에코 어빌리티 후 공명 에너지 10pt 회복(20초마다)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "공명 해방 드래곤의 광상곡 지속 시간 7초 연장",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "분노의 연주/분노의 후가 명중 시 협동 공격으로 강화음 4발 발사(피해 50% 감소)",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ]
+  }
+ },
+ "1307": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "음양상생 진입 시 공명 에너지 25pt 회복(24초 1회)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "파티원 HP 50% 미만 시 공격력 350+150% HP 회복(24초 1회)",
+     "reason": "shield-heal"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "복링의 치료 효과 보너스 20% 증가",
+     "reason": "survivability"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "오뢰 퇴마진 생성 시 범위 내 목표에 전자 효과 6스택 추가",
+     "reason": "mechanical"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "skillDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    }
+   ]
+  }
+ },
+ "1102": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "강공격 폭발 스태미나 소모 10 감소 및 만년적설 발동 시 경직 저항력 증가",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "dmg_pct",
+     "value": 35,
+     "cond": true,
+     "source_param": "35%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "heavyDmg",
+     "value": 120,
+     "cond": true,
+     "source_param": "120%"
+    },
+    {
+     "kind": "note",
+     "text": "죽음의 눈보라 발동 시 공명 에너지 10 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "공명 회로 얼음 파편의 크리티컬 피해 100% 증가(스킬 한정 크리 피해라 grounding 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "얼음 가시/기둥/산이 폭발 실패해도 사라질 때 즉시 폭발",
+     "reason": "mechanical"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 10,
+     "cond": true,
+     "source_param": "10%"
+    },
+    {
+     "kind": "note",
+     "text": "얼음 기둥/얼음산 폭발 후 파티 공격력 버프 최대 2스택 중첩(20초)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1103": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "응급대비책 발동 시 염원 소모당 공명 에너지 추가 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "glacioDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    },
+    {
+     "kind": "note",
+     "text": "염원 4pt 시 치료 효과 보너스 15% 증가(12초)",
+     "reason": "shield-heal"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "hpPct",
+     "value": 12,
+     "cond": true,
+     "source_param": "12%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "빈틈의 울림 강화: HP 최대치 1.20%의 응결 추가 피해(HP 기반, ATK% 아님)+치료 배율 20% 상승+2단 증가",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "파티원 의식 상실 시 즉시 부활+HP 100% 회복(10분당 1회)",
+     "reason": "survivability"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "glacioDmg",
+     "value": 12,
+     "cond": true,
+     "source_param": "12%"
+    }
+   ]
+  }
+ },
+ "1403": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 순간이동 쿨타임 4초 감소",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    },
+    {
+     "kind": "note",
+     "text": "안개 분신이 계승한 HP 100% 증가",
+     "reason": "summon-unquantifiable"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "basicDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    },
+    {
+     "kind": "note",
+     "text": "안개의 잠복 상태 시 받는 피해 30% 감소",
+     "reason": "survivability"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "aeroDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 8,
+     "cond": true,
+     "source_param": "8%"
+    },
+    {
+     "kind": "stat",
+     "key": "heavyDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    }
+   ]
+  }
+ },
+ "1402": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "stat",
+     "key": "aeroDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "강공격 명중 시 공명 에너지 10pt 회복(20초 쿨)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "skillDmg",
+     "value": 40,
+     "cond": false,
+     "source_param": "40%"
+    },
+    {
+     "kind": "note",
+     "text": "바람 필드 견인 범위 33% 증가",
+     "reason": "utility"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "공중 공격 '날개의 뜻' 피해 95% 증가",
+     "reason": "conditional-complex"
+    }
+   ],
+   "5": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "북풍의 소용돌이",
+     "value": 85,
+     "cond": false,
+     "source_param": "85%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ]
+  }
+ },
+ "1303": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "뇌전의 집행 상태 시 일반/강공격 공격 속도 20% 증가",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "천둥의 울림 발동 시 공명 에너지 15pt 추가 회복",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "뇌전의 쐐기 협동 공격 명중 시 방어력 20% 기반 추가 피해",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "적토중명 발동 시 파티원에게 방어력 200% 실드 10초",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "liberationDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "defPct",
+     "value": 32,
+     "cond": true,
+     "source_param": "32%"
+    }
+   ]
+  }
+ },
+ "1106": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "행운의 징조 발동 시 10% 확률 피해/공격 면역 5초",
+     "reason": "survivability"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "대우·연주·합설이 시의 형상화 피해 증가 효과를 1회 추가 발생",
+     "reason": "conditional-complex"
+    }
+   ],
+   "3": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "상자 속 축복 발동 시 20% 확률로 쿨타임 미진입",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "crit",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 15,
+     "cond": true,
+     "source_param": "15%"
+    },
+    {
+     "kind": "note",
+     "text": "맑은 푸른빛 최대 4스택(스택당 크리 피해 15%)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1202": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 폭격의 천둥소리 발동 시 반드시 크리티컬",
+     "reason": "conditional-complex"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "격파 시 공명 에너지 회복(최대 20pt)",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "뜨거운 불길",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "60발 열압탄 획득 및 투쟁의 마음 쿨타임 즉시 리셋",
+     "reason": "mechanical"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "atkPct",
+     "value": 30,
+     "cond": true,
+     "source_param": "30%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "team_stat",
+     "key": "basicDmg",
+     "value": 25,
+     "cond": true,
+     "source_param": "25%"
+    }
+   ]
+  }
+ },
+ "1110": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "이상 효과 추가/피해 후에도 공격력 증가 효과 발생 가능(수치 미기재)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "note",
+     "text": "그늘을 밝힌 중명조 지속시간 100% 증가 및 일부 공격 중단 불가",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "team_stat",
+     "key": "critDmg",
+     "value": 50,
+     "cond": true,
+     "source_param": "50%",
+     "reason": "이상 효과 추가/암흑 스택 소모 시 발동 캐릭터 크리티컬 피해 50% 증가(30초)"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "협주 에너지 20pt·꽃향기의 편지 350pt 회복(25초당 1회)",
+     "reason": "mechanical"
+    }
+   ],
+   "4": [
+    {
+     "kind": "note",
+     "text": "만물의 윤기·봄날의 생기 치료량 50% 증가",
+     "reason": "shield-heal"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "일반/강공격·비에 젖어들 무렵의 피해 배율 100% 상승(특정 변형 스킬, skills[] 이름과 미매칭)",
+     "reason": "conditional-complex"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "변주 스킬 청량한 옥소리·공명 스킬 깨어난 봄기운 크리티컬 피해 500% 증가(특정 스킬 한정, per-skill critDmg 미지원)",
+     "reason": "conditional-complex"
+    }
+   ]
+  }
+ },
+ "1310": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "note",
+     "text": "기본공격/공명스킬 발동 시 0.5초간 경직 저항력 증가",
+     "reason": "survivability"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "최종 전략 피해 후 목표에 전자 효과 5스택 추가",
+     "reason": "mechanical"
+    }
+   ],
+   "3": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 과부하의 피해 배율 20% 상승(과부하가 skills 목록에 없어 skill_mult 근거화 불가)",
+     "reason": "uncertain"
+    }
+   ],
+   "4": [
+    {
+     "kind": "skill_mult",
+     "skill_name": "최종 전략",
+     "add_pct": 20,
+     "cond": false,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "stat",
+     "key": "critDmg",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "6": [
+    {
+     "kind": "note",
+     "text": "공명 스킬 밀려온 천개의 소리·천둥의 추락 피해 배율 20% 상승(두 스킬이 skills 목록에 없어 근거화 불가)",
+     "reason": "uncertain"
+    }
+   ]
+  }
+ },
+ "1610": {
+  "nodes": {
+   "1": [
+    {
+     "kind": "extra_hit",
+     "name": "현령의 그림자 · 추락 저항",
+     "skill_type": "강공격",
+     "element": "인멸",
+     "mult": 337.98,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "337.98%"
+    },
+    {
+     "kind": "note",
+     "text": "발동 기간 동안 주변 목표 정체(이동 봉쇄) 및 특정 공격 중단 면역",
+     "reason": "mechanical"
+    }
+   ],
+   "2": [
+    {
+     "kind": "note",
+     "text": "강공격/공중/일반/회피반격 특정 파생 공격 피해 100% 증가(단일 스킬·타입으로 매핑 불가)",
+     "reason": "conditional-complex"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "현령의 그림자 · 청아한 구슬소리",
+     "skill_type": "강공격",
+     "element": "인멸",
+     "mult": 337.98,
+     "hits": 1,
+     "always_crit": false,
+     "cond": true,
+     "source_param": "337.98%"
+    }
+   ],
+   "3": [
+    {
+     "kind": "skill_dmg",
+     "skill_name": "만음을 잠재운 깃털",
+     "value": 175,
+     "cond": true,
+     "source_param": "175%"
+    },
+    {
+     "kind": "note",
+     "text": "목표 암흑 효과 스택 최대치 +3(20초) — 암흑 DEF shred 증폭 유도, 수치화 불가",
+     "reason": "conditional-complex"
+    }
+   ],
+   "4": [
+    {
+     "kind": "team_stat",
+     "key": "atkPct",
+     "value": 20,
+     "cond": true,
+     "source_param": "20%"
+    }
+   ],
+   "5": [
+    {
+     "kind": "note",
+     "text": "치명타 피해 시 사망 무효·HP 50% 회복·3초 피해면역(10분 쿨)",
+     "reason": "survivability"
+    }
+   ],
+   "6": [
+    {
+     "kind": "stat",
+     "key": "heavyDmg",
+     "value": 40,
+     "cond": true,
+     "source_param": "40%"
+    },
+    {
+     "kind": "extra_hit",
+     "name": "현령의 그림자 · 고목처럼 고요히",
+     "skill_type": "강공격",
+     "element": "인멸",
+     "mult": 337.98,
+     "hits": 5,
+     "always_crit": true,
+     "cond": true,
+     "source_param": "337.98%"
+    }
+   ]
+  }
+ }
+}

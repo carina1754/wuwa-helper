@@ -35,8 +35,9 @@ const STAT_ROWS: StatKey[] = ["hp", "atk", "def", "crit", "critDmg", "energyRege
 // 팀 공유 버프로 자주 쓰는 스탯을 앞에 노출
 const BUFF_KEYS: StatKey[] = ["atkPct", "atk", "critDmg", "crit", "skillDmg", "basicDmg", "heavyDmg", "liberationDmg", "fusionDmg", "glacioDmg", "electroDmg", "aeroDmg", "spectroDmg", "havocDmg"];
 
-type UiOpts = { enemyLevel: number; enemyRes: number; resShred: number; defIgnore: number; defReduce: number; boost: number; bonusPct: number };
-const DEFAULT_OPTS: UiOpts = { enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, bonusPct: 0 };
+type UiOpts = { enemyLevel: number; enemyRes: number; resShred: number; defIgnore: number; defReduce: number; boost: number; bonusPct: number; fullUptime: boolean };
+type NumericOptKey = Exclude<keyof UiOpts, "fullUptime">;
+const DEFAULT_OPTS: UiOpts = { enemyLevel: 90, enemyRes: 20, resShred: 0, defIgnore: 0, defReduce: 0, boost: 0, bonusPct: 0, fullUptime: true };
 
 export function img(p?: string | null): string | undefined {
   if (!p) return undefined;
@@ -137,7 +138,7 @@ export function TeamBuilder() {
   const choose = (r: CodexResonator | CodexWeapon | CodexEcho) => {
     if (!picker) return;
     const { kind, slot, echoIdx } = picker;
-    if (kind === "resonator") setSlot(slot, (s) => ({ ...s, resonatorId: (r as CodexResonator).id }));
+    if (kind === "resonator") setSlot(slot, (s) => ({ ...s, resonatorId: (r as CodexResonator).id, build: { ...s.build, skillLevels: {} } }));
     else if (kind === "weapon") setBuild(slot, (b) => ({ ...b, weaponId: (r as CodexWeapon).id }));
     else if (kind === "echo" && echoIdx != null && config)
       setBuild(slot, (b) => ({ ...b, echoes: b.echoes.map((e, j) => (j === echoIdx ? echoFromCodex(r as CodexEcho, config) : e)) }));
@@ -147,10 +148,11 @@ export function TeamBuilder() {
   const partyFilled = party.every((s) => s.resonatorId != null);
   const filled = party.filter((s) => s.resonatorId != null).length;
 
-  // 슬롯 → 서버 엔진 입력. 스킬 레벨은 전부 Lv.10(생략 시 서버 기본), 무기 조건부 버프는 미적용(always-on만).
+  // 슬롯 → 서버 엔진 입력. 스킬 레벨은 빌드에서 개별 설정(미설정 스킬은 서버 기본 Lv.10). 풀 업타임 ON이면 조건부 공명 사슬/무기/킷 버프까지 이상적 로테이션 기준으로 반영.
   const slotToMember = (s: Slot): SimMemberIn | null => {
     if (s.resonatorId == null) return null;
     const b = s.build;
+    const skillLevels = b.skillLevels && Object.keys(b.skillLevels).length ? b.skillLevels : undefined;
     return {
       reso_id: String(s.resonatorId),
       level: b.level,
@@ -160,6 +162,9 @@ export function TeamBuilder() {
       echoes: b.echoes
         .filter((e): e is NonNullable<typeof e> => !!e)
         .map((e) => ({ echo_id: String(e.echoId), cost: e.cost, grade: e.grade, level: e.level, main: e.main, subs: e.subs.map((x) => ({ key: x.key, value: x.value })) })),
+      skill_levels: skillLevels,
+      sequence: b.sequence && b.sequence > 0 ? b.sequence : undefined,
+      full_uptime: opts.fullUptime,
     };
   };
 
@@ -193,8 +198,8 @@ export function TeamBuilder() {
     }
   };
 
-  const setOpt = (k: keyof UiOpts, v: number) => setOpts((o) => ({ ...o, [k]: v }));
-  const OPT_FIELDS: { key: keyof UiOpts; label: string }[] = [
+  const setOpt = (k: NumericOptKey, v: number) => setOpts((o) => ({ ...o, [k]: v }));
+  const OPT_FIELDS: { key: NumericOptKey; label: string }[] = [
     { key: "enemyLevel", label: "적 레벨" },
     { key: "enemyRes", label: "적 저항%" },
     { key: "resShred", label: "저항 무시%" },
@@ -339,6 +344,11 @@ export function TeamBuilder() {
               <input type="number" value={shredPct} onChange={(e) => setDefShredPct(Number(e.target.value))} className="w-14 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" />
             </label>
           </div>
+          <label className="mt-2 flex items-center gap-2 rounded bg-[var(--surface-2)] px-2 py-1.5 text-xs">
+            <input type="checkbox" checked={opts.fullUptime} onChange={(e) => setOpts((o) => ({ ...o, fullUptime: e.target.checked }))} className="accent-[var(--accent)]" />
+            <span className="text-[var(--fg)]">풀 업타임</span>
+            <span className="text-[10px] text-[var(--muted)]">이상적 로테이션 기준 조건부 공명 사슬·무기·킷 버프 반영(끄면 상시 발동만)</span>
+          </label>
           {autoDefShred > 0 && defShredPct == null ? (
             <p className="mt-1.5 text-[10px] text-[var(--accent)]">암흑(인멸) 자동 적용 · 적 방어 −{Math.round(autoDefShred * 100)}%</p>
           ) : null}
@@ -372,7 +382,7 @@ export function TeamBuilder() {
         <button type="button" onClick={calculate} disabled={!filled || busy} className="rounded-md bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50">
           {busy ? "계산 중…" : "서버 엔진으로 계산"}
         </button>
-        <span className="text-xs text-[var(--muted)]">공명자 {filled}명 · 스킬 Lv.10 기준</span>
+        <span className="text-xs text-[var(--muted)]">공명자 {filled}명 · 스킬 레벨 개별 설정(기본 Lv.10)</span>
         {error ? <span className="text-xs text-[var(--danger,#e5484d)]">{error}</span> : null}
       </div>
 
@@ -426,6 +436,25 @@ export function TeamBuilder() {
                   </dl>
                 ) : noSkillData(reso) ? (
                   <div className="mt-2 rounded bg-[var(--surface-2)] px-2.5 py-1.5 text-xs leading-relaxed text-[#e0a04d]">⚠ 스킬 배율 데이터가 없어 개인 피해를 계산할 수 없습니다. 방랑자(로버)는 버프·힐 서포터로 활용하세요.</div>
+                ) : null}
+
+                {(m.applied_team_buffs?.length ?? 0) > 0 ? (
+                  <div className="mt-2 border-t border-dashed border-[var(--line)] pt-2">
+                    <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">자동 적용 팀 버프</div>
+                    <div className="mt-1 flex flex-wrap gap-1">
+                      {m.applied_team_buffs!.map((b, j) => (
+                        <span key={j} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] font-medium text-[var(--accent)]">{b}</span>
+                      ))}
+                    </div>
+                  </div>
+                ) : null}
+
+                {(m.team_notes?.length ?? 0) > 0 ? (
+                  <ul className="mt-2 grid gap-0.5 text-[11px] leading-relaxed text-[var(--muted)]">
+                    {m.team_notes!.map((t, j) => (
+                      <li key={j}>· {t}</li>
+                    ))}
+                  </ul>
                 ) : null}
 
                 {((m.anomaly_dmg ?? 0) > 0 || (m.anomaly_def_down ?? 0) > 0 || (m.tune_break_dmg ?? 0) > 0) ? (
@@ -585,6 +614,71 @@ export function BuildEditor({
         <span className="flex justify-between text-xs text-[var(--muted)]"><span>캐릭터 레벨</span><span className="text-[var(--fg)]">Lv.{build.level}</span></span>
         <input type="range" min={1} max={90} value={build.level} onChange={(e) => onChange((b) => ({ ...b, level: Number(e.target.value) }))} className="w-full accent-[var(--accent)]" />
       </label>
+
+      {/* skill levels — 스킬별 배율 레벨(이전엔 서버에서 Lv.10 고정). 피해가 있는 레벨업 스킬만 노출 */}
+      {(() => {
+        const levelable = reso.skills
+          .map((s, i) => ({ s, i, max: Math.max(1, ...(s.damage ?? []).map((d) => d.rates.length)) }))
+          .filter((x) => x.max > 1);
+        if (!levelable.length) return null;
+        const lvOf = (i: number, max: number) => build.skillLevels?.[i] ?? Math.min(10, max);
+        const setLv = (i: number, v: number) => onChange((b) => ({ ...b, skillLevels: { ...(b.skillLevels ?? {}), [i]: v } }));
+        return (
+          <div>
+            <div className="mb-2 flex items-center justify-between text-sm">
+              <span className="font-semibold text-[var(--fg)]">스킬 레벨</span>
+              <button type="button" onClick={() => onChange((b) => ({ ...b, skillLevels: {} }))} className="text-[11px] text-[var(--accent)] hover:underline">전체 Lv.10</button>
+            </div>
+            <div className="grid gap-1.5">
+              {levelable.map(({ s, i, max }) => (
+                <label key={i} className="flex items-center gap-2 text-xs">
+                  <span className="w-20 shrink-0 truncate text-[var(--muted)]" title={s.SkillName ?? ""}>{s.SkillType || s.SkillName || `스킬 ${i + 1}`}</span>
+                  <input type="range" min={1} max={Math.min(10, max)} value={lvOf(i, max)} onChange={(e) => setLv(i, Number(e.target.value))} className="min-w-0 flex-1 accent-[var(--accent)]" />
+                  <span className="w-10 shrink-0 text-right font-medium text-[var(--fg)]">Lv.{lvOf(i, max)}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* 공명 사슬 (S0-S6) — 보유 시퀀스 단계. 서버가 S1..seq 노드 효과를 딜에 반영(datamine 파라미터 실측 기반, 메커니즘/조건부는 미반영 표기) */}
+      {(() => {
+        const chain = reso.resonance_chain ?? [];
+        if (!chain.length) return null;
+        const seq = build.sequence ?? 0;
+        const setSeq = (v: number) => onChange((b) => ({ ...b, sequence: v }));
+        return (
+          <div>
+            <div className="mb-2 flex items-center justify-between text-sm">
+              <span className="font-semibold text-[var(--fg)]">공명 사슬</span>
+              <span className="text-[11px] text-[var(--muted)]">S{seq} · 딜 반영</span>
+            </div>
+            <div className="flex gap-1">
+              {[0, 1, 2, 3, 4, 5, 6].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setSeq(n)}
+                  className={`h-7 flex-1 rounded text-xs font-semibold transition-colors ${seq === n ? "bg-[var(--accent)] text-white" : "bg-[var(--surface-2)] text-[var(--muted)] hover:text-[var(--fg)]"}`}
+                >
+                  S{n}
+                </button>
+              ))}
+            </div>
+            {seq > 0 ? (
+              <ol className="mt-2 grid gap-1">
+                {chain.slice(0, seq).map((node, i) => (
+                  <li key={i} className="text-[11px] leading-5 text-[var(--fg-soft)]">
+                    <span className="mr-1 font-semibold text-[var(--accent)]">S{i + 1}</span>
+                    {node.NodeName || node.AttributesDescription || ""}
+                  </li>
+                ))}
+              </ol>
+            ) : null}
+          </div>
+        );
+      })()}
 
       {/* weapon */}
       <div className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] p-3">

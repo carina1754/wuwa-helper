@@ -1,7 +1,7 @@
 // WuWa build math for the party builder: character (encore level curves) +
 // weapon (encore curves) + 5 echoes (standard WuWa main/sub-stat tables).
 // Echo main-stat / sub-stat values are game constants (not in encore), encoded
-// here to match what wuthering.gg's builder shows.
+// here as the canonical WuWa main/sub-stat reference values.
 import type { CodexResonator, CodexWeapon, CodexEcho } from "./types";
 
 export type StatKey =
@@ -65,10 +65,14 @@ export type ResonatorBuild = {
   weaponLevel: number; // 1-90
   weaponRank: number; // 1-5
   echoes: (EchoBuild | null)[]; // length 5
+  // skills[] 배열 인덱스 -> 스킬 레벨(1-10). 미지정 스킬은 서버에서 Lv.10로 계산.
+  skillLevels?: Record<number, number>;
+  // 공명 사슬(S0-S6). 보유 시퀀스 단계 수 — 서버가 S1..sequence 노드 효과를 딜에 반영.
+  sequence?: number;
 };
 
 export function emptyBuild(): ResonatorBuild {
-  return { level: 90, weaponId: null, weaponLevel: 90, weaponRank: 1, echoes: [null, null, null, null, null] };
+  return { level: 90, weaponId: null, weaponLevel: 90, weaponRank: 1, echoes: [null, null, null, null, null], skillLevels: {}, sequence: 0 };
 }
 
 const curveAt = (curve: { level: number; value: number }[] | undefined, level: number): number => {
