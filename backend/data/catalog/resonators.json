@@ -3909,7 +3909,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1405,
@@ -6296,7 +6300,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1411,
@@ -9161,7 +9169,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1304,
@@ -12073,7 +12085,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1404,
@@ -14788,7 +14804,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1104,
@@ -17265,7 +17285,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "glacioDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1211,
@@ -20132,7 +20156,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1308,
@@ -23464,7 +23492,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1606,
@@ -25881,7 +25913,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1511,
@@ -29270,7 +29306,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1109,
@@ -31897,7 +31937,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1510,
@@ -34869,7 +34913,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1207,
@@ -37721,7 +37769,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1509,
@@ -40438,7 +40490,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1209,
@@ -43035,7 +43091,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "healing": 12.0,
+      "defPct": 15.2
+    }
   },
   {
     "id": 1502,
@@ -45344,7 +45404,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "spectroDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1408,
@@ -47941,7 +48005,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "healing": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1604,
@@ -50508,7 +50576,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "atkPct": 12.0,
+      "havocDmg": 12.0
+    }
   },
   {
     "id": 1503,
@@ -52925,7 +52997,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "healing": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1206,
@@ -55987,7 +56063,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1305,
@@ -58674,7 +58754,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1407,
@@ -61151,7 +61235,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1412,
@@ -64040,7 +64128,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1306,
@@ -66979,7 +67071,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1203,
@@ -69606,7 +69702,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "fusionDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1210,
@@ -72893,7 +72993,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1410,
@@ -75625,7 +75729,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1302,
@@ -78147,7 +78255,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1205,
@@ -80789,7 +80901,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1105,
@@ -83236,7 +83352,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1507,
@@ -86425,7 +86545,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1508,
@@ -89967,7 +90091,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1409,
@@ -93674,7 +93802,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "hpPct": 12.0
+    }
   },
   {
     "id": 1107,
@@ -96629,7 +96761,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1603,
@@ -99473,7 +99609,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1301,
@@ -102580,7 +102720,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "atkPct": 12.0,
+      "critDmg": 16.0
+    }
   },
   {
     "id": 1607,
@@ -105513,7 +105657,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1505,
@@ -107870,7 +108018,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "healing": 12.0,
+      "hpPct": 12.0
+    }
   },
   {
     "id": 1506,
@@ -110285,7 +110437,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "critDmg": 16.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1608,
@@ -113272,7 +113428,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1108,
@@ -116649,7 +116809,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1602,
@@ -119156,7 +119320,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "havocDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1601,
@@ -121483,7 +121651,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "havocDmg": 12.0,
+      "defPct": 15.2
+    }
   },
   {
     "id": 1504,
@@ -123975,7 +124147,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1204,
@@ -126302,7 +126478,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "fusionDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1307,
@@ -128626,7 +128806,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "healing": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1102,
@@ -130908,7 +131092,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "glacioDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1103,
@@ -133205,7 +133393,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "healing": 12.0,
+      "hpPct": 12.0
+    }
   },
   {
     "id": 1403,
@@ -136057,7 +136249,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "aeroDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1402,
@@ -138567,7 +138763,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "atkPct": 12.0,
+      "aeroDmg": 12.0
+    }
   },
   {
     "id": 1303,
@@ -141269,7 +141469,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "support",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "electroDmg": 12.0,
+      "defPct": 15.2
+    }
   },
   {
     "id": 1106,
@@ -143836,7 +144040,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "healer",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1202,
@@ -146163,7 +146371,11 @@
     "max_level": 90,
     "source": "datamine-3.5.0",
     "role": "main_dps",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "forte_bonus": {
+      "fusionDmg": 12.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1110,
@@ -148985,7 +149197,11 @@
       {
         "NodeName": "<color=Highlight>변주 스킬 · 청량한 옥소리</color>와 <color=Highlight>공명 스킬 · 깨어난 봄기운</color>의 크리티컬 피해가 {0} 증가된다"
       }
-    ]
+    ],
+    "forte_bonus": {
+      "healing": 12.0,
+      "hpPct": 12.0
+    }
   },
   {
     "id": 1310,
@@ -152332,7 +152548,11 @@
       {
         "NodeName": "<color=Highlight>밀려온 천개의 소리</color>의 배율이 {0} 상승된다"
       }
-    ]
+    ],
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   },
   {
     "id": 1610,
@@ -155176,6 +155396,10 @@
       {
         "NodeName": "양양 · 현령이 목표에게 <color=Highlight>「<te href=850012>암흑 효과</te>」</color> 추가 시, <color=Highlight>만음이 흐르고</color>를 획득하고, {0}초간 지속된다. <color=Highlight>만음이 흐르고</color> 지속 기간 동안, 목표가 양양 · 현령으로부터 받는 강공격 피해가 {1} 증가된다.\n<size=10></size>\n<color=Highlight>공명 스킬 · 검술의 흐름 · 푸름</color>, <color=Highlight>공명 스킬 · 검술의 흐름 · 깃털</color> 발동 시, <color=Highlight>고목처럼 고요히</color>를 획득하고, {2}초간 지속된다. <color=Highlight>고목처럼 고요히</color> 지속 기간 동안, 양양 · 현령이 파티 내 등장 캐릭터일 경우, 근처 파티 내 캐릭터가 목표에게 <color=Highlight>「<te href=850010>서리 효과</te>」</color>, <color=Highlight>「<te href=850011>불꽃 효과</te>」</color>, <color=Highlight>「<te href=850013>전자 효과</te>」</color>, <color=Highlight>「<te href=850009>풍식 효과</te>」</color>, <color=Highlight>「<te href=850008>광학 효과</te>」</color>, <color=Highlight>「<te href=850012>암흑 효과</te>」</color>추가 시, 양양 · 현령이 <color=Highlight>현령의 그림자 · 고목처럼 고요히</color>를 소환하여 목표를 공격하고, 양양 · 현령 공격력의 {3}에 해당하는 <color=Dark>인멸 피해</color>를 입힌다. <color=Highlight>현령의 그림자 · 고목처럼 고요히</color>의 피해는 <color=Highlight>강공격 피해</color>로 적용되며, 반드시 크리티컬이 발생한다.\n<size=10></size>\n<color=Highlight>현령의 그림자 · 고목처럼 고요히</color> 소환 간격은 {4}초이며, {5}회 소환 후 <color=Highlight>고목처럼 고요히</color>가 제거된다. <color=Highlight>고목처럼 고요히</color>의 쿨타임은 {6}초이다"
       }
-    ]
+    ],
+    "forte_bonus": {
+      "crit": 8.0,
+      "atkPct": 12.0
+    }
   }
 ]

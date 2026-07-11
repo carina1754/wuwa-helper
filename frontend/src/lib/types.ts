@@ -262,6 +262,7 @@ export interface CodexResonator {
   resonance_chain: CodexResonanceNode[];
   stats: Record<string, number>;
   stat_curves?: Record<string, { level: number; value: number }[]> | null;
+  forte_bonus?: Record<string, number> | null; // 포르테(스킬트리) 고정 스탯 보너스
   max_level?: number | null;
   introduction?: string | null;
 }

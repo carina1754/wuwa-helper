@@ -185,6 +185,11 @@ export function computeStats(
   }
   for (const s of extra) addStat(s.key, s.value); // sonata sets + weapon passive buffs (from caller)
 
+  // 포르테(스킬트리) 고정 스탯 보너스 — 인게임 패널에 항상 반영되는 값(예: +공격력%·+크리 피해·+속성 피해).
+  if (reso.forte_bonus) {
+    for (const [key, value] of Object.entries(reso.forte_bonus)) addStat(key as StatKey, value);
+  }
+
   out.hp = (baseHp) * (1 + pct.hpPct / 100) + flat.hp;
   out.atk = (baseAtk + weaponAtk) * (1 + pct.atkPct / 100) + flat.atk;
   out.def = (baseDef) * (1 + pct.defPct / 100) + flat.def;

@@ -185,6 +185,12 @@ def compute_stats(
     for key, val in extra:  # sonata sets + weapon passive buffs (from caller)
         add_stat(key, val)
 
+    # 포르테(스킬트리) 고정 스탯 보너스 — 인게임 패널에 항상 반영되는 값(예: +공격력%·+크리 피해·+속성 피해).
+    forte = reso.get("forte_bonus") if isinstance(reso, Mapping) else getattr(reso, "forte_bonus", None)
+    if forte:
+        for key, val in forte.items():
+            add_stat(str(key), val)
+
     out["hp"] = base_hp * (1 + pct["hpPct"] / 100) + flat["hp"]
     out["atk"] = (base_atk + weapon_atk) * (1 + pct["atkPct"] / 100) + flat["atk"]
     out["def"] = base_def * (1 + pct["defPct"] / 100) + flat["def"]
