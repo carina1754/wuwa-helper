@@ -314,6 +314,75 @@ def _enforce_mentioned_resonators(
     return resp
 
 
+# --- 역할 지정: 사용자가 '메인 딜러'로 쓸 공명자를 직접 지정 -------------------------
+# 고정 role 태그(예: 페비=support)를 무시하고 사용자의 의도를 우선한다. UI는 메시지에
+# "메인딜 지정: <이름>" 마커를 넣고, 자유 텍스트는 "<이름> 메인딜/캐리" 패턴을 가볍게 감지한다.
+_PIN_MARKER = "메인딜 지정"
+_PIN_KEYWORDS = ("메인딜", "메인 딜", "메인딜러", "메인 딜러", "메인 캐리", "메인으로", "캐리로", "main dps")
+
+
+def _resolve_pinned_main_dps(text: str, catalog: dict[str, dict[str, dict]]) -> str | None:
+    t = _nfc(text)
+    if not t:
+        return None
+    pairs = sorted(_resonator_name_pairs(catalog), key=lambda x: -len(x[0]))
+    # 1) 명시 마커 "메인딜 지정: <이름>"
+    if _PIN_MARKER in t:
+        after = t.split(_PIN_MARKER, 1)[1]
+        for name, rid in pairs:
+            if name and name in after:
+                return rid
+    # 2) 자유 텍스트: 핀 키워드가 있으면 키워드 직전에 등장한 공명자를 채택
+    low = t.lower()
+    kw_pos = min((low.find(k) for k in _PIN_KEYWORDS if k in low), default=-1)
+    if kw_pos < 0:
+        return None
+    positions = [(t.find(name), rid) for name, rid in pairs if name and name in t]
+    positions = [(p, rid) for p, rid in positions if p != -1]
+    if not positions:
+        return None
+    before = [(p, rid) for p, rid in positions if p <= kw_pos]
+    if before:
+        return max(before, key=lambda x: x[0])[1]
+    return min(positions, key=lambda x: x[0])[1]
+
+
+def _pinned_constraint_block(pinned: str, catalog: dict[str, dict[str, dict]]) -> str:
+    r = catalog["resonators"].get(pinned, {})
+    nm = r.get("name_ko", pinned)
+    base_role = r.get("role")
+    return (
+        "[중요 · 사용자가 지정한 메인 딜러]\n"
+        f"사용자는 이 파티의 메인 딜러(main_dps)로 {nm}(id {pinned})를 지정했다. "
+        f"{nm}의 기본 역할 태그가 '{base_role}'이더라도 이 파티에서는 반드시 {nm}를 main_dps로 배치하고 "
+        "그에 맞는 무기·에코·추옵으로 빌드하라. 다른 공명자를 메인 딜러로 세우지 마라."
+    )
+
+
+def _enforce_pinned_main_dps(
+    resp: AiChatResponse, pinned: str, catalog: dict[str, dict[str, dict]]
+) -> AiChatResponse:
+    """후검증: 지정된 공명자가 팀에 있으면 role=main_dps로 강제하고, 다른 main_dps는 sub_dps로 강등."""
+    rec = resp.recommendation
+    if rec is None or not pinned:
+        return resp
+    nm = catalog["resonators"].get(pinned, {}).get("name_ko", pinned)
+    team_ids = [p.resonator_id for p in rec.team]
+    if pinned not in team_ids:
+        return resp
+    changed = False
+    for pick in rec.team:
+        if pick.resonator_id == pinned and pick.role != "main_dps":
+            pick.role = "main_dps"
+            changed = True
+        elif pick.resonator_id != pinned and pick.role == "main_dps":
+            pick.role = "sub_dps"
+            changed = True
+    if changed:
+        resp.reply = (resp.reply or "") + f"\n\n(참고: 지정하신 {nm}를 메인 딜러로 맞췄어요.)"
+    return resp
+
+
 def chat(request: AiChatRequest) -> AiChatResponse:
     base_url = os.getenv("LLM_BASE_URL")
     if not base_url:
@@ -323,12 +392,15 @@ def chat(request: AiChatRequest) -> AiChatResponse:
     index = build_catalog_index(catalog)
     system = build_system_prompt(request.profile, index)
 
-    # 유사 이름(예: 치사/치샤) 혼동 방지: 마지막 사용자 메시지에서 명시한 공명자를 결정적으로 해석해
-    # 프롬프트에 강제 제약으로 주입하고, 응답 후 유사-이름 오선택을 교정한다.
+    # 유사 이름(예: 치사/치샤) 혼동 방지 + 역할 지정: 마지막 사용자 메시지를 결정적으로 해석해
+    # 프롬프트에 강제 제약으로 주입하고, 응답 후 오선택을 교정한다.
     last_user = next((m.content for m in reversed(request.messages) if m.role == "user"), "")
     mentioned = _resolve_mentioned_resonators(last_user, catalog)
     if mentioned:
         system = system + "\n" + _mentioned_constraint_block(mentioned, catalog)
+    pinned = _resolve_pinned_main_dps(last_user, catalog)
+    if pinned:
+        system = system + "\n" + _pinned_constraint_block(pinned, catalog)
 
     client = OpenAI(base_url=base_url, api_key=os.getenv("LLM_API_KEY", "sk-local"))
     model = os.getenv("LLM_MODEL", "wuwa-vlm")
@@ -347,7 +419,13 @@ def chat(request: AiChatRequest) -> AiChatResponse:
         messages=messages,
         extra_body=extra_body,
     )
-    return _parse_reply(response.choices[0].message.content or "", catalog)
+    resp = _parse_reply(response.choices[0].message.content or "", catalog)
+    # 후검증(안전망): 유사 이름 오선택 교정 → 지정 메인 딜러 역할 강제.
+    if mentioned:
+        resp = _enforce_mentioned_resonators(resp, mentioned, catalog)
+    if pinned:
+        resp = _enforce_pinned_main_dps(resp, pinned, catalog)
+    return resp
 
 
 def _parse_reply(raw: str, catalog: dict[str, dict[str, dict]]) -> AiChatResponse:

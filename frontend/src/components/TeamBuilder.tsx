@@ -67,6 +67,7 @@ export function TeamBuilder() {
   const [picker, setPicker] = useState<null | { kind: "resonator" | "weapon" | "echo"; slot: number; echoIdx?: number }>(null);
   const [aiBusy, setAiBusy] = useState(false);
   const [aiStatus, setAiStatus] = useState("");
+  const [mainDpsId, setMainDpsId] = useState<number | null>(null); // 사용자가 지정한 메인 딜러(역할 태그 우선)
   const { data: session } = useSession();
   const userId = session?.user?.email ?? null;
 
@@ -243,9 +244,14 @@ export function TeamBuilder() {
     setAiBusy(true);
     setAiStatus("AI가 파티를 분석하는 중… (최대 30초)");
     const { names, text } = describeParty();
+    const mainName = mainDpsId != null ? resos.find((r) => r.id === mainDpsId)?.name ?? null : null;
+    const pinLine = mainName
+      ? `\n\n메인딜 지정: ${mainName} (기본 역할 태그와 무관하게 이 공명자를 main_dps로 평가·빌드해줘)`
+      : "";
     const firstMessage =
       "파티 빌딩에서 직접 구성한 파티입니다. 아래 구성을 평가하고, 각 캐릭터의 역할·무기·에코(소나타)·추천 추옵(최대 5개)과 파티 업그레이드 순서를 추천해줘. 정보가 충분하니 최종 추천으로 확정(is_final)해줘.\n\n[선택한 구성]\n" +
-      text;
+      text +
+      pinLine;
     const profile: AiProfile = {
       owned_characters: names,
       desired_characters: names,
@@ -513,6 +519,26 @@ export function TeamBuilder() {
             </button>
           )}
         </div>
+        {partyFilled ? (
+          <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+            <span className="text-[var(--muted)]">메인 딜러 지정</span>
+            <select
+              value={mainDpsId ?? ""}
+              onChange={(e) => setMainDpsId(e.target.value ? Number(e.target.value) : null)}
+              className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] px-2 py-1 text-[var(--fg)]"
+            >
+              <option value="">자동 (역할 태그 기준)</option>
+              {party.map((s) =>
+                s.resonatorId != null ? (
+                  <option key={s.resonatorId} value={s.resonatorId}>
+                    {resoById.get(s.resonatorId)?.name ?? s.resonatorId}
+                  </option>
+                ) : null,
+              )}
+            </select>
+            <span className="text-[var(--faint)]">지정하면 역할 태그와 무관하게 그 캐릭터를 메인딜로 평가해요</span>
+          </div>
+        ) : null}
         {aiStatus ? <p className="mt-2 text-xs text-[var(--fg-soft)]">{aiStatus}</p> : null}
       </div>
 
