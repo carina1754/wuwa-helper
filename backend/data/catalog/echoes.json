@@ -5851,5 +5851,474 @@
     "icon": "/catalog/image/echoes/60200006",
     "source": "encore.moe",
     "sim_source": "datamine-3.5.0"
+  },
+  {
+    "id": 60002022,
+    "name_ko": "분해된 전사",
+    "name_en": "Smiter",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 분해된 전사를 소환한 후, 적에게 빠르게 연속 펀치를 날려 7단 19.26%의 회절 피해를 입힌다. 이어 어퍼컷을 날려 57.78%의 회절 피해를 입힌다.<br>스킬 쿨타임: 15초",
+      "SkillCD": 15
+    },
+    "icon": "/catalog/image/echoes/60002022",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002032,
+    "name_ko": "자정후",
+    "name_en": "Porcelain Picket",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 자정후를 소환한 후, 전방의 적에게 참격을 가하여 2단 19.44%의 기류 피해를 입힌다. 이어 회전하며 돌진하여 경로 위의 적에게 7단 12.96%의 기류 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002032",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002042,
+    "name_ko": "석정후",
+    "name_en": "Stone Picket",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 석정후를 소환한 후, 적에게 129.60%의 기류 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002042",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002052,
+    "name_ko": "금정후",
+    "name_en": "Aureate Picket",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "악을 씻어내는 마음"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 금정후로 변신한 후, 제자리에서 HP 최대치의 0.55%에 해당하는 HP를 13회 회복하고 추가 24pt의 HP를 회복한다. 이어 적에게 강타를 가하여 153.90%의 기류 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002052",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002062,
+    "name_ko": "심월 인형 · 희(喜)",
+    "name_en": "Kernel Puppet: Joy",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 심월 인형 · 희(喜)를 소환한 후, 적에게 129.60%의 물리 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002062",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002072,
+    "name_ko": "심월 인형 · 노(怒)",
+    "name_en": "Kernel Puppet: Anger",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "악을 씻어내는 마음"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 심월 인형 · 노(怒)를 소환한 후, 적에게 129.60%의 용융 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002072",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002082,
+    "name_ko": "심월 인형 · 우(憂)",
+    "name_en": "Kernel Puppet: Worry",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "악을 씻어내는 마음"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 심월 인형 · 우(憂)를 소환한 후, 적에게 2단 64.80%의 응결 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002082",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002092,
+    "name_ko": "심월 인형 · 사(思)",
+    "name_en": "Kernel Puppet: Reflection",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "악을 씻어내는 마음"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 심월 인형 · 사(思)를 소환해 적에게 2단 64.80%의 전도 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002092",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002102,
+    "name_ko": "심월 인형 · 비(悲)",
+    "name_en": "Kernel Puppet: Grief",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 심월 인형 · 비(悲)를 소환한 후, 적에게 129.60%의 회절 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002102",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002112,
+    "name_ko": "심월 인형 · 공(恐)",
+    "name_en": "Kernel Puppet: Fright",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 심월 인형 · 공(恐)을 소환한 후, 적에게 1단 51.84%의 인멸 피해와 1단 77.76%의 인멸 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002112",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002122,
+    "name_ko": "안개 수존 · 몸",
+    "name_en": "Fog Lionarch: Body",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 안개 수존 · 몸을 소환한 후, 적에게 내려쳐 192.60%의 용융 피해를 입힌다.<br>스킬 쿨타임: 15초",
+      "SkillCD": 15
+    },
+    "icon": "/catalog/image/echoes/60002122",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002132,
+    "name_ko": "안개 수존 · 머리",
+    "name_en": "Fog Lionarch: Head",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 안개 수존 · 머리를 소환한 후, 적에게 날아가 129.60%의 용융 피해를 입힌다.<br>스킬 쿨타임: 8초",
+      "SkillCD": 8
+    },
+    "icon": "/catalog/image/echoes/60002132",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002142,
+    "name_ko": "불씨의 사냥꾼",
+    "name_en": "Smolder",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 203,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 불씨의 사냥꾼을 소환한 후, 불덩이를 던져 목표 적에게 192.60%의 용융 피해를 입힌다. 불덩이가 지면에 명중하면 폭발하여 범위 내의 적에게 192.60%의 용융 피해를 입힌다.<br>스킬 쿨타임: 15초",
+      "SkillCD": 15
+    },
+    "icon": "/catalog/image/echoes/60002142",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002152,
+    "name_ko": "안개 수존",
+    "name_en": "Fog Lionarch",
+    "rarity": 1,
+    "cost": 3,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래",
+      "악을 씻어내는 마음",
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 202,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 안개 수존을 소환한 후, 뜨거운 화염을 뿜어 적에게 7단 33.93%의 용융 피해를 입힌다.<br>스킬 쿨타임: 20초",
+      "SkillCD": 20
+    },
+    "icon": "/catalog/image/echoes/60002152",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002162,
+    "name_ko": "봉정계유",
+    "name_en": "Forbidden Bastion",
+    "rarity": 1,
+    "cost": 3,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래",
+      "악을 씻어내는 마음",
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 202,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 봉정계유를 소환한 후, 적에게 강타를 가하여 237.60%의 응결 피해를 입힌다.<br>메인 슬롯에 해당 에코 어빌리티를 장착 시, 자신의 치료 효과 보너스가 10.00% 증가된다.<br>스킬 쿨타임: 20초",
+      "SkillCD": 20
+    },
+    "icon": "/catalog/image/echoes/60002162",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002172,
+    "name_ko": "만와뢰 · 잔해",
+    "name_en": "Myriad Snare: Rustfire Chassis",
+    "rarity": 2,
+    "cost": 4,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "악을 씻어내는 마음",
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 201,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 만와뢰 · 잔해를 소환한 후, 우선 적에게 HP 최대치의 10.20%에 해당하는 용융 피해를 입히고, 해당 기간 동안 경로상의 적을 최대 19회까지 연속으로 짓밟으며, 1회마다 HP 최대치의 0.37%에 해당하는 용융 피해를 입힌다.<br>메인 슬롯에 해당 에코 어빌리티를 장착 시, 자신의 용융 피해 보너스가 12.00% 증가되고, 강공격 피해 보너스가 12.00% 증가된다.<br>스킬 쿨타임: 20초",
+      "SkillCD": 20
+    },
+    "icon": "/catalog/image/echoes/60002172",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60002182,
+    "name_ko": "천괴중루",
+    "name_en": "Thousand-Puppet Pavilion",
+    "rarity": 3,
+    "cost": 4,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 201,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 주변 적에게 109.44%의 인멸 피해를 입히고, 4자루의 「수많은 기억 속 검의 소리」를 소환하며 15초간 지속된다.<br>「수많은 기억 속 검의 소리」가 존재하는 기간 동안, 자신이 목표에게 「암흑 효과」 추가 시, 「수많은 기억 속 검의 소리」 1자루를 소모하여 목표에게 41.04%의 인멸 피해를 1회 입히며, 1초마다 1회 발생할 수 있다.<br>메인 슬롯에 해당 에코 어빌리티를 장착 시, 자신의 인멸 피해 보너스가 12.00% 증가되고, 강공격 피해 보너스가 12.00% 증가된다.<br>스킬 쿨타임: 20초",
+      "SkillCD": 20
+    },
+    "icon": "/catalog/image/echoes/60002182",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60102025,
+    "name_ko": "이상 · 분해된 전사",
+    "name_en": "Phantom: Smiter",
+    "rarity": 0,
+    "cost": 1,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래"
+    ],
+    "main_prop": {
+      "RandGroupId": 503,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 분해된 전사를 소환한 후, 적에게 빠르게 연속 펀치를 날려 7단 19.26%의 회절 피해를 입힌다. 이어 어퍼컷을 날려 57.78%의 회절 피해를 입힌다.<br>스킬 쿨타임: 15초",
+      "SkillCD": 15
+    },
+    "icon": "/catalog/image/echoes/60102025",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60102165,
+    "name_ko": "이상 · 봉정계유",
+    "name_en": "Phantom: Forbidden Bastion",
+    "rarity": 1,
+    "cost": 3,
+    "element": "회절",
+    "phantom_type": 1,
+    "sonata": [
+      "내려앉은 깃털의 노래",
+      "악을 씻어내는 마음",
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 502,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 봉정계유를 소환한 후, 적에게 강타를 가하여 237.60%의 응결 피해를 입힌다.<br>메인 슬롯에 해당 에코 어빌리티를 장착 시, 자신의 치료 효과 보너스가 10.00% 증가된다.<br>스킬 쿨타임: 20초",
+      "SkillCD": 20
+    },
+    "icon": "/catalog/image/echoes/60102165",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
+  },
+  {
+    "id": 60300003,
+    "name_ko": "봉정계유",
+    "name_en": "Forbidden Bastion",
+    "rarity": 1,
+    "cost": 3,
+    "element": "회절",
+    "phantom_type": 2,
+    "sonata": [
+      "내려앉은 깃털의 노래",
+      "악을 씻어내는 마음",
+      "황천길을 밝히는 등불"
+    ],
+    "main_prop": {
+      "RandGroupId": 502,
+      "RandNum": 1
+    },
+    "skill": {
+      "DescriptionEx": "에코 어빌리티를 사용하여 봉정계유를 소환한 후, 적에게 강타를 가하여 237.60%의 응결 피해를 입힌다.<br>메인 슬롯에 해당 에코 어빌리티를 장착 시, 자신의 치료 효과 보너스가 10.00% 증가된다.<br>스킬 쿨타임: 20초",
+      "SkillCD": 20
+    },
+    "icon": "/catalog/image/echoes/60300003",
+    "source": "encore.moe",
+    "sim_source": "datamine-3.5.5"
   }
 ]
