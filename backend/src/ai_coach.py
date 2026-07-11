@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import unicodedata
 
 from openai import OpenAI
 
@@ -183,6 +184,136 @@ def _mock_chat(request: AiChatRequest) -> AiChatResponse:
     )
 
 
+# --- 이름 혼동 방지: 자유 텍스트 챗에서 명시한 공명자를 결정적으로 해석 ------------
+# 로컬 소형 LLM은 "치사"와 "치샤"처럼 한 음절만 다른 이름을 헷갈려 엉뚱한 id를 고르곤 한다.
+# 드롭다운(구조적 id 선택)은 멀쩡하므로, 챗에서도 이름→id를 코드로 확정해 같은 신뢰도를 준다.
+
+def _nfc(text: str) -> str:
+    return unicodedata.normalize("NFC", text or "")
+
+
+def _resonator_name_pairs(catalog: dict[str, dict[str, dict]]) -> list[tuple[str, str]]:
+    """(name, id) 목록 — 정확 매칭용. 전체 이름 + 고유한 '·' 분절 별칭.
+
+    사용자는 '양양·현령'을 '현령'처럼 줄여 부르므로, 로스터 전체에서 정확히 한 공명자에만
+    등장하고 다른 정식명과 겹치지 않는 분절만 별칭으로 추가한다(모호하면 제외 → 오검출 방지).
+    """
+    full: list[tuple[str, str]] = []
+    for r in catalog["resonators"].values():
+        nm = r.get("name_ko")
+        if nm:
+            full.append((_nfc(str(nm)), str(r["id"])))
+    pairs = list(full)
+    full_names = {nm for nm, _ in full}
+    seg_owners: dict[str, set[str]] = {}
+    for nm, rid in full:
+        for sep in ("·", "・", "："):
+            if sep in nm:
+                for seg in nm.split(sep):
+                    seg = seg.strip()
+                    if len(seg) >= 2:
+                        seg_owners.setdefault(seg, set()).add(rid)
+    for seg, owners in seg_owners.items():
+        if len(owners) == 1 and seg not in full_names:
+            pairs.append((seg, next(iter(owners))))
+    return pairs
+
+
+def _resolve_mentioned_resonators(text: str, catalog: dict[str, dict[str, dict]]) -> list[str]:
+    """자유 텍스트에서 정확 부분문자열로 언급된 공명자 id를 추출.
+
+    긴 이름부터 매칭·마스킹해 짧은 이름이 긴 이름 안에서 오검출되지 않게 한다
+    (예: '양양·현령'을 먼저 잡고 그 안의 '양양'이 다시 잡히지 않게). '치사'는 '치샤'의
+    부분문자열이 아니므로 정확 매칭만으로 둘이 깔끔히 구분된다 — 이게 이 버그의 핵심.
+    """
+    masked = _nfc(text)
+    if not masked:
+        return []
+    found: list[str] = []
+    for name, rid in sorted(_resonator_name_pairs(catalog), key=lambda x: -len(x[0])):
+        if name and name in masked:
+            found.append(rid)
+            masked = masked.replace(name, " " * len(name))
+    seen: set[str] = set()
+    out: list[str] = []
+    for rid in found:
+        if rid not in seen:
+            seen.add(rid)
+            out.append(rid)
+    return out
+
+
+def _confusable_siblings(catalog: dict[str, dict[str, dict]]) -> dict[str, set[str]]:
+    """이름이 정확히 한 음절만 다른 공명자 쌍 → id→{유사 id} (예: 치사↔치샤)."""
+    ros = [(_nfc(str(r.get("name_ko") or "")), str(r["id"])) for r in catalog["resonators"].values()]
+    sib: dict[str, set[str]] = {}
+    for na, ia in ros:
+        for nb, ib in ros:
+            if ia == ib or not na or not nb or len(na) != len(nb):
+                continue
+            if sum(1 for x, y in zip(na, nb) if x != y) == 1:
+                sib.setdefault(ia, set()).add(ib)
+    return sib
+
+
+def _mentioned_constraint_block(mentioned: list[str], catalog: dict[str, dict[str, dict]]) -> str:
+    ros = catalog["resonators"]
+    sib = _confusable_siblings(catalog)
+    lines = [
+        "[중요 · 사용자가 이번 메시지에서 명시한 공명자]",
+        "아래 공명자는 사용자가 정확히 지정한 것이다. 반드시 이 id를 그대로 팀에 사용하고,",
+        "이름이 비슷한 다른 공명자로 절대 대체하지 마라.",
+    ]
+    for rid in mentioned:
+        nm = ros.get(rid, {}).get("name_ko", rid)
+        sibs = sib.get(rid)
+        if sibs:
+            sib_txt = ", ".join(f"{ros.get(s, {}).get('name_ko', s)}(id {s})" for s in sorted(sibs))
+            lines.append(f"- {nm} (id {rid}) — 유사 이름 {sib_txt} 와(과) 혼동 금지")
+        else:
+            lines.append(f"- {nm} (id {rid})")
+    return "\n".join(lines)
+
+
+def _enforce_mentioned_resonators(
+    resp: AiChatResponse, mentioned: list[str], catalog: dict[str, dict[str, dict]]
+) -> AiChatResponse:
+    """후검증(A): 사용자가 명시한 공명자가 팀에서 빠지고 대신 '유사 이름' 공명자가 들어갔으면
+    그 픽의 id를 명시 id로 교정한다(예: 치샤→치사). 유사 이름 충돌일 때만 손대므로 안전하다."""
+    rec = resp.recommendation
+    if rec is None:
+        return resp
+    sib = _confusable_siblings(catalog)
+    ros = catalog["resonators"]
+    team_ids = [p.resonator_id for p in rec.team]
+    corrections: list[tuple[str, str]] = []
+    for m in mentioned:
+        if m in team_ids:
+            continue
+        for pick in rec.team:
+            if pick.resonator_id in sib.get(m, set()):
+                old = pick.resonator_id
+                pick.resonator_id = m
+                note = (
+                    f"[자동 교정: 이름이 비슷한 {ros.get(old, {}).get('name_ko', old)}(으)로 잘못 지정되어 "
+                    f"사용자가 명시한 {ros.get(m, {}).get('name_ko', m)}(으)로 바꿨습니다] "
+                )
+                pick.reason = note + (pick.reason or "")
+                corrections.append((old, m))
+                team_ids = [m if x == old else x for x in team_ids]
+                break
+    if corrections:
+        def _nm(i: str) -> str:
+            return ros.get(i, {}).get("name_ko", i)
+
+        detail = " / ".join(f"{_nm(o)}→{_nm(n)}" for o, n in corrections)
+        resp.reply = (resp.reply or "") + (
+            f"\n\n(참고: 이름이 비슷한 공명자를 자동 교정했어요 — {detail}. "
+            "빌드 세부는 지정하신 공명자 기준으로 다시 확인해 주세요.)"
+        )
+    return resp
+
+
 def chat(request: AiChatRequest) -> AiChatResponse:
     base_url = os.getenv("LLM_BASE_URL")
     if not base_url:
@@ -191,6 +322,13 @@ def chat(request: AiChatRequest) -> AiChatResponse:
     catalog = _fetch_catalog()
     index = build_catalog_index(catalog)
     system = build_system_prompt(request.profile, index)
+
+    # 유사 이름(예: 치사/치샤) 혼동 방지: 마지막 사용자 메시지에서 명시한 공명자를 결정적으로 해석해
+    # 프롬프트에 강제 제약으로 주입하고, 응답 후 유사-이름 오선택을 교정한다.
+    last_user = next((m.content for m in reversed(request.messages) if m.role == "user"), "")
+    mentioned = _resolve_mentioned_resonators(last_user, catalog)
+    if mentioned:
+        system = system + "\n" + _mentioned_constraint_block(mentioned, catalog)
 
     client = OpenAI(base_url=base_url, api_key=os.getenv("LLM_API_KEY", "sk-local"))
     model = os.getenv("LLM_MODEL", "wuwa-vlm")
