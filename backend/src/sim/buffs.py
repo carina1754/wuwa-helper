@@ -71,23 +71,32 @@ def sonata_bonuses_from_counts(
     counts: Mapping[str, int],
     set_by_name: Mapping[str, Mapping[str, Any]],
 ) -> dict | None:
-    """Given per-set equipped counts, return the dominant set's 2-/5-piece effects."""
-    best: tuple[str, int] | None = None
-    for name, count in counts.items():
-        if count >= 2 and (best is None or count > best[1]):
-            best = (name, count)
-    if not best:
+    """Apply the 2-piece effect of EVERY sonata with >=2 equipped echoes, plus the
+    5-piece of any sonata with >=5. Sonata thresholds are independent in-game, so a
+    hybrid like 2+2 grants BOTH 2-set effects (not just the dominant one)."""
+    active = sorted(
+        ((name, count) for name, count in counts.items() if count >= 2),
+        key=lambda nc: (-nc[1], nc[0]),
+    )
+    if not active:
         return None
-    st = set_by_name.get(best[0])
     bonuses: list[Buff] = []
-    two = parse_set_effect(st.get("two_piece") if st else None)
-    if two:
-        bonuses.append(two)
-    if best[1] >= 5:
-        five = parse_set_effect(st.get("five_piece") if st else None)
-        if five:
-            bonuses.append(five)
-    return {"name": best[0], "count": best[1], "bonuses": bonuses}
+    for name, count in active:
+        st = set_by_name.get(name)
+        two = parse_set_effect(st.get("two_piece") if st else None)
+        if two:
+            bonuses.append(two)
+        if count >= 5:
+            five = parse_set_effect(st.get("five_piece") if st else None)
+            if five:
+                bonuses.append(five)
+    top_name, top_count = active[0]
+    return {
+        "name": top_name,  # 대표(최다) 세트 — 표시용
+        "count": top_count,
+        "bonuses": bonuses,
+        "sets": [{"name": name, "count": count} for name, count in active],
+    }
 
 
 def active_set_bonuses(

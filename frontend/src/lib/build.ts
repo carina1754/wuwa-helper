@@ -107,29 +107,40 @@ export function parseSetEffect(text: string | null | undefined): { key: StatKey;
 }
 
 export type SonataSet = { name_ko: string; two_piece?: string | null; five_piece?: string | null };
-// The set with the most equipped echoes; its 2-set (and 5-set at 5) always-on effects apply.
+// Every sonata with >=2 equipped echoes applies its 2-set effect; any with >=5 also
+// applies its 5-set. Sonata thresholds are independent in-game, so a 2+2 hybrid grants
+// BOTH 2-set effects (not just the dominant one). `name`/`count` = the dominant set.
 export function activeSetBonuses(
   build: ResonatorBuild,
   echoSonata: (id: string) => string[],
   setByName: Map<string, SonataSet>,
-): { name: string; count: number; bonuses: { key: StatKey; value: number }[] } | null {
+): {
+  name: string;
+  count: number;
+  bonuses: { key: StatKey; value: number }[];
+  sets: { name: string; count: number }[];
+} | null {
   const counts = new Map<string, number>();
   for (const e of build.echoes) {
     if (!e) continue;
     for (const s of echoSonata(e.echoId)) counts.set(s, (counts.get(s) ?? 0) + 1);
   }
-  let best: { name: string; count: number } | null = null;
-  for (const [name, count] of counts) if (count >= 2 && (!best || count > best.count)) best = { name, count };
-  if (!best) return null;
-  const set = setByName.get(best.name);
+  const active = [...counts.entries()]
+    .filter(([, count]) => count >= 2)
+    .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  if (!active.length) return null;
   const bonuses: { key: StatKey; value: number }[] = [];
-  const two = parseSetEffect(set?.two_piece);
-  if (two) bonuses.push(two);
-  if (best.count >= 5) {
-    const five = parseSetEffect(set?.five_piece);
-    if (five) bonuses.push(five);
+  for (const [name, count] of active) {
+    const set = setByName.get(name);
+    const two = parseSetEffect(set?.two_piece);
+    if (two) bonuses.push(two);
+    if (count >= 5) {
+      const five = parseSetEffect(set?.five_piece);
+      if (five) bonuses.push(five);
+    }
   }
-  return { name: best.name, count: best.count, bonuses };
+  const [topName, topCount] = active[0];
+  return { name: topName, count: topCount, bonuses, sets: active.map(([name, count]) => ({ name, count })) };
 }
 
 export function computeStats(

@@ -796,7 +796,7 @@ export function BuildEditor({
       {active ? (
         <div className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] p-2.5 text-xs">
           <span className="font-semibold text-[var(--fg)]">세트 효과</span>{" "}
-          <span className="text-[var(--fg-soft)]">{active.name} · {active.count >= 5 ? "5세트" : "2세트"}</span>
+          <span className="text-[var(--fg-soft)]">{active.sets.map((s) => `${s.name} ${s.count >= 5 ? "5세트" : "2세트"}`).join(" + ")}</span>
           {active.bonuses.length ? (
             <span className="text-[var(--accent)]"> · {active.bonuses.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`).join(", ")}</span>
           ) : null}
