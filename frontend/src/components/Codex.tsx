@@ -6,7 +6,7 @@ import { Portal } from "./Portal";
 import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
 import { weaponDescAtRank } from "@/lib/build";
 import { mediaUrl as imageSrc } from "@/lib/constants";
-import { localizedName, useLanguage } from "@/lib/i18n";
+import { localizedField, localizedName, localizedSkillType, useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexSkillDamage, CodexWeapon, Role, SonataSet } from "@/lib/types";
 
 type SubTab = "resonators" | "weapons" | "echoes";
@@ -670,7 +670,7 @@ export function ResonatorDetail({ item }: { item: CodexResonator }) {
     .join(" · ");
 
   const chainNodes = (item.resonance_chain ?? [])
-    .map((node) => node.NodeName)
+    .map((node) => localizedField(node, "NodeName", language))
     .filter(Boolean) as string[];
 
   const maxLevel = item.max_level ?? 90;
@@ -707,13 +707,13 @@ export function ResonatorDetail({ item }: { item: CodexResonator }) {
               <li key={`${skill.SkillName ?? "skill"}-${index}`} className="text-sm">
                 <div className="flex items-baseline justify-between gap-1.5">
                   <div className="flex items-baseline gap-1.5">
-                    {skill.SkillName ? <span className="font-semibold text-[var(--fg)]">{stripTags(skill.SkillName)}</span> : null}
-                    {skill.SkillType ? <span className="text-xs text-[var(--muted)]">{skill.SkillType}</span> : null}
+                    {skill.SkillName ? <span className="font-semibold text-[var(--fg)]">{stripTags(localizedField(skill, "SkillName", language))}</span> : null}
+                    {skill.SkillType ? <span className="text-xs text-[var(--muted)]">{localizedSkillType(skill.SkillType, language)}</span> : null}
                   </div>
                   {skill.damage?.length ? <span className="shrink-0 text-xs text-[var(--muted)]">Lv.{skillLvOf(index)}</span> : null}
                 </div>
                 {skill.SkillDescribe ? (
-                  <p className="mt-0.5 line-clamp-3 text-[var(--fg-soft)]">{stripTags(skill.SkillDescribe)}</p>
+                  <p className="mt-0.5 line-clamp-3 text-[var(--fg-soft)]">{stripTags(localizedField(skill, "SkillDescribe", language))}</p>
                 ) : null}
                 {skill.damage?.length ? (
                   <>
@@ -724,7 +724,7 @@ export function ResonatorDetail({ item }: { item: CodexResonator }) {
                       value={skillLvOf(index)}
                       onChange={(e) => setSkillLvOf(index, Number(e.target.value))}
                       className="mb-1 mt-1.5 w-full accent-[var(--accent)]"
-                      aria-label={`${stripTags(skill.SkillName ?? t.codex.skills)} ${t.codex.level}`}
+                      aria-label={`${stripTags(localizedField(skill, "SkillName", language) || t.codex.skills)} ${t.codex.level}`}
                     />
                     <div className="mt-1 flex flex-wrap gap-1">
                       {groupSkillDamage(skill.damage, skillLvOf(index)).map((g, gi) => (

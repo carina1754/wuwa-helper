@@ -1656,6 +1656,65 @@ export function localizedName(
   return entry[`name_${language}`] || koName;
 }
 
+/** 표시 전용 현지화 필드 선택자: `${base}_${language}` 있으면 사용, 없으면 한국어로 폴백.
+ * base(스킬 SkillName/NodeName) 또는 `${base}_ko`(공지 title/summary) 둘 다 한국어 원본으로 인정.
+ * catalog·공지에 additive로 붙은 _en/_ja/_zhHans 형제 필드용. */
+export function localizedField(entry: object, base: string, language: Language): string {
+  const rec = entry as Record<string, unknown>;
+  const koVal = ((rec[base] as string) ?? (rec[`${base}_ko`] as string)) ?? "";
+  if (language === "ko") return koVal;
+  return ((rec[`${base}_${language}`] as string) || "").trim() || koVal;
+}
+
+/** localizedField의 배열판 (예: 공지 하이라이트 리스트). 비었으면 한국어로 폴백. */
+export function localizedList(entry: object, base: string, language: Language): string[] {
+  const rec = entry as Record<string, unknown>;
+  const koVal = ((rec[base] ?? rec[`${base}_ko`]) as string[]) ?? [];
+  if (language === "ko") return koVal;
+  const loc = rec[`${base}_${language}`] as string[] | undefined;
+  return loc && loc.length ? loc : koVal;
+}
+
+/** 스킬 타입(8종 enum) 현지화. 엔진은 한국어 SkillType 부분일치로 분류하므로 데이터는 한국어 유지,
+ * 여기서는 표시만 번역 (datamine 공식 용어). ko/미매핑은 원문 그대로. */
+const SKILL_TYPE_I18N: Partial<Record<Language, Record<string, string>>> = {
+  en: {
+    "고유 스킬": "Inherent Skill",
+    "공명 스킬": "Resonance Skill",
+    "공명 해방": "Resonance Liberation",
+    "공명 회로": "Forte Circuit",
+    "기본 공격": "Normal Attack",
+    "반주 스킬": "Outro Skill",
+    "변주 스킬": "Intro Skill",
+    "조화도 파괴": "Tune Break",
+  },
+  ja: {
+    "고유 스킬": "固有スキル",
+    "공명 스킬": "共鳴スキル",
+    "공명 해방": "共鳴解放",
+    "공명 회로": "共鳴回路",
+    "기본 공격": "基本攻撃",
+    "반주 스킬": "終奏スキル",
+    "변주 스킬": "変奏スキル",
+    "조화도 파괴": "協和破壊",
+  },
+  zhHans: {
+    "고유 스킬": "固有技能",
+    "공명 스킬": "共鸣技能",
+    "공명 해방": "共鸣解放",
+    "공명 회로": "共鸣回路",
+    "기본 공격": "常态攻击",
+    "반주 스킬": "延奏技能",
+    "변주 스킬": "变奏技能",
+    "조화도 파괴": "谐度破坏",
+  },
+};
+
+export function localizedSkillType(ko: string | null | undefined, language: Language): string {
+  const val = ko ?? "";
+  return SKILL_TYPE_I18N[language]?.[val] ?? val;
+}
+
 const STORAGE_KEY = "mj:lang";
 
 interface LanguageContextValue {

@@ -5,7 +5,7 @@ import { Portal } from "./Portal";
 import { signIn, useSession } from "next-auth/react";
 import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation, teamCalculate } from "@/lib/api";
 import { mediaUrl } from "@/lib/constants";
-import { localizedName, useLanguage } from "@/lib/i18n";
+import { localizedField, localizedName, localizedSkillType, useLanguage } from "@/lib/i18n";
 import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SimMemberIn, SimOpts, SonataSet, TeamCalcRequestBody, TeamCalcResult } from "@/lib/types";
 import {
   activeSetBonuses,
@@ -661,7 +661,7 @@ export function BuildEditor({
             <div className="grid gap-1.5">
               {levelable.map(({ s, i, max }) => (
                 <label key={i} className="flex items-center gap-2 text-xs">
-                  <span className="w-20 shrink-0 truncate text-[var(--muted)]" title={s.SkillName ?? ""}>{s.SkillType || s.SkillName || `${t.teams.skillNPrefix}${i + 1}`}</span>
+                  <span className="w-20 shrink-0 truncate text-[var(--muted)]" title={localizedField(s, "SkillName", language)}>{localizedSkillType(s.SkillType, language) || localizedField(s, "SkillName", language) || `${t.teams.skillNPrefix}${i + 1}`}</span>
                   <input type="range" min={1} max={Math.min(10, max)} value={lvOf(i, max)} onChange={(e) => setLv(i, Number(e.target.value))} className="min-w-0 flex-1 accent-[var(--accent)]" />
                   <span className="w-10 shrink-0 text-right font-medium text-[var(--fg)]">Lv.{lvOf(i, max)}</span>
                 </label>
@@ -700,7 +700,7 @@ export function BuildEditor({
                 {chain.slice(0, seq).map((node, i) => (
                   <li key={i} className="text-[11px] leading-5 text-[var(--fg-soft)]">
                     <span className="mr-1 font-semibold text-[var(--accent)]">S{i + 1}</span>
-                    {node.NodeName || node.AttributesDescription || ""}
+                    {localizedField(node, "NodeName", language) || node.AttributesDescription || ""}
                   </li>
                 ))}
               </ol>

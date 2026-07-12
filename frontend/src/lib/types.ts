@@ -193,6 +193,13 @@ export interface GameUpdateSummary {
   highlights_ko: string[];
   source_links: string[];
   image_url?: string | null;
+  // 표시 전용 본문 현지화 (없으면 _ko 폴백). 제목은 한국어 유지.
+  summary_en?: string | null;
+  summary_ja?: string | null;
+  summary_zhHans?: string | null;
+  highlights_en?: string[] | null;
+  highlights_ja?: string[] | null;
+  highlights_zhHans?: string[] | null;
 }
 
 export interface SiteUpdateEntry {
@@ -201,6 +208,12 @@ export interface SiteUpdateEntry {
   version?: string | null;
   title_ko: string;
   description_ko: string;
+  title_en?: string | null;
+  title_ja?: string | null;
+  title_zhHans?: string | null;
+  description_en?: string | null;
+  description_ja?: string | null;
+  description_zhHans?: string | null;
 }
 
 export interface PickupBannerCharacter {
@@ -238,14 +251,24 @@ export interface CodexSkillDamage {
 export interface CodexSkill {
   SkillName?: string | null;
   SkillDescribe?: string | null;
-  SkillType?: string | null;
+  SkillType?: string | null; // 한국어 유지 (딜 엔진이 부분일치로 분류) — 표시는 localizedSkillType()
   Icon?: string | null;
   damage?: CodexSkillDamage[] | null;
+  // 표시 전용 현지화 형제 (localizedField로 조회, datamine 추출·한국어 폴백)
+  SkillName_en?: string | null;
+  SkillName_ja?: string | null;
+  SkillName_zhHans?: string | null;
+  SkillDescribe_en?: string | null;
+  SkillDescribe_ja?: string | null;
+  SkillDescribe_zhHans?: string | null;
 }
 
 export interface CodexResonanceNode {
   NodeName?: string | null;
   AttributesDescription?: string | null;
+  NodeName_en?: string | null;
+  NodeName_ja?: string | null;
+  NodeName_zhHans?: string | null;
 }
 
 export interface CodexResonator {
