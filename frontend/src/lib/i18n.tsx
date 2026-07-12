@@ -1,12 +1,13 @@
 "use client";
 
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 
-// 한국어 단일 언어 서비스. 전환 UI가 없어 영어 사본은 데드코드였고 번들만 키워 제거함.
-// 다국어가 다시 필요해지면 copy에 로케일 키를 추가하고 Provider를 상태 기반으로 되돌리면 된다.
-export type Language = "ko";
+// 다국어 서비스. copy에 로케일별 문자열 테이블을 두고 Provider가 현재 언어를 상태로 관리한다.
+// 게임 용어 맵(elements/weaponTypes/statNames/sonataSets/characterNames/weaponNames)은 영어 키가
+// 곧 영문 표기라 en은 identMap 항등 매핑으로 파생한다. 카탈로그 이름·설명 현지화는 백엔드(name_en 등)가 담당.
+export type Language = "ko" | "en";
 
-export const copy = {
+const koTable = {
   ko: {
     app: {
       name: "띵조 AI",
@@ -327,19 +328,247 @@ export const copy = {
       restricted: "관리자 계정으로 로그인해야 접근할 수 있습니다.",
     },
   },
-} as const;
+};
+
+const ko = koTable.ko;
+type LocaleStrings = typeof ko;
+
+/** en용: 영어 키가 곧 영문 표기인 게임 용어 맵을 항등 매핑으로 파생(타입 충족·데드 유지). */
+function identMap<T extends object>(o: T): { [K in keyof T]: string } {
+  const out = {} as { [K in keyof T]: string };
+  for (const key of Object.keys(o) as (keyof T)[]) out[key] = String(key);
+  return out;
+}
+
+const en: LocaleStrings = {
+  app: {
+    name: "WuWa Helper",
+    tagline: "Screenshot OCR, echo scoring, build priorities",
+    status: "Unofficial guide",
+    websiteUpdates: "Announcements",
+    discord: "Discord",
+    languageLabel: "Change language",
+    themeLabel: "Toggle theme",
+    signIn: "Sign in with Google",
+    signOut: "Sign out",
+    admin: "Admin",
+    loading: "Loading",
+  },
+  tabs: {
+    Dashboard: "Dashboard",
+    Ai: "AI",
+    Planner: "Codex",
+    PickupSchedule: "Banner schedule",
+    Updates: "WuWa updates",
+    Teams: "Party",
+    Snapshot: "Real DMG",
+    History: "History",
+  },
+  roles: { main_dps: "Main DPS", sub_dps: "Sub DPS", support: "Support", healer: "Healer" },
+  elements: identMap(ko.elements),
+  weaponTypes: identMap(ko.weaponTypes),
+  statNames: identMap(ko.statNames),
+  sonataSets: identMap(ko.sonataSets),
+  characterNames: identMap(ko.characterNames),
+  weaponNames: identMap(ko.weaponNames),
+  dashboard: {
+    cards: [
+      ["Recent analysis", "Save a diagnosis and it will show up here."],
+      ["Current priority", "Run an analysis to see your weakest echo first."],
+      ["Next action", "Fix your main stat before optimizing sub-stats."],
+    ],
+  },
+  analyzer: {
+    manualEditor: "Manual edit",
+    character: "Character",
+    level: "Level",
+    weapon: "Weapon",
+    atk: "ATK",
+    critRate: "Crit. Rate",
+    critDmg: "Crit. DMG",
+    energyRegen: "Energy Regen",
+    analyzeImage: "Analyze image",
+    runDiagnosis: "Run diagnosis",
+    saveHistory: "Save to history",
+    selectImageFirst: "Select an image first.",
+    extracting: "Extracting screenshot...",
+    extractionReady: "Extraction complete.",
+    extractionFailed: "Extraction failed.",
+    diagnosisRunning: "Running diagnosis...",
+    diagnosisComplete: "Diagnosis complete.",
+    diagnosisFailed: "Diagnosis failed.",
+    saveRequirement: "Run extraction and diagnosis before saving to history.",
+    saved: "Saved to history.",
+    saveFailed: "Failed to save history.",
+  },
+  uploader: {
+    screenshot: "Screenshot",
+    previewAlt: "Uploaded screenshot preview",
+    previewEmpty: "An image preview will appear here",
+  },
+  echoes: {
+    title: "Echoes",
+    echo: "Echo",
+    slot: "Slot",
+    echoName: "Echo name",
+    set: "Set",
+    mainStat: "Main stat",
+    level: "Level",
+    subStat: "Sub stat",
+    value: "Value",
+  },
+  extraction: {
+    empty: "No extraction result yet.",
+    title: "Extraction result",
+    screen: "Screen",
+    rawText: "Raw text",
+    json: "JSON",
+  },
+  diagnosis: {
+    empty: "Run a diagnosis to see the result.",
+    title: "Diagnosis result",
+  },
+  planner: {
+    title: "Character codex",
+    body: "Check the recommended set, weapon, and priority stats for each character.",
+    search: "Search characters",
+    allRoles: "All roles",
+    allElements: "All elements",
+    recommendedSet: "Recommended set",
+    fallbackSets: "Alternative sets",
+    weapon: "Recommended weapon",
+    bonusStats: "Bonus stats",
+    noResults: "No characters match the filters.",
+    source: "Source",
+  },
+  teams: {
+    title: "Party building",
+    body: "MVP party advice is role-based — Main DPS, Sub DPS, Support/Healer. Owned-character recommendations come next.",
+  },
+  pickup: {
+    title: "Banner history",
+    body: "Character and weapon banner records by version (KR time). Click an icon for details.",
+    year: "Year",
+    yearly: "Yearly view",
+    monthly: "Monthly calendar",
+    legend: "Legend",
+    first: "First banner",
+    rerun: "Rerun",
+    characters: "Featured characters",
+    source: "Source",
+    empty: "No banner data yet.",
+  },
+  updates: {
+    title: "WuWa update summary",
+    body: "Shows only update times (KR) and official sources.",
+    releaseDate: "Update time (KR)",
+    source: "Official site",
+    empty: "No update data yet.",
+  },
+  siteUpdates: {
+    title: "Announcements",
+    body: "Features added or changed on this site, by date and version.",
+    empty: "No announcements yet.",
+  },
+  history: {
+    title: "History",
+    empty: "Your saved analyses will appear here.",
+    unknown: "Unknown",
+    select: "Select a saved session.",
+  },
+  rules: {
+    title: "Rule management",
+    save: "Save rules",
+    saved: "Rules saved.",
+    saveFailed: "Failed to save rules.",
+  },
+  settings: {
+    title: "Settings",
+    apiBaseUrl: "API base URL",
+    openAiKey: "Local LLM (vision)",
+    openAiKeyBody:
+      "For real vision extraction, set LLM_BASE_URL (llama.cpp llama-server) on the backend. Without it, mock mode is used.",
+    legalNotice: "Legal notice",
+    legalNoticeBody:
+      "WuWa Helper is an unofficial fan tool and is not affiliated with Wuthering Waves or Kuro Games.",
+    exportJson: "Export JSON",
+    importJson: "Import JSON",
+    imported: (rules: number, history: number, characters = 0) =>
+      `Imported ${rules} rules, ${characters} characters, and ${history} history entries.`,
+  },
+  login: {
+    title: "Sign in",
+    body: "Sign in with your Google account to check admin rights and your session.",
+    google: "Sign in with Google",
+    adminEmail: "Admin email: wawa.ai.coach@gmail.com",
+  },
+  admin: {
+    title: "Admin page",
+    body: "Only admins can edit rules and service settings.",
+    restricted: "You must sign in with an admin account to access this.",
+  },
+};
+
+export const copy: Record<Language, LocaleStrings> = { ko, en };
+
+export const LANGUAGES: readonly { readonly code: Language; readonly label: string }[] = [
+  { code: "ko", label: "한국어" },
+  { code: "en", label: "English" },
+];
+
+const STORAGE_KEY = "mj:lang";
 
 interface LanguageContextValue {
   language: Language;
-  t: (typeof copy)[Language];
+  setLanguage: (language: Language) => void;
+  t: LocaleStrings;
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
-const contextValue: LanguageContextValue = { language: "ko", t: copy.ko };
-
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  return <LanguageContext.Provider value={contextValue}>{children}</LanguageContext.Provider>;
+  const [language, setLanguageState] = useState<Language>("ko");
+
+  // Server and first client render both start at "ko" (no hydration mismatch);
+  // the saved/detected locale is applied in an effect right after mount.
+  useEffect(() => {
+    try {
+      const saved = localStorage.getItem(STORAGE_KEY);
+      if (saved && saved in copy) {
+        setLanguageState(saved as Language);
+        return;
+      }
+      if ((navigator.language ?? "").toLowerCase().startsWith("en")) {
+        setLanguageState("en");
+      }
+    } catch {
+      /* localStorage/navigator unavailable — keep default */
+    }
+  }, []);
+
+  useEffect(() => {
+    try {
+      document.documentElement.lang = language;
+    } catch {
+      /* ignore */
+    }
+  }, [language]);
+
+  const setLanguage = useCallback((next: Language) => {
+    setLanguageState(next);
+    try {
+      localStorage.setItem(STORAGE_KEY, next);
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
+  const value = useMemo<LanguageContextValue>(
+    () => ({ language, setLanguage, t: copy[language] }),
+    [language, setLanguage],
+  );
+
+  return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
 }
 
 export function useLanguage() {

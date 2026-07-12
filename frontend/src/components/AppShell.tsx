@@ -4,7 +4,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { TABS, type AppTab } from "@/lib/constants";
-import { useLanguage } from "@/lib/i18n";
+import { LANGUAGES, useLanguage, type Language } from "@/lib/i18n";
 import { SupportModal } from "./SupportModal";
 
 function DiscordIcon({ className }: { className?: string }) {
@@ -35,7 +35,7 @@ export function AppShell({ renderTab }: AppShellProps) {
   const [activeTab, setActiveTab] = useState<AppTab>("Updates");
   const [supportOpen, setSupportOpen] = useState(false);
   const { data: session, status } = useSession();
-  const { t } = useLanguage();
+  const { t, language, setLanguage } = useLanguage();
   const isSignedIn = status === "authenticated";
   const isAdmin = session?.user?.role === "admin";
 
@@ -69,6 +69,29 @@ export function AppShell({ renderTab }: AppShellProps) {
                   <path d="M12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5L19 19M19 5l-1.5 1.5M6.5 17.5L5 19" />
                 </svg>
               </button>
+              <select
+                className="langsel"
+                value={language}
+                onChange={(event) => setLanguage(event.target.value as Language)}
+                aria-label={t.app.languageLabel}
+                title={t.app.languageLabel}
+                style={{
+                  background: "transparent",
+                  color: "inherit",
+                  border: "1px solid currentColor",
+                  borderRadius: 999,
+                  padding: "3px 8px",
+                  fontSize: 12,
+                  opacity: 0.8,
+                  cursor: "pointer",
+                }}
+              >
+                {LANGUAGES.map((option) => (
+                  <option key={option.code} value={option.code}>
+                    {option.label}
+                  </option>
+                ))}
+              </select>
               <Link className="iconbtn" href="/guide" aria-label="이용 가이드" title="이용 가이드">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <circle cx="12" cy="12" r="9.5" />

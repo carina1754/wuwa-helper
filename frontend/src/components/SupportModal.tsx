@@ -1,9 +1,10 @@
 "use client";
 
+import { useLanguage } from "@/lib/i18n";
 import { Portal } from "./Portal";
 
-// 후원(커피 한 잔) 모달 — 광고 없이 운영하는 사이트의 후원 안내. 토스페이 QR.
-// 사이트 디자인 언어(모노스페이스 킥커 + 골드/틸 토큰 + 얇은 라인 카드)를 그대로 따른다.
+// 후원(커피 한 잔) 모달 — 광고 없이 운영하는 사이트의 후원 안내. 국내는 토스페이 QR,
+// 해외는 PayPal 링크. 사이트 디자인 언어(모노 킥커 + 골드/틸 토큰 + 얇은 라인 카드)를 따른다.
 
 function CoffeeIcon({ className }: { className?: string }) {
   return (
@@ -15,7 +16,17 @@ function CoffeeIcon({ className }: { className?: string }) {
   );
 }
 
+function PaypalIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <path d="M7 20l1.8-11.5A1.5 1.5 0 0 1 10.3 7H14a4 4 0 0 1 0 8h-3.2" />
+      <path d="M10 20l1.6-10A1.5 1.5 0 0 1 13.1 8.7H16a3.5 3.5 0 0 1 0 7h-2.6" />
+    </svg>
+  );
+}
+
 export function SupportModal({ onClose }: { onClose: () => void }) {
+  const { language } = useLanguage();
   return (
     <Portal>
       <div className="fixed inset-0 z-50 flex items-start justify-center overflow-y-auto bg-slate-950/60 p-4 backdrop-blur-[2px]" role="dialog" aria-modal="true" aria-label="커피 한 잔 보태기" onClick={onClose}>
@@ -52,6 +63,20 @@ export function SupportModal({ onClose }: { onClose: () => void }) {
               <p className="mt-3 text-center text-sm font-semibold text-[var(--fg)]">토스로 스캔해서 보태기</p>
               <p className="mt-0.5 text-center text-xs text-[var(--muted)]">휴대폰 카메라 또는 토스 앱으로 QR을 찍으면 돼요</p>
             </div>
+
+            {/* PayPal — 해외 후원용(토스는 국내 전용) */}
+            <a
+              href="https://paypal.me/wuwahelper"
+              target="_blank"
+              rel="noreferrer"
+              className="mt-3 flex items-center justify-center gap-2.5 rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-4 py-3 text-sm font-semibold text-[var(--fg)] transition hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <PaypalIcon className="h-[18px] w-[18px] text-[var(--accent)]" />
+              {language === "ko" ? "PayPal로 후원하기" : "Donate with PayPal"}
+            </a>
+            <p className="mt-1.5 text-center text-xs text-[var(--muted)]">
+              {language === "ko" ? "해외에서도 카드로 간편하게" : "For international supporters"}
+            </p>
           </div>
 
           <div className="border-t border-[var(--line)] bg-[var(--surface-2)] px-5 py-3">
