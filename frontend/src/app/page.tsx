@@ -5,7 +5,6 @@ import { AiHistory } from "@/components/AiHistory";
 import { AppShell } from "@/components/AppShell";
 import { Codex } from "@/components/Codex";
 import { PickupSchedule } from "@/components/PickupSchedule";
-import { SnapshotDamage } from "@/components/SnapshotDamage";
 import { TeamBuilder } from "@/components/TeamBuilder";
 import { UpdatesSummary } from "@/components/UpdatesSummary";
 import { WebsiteUpdates } from "@/components/WebsiteUpdates";
@@ -25,8 +24,6 @@ function renderTab(tab: AppTab) {
       return <WebsiteUpdates />;
     case "Teams":
       return <TeamBuilder />;
-    case "Snapshot":
-      return <SnapshotDamage />;
     case "History":
       return <AiHistory />;
   }

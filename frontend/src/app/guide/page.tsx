@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "이용 가이드 — 띵조 AI",
-  description: "띵조 AI 사용법: 도감, 픽업 일정표, 파티 딜 계산(풀 업타임·자동 팀 버프), 실측 딜, AI 빌딩까지 스크린샷과 함께 안내합니다.",
+  description: "띵조 AI 사용법: 도감, 픽업 일정표, 파티 딜 계산(풀 업타임·자동 팀 버프), AI 빌딩까지 스크린샷과 함께 안내합니다.",
 };
 
 /** 스크린샷 + 캡션 공통 프레임 */
@@ -43,7 +43,6 @@ const TOC = [
   { id: "codex", label: "도감" },
   { id: "pickup", label: "픽업 일정표" },
   { id: "party", label: "파티 딜 계산" },
-  { id: "snapshot", label: "실측 딜" },
   { id: "ai", label: "AI 빌딩" },
   { id: "notice", label: "공지사항" },
 ];
@@ -90,7 +89,7 @@ export default function GuidePage() {
           <section id="start" className="mt-10 scroll-mt-24">
             <h2 className="border-b border-[var(--line)] pb-2 text-xl font-bold text-[var(--fg)]">1. 시작하기</h2>
             <p className="mt-3 text-sm leading-relaxed text-[var(--fg-soft)]">
-              첫 화면에는 <b className="text-[var(--fg)]">명조 업데이트</b> 탭이 열려 있고, 상단에서 <b className="text-[var(--fg)]">AI · 도감 · 픽업 일정표 · 명조 업데이트 · 파티 · 실측 딜 · 기록</b> 탭을 오갈 수 있습니다.
+              첫 화면에는 <b className="text-[var(--fg)]">명조 업데이트</b> 탭이 열려 있고, 상단에서 <b className="text-[var(--fg)]">AI · 도감 · 픽업 일정표 · 명조 업데이트 · 파티 · 기록</b> 탭을 오갈 수 있습니다.
               오른쪽 위 아이콘은 순서대로 디스코드 참여, 라이트/다크 테마 전환, 공지사항, 구글 로그인입니다.
             </p>
             <Shot src="/guide/01-home.png" alt="홈 화면 — 명조 업데이트 탭" caption="첫 화면(명조 업데이트) — 상단 탭과 우측 상단 아이콘" />
@@ -164,19 +163,9 @@ export default function GuidePage() {
             <Tip>공명자 3명을 모두 채우면 하단 <b className="text-[var(--fg)]">AI 파티 분석</b>으로 구성 평가를 받아 기록에 저장할 수도 있습니다(구글 로그인 필요).</Tip>
           </section>
 
-          {/* 5. 실측 딜 */}
-          <section id="snapshot" className="mt-10 scroll-mt-24">
-            <h2 className="border-b border-[var(--line)] pb-2 text-xl font-bold text-[var(--fg)]">5. 실측 딜 — 내 계정 그대로 계산</h2>
-            <p className="mt-3 text-sm leading-relaxed text-[var(--fg-soft)]">
-              <b className="text-[var(--fg)]">실측 딜</b> 탭은 게임의 캐릭터 정보 화면 스크린샷(PNG·JPG)을 올리면 실제 장착한 에코 부가옵션을 읽어 <b className="text-[var(--fg)]">내 계정의 절대 피해</b>를 계산합니다.
-              파티 탭의 기본값 상대 비교와 달리 실측값 기준입니다. 스크린샷 없이 <b className="text-[var(--fg)]">빈 양식으로 직접 입력</b>할 수도 있습니다.
-            </p>
-            <Shot src="/guide/11-snapshot.png" alt="실측 딜 탭" caption="실측 딜 — 캐릭터 정보 스크린샷 업로드 또는 수동 입력" />
-          </section>
-
-          {/* 6. AI 빌딩 */}
+          {/* 5. AI 빌딩 */}
           <section id="ai" className="mt-10 scroll-mt-24">
-            <h2 className="border-b border-[var(--line)] pb-2 text-xl font-bold text-[var(--fg)]">6. AI 빌딩 — 대화형 빌드 추천</h2>
+            <h2 className="border-b border-[var(--line)] pb-2 text-xl font-bold text-[var(--fg)]">5. AI 빌딩 — 대화형 빌드 추천</h2>
             <p className="mt-3 text-sm leading-relaxed text-[var(--fg-soft)]">
               <b className="text-[var(--fg)]">AI</b> 탭에서 보유 캐릭터와 목표(예: 무과금, 심층 클리어)를 입력하면 AI가 빌드와 파티를 추천합니다.
               추천 결과는 <b className="text-[var(--fg)]">기록</b> 탭에 저장되어 언제든 다시 볼 수 있습니다. 이 기능은 구글 로그인 후 이용할 수 있습니다.
@@ -184,9 +173,9 @@ export default function GuidePage() {
             <Shot src="/guide/12-ai.png" alt="AI 탭" caption="AI 빌딩 — 구글 로그인 후 이용" />
           </section>
 
-          {/* 7. 공지사항 */}
+          {/* 6. 공지사항 */}
           <section id="notice" className="mt-10 scroll-mt-24">
-            <h2 className="border-b border-[var(--line)] pb-2 text-xl font-bold text-[var(--fg)]">7. 공지사항 — 사이트 업데이트 내역</h2>
+            <h2 className="border-b border-[var(--line)] pb-2 text-xl font-bold text-[var(--fg)]">6. 공지사항 — 사이트 업데이트 내역</h2>
             <p className="mt-3 text-sm leading-relaxed text-[var(--fg-soft)]">
               우측 상단의 확성기 아이콘을 누르면 사이트 업데이트 내역(버전별 변경사항)을 볼 수 있습니다. 새 기능이 추가되면 이곳에서 먼저 안내합니다.
             </p>
