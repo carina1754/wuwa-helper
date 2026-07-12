@@ -1652,16 +1652,8 @@ export function localizedName(
   language: Language,
 ): string {
   const koName = entry.name_ko ?? entry.name ?? "";
-  switch (language) {
-    case "en":
-      return entry.name_en || koName;
-    case "ja":
-      return entry.name_ja || koName;
-    case "zhHans":
-      return entry.name_zhHans || koName;
-    default:
-      return koName;
-  }
+  if (language === "ko") return koName;
+  return entry[`name_${language}`] || koName;
 }
 
 const STORAGE_KEY = "mj:lang";

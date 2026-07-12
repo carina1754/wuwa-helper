@@ -31,11 +31,9 @@ CAT = ROOT / "backend" / "data" / "catalog"
 LANGS = {"en": "en", "ja": "ja", "zhHans": "zh-Hans"}  # our field suffix -> datamine textmap dir
 
 WRITE = "--write" in sys.argv
-report = []
 
 
 def log(s):
-    report.append(str(s))
     print(s)
 
 
@@ -188,7 +186,3 @@ if WRITE:
     log("WROTE catalog files.")
 else:
     log("DRY RUN (pass --write to apply).")
-
-(Path(os.getenv("CLAUDE_JOB_DIR", ".")) / "tmp" / "i18n_extract_report.txt").write_text(
-    "\n".join(report), encoding="utf-8"
-) if os.getenv("CLAUDE_JOB_DIR") else None
