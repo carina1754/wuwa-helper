@@ -6,7 +6,7 @@ import { Portal } from "./Portal";
 import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
 import { weaponDescAtRank } from "@/lib/build";
 import { mediaUrl as imageSrc } from "@/lib/constants";
-import { localizedField, localizedName, localizedSkillType, useLanguage } from "@/lib/i18n";
+import { localizedField, localizedName, localizedSkillType, stripTags, useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexSkillDamage, CodexWeapon, Role, SonataSet } from "@/lib/types";
 
 type SubTab = "resonators" | "weapons" | "echoes";
@@ -15,17 +15,6 @@ type Detail =
   | { type: "resonator"; item: CodexResonator }
   | { type: "weapon"; item: CodexWeapon }
   | { type: "echo"; item: CodexEcho };
-
-/** Game strings carry UE rich-text markup (<size>, <color>, <te href=…>) and
- * {0}/{1} runtime placeholders. Strip every tag and collapse whitespace so the
- * copy renders as clean prose. Placeholders are left in place. */
-function stripTags(input?: string | null): string {
-  if (!input) return "";
-  return input
-    .replace(/<[^>]*>/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-}
 
 /** 5★ gets a warm gold ring, 4★ a violet ring; anything else a neutral line. */
 function rarityRing(rarity?: number | null): string {
@@ -729,7 +718,7 @@ export function ResonatorDetail({ item }: { item: CodexResonator }) {
                     <div className="mt-1 flex flex-wrap gap-1">
                       {groupSkillDamage(skill.damage, skillLvOf(index)).map((g, gi) => (
                         <span key={gi} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--fg-soft)]">
-                          {g.label}: <span className="font-medium text-[var(--fg)]">{g.value}</span>
+                          {localizedSkillType(g.label, language)}: <span className="font-medium text-[var(--fg)]">{g.value}</span>
                         </span>
                       ))}
                     </div>

@@ -5,7 +5,7 @@ import { Portal } from "./Portal";
 import { signIn, useSession } from "next-auth/react";
 import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation, teamCalculate } from "@/lib/api";
 import { mediaUrl } from "@/lib/constants";
-import { localizedField, localizedName, localizedSkillType, useLanguage } from "@/lib/i18n";
+import { localizedField, localizedName, localizedSkillType, localizedStat, stripTags, useLanguage, type Language } from "@/lib/i18n";
 import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SimMemberIn, SimOpts, SonataSet, TeamCalcRequestBody, TeamCalcResult } from "@/lib/types";
 import {
   activeSetBonuses,
@@ -311,7 +311,7 @@ export function TeamBuilder() {
                     <dl className="mt-3 grid grid-cols-2 gap-1 text-xs">
                       {(["atk", "hp", "crit", "critDmg"] as StatKey[]).map((k) => (
                         <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1">
-                          <dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt>
+                          <dt className="text-[var(--muted)]">{localizedStat(k, language)}</dt>
                           <dd className="font-medium text-[var(--fg)]">{fmtStat(k, stats[k])}</dd>
                         </div>
                       ))}
@@ -371,8 +371,8 @@ export function TeamBuilder() {
             {teamBuffs.map((b, i) => (
               <div key={i} className="flex items-center gap-1.5 text-xs">
                 <select value={b.key} onChange={(e) => setTeamBuffs((arr) => arr.map((x, j) => (j === i ? { ...x, key: e.target.value as StatKey } : x)))} className="flex-1 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
-                  {BUFF_KEYS.map((k) => <option key={k} value={k}>{STAT_LABEL[k]}</option>)}
-                  {(Object.keys(STAT_LABEL) as StatKey[]).filter((k) => !BUFF_KEYS.includes(k)).map((k) => <option key={k} value={k}>{STAT_LABEL[k]}</option>)}
+                  {BUFF_KEYS.map((k) => <option key={k} value={k}>{localizedStat(k, language)}</option>)}
+                  {(Object.keys(STAT_LABEL) as StatKey[]).filter((k) => !BUFF_KEYS.includes(k)).map((k) => <option key={k} value={k}>{localizedStat(k, language)}</option>)}
                 </select>
                 <input type="number" step="0.1" value={b.value} onChange={(e) => setTeamBuffs((arr) => arr.map((x, j) => (j === i ? { ...x, value: Number(e.target.value) } : x)))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-right text-[var(--fg)]" />
                 <button type="button" onClick={() => setTeamBuffs((arr) => arr.filter((_, j) => j !== i))} className="text-[var(--muted)] hover:text-[var(--fg)]" aria-label={t.teams.deleteAria}>✕</button>
@@ -423,10 +423,10 @@ export function TeamBuilder() {
 
                 <dl className="mt-3 grid grid-cols-2 gap-1.5 text-xs sm:grid-cols-3">
                   {STAT_ROWS.map((k) => (
-                    <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium tabular-nums text-[var(--fg)]">{fmtStat(k, m.stats[k] ?? 0)}</dd></div>
+                    <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1"><dt className="text-[var(--muted)]">{localizedStat(k, language)}</dt><dd className="font-medium tabular-nums text-[var(--fg)]">{fmtStat(k, m.stats[k] ?? 0)}</dd></div>
                   ))}
                   {extras.map((k) => (
-                    <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium tabular-nums text-[var(--accent)]">{fmtStat(k, m.stats[k] ?? 0)}</dd></div>
+                    <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2 py-1"><dt className="text-[var(--muted)]">{localizedStat(k, language)}</dt><dd className="font-medium tabular-nums text-[var(--accent)]">{fmtStat(k, m.stats[k] ?? 0)}</dd></div>
                   ))}
                 </dl>
 
@@ -586,14 +586,17 @@ export function TeamBuilder() {
 // ---------------------------------------------------------------------------
 const WEAPON_ELEM_KEYS: StatKey[] = ["glacioDmg", "fusionDmg", "electroDmg", "aeroDmg", "spectroDmg", "havocDmg"];
 // compact label for weapon buffs; collapse the six element-dmg keys into "속성 피해"
-function weaponBuffSummary(buffs: WeaponBuff[]): string {
+const ELEM_DMG_LABEL: Record<Language, string> = {
+  ko: "속성 피해", en: "Elemental DMG", ja: "属性ダメージ", zhHans: "属性伤害",
+};
+function weaponBuffSummary(buffs: WeaponBuff[], language: Language): string {
   const elem = buffs.filter((b) => WEAPON_ELEM_KEYS.includes(b.key));
   const nonElem = buffs.filter((b) => !WEAPON_ELEM_KEYS.includes(b.key));
-  const parts = nonElem.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`);
+  const parts = nonElem.map((b) => `${localizedStat(b.key, language)} +${b.value}%`);
   if (elem.length === WEAPON_ELEM_KEYS.length && elem.every((b) => b.value === elem[0].value)) {
-    parts.push(`속성 피해 +${elem[0].value}%`);
+    parts.push(`${ELEM_DMG_LABEL[language]} +${elem[0].value}%`);
   } else {
-    parts.push(...elem.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`));
+    parts.push(...elem.map((b) => `${localizedStat(b.key, language)} +${b.value}%`));
   }
   return parts.join(" · ");
 }
@@ -700,7 +703,7 @@ export function BuildEditor({
                 {chain.slice(0, seq).map((node, i) => (
                   <li key={i} className="text-[11px] leading-5 text-[var(--fg-soft)]">
                     <span className="mr-1 font-semibold text-[var(--accent)]">S{i + 1}</span>
-                    {localizedField(node, "NodeName", language) || node.AttributesDescription || ""}
+                    {stripTags(localizedField(node, "NodeName", language) || node.AttributesDescription)}
                   </li>
                 ))}
               </ol>
@@ -729,7 +732,7 @@ export function BuildEditor({
             </label>
             {wb.always.length ? (
               <p className="mt-2 inline-flex items-center gap-1 rounded bg-[var(--accent-soft,var(--surface-2))] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">
-                {t.codex.passive} · {weaponBuffSummary(wb.always)}
+                {t.codex.passive} · {weaponBuffSummary(wb.always, language)}
               </p>
             ) : null}
             {weapon.desc ? (
@@ -767,7 +770,7 @@ export function BuildEditor({
                   </label>
                   <label className="flex items-center gap-1">{t.teams.main}
                     <select value={e.main} onChange={(ev) => setEcho(idx, (x) => ({ ...x, main: ev.target.value as StatKey }))} className="rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
-                      {(config ? echoMainOptions(config, e.cost) : []).map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
+                      {(config ? echoMainOptions(config, e.cost) : []).map((o) => <option key={o.key} value={o.key}>{localizedStat(o.key, language)}</option>)}
                     </select>
                   </label>
                   <label className="flex flex-1 items-center gap-1">Lv.{e.level}
@@ -779,7 +782,7 @@ export function BuildEditor({
                   {e.subs.map((s, si) => (
                     <div key={si} className="flex items-center gap-1.5 text-[11px]">
                       <select value={s.key} onChange={(ev) => setEcho(idx, (x) => ({ ...x, subs: x.subs.map((y, k) => (k === si ? { key: ev.target.value as StatKey, value: config ? subMax(config, ev.target.value as StatKey) : 0 } : y)) }))} className="flex-1 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
-                        {(config?.sub ?? []).map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
+                        {(config?.sub ?? []).map((o) => <option key={o.key} value={o.key}>{localizedStat(o.key, language)}</option>)}
                       </select>
                       <input type="number" step="0.1" value={s.value} onChange={(ev) => setEcho(idx, (x) => ({ ...x, subs: x.subs.map((y, k) => (k === si ? { ...y, value: Number(ev.target.value) } : y)) }))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-right text-[var(--fg)]" />
                       <button type="button" onClick={() => setEcho(idx, (x) => ({ ...x, subs: x.subs.filter((_, k) => k !== si) }))} className="text-[var(--muted)] hover:text-[var(--fg)]">✕</button>
@@ -803,7 +806,7 @@ export function BuildEditor({
           <span className="font-semibold text-[var(--fg)]">{t.teams.setEffect}</span>{" "}
           <span className="text-[var(--fg-soft)]">{active.sets.map((s) => `${localizedName(setByName.get(s.name) ?? { name_ko: s.name }, language)} ${s.count >= 5 ? t.teams.set5 : t.teams.set2}`).join(" + ")}</span>
           {active.bonuses.length ? (
-            <span className="text-[var(--accent)]"> · {active.bonuses.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`).join(", ")}</span>
+            <span className="text-[var(--accent)]"> · {active.bonuses.map((b) => `${localizedStat(b.key, language)} +${b.value}%`).join(", ")}</span>
           ) : null}
         </div>
       ) : null}
@@ -813,10 +816,10 @@ export function BuildEditor({
         <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.stats}</h4>
         <dl className="grid grid-cols-2 gap-1.5 text-sm">
           {PANEL_KEYS.map((k) => (
-            <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium text-[var(--fg)]">{fmtStat(k, stats[k])}</dd></div>
+            <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5"><dt className="text-[var(--muted)]">{localizedStat(k, language)}</dt><dd className="font-medium text-[var(--fg)]">{fmtStat(k, stats[k])}</dd></div>
           ))}
           {(Object.keys(STAT_LABEL) as StatKey[]).filter((k) => !PANEL_KEYS.includes(k) && Math.abs(stats[k]) > 0.05).map((k) => (
-            <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium text-[var(--fg)]">{fmtStat(k, stats[k])}</dd></div>
+            <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5"><dt className="text-[var(--muted)]">{localizedStat(k, language)}</dt><dd className="font-medium text-[var(--fg)]">{fmtStat(k, stats[k])}</dd></div>
           ))}
         </dl>
       </div>

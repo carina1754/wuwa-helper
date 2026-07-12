@@ -1,6 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { STAT_LABEL, type StatKey } from "./build";
 
 // 다국어 서비스. copy에 로케일별 문자열 테이블을 두고 Provider가 현재 언어를 상태로 관리한다.
 // elements/weaponTypes는 런타임에 한국어 카탈로그 값(예: '기류', '대검')으로 조회되므로 한국어 키로 둔다.
@@ -1675,6 +1676,14 @@ export function localizedList(entry: object, base: string, language: Language): 
   return loc && loc.length ? loc : koVal;
 }
 
+/** 게임 문자열의 UE 리치텍스트 마크업(<size>·<color>·<te href=…>) 제거 + 공백 정리.
+ * datamine 정본 카탈로그는 정규화 저장되지만, 신규 WIP 캐릭 데이터는 raw 태그가 남을 수 있어
+ * 렌더 시 방어적으로 스트립(Codex·TeamPresetPanel 공용). {n} 플레이스홀더는 보존. */
+export function stripTags(input?: string | null): string {
+  if (!input) return "";
+  return input.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+}
+
 /** 스킬 타입(8종 enum) 현지화. 엔진은 한국어 SkillType 부분일치로 분류하므로 데이터는 한국어 유지,
  * 여기서는 표시만 번역 (datamine 공식 용어). ko/미매핑은 원문 그대로. */
 const SKILL_TYPE_I18N: Partial<Record<Language, Record<string, string>>> = {
@@ -1713,6 +1722,37 @@ const SKILL_TYPE_I18N: Partial<Record<Language, Record<string, string>>> = {
 export function localizedSkillType(ko: string | null | undefined, language: Language): string {
   const val = ko ?? "";
   return SKILL_TYPE_I18N[language]?.[val] ?? val;
+}
+
+/** 스탯 라벨(StatKey 20종) 현지화. ko 정본은 build.ts STAT_LABEL, en/ja/zhHans는 datamine 공식
+ * 속성명(PropertyIndex/RoleTag 텍스트맵). %변형은 기본 라벨+"%"(ko 관례 동일). 표시 전용. */
+const STAT_LABEL_I18N: Record<Exclude<Language, "ko">, Record<StatKey, string>> = {
+  en: {
+    hp: "HP", atk: "ATK", def: "DEF", hpPct: "HP%", atkPct: "ATK%", defPct: "DEF%",
+    crit: "Crit. Rate", critDmg: "Crit. DMG", energyRegen: "Energy Regen", healing: "Healing Bonus",
+    basicDmg: "Basic Attack DMG", heavyDmg: "Heavy Attack DMG", skillDmg: "Resonance Skill DMG", liberationDmg: "Resonance Liberation DMG",
+    glacioDmg: "Glacio DMG Bonus", fusionDmg: "Fusion DMG Bonus", electroDmg: "Electro DMG Bonus",
+    aeroDmg: "Aero DMG Bonus", spectroDmg: "Spectro DMG Bonus", havocDmg: "Havoc DMG Bonus",
+  },
+  ja: {
+    hp: "HP", atk: "攻撃力", def: "防御力", hpPct: "HP%", atkPct: "攻撃力%", defPct: "防御力%",
+    crit: "クリティカル", critDmg: "クリティカルダメージ", energyRegen: "共鳴効率", healing: "HP回復効果アップ",
+    basicDmg: "通常攻撃ダメージ", heavyDmg: "重撃ダメージ", skillDmg: "共鳴スキルダメージ", liberationDmg: "共鳴解放ダメージ",
+    glacioDmg: "凝縮ダメージ", fusionDmg: "焦熱ダメージ", electroDmg: "電導ダメージ",
+    aeroDmg: "気動ダメージ", spectroDmg: "回折ダメージ", havocDmg: "消滅ダメージ",
+  },
+  zhHans: {
+    hp: "生命力", atk: "攻击力", def: "防御力", hpPct: "HP%", atkPct: "攻击力%", defPct: "防御力%",
+    crit: "暴击", critDmg: "暴击伤害", energyRegen: "共鸣效率", healing: "治疗效果加成",
+    basicDmg: "普攻伤害", heavyDmg: "重击伤害", skillDmg: "共鸣技能伤害", liberationDmg: "共鸣解放伤害",
+    glacioDmg: "冷凝伤害", fusionDmg: "热熔伤害", electroDmg: "导电伤害",
+    aeroDmg: "气动伤害", spectroDmg: "衍射伤害", havocDmg: "湮灭伤害",
+  },
+};
+
+export function localizedStat(key: StatKey, language: Language): string {
+  if (language === "ko") return STAT_LABEL[key];
+  return STAT_LABEL_I18N[language]?.[key] ?? STAT_LABEL[key];
 }
 
 const STORAGE_KEY = "mj:lang";
