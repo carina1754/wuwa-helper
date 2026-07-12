@@ -795,7 +795,9 @@
     "icon": "/catalog/image/weapons/21040045",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "パルスの機腕",
+    "name_zhHans": "脉冲协臂"
   },
   {
     "id": 21050046,
@@ -1593,7 +1595,9 @@
     "icon": "/catalog/image/weapons/21050046",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "光のハルモニア",
+    "name_zhHans": "和光回唱"
   },
   {
     "id": 21050016,
@@ -2391,7 +2395,9 @@
     "icon": "/catalog/image/weapons/21050016",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "糸繰りの奇術",
+    "name_zhHans": "掣傀之手"
   },
   {
     "id": 21020026,
@@ -3189,7 +3195,9 @@
     "icon": "/catalog/image/weapons/21020026",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "春裁ち",
+    "name_zhHans": "裁春"
   },
   {
     "id": 21020045,
@@ -3987,7 +3995,9 @@
     "icon": "/catalog/image/weapons/21020045",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "レーザーの鋭剣",
+    "name_zhHans": "镭射切变"
   },
   {
     "id": 21040015,
@@ -4785,7 +4795,9 @@
     "icon": "/catalog/image/weapons/21040015",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "怒涛の湖音",
+    "name_zhHans": "擎渊怒涛"
   },
   {
     "id": 21050036,
@@ -5583,7 +5595,9 @@
     "icon": "/catalog/image/weapons/21050036",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "星々のコンチェルト",
+    "name_zhHans": "星序协响"
   },
   {
     "id": 21050056,
@@ -6381,7 +6395,9 @@
     "icon": "/catalog/image/weapons/21050056",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "深海の囁き",
+    "name_zhHans": "海的呢喃"
   },
   {
     "id": 21010066,
@@ -7179,7 +7195,9 @@
     "icon": "/catalog/image/weapons/21010066",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "スターキャリブレーター",
+    "name_zhHans": "宙算仪轨"
   },
   {
     "id": 21050045,
@@ -7977,7 +7995,9 @@
     "icon": "/catalog/image/weapons/21050045",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ボゾンの観測器",
+    "name_zhHans": "玻色星仪"
   },
   {
     "id": 21030015,
@@ -8775,7 +8795,9 @@
     "icon": "/catalog/image/weapons/21030015",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "不変の湖煙",
+    "name_zhHans": "停驻之烟"
   },
   {
     "id": 21010036,
@@ -9573,7 +9595,9 @@
     "icon": "/catalog/image/weapons/21010036",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "闘炎の爪痕",
+    "name_zhHans": "焰痕"
   },
   {
     "id": 21040036,
@@ -10371,7 +10395,9 @@
     "icon": "/catalog/image/weapons/21040036",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "焔光の裁き",
+    "name_zhHans": "焰光裁定"
   },
   {
     "id": 21020086,
@@ -11169,7 +11195,9 @@
     "icon": "/catalog/image/weapons/21020086",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "灼霜",
+    "name_zhHans": "灼霜"
   },
   {
     "id": 21040046,
@@ -11967,7 +11995,9 @@
     "icon": "/catalog/image/weapons/21040046",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "万物を書き留める月相",
+    "name_zhHans": "万物持存的注释"
   },
   {
     "id": 21040066,
@@ -12765,7 +12795,9 @@
     "icon": "/catalog/image/weapons/21040066",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ソル・スウォーンの注釈",
+    "name_zhHans": "昭日译注"
   },
   {
     "id": 21020016,
@@ -13563,7 +13595,9 @@
     "icon": "/catalog/image/weapons/21020016",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "赫く燃ゆる流光",
+    "name_zhHans": "赫奕流明"
   },
   {
     "id": 21020056,
@@ -14361,7 +14395,9 @@
     "icon": "/catalog/image/weapons/21020056",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "定めを覆す荊冠",
+    "name_zhHans": "不屈命定之冠"
   },
   {
     "id": 21030026,
@@ -15159,7 +15195,9 @@
     "icon": "/catalog/image/weapons/21030026",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "森のアリア",
+    "name_zhHans": "林间的咏叹调"
   },
   {
     "id": 21030066,
@@ -15957,7 +15995,9 @@
     "icon": "/catalog/image/weapons/21030066",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "スカル・ポッパー",
+    "name_zhHans": "碎骨"
   },
   {
     "id": 21030056,
@@ -16755,7 +16795,9 @@
     "icon": "/catalog/image/weapons/21030056",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "スペクトラル・トリガー",
+    "name_zhHans": "蜃影"
   },
   {
     "id": 21030046,
@@ -17553,7 +17595,9 @@
     "icon": "/catalog/image/weapons/21030046",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "スペクトル・ブラスター",
+    "name_zhHans": "溢彩荧辉"
   },
   {
     "id": 21030036,
@@ -18351,7 +18395,9 @@
     "icon": "/catalog/image/weapons/21030036",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ルクス＆アンブラ",
+    "name_zhHans": "光影双生"
   },
   {
     "id": 21010045,
@@ -19149,7 +19195,9 @@
     "icon": "/catalog/image/weapons/21010045",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ラディアンスの切っ先",
+    "name_zhHans": "源能机锋"
   },
   {
     "id": 21020076,
@@ -19947,7 +19995,9 @@
     "icon": "/catalog/image/weapons/21020076",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "とこしえの明星",
+    "name_zhHans": "永远的启明星"
   },
   {
     "id": 21050026,
@@ -20745,7 +20795,9 @@
     "icon": "/catalog/image/weapons/21050026",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "氷華の雅印",
+    "name_zhHans": "琼枝冰绡"
   },
   {
     "id": 21030045,
@@ -21543,7 +21595,9 @@
     "icon": "/catalog/image/weapons/21030045",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フェーズのさざ波",
+    "name_zhHans": "相位涟漪"
   },
   {
     "id": 21050076,
@@ -22341,7 +22395,9 @@
     "icon": "/catalog/image/weapons/21050076",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "偽物の矮星",
+    "name_zhHans": "赝作的矮星"
   },
   {
     "id": 21050066,
@@ -23139,7 +23195,9 @@
     "icon": "/catalog/image/weapons/21050066",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "幽冥の忘憂曲",
+    "name_zhHans": "幽冥的忘忧章"
   },
   {
     "id": 21030016,
@@ -23937,7 +23995,9 @@
     "icon": "/catalog/image/weapons/21030016",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ラストダンス",
+    "name_zhHans": "死与舞"
   },
   {
     "id": 21020015,
@@ -24735,7 +24795,9 @@
     "icon": "/catalog/image/weapons/21020015",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "千古の湖水",
+    "name_zhHans": "千古洑流"
   },
   {
     "id": 21010046,
@@ -25533,7 +25595,9 @@
     "icon": "/catalog/image/weapons/21010046",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雷霆を統べし王剣",
+    "name_zhHans": "驭冕铸雷之权"
   },
   {
     "id": 21010016,
@@ -26331,7 +26395,9 @@
     "icon": "/catalog/image/weapons/21010016",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "蒼鱗連峰",
+    "name_zhHans": "苍鳞千嶂"
   },
   {
     "id": 21010056,
@@ -27129,7 +27195,9 @@
     "icon": "/catalog/image/weapons/21010056",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "曇斬",
+    "name_zhHans": "昙切"
   },
   {
     "id": 21010026,
@@ -27927,7 +27995,9 @@
     "icon": "/catalog/image/weapons/21010026",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "歳華調和",
+    "name_zhHans": "时和岁稔"
   },
   {
     "id": 21050015,
@@ -28725,7 +28795,9 @@
     "icon": "/catalog/image/weapons/21050015",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "栄枯の湖岸",
+    "name_zhHans": "漪澜浮录"
   },
   {
     "id": 21040016,
@@ -29523,7 +29595,9 @@
     "icon": "/catalog/image/weapons/21040016",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "万端の枢機",
+    "name_zhHans": "诸方玄枢"
   },
   {
     "id": 21020066,
@@ -30321,7 +30395,9 @@
     "icon": "/catalog/image/weapons/21020066",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "破敵の鋭竹",
+    "name_zhHans": "裁竹"
   },
   {
     "id": 21010015,
@@ -31119,7 +31195,9 @@
     "icon": "/catalog/image/weapons/21010015",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "仙境の湖光",
+    "name_zhHans": "浩境粼光"
   },
   {
     "id": 21050086,
@@ -31917,7 +31995,9 @@
     "icon": "/catalog/image/weapons/21050086",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フリーズフレーム",
+    "name_zhHans": "存帧"
   },
   {
     "id": 21040056,
@@ -32715,7 +32795,9 @@
     "icon": "/catalog/image/weapons/21040056",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "デイブレイカースパイン",
+    "name_zhHans": "白昼之脊"
   },
   {
     "id": 21020046,
@@ -33513,7 +33595,9 @@
     "icon": "/catalog/image/weapons/21020046",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "血の盟約",
+    "name_zhHans": "血誓盟约"
   },
   {
     "id": 21020036,
@@ -34311,7 +34395,9 @@
     "icon": "/catalog/image/weapons/21020036",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "エンドレスボヤージュ",
+    "name_zhHans": "不灭航路"
   },
   {
     "id": 21040026,
@@ -35109,7 +35195,9 @@
     "icon": "/catalog/image/weapons/21040026",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "トラジコメーディア",
+    "name_zhHans": "悲喜剧"
   },
   {
     "id": 21020034,
@@ -35907,7 +35995,9 @@
     "icon": "/catalog/image/weapons/21020034",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "瞬斬刀＃18",
+    "name_zhHans": "瞬斩刀-18型"
   },
   {
     "id": 21040034,
@@ -36705,7 +36795,9 @@
     "icon": "/catalog/image/weapons/21040034",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "鋼影拳＃21・四番",
+    "name_zhHans": "钢影拳-21丁型"
   },
   {
     "id": 21050034,
@@ -37503,7 +37595,9 @@
     "icon": "/catalog/image/weapons/21050034",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "鳴動機＃25",
+    "name_zhHans": "鸣动仪-25型"
   },
   {
     "id": 21030034,
@@ -38301,7 +38395,9 @@
     "icon": "/catalog/image/weapons/21030034",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "穿撃銃＃26",
+    "name_zhHans": "穿击枪-26型"
   },
   {
     "id": 21010034,
@@ -39099,7 +39195,9 @@
     "icon": "/catalog/image/weapons/21010034",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "重破刃＃41",
+    "name_zhHans": "重破刃-41型"
   },
   {
     "id": 21010074,
@@ -39897,7 +39995,9 @@
     "icon": "/catalog/image/weapons/21010074",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "秋の名残",
+    "name_zhHans": "纹秋"
   },
   {
     "id": 21040104,
@@ -40695,7 +40795,9 @@
     "icon": "/catalog/image/weapons/21040104",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "舞い上がる大空",
+    "name_zhHans": "凌空"
   },
   {
     "id": 21050064,
@@ -41493,7 +41595,9 @@
     "icon": "/catalog/image/weapons/21050064",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "変化の星",
+    "name_zhHans": "异度"
   },
   {
     "id": 21010104,
@@ -42291,7 +42395,9 @@
     "icon": "/catalog/image/weapons/21010104",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "金の天穹",
+    "name_zhHans": "金穹"
   },
   {
     "id": 21050044,
@@ -43089,7 +43195,9 @@
     "icon": "/catalog/image/weapons/21050044",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "今州の衛士",
+    "name_zhHans": "今州守望"
   },
   {
     "id": 21010024,
@@ -43887,7 +43995,9 @@
     "icon": "/catalog/image/weapons/21010024",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "霊感ディスコード",
+    "name_zhHans": "异响空灵"
   },
   {
     "id": 21030074,
@@ -44685,7 +44795,9 @@
     "icon": "/catalog/image/weapons/21030074",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "迸る雷霆",
+    "name_zhHans": "奔雷"
   },
   {
     "id": 21050104,
@@ -45483,7 +45595,9 @@
     "icon": "/catalog/image/weapons/21050104",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "弾む輝き",
+    "name_zhHans": "曜光"
   },
   {
     "id": 21020017,
@@ -46281,7 +46395,9 @@
     "icon": "/catalog/image/weapons/21020017",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "心の錨",
+    "name_zhHans": "心之锚"
   },
   {
     "id": 21040094,
@@ -47079,7 +47195,9 @@
     "icon": "/catalog/image/weapons/21040094",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "酩酊のエポス",
+    "name_zhHans": "酩酊的英雄志"
   },
   {
     "id": 21010084,
@@ -47877,7 +47995,9 @@
     "icon": "/catalog/image/weapons/21010084",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "破滅に迫る赤方偏移",
+    "name_zhHans": "凋亡频移"
   },
   {
     "id": 21050027,
@@ -48675,7 +48795,9 @@
     "icon": "/catalog/image/weapons/21050027",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "海の恩恵",
+    "name_zhHans": "大海的馈赠"
   },
   {
     "id": 21040024,
@@ -49473,7 +49595,9 @@
     "icon": "/catalog/image/weapons/21040024",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "狂乱マルカート",
+    "name_zhHans": "呼啸重音"
   },
   {
     "id": 21030044,
@@ -50271,7 +50395,9 @@
     "icon": "/catalog/image/weapons/21030044",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "燃え尽きぬ焔",
+    "name_zhHans": "无眠烈火"
   },
   {
     "id": 21020064,
@@ -51069,7 +51195,9 @@
     "icon": "/catalog/image/weapons/21020064",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "倒錯の星",
+    "name_zhHans": "西升"
   },
   {
     "id": 21050017,
@@ -51867,7 +51995,9 @@
     "icon": "/catalog/image/weapons/21050017",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "海淵のリフレイン",
+    "name_zhHans": "渊海回声"
   },
   {
     "id": 21020044,
@@ -52665,7 +52795,9 @@
     "icon": "/catalog/image/weapons/21020044",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "決死の一人戦",
+    "name_zhHans": "不归孤军"
   },
   {
     "id": 21030084,
@@ -53463,7 +53595,9 @@
     "icon": "/catalog/image/weapons/21030084",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "悖理を説く宇宙ジェット",
+    "name_zhHans": "悖论喷流"
   },
   {
     "id": 21020084,
@@ -54261,7 +54395,9 @@
     "icon": "/catalog/image/weapons/21020084",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "永遠を砕く重力崩壊",
+    "name_zhHans": "永续坍缩"
   },
   {
     "id": 21020104,
@@ -55059,7 +55195,9 @@
     "icon": "/catalog/image/weapons/21020104",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "鋭利な翼",
+    "name_zhHans": "翼锋"
   },
   {
     "id": 21010094,
@@ -55857,7 +55995,9 @@
     "icon": "/catalog/image/weapons/21010094",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "寛恕のタ・エイス・ヘアウトン",
+    "name_zhHans": "容赦的沉思录"
   },
   {
     "id": 21050084,
@@ -56655,7 +56795,9 @@
     "icon": "/catalog/image/weapons/21050084",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "コアが溶融する降着円盤",
+    "name_zhHans": "核熔星盘"
   },
   {
     "id": 21030094,
@@ -57453,7 +57595,9 @@
     "icon": "/catalog/image/weapons/21030094",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "別れのメロス",
+    "name_zhHans": "叙别的罗曼史"
   },
   {
     "id": 21010044,
@@ -58251,7 +58395,9 @@
     "icon": "/catalog/image/weapons/21010044",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "長夜の灯火",
+    "name_zhHans": "永夜长明"
   },
   {
     "id": 21010064,
@@ -59049,7 +59195,9 @@
     "icon": "/catalog/image/weapons/21010064",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "逆行の星",
+    "name_zhHans": "东落"
   },
   {
     "id": 21040044,
@@ -59847,7 +59995,9 @@
     "icon": "/catalog/image/weapons/21040044",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "金鉄の志",
+    "name_zhHans": "袍泽之固"
   },
   {
     "id": 21020074,
@@ -60645,7 +60795,9 @@
     "icon": "/catalog/image/weapons/21020074",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "万象変遷",
+    "name_zhHans": "飞景"
   },
   {
     "id": 21030064,
@@ -61443,7 +61595,9 @@
     "icon": "/catalog/image/weapons/21030064",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "疾走の星",
+    "name_zhHans": "飞逝"
   },
   {
     "id": 21040064,
@@ -62241,7 +62395,9 @@
     "icon": "/catalog/image/weapons/21040064",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "驚異の星",
+    "name_zhHans": "骇行"
   },
   {
     "id": 21040084,
@@ -63039,7 +63195,9 @@
     "icon": "/catalog/image/weapons/21040084",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "星屑が捩れる渦巻腕",
+    "name_zhHans": "尘云旋臂"
   },
   {
     "id": 21050074,
@@ -63837,7 +63995,9 @@
     "icon": "/catalog/image/weapons/21050074",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "清らかな音",
+    "name_zhHans": "清音"
   },
   {
     "id": 21030104,
@@ -64635,7 +64795,9 @@
     "icon": "/catalog/image/weapons/21030104",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "紅炎",
+    "name_zhHans": "阳焰"
   },
   {
     "id": 21050024,
@@ -65433,7 +65595,9 @@
     "icon": "/catalog/image/weapons/21050024",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "奇妙バリエーション",
+    "name_zhHans": "奇幻变奏"
   },
   {
     "id": 21020094,
@@ -66231,7 +66395,9 @@
     "icon": "/catalog/image/weapons/21020094",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "風刺のファブリオー",
+    "name_zhHans": "风流的寓言诗"
   },
   {
     "id": 21020024,
@@ -67029,7 +67195,9 @@
     "icon": "/catalog/image/weapons/21020024",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "行進オーバーチュア",
+    "name_zhHans": "行进序曲"
   },
   {
     "id": 21050094,
@@ -67827,7 +67995,9 @@
     "icon": "/catalog/image/weapons/21050094",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "虚飾のワルツ",
+    "name_zhHans": "虚饰的华尔兹"
   },
   {
     "id": 21030024,
@@ -68625,7 +68795,9 @@
     "icon": "/catalog/image/weapons/21030024",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "華麗カテンツァ",
+    "name_zhHans": "华彩乐段"
   },
   {
     "id": 21040074,
@@ -69423,7 +69595,9 @@
     "icon": "/catalog/image/weapons/21040074",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "黄金の拳",
+    "name_zhHans": "金掌"
   },
   {
     "id": 21040043,
@@ -70221,7 +70395,9 @@
     "icon": "/catalog/image/weapons/21040043",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "探索者手甲・排除",
+    "name_zhHans": "远行者臂铠·破障"
   },
   {
     "id": 21030043,
@@ -71019,7 +71195,9 @@
     "icon": "/catalog/image/weapons/21030043",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "探索者拳銃・洞察",
+    "name_zhHans": "远行者佩枪·洞察"
   },
   {
     "id": 21010043,
@@ -71817,7 +71995,9 @@
     "icon": "/catalog/image/weapons/21010043",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "探索者長刃・開拓",
+    "name_zhHans": "远行者长刃·辟路"
   },
   {
     "id": 21050043,
@@ -72615,7 +72795,9 @@
     "icon": "/catalog/image/weapons/21050043",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "探索者増幅器・発見",
+    "name_zhHans": "远行者矩阵·探幽"
   },
   {
     "id": 21020043,
@@ -73413,7 +73595,9 @@
     "icon": "/catalog/image/weapons/21020043",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "探索者迅刀・旅路",
+    "name_zhHans": "远行者迅刀·旅迹"
   },
   {
     "id": 21040053,
@@ -74211,7 +74395,9 @@
     "icon": "/catalog/image/weapons/21040053",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "辺守手甲・造設",
+    "name_zhHans": "戍关臂铠·拔山"
   },
   {
     "id": 21030053,
@@ -75009,7 +75195,9 @@
     "icon": "/catalog/image/weapons/21030053",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "辺守拳銃・平定",
+    "name_zhHans": "戍关佩枪·平云"
   },
   {
     "id": 21010053,
@@ -75807,7 +75995,9 @@
     "icon": "/catalog/image/weapons/21010053",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "辺守長刃・統率",
+    "name_zhHans": "戍关长刃·定军"
   },
   {
     "id": 21050053,
@@ -76605,7 +76795,9 @@
     "icon": "/catalog/image/weapons/21050053",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "辺守増幅器・伝承",
+    "name_zhHans": "戍关音感仪·留光"
   },
   {
     "id": 21020053,
@@ -77403,7 +77595,9 @@
     "icon": "/catalog/image/weapons/21020053",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "辺守迅刀・鎮護",
+    "name_zhHans": "戍关迅刀·镇海"
   },
   {
     "id": 21040023,
@@ -78201,7 +78395,9 @@
     "icon": "/catalog/image/weapons/21040023",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "本源手甲・試作肆",
+    "name_zhHans": "源能臂铠·测肆"
   },
   {
     "id": 21030023,
@@ -78999,7 +79195,9 @@
     "icon": "/catalog/image/weapons/21030023",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "本源拳銃・試作参",
+    "name_zhHans": "源能佩枪·测叁"
   },
   {
     "id": 21010023,
@@ -79797,7 +79995,9 @@
     "icon": "/catalog/image/weapons/21010023",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "本源長刃・試作壱",
+    "name_zhHans": "源能长刃·测壹"
   },
   {
     "id": 21050023,
@@ -80595,7 +80795,9 @@
     "icon": "/catalog/image/weapons/21050023",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "本源増幅器・試作伍",
+    "name_zhHans": "源能音感仪·测五"
   },
   {
     "id": 21020023,
@@ -81393,7 +81595,9 @@
     "icon": "/catalog/image/weapons/21020023",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "本源迅刀・試作弐",
+    "name_zhHans": "源能迅刀·测贰"
   },
   {
     "id": 21010063,
@@ -82191,7 +82395,9 @@
     "icon": "/catalog/image/weapons/21010063",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "天上の仙楽",
+    "name_zhHans": "钧天正音"
   },
   {
     "id": 21040013,
@@ -82989,7 +83195,9 @@
     "icon": "/catalog/image/weapons/21040013",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "暗夜の手甲・夜灯",
+    "name_zhHans": "暗夜臂铠·夜芒"
   },
   {
     "id": 21030013,
@@ -83787,7 +83995,9 @@
     "icon": "/catalog/image/weapons/21030013",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "暗夜の拳銃・闇星",
+    "name_zhHans": "暗夜佩枪·暗星"
   },
   {
     "id": 21010013,
@@ -84585,7 +84795,9 @@
     "icon": "/catalog/image/weapons/21010013",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "暗夜の長刃・玄明",
+    "name_zhHans": "暗夜长刃·玄明"
   },
   {
     "id": 21050013,
@@ -85383,7 +85595,9 @@
     "icon": "/catalog/image/weapons/21050013",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "暗夜の増幅器・冥光",
+    "name_zhHans": "暗夜矩阵·暝光"
   },
   {
     "id": 21020013,
@@ -86181,7 +86395,9 @@
     "icon": "/catalog/image/weapons/21020013",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "暗夜の迅刀・黒閃",
+    "name_zhHans": "暗夜迅刀·黑闪"
   },
   {
     "id": 21040012,
@@ -86979,7 +87195,9 @@
     "icon": "/catalog/image/weapons/21040012",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "原初の手甲・磐石",
+    "name_zhHans": "原初臂铠·磐岩"
   },
   {
     "id": 21030012,
@@ -87777,7 +87995,9 @@
     "icon": "/catalog/image/weapons/21030012",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "原初の拳銃・深森",
+    "name_zhHans": "原初佩枪·穿林"
   },
   {
     "id": 21010012,
@@ -88575,7 +88795,9 @@
     "icon": "/catalog/image/weapons/21010012",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "原初の長刃・岩塊",
+    "name_zhHans": "原初长刃·朴石"
   },
   {
     "id": 21050012,
@@ -89373,7 +89595,9 @@
     "icon": "/catalog/image/weapons/21050012",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "原初の増幅器・波音",
+    "name_zhHans": "原初音感仪·听浪"
   },
   {
     "id": 21020012,
@@ -90171,7 +90395,9 @@
     "icon": "/catalog/image/weapons/21020012",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "原初の迅刀・雨鳴",
+    "name_zhHans": "原初迅刀·鸣雨"
   },
   {
     "id": 21040011,
@@ -90969,7 +91195,9 @@
     "icon": "/catalog/image/weapons/21040011",
     "source": "encore.moe",
     "weapon_type_ko": "권갑",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "稽古用手甲",
+    "name_zhHans": "教学臂铠"
   },
   {
     "id": 21030011,
@@ -91767,7 +91995,9 @@
     "icon": "/catalog/image/weapons/21030011",
     "source": "encore.moe",
     "weapon_type_ko": "권총",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "稽古用拳銃",
+    "name_zhHans": "教学佩枪"
   },
   {
     "id": 21010011,
@@ -92565,7 +92795,9 @@
     "icon": "/catalog/image/weapons/21010011",
     "source": "encore.moe",
     "weapon_type_ko": "대검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "稽古用長刃",
+    "name_zhHans": "教学长刃"
   },
   {
     "id": 21050011,
@@ -93363,7 +93595,9 @@
     "icon": "/catalog/image/weapons/21050011",
     "source": "encore.moe",
     "weapon_type_ko": "증폭기",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "稽古用増幅器",
+    "name_zhHans": "教学音感仪"
   },
   {
     "id": 21020011,
@@ -94161,7 +94395,9 @@
     "icon": "/catalog/image/weapons/21020011",
     "source": "encore.moe",
     "weapon_type_ko": "직검",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "稽古用迅刀",
+    "name_zhHans": "教学迅刀"
   },
   {
     "id": 21020096,
@@ -94957,7 +95193,9 @@
     "icon": "/catalog/image/weapons/21020096",
     "resonance": null,
     "sim_source": "datamine-3.5.0",
-    "source": "datamine-3.5.0"
+    "source": "datamine-3.5.0",
+    "name_ja": "天つ蒼淵",
+    "name_zhHans": "天之苍苍"
   },
   {
     "id": 21050096,
@@ -95753,6 +95991,8 @@
     "icon": "/catalog/image/weapons/21050096",
     "resonance": null,
     "sim_source": "datamine-3.5.0",
-    "source": "datamine-3.5.0"
+    "source": "datamine-3.5.0",
+    "name_ja": "夕霞の飲露",
+    "name_zhHans": "栖霞饮露"
   }
 ]

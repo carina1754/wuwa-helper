@@ -20,7 +20,9 @@
     },
     "icon": "/catalog/image/echoes/60002005",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・ダーニャ",
+    "name_zhHans": "共鸣回响·达妮娅"
   },
   {
     "id": 60001675,
@@ -44,7 +46,9 @@
     },
     "icon": "/catalog/image/echoes/60001675",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・鳴式・レビヤタン",
+    "name_zhHans": "共鸣回响·鸣式·利维亚坦"
   },
   {
     "id": 60001995,
@@ -67,7 +71,9 @@
     },
     "icon": "/catalog/image/echoes/60001995",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・鳴式・虚構神機",
+    "name_zhHans": "共鸣回响·鸣式·虚造神型"
   },
   {
     "id": 60001065,
@@ -91,7 +97,9 @@
     },
     "icon": "/catalog/image/echoes/60001065",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・フルールドリス",
+    "name_zhHans": "共鸣回响·芙露德莉斯"
   },
   {
     "id": 60000535,
@@ -114,7 +122,9 @@
     },
     "icon": "/catalog/image/echoes/60000535",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "無妄者",
+    "name_zhHans": "无妄者"
   },
   {
     "id": 60200014,
@@ -137,7 +147,9 @@
     },
     "icon": "/catalog/image/echoes/60200014",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "無妄者",
+    "name_zhHans": "无妄者"
   },
   {
     "id": 60001915,
@@ -160,7 +172,9 @@
     },
     "icon": "/catalog/image/echoes/60001915",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "シギルム",
+    "name_zhHans": "辛吉勒姆"
   },
   {
     "id": 60001155,
@@ -183,7 +197,9 @@
     },
     "icon": "/catalog/image/echoes/60001155",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・ヘカテー",
+    "name_zhHans": "梦魇·赫卡忒"
   },
   {
     "id": 60000595,
@@ -206,7 +222,9 @@
     },
     "icon": "/catalog/image/echoes/60000595",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "角",
+    "name_zhHans": "角"
   },
   {
     "id": 60200018,
@@ -229,7 +247,9 @@
     },
     "icon": "/catalog/image/echoes/60200018",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "角",
+    "name_zhHans": "角"
   },
   {
     "id": 60200101,
@@ -252,7 +272,9 @@
     },
     "icon": "/catalog/image/echoes/60200101",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無妄者",
+    "name_zhHans": "异相·无妄者"
   },
   {
     "id": 60100535,
@@ -275,7 +297,9 @@
     },
     "icon": "/catalog/image/echoes/60100535",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無妄者",
+    "name_zhHans": "异相·无妄者"
   },
   {
     "id": 60200027,
@@ -298,7 +322,9 @@
     },
     "icon": "/catalog/image/echoes/60200027",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無妄者",
+    "name_zhHans": "异相·无妄者"
   },
   {
     "id": 60101915,
@@ -321,7 +347,9 @@
     },
     "icon": "/catalog/image/echoes/60101915",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・シギルム",
+    "name_zhHans": "异相·辛吉勒姆"
   },
   {
     "id": 60200203,
@@ -344,7 +372,9 @@
     },
     "icon": "/catalog/image/echoes/60200203",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雷刹のウロコ",
+    "name_zhHans": "朔雷之鳞"
   },
   {
     "id": 60000375,
@@ -368,7 +398,9 @@
     },
     "icon": "/catalog/image/echoes/60000375",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "鳴鐘の亀",
+    "name_zhHans": "鸣钟之龟"
   },
   {
     "id": 60000855,
@@ -391,7 +423,9 @@
     },
     "icon": "/catalog/image/echoes/60000855",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ヘカテー",
+    "name_zhHans": "赫卡忒"
   },
   {
     "id": 60001215,
@@ -414,7 +448,9 @@
     },
     "icon": "/catalog/image/echoes/60001215",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "偽りの神王",
+    "name_zhHans": "伪作的神王"
   },
   {
     "id": 60002015,
@@ -437,7 +473,9 @@
     },
     "icon": "/catalog/image/echoes/60002015",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・ナイトメア・スマッシャー",
+    "name_zhHans": "共鸣回响·梦魇亚当·重锤"
   },
   {
     "id": 60001165,
@@ -461,7 +499,9 @@
     },
     "icon": "/catalog/image/echoes/60001165",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・フェンリコ",
+    "name_zhHans": "共鸣回响·芬莱克"
   },
   {
     "id": 60200202,
@@ -484,7 +524,9 @@
     },
     "icon": "/catalog/image/echoes/60200202",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "グルッポ",
+    "name_zhHans": "咕咕河豚"
   },
   {
     "id": 60000225,
@@ -507,7 +549,9 @@
     },
     "icon": "/catalog/image/echoes/60000225",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雲閃のウロコ",
+    "name_zhHans": "云闪之鳞"
   },
   {
     "id": 60000605,
@@ -530,7 +574,9 @@
     },
     "icon": "/catalog/image/echoes/60000605",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フェイタルエラー",
+    "name_zhHans": "无归的谬误"
   },
   {
     "id": 60000825,
@@ -553,7 +599,9 @@
     },
     "icon": "/catalog/image/echoes/60000825",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ローレライ",
+    "name_zhHans": "罗蕾莱"
   },
   {
     "id": 60001905,
@@ -577,7 +625,9 @@
     },
     "icon": "/catalog/image/echoes/60001905",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドライブの機骸",
+    "name_zhHans": "炉芯机骸"
   },
   {
     "id": 60200204,
@@ -600,7 +650,9 @@
     },
     "icon": "/catalog/image/echoes/60200204",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "無妄者",
+    "name_zhHans": "无妄者"
   },
   {
     "id": 60001605,
@@ -623,7 +675,9 @@
     },
     "icon": "/catalog/image/echoes/60001605",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "海の娘",
+    "name_zhHans": "海之女"
   },
   {
     "id": 60000445,
@@ -646,7 +700,9 @@
     },
     "icon": "/catalog/image/echoes/60000445",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "輝き蛍の軍勢",
+    "name_zhHans": "辉萤军势"
   },
   {
     "id": 60000885,
@@ -669,7 +725,9 @@
     },
     "icon": "/catalog/image/echoes/60000885",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・雲閃のウロコ",
+    "name_zhHans": "梦魇·云闪之鳞"
   },
   {
     "id": 60001055,
@@ -693,7 +751,9 @@
     },
     "icon": "/catalog/image/echoes/60001055",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・輝き蛍の軍勢",
+    "name_zhHans": "梦魇·辉萤军势"
   },
   {
     "id": 60000925,
@@ -716,7 +776,9 @@
     },
     "icon": "/catalog/image/echoes/60000925",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・哀切の凶鳥",
+    "name_zhHans": "梦魇·哀声鸷"
   },
   {
     "id": 60000875,
@@ -739,7 +801,9 @@
     },
     "icon": "/catalog/image/echoes/60000875",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・無情のサギ",
+    "name_zhHans": "梦魇·无常凶鹭"
   },
   {
     "id": 60000915,
@@ -762,7 +826,9 @@
     },
     "icon": "/catalog/image/echoes/60000915",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・燎原の炎騎",
+    "name_zhHans": "梦魇·燎照之骑"
   },
   {
     "id": 60000895,
@@ -786,7 +852,9 @@
     },
     "icon": "/catalog/image/echoes/60000895",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・雷刹のウロコ",
+    "name_zhHans": "梦魇·朔雷之鳞"
   },
   {
     "id": 60001135,
@@ -810,7 +878,9 @@
     },
     "icon": "/catalog/image/echoes/60001135",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・ケルピー",
+    "name_zhHans": "梦魇·凯尔匹"
   },
   {
     "id": 60000905,
@@ -833,7 +903,9 @@
     },
     "icon": "/catalog/image/echoes/60000905",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・無冠者",
+    "name_zhHans": "梦魇·无冠者"
   },
   {
     "id": 60000865,
@@ -856,7 +928,9 @@
     },
     "icon": "/catalog/image/echoes/60000865",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・飛廉の大猿",
+    "name_zhHans": "梦魇·飞廉之猩"
   },
   {
     "id": 60000455,
@@ -879,7 +953,9 @@
     },
     "icon": "/catalog/image/echoes/60000455",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "哀切の凶鳥",
+    "name_zhHans": "哀声鸷"
   },
   {
     "id": 60001145,
@@ -902,7 +978,9 @@
     },
     "icon": "/catalog/image/echoes/60001145",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "誉れのライオネス",
+    "name_zhHans": "荣耀狮像"
   },
   {
     "id": 60000525,
@@ -925,7 +1003,9 @@
     },
     "icon": "/catalog/image/echoes/60000525",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "無情のサギ",
+    "name_zhHans": "无常凶鹭"
   },
   {
     "id": 60001925,
@@ -949,7 +1029,9 @@
     },
     "icon": "/catalog/image/echoes/60001925",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "名もない探索者",
+    "name_zhHans": "无铭探索者"
   },
   {
     "id": 60101215,
@@ -972,7 +1054,9 @@
     },
     "icon": "/catalog/image/echoes/60101215",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・偽りの神王",
+    "name_zhHans": "异相·伪作的神王"
   },
   {
     "id": 60001225,
@@ -995,7 +1079,9 @@
     },
     "icon": "/catalog/image/echoes/60001225",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・雲閃のウロコ",
+    "name_zhHans": "异相·云闪之鳞"
   },
   {
     "id": 60200106,
@@ -1018,7 +1104,9 @@
     },
     "icon": "/catalog/image/echoes/60200106",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・雲閃のウロコ",
+    "name_zhHans": "异相·云闪之鳞"
   },
   {
     "id": 60100605,
@@ -1041,7 +1129,9 @@
     },
     "icon": "/catalog/image/echoes/60100605",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・フェイタルエラー",
+    "name_zhHans": "异相·无归的谬误"
   },
   {
     "id": 60100825,
@@ -1064,7 +1154,9 @@
     },
     "icon": "/catalog/image/echoes/60100825",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ローレライ",
+    "name_zhHans": "异相·罗蕾莱"
   },
   {
     "id": 60101905,
@@ -1088,7 +1180,9 @@
     },
     "icon": "/catalog/image/echoes/60101905",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ドライブの機骸",
+    "name_zhHans": "异相·炉芯机骸"
   },
   {
     "id": 60200104,
@@ -1111,7 +1205,9 @@
     },
     "icon": "/catalog/image/echoes/60200104",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無妄者",
+    "name_zhHans": "异相·无妄者"
   },
   {
     "id": 60200105,
@@ -1134,7 +1230,9 @@
     },
     "icon": "/catalog/image/echoes/60200105",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無妄者",
+    "name_zhHans": "异相·无妄者"
   },
   {
     "id": 60200102,
@@ -1157,7 +1255,9 @@
     },
     "icon": "/catalog/image/echoes/60200102",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無妄者",
+    "name_zhHans": "异相·无妄者"
   },
   {
     "id": 60200201,
@@ -1180,7 +1280,9 @@
     },
     "icon": "/catalog/image/echoes/60200201",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・磐石の守り手",
+    "name_zhHans": "异相·磐石守卫"
   },
   {
     "id": 60100915,
@@ -1203,7 +1305,9 @@
     },
     "icon": "/catalog/image/echoes/60100915",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ナイトメア・燎原の炎騎",
+    "name_zhHans": "异相·梦魇·燎照之骑"
   },
   {
     "id": 60100905,
@@ -1226,7 +1330,9 @@
     },
     "icon": "/catalog/image/echoes/60100905",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ナイトメア・無冠者",
+    "name_zhHans": "异相·梦魇·无冠者"
   },
   {
     "id": 60001455,
@@ -1249,7 +1355,9 @@
     },
     "icon": "/catalog/image/echoes/60001455",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・哀切の凶鳥",
+    "name_zhHans": "异相·哀声鸷"
   },
   {
     "id": 60200009,
@@ -1272,7 +1380,9 @@
     },
     "icon": "/catalog/image/echoes/60200009",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無情のサギ",
+    "name_zhHans": "异相·无常凶鹭"
   },
   {
     "id": 60001525,
@@ -1295,7 +1405,9 @@
     },
     "icon": "/catalog/image/echoes/60001525",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無情のサギ",
+    "name_zhHans": "异相·无常凶鹭"
   },
   {
     "id": 60200029,
@@ -1318,7 +1430,9 @@
     },
     "icon": "/catalog/image/echoes/60200029",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無情のサギ",
+    "name_zhHans": "异相·无常凶鹭"
   },
   {
     "id": 60100835,
@@ -1341,7 +1455,9 @@
     },
     "icon": "/catalog/image/echoes/60100835",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ゼノコロッサス",
+    "name_zhHans": "异相·异构武装"
   },
   {
     "id": 60100325,
@@ -1364,7 +1480,9 @@
     },
     "icon": "/catalog/image/echoes/60100325",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・燎原の炎騎",
+    "name_zhHans": "异相·燎照之骑"
   },
   {
     "id": 60100425,
@@ -1387,7 +1505,9 @@
     },
     "icon": "/catalog/image/echoes/60100425",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・無冠者",
+    "name_zhHans": "异相·无冠者"
   },
   {
     "id": 60200028,
@@ -1410,7 +1530,9 @@
     },
     "icon": "/catalog/image/echoes/60200028",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・飛廉の大猿",
+    "name_zhHans": "异相·飞廉之猩"
   },
   {
     "id": 60200015,
@@ -1433,7 +1555,9 @@
     },
     "icon": "/catalog/image/echoes/60200015",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・飛廉の大猿",
+    "name_zhHans": "异相·飞廉之猩"
   },
   {
     "id": 60200205,
@@ -1456,7 +1580,9 @@
     },
     "icon": "/catalog/image/echoes/60200205",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・飛廉の大猿",
+    "name_zhHans": "异相·飞廉之猩"
   },
   {
     "id": 60200008,
@@ -1479,7 +1605,9 @@
     },
     "icon": "/catalog/image/echoes/60200008",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・飛廉の大猿",
+    "name_zhHans": "异相·飞廉之猩"
   },
   {
     "id": 60001435,
@@ -1502,7 +1630,9 @@
     },
     "icon": "/catalog/image/echoes/60001435",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・飛廉の大猿",
+    "name_zhHans": "异相·飞廉之猩"
   },
   {
     "id": 60200103,
@@ -1525,7 +1655,9 @@
     },
     "icon": "/catalog/image/echoes/60200103",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ゼノコロッサス",
+    "name_zhHans": "异构武装"
   },
   {
     "id": 60000835,
@@ -1548,7 +1680,9 @@
     },
     "icon": "/catalog/image/echoes/60000835",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ゼノコロッサス",
+    "name_zhHans": "异构武装"
   },
   {
     "id": 60000485,
@@ -1571,7 +1705,9 @@
     },
     "icon": "/catalog/image/echoes/60000485",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "機械アボミネーション",
+    "name_zhHans": "聚械机偶"
   },
   {
     "id": 60000325,
@@ -1594,7 +1730,9 @@
     },
     "icon": "/catalog/image/echoes/60000325",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "燎原の炎騎",
+    "name_zhHans": "燎照之骑"
   },
   {
     "id": 60000395,
@@ -1617,7 +1755,9 @@
     },
     "icon": "/catalog/image/echoes/60000395",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雷刹のウロコ",
+    "name_zhHans": "朔雷之鳞"
   },
   {
     "id": 60200013,
@@ -1640,7 +1780,9 @@
     },
     "icon": "/catalog/image/echoes/60200013",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雷刹のウロコ",
+    "name_zhHans": "朔雷之鳞"
   },
   {
     "id": 60000425,
@@ -1663,7 +1805,9 @@
     },
     "icon": "/catalog/image/echoes/60000425",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "無冠者",
+    "name_zhHans": "无冠者"
   },
   {
     "id": 60000845,
@@ -1686,7 +1830,9 @@
     },
     "icon": "/catalog/image/echoes/60000845",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "嘆きのドレイク",
+    "name_zhHans": "叹息古龙"
   },
   {
     "id": 60000435,
@@ -1709,7 +1855,9 @@
     },
     "icon": "/catalog/image/echoes/60000435",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "飛廉の大猿",
+    "name_zhHans": "飞廉之猩"
   },
   {
     "id": 60001895,
@@ -1733,7 +1881,9 @@
     },
     "icon": "/catalog/image/echoes/60001895",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ハイヴェイシャ",
+    "name_zhHans": "海维夏"
   },
   {
     "id": 60000315,
@@ -1757,7 +1907,9 @@
     },
     "icon": "/catalog/image/echoes/60000315",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "トゲバラタケ",
+    "name_zhHans": "刺玫菇"
   },
   {
     "id": 60000565,
@@ -1781,7 +1933,9 @@
     },
     "icon": "/catalog/image/echoes/60000565",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雪鬣狼",
+    "name_zhHans": "雪鬃狼"
   },
   {
     "id": 60000355,
@@ -1805,7 +1959,9 @@
     },
     "icon": "/catalog/image/echoes/60000355",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "闇鬣狼",
+    "name_zhHans": "暗鬃狼"
   },
   {
     "id": 60200032,
@@ -1829,7 +1985,9 @@
     },
     "icon": "/catalog/image/echoes/60200032",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ビッグベア",
+    "name_zhHans": "巨布偶"
   },
   {
     "id": 60000185,
@@ -1853,7 +2011,9 @@
     },
     "icon": "/catalog/image/echoes/60000185",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "巨岩の闘士",
+    "name_zhHans": "坚岩斗士"
   },
   {
     "id": 60000495,
@@ -1877,7 +2037,9 @@
     },
     "icon": "/catalog/image/echoes/60000495",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "巡回のカラクリ",
+    "name_zhHans": "巡哨机傀"
   },
   {
     "id": 60200003,
@@ -1901,7 +2063,9 @@
     },
     "icon": "/catalog/image/echoes/60200003",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "巡回のカラクリ",
+    "name_zhHans": "巡哨机傀"
   },
   {
     "id": 60200023,
@@ -1925,7 +2089,9 @@
     },
     "icon": "/catalog/image/echoes/60200023",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "巡回のカラクリ",
+    "name_zhHans": "巡哨机傀"
   },
   {
     "id": 60001945,
@@ -1949,7 +2115,9 @@
     },
     "icon": "/catalog/image/echoes/60001945",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・クロナファルコン",
+    "name_zhHans": "共鸣回响·冠顶苍隼"
   },
   {
     "id": 60300002,
@@ -1973,7 +2141,9 @@
     },
     "icon": "/catalog/image/echoes/60300002",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "響き渡る共鳴・クロナファルコン",
+    "name_zhHans": "共鸣回响·冠顶苍隼"
   },
   {
     "id": 60000295,
@@ -1997,7 +2167,9 @@
     },
     "icon": "/catalog/image/echoes/60000295",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "熔解トカゲ",
+    "name_zhHans": "绿熔蜥"
   },
   {
     "id": 60000775,
@@ -2022,7 +2194,9 @@
     },
     "icon": "/catalog/image/echoes/60000775",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アビサル・グラディウス",
+    "name_zhHans": "持刃贵族"
   },
   {
     "id": 60001955,
@@ -2046,7 +2220,9 @@
     },
     "icon": "/catalog/image/echoes/60001955",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "グローモス",
+    "name_zhHans": "格洛犸图"
   },
   {
     "id": 60000405,
@@ -2070,7 +2246,9 @@
     },
     "icon": "/catalog/image/echoes/60000405",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "いたずら猿",
+    "name_zhHans": "戏猿"
   },
   {
     "id": 60001825,
@@ -2094,7 +2272,9 @@
     },
     "icon": "/catalog/image/echoes/60001825",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "マイニング・メカレインディア",
+    "name_zhHans": "矿岩机麋"
   },
   {
     "id": 60200017,
@@ -2118,7 +2298,9 @@
     },
     "icon": "/catalog/image/echoes/60200017",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "宣諭の楽手",
+    "name_zhHans": "奏谕乐师"
   },
   {
     "id": 60200007,
@@ -2142,7 +2324,9 @@
     },
     "icon": "/catalog/image/echoes/60200007",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "宣諭の楽手",
+    "name_zhHans": "奏谕乐师"
   },
   {
     "id": 60000195,
@@ -2166,7 +2350,9 @@
     },
     "icon": "/catalog/image/echoes/60000195",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "宣諭の楽手",
+    "name_zhHans": "奏谕乐师"
   },
   {
     "id": 60000785,
@@ -2190,7 +2376,9 @@
     },
     "icon": "/catalog/image/echoes/60000785",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アビサル・メルカトル",
+    "name_zhHans": "凝水贵族"
   },
   {
     "id": 60001885,
@@ -2214,7 +2402,9 @@
     },
     "icon": "/catalog/image/echoes/60001885",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "風纏いの寄生甲",
+    "name_zhHans": "风鳞蜃甲"
   },
   {
     "id": 60000735,
@@ -2238,7 +2428,9 @@
     },
     "icon": "/catalog/image/echoes/60000735",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "回歴の騎士",
+    "name_zhHans": "巡游骑士"
   },
   {
     "id": 60000745,
@@ -2262,7 +2454,9 @@
     },
     "icon": "/catalog/image/echoes/60000745",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "炎昼の騎士",
+    "name_zhHans": "幻昼骑士"
   },
   {
     "id": 60000125,
@@ -2286,7 +2480,9 @@
     },
     "icon": "/catalog/image/echoes/60000125",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "紫羽サギ",
+    "name_zhHans": "紫羽鹭"
   },
   {
     "id": 60001985,
@@ -2309,7 +2505,9 @@
     },
     "icon": "/catalog/image/echoes/60001985",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ファントムモス",
+    "name_zhHans": "迷胧幻蛾"
   },
   {
     "id": 60200025,
@@ -2333,7 +2531,9 @@
     },
     "icon": "/catalog/image/echoes/60200025",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "磐石の守り手",
+    "name_zhHans": "磐石守卫"
   },
   {
     "id": 60000245,
@@ -2357,7 +2557,9 @@
     },
     "icon": "/catalog/image/echoes/60000245",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "磐石の守り手",
+    "name_zhHans": "磐石守卫"
   },
   {
     "id": 60000805,
@@ -2381,7 +2583,9 @@
     },
     "icon": "/catalog/image/echoes/60000805",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ヴィトルムダンサー",
+    "name_zhHans": "琉璃刀伶"
   },
   {
     "id": 60001875,
@@ -2405,7 +2609,9 @@
     },
     "icon": "/catalog/image/echoes/60001875",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "霜纏いの寄生甲",
+    "name_zhHans": "霜鳞蜃甲"
   },
   {
     "id": 60001855,
@@ -2430,7 +2636,9 @@
     },
     "icon": "/catalog/image/echoes/60001855",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "リッパーシェード",
+    "name_zhHans": "锯袭铁影"
   },
   {
     "id": 60001865,
@@ -2455,7 +2663,9 @@
     },
     "icon": "/catalog/image/echoes/60001865",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "プラウラーシェード",
+    "name_zhHans": "隐迹铁影"
   },
   {
     "id": 60000975,
@@ -2480,7 +2690,9 @@
     },
     "icon": "/catalog/image/echoes/60000975",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ハリケーン熊",
+    "name_zhHans": "飓力熊"
   },
   {
     "id": 60001845,
@@ -2505,7 +2717,9 @@
     },
     "icon": "/catalog/image/echoes/60001845",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "スペーストレック重機",
+    "name_zhHans": "探隧重机"
   },
   {
     "id": 60000215,
@@ -2529,7 +2743,9 @@
     },
     "icon": "/catalog/image/echoes/60000215",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "冥淵の守り手",
+    "name_zhHans": "冥渊守卫"
   },
   {
     "id": 60001839,
@@ -2554,7 +2770,9 @@
     },
     "icon": "/catalog/image/echoes/60001839",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アイアン・フーフ",
+    "name_zhHans": "重工铁蹄"
   },
   {
     "id": 60001739,
@@ -2577,7 +2795,9 @@
     },
     "icon": "/catalog/image/echoes/60001739",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・トゲバラタケ",
+    "name_zhHans": "梦魇·刺玫菇"
   },
   {
     "id": 60001685,
@@ -2600,7 +2820,9 @@
     },
     "icon": "/catalog/image/echoes/60001685",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・熔解トカゲ",
+    "name_zhHans": "梦魇·绿熔蜥"
   },
   {
     "id": 60001615,
@@ -2623,7 +2845,9 @@
     },
     "icon": "/catalog/image/echoes/60001615",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・紫羽サギ",
+    "name_zhHans": "梦魇·紫羽鹭"
   },
   {
     "id": 60001625,
@@ -2646,7 +2870,9 @@
     },
     "icon": "/catalog/image/echoes/60001625",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・青羽サギ",
+    "name_zhHans": "梦魇·青羽鹭"
   },
   {
     "id": 60001195,
@@ -2669,7 +2895,9 @@
     },
     "icon": "/catalog/image/echoes/60001195",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・金鈴の楽手",
+    "name_zhHans": "梦魇·振铎乐师"
   },
   {
     "id": 60000575,
@@ -2693,7 +2921,9 @@
     },
     "icon": "/catalog/image/echoes/60000575",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "浮遊鱗機（ふゆうりんき）",
+    "name_zhHans": "游鳞机枢"
   },
   {
     "id": 60000795,
@@ -2718,7 +2948,9 @@
     },
     "icon": "/catalog/image/echoes/60000795",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フロートアルマ",
+    "name_zhHans": "浮灵偶"
   },
   {
     "id": 60100815,
@@ -2742,7 +2974,9 @@
     },
     "icon": "/catalog/image/echoes/60100815",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ビッグベア",
+    "name_zhHans": "异相·巨布偶"
   },
   {
     "id": 60101955,
@@ -2766,7 +3000,9 @@
     },
     "icon": "/catalog/image/echoes/60101955",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・グローモス",
+    "name_zhHans": "异相·格洛犸图"
   },
   {
     "id": 60100735,
@@ -2790,7 +3026,9 @@
     },
     "icon": "/catalog/image/echoes/60100735",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・回歴の騎士",
+    "name_zhHans": "异相·巡游骑士"
   },
   {
     "id": 60001245,
@@ -2814,7 +3052,9 @@
     },
     "icon": "/catalog/image/echoes/60001245",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・磐石の守り手",
+    "name_zhHans": "异相·磐石守卫"
   },
   {
     "id": 60200005,
@@ -2838,7 +3078,9 @@
     },
     "icon": "/catalog/image/echoes/60200005",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・磐石の守り手",
+    "name_zhHans": "异相·磐石守卫"
   },
   {
     "id": 60200011,
@@ -2862,7 +3104,9 @@
     },
     "icon": "/catalog/image/echoes/60200011",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・磐石の守り手",
+    "name_zhHans": "异相·磐石守卫"
   },
   {
     "id": 60100805,
@@ -2886,7 +3130,9 @@
     },
     "icon": "/catalog/image/echoes/60100805",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ヴィトルムダンサー",
+    "name_zhHans": "异相·琉璃刀伶"
   },
   {
     "id": 60100575,
@@ -2910,7 +3156,9 @@
     },
     "icon": "/catalog/image/echoes/60100575",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・浮遊鱗機",
+    "name_zhHans": "异相·游鳞机枢"
   },
   {
     "id": 60100795,
@@ -2935,7 +3183,9 @@
     },
     "icon": "/catalog/image/echoes/60100795",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・フロートアルマ",
+    "name_zhHans": "异相·浮灵偶"
   },
   {
     "id": 60101045,
@@ -2959,7 +3209,9 @@
     },
     "icon": "/catalog/image/echoes/60101045",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・カピタネウス",
+    "name_zhHans": "异相·荣光节使"
   },
   {
     "id": 60101125,
@@ -2983,7 +3235,9 @@
     },
     "icon": "/catalog/image/echoes/60101125",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・クラトスクス",
+    "name_zhHans": "异相·角鳄"
   },
   {
     "id": 60101945,
@@ -3007,7 +3261,9 @@
     },
     "icon": "/catalog/image/echoes/60101945",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・クロナファルコン",
+    "name_zhHans": "异相·冠顶苍隼"
   },
   {
     "id": 60101795,
@@ -3030,7 +3286,9 @@
     },
     "icon": "/catalog/image/echoes/60101795",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・バイポーラ・ノヴァライザー",
+    "name_zhHans": "异相·双极·星升辉铳"
   },
   {
     "id": 60101805,
@@ -3053,7 +3311,9 @@
     },
     "icon": "/catalog/image/echoes/60101805",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・バイポーラ・アビスフォール",
+    "name_zhHans": "异相·双极·渊陨重锋"
   },
   {
     "id": 60100585,
@@ -3076,7 +3336,9 @@
     },
     "icon": "/catalog/image/echoes/60100585",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・光踏獣",
+    "name_zhHans": "异相·踏光兽"
   },
   {
     "id": 60001115,
@@ -3100,7 +3362,9 @@
     },
     "icon": "/catalog/image/echoes/60001115",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "伝道師の空殻",
+    "name_zhHans": "传道者的遗形"
   },
   {
     "id": 60000965,
@@ -3125,7 +3389,9 @@
     },
     "icon": "/catalog/image/echoes/60000965",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "彫像を再構築する岩拳",
+    "name_zhHans": "重塑雕像的拳砾"
   },
   {
     "id": 60000135,
@@ -3149,7 +3415,9 @@
     },
     "icon": "/catalog/image/echoes/60000135",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "青羽サギ",
+    "name_zhHans": "青羽鹭"
   },
   {
     "id": 60000205,
@@ -3173,7 +3441,9 @@
     },
     "icon": "/catalog/image/echoes/60000205",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "金鈴の楽手",
+    "name_zhHans": "振铎乐师"
   },
   {
     "id": 60001045,
@@ -3198,7 +3468,9 @@
     },
     "icon": "/catalog/image/echoes/60001045",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "カピタネウス",
+    "name_zhHans": "荣光节使"
   },
   {
     "id": 60200041,
@@ -3222,7 +3494,9 @@
     },
     "icon": "/catalog/image/echoes/60200041",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "クラトスクス",
+    "name_zhHans": "角鳄"
   },
   {
     "id": 60001125,
@@ -3247,7 +3521,9 @@
     },
     "icon": "/catalog/image/echoes/60001125",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "クラトスクス",
+    "name_zhHans": "角鳄"
   },
   {
     "id": 60001205,
@@ -3271,7 +3547,9 @@
     },
     "icon": "/catalog/image/echoes/60001205",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "コロサウルス",
+    "name_zhHans": "蚀脊龙"
   },
   {
     "id": 60001935,
@@ -3295,7 +3573,9 @@
     },
     "icon": "/catalog/image/echoes/60001935",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "メカファルコン",
+    "name_zhHans": "冠顶械隼"
   },
   {
     "id": 60300001,
@@ -3319,7 +3599,9 @@
     },
     "icon": "/catalog/image/echoes/60300001",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "メカファルコン",
+    "name_zhHans": "冠顶械隼"
   },
   {
     "id": 60000465,
@@ -3343,7 +3625,9 @@
     },
     "icon": "/catalog/image/echoes/60000465",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "恐刃の車",
+    "name_zhHans": "车刃镰"
   },
   {
     "id": 60001795,
@@ -3367,7 +3651,9 @@
     },
     "icon": "/catalog/image/echoes/60001795",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "バイポーラ・ノヴァライザー",
+    "name_zhHans": "双极·星升辉铳"
   },
   {
     "id": 60001809,
@@ -3392,7 +3678,9 @@
     },
     "icon": "/catalog/image/echoes/60001809",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "バイポーラ・アビスフォール",
+    "name_zhHans": "双极·渊陨重锋"
   },
   {
     "id": 60000765,
@@ -3416,7 +3704,9 @@
     },
     "icon": "/catalog/image/echoes/60000765",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アビサル・パトリシウス",
+    "name_zhHans": "毒冠贵族"
   },
   {
     "id": 60001815,
@@ -3440,7 +3730,9 @@
     },
     "icon": "/catalog/image/echoes/60001815",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フローラ・メカレインディア",
+    "name_zhHans": "莳植机麋"
   },
   {
     "id": 60000335,
@@ -3464,7 +3756,9 @@
     },
     "icon": "/catalog/image/echoes/60000335",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "黒棘熊",
+    "name_zhHans": "箭簇熊"
   },
   {
     "id": 60000755,
@@ -3488,7 +3782,9 @@
     },
     "icon": "/catalog/image/echoes/60000755",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "闇夜の騎士",
+    "name_zhHans": "暗夜骑士"
   },
   {
     "id": 60000585,
@@ -3511,7 +3807,9 @@
     },
     "icon": "/catalog/image/echoes/60000585",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "光踏獣（こうとうじゅう）",
+    "name_zhHans": "踏光兽"
   },
   {
     "id": 60000305,
@@ -3535,7 +3833,9 @@
     },
     "icon": "/catalog/image/echoes/60000305",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "トゲバラタケ（幼体）",
+    "name_zhHans": "刺玫菇（稚形）"
   },
   {
     "id": 60000615,
@@ -3559,7 +3859,9 @@
     },
     "icon": "/catalog/image/echoes/60000615",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "風鬣狼",
+    "name_zhHans": "风鬃狼"
   },
   {
     "id": 60000365,
@@ -3583,7 +3885,9 @@
     },
     "icon": "/catalog/image/echoes/60000365",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "火鬣狼",
+    "name_zhHans": "火鬃狼"
   },
   {
     "id": 60000635,
@@ -3607,7 +3911,9 @@
     },
     "icon": "/catalog/image/echoes/60000635",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "霜鬣狼",
+    "name_zhHans": "霜鬃狼"
   },
   {
     "id": 60000625,
@@ -3631,7 +3937,9 @@
     },
     "icon": "/catalog/image/echoes/60000625",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雷鬣狼",
+    "name_zhHans": "雷鬃狼"
   },
   {
     "id": 60000415,
@@ -3655,7 +3963,9 @@
     },
     "icon": "/catalog/image/echoes/60000415",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "結晶化サソリ",
+    "name_zhHans": "晶螯蝎"
   },
   {
     "id": 60000035,
@@ -3679,7 +3989,9 @@
     },
     "icon": "/catalog/image/echoes/60000035",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "春雷の狩人",
+    "name_zhHans": "惊蛰猎手"
   },
   {
     "id": 60001105,
@@ -3704,7 +4016,9 @@
     },
     "icon": "/catalog/image/echoes/60001105",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "狂信者の血肉",
+    "name_zhHans": "苦信者的作俑"
   },
   {
     "id": 60000685,
@@ -3729,7 +4043,9 @@
     },
     "icon": "/catalog/image/echoes/60000685",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "雲の妖精",
+    "name_zhHans": "云海妖精"
   },
   {
     "id": 60000285,
@@ -3754,7 +4070,9 @@
     },
     "icon": "/catalog/image/echoes/60000285",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "熔解トカゲ（幼体）",
+    "name_zhHans": "绿熔蜥（稚形）"
   },
   {
     "id": 60000715,
@@ -3778,7 +4096,9 @@
     },
     "icon": "/catalog/image/echoes/60000715",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "サクサクベア",
+    "name_zhHans": "工头布偶"
   },
   {
     "id": 60000935,
@@ -3803,7 +4123,9 @@
     },
     "icon": "/catalog/image/echoes/60000935",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "愚者のゴールドの岩塊",
+    "name_zhHans": "愚金幼岩"
   },
   {
     "id": 60000955,
@@ -3827,7 +4149,9 @@
     },
     "icon": "/catalog/image/echoes/60000955",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "気動のプリズム",
+    "name_zhHans": "气动棱镜"
   },
   {
     "id": 60000115,
@@ -3851,7 +4175,9 @@
     },
     "icon": "/catalog/image/echoes/60000115",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "グルッポ",
+    "name_zhHans": "咕咕河豚"
   },
   {
     "id": 60200012,
@@ -3875,7 +4201,9 @@
     },
     "icon": "/catalog/image/echoes/60200012",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "グルッポ",
+    "name_zhHans": "咕咕河豚"
   },
   {
     "id": 60000275,
@@ -3899,7 +4227,9 @@
     },
     "icon": "/catalog/image/echoes/60000275",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "モグロン",
+    "name_zhHans": "遁地鼠"
   },
   {
     "id": 60001015,
@@ -3924,7 +4254,9 @@
     },
     "icon": "/catalog/image/echoes/60001015",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドレイクの幼体・気動",
+    "name_zhHans": "小翼龙·气动"
   },
   {
     "id": 60001075,
@@ -3948,7 +4280,9 @@
     },
     "icon": "/catalog/image/echoes/60001075",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドレイクの幼体・焦熱",
+    "name_zhHans": "小翼龙·热熔"
   },
   {
     "id": 60001035,
@@ -3972,7 +4306,9 @@
     },
     "icon": "/catalog/image/echoes/60001035",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドレイクの幼体・凝縮",
+    "name_zhHans": "小翼龙·冷凝"
   },
   {
     "id": 60001095,
@@ -3997,7 +4333,9 @@
     },
     "icon": "/catalog/image/echoes/60001095",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドレイクの幼体・消滅",
+    "name_zhHans": "小翼龙·湮灭"
   },
   {
     "id": 60001025,
@@ -4022,7 +4360,9 @@
     },
     "icon": "/catalog/image/echoes/60001025",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドレイクの幼体・電導",
+    "name_zhHans": "小翼龙·导电"
   },
   {
     "id": 60001085,
@@ -4046,7 +4386,9 @@
     },
     "icon": "/catalog/image/echoes/60001085",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ドレイクの幼体・回折",
+    "name_zhHans": "小翼龙·衍射"
   },
   {
     "id": 60000515,
@@ -4070,7 +4412,9 @@
     },
     "icon": "/catalog/image/echoes/60000515",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "チリン",
+    "name_zhHans": "叮咚咚"
   },
   {
     "id": 60000985,
@@ -4095,7 +4439,9 @@
     },
     "icon": "/catalog/image/echoes/60000985",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ガルディア",
+    "name_zhHans": "卫冕节使"
   },
   {
     "id": 60200207,
@@ -4119,7 +4465,9 @@
     },
     "icon": "/catalog/image/echoes/60200207",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "宣諭の楽手",
+    "name_zhHans": "奏谕乐师"
   },
   {
     "id": 60000725,
@@ -4144,7 +4492,9 @@
     },
     "icon": "/catalog/image/echoes/60000725",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "秘蔵ミミック",
+    "name_zhHans": "欺诈奇藏"
   },
   {
     "id": 60000695,
@@ -4168,7 +4518,9 @@
     },
     "icon": "/catalog/image/echoes/60000695",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ミスター・マギア",
+    "name_zhHans": "魔术先生"
   },
   {
     "id": 60001765,
@@ -4194,7 +4546,9 @@
     },
     "icon": "/catalog/image/echoes/60001765",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "サイクツクマバチ",
+    "name_zhHans": "矿岩熊蜂"
   },
   {
     "id": 60001775,
@@ -4219,7 +4573,9 @@
     },
     "icon": "/catalog/image/echoes/60001775",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "イワグモS4型",
+    "name_zhHans": "岩蛛S4型"
   },
   {
     "id": 60000235,
@@ -4243,7 +4599,9 @@
     },
     "icon": "/catalog/image/echoes/60000235",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "徘徊の狩人",
+    "name_zhHans": "巡徊猎手"
   },
   {
     "id": 60000025,
@@ -4268,7 +4626,9 @@
     },
     "icon": "/catalog/image/echoes/60000025",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "壊れかけ岩塊",
+    "name_zhHans": "裂变幼岩"
   },
   {
     "id": 60001785,
@@ -4294,7 +4654,9 @@
     },
     "icon": "/catalog/image/echoes/60001785",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ビリリ",
+    "name_zhHans": "噼啪啪"
   },
   {
     "id": 60000995,
@@ -4319,7 +4681,9 @@
     },
     "icon": "/catalog/image/echoes/60000995",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "サジタリオ",
+    "name_zhHans": "赦罪节使"
   },
   {
     "id": 60001005,
@@ -4343,7 +4707,9 @@
     },
     "icon": "/catalog/image/echoes/60001005",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "サケルドス",
+    "name_zhHans": "慈悲节使"
   },
   {
     "id": 60000105,
@@ -4367,7 +4733,9 @@
     },
     "icon": "/catalog/image/echoes/60000105",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "破霜の狩人",
+    "name_zhHans": "破霜猎手"
   },
   {
     "id": 60000345,
@@ -4391,7 +4759,9 @@
     },
     "icon": "/catalog/image/echoes/60000345",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "寒霜亀",
+    "name_zhHans": "寒霜陆龟"
   },
   {
     "id": 60000015,
@@ -4416,7 +4786,9 @@
     },
     "icon": "/catalog/image/echoes/60000015",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "先兵岩塊",
+    "name_zhHans": "先锋幼岩"
   },
   {
     "id": 60000265,
@@ -4441,7 +4813,9 @@
     },
     "icon": "/catalog/image/echoes/60000265",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "砕牙イノシシ",
+    "name_zhHans": "碎獠猪"
   },
   {
     "id": 60000255,
@@ -4466,7 +4840,9 @@
     },
     "icon": "/catalog/image/echoes/60000255",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "遊弋蝶",
+    "name_zhHans": "游弋蝶"
   },
   {
     "id": 60001975,
@@ -4491,7 +4867,9 @@
     },
     "icon": "/catalog/image/echoes/60001975",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "シャドウステッパー",
+    "name_zhHans": "影烁者"
   },
   {
     "id": 60000505,
@@ -4516,7 +4894,9 @@
     },
     "icon": "/catalog/image/echoes/60000505",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "信号機モドキ",
+    "name_zhHans": "通行灯偶"
   },
   {
     "id": 60000055,
@@ -4540,7 +4920,9 @@
     },
     "icon": "/catalog/image/echoes/60000055",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "審判の戦士",
+    "name_zhHans": "审判战士"
   },
   {
     "id": 60200031,
@@ -4565,7 +4947,9 @@
     },
     "icon": "/catalog/image/echoes/60200031",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ミス・ロンリー",
+    "name_zhHans": "寂寞小姐"
   },
   {
     "id": 60001965,
@@ -4590,7 +4974,9 @@
     },
     "icon": "/catalog/image/echoes/60001965",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アイスグリントダンサー",
+    "name_zhHans": "冰盈舞者"
   },
   {
     "id": 60200019,
@@ -4615,7 +5001,9 @@
     },
     "icon": "/catalog/image/echoes/60200019",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アツツ",
+    "name_zhHans": "阿嗞嗞"
   },
   {
     "id": 60200209,
@@ -4640,7 +5028,9 @@
     },
     "icon": "/catalog/image/echoes/60200209",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アツツ",
+    "name_zhHans": "阿嗞嗞"
   },
   {
     "id": 60000075,
@@ -4665,7 +5055,9 @@
     },
     "icon": "/catalog/image/echoes/60000075",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "アツツ",
+    "name_zhHans": "阿嗞嗞"
   },
   {
     "id": 60001705,
@@ -4688,7 +5080,9 @@
     },
     "icon": "/catalog/image/echoes/60001705",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・トゲバラタケ（幼体）",
+    "name_zhHans": "梦魇·刺玫菇（稚形）"
   },
   {
     "id": 60001635,
@@ -4711,7 +5105,9 @@
     },
     "icon": "/catalog/image/echoes/60001635",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・春雷の狩人",
+    "name_zhHans": "梦魇·惊蛰猎手"
   },
   {
     "id": 60001695,
@@ -4734,7 +5130,9 @@
     },
     "icon": "/catalog/image/echoes/60001695",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・熔解トカゲ（幼体）",
+    "name_zhHans": "梦魇·绿熔蜥（稚形）"
   },
   {
     "id": 60001655,
@@ -4757,7 +5155,9 @@
     },
     "icon": "/catalog/image/echoes/60001655",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・グルッポ",
+    "name_zhHans": "梦魇·咕咕河豚"
   },
   {
     "id": 60001645,
@@ -4780,7 +5180,9 @@
     },
     "icon": "/catalog/image/echoes/60001645",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・徘徊の狩人",
+    "name_zhHans": "梦魇·巡徊猎手"
   },
   {
     "id": 60001185,
@@ -4803,7 +5205,9 @@
     },
     "icon": "/catalog/image/echoes/60001185",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・破霜の狩人",
+    "name_zhHans": "梦魇·破霜猎手"
   },
   {
     "id": 60001175,
@@ -4826,7 +5230,9 @@
     },
     "icon": "/catalog/image/echoes/60001175",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・審判の戦士",
+    "name_zhHans": "梦魇·审判战士"
   },
   {
     "id": 60001719,
@@ -4849,7 +5255,9 @@
     },
     "icon": "/catalog/image/echoes/60001719",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・ウカカ",
+    "name_zhHans": "梦魇·呜咔咔"
   },
   {
     "id": 60001665,
@@ -4872,7 +5280,9 @@
     },
     "icon": "/catalog/image/echoes/60001665",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・ジュルッポ",
+    "name_zhHans": "梦魇·啾啾河豚"
   },
   {
     "id": 60001725,
@@ -4895,7 +5305,9 @@
     },
     "icon": "/catalog/image/echoes/60001725",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ナイトメア・地駝鳥",
+    "name_zhHans": "梦魇·侏侏鸵"
   },
   {
     "id": 60000385,
@@ -4919,7 +5331,9 @@
     },
     "icon": "/catalog/image/echoes/60000385",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "猿の幼体",
+    "name_zhHans": "幼猿"
   },
   {
     "id": 60000045,
@@ -4944,7 +5358,9 @@
     },
     "icon": "/catalog/image/echoes/60000045",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "慟哭の戦士",
+    "name_zhHans": "鸣泣战士"
   },
   {
     "id": 60000545,
@@ -4968,7 +5384,9 @@
     },
     "icon": "/catalog/image/echoes/60000545",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "溶岩虫",
+    "name_zhHans": "融火虫"
   },
   {
     "id": 60000155,
@@ -4993,7 +5411,9 @@
     },
     "icon": "/catalog/image/echoes/60000155",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "焦熱のプリズム",
+    "name_zhHans": "热熔棱镜"
   },
   {
     "id": 60200208,
@@ -5017,7 +5437,9 @@
     },
     "icon": "/catalog/image/echoes/60200208",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "角",
+    "name_zhHans": "角"
   },
   {
     "id": 60200004,
@@ -5042,7 +5464,9 @@
     },
     "icon": "/catalog/image/echoes/60200004",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ウカカ",
+    "name_zhHans": "呜咔咔"
   },
   {
     "id": 60200024,
@@ -5066,7 +5490,9 @@
     },
     "icon": "/catalog/image/echoes/60200024",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ウカカ",
+    "name_zhHans": "呜咔咔"
   },
   {
     "id": 60000095,
@@ -5091,7 +5517,9 @@
     },
     "icon": "/catalog/image/echoes/60000095",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ウカカ",
+    "name_zhHans": "呜咔咔"
   },
   {
     "id": 60000665,
@@ -5115,7 +5543,9 @@
     },
     "icon": "/catalog/image/echoes/60000665",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フロートアルマ・ライト",
+    "name_zhHans": "浮灵偶·莱特"
   },
   {
     "id": 60000655,
@@ -5139,7 +5569,9 @@
     },
     "icon": "/catalog/image/echoes/60000655",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フロートアルマ・レフト",
+    "name_zhHans": "浮灵偶·蕾弗"
   },
   {
     "id": 60000645,
@@ -5163,7 +5595,9 @@
     },
     "icon": "/catalog/image/echoes/60000645",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フロートアルマ・ヘッド",
+    "name_zhHans": "浮灵偶·海德"
   },
   {
     "id": 60000945,
@@ -5188,7 +5622,9 @@
     },
     "icon": "/catalog/image/echoes/60000945",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ミカーレの岩塊",
+    "name_zhHans": "釉变幼岩"
   },
   {
     "id": 60200022,
@@ -5213,7 +5649,9 @@
     },
     "icon": "/catalog/image/echoes/60200022",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "凝縮のプリズム",
+    "name_zhHans": "冷凝棱镜"
   },
   {
     "id": 60200002,
@@ -5238,7 +5676,9 @@
     },
     "icon": "/catalog/image/echoes/60200002",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "凝縮のプリズム",
+    "name_zhHans": "冷凝棱镜"
   },
   {
     "id": 60000145,
@@ -5263,7 +5703,9 @@
     },
     "icon": "/catalog/image/echoes/60000145",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "凝縮のプリズム",
+    "name_zhHans": "冷凝棱镜"
   },
   {
     "id": 60100685,
@@ -5287,7 +5729,9 @@
     },
     "icon": "/catalog/image/echoes/60100685",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・雲の妖精",
+    "name_zhHans": "异相·云海妖精"
   },
   {
     "id": 60100715,
@@ -5312,7 +5756,9 @@
     },
     "icon": "/catalog/image/echoes/60100715",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・サクサクベア",
+    "name_zhHans": "异相·工头布偶"
   },
   {
     "id": 60100115,
@@ -5336,7 +5782,9 @@
     },
     "icon": "/catalog/image/echoes/60100115",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・グルッポ",
+    "name_zhHans": "异相·咕咕河豚"
   },
   {
     "id": 60100515,
@@ -5360,7 +5808,9 @@
     },
     "icon": "/catalog/image/echoes/60100515",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・チリン",
+    "name_zhHans": "异相·叮咚咚"
   },
   {
     "id": 60100725,
@@ -5385,7 +5835,9 @@
     },
     "icon": "/catalog/image/echoes/60100725",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・秘蔵ミミック",
+    "name_zhHans": "异相·欺诈奇藏"
   },
   {
     "id": 60101785,
@@ -5409,7 +5861,9 @@
     },
     "icon": "/catalog/image/echoes/60101785",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・ビリリ",
+    "name_zhHans": "异相·噼啪啪"
   },
   {
     "id": 60200021,
@@ -5433,7 +5887,9 @@
     },
     "icon": "/catalog/image/echoes/60200021",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・寒霜亀",
+    "name_zhHans": "异相·寒霜陆龟"
   },
   {
     "id": 60200016,
@@ -5457,7 +5913,9 @@
     },
     "icon": "/catalog/image/echoes/60200016",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・寒霜亀",
+    "name_zhHans": "异相·寒霜陆龟"
   },
   {
     "id": 60200001,
@@ -5481,7 +5939,9 @@
     },
     "icon": "/catalog/image/echoes/60200001",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・寒霜亀",
+    "name_zhHans": "异相·寒霜陆龟"
   },
   {
     "id": 60200206,
@@ -5505,7 +5965,9 @@
     },
     "icon": "/catalog/image/echoes/60200206",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・寒霜亀",
+    "name_zhHans": "异相·寒霜陆龟"
   },
   {
     "id": 60001345,
@@ -5529,7 +5991,9 @@
     },
     "icon": "/catalog/image/echoes/60001345",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・寒霜亀",
+    "name_zhHans": "异相·寒霜陆龟"
   },
   {
     "id": 60101965,
@@ -5552,7 +6016,9 @@
     },
     "icon": "/catalog/image/echoes/60101965",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・アイスグリントダンサー",
+    "name_zhHans": "异相·冰盈舞者"
   },
   {
     "id": 60100675,
@@ -5576,7 +6042,9 @@
     },
     "icon": "/catalog/image/echoes/60100675",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "異相・フェイイグニス",
+    "name_zhHans": "异相·幽翎火"
   },
   {
     "id": 60000175,
@@ -5601,7 +6069,9 @@
     },
     "icon": "/catalog/image/echoes/60000175",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "消滅のプリズム",
+    "name_zhHans": "湮灭棱镜"
   },
   {
     "id": 60001745,
@@ -5626,7 +6096,9 @@
     },
     "icon": "/catalog/image/echoes/60001745",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "戦慄の戦士",
+    "name_zhHans": "颤栗战士"
   },
   {
     "id": 60000475,
@@ -5650,7 +6122,9 @@
     },
     "icon": "/catalog/image/echoes/60000475",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "ジュルッポ",
+    "name_zhHans": "啾啾河豚"
   },
   {
     "id": 60000065,
@@ -5675,7 +6149,9 @@
     },
     "icon": "/catalog/image/echoes/60000065",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "カチャチャ",
+    "name_zhHans": "咔嚓嚓"
   },
   {
     "id": 60001755,
@@ -5701,7 +6177,9 @@
     },
     "icon": "/catalog/image/echoes/60001755",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "カフンクマバチ",
+    "name_zhHans": "莳植熊蜂"
   },
   {
     "id": 60000675,
@@ -5726,7 +6204,9 @@
     },
     "icon": "/catalog/image/echoes/60000675",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フェイイグニス",
+    "name_zhHans": "幽翎火"
   },
   {
     "id": 60000555,
@@ -5750,7 +6230,9 @@
     },
     "icon": "/catalog/image/echoes/60000555",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "地駝鳥",
+    "name_zhHans": "侏侏鸵"
   },
   {
     "id": 60000165,
@@ -5775,7 +6257,9 @@
     },
     "icon": "/catalog/image/echoes/60000165",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "回折のプリズム",
+    "name_zhHans": "衍射棱镜"
   },
   {
     "id": 60200026,
@@ -5800,7 +6284,9 @@
     },
     "icon": "/catalog/image/echoes/60200026",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フシュシュ",
+    "name_zhHans": "呼咻咻"
   },
   {
     "id": 60000085,
@@ -5825,7 +6311,9 @@
     },
     "icon": "/catalog/image/echoes/60000085",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フシュシュ",
+    "name_zhHans": "呼咻咻"
   },
   {
     "id": 60200006,
@@ -5850,7 +6338,9 @@
     },
     "icon": "/catalog/image/echoes/60200006",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.0"
+    "sim_source": "datamine-3.5.0",
+    "name_ja": "フシュシュ",
+    "name_zhHans": "呼咻咻"
   },
   {
     "id": 60002022,
@@ -5873,7 +6363,9 @@
     },
     "icon": "/catalog/image/echoes/60002022",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "融躯の戦士",
+    "name_zhHans": "融躯战士"
   },
   {
     "id": 60002032,
@@ -5896,7 +6388,9 @@
     },
     "icon": "/catalog/image/echoes/60002032",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "磁器の庭候",
+    "name_zhHans": "瓷庭候"
   },
   {
     "id": 60002042,
@@ -5919,7 +6413,9 @@
     },
     "icon": "/catalog/image/echoes/60002042",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "石の庭候",
+    "name_zhHans": "石庭候"
   },
   {
     "id": 60002052,
@@ -5942,7 +6438,9 @@
     },
     "icon": "/catalog/image/echoes/60002052",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "金鉄の庭候",
+    "name_zhHans": "金庭候"
   },
   {
     "id": 60002062,
@@ -5965,7 +6463,9 @@
     },
     "icon": "/catalog/image/echoes/60002062",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "心傀・喜",
+    "name_zhHans": "心傀·喜"
   },
   {
     "id": 60002072,
@@ -5988,7 +6488,9 @@
     },
     "icon": "/catalog/image/echoes/60002072",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "心傀・怒",
+    "name_zhHans": "心傀·怒"
   },
   {
     "id": 60002082,
@@ -6011,7 +6513,9 @@
     },
     "icon": "/catalog/image/echoes/60002082",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "心傀・憂",
+    "name_zhHans": "心傀·忧"
   },
   {
     "id": 60002092,
@@ -6034,7 +6538,9 @@
     },
     "icon": "/catalog/image/echoes/60002092",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "心傀・思",
+    "name_zhHans": "心傀·思"
   },
   {
     "id": 60002102,
@@ -6057,7 +6563,9 @@
     },
     "icon": "/catalog/image/echoes/60002102",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "心傀・悲",
+    "name_zhHans": "心傀·悲"
   },
   {
     "id": 60002112,
@@ -6080,7 +6588,9 @@
     },
     "icon": "/catalog/image/echoes/60002112",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "心傀・恐",
+    "name_zhHans": "心傀·恐"
   },
   {
     "id": 60002122,
@@ -6103,7 +6613,9 @@
     },
     "icon": "/catalog/image/echoes/60002122",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "霽息の獣尊・胴",
+    "name_zhHans": "霁息兽尊·身"
   },
   {
     "id": 60002132,
@@ -6126,7 +6638,9 @@
     },
     "icon": "/catalog/image/echoes/60002132",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "霽息の獣尊・首",
+    "name_zhHans": "霁息兽尊·首"
   },
   {
     "id": 60002142,
@@ -6149,7 +6663,9 @@
     },
     "icon": "/catalog/image/echoes/60002142",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "熄えぬ狩人",
+    "name_zhHans": "不熄猎手"
   },
   {
     "id": 60002152,
@@ -6174,7 +6690,9 @@
     },
     "icon": "/catalog/image/echoes/60002152",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "霽息の獣尊",
+    "name_zhHans": "霁息兽尊"
   },
   {
     "id": 60002162,
@@ -6199,7 +6717,9 @@
     },
     "icon": "/catalog/image/echoes/60002162",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "封庭の械囿",
+    "name_zhHans": "封庭械囿"
   },
   {
     "id": 60002172,
@@ -6223,7 +6743,9 @@
     },
     "icon": "/catalog/image/echoes/60002172",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "万囮の檻・朽躯",
+    "name_zhHans": "万囮牢·朽躯"
   },
   {
     "id": 60002182,
@@ -6246,7 +6768,9 @@
     },
     "icon": "/catalog/image/echoes/60002182",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "千傀の重楼",
+    "name_zhHans": "千傀重楼"
   },
   {
     "id": 60102025,
@@ -6269,7 +6793,9 @@
     },
     "icon": "/catalog/image/echoes/60102025",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "異相・融躯の戦士",
+    "name_zhHans": "异相·融躯战士"
   },
   {
     "id": 60102165,
@@ -6294,7 +6820,9 @@
     },
     "icon": "/catalog/image/echoes/60102165",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "異相・封庭の械囿",
+    "name_zhHans": "异相·封庭械囿"
   },
   {
     "id": 60300003,
@@ -6319,6 +6847,8 @@
     },
     "icon": "/catalog/image/echoes/60300003",
     "source": "encore.moe",
-    "sim_source": "datamine-3.5.5"
+    "sim_source": "datamine-3.5.5",
+    "name_ja": "封庭の械囿",
+    "name_zhHans": "封庭械囿"
   }
 ]

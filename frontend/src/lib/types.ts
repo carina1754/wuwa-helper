@@ -252,6 +252,8 @@ export interface CodexResonator {
   id: number;
   name: string;
   name_en?: string | null;
+  name_ja?: string | null;
+  name_zhHans?: string | null;
   rarity: number;
   element?: string | null;
   weapon_type?: string | null;
@@ -275,6 +277,8 @@ export interface CodexWeapon {
   id: string;
   name_ko: string;
   name_en?: string | null;
+  name_ja?: string | null;
+  name_zhHans?: string | null;
   weapon_type?: string | null;
   weapon_type_ko?: string | null;
   rarity: number;
@@ -299,6 +303,8 @@ export interface CodexEcho {
   id: string;
   name_ko: string;
   name_en?: string | null;
+  name_ja?: string | null;
+  name_zhHans?: string | null;
   cost: number;
   rarity: number;
   sonata: string[];
@@ -309,6 +315,9 @@ export interface CodexEcho {
 export interface SonataSet {
   id: string;
   name_ko: string;
+  name_en?: string | null;
+  name_ja?: string | null;
+  name_zhHans?: string | null;
   icon?: string | null;
   two_piece?: string | null;
   five_piece?: string | null;

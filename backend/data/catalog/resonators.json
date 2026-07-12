@@ -3913,7 +3913,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ガルブレーナ",
+    "name_zhHans": "嘉贝莉娜"
   },
   {
     "id": 1405,
@@ -6304,7 +6306,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "鑑心",
+    "name_zhHans": "鉴心"
   },
   {
     "id": 1411,
@@ -9173,7 +9177,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "仇遠",
+    "name_zhHans": "仇远"
   },
   {
     "id": 1304,
@@ -12089,7 +12095,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "今汐",
+    "name_zhHans": "今汐"
   },
   {
     "id": 1404,
@@ -14808,7 +14816,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "忌炎",
+    "name_zhHans": "忌炎"
   },
   {
     "id": 1104,
@@ -17289,7 +17299,9 @@
     "forte_bonus": {
       "glacioDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "凌陽",
+    "name_zhHans": "凌阳"
   },
   {
     "id": 1211,
@@ -20160,7 +20172,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ダーニャ",
+    "name_zhHans": "达妮娅"
   },
   {
     "id": 1308,
@@ -23496,7 +23510,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "レベッカ",
+    "name_zhHans": "丽贝卡"
   },
   {
     "id": 1606,
@@ -25917,7 +25933,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ロココ",
+    "name_zhHans": "洛可可"
   },
   {
     "id": 1511,
@@ -29310,7 +29328,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ルーシー",
+    "name_zhHans": "露西"
   },
   {
     "id": 1109,
@@ -31941,7 +31961,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ルシラー",
+    "name_zhHans": "洛瑟菈"
   },
   {
     "id": 1510,
@@ -34917,7 +34939,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "リューク・ヘルセン",
+    "name_zhHans": "陆·赫斯"
   },
   {
     "id": 1207,
@@ -37773,7 +37797,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ルパ",
+    "name_zhHans": "露帕"
   },
   {
     "id": 1509,
@@ -40494,7 +40520,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "リンネー",
+    "name_zhHans": "琳奈"
   },
   {
     "id": 1209,
@@ -43095,7 +43123,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "defPct": 15.2
-    }
+    },
+    "name_ja": "モーニエ",
+    "name_zhHans": "莫宁"
   },
   {
     "id": 1502,
@@ -45408,7 +45438,9 @@
     "forte_bonus": {
       "spectroDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "漂泊者・回折",
+    "name_zhHans": "漂泊者·衍射"
   },
   {
     "id": 1408,
@@ -48009,7 +48041,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "漂泊者・気動",
+    "name_zhHans": "漂泊者·气动"
   },
   {
     "id": 1604,
@@ -50580,7 +50614,9 @@
     "forte_bonus": {
       "atkPct": 12.0,
       "havocDmg": 12.0
-    }
+    },
+    "name_ja": "漂泊者・消滅",
+    "name_zhHans": "漂泊者·湮灭"
   },
   {
     "id": 1503,
@@ -53001,7 +53037,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ヴェリーナ",
+    "name_zhHans": "维里奈"
   },
   {
     "id": 1206,
@@ -56067,7 +56105,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ブラント",
+    "name_zhHans": "布兰特"
   },
   {
     "id": 1305,
@@ -58758,7 +58798,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "相里要",
+    "name_zhHans": "相里要"
   },
   {
     "id": 1407,
@@ -61239,7 +61281,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "シャコンヌ",
+    "name_zhHans": "夏空"
   },
   {
     "id": 1412,
@@ -64132,7 +64176,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "シグリカ",
+    "name_zhHans": "西格莉卡"
   },
   {
     "id": 1306,
@@ -67075,7 +67121,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "オーガスタ",
+    "name_zhHans": "奥古斯塔"
   },
   {
     "id": 1203,
@@ -69706,7 +69754,9 @@
     "forte_bonus": {
       "fusionDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "アンコ",
+    "name_zhHans": "安可"
   },
   {
     "id": 1210,
@@ -72997,7 +73047,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "エイメス",
+    "name_zhHans": "爱弥斯"
   },
   {
     "id": 1410,
@@ -75733,7 +75785,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ユーノ",
+    "name_zhHans": "尤诺"
   },
   {
     "id": 1302,
@@ -78259,7 +78313,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "吟霖",
+    "name_zhHans": "吟霖"
   },
   {
     "id": 1205,
@@ -80905,7 +80961,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "長離",
+    "name_zhHans": "长离"
   },
   {
     "id": 1105,
@@ -83356,7 +83414,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "折枝",
+    "name_zhHans": "折枝"
   },
   {
     "id": 1507,
@@ -86549,7 +86609,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ザンニー",
+    "name_zhHans": "赞妮"
   },
   {
     "id": 1508,
@@ -90095,7 +90157,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "千咲",
+    "name_zhHans": "千咲"
   },
   {
     "id": 1409,
@@ -93806,7 +93870,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "hpPct": 12.0
-    }
+    },
+    "name_ja": "カルテジア",
+    "name_zhHans": "卡提希娅"
   },
   {
     "id": 1107,
@@ -96765,7 +96831,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "カルロッタ",
+    "name_zhHans": "珂莱塔"
   },
   {
     "id": 1603,
@@ -99613,7 +99681,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "ツバキ",
+    "name_zhHans": "椿"
   },
   {
     "id": 1301,
@@ -102724,7 +102794,9 @@
     "forte_bonus": {
       "atkPct": 12.0,
       "critDmg": 16.0
-    }
+    },
+    "name_ja": "カカロ",
+    "name_zhHans": "卡卡罗"
   },
   {
     "id": 1607,
@@ -105661,7 +105733,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "カンタレラ",
+    "name_zhHans": "坎特蕾拉"
   },
   {
     "id": 1505,
@@ -108022,7 +108096,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "hpPct": 12.0
-    }
+    },
+    "name_ja": "ショアキーパー",
+    "name_zhHans": "守岸人"
   },
   {
     "id": 1506,
@@ -110441,7 +110517,9 @@
     "forte_bonus": {
       "critDmg": 16.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "フィービー",
+    "name_zhHans": "菲比"
   },
   {
     "id": 1608,
@@ -113432,7 +113510,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "フローヴァ",
+    "name_zhHans": "弗洛洛"
   },
   {
     "id": 1108,
@@ -116813,7 +116893,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "緋雪",
+    "name_zhHans": "绯雪"
   },
   {
     "id": 1602,
@@ -119324,7 +119406,9 @@
     "forte_bonus": {
       "havocDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "丹瑾",
+    "name_zhHans": "丹瑾"
   },
   {
     "id": 1601,
@@ -121655,7 +121739,9 @@
     "forte_bonus": {
       "havocDmg": 12.0,
       "defPct": 15.2
-    }
+    },
+    "name_ja": "桃祈",
+    "name_zhHans": "桃祈"
   },
   {
     "id": 1504,
@@ -124151,7 +124237,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "灯灯",
+    "name_zhHans": "灯灯"
   },
   {
     "id": 1204,
@@ -126482,7 +126570,9 @@
     "forte_bonus": {
       "fusionDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "モルトフィー",
+    "name_zhHans": "莫特斐"
   },
   {
     "id": 1307,
@@ -128810,7 +128900,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "卜霊",
+    "name_zhHans": "卜灵"
   },
   {
     "id": 1102,
@@ -131096,7 +131188,9 @@
     "forte_bonus": {
       "glacioDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "散華",
+    "name_zhHans": "散华"
   },
   {
     "id": 1103,
@@ -133397,7 +133491,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "hpPct": 12.0
-    }
+    },
+    "name_ja": "白芷",
+    "name_zhHans": "白芷"
   },
   {
     "id": 1403,
@@ -136253,7 +136349,9 @@
     "forte_bonus": {
       "aeroDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "アールト",
+    "name_zhHans": "秋水"
   },
   {
     "id": 1402,
@@ -138767,7 +138865,9 @@
     "forte_bonus": {
       "atkPct": 12.0,
       "aeroDmg": 12.0
-    }
+    },
+    "name_ja": "秧秧",
+    "name_zhHans": "秧秧"
   },
   {
     "id": 1303,
@@ -141473,7 +141573,9 @@
     "forte_bonus": {
       "electroDmg": 12.0,
       "defPct": 15.2
-    }
+    },
+    "name_ja": "淵武",
+    "name_zhHans": "渊武"
   },
   {
     "id": 1106,
@@ -144044,7 +144146,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "釉瑚",
+    "name_zhHans": "釉瑚"
   },
   {
     "id": 1202,
@@ -146375,7 +146479,9 @@
     "forte_bonus": {
       "fusionDmg": 12.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "熾霞",
+    "name_zhHans": "炽霞"
   },
   {
     "id": 1110,
@@ -149201,7 +149307,9 @@
     "forte_bonus": {
       "healing": 12.0,
       "hpPct": 12.0
-    }
+    },
+    "name_ja": "穂穂",
+    "name_zhHans": "穗穗"
   },
   {
     "id": 1310,
@@ -152552,7 +152660,9 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "漂泊者・電導",
+    "name_zhHans": "漂泊者·导电"
   },
   {
     "id": 1610,
@@ -155400,6 +155510,8 @@
     "forte_bonus": {
       "crit": 8.0,
       "atkPct": 12.0
-    }
+    },
+    "name_ja": "秧秧・玄翎",
+    "name_zhHans": "秧秧·玄翎"
   }
 ]
