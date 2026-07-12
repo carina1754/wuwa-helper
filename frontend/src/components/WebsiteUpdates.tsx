@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { getSiteUpdates } from "@/lib/api";
-import { useLanguage } from "@/lib/i18n";
+import { localizedField, useLanguage } from "@/lib/i18n";
 import type { SiteUpdateEntry } from "@/lib/types";
 
 export function WebsiteUpdates() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [entries, setEntries] = useState<SiteUpdateEntry[]>([]);
   const [error, setError] = useState("");
 
@@ -32,12 +32,12 @@ export function WebsiteUpdates() {
             <article key={entry.id} className="overflow-hidden rounded-lg border border-[var(--line)] bg-[var(--surface)] shadow-panel">
               <header className="flex flex-wrap items-center gap-2 border-b border-[var(--line)] bg-[var(--surface-2)] px-4 py-3">
                 {entry.version ? <span className="rounded-md bg-[var(--accent)] px-2 py-0.5 text-xs font-bold text-[var(--accent-ink)]">v{entry.version}</span> : null}
-                <h3 className="text-base font-semibold text-[var(--fg)]">{entry.title_ko}</h3>
+                <h3 className="text-base font-semibold text-[var(--fg)]">{localizedField(entry, "title", language)}</h3>
                 <time className="ml-auto text-xs text-[var(--muted)]">{entry.date}</time>
               </header>
-              {entry.description_ko ? (
+              {localizedField(entry, "description", language) ? (
                 <ul className="grid gap-2.5 px-4 py-4">
-                  {entry.description_ko.split("\n").map((raw, i) => {
+                  {localizedField(entry, "description", language).split("\n").map((raw, i) => {
                     const line = raw.replace(/^\s*[•-]\s*/, "").trim();
                     if (!line) return null;
                     const ci = line.indexOf(":");

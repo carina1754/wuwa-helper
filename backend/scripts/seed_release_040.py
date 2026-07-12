@@ -17,6 +17,27 @@ ENTRY = {
     "date": "2026-07-09",
     "version": "0.4.0",
     "title_ko": "0.4.0 업데이트",
+    "title_en": "0.4.0 Update",
+    "title_ja": "0.4.0 アップデート",
+    "title_zhHans": "0.4.0 更新",
+    "description_en": (
+        "• AI Build: get conversational recommendations for characters, weapons, echoes, sonatas, and upgrade order. Upload a screenshot and your owned characters are recognized automatically.\n"
+        "• Party damage index: computes the relative damage index of a recommended lineup and shows each character's contribution (%). It's a comparison figure based on standard-build assumptions.\n"
+        "• Save & delete records: save recommendations you like to the 'History' tab and delete the ones you don't need.\n"
+        "• UI cleanup: removed the in-progress dashboard and renamed the service to 'WuWa Helper'."
+    ),
+    "description_ja": (
+        "• AIビルド:キャラクター・武器・エコー・ソナタと育成順序を対話形式で提案します。スクリーンショットをアップロードすると所持キャラクターを自動認識します。\n"
+        "• パーティダメージ指数:推薦編成の相対ダメージ指数を計算し、キャラクターごとの貢献度(%)とともに表示します。標準ビルドを前提とした比較用の数値です。\n"
+        "• 記録の保存・削除:気に入った推薦を「履歴」タブに保存し、不要な記録は削除できます。\n"
+        "• 画面整理:準備中だったダッシュボードを整理し、サービス名を「鳴潮ヘルパー」に変更しました。"
+    ),
+    "description_zhHans": (
+        "• AI搭配:以对话形式推荐角色·武器·声骸·合鸣及养成顺序。上传截图即可自动识别持有角色。\n"
+        "• 队伍伤害指数:计算推荐阵容的相对伤害指数,并显示各角色的贡献度(%)。这是基于标准配装假设的对比数值。\n"
+        "• 记录保存·删除:可将喜欢的推荐保存到「记录」标签页,并删除不需要的记录。\n"
+        "• 界面整理:整理了筹备中的仪表盘,并将服务名称更改为「鸣潮助手」。"
+    ),
     "description_ko": (
         "• AI 빌딩: 대화형으로 캐릭터·무기·에코·소나타와 업그레이드 순서를 추천받을 수 있습니다. 스크린샷을 올리면 보유 캐릭터를 자동으로 인식합니다.\n"
         "• 파티 딜 지수: 추천 조합의 상대 딜 지수를 계산해 캐릭터별 기여도(%)와 함께 보여줍니다. 표준 빌드 가정 기반의 비교용 수치입니다.\n"

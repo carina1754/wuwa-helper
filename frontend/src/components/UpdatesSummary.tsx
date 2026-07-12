@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 import { getUpdates } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/constants";
-import { useLanguage } from "@/lib/i18n";
+import { localizedField, localizedList, useLanguage } from "@/lib/i18n";
 import type { GameUpdateSummary } from "@/lib/types";
 
 export function UpdatesSummary() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [updates, setUpdates] = useState<GameUpdateSummary[]>([]);
   const [error, setError] = useState("");
   // Which past-version row is expanded in place (accordion). null = all closed.
@@ -59,10 +59,10 @@ export function UpdatesSummary() {
               </time>
             ) : null}
             <h2>{featured.title_ko}</h2>
-            <p>{featured.summary_ko}</p>
-            {featured.highlights_ko.length > 0 || featured.source_links.length > 0 ? (
+            <p>{localizedField(featured, "summary", language)}</p>
+            {localizedList(featured, "highlights", language).length > 0 || featured.source_links.length > 0 ? (
               <div className="tags">
-                {featured.highlights_ko.map((highlight) => (
+                {localizedList(featured, "highlights", language).map((highlight) => (
                   <span key={highlight} className="tag">
                     {highlight}
                   </span>
@@ -110,10 +110,10 @@ export function UpdatesSummary() {
                     <img className="acc-bg" src={`${API_BASE_URL}${update.image_url}`} alt="" loading="lazy" />
                   ) : null}
                   <div className="acc-body">
-                    <p>{update.summary_ko}</p>
-                    {update.highlights_ko.length > 0 || update.source_links.length > 0 ? (
+                    <p>{localizedField(update, "summary", language)}</p>
+                    {localizedList(update, "highlights", language).length > 0 || update.source_links.length > 0 ? (
                       <div className="tags">
-                        {update.highlights_ko.map((highlight) => (
+                        {localizedList(update, "highlights", language).map((highlight) => (
                           <span key={highlight} className="tag">
                             {highlight}
                           </span>

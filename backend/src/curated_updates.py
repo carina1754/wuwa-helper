@@ -1,8 +1,25 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
 from .database import get_connection
+
+# Display-only localized bodies (en/ja/zhHans) for each version, authored data
+# file kept next to the code so it survives DB resets/deploys just like the
+# Korean text below. Shape: {version: {summary_en, summary_ja, summary_zhHans,
+# highlights_en, highlights_ja, highlights_zhHans}}. Titles stay Korean.
+_I18N_PATH = Path(__file__).resolve().parent.parent / "data" / "curated_updates_i18n.json"
+_LOCALIZED_KEYS = (
+    "summary_en", "summary_ja", "summary_zhHans",
+    "highlights_en", "highlights_ja", "highlights_zhHans",
+)
+
+
+def _load_i18n() -> dict[str, dict]:
+    if _I18N_PATH.exists():
+        return json.loads(_I18N_PATH.read_text(encoding="utf-8"))
+    return {}
 
 # Authored Korean summaries per game version. This module is the source of
 # truth so the text survives DB resets and deploys with the code;
@@ -213,6 +230,7 @@ def apply_curated_update_summaries() -> int:
     Matches rows by version. Returns the number of rows actually changed
     (0 when everything already matches).
     """
+    i18n = _load_i18n()
     updated = 0
     with get_connection() as conn:
         for version, payload in CURATED_UPDATE_SUMMARIES.items():
@@ -223,13 +241,17 @@ def apply_curated_update_summaries() -> int:
             if row is None:
                 continue
             data = json.loads(row["data_json"])
-            if (
-                data.get("summary_ko") == payload["summary_ko"]
-                and data.get("highlights_ko") == payload["highlights_ko"]
-            ):
+            fields = {
+                "summary_ko": payload["summary_ko"],
+                "highlights_ko": payload["highlights_ko"],
+            }
+            for k in _LOCALIZED_KEYS:
+                v = (i18n.get(version) or {}).get(k)
+                if v:
+                    fields[k] = v
+            if all(data.get(k) == v for k, v in fields.items()):
                 continue
-            data["summary_ko"] = payload["summary_ko"]
-            data["highlights_ko"] = payload["highlights_ko"]
+            data.update(fields)
             conn.execute(
                 "UPDATE game_updates SET data_json = %s, updated_at = now() WHERE id = %s",
                 (json.dumps(data, ensure_ascii=False), row["id"]),
