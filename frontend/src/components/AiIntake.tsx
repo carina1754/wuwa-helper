@@ -3,9 +3,15 @@
 import { useMemo, useState } from "react";
 import { extractVision } from "@/lib/api";
 import { mediaUrl } from "@/lib/constants";
+import { useLanguage } from "@/lib/i18n";
 import type { AiProfile, CodexResonator } from "@/lib/types";
 
-const PLAY_STYLES = ["고점 딜(뽕맛)", "편하게 자동", "지속 딜/생존", "서포트/힐 위주"];
+const PLAY_STYLES: { value: string; labelKey: "highBurst" | "easyAuto" | "sustain" | "support" }[] = [
+  { value: "고점 딜(뽕맛)", labelKey: "highBurst" },
+  { value: "편하게 자동", labelKey: "easyAuto" },
+  { value: "지속 딜/생존", labelKey: "sustain" },
+  { value: "서포트/힐 위주", labelKey: "support" },
+];
 
 /** 인트로 화면: 연각 레벨 · 희망 캐릭터 칩 · 플레이스타일 · 자유 메모 · (선택) 스크린샷.
  * 스크린샷 없이도 제출 가능. 제출 시 프로필과 첫 메시지를 상위로 전달. */
@@ -16,6 +22,7 @@ export function AiIntake({
   resonators: CodexResonator[];
   onStart: (profile: AiProfile, firstMessage: string) => void;
 }) {
+  const { t } = useLanguage();
   const [desired, setDesired] = useState<string[]>([]);
   const [owned, setOwned] = useState<string[]>([]);
   const [charQuery, setCharQuery] = useState("");
@@ -40,18 +47,18 @@ export function AiIntake({
   const handleScreenshot = async (file: File | null) => {
     if (!file) return;
     setVisionBusy(true);
-    setVisionStatus("스크린샷 분석 중…");
+    setVisionStatus(t.aiIntake.analyzingScreenshot);
     try {
       const result = await extractVision(file);
       const name = result.snapshot.character_name?.trim();
       if (name && !owned.includes(name)) {
         setOwned((prev) => [...prev, name]);
-        setVisionStatus(`인식됨: ${name}`);
+        setVisionStatus(`${t.aiIntake.recognized}: ${name}`);
       } else {
-        setVisionStatus("캐릭터를 특정하지 못했어요. 직접 입력해 주세요.");
+        setVisionStatus(t.aiIntake.notRecognized);
       }
     } catch {
-      setVisionStatus("스크린샷 분석에 실패했어요. 스크린샷 없이 진행해도 됩니다.");
+      setVisionStatus(t.aiIntake.visionFailed);
     } finally {
       setVisionBusy(false);
     }
@@ -80,14 +87,14 @@ export function AiIntake({
   return (
     <div className="grid max-w-2xl gap-5">
       <div>
-        <h2 className="text-lg font-semibold">AI 빌딩</h2>
+        <h2 className="text-lg font-semibold">{t.aiIntake.heading}</h2>
         <p className="mt-1 text-sm text-slate-500 dark:text-neutral-400">
-          현재 상황을 알려주면 캐릭터·무기·에코·업그레이드 순서를 추천하고, 대화로 다듬어 드려요.
+          {t.aiIntake.description}
         </p>
       </div>
 
       <div className="grid gap-1">
-        <span className="text-sm font-medium">사용하고 싶은 캐릭터</span>
+        <span className="text-sm font-medium">{t.aiIntake.desiredCharacters}</span>
         <div className="relative">
           <button
             type="button"
@@ -95,7 +102,7 @@ export function AiIntake({
             className="flex w-full items-center justify-between rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
           >
             <span className={desired.length ? "" : "text-slate-400 dark:text-neutral-500"}>
-              {desired.length ? `${desired.length}명 선택됨` : "눌러서 캐릭터 선택"}
+              {desired.length ? `${desired.length}${t.aiIntake.selectedSuffix}` : t.aiIntake.selectPrompt}
             </span>
             <span className="text-slate-400 dark:text-neutral-500">{pickerOpen ? "▲" : "▼"}</span>
           </button>
@@ -107,11 +114,11 @@ export function AiIntake({
                   <input
                     value={charQuery}
                     onChange={(e) => setCharQuery(e.target.value)}
-                    placeholder="이름 검색"
+                    placeholder={t.aiIntake.nameSearch}
                     className="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-1.5 text-sm dark:border-neutral-700 dark:bg-neutral-950"
                   />
                   <button type="button" onClick={() => setPickerOpen(false)} className="rounded-md bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white">
-                    완료
+                    {t.aiIntake.done}
                   </button>
                 </div>
                 <div className="grid max-h-72 grid-cols-4 gap-1 overflow-y-auto p-2 sm:grid-cols-6">
@@ -141,7 +148,7 @@ export function AiIntake({
                     );
                   })}
                   {filtered.length === 0 ? (
-                    <p className="col-span-full py-6 text-center text-sm text-slate-400 dark:text-neutral-500">결과가 없습니다.</p>
+                    <p className="col-span-full py-6 text-center text-sm text-slate-400 dark:text-neutral-500">{t.aiIntake.noResults}</p>
                   ) : null}
                 </div>
               </div>
@@ -172,47 +179,47 @@ export function AiIntake({
       </div>
 
       <div className="grid gap-1">
-        <span className="text-sm font-medium">플레이 스타일</span>
+        <span className="text-sm font-medium">{t.aiIntake.playStyle}</span>
         <div className="flex flex-wrap gap-1.5">
           {PLAY_STYLES.map((s) => (
             <button
-              key={s}
+              key={s.value}
               type="button"
               onClick={() => {
-                setPlayStyle(playStyle === s ? "" : s);
+                setPlayStyle(playStyle === s.value ? "" : s.value);
                 setCustomStyle("");
               }}
               className={
-                playStyle === s && !customStyle.trim()
+                playStyle === s.value && !customStyle.trim()
                   ? "rounded-full bg-indigo-600 px-3 py-1 text-xs text-white"
                   : "rounded-full bg-slate-200 px-3 py-1 text-xs text-slate-700 dark:bg-neutral-800 dark:text-neutral-300"
               }
             >
-              {s}
+              {t.aiIntake[s.labelKey]}
             </button>
           ))}
         </div>
         <input
           value={customStyle}
           onChange={(e) => setCustomStyle(e.target.value)}
-          placeholder="직접 입력 (예: 조작 간단한 원버튼 위주, 순간 폭딜 좋아함)"
+          placeholder={t.aiIntake.customStylePlaceholder}
           className="mt-1 w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
         />
       </div>
 
       <label className="grid gap-1">
-        <span className="text-sm font-medium">추가 메모 (선택)</span>
+        <span className="text-sm font-medium">{t.aiIntake.note}</span>
         <textarea
           value={note}
           onChange={(e) => setNote(e.target.value)}
           rows={2}
-          placeholder="예: 무과금이라 4성 무기 위주로, 심층 3막 클리어가 목표"
+          placeholder={t.aiIntake.notePlaceholder}
           className="w-full rounded-md border border-slate-300 px-3 py-2 text-sm dark:border-neutral-700 dark:bg-neutral-900"
         />
       </label>
 
       <div className="grid gap-1.5">
-        <span className="text-sm font-medium">스크린샷으로 보유 캐릭터 추가 (선택)</span>
+        <span className="text-sm font-medium">{t.aiIntake.screenshotAdd}</span>
         <label
           className={`group flex cursor-pointer items-center gap-3 rounded-lg border border-dashed border-slate-300 bg-slate-50 px-4 py-3 text-sm transition hover:border-indigo-400 hover:bg-indigo-50/60 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:border-indigo-500 dark:hover:bg-indigo-950/40 ${
             visionBusy ? "pointer-events-none opacity-60" : ""
@@ -232,9 +239,9 @@ export function AiIntake({
           </span>
           <span className="grid">
             <span className="font-medium text-slate-700 dark:text-neutral-200">
-              {visionBusy ? "분석 중…" : "이미지 파일 선택 또는 끌어다 놓기"}
+              {visionBusy ? t.aiIntake.analyzing : t.aiIntake.dropImage}
             </span>
-            <span className="text-xs text-slate-400 dark:text-neutral-500">캐릭터 정보 화면 스크린샷 (PNG·JPG)</span>
+            <span className="text-xs text-slate-400 dark:text-neutral-500">{t.aiIntake.screenshotHint}</span>
           </span>
           <input
             type="file"
@@ -269,7 +276,7 @@ export function AiIntake({
         onClick={submit}
         className="justify-self-start rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
       >
-        빌드 시작하기
+        {t.aiIntake.startBuild}
       </button>
     </div>
   );

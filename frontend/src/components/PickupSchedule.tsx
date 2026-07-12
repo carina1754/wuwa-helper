@@ -6,7 +6,7 @@ import { Portal } from "./Portal";
 import { ResonatorDetail, WeaponDetail } from "./Codex";
 import { getCodexResonators, getCodexWeapons, getPickupBanners } from "@/lib/api";
 import { API_BASE_URL } from "@/lib/constants";
-import { useLanguage } from "@/lib/i18n";
+import { localizedName, useLanguage } from "@/lib/i18n";
 import type { CodexResonator, CodexWeapon, PickupBanner, PickupBannerCharacter, PickupBannerWeapon } from "@/lib/types";
 
 type DetailTarget =
@@ -58,8 +58,8 @@ function groupBanners(list: PickupBanner[]): BannerGroup[] {
 /** Phase-1 banners start when the version launches; Namuwiki records that as a
  * relative phrase ("3.5 버전 업데이트 이후") rather than a date. Show a short label
  * for those and the raw date otherwise. */
-function formatPeriod(start?: string | null, end?: string | null): string | null {
-  const startLabel = start ? (/버전 업데이트 이후/.test(start) ? "버전 출시" : start) : null;
+function formatPeriod(start: string | null | undefined, end: string | null | undefined, versionReleaseLabel: string): string | null {
+  const startLabel = start ? (/버전 업데이트 이후/.test(start) ? versionReleaseLabel : start) : null;
   if (!startLabel && !end) return null;
   if (startLabel && end) return `${startLabel} ~ ${end}`;
   return startLabel ? `${startLabel} ~` : `~ ${end}`;
@@ -82,7 +82,7 @@ function normalizeName(name: string): string {
 }
 
 export function PickupSchedule() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [banners, setBanners] = useState<PickupBanner[]>([]);
   const [resonators, setResonators] = useState<CodexResonator[]>([]);
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
@@ -137,7 +137,16 @@ export function PickupSchedule() {
   const matchWeapon = (nameKo: string): CodexWeapon | null =>
     weaponByName.get(normalizeName(nameKo)) ?? null;
 
-  const tElement = (value?: string | null) => (value ? (t.elements as Record<string, string>)[value] ?? value : "-");
+  /** 배너 데이터는 name_ko만 가지므로, 카탈로그에 매칭되면 현지화 이름으로 표시. */
+  const resoDisplay = (nameKo: string): string => {
+    const r = matchResonator(nameKo);
+    return r ? localizedName(r, language) : nameKo;
+  };
+  const weaponDisplay = (nameKo: string): string => {
+    const w = matchWeapon(nameKo);
+    return w ? localizedName(w, language) : nameKo;
+  };
+
   const tWeaponType = (value?: string | null) => (value ? (t.weaponTypes as Record<string, string>)[value] ?? value : "-");
 
   const hasCollab = useMemo(() => banners.some((banner) => banner.is_collab), [banners]);
@@ -160,7 +169,7 @@ export function PickupSchedule() {
           <h2 className="text-xl font-semibold text-[var(--fg)] sm:text-2xl">{t.pickup.title}</h2>
           <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--fg-soft)]">{t.pickup.body}</p>
           <div className="mt-4 flex flex-wrap items-center gap-2">
-            <span className="text-xs font-medium text-[var(--muted)]">표시:</span>
+            <span className="text-xs font-medium text-[var(--muted)]">{t.pickup.filterLabel}</span>
             <button
               type="button"
               aria-pressed={showCharacters}
@@ -168,7 +177,7 @@ export function PickupSchedule() {
               className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${toggleClass(showCharacters)}`}
             >
               <UserRound className="h-4 w-4" aria-hidden="true" />
-              캐릭터
+              {t.pickup.filterCharacters}
             </button>
             <button
               type="button"
@@ -177,7 +186,7 @@ export function PickupSchedule() {
               className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${toggleClass(showWeapons)}`}
             >
               <Swords className="h-4 w-4" aria-hidden="true" />
-              무기
+              {t.pickup.filterWeapons}
             </button>
             {hasCollab ? (
               <button
@@ -187,7 +196,7 @@ export function PickupSchedule() {
                 className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${toggleClass(showCollab)}`}
               >
                 <Handshake className="h-4 w-4" aria-hidden="true" />
-                콜라보
+                {t.pickup.filterCollab}
               </button>
             ) : null}
           </div>
@@ -209,7 +218,7 @@ export function PickupSchedule() {
             <span className="inline-flex h-9 items-center justify-center rounded-md bg-[var(--accent)] px-2.5 text-sm font-semibold text-[var(--accent-ink)]">
               {version}
             </span>
-            <h3 className="text-base font-semibold text-[var(--fg)]">버전 픽업</h3>
+            <h3 className="text-base font-semibold text-[var(--fg)]">{t.pickup.versionBanners}</h3>
           </div>
 
           <div className="grid gap-3 p-4 sm:grid-cols-2 xl:grid-cols-3">
@@ -231,19 +240,19 @@ export function PickupSchedule() {
                     }`}
                   >
                     {group.isRerun ? <RotateCcw className="h-3.5 w-3.5" aria-hidden="true" /> : <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />}
-                    {group.isRerun ? "복각" : "신규"}
+                    {group.isRerun ? t.pickup.rerun : t.pickup.newBanner}
                   </span>
                   {group.isCollab ? (
                     <span className="inline-flex items-center gap-1 rounded-md bg-fuchsia-50 px-2 py-1 text-xs font-semibold text-fuchsia-800 ring-1 ring-inset ring-fuchsia-200 dark:bg-fuchsia-400/10 dark:text-fuchsia-200 dark:ring-fuchsia-400/30">
                       <Handshake className="h-3.5 w-3.5" aria-hidden="true" />
-                      콜라보
+                      {t.pickup.filterCollab}
                     </span>
                   ) : null}
                 </div>
-                {formatPeriod(group.startDate, group.endDate) ? (
+                {formatPeriod(group.startDate, group.endDate, t.pickup.versionRelease) ? (
                   <p className="mb-3 flex items-start gap-1 text-xs text-[var(--muted)]">
                     <CalendarDays className="mt-px h-3.5 w-3.5 shrink-0" aria-hidden="true" />
-                    <span>{formatPeriod(group.startDate, group.endDate)}</span>
+                    <span>{formatPeriod(group.startDate, group.endDate, t.pickup.versionRelease)}</span>
                   </p>
                 ) : null}
 
@@ -261,7 +270,7 @@ export function PickupSchedule() {
                               avatar: character.avatar,
                             })
                           }
-                          title={`${character.name_ko} 상세 보기`}
+                          title={`${resoDisplay(character.name_ko)} ${t.codex.viewDetail}`}
                           className="flex w-16 flex-col items-center gap-1 rounded-md text-center transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                         >
                           {character.avatar ? (
@@ -277,7 +286,7 @@ export function PickupSchedule() {
                             </span>
                           )}
                           <span className="w-full truncate text-xs font-medium text-[var(--fg-soft)]">
-                            {character.name_ko}
+                            {resoDisplay(character.name_ko)}
                           </span>
                         </button>
                       ))
@@ -289,7 +298,7 @@ export function PickupSchedule() {
                           type="button"
                           key={`w-${weapon.name_ko}-${wi}`}
                           onClick={() => setDetail({ type: "weapon", weapon })}
-                          title={`${weapon.name_ko} 상세 보기`}
+                          title={`${weaponDisplay(weapon.name_ko)} ${t.codex.viewDetail}`}
                           className="flex w-16 flex-col items-center gap-1 rounded-md text-center transition hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
                         >
                           {weapon.icon ? (
@@ -305,14 +314,14 @@ export function PickupSchedule() {
                             </span>
                           )}
                           <span className="w-full truncate text-xs font-medium text-[var(--fg-soft)]">
-                            {weapon.name_ko}
+                            {weaponDisplay(weapon.name_ko)}
                           </span>
                         </button>
                       ))
                     : null}
 
                   {!showCharacters && !showWeapons ? (
-                    <p className="text-xs text-[var(--muted)]">캐릭터 또는 무기를 선택하세요.</p>
+                    <p className="text-xs text-[var(--muted)]">{t.pickup.noSelection}</p>
                   ) : null}
                 </div>
               </article>
@@ -336,7 +345,7 @@ export function PickupSchedule() {
             <button
               type="button"
               onClick={() => setDetail(null)}
-              aria-label="닫기"
+              aria-label={t.codex.close}
               className="absolute right-3 top-3 rounded-md p-1 text-[var(--muted)] transition hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"
             >
               <X className="h-5 w-5" aria-hidden="true" />
@@ -344,7 +353,7 @@ export function PickupSchedule() {
 
             {detail.type === "character" ? (
               detail.reso ? (
-                <ResonatorDetail item={detail.reso} tElement={tElement} />
+                <ResonatorDetail item={detail.reso} />
               ) : (
                 <div className="grid justify-items-center gap-3 text-center">
                   {detail.avatar ? (
@@ -357,7 +366,7 @@ export function PickupSchedule() {
                   ) : null}
                   <div>
                     <h3 className="text-lg font-semibold text-[var(--fg)]">{detail.nameKo}</h3>
-                    <p className="mt-1 text-sm text-[var(--muted)]">상세 정보가 아직 없습니다.</p>
+                    <p className="mt-1 text-sm text-[var(--muted)]">{t.pickup.noDetail}</p>
                   </div>
                 </div>
               )

@@ -6,7 +6,7 @@ import { Portal } from "./Portal";
 import { getCodexEchoes, getCodexResonators, getCodexWeapons, getSonataSets } from "@/lib/api";
 import { weaponDescAtRank } from "@/lib/build";
 import { mediaUrl as imageSrc } from "@/lib/constants";
-import { useLanguage } from "@/lib/i18n";
+import { localizedName, useLanguage } from "@/lib/i18n";
 import type { CodexEcho, CodexResonator, CodexSkillDamage, CodexWeapon, Role, SonataSet } from "@/lib/types";
 
 type SubTab = "resonators" | "weapons" | "echoes";
@@ -15,13 +15,6 @@ type Detail =
   | { type: "resonator"; item: CodexResonator }
   | { type: "weapon"; item: CodexWeapon }
   | { type: "echo"; item: CodexEcho };
-
-const ROLE_LABELS: Record<Role, string> = {
-  main_dps: "메인 딜러",
-  sub_dps: "서브 딜러",
-  support: "서포터",
-  healer: "힐러",
-};
 
 /** Game strings carry UE rich-text markup (<size>, <color>, <te href=…>) and
  * {0}/{1} runtime placeholders. Strip every tag and collapse whitespace so the
@@ -91,13 +84,6 @@ function weaponResonanceName(weapon: CodexWeapon): string {
 }
 
 const STAT_KEYS = ["Atk", "Life", "Def", "Crit", "CritDamage"] as const;
-const STAT_LABELS: Record<(typeof STAT_KEYS)[number], string> = {
-  Atk: "공격력",
-  Life: "생명력",
-  Def: "방어력",
-  Crit: "치명타 확률",
-  CritDamage: "치명타 피해",
-};
 
 interface FilterSelectProps {
   label: string;
@@ -132,11 +118,17 @@ function SonataFilter({
   onChange,
   options,
   iconOf,
+  labelOf,
+  allLabel,
+  ariaLabel,
 }: {
   value: string;
   onChange: (value: string) => void;
   options: string[];
   iconOf: (name: string) => string | undefined;
+  labelOf: (name: string) => string;
+  allLabel: string;
+  ariaLabel: string;
 }) {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -153,7 +145,7 @@ function SonataFilter({
     <div ref={ref} className="relative">
       <button
         type="button"
-        aria-label="소나타 필터"
+        aria-label={ariaLabel}
         onClick={() => setOpen((current) => !current)}
         className="flex min-h-9 items-center gap-1.5 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-1.5 text-sm text-[var(--fg)]"
       >
@@ -163,10 +155,10 @@ function SonataFilter({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={selectedIcon} alt="" className="h-4 w-4 shrink-0 object-contain" />
             ) : null}
-            <span className="max-w-[9rem] truncate">{value}</span>
+            <span className="max-w-[9rem] truncate">{labelOf(value)}</span>
           </>
         ) : (
-          <span className="text-[var(--muted)]">전체 소나타</span>
+          <span className="text-[var(--muted)]">{allLabel}</span>
         )}
         <ChevronDown className="h-3.5 w-3.5 shrink-0 text-[var(--muted)]" aria-hidden="true" />
       </button>
@@ -183,7 +175,7 @@ function SonataFilter({
             }`}
           >
             <span className="h-5 w-5 shrink-0" />
-            전체 소나타
+            {allLabel}
           </button>
           {options.map((name) => {
             const icon = imageSrc(iconOf(name));
@@ -205,7 +197,7 @@ function SonataFilter({
                 ) : (
                   <span className="h-5 w-5 shrink-0" />
                 )}
-                <span className="truncate">{name}</span>
+                <span className="truncate">{labelOf(name)}</span>
               </button>
             );
           })}
@@ -222,19 +214,21 @@ function GridCell({
   rarity,
   hint,
   onClick,
+  viewLabel,
 }: {
   name: string;
   image?: string | null;
   rarity?: number | null;
   hint?: string;
   onClick: () => void;
+  viewLabel: string;
 }) {
   const src = imageSrc(image);
   return (
     <button
       type="button"
       onClick={onClick}
-      title={`${name} 상세 보기`}
+      title={`${name} ${viewLabel}`}
       className="flex flex-col items-center gap-1.5 rounded-md p-1.5 text-center transition hover:-translate-y-0.5 hover:bg-[var(--surface-2)] focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
     >
       {src ? (
@@ -258,7 +252,7 @@ function GridCell({
 }
 
 export function Codex() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [tab, setTab] = useState<SubTab>("resonators");
   const [resonators, setResonators] = useState<CodexResonator[]>([]);
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
@@ -314,6 +308,19 @@ export function Codex() {
 
   const tElement = (value?: string | null) =>
     value ? (t.elements as Record<string, string>)[value] ?? value : value ?? "";
+  const tWeaponType = (value?: string | null) =>
+    value ? (t.weaponTypes as Record<string, string>)[value] ?? value : value ?? "";
+
+  // 소나타는 한국어 이름을 키로 그룹핑/필터링하므로, 표시용 현지화 라벨은 별도 맵으로 조회.
+  const sonataByKo = useMemo(() => {
+    const map = new Map<string, SonataSet>();
+    for (const set of sonataSets) if (set.name_ko) map.set(set.name_ko, set);
+    return map;
+  }, [sonataSets]);
+  const sonataLabel = (koName: string) => {
+    const set = sonataByKo.get(koName);
+    return set ? localizedName(set, language) : koName;
+  };
 
   // Distinct filter option lists derived from the loaded data.
   const elementOptions = useMemo(
@@ -447,7 +454,7 @@ export function Codex() {
             className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${subTabClass(tab === "resonators")}`}
           >
             <UserRound className="h-4 w-4" aria-hidden="true" />
-            캐릭터
+            {t.codex.resonators}
           </button>
           <button
             type="button"
@@ -456,7 +463,7 @@ export function Codex() {
             className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${subTabClass(tab === "weapons")}`}
           >
             <Swords className="h-4 w-4" aria-hidden="true" />
-            무기
+            {t.codex.weapons}
           </button>
           <button
             type="button"
@@ -465,7 +472,7 @@ export function Codex() {
             className={`inline-flex items-center gap-1.5 rounded-md border px-3 py-1.5 text-sm font-medium transition ${subTabClass(tab === "echoes")}`}
           >
             <Sparkles className="h-4 w-4" aria-hidden="true" />
-            에코
+            {t.codex.echoes}
           </button>
         </div>
 
@@ -473,32 +480,35 @@ export function Codex() {
         <div className="mt-4 flex flex-wrap items-center gap-2">
           <input
             className="min-h-9 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-1.5 text-sm text-[var(--fg)] placeholder:text-[var(--muted)]"
-            placeholder="이름 검색"
+            placeholder={t.codex.searchName}
             value={search}
             onChange={(event) => setSearch(event.target.value)}
           />
           {tab === "resonators" ? (
             <>
-              <FilterSelect label="전체 속성" value={element} onChange={setElement} options={elementOptions} render={tElement} />
-              <FilterSelect label="전체 무기" value={weaponTypeR} onChange={setWeaponTypeR} options={resonatorWeaponTypes} />
-              <FilterSelect label="전체 성급" value={rarityR} onChange={setRarityR} options={resonatorRarities} render={(v) => `${v}★`} />
-              <FilterSelect label="전체 역할" value={role} onChange={setRole} options={roleOptions} render={(v) => ROLE_LABELS[v as Role] ?? v} />
+              <FilterSelect label={t.planner.allElements} value={element} onChange={setElement} options={elementOptions} render={tElement} />
+              <FilterSelect label={t.codex.allTypes} value={weaponTypeR} onChange={setWeaponTypeR} options={resonatorWeaponTypes} render={tWeaponType} />
+              <FilterSelect label={t.codex.allRarities} value={rarityR} onChange={setRarityR} options={resonatorRarities} render={(v) => `${v}★`} />
+              <FilterSelect label={t.planner.allRoles} value={role} onChange={setRole} options={roleOptions} render={(v) => t.roles[v as Role] ?? v} />
             </>
           ) : null}
           {tab === "weapons" ? (
             <>
-              <FilterSelect label="전체 종류" value={weaponTypeW} onChange={setWeaponTypeW} options={weaponTypeOptions} />
-              <FilterSelect label="전체 성급" value={rarityW} onChange={setRarityW} options={weaponRarities} render={(v) => `${v}★`} />
+              <FilterSelect label={t.codex.allTypes} value={weaponTypeW} onChange={setWeaponTypeW} options={weaponTypeOptions} render={tWeaponType} />
+              <FilterSelect label={t.codex.allRarities} value={rarityW} onChange={setRarityW} options={weaponRarities} render={(v) => `${v}★`} />
             </>
           ) : null}
           {tab === "echoes" ? (
             <>
-              <FilterSelect label="전체 코스트" value={cost} onChange={setCost} options={costOptions} render={(v) => `${v} 코스트`} />
+              <FilterSelect label={t.codex.allCosts} value={cost} onChange={setCost} options={costOptions} render={(v) => `${v} ${t.codex.cost}`} />
               <SonataFilter
                 value={sonata}
                 onChange={setSonata}
                 options={sonataOptions}
                 iconOf={(name) => sonataIcon.get(name)}
+                labelOf={sonataLabel}
+                allLabel={t.codex.allSonata}
+                ariaLabel={t.codex.sonataFilter}
               />
             </>
           ) : null}
@@ -526,17 +536,18 @@ export function Codex() {
                   // eslint-disable-next-line @next/next/no-img-element
                   <img src={imageSrc(sonataIcon.get(group.name))} alt="" className="h-6 w-6 shrink-0 object-contain" />
                 ) : null}
-                <h3 className="text-sm font-semibold text-[var(--fg)]">{group.name || "기타"}</h3>
+                <h3 className="text-sm font-semibold text-[var(--fg)]">{group.name ? sonataLabel(group.name) : t.codex.other}</h3>
                 <span className="text-xs text-[var(--muted)]">{group.echoes.length}</span>
               </div>
               <div className={GRID_CLASS}>
                 {group.echoes.map((item) => (
                   <GridCell
                     key={item.id}
-                    name={item.name_ko}
+                    name={localizedName(item, language)}
                     image={item.icon}
                     rarity={item.rarity}
-                    hint={item.cost != null ? `${item.cost} 코스트` : ""}
+                    hint={item.cost != null ? `${item.cost} ${t.codex.cost}` : ""}
+                    viewLabel={t.codex.viewDetail}
                     onClick={() => setDetail({ type: "echo", item })}
                   />
                 ))}
@@ -551,10 +562,11 @@ export function Codex() {
               ? filteredResonators.map((item) => (
                   <GridCell
                     key={item.id}
-                    name={item.name}
+                    name={localizedName(item, language)}
                     image={item.image}
                     rarity={item.rarity}
                     hint={tElement(item.element)}
+                    viewLabel={t.codex.viewDetail}
                     onClick={() => setDetail({ type: "resonator", item })}
                   />
                 ))
@@ -563,10 +575,11 @@ export function Codex() {
               ? filteredWeapons.map((item) => (
                   <GridCell
                     key={item.id}
-                    name={item.name_ko}
+                    name={localizedName(item, language)}
                     image={item.icon}
                     rarity={item.rarity}
-                    hint={item.weapon_type_ko ?? ""}
+                    hint={tWeaponType(item.weapon_type_ko)}
+                    viewLabel={t.codex.viewDetail}
                     onClick={() => setDetail({ type: "weapon", item })}
                   />
                 ))
@@ -590,18 +603,18 @@ export function Codex() {
             <button
               type="button"
               onClick={() => setDetail(null)}
-              aria-label="닫기"
+              aria-label={t.codex.close}
               className="absolute right-3 top-3 rounded-md p-1 text-[var(--muted)] transition hover:bg-[var(--surface-2)] hover:text-[var(--fg)]"
             >
               <X className="h-5 w-5" aria-hidden="true" />
             </button>
 
             {detail.type === "resonator" ? (
-              <ResonatorDetail item={detail.item} tElement={tElement} />
+              <ResonatorDetail item={detail.item} />
             ) : detail.type === "weapon" ? (
               <WeaponDetail item={detail.item} />
             ) : (
-              <EchoDetail item={detail.item} />
+              <EchoDetail item={detail.item} sonataLabel={sonataLabel} />
             )}
           </div>
           </div>
@@ -641,18 +654,17 @@ function DetailHeader({
   );
 }
 
-export function ResonatorDetail({
-  item,
-  tElement,
-}: {
-  item: CodexResonator;
-  tElement: (value?: string | null) => string;
-}) {
+export function ResonatorDetail({ item }: { item: CodexResonator }) {
+  const { t, language } = useLanguage();
+  const tElement = (value?: string | null) =>
+    value ? (t.elements as Record<string, string>)[value] ?? value : value ?? "";
+  const tWeaponType = (value?: string | null) =>
+    value ? (t.weaponTypes as Record<string, string>)[value] ?? value : value ?? "";
   const meta = [
     item.rarity ? `${item.rarity}★` : null,
     tElement(item.element) || null,
-    item.weapon_type_ko || null,
-    ROLE_LABELS[item.role] ?? item.role,
+    tWeaponType(item.weapon_type_ko) || null,
+    t.roles[item.role] ?? item.role,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -685,11 +697,11 @@ export function ResonatorDetail({
 
   return (
     <div className="grid gap-4">
-      <DetailHeader name={item.name} image={item.image} rarity={item.rarity} meta={meta} />
+      <DetailHeader name={localizedName(item, language)} image={item.image} rarity={item.rarity} meta={meta} />
 
       {item.skills?.length ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">스킬</h4>
+          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.skills}</h4>
           <ul className="grid gap-2.5">
             {item.skills.map((skill, index) => (
               <li key={`${skill.SkillName ?? "skill"}-${index}`} className="text-sm">
@@ -712,7 +724,7 @@ export function ResonatorDetail({
                       value={skillLvOf(index)}
                       onChange={(e) => setSkillLvOf(index, Number(e.target.value))}
                       className="mb-1 mt-1.5 w-full accent-[var(--accent)]"
-                      aria-label={`${stripTags(skill.SkillName ?? "스킬")} 레벨`}
+                      aria-label={`${stripTags(skill.SkillName ?? t.codex.skills)} ${t.codex.level}`}
                     />
                     <div className="mt-1 flex flex-wrap gap-1">
                       {groupSkillDamage(skill.damage, skillLvOf(index)).map((g, gi) => (
@@ -731,7 +743,7 @@ export function ResonatorDetail({
 
       {chainNodes.length ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">공명 사슬</h4>
+          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.resonanceChain}</h4>
           <ol className="grid gap-1 text-sm text-[var(--fg-soft)]">
             {chainNodes.map((node, index) => (
               <li key={`${node}-${index}`}>
@@ -746,7 +758,7 @@ export function ResonatorDetail({
       {stats.length ? (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-[var(--fg)]">스탯</h4>
+            <h4 className="text-sm font-semibold text-[var(--fg)]">{t.codex.stats}</h4>
             {curves ? <span className="text-xs text-[var(--muted)]">Lv. {level}</span> : null}
           </div>
           {curves ? (
@@ -757,13 +769,13 @@ export function ResonatorDetail({
               value={level}
               onChange={(e) => setLevel(Number(e.target.value))}
               className="mb-3 w-full accent-[var(--accent)]"
-              aria-label="레벨"
+              aria-label={t.codex.level}
             />
           ) : null}
           <dl className="grid grid-cols-2 gap-2 text-sm">
             {stats.map((entry) => (
               <div key={entry.key} className="flex items-center justify-between rounded-md bg-[var(--surface-2)] px-2.5 py-1.5">
-                <dt className="text-[var(--muted)]">{STAT_LABELS[entry.key]}</dt>
+                <dt className="text-[var(--muted)]">{t.codex.statLabels[entry.key as keyof typeof t.codex.statLabels]}</dt>
                 <dd className="font-medium text-[var(--fg)]">{fmtStat(entry.key, entry.value as number)}</dd>
               </div>
             ))}
@@ -775,7 +787,10 @@ export function ResonatorDetail({
 }
 
 export function WeaponDetail({ item }: { item: CodexWeapon }) {
-  const meta = [item.rarity ? `${item.rarity}★` : null, item.weapon_type_ko || null]
+  const { t, language } = useLanguage();
+  const tWeaponType = (value?: string | null) =>
+    value ? (t.weaponTypes as Record<string, string>)[value] ?? value : value ?? "";
+  const meta = [item.rarity ? `${item.rarity}★` : null, tWeaponType(item.weapon_type_ko) || null]
     .filter(Boolean)
     .join(" · ");
   const resonanceName = weaponResonanceName(item);
@@ -794,12 +809,12 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
 
   return (
     <div className="grid gap-4">
-      <DetailHeader name={item.name_ko} image={item.icon} rarity={item.rarity} meta={meta} />
+      <DetailHeader name={localizedName(item, language)} image={item.icon} rarity={item.rarity} meta={meta} />
 
       {props.length ? (
         <div>
           <div className="mb-2 flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-[var(--fg)]">스탯</h4>
+            <h4 className="text-sm font-semibold text-[var(--fg)]">{t.codex.stats}</h4>
             <span className="text-xs text-[var(--muted)]">Lv. {level}</span>
           </div>
           <input
@@ -831,8 +846,8 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
       {resonanceName || desc ? (
         <div>
           <div className="mb-1.5 flex items-center justify-between gap-2">
-            <h4 className="text-sm font-semibold text-[var(--fg)]">패시브{resonanceName ? ` · ${resonanceName}` : ""}</h4>
-            {hasRefine ? <span className="text-xs text-[var(--muted)]">정제 R{rank}</span> : null}
+            <h4 className="text-sm font-semibold text-[var(--fg)]">{t.codex.passive}{resonanceName ? ` · ${resonanceName}` : ""}</h4>
+            {hasRefine ? <span className="text-xs text-[var(--muted)]">{t.codex.refine} R{rank}</span> : null}
           </div>
           {hasRefine ? (
             <input
@@ -842,7 +857,7 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
               value={rank}
               onChange={(e) => setRank(Number(e.target.value))}
               className="mb-2 w-full accent-[var(--accent)]"
-              aria-label="정제"
+              aria-label={t.codex.refine}
             />
           ) : null}
           {desc ? <p className="text-sm text-[var(--fg-soft)]">{desc}</p> : null}
@@ -851,7 +866,7 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
 
       {lore ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">설명</h4>
+          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.description}</h4>
           <p className="line-clamp-5 text-sm text-[var(--muted)]">{lore}</p>
         </div>
       ) : null}
@@ -859,26 +874,27 @@ export function WeaponDetail({ item }: { item: CodexWeapon }) {
   );
 }
 
-function EchoDetail({ item }: { item: CodexEcho }) {
-  const meta = [item.cost != null ? `${item.cost} 코스트` : null, item.rarity ? `${item.rarity}★` : null]
+function EchoDetail({ item, sonataLabel }: { item: CodexEcho; sonataLabel: (koName: string) => string }) {
+  const { t, language } = useLanguage();
+  const meta = [item.cost != null ? `${item.cost} ${t.codex.cost}` : null, item.rarity ? `${item.rarity}★` : null]
     .filter(Boolean)
     .join(" · ");
   const skillDesc = stripTags(item.skill?.DescriptionEx);
 
   return (
     <div className="grid gap-4">
-      <DetailHeader name={item.name_ko} image={item.icon} rarity={item.rarity} meta={meta} />
+      <DetailHeader name={localizedName(item, language)} image={item.icon} rarity={item.rarity} meta={meta} />
 
       {item.sonata?.length ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">소나타</h4>
+          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.sonata}</h4>
           <div className="flex flex-wrap gap-1.5">
             {item.sonata.map((name) => (
               <span
                 key={name}
                 className="rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-2 py-1 text-xs text-[var(--fg-soft)]"
               >
-                {name}
+                {sonataLabel(name)}
               </span>
             ))}
           </div>
@@ -887,7 +903,7 @@ function EchoDetail({ item }: { item: CodexEcho }) {
 
       {skillDesc ? (
         <div>
-          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">스킬</h4>
+          <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.skills}</h4>
           <p className="text-sm text-[var(--fg-soft)]">{skillDesc}</p>
         </div>
       ) : null}

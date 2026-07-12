@@ -8,6 +8,7 @@ import { AiIntake } from "./AiIntake";
 import type { NameMaps } from "./RecommendationCard";
 import type { GameConfig } from "@/lib/build";
 import { computePartyDamage } from "@/lib/partyDamage";
+import { useLanguage } from "@/lib/i18n";
 import type { AiMessage, AiProfile, CodexResonator, CodexWeapon, Recommendation } from "@/lib/types";
 
 const EMPTY_NAMES: NameMaps = {
@@ -19,6 +20,7 @@ const EMPTY_NAMES: NameMaps = {
 
 /** AI 코치 탭 컨테이너: 인트로 → 대화 → 추천 카드 → 확정 저장. */
 export function AiCoach() {
+  const { t } = useLanguage();
   const { data: session, status } = useSession();
   const userId = session?.user?.email ?? null;
 
@@ -74,7 +76,7 @@ export function AiCoach() {
       setMessages([...nextMessages, { role: "assistant", content: response.reply }]);
       setRecommendation(response.recommendation ?? null);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "요청에 실패했습니다.");
+      setError(e instanceof Error ? e.message : t.aiCoach.requestFailed);
     } finally {
       setLoading(false);
     }
@@ -100,7 +102,7 @@ export function AiCoach() {
   const handleConfirm = async () => {
     if (!recommendation) return;
     if (!userId) {
-      setError("기록을 저장하려면 구글 로그인이 필요해요.");
+      setError(t.aiCoach.loginToSave);
       return;
     }
     setConfirming(true);
@@ -111,13 +113,13 @@ export function AiCoach() {
         profile,
         conversation: messages,
         recommendation,
-        title: recommendation.summary || "AI 추천 빌드",
+        title: recommendation.summary || t.aiCoach.defaultTitle,
       });
-      setSavedTitle(record.title ?? record.recommendation.summary ?? "저장됨");
+      setSavedTitle(record.title ?? record.recommendation.summary ?? t.aiCoach.saved);
       // 저장 확인 문구를 잠깐 보여준 뒤 자동으로 처음(인트로)으로 복귀.
       window.setTimeout(() => reset(), 1500);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "저장에 실패했습니다.");
+      setError(e instanceof Error ? e.message : t.aiCoach.saveFailed);
     } finally {
       setConfirming(false);
     }
@@ -143,11 +145,11 @@ export function AiCoach() {
   if (!userId) {
     return (
       <div className="grid max-w-md gap-3">
-        <h2 className="text-lg font-semibold">AI 빌딩</h2>
+        <h2 className="text-lg font-semibold">{t.aiCoach.title}</h2>
         <p className="text-sm text-slate-500 dark:text-neutral-400">
           {status === "loading"
-            ? "로그인 상태를 확인하는 중…"
-            : "AI 빌드 추천은 구글 로그인 후 이용할 수 있어요. 로그인하면 추천이 내 계정 기록으로 저장됩니다."}
+            ? t.aiCoach.checkingLogin
+            : t.aiCoach.loginIntro}
         </p>
         {status !== "loading" ? (
           <button
@@ -155,7 +157,7 @@ export function AiCoach() {
             onClick={() => void signIn("google", { callbackUrl: "/" })}
             className="justify-self-start rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
           >
-            구글로 로그인
+            {t.aiCoach.signInWithGoogle}
           </button>
         ) : null}
       </div>
@@ -169,15 +171,15 @@ export function AiCoach() {
   return (
     <div className="grid gap-4">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">AI 빌딩</h2>
+        <h2 className="text-lg font-semibold">{t.aiCoach.title}</h2>
         <button type="button" onClick={reset} className="text-sm text-slate-500 hover:text-slate-800 dark:hover:text-neutral-200">
-          새로 시작
+          {t.aiCoach.startOver}
         </button>
       </div>
 
       {savedTitle ? (
         <div className="rounded-md border border-emerald-300 bg-emerald-50 px-3 py-2 text-sm text-emerald-800 dark:border-emerald-800 dark:bg-emerald-950 dark:text-emerald-200">
-          기록에 저장했어요: <b>{savedTitle}</b>
+          {t.aiCoach.savedToHistory}: <b>{savedTitle}</b>
         </div>
       ) : null}
       {error ? (

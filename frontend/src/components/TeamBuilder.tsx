@@ -5,7 +5,7 @@ import { Portal } from "./Portal";
 import { signIn, useSession } from "next-auth/react";
 import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation, teamCalculate } from "@/lib/api";
 import { mediaUrl } from "@/lib/constants";
-import { useLanguage } from "@/lib/i18n";
+import { localizedName, useLanguage } from "@/lib/i18n";
 import type { AiMessage, AiProfile, CodexEcho, CodexResonator, CodexWeapon, SimMemberIn, SimOpts, SonataSet, TeamCalcRequestBody, TeamCalcResult } from "@/lib/types";
 import {
   activeSetBonuses,
@@ -55,7 +55,8 @@ function noSkillData(reso: CodexResonator | null | undefined): boolean {
 }
 
 export function TeamBuilder() {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
+  const tElement = (value?: string | null) => (value ? (t.elements as Record<string, string>)[value] ?? value : value ?? "");
   const [resos, setResos] = useState<CodexResonator[]>([]);
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
   const [echoes, setEchoes] = useState<CodexEcho[]>([]);
@@ -191,7 +192,7 @@ export function TeamBuilder() {
       setResult(await teamCalculate(body));
     } catch (e) {
       setResult(null);
-      setError(e instanceof Error ? e.message : "계산에 실패했습니다.");
+      setError(e instanceof Error ? e.message : t.teams.calcFailed);
     } finally {
       setBusy(false);
     }
@@ -199,13 +200,13 @@ export function TeamBuilder() {
 
   const setOpt = (k: NumericOptKey, v: number) => setOpts((o) => ({ ...o, [k]: v }));
   const OPT_FIELDS: { key: NumericOptKey; label: string }[] = [
-    { key: "enemyLevel", label: "적 레벨" },
-    { key: "enemyRes", label: "적 저항%" },
-    { key: "resShred", label: "저항 무시%" },
-    { key: "defIgnore", label: "방어 무시%" },
-    { key: "defReduce", label: "방어 감소%" },
-    { key: "boost", label: "부스트%" },
-    { key: "bonusPct", label: "피해증가%" },
+    { key: "enemyLevel", label: t.teams.enemyLevel },
+    { key: "enemyRes", label: t.teams.enemyRes },
+    { key: "resShred", label: t.teams.resShred },
+    { key: "defIgnore", label: t.teams.defIgnore },
+    { key: "defReduce", label: t.teams.defReduce },
+    { key: "boost", label: t.teams.boost },
+    { key: "bonusPct", label: t.teams.bonusPct },
   ];
 
   const ranked = result ? [...result.members].sort((a, b) => b.total - a.total) : [];
@@ -238,11 +239,11 @@ export function TeamBuilder() {
   const analyzeAndSave = async () => {
     if (aiBusy || !partyFilled) return;
     if (!userId) {
-      setAiStatus("기록을 저장하려면 구글 로그인이 필요해요.");
+      setAiStatus(t.teams.aiLoginRequired);
       return;
     }
     setAiBusy(true);
-    setAiStatus("AI가 파티를 분석하는 중… (최대 30초)");
+    setAiStatus(t.teams.aiAnalyzing);
     const { names, text } = describeParty();
     const mainName = mainDpsId != null ? resos.find((r) => r.id === mainDpsId)?.name ?? null : null;
     const pinLine = mainName
@@ -262,7 +263,7 @@ export function TeamBuilder() {
     try {
       const res = await aiChat(messages, profile);
       if (!res.recommendation) {
-        setAiStatus("추천을 생성하지 못했어요. 잠시 후 다시 시도해 주세요.");
+        setAiStatus(t.teams.aiNoRecommendation);
         return;
       }
       const convo: AiMessage[] = [...messages, { role: "assistant", content: res.reply }];
@@ -273,9 +274,9 @@ export function TeamBuilder() {
         recommendation: res.recommendation,
         title: res.recommendation.summary || `${names.join(", ")} 파티`,
       });
-      setAiStatus(`기록 탭에 저장했어요: ${saved.title ?? saved.recommendation.summary ?? "저장됨"}`);
+      setAiStatus(`${t.teams.aiSavedPrefix}${saved.title ?? saved.recommendation.summary ?? t.teams.aiSavedFallback}`);
     } catch {
-      setAiStatus("분석에 실패했어요. 잠시 후 다시 시도해 주세요.");
+      setAiStatus(t.teams.aiFailed);
     } finally {
       setAiBusy(false);
     }
@@ -285,7 +286,7 @@ export function TeamBuilder() {
     <section className="grid gap-5">
       <div>
         <h2 className="text-xl font-semibold text-[var(--fg)]">{t.teams.title}</h2>
-        <p className="mt-1 text-sm text-[var(--muted)]">공명자 3명의 캐릭터·무기·에코를 설정하면 서버 엔진이 파티 전체 피해와 기여도를 계산합니다.</p>
+        <p className="mt-1 text-sm text-[var(--muted)]">{t.teams.subtitle}</p>
       </div>
 
       <div className="grid gap-3 sm:grid-cols-3">
@@ -301,10 +302,10 @@ export function TeamBuilder() {
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={img(reso.image)} alt="" className={`h-11 w-11 rounded-md bg-[var(--surface-2)] object-cover ring-2 ${ring(reso.rarity)}`} />
                     <div className="min-w-0">
-                      <div className="truncate text-sm font-semibold text-[var(--fg)]">{reso.name}</div>
-                      <div className="text-xs text-[var(--muted)]">Lv.{slot.build.level} · {reso.element} · {t.roles[reso.role]}</div>
+                      <div className="truncate text-sm font-semibold text-[var(--fg)]">{localizedName(reso, language)}</div>
+                      <div className="text-xs text-[var(--muted)]">Lv.{slot.build.level} · {tElement(reso.element)} · {t.roles[reso.role]}</div>
                     </div>
-                    <button type="button" onClick={() => setSlot(i, () => ({ resonatorId: null, build: emptyBuild() }))} className="ml-auto grid h-6 w-6 place-items-center rounded-md text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--fg)]" aria-label="제거">✕</button>
+                    <button type="button" onClick={() => setSlot(i, () => ({ resonatorId: null, build: emptyBuild() }))} className="ml-auto grid h-6 w-6 place-items-center rounded-md text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--fg)]" aria-label={t.teams.remove}>✕</button>
                   </div>
                   {stats ? (
                     <dl className="mt-3 grid grid-cols-2 gap-1 text-xs">
@@ -317,14 +318,14 @@ export function TeamBuilder() {
                     </dl>
                   ) : null}
                   {noSkillData(reso) ? (
-                    <div className="mt-2 rounded bg-[var(--surface-2)] px-2 py-1 text-[11px] leading-tight text-[#e0a04d]">⚠ 스킬 배율 데이터 없음 · 개인 피해 계산 불가</div>
+                    <div className="mt-2 rounded bg-[var(--surface-2)] px-2 py-1 text-[11px] leading-tight text-[#e0a04d]">{t.teams.noSkillDataShort}</div>
                   ) : null}
-                  <button type="button" onClick={() => setEditing(i)} className="mt-3 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] py-1.5 text-xs font-medium text-[var(--accent)] hover:border-[var(--accent)]">빌드 편집</button>
+                  <button type="button" onClick={() => setEditing(i)} className="mt-3 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] py-1.5 text-xs font-medium text-[var(--accent)] hover:border-[var(--accent)]">{t.teams.editBuild}</button>
                 </>
               ) : (
                 <button type="button" onClick={() => setPicker({ kind: "resonator", slot: i })} className="flex h-full w-full flex-col items-center justify-center gap-2 text-[var(--muted)] hover:text-[var(--fg)]">
                   <span className="grid h-12 w-12 place-items-center rounded-full border border-dashed border-[var(--line-2)] text-xl">+</span>
-                  <span className="text-xs">공명자 추가</span>
+                  <span className="text-xs">{t.teams.addResonator}</span>
                 </button>
               )}
             </div>
@@ -335,7 +336,7 @@ export function TeamBuilder() {
       {/* 시뮬 조건 — 파티 전체 공유(적 조건 + 팀 버프) */}
       <div className="grid gap-4 rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4 md:grid-cols-2">
         <div>
-          <div className="mb-2 text-sm font-semibold text-[var(--fg)]">적 조건</div>
+          <div className="mb-2 text-sm font-semibold text-[var(--fg)]">{t.teams.enemyConditions}</div>
           <div className="grid grid-cols-2 gap-1.5 text-xs sm:grid-cols-3">
             {OPT_FIELDS.map((f) => (
               <label key={f.key} className="flex items-center justify-between gap-1 rounded bg-[var(--surface-2)] px-2 py-1">
@@ -344,29 +345,29 @@ export function TeamBuilder() {
               </label>
             ))}
             <label className="flex items-center justify-between gap-1 rounded bg-[var(--surface-2)] px-2 py-1">
-              <span className="text-[var(--muted)]">방어감소%{defShredPct == null ? "·자동" : ""}</span>
+              <span className="text-[var(--muted)]">{t.teams.partyDefShred}{defShredPct == null ? t.teams.autoSuffix : ""}</span>
               <input type="number" value={shredPct} onChange={(e) => setDefShredPct(Number(e.target.value))} className="w-14 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 text-right text-[var(--fg)]" />
             </label>
           </div>
           <label className="mt-2 flex items-center gap-2 rounded bg-[var(--surface-2)] px-2 py-1.5 text-xs">
             <input type="checkbox" checked={opts.fullUptime} onChange={(e) => setOpts((o) => ({ ...o, fullUptime: e.target.checked }))} className="accent-[var(--accent)]" />
-            <span className="text-[var(--fg)]">풀 업타임</span>
-            <span className="text-[10px] text-[var(--muted)]">이상적 로테이션 기준 조건부 공명 사슬·무기·킷 버프 반영(끄면 상시 발동만)</span>
+            <span className="text-[var(--fg)]">{t.teams.fullUptime}</span>
+            <span className="text-[10px] text-[var(--muted)]">{t.teams.fullUptimeHint}</span>
           </label>
           {autoDefShred > 0 && defShredPct == null ? (
-            <p className="mt-1.5 text-[10px] text-[var(--accent)]">암흑(인멸) 자동 적용 · 적 방어 −{Math.round(autoDefShred * 100)}%</p>
+            <p className="mt-1.5 text-[10px] text-[var(--accent)]">{t.teams.havocAutoApplied}{Math.round(autoDefShred * 100)}%</p>
           ) : null}
         </div>
 
         {/* 팀 공유 버프 */}
         <div>
           <div className="mb-2 flex items-center justify-between text-sm">
-            <span className="font-semibold text-[var(--fg)]">팀 공유 버프</span>
-            <button type="button" onClick={() => setTeamBuffs((b) => [...b, { key: "atkPct", value: 0 }])} className="text-xs text-[var(--accent)] hover:underline">+ 버프 추가</button>
+            <span className="font-semibold text-[var(--fg)]">{t.teams.teamBuffs}</span>
+            <button type="button" onClick={() => setTeamBuffs((b) => [...b, { key: "atkPct", value: 0 }])} className="text-xs text-[var(--accent)] hover:underline">{t.teams.addBuff}</button>
           </div>
-          <p className="mb-2 text-[11px] text-[var(--muted)]">서포터가 파티 전원에게 주는 버프(예: 공격력% +20). 모든 공명자 스탯에 더해집니다.</p>
+          <p className="mb-2 text-[11px] text-[var(--muted)]">{t.teams.teamBuffsHint}</p>
           <div className="grid gap-1.5">
-            {teamBuffs.length === 0 ? <div className="rounded bg-[var(--surface-2)] px-2 py-2 text-center text-xs text-[var(--muted)]">추가된 버프가 없습니다.</div> : null}
+            {teamBuffs.length === 0 ? <div className="rounded bg-[var(--surface-2)] px-2 py-2 text-center text-xs text-[var(--muted)]">{t.teams.noBuffs}</div> : null}
             {teamBuffs.map((b, i) => (
               <div key={i} className="flex items-center gap-1.5 text-xs">
                 <select value={b.key} onChange={(e) => setTeamBuffs((arr) => arr.map((x, j) => (j === i ? { ...x, key: e.target.value as StatKey } : x)))} className="flex-1 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
@@ -374,7 +375,7 @@ export function TeamBuilder() {
                   {(Object.keys(STAT_LABEL) as StatKey[]).filter((k) => !BUFF_KEYS.includes(k)).map((k) => <option key={k} value={k}>{STAT_LABEL[k]}</option>)}
                 </select>
                 <input type="number" step="0.1" value={b.value} onChange={(e) => setTeamBuffs((arr) => arr.map((x, j) => (j === i ? { ...x, value: Number(e.target.value) } : x)))} className="w-16 rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-right text-[var(--fg)]" />
-                <button type="button" onClick={() => setTeamBuffs((arr) => arr.filter((_, j) => j !== i))} className="text-[var(--muted)] hover:text-[var(--fg)]" aria-label="삭제">✕</button>
+                <button type="button" onClick={() => setTeamBuffs((arr) => arr.filter((_, j) => j !== i))} className="text-[var(--muted)] hover:text-[var(--fg)]" aria-label={t.teams.deleteAria}>✕</button>
               </div>
             ))}
           </div>
@@ -384,9 +385,9 @@ export function TeamBuilder() {
       {/* 계산 */}
       <div className="flex flex-wrap items-center gap-3">
         <button type="button" onClick={calculate} disabled={!filled || busy} className="rounded-md bg-[var(--accent)] px-5 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50">
-          {busy ? "계산 중…" : "서버 엔진으로 계산"}
+          {busy ? t.teams.calculating : t.teams.calcButton}
         </button>
-        <span className="text-xs text-[var(--muted)]">공명자 {filled}명 · 스킬 레벨 개별 설정(기본 Lv.10)</span>
+        <span className="text-xs text-[var(--muted)]">{t.teams.resonatorCountPrefix}{filled}{t.teams.resonatorCountSuffix}</span>
         {error ? <span className="text-xs text-[var(--danger,#e5484d)]">{error}</span> : null}
       </div>
 
@@ -394,7 +395,7 @@ export function TeamBuilder() {
       {result ? (
         <div className="grid gap-3">
           <div className="flex items-baseline justify-between rounded-lg border border-[var(--line)] bg-[var(--surface)] px-4 py-3">
-            <span className="text-sm font-semibold text-[var(--fg)]">팀 총 피해 (1사이클)</span>
+            <span className="text-sm font-semibold text-[var(--fg)]">{t.teams.teamTotalDamage}</span>
             <span className="text-2xl font-bold tabular-nums text-[var(--accent)]">{Math.round(result.team_total).toLocaleString()}</span>
           </div>
           {ranked.map((m, rank) => {
@@ -409,7 +410,7 @@ export function TeamBuilder() {
                   <img src={img(reso?.image)} alt="" className={`h-10 w-10 rounded-md bg-[var(--surface-2)] object-cover ring-2 ${reso ? ring(reso.rarity) : ""}`} />
                   <div className="min-w-0">
                     <div className="truncate text-sm font-semibold text-[var(--fg)]">{m.name ?? reso?.name ?? m.reso_id}</div>
-                    <div className="text-xs text-[var(--muted)]">{m.element ?? reso?.element} · 코스트 {m.cost}</div>
+                    <div className="text-xs text-[var(--muted)]">{tElement(m.element ?? reso?.element)} · {t.codex.cost} {m.cost}</div>
                   </div>
                   <div className="ml-auto text-right">
                     <div className="font-bold tabular-nums text-[var(--fg)]">{Math.round(m.total).toLocaleString()}</div>
@@ -439,12 +440,12 @@ export function TeamBuilder() {
                     ))}
                   </dl>
                 ) : noSkillData(reso) ? (
-                  <div className="mt-2 rounded bg-[var(--surface-2)] px-2.5 py-1.5 text-xs leading-relaxed text-[#e0a04d]">⚠ 스킬 배율 데이터가 없어 개인 피해를 계산할 수 없습니다. 방랑자(로버)는 버프·힐 서포터로 활용하세요.</div>
+                  <div className="mt-2 rounded bg-[var(--surface-2)] px-2.5 py-1.5 text-xs leading-relaxed text-[#e0a04d]">{t.teams.noSkillDataLong}</div>
                 ) : null}
 
                 {(m.applied_team_buffs?.length ?? 0) > 0 ? (
                   <div className="mt-2 border-t border-dashed border-[var(--line)] pt-2">
-                    <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">자동 적용 팀 버프</div>
+                    <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">{t.teams.autoAppliedBuffs}</div>
                     <div className="mt-1 flex flex-wrap gap-1">
                       {m.applied_team_buffs!.map((b, j) => (
                         <span key={j} className="rounded bg-[var(--surface-2)] px-1.5 py-0.5 text-[11px] font-medium text-[var(--accent)]">{b}</span>
@@ -463,22 +464,22 @@ export function TeamBuilder() {
 
                 {((m.anomaly_dmg ?? 0) > 0 || (m.anomaly_def_down ?? 0) > 0 || (m.tune_break_dmg ?? 0) > 0) ? (
                   <dl className="mt-2 grid gap-1 border-t border-dashed border-[var(--line)] pt-2 text-xs">
-                    <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">상황부 · 딜 총합 미포함</div>
+                    <div className="text-[10px] uppercase tracking-wide text-[var(--muted)]">{t.teams.situational}</div>
                     {m.anomaly_type && (m.anomaly_dmg ?? 0) > 0 ? (
                       <div className="flex items-center justify-between gap-2">
-                        <dt className="text-[var(--muted)]">이상 피해 · {m.anomaly_type}</dt>
+                        <dt className="text-[var(--muted)]">{t.teams.anomalyDamagePrefix}{m.anomaly_type}</dt>
                         <dd className="shrink-0 tabular-nums text-[var(--fg-soft)]">{Math.round(m.anomaly_dmg!).toLocaleString()}</dd>
                       </div>
                     ) : null}
                     {(m.anomaly_def_down ?? 0) > 0 ? (
                       <div className="flex items-center justify-between gap-2">
-                        <dt className="text-[var(--muted)]">이상 방깎 · {m.anomaly_type ?? "암흑"}</dt>
+                        <dt className="text-[var(--muted)]">{t.teams.anomalyDefDownPrefix}{m.anomaly_type ?? "암흑"}</dt>
                         <dd className="shrink-0 tabular-nums text-[var(--fg-soft)]">-{((m.anomaly_def_down ?? 0) * 100).toFixed(0)}%</dd>
                       </div>
                     ) : null}
                     {(m.tune_break_dmg ?? 0) > 0 ? (
                       <div className="flex items-center justify-between gap-2">
-                        <dt className="text-[var(--muted)]">조화도 파괴</dt>
+                        <dt className="text-[var(--muted)]">{t.teams.tuneBreak}</dt>
                         <dd className="shrink-0 tabular-nums text-[var(--fg-soft)]">{Math.round(m.tune_break_dmg!).toLocaleString()}</dd>
                       </div>
                     ) : null}
@@ -494,10 +495,10 @@ export function TeamBuilder() {
       <div className="rounded-lg border border-[var(--line)] bg-[var(--surface)] p-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
-            <div className="text-sm font-semibold text-[var(--fg)]">AI 파티 분석</div>
+            <div className="text-sm font-semibold text-[var(--fg)]">{t.teams.aiPartyAnalysis}</div>
             <p className="mt-0.5 text-xs text-[var(--muted)]">
-              공명자 3명을 모두 선택하면 구성을 AI가 평가해 추천 형식으로 기록에 저장합니다.
-              {userId ? null : " 기록 저장은 구글 로그인이 필요해요."}
+              {t.teams.aiPartyAnalysisHint}
+              {userId ? null : t.teams.aiSaveNeedsLogin}
             </p>
           </div>
           {userId ? (
@@ -507,7 +508,7 @@ export function TeamBuilder() {
               disabled={!partyFilled || aiBusy}
               className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50"
             >
-              {aiBusy ? "분석 중…" : "AI로 분석·기록"}
+              {aiBusy ? t.teams.analyzing : t.teams.analyzeAndRecord}
             </button>
           ) : (
             <button
@@ -515,28 +516,29 @@ export function TeamBuilder() {
               onClick={() => void signIn("google", { callbackUrl: "/" })}
               className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90"
             >
-              구글 로그인하고 기록
+              {t.teams.signInAndRecord}
             </button>
           )}
         </div>
         {partyFilled ? (
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
-            <span className="text-[var(--muted)]">메인 딜러 지정</span>
+            <span className="text-[var(--muted)]">{t.teams.mainDpsLabel}</span>
             <select
               value={mainDpsId ?? ""}
               onChange={(e) => setMainDpsId(e.target.value ? Number(e.target.value) : null)}
               className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] px-2 py-1 text-[var(--fg)]"
             >
-              <option value="">자동 (역할 태그 기준)</option>
-              {party.map((s) =>
-                s.resonatorId != null ? (
+              <option value="">{t.teams.autoByRole}</option>
+              {party.map((s) => {
+                const r = s.resonatorId != null ? resoById.get(s.resonatorId) : null;
+                return s.resonatorId != null ? (
                   <option key={s.resonatorId} value={s.resonatorId}>
-                    {resoById.get(s.resonatorId)?.name ?? s.resonatorId}
+                    {r ? localizedName(r, language) : s.resonatorId}
                   </option>
-                ) : null,
-              )}
+                ) : null;
+              })}
             </select>
-            <span className="text-[var(--faint)]">지정하면 역할 태그와 무관하게 그 캐릭터를 메인딜로 평가해요</span>
+            <span className="text-[var(--faint)]">{t.teams.mainDpsHint}</span>
           </div>
         ) : null}
         {aiStatus ? <p className="mt-2 text-xs text-[var(--fg-soft)]">{aiStatus}</p> : null}
@@ -611,6 +613,9 @@ export function BuildEditor({
   onPick: (p: { kind: "weapon" | "echo"; slot: number; echoIdx?: number }) => void;
   onClose: () => void;
 }) {
+  const { language } = useLanguage();
+  const tElement = (value?: string | null) => (value ? (t.elements as Record<string, string>)[value] ?? value : value ?? "");
+  const tWeaponType = (value?: string | null) => (value ? (t.weaponTypes as Record<string, string>)[value] ?? value : value ?? "");
   const weapon = build.weaponId ? weaponById.get(build.weaponId) ?? null : null;
   const active = activeSetBonuses(build, (id) => echoById.get(id)?.sonata ?? [], setByName);
   const wb = weaponBuffs(weapon, build.weaponRank); // { always, conditional, boost }
@@ -627,15 +632,15 @@ export function BuildEditor({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={img(reso.image)} alt="" className={`h-10 w-10 rounded-md bg-[var(--surface-2)] object-cover ring-2 ${ring(reso.rarity)}`} />
         <div>
-          <div className="text-base font-semibold text-[var(--fg)]">{reso.name}</div>
-          <div className="text-xs text-[var(--muted)]">{reso.rarity}★ · {reso.element} · {t.roles[reso.role]}</div>
+          <div className="text-base font-semibold text-[var(--fg)]">{localizedName(reso, language)}</div>
+          <div className="text-xs text-[var(--muted)]">{reso.rarity}★ · {tElement(reso.element)} · {t.roles[reso.role]}</div>
         </div>
-        <button type="button" onClick={onClose} className="ml-auto grid h-8 w-8 place-items-center rounded-md text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--fg)]" aria-label="닫기">✕</button>
+        <button type="button" onClick={onClose} className="ml-auto grid h-8 w-8 place-items-center rounded-md text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--fg)]" aria-label={t.codex.close}>✕</button>
       </div>
 
       {/* character level */}
       <label className="grid gap-1">
-        <span className="flex justify-between text-xs text-[var(--muted)]"><span>캐릭터 레벨</span><span className="text-[var(--fg)]">Lv.{build.level}</span></span>
+        <span className="flex justify-between text-xs text-[var(--muted)]"><span>{t.codex.level}</span><span className="text-[var(--fg)]">Lv.{build.level}</span></span>
         <input type="range" min={1} max={90} value={build.level} onChange={(e) => onChange((b) => ({ ...b, level: Number(e.target.value) }))} className="w-full accent-[var(--accent)]" />
       </label>
 
@@ -650,13 +655,13 @@ export function BuildEditor({
         return (
           <div>
             <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="font-semibold text-[var(--fg)]">스킬 레벨</span>
-              <button type="button" onClick={() => onChange((b) => ({ ...b, skillLevels: {} }))} className="text-[11px] text-[var(--accent)] hover:underline">전체 Lv.10</button>
+              <span className="font-semibold text-[var(--fg)]">{t.teams.skillLevels}</span>
+              <button type="button" onClick={() => onChange((b) => ({ ...b, skillLevels: {} }))} className="text-[11px] text-[var(--accent)] hover:underline">{t.teams.allLv10}</button>
             </div>
             <div className="grid gap-1.5">
               {levelable.map(({ s, i, max }) => (
                 <label key={i} className="flex items-center gap-2 text-xs">
-                  <span className="w-20 shrink-0 truncate text-[var(--muted)]" title={s.SkillName ?? ""}>{s.SkillType || s.SkillName || `스킬 ${i + 1}`}</span>
+                  <span className="w-20 shrink-0 truncate text-[var(--muted)]" title={s.SkillName ?? ""}>{s.SkillType || s.SkillName || `${t.teams.skillNPrefix}${i + 1}`}</span>
                   <input type="range" min={1} max={Math.min(10, max)} value={lvOf(i, max)} onChange={(e) => setLv(i, Number(e.target.value))} className="min-w-0 flex-1 accent-[var(--accent)]" />
                   <span className="w-10 shrink-0 text-right font-medium text-[var(--fg)]">Lv.{lvOf(i, max)}</span>
                 </label>
@@ -675,8 +680,8 @@ export function BuildEditor({
         return (
           <div>
             <div className="mb-2 flex items-center justify-between text-sm">
-              <span className="font-semibold text-[var(--fg)]">공명 사슬</span>
-              <span className="text-[11px] text-[var(--muted)]">S{seq} · 딜 반영</span>
+              <span className="font-semibold text-[var(--fg)]">{t.codex.resonanceChain}</span>
+              <span className="text-[11px] text-[var(--muted)]">S{seq} · {t.teams.dmgApplied}</span>
             </div>
             <div className="flex gap-1">
               {[0, 1, 2, 3, 4, 5, 6].map((n) => (
@@ -711,20 +716,20 @@ export function BuildEditor({
             <div className="flex items-center gap-2">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={img(weapon.icon)} alt="" className="h-9 w-9 rounded object-contain" />
-              <div className="min-w-0 flex-1"><div className="truncate text-sm font-medium text-[var(--fg)]">{weapon.name_ko}</div><div className="text-xs text-[var(--muted)]">{weapon.rarity}★ · {weapon.weapon_type_ko}</div></div>
-              <button type="button" onClick={() => onPick({ kind: "weapon", slot })} className="text-xs text-[var(--accent)] hover:underline">교체</button>
+              <div className="min-w-0 flex-1"><div className="truncate text-sm font-medium text-[var(--fg)]">{localizedName(weapon, language)}</div><div className="text-xs text-[var(--muted)]">{weapon.rarity}★ · {tWeaponType(weapon.weapon_type_ko)}</div></div>
+              <button type="button" onClick={() => onPick({ kind: "weapon", slot })} className="text-xs text-[var(--accent)] hover:underline">{t.teams.replace}</button>
             </div>
             <label className="mt-2 grid gap-1">
-              <span className="flex justify-between text-xs text-[var(--muted)]"><span>무기 레벨</span><span className="text-[var(--fg)]">Lv.{build.weaponLevel}</span></span>
+              <span className="flex justify-between text-xs text-[var(--muted)]"><span>{t.teams.weaponLevel}</span><span className="text-[var(--fg)]">Lv.{build.weaponLevel}</span></span>
               <input type="range" min={1} max={90} value={build.weaponLevel} onChange={(e) => onChange((b) => ({ ...b, weaponLevel: Number(e.target.value) }))} className="w-full accent-[var(--accent)]" />
             </label>
             <label className="mt-2 grid gap-1">
-              <span className="flex justify-between text-xs text-[var(--muted)]"><span>정제</span><span className="text-[var(--fg)]">R{build.weaponRank}</span></span>
+              <span className="flex justify-between text-xs text-[var(--muted)]"><span>{t.codex.refine}</span><span className="text-[var(--fg)]">R{build.weaponRank}</span></span>
               <input type="range" min={1} max={5} value={build.weaponRank} onChange={(e) => onChange((b) => ({ ...b, weaponRank: Number(e.target.value) }))} className="w-full accent-[var(--accent)]" />
             </label>
             {wb.always.length ? (
               <p className="mt-2 inline-flex items-center gap-1 rounded bg-[var(--accent-soft,var(--surface-2))] px-2 py-0.5 text-[11px] font-medium text-[var(--accent)]">
-                패시브 · {weaponBuffSummary(wb.always)}
+                {t.codex.passive} · {weaponBuffSummary(wb.always)}
               </p>
             ) : null}
             {weapon.desc ? (
@@ -732,15 +737,15 @@ export function BuildEditor({
             ) : null}
           </>
         ) : (
-          <button type="button" onClick={() => onPick({ kind: "weapon", slot })} className="w-full py-2 text-sm text-[var(--accent)]">+ 무기 선택</button>
+          <button type="button" onClick={() => onPick({ kind: "weapon", slot })} className="w-full py-2 text-sm text-[var(--accent)]">{t.teams.selectWeapon}</button>
         )}
       </div>
 
       {/* echoes */}
       <div>
         <div className="mb-2 flex items-center justify-between text-sm">
-          <span className="font-semibold text-[var(--fg)]">에코</span>
-          <span className={cost > costBudget ? "text-[var(--gold)]" : "text-[var(--muted)]"}>코스트 {cost}/{costBudget}</span>
+          <span className="font-semibold text-[var(--fg)]">{t.teams.echo}</span>
+          <span className={cost > costBudget ? "text-[var(--gold)]" : "text-[var(--muted)]"}>{t.codex.cost} {cost}/{costBudget}</span>
         </div>
         <div className="grid gap-2">
           {build.echoes.map((e, idx) => {
@@ -750,17 +755,17 @@ export function BuildEditor({
                 <div className="flex items-center gap-2">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={img(codex?.icon)} alt="" className="h-8 w-8 rounded object-contain" />
-                  <div className="min-w-0 flex-1"><div className="truncate text-xs font-medium text-[var(--fg)]">{codex?.name_ko ?? "에코"}</div><div className="text-[11px] text-[var(--muted)]">{e.cost} 코스트</div></div>
-                  <button type="button" onClick={() => onPick({ kind: "echo", slot, echoIdx: idx })} className="text-[11px] text-[var(--accent)] hover:underline">교체</button>
-                  <button type="button" onClick={() => onChange((b) => ({ ...b, echoes: b.echoes.map((x, j) => (j === idx ? null : x)) }))} className="text-[11px] text-[var(--muted)] hover:text-[var(--fg)]">제거</button>
+                  <div className="min-w-0 flex-1"><div className="truncate text-xs font-medium text-[var(--fg)]">{codex ? localizedName(codex, language) : t.teams.echo}</div><div className="text-[11px] text-[var(--muted)]">{e.cost} {t.codex.cost}</div></div>
+                  <button type="button" onClick={() => onPick({ kind: "echo", slot, echoIdx: idx })} className="text-[11px] text-[var(--accent)] hover:underline">{t.teams.replace}</button>
+                  <button type="button" onClick={() => onChange((b) => ({ ...b, echoes: b.echoes.map((x, j) => (j === idx ? null : x)) }))} className="text-[11px] text-[var(--muted)] hover:text-[var(--fg)]">{t.teams.remove}</button>
                 </div>
                 <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px]">
-                  <label className="flex items-center gap-1">등급
+                  <label className="flex items-center gap-1">{t.teams.grade}
                     <select value={e.grade} onChange={(ev) => setEcho(idx, (x) => ({ ...x, grade: Number(ev.target.value) }))} className="rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
                       {[5, 4, 3, 2, 1].map((g) => <option key={g} value={g}>{g}★</option>)}
                     </select>
                   </label>
-                  <label className="flex items-center gap-1">메인
+                  <label className="flex items-center gap-1">{t.teams.main}
                     <select value={e.main} onChange={(ev) => setEcho(idx, (x) => ({ ...x, main: ev.target.value as StatKey }))} className="rounded border border-[var(--line-2)] bg-[var(--surface)] px-1 py-0.5 text-[var(--fg)]">
                       {(config ? echoMainOptions(config, e.cost) : []).map((o) => <option key={o.key} value={o.key}>{STAT_LABEL[o.key]}</option>)}
                     </select>
@@ -781,12 +786,12 @@ export function BuildEditor({
                     </div>
                   ))}
                   {e.subs.length < (config ? subSlots(config, e.grade) : 0) ? (
-                    <button type="button" onClick={() => setEcho(idx, (x) => ({ ...x, subs: [...x.subs, { key: "crit", value: config ? subMax(config, "crit") : 0 }] }))} className="justify-self-start text-[11px] text-[var(--accent)] hover:underline">+ 추가옵션</button>
+                    <button type="button" onClick={() => setEcho(idx, (x) => ({ ...x, subs: [...x.subs, { key: "crit", value: config ? subMax(config, "crit") : 0 }] }))} className="justify-self-start text-[11px] text-[var(--accent)] hover:underline">{t.teams.addSubStat}</button>
                   ) : null}
                 </div>
               </div>
             ) : (
-              <button key={idx} type="button" onClick={() => onPick({ kind: "echo", slot, echoIdx: idx })} className="rounded-md border border-dashed border-[var(--line-2)] py-2 text-xs text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]">+ 에코 {idx + 1}</button>
+              <button key={idx} type="button" onClick={() => onPick({ kind: "echo", slot, echoIdx: idx })} className="rounded-md border border-dashed border-[var(--line-2)] py-2 text-xs text-[var(--muted)] hover:border-[var(--accent)] hover:text-[var(--accent)]">{t.teams.addEchoSlotPrefix}{idx + 1}</button>
             );
           })}
         </div>
@@ -795,8 +800,8 @@ export function BuildEditor({
       {/* active sonata set effect */}
       {active ? (
         <div className="rounded-md border border-[var(--line)] bg-[var(--surface-2)] p-2.5 text-xs">
-          <span className="font-semibold text-[var(--fg)]">세트 효과</span>{" "}
-          <span className="text-[var(--fg-soft)]">{active.sets.map((s) => `${s.name} ${s.count >= 5 ? "5세트" : "2세트"}`).join(" + ")}</span>
+          <span className="font-semibold text-[var(--fg)]">{t.teams.setEffect}</span>{" "}
+          <span className="text-[var(--fg-soft)]">{active.sets.map((s) => `${localizedName(setByName.get(s.name) ?? { name_ko: s.name }, language)} ${s.count >= 5 ? t.teams.set5 : t.teams.set2}`).join(" + ")}</span>
           {active.bonuses.length ? (
             <span className="text-[var(--accent)]"> · {active.bonuses.map((b) => `${STAT_LABEL[b.key]} +${b.value}%`).join(", ")}</span>
           ) : null}
@@ -805,7 +810,7 @@ export function BuildEditor({
 
       {/* final stats */}
       <div>
-        <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">최종 스탯</h4>
+        <h4 className="mb-1.5 text-sm font-semibold text-[var(--fg)]">{t.codex.stats}</h4>
         <dl className="grid grid-cols-2 gap-1.5 text-sm">
           {PANEL_KEYS.map((k) => (
             <div key={k} className="flex justify-between rounded bg-[var(--surface-2)] px-2.5 py-1.5"><dt className="text-[var(--muted)]">{STAT_LABEL[k]}</dt><dd className="font-medium text-[var(--fg)]">{fmtStat(k, stats[k])}</dd></div>
@@ -831,23 +836,25 @@ export function PickerModal({
   onClose: () => void;
   t: ReturnType<typeof useLanguage>["t"];
 }) {
+  const { language } = useLanguage();
+  const tWeaponType = (value?: string | null) => (value ? (t.weaponTypes as Record<string, string>)[value] ?? value : value ?? "");
   const [q, setQ] = useState("");
   const items: { id: string | number; name: string; image?: string | null; rarity: number; hint?: string; raw: CodexResonator | CodexWeapon | CodexEcho }[] =
     kind === "resonator"
-      ? resos.map((r) => ({ id: r.id, name: r.name, image: r.image, rarity: r.rarity, hint: t.roles[r.role], raw: r }))
+      ? resos.map((r) => ({ id: r.id, name: localizedName(r, language), image: r.image, rarity: r.rarity, hint: t.roles[r.role], raw: r }))
       : kind === "weapon"
-        ? weapons.map((w) => ({ id: w.id, name: w.name_ko, image: w.icon, rarity: w.rarity, hint: w.weapon_type_ko ?? "", raw: w }))
-        : echoes.map((e) => ({ id: e.id, name: e.name_ko, image: e.icon, rarity: e.rarity, hint: `${e.cost}코스트`, raw: e }));
+        ? weapons.map((w) => ({ id: w.id, name: localizedName(w, language), image: w.icon, rarity: w.rarity, hint: tWeaponType(w.weapon_type_ko), raw: w }))
+        : echoes.map((e) => ({ id: e.id, name: localizedName(e, language), image: e.icon, rarity: e.rarity, hint: `${e.cost} ${t.codex.cost}`, raw: e }));
   const filtered = q ? items.filter((i) => i.name.includes(q)) : items;
-  const label = kind === "resonator" ? "공명자" : kind === "weapon" ? "무기" : "에코";
+  const label = kind === "resonator" ? t.teams.resonator : kind === "weapon" ? t.teams.weapon : t.teams.echo;
 
   return (
     <Portal>
       <div className="fixed inset-0 z-[60] flex items-center justify-center bg-slate-950/60 p-4" role="dialog" aria-modal="true" onClick={onClose}>
         <div className="relative flex max-h-[85vh] w-full max-w-2xl flex-col overflow-hidden rounded-lg border border-[var(--line)] bg-[var(--surface)] shadow-xl" onClick={(e) => e.stopPropagation()}>
           <div className="flex items-center gap-2 border-b border-[var(--line)] p-3">
-            <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder={`${label} 검색`} className="min-w-0 flex-1 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-1.5 text-sm text-[var(--fg)] outline-none" />
-            <button type="button" onClick={onClose} className="grid h-8 w-8 place-items-center rounded-md text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--fg)]" aria-label="닫기">✕</button>
+            <input autoFocus value={q} onChange={(e) => setQ(e.target.value)} placeholder={`${label} ${t.teams.search}`} className="min-w-0 flex-1 rounded-md border border-[var(--line-2)] bg-[var(--surface-2)] px-3 py-1.5 text-sm text-[var(--fg)] outline-none" />
+            <button type="button" onClick={onClose} className="grid h-8 w-8 place-items-center rounded-md text-[var(--muted)] hover:bg-[var(--surface-2)] hover:text-[var(--fg)]" aria-label={t.codex.close}>✕</button>
           </div>
           <div className="grid grid-cols-3 gap-2 overflow-y-auto p-3 sm:grid-cols-4 md:grid-cols-6">
             {filtered.map((it) => (
@@ -857,7 +864,7 @@ export function PickerModal({
                 <span className="line-clamp-1 text-[11px] text-[var(--fg-soft)]">{it.name}</span>
               </button>
             ))}
-            {filtered.length === 0 ? <p className="col-span-full py-8 text-center text-sm text-[var(--muted)]">결과가 없습니다.</p> : null}
+            {filtered.length === 0 ? <p className="col-span-full py-8 text-center text-sm text-[var(--muted)]">{t.teams.noResults}</p> : null}
           </div>
         </div>
       </div>

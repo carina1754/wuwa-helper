@@ -7,6 +7,7 @@ import { RecommendationCard, type NameMaps } from "./RecommendationCard";
 import type { GameConfig } from "@/lib/build";
 import { computePartyDamage } from "@/lib/partyDamage";
 import type { AiRecommendationRecord, CodexResonator, CodexWeapon } from "@/lib/types";
+import { useLanguage } from "@/lib/i18n";
 
 const EMPTY_NAMES: NameMaps = {
   resonator: new Map(),
@@ -15,9 +16,17 @@ const EMPTY_NAMES: NameMaps = {
   sonata: new Map(),
 };
 
+const DATE_LOCALES: Record<string, string> = {
+  ko: "ko-KR",
+  ja: "ja-JP",
+  zhHans: "zh-CN",
+  en: "en-US",
+};
+
 /** 기록 탭: 확정 저장된 AI 추천을 아이콘 카드로 재열람. */
 export function AiHistory() {
   const { data: session, status } = useSession();
+  const { t, language } = useLanguage();
   const userId = session?.user?.email ?? null;
 
   const [records, setRecords] = useState<AiRecommendationRecord[]>([]);
@@ -30,7 +39,7 @@ export function AiHistory() {
 
   const handleDelete = async (id: string) => {
     if (deletingId) return;
-    if (!window.confirm("이 기록을 삭제할까요?")) return;
+    if (!window.confirm(t.aiHistory.confirmDelete)) return;
     setDeletingId(id);
     try {
       await deleteRecommendation(id);
@@ -88,9 +97,9 @@ export function AiHistory() {
   if (!userId) {
     return (
       <div className="grid max-w-md gap-3">
-        <h2 className="text-lg font-semibold">기록</h2>
+        <h2 className="text-lg font-semibold">{t.aiHistory.title}</h2>
         <p className="text-sm text-slate-500 dark:text-neutral-400">
-          {status === "loading" ? "로그인 상태를 확인하는 중…" : "구글 로그인하면 내 계정에 저장된 추천 기록을 볼 수 있어요."}
+          {status === "loading" ? t.aiHistory.checkingLogin : t.aiHistory.signInPrompt}
         </p>
         {status !== "loading" ? (
           <button
@@ -98,7 +107,7 @@ export function AiHistory() {
             onClick={() => void signIn("google", { callbackUrl: "/" })}
             className="justify-self-start rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
           >
-            구글로 로그인
+            {t.aiHistory.signInGoogle}
           </button>
         ) : null}
       </div>
@@ -106,15 +115,15 @@ export function AiHistory() {
   }
 
   if (loading) {
-    return <p className="text-sm text-slate-500 dark:text-neutral-400">기록을 불러오는 중…</p>;
+    return <p className="text-sm text-slate-500 dark:text-neutral-400">{t.aiHistory.loading}</p>;
   }
 
   if (records.length === 0) {
     return (
       <div className="grid gap-1">
-        <h2 className="text-lg font-semibold">기록</h2>
+        <h2 className="text-lg font-semibold">{t.aiHistory.title}</h2>
         <p className="text-sm text-slate-500 dark:text-neutral-400">
-          아직 저장된 추천이 없어요. AI 탭에서 추천을 받고 &ldquo;이걸로 확정&rdquo;을 누르면 여기에 저장됩니다.
+          {t.aiHistory.emptyBody}
         </p>
       </div>
     );
@@ -122,18 +131,18 @@ export function AiHistory() {
 
   return (
     <div className="grid gap-4">
-      <h2 className="text-lg font-semibold">기록</h2>
+      <h2 className="text-lg font-semibold">{t.aiHistory.title}</h2>
       {records.map((rec) => (
         <div key={rec.id} className="grid gap-1">
           <div className="flex items-center justify-between">
-            <p className="text-xs text-slate-400">{new Date(rec.created_at).toLocaleString("ko-KR")}</p>
+            <p className="text-xs text-slate-400">{new Date(rec.created_at).toLocaleString(DATE_LOCALES[language] ?? "ko-KR")}</p>
             <button
               type="button"
               onClick={() => handleDelete(rec.id)}
               disabled={deletingId === rec.id}
               className="rounded-md px-2 py-1 text-xs text-slate-400 hover:bg-red-50 hover:text-red-600 disabled:opacity-50 dark:hover:bg-red-950 dark:hover:text-red-400"
             >
-              {deletingId === rec.id ? "삭제 중…" : "삭제"}
+              {deletingId === rec.id ? t.aiHistory.deleting : t.aiHistory.delete}
             </button>
           </div>
           <RecommendationCard
@@ -143,7 +152,7 @@ export function AiHistory() {
           />
           {rec.profile?.note ? (
             <details className="mt-1 text-xs text-slate-500 dark:text-neutral-400">
-              <summary className="cursor-pointer select-none">선택한 구성 / 메모</summary>
+              <summary className="cursor-pointer select-none">{t.aiHistory.selectedBuildMemo}</summary>
               <pre className="mt-1 whitespace-pre-wrap font-sans">{rec.profile.note}</pre>
             </details>
           ) : null}
