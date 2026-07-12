@@ -23,7 +23,10 @@
       "新增3种全新合鸣效果，以及全新声骸·残像原野·群落",
       "全息战略·对练开放全新挑战，终末矩阵第二周期（3.5〜3.8版本）开放",
       "新增探索摩托「云驰」、先驱经验·语音包自定义·生物打印功能"
-    ]
+    ],
+    "title_en": "“Lingering Echoes, Singing in Dreams Leaning on the Sword” Version 3.5",
+    "title_ja": "「遺されし残響、剣に寄り添い夢の中で歌う」Ver.3.5",
+    "title_zhHans": "「遗留的回响，倚剑于梦中歌唱」3.5版本"
   },
   "3.4": {
     "summary_en": "“The Dream Not Chosen.” Version 3.4 opens the collaboration region “Realm of the Mind · Night City,” and advances the epilogue of Tidal Quest Chapter 3, “Our Choice Is the Sky,” together with the Anecdote Quest side story “Edge Dream.” It adds the new Sonata set “Nightmare of the Dream-Shattering Wraith,” the new Tactical Hologram: Synchronization challenge “The Nameless Seeker,” the “Weekly Journey” system, and the “Illusory Amusement Park · Delusion” content, while a variety of quality-of-life features are also improved, including exploration-bike custom presets and high-resolution Photo Mode with detailed camera adjustments.",
@@ -52,7 +55,10 @@
       "新增[每周旅程]系统及[幻想游乐园·妄想]内容，并整合原有[众多之门的幻象]",
       "新增[全息战略·同步]全新挑战「无名探索者」",
       "优化探索摩托自定义预设、拍照模式高清化／相机细节调整等便利功能"
-    ]
+    ],
+    "title_en": "“The Dream Left Unchosen” Version 3.4",
+    "title_ja": "「選ばれなかった夢」Ver.3.4",
+    "title_zhHans": "「未被选择的梦」3.4版本"
   },
   "3.3": {
     "summary_en": "“An Echo Reaching from the Edge of the Star Sea.” In Version 3.3, the new region “the Dark Plains” (Sunset Isle, the Sealed Land, the Cliffs of Silence, and more) opens beneath Rahai Roy, and Tidal Quest Chapter 3 reaches its conclusion through its epilogue and Act 5. Two new Sonata sets, a new Tacet Field, and the new Tactical Hologram challenge “Sigillum” are added, while the exploration bike gains a new gliding ability and an expansion module. To mark the second anniversary, a variety of festival-series events and collaboration events are also held.",
@@ -78,7 +84,10 @@
       "新增2种合鸣效果及全新无音区",
       "探索摩托全新滑翔能力·拓展模块，全新挑战内容「西吉鲁姆」（全息战略）",
       "举办两周年庆典系列活动及多项联动活动"
-    ]
+    ],
+    "title_en": "“Echoes Reaching from the Edge of the Star Sea” Version 3.3",
+    "title_ja": "「星海の果てから届く残響」Ver.3.3",
+    "title_zhHans": "「自星海尽头传来的回响」3.3版本"
   },
   "3.2": {
     "summary_en": "“A Resolve Unveiled in Shadow.” Version 3.2 continues Tidal Quest Chapter 3 with Act 4 “The Gold That Falls Not Beneath the Shadow” and the epilogue “The Dark Side · Shadow of the Twisted Rabbit,” and opens the new high-difficulty cyclic challenge “the Doomsday Matrix.” The regular event “Whispers of the Myriad Stars,” which lets players experience Resonator side stories, and various version events are held, while quality-of-life features are improved too, including exploration-bike autopilot and Echo filters with batch discard and lock.",
@@ -107,7 +116,10 @@
       "版本活动「随节奏起航」·「拉海罗伊解谜」·「荒野骑士」等",
       "新增全息战略·同步「海瓦蒂亚」挑战",
       "优化探索摩托自动驾驶·声骸筛选／批量弃置·锁定等便利功能"
-    ]
+    ],
+    "title_en": "“Resolve Revealed Within the Shadows” Version 3.2",
+    "title_ja": "「影の中で明かされた決意」Ver.3.2",
+    "title_zhHans": "「于阴影中揭示的决心」3.2版本"
   },
   "3.1": {
     "summary_en": "“To You, Amid the Snow.” Version 3.1 opens the new region “Roya Icefield · Icefield Surface,” and continues with Tidal Quest Chapter 3 Act 3 “The Star That Sets Out on a Long Journey” and the epilogue “Where the Sunlight Lingers.” The exploration bike gains the “Frost Dash” ability for traveling across water, the new expansion module “Environmental Optimization,” and appearance customization, while character-development conveniences are improved as well—new Afterimage clusters and three Sonata sets, the Data Station’s targeted fusion and sub-tune attribute reconfiguration, and the “Companion for the Long Journey” perk system.",
@@ -133,7 +145,10 @@
       "探索摩托新增「霜驰」水面行驶能力、「环境优化」拓展模块、摩托外观自定义",
       "新增全新残像群落「盲坠之地」及3种全新合鸣效果",
       "优化数据站指定融合·副音属性重构、「漫漫旅途的同行」福利系统等育成便利功能"
-    ]
+    ],
+    "title_en": "“To You Within the Snow” Version 3.1",
+    "title_ja": "「雪の中にいる君へ」Ver.3.1",
+    "title_zhHans": "「致雪中的你」3.1版本"
   },
   "3.0": {
     "summary_en": "In Version 3.0, “Born to Behold the Starry Sky,” the new regions “Lahai-Roi” and the “Roya Icefield” open up, and Main Quest Chapter 3, “To the Star That Will Soon Shine,” begins against the backdrop of Startorch Academy. A new ride for exploring the region, the “Exploration Bike,” arrives alongside new Afterimage colonies, new Sonata effects, and a new [Attunement Break] combat mechanic, while a range of quality-of-life features—including the [WavesLine] system and the [Region Guide] map function—are improved as well.",
@@ -159,7 +174,10 @@
       "新增探索道具「科考摩托」及自定义涂装·扩展模块",
       "新增[残像群落·拉海洛]及3种全新合鸣效果",
       "新增[调和度破坏]战斗机制、[共鸣模式切换]功能，以及[WavesLine]·[地区指南]系统"
-    ]
+    ],
+    "title_en": "“We, Born to Behold the Starry Sky” Version 3.0",
+    "title_ja": "「星空を見るために生まれた私たち」Ver.3.0",
+    "title_zhHans": "「为仰望星空而生的我们」3.0版本"
   },
   "2.8": {
     "summary_en": "In Version 2.8, “To the City Sealed in Amber,” the new region “Ruins of Time” opens, and Main Quest Chapter 2 Act 12, “When Dawnlight Settles on the Wilds,” is added along with its epilogue, “Starlight Flowing Amid the Snow.” A new Nightmare Purge stage, the “Honami City Nightmare Colony,” and the Sonata “Strings that Shatter Fate” are introduced, while numerous quality-of-life improvements arrive—balance adjustments to Anomaly effects (Dark, Flame, Frost, Electro), plus new Echo recommendation, bulk Echo absorption, and material replenishment features.",
@@ -185,7 +203,10 @@
       "新增梦魇消除「霍纳米市梦魇群落」及合鸣效果「崩解命运之弦」",
       "异常效果（暗黑·火焰·冰霜·电子）系统调整",
       "新增声骸推荐（主声骸推荐）·声骸一键吸收·材料补充等功能，优化便利性"
-    ]
+    ],
+    "title_en": "“To the City Sealed in Amber” Version 2.8",
+    "title_ja": "「琥珀に閉ざされた都市へ」Ver.2.8",
+    "title_zhHans": "「前往被琥珀封存的城市」2.8版本"
   },
   "2.7": {
     "summary_en": "In Version 2.7, “Dawn Breaks on Dark Tides,” the new regions “Sanguis Hunting Grounds · Peak of the Three Heroes” and “Domain of the Black Tide · Roving Paradise” open, and with Main Quest Chapter 2 Acts 10 and 11 and the epilogue “A Stranger Alone in a Foreign Land,” the Rinascita storyline enters its finale. A daily-refreshing Nightmare Purge stage, the “Peak of the Three Heroes · Nightmare Colony,” and the challenge content “Tactical Hologram · Anguish · Lion of Glory” are added, along with a host of new system conveniences such as Resonator build suggestions, terminal swapping, an All Things Compendium (various formidable foes), and Traces of Wandering.",
@@ -211,7 +232,10 @@
       "新增每日刷新的「三王峰·梦魇群落」（梦魇消除内容）",
       "全新挑战内容「全息战略·幻痛·荣耀狮像」",
       "大量新增共鸣者培养建议、终端更换、怪物图鉴（多样强敌）、流浪的足迹等系统便利功能"
-    ]
+    ],
+    "title_en": "“The Dawn Where Dark Tides Loom” Version 2.7",
+    "title_ja": "「暗き波が垂れ込める夜明け」Ver.2.7",
+    "title_zhHans": "「暗潮笼罩的黎明」2.7版本"
   },
   "2.6": {
     "summary_en": "In Version 2.6, “Searing Sunlight, Soothing Moonlight,” the new region “Sanguis Hunting Grounds” opens and Main Quest Chapter 2 Acts 8 and 9 continue. Two new Sonata effects and many new Echoes arrive, along with new Nightmare Purge content such as the “Sea-Eroded Rocky Coast Nightmare Colony” and the “Erosion Zone Nightmare Colony,” while gliding is extended to the “Jinzhou” and “Black Shores” regions and conveniences like bulk reward collection are improved.",
@@ -237,7 +261,10 @@
       "新增2种全新合鸣效果及多个全新声骸",
       "全新梦魇消除内容「海蚀岩海岸梦魇群落」·「侵蚀地梦魇群落」",
       "扩展「今州」·「黑海岸」地区滑翔功能，优化奖励一键领取等系统"
-    ]
+    ],
+    "title_en": "“Blazing Sunlight, Cooling Moonlight” Version 2.6",
+    "title_ja": "「熱く照らす陽光、涼やかに照らす月光」Ver.2.6",
+    "title_zhHans": "「炽热的阳光，清凉的月光」2.6版本"
   },
   "2.5": {
     "summary_en": "In Version 2.5, “An Undying Song that Never Withers,” the new region “Deep Sea Testing Grounds” opens, and alongside the new exploration mechanics [Tuning] and the [Tuning Device], Main Quest Chapter 2 Act 7, “Chasing a Dream in the Secret Garden,” continues. A new Sonata and the permanent [Nightmare Purge] content “Nightmare Colony on the Isle of Countless Deaths” are added, while build conveniences are improved—including expanding party formation slots from 5 to 10.",
@@ -263,7 +290,10 @@
       "新增全新合鸣效果「扭曲彼岸之梦」（3件套）及多个全新声骸",
       "新设常驻[梦魇消除]内容「众多死亡长眠之岛的梦魇群落」",
       "将队伍编成槽位由5个扩展至10个，并优化声骸管理建议·优化同步等培养便利功能"
-    ]
+    ],
+    "title_en": "“The Unwithering, Undying Song” Version 2.5",
+    "title_ja": "「枯れることなき不滅の歌」Ver.2.5",
+    "title_zhHans": "「永不凋零的不朽之歌」2.5版本"
   },
   "2.4": {
     "summary_en": "“The Crown of Glory Cast Amid the Cheers” — Version 2.4 opens the new region of Septimont and, through Main Quest Chapter 2 Acts 5 and 6, unfolds a story surrounding a gladiatorial tournament. It adds the “Slash” exploration gimmick and bathhouse field interactions, two new Sonata effects, and the “Tactical Hologram · Suffering” challenge content, along with system improvements such as an in-game official strategy site and a full-screen graphics filter.",
@@ -289,7 +319,10 @@
       "全新合鸣效果「愿戴荣光之旅」·「奔狼燎原之焰」，以及多个全新声骸",
       "新设游戏内官方攻略站、「索拉里斯新启庆典」系统",
       "画面设置新增全屏滤镜·超高清选项等优化"
-    ]
+    ],
+    "title_en": "“The Crown of Glory Cast Amid the Cheers” Version 2.4",
+    "title_ja": "「歓声の中で投じられた栄光の王冠」Ver.2.4",
+    "title_zhHans": "「于欢呼中抛出的荣耀之冠」2.4版本"
   },
   "2.3": {
     "summary_en": "“A Joyful ‘Gathering’ Welcomed with a Song of Passion” — Marking its first anniversary, Version 2.3 runs a variety of commemorative events, including Tumble and Twirl, Run Rice Dumpling, and the Black Gold Black Market. The new “Data Reforge” system lets you reset the main stat of 5★ Echoes to any attribute you want, and it adds the “Tactical Hologram · Suffering” challenge content and new Anomaly Echoes. Convenience features such as Echo Illusion, Birthday Blessing, and Glossary Commentary are newly introduced, while support for ray tracing and 120fps graphics cards is expanded.",
@@ -315,7 +348,10 @@
       "「全息战略·苦痛」挑战内容及全新异常声骸",
       "新设「声骸幻影」·「生日祝福」·「名词解说」等便利功能",
       "扩大光线追踪·120fps显卡支持，并新增移动端预下载功能"
-    ]
+    ],
+    "title_en": "“The Joyous 'Gathering' Greeted with a Song of Passion” Version 2.3",
+    "title_ja": "「情熱の歌で迎える喜びの「集い」」Ver.2.3",
+    "title_zhHans": "「以热情之歌迎接的欢愉「聚会」」2.3版本"
   },
   "2.2": {
     "summary_en": "“The Tall Tower That Tells Truth from Falsehood” — Version 2.2 opens the new regions of Avinoleum and the Beo Waters, and unfolds Main Quest Chapter 2 Act 4, “The Holy, the Defiant, and the Bringer of Death.” It adds a new exploration mechanic built around the “Gravity Inverter,” Resonator companion exploration content, the new Sonata effect “Gusts of Welkin,” and many new Echoes, while also introducing the new Tactical Hologram content “Lamenting Elder Dragon,” a title system, and Anomaly Echoes.",
@@ -341,7 +377,10 @@
       "展开主线任务第2章第4幕，新增交错之星任务·危险任务等全新剧情",
       "全新合鸣效果「流云逝尽之空」及多个全新声骸",
       "导入全息战略新内容「叹息的古龙」、称号系统、异常声骸"
-    ]
+    ],
+    "title_en": "“The High Tower That Discerns True from False” Version 2.2",
+    "title_ja": "「真偽を分かつ高き塔」Ver.2.2",
+    "title_zhHans": "「辨明真伪的高塔」2.2版本"
   },
   "2.1": {
     "summary_en": "“The Whisper of Birds, the Song of the Waves” — Version 2.1 opens the new regions of the Vault’s Lower Levels and the Rizzoli Archipelago, and advances new stories such as the [Perilous Mission] “The Silently Falling Leaves.” Along with the seafaring-themed event [The Old Man, the Fish, and the Sea], where you can enjoy fishing, the new regular content [The Song of Death and the Undersea Ruins] and the weekly content [Illusions of Countless Doors] open, while Echo recommendation and Echo preset features and graphics options such as ray tracing and DLSS3 frame generation are added.",
@@ -367,7 +406,10 @@
       "航海主题活动[老人、鱼与海]及[里德斯·拉古那]、[摹刻战略III]等限时活动",
       "全新常驻内容[死亡之歌与海底废墟]、全新周常内容[众多之门的幻象]",
       "新增声骸推荐·声骸预设·拍摄模式滤镜，光线追踪·DLSS3帧生成等画面优化"
-    ]
+    ],
+    "title_en": "“Whispers of Birds, Songs of Waves” Version 2.1",
+    "title_ja": "「鳥のささやき、波の歌」Ver.2.1",
+    "title_zhHans": "「鸟之低语，浪之歌」2.1版本"
   },
   "2.0": {
     "summary_en": "“A Song Offered to Silence” — Version 2.0 opens the new region of Rinascita and its southern port-city district of Ragunna, and unfolds Main Quest Chapter 2, “A Song Offered to Silence” (Prologue through Act 3). It adds new challenge content such as the “Tactical Hologram · Suffering” and Sea of Clouds gliding, and newly introduces various systems including character costumes, injury depiction, synthesis, immersive mode, and record collection, while the Data Bank’s maximum level is raised to Lv.24.",
@@ -393,7 +435,10 @@
       "新增全息战略「苦痛」、云海滑翔等全新挑战内容",
       "全新导入角色服装·负伤表现·合成·沉浸模式·记录收藏系统",
       "数据坞最高等级提升至Lv.24，优化探索进度系统"
-    ]
+    ],
+    "title_en": "“A Song Offered to the Silence” Version 2.0",
+    "title_ja": "「沈黙に捧げる歌声」Ver.2.0",
+    "title_zhHans": "「献给沉默的歌声」2.0版本"
   },
   "1.4": {
     "summary_en": "“The night that knocks at the door of day” — In Version 1.4, the new Intertwined Fate story “The Star-Sea That Endlessly Forks in Two” opens, and a new dream-infiltration-themed event “The Dream Path That Lost Its Order” and new Mysterious Realm Challenge content “Where Dreams Meet” are added. A new anomaly Echo, [Inferno Rider], is introduced alongside a new system, [Weapon Projection], that lets you freely customize weapon appearances, and a range of growth and quality-of-life improvements arrive as well, including staged Echo-enhancement input and double-reward claims from dungeons.",
@@ -419,7 +464,10 @@
       "神秘境地挑战全新内容“众梦的相遇”开放",
       "新增全新异常声骸[地狱火骑士]及全新系统[武器投影]",
       "声骸强化[分段投入]选项，应召领域·模拟领域·无音扫荡副本双倍奖励领取等便利性改进"
-    ]
+    ],
+    "title_en": "“The Night That Knocks on the Door of Day” Version 1.4",
+    "title_ja": "「昼の扉を叩く夜」Ver.1.4",
+    "title_zhHans": "「叩响白昼之门的黑夜」1.4版本"
   },
   "1.3": {
     "summary_en": "“In search of the coast's end” — In Version 1.3, Companion Quest Chapter 1 Act 8 unfolds against the backdrop of the Black Shores, and the Intertwined Fate quest “The Little Lamb's Grand Adventure” newly opens. Alongside the regional-exploration event “The Sea Where the Stars Sleep” and the commemorative photo event “Shadow of the Star-Sea,” a new Tactical Hologram “Inferno Rider,” new challenge content “Game Cartridge Collector,” and new anomaly Echoes are added, while various conveniences—bulk Echo fusion, map switching, teleport, habitat tracking, and story recaps—along with mobile controller support are improved.",
@@ -445,7 +493,10 @@
       "地区探索·摄影活动“群星沉眠的海”·“星海之影”",
       "全新全息战略“地狱火骑士”及挑战内容“游戏卡带收藏家”",
       "声骸批量融合、地图切换·传送、移动端手柄支持等系统改进"
-    ]
+    ],
+    "title_en": "“In Search of the Shore's End” Version 1.3",
+    "title_ja": "「海岸の果てを求めて」Ver.1.3",
+    "title_zhHans": "「寻觅海岸的尽头」1.3版本"
   },
   "1.2": {
     "summary_en": "“Blessing of moonlight, wishes of mankind” — In Version 1.2, the moon-viewing festival events “Moonlight Wish” and “The Helper Behind the Scenes,” together with the 7-day login event “Gift of the Full Moon,” take place, and new content “Mysterious Realm Challenge · Festival of Dreamland,” the fantasy Echo “Dreamless,” and new Metaphors are added. A new returning-player system “Haega's Concerto” and a new exploration tool “Assist Gear · Shooting” are introduced, along with a revamp of the crystal-storage system (introducing the new Crystal Group Points) and various optimizations to controller input and graphics options (120fps support).",
@@ -471,7 +522,10 @@
       "全新内容“神秘境地挑战・梦乡的庆典”＋幻想声骸“无妄者”、全新隐喻",
       "全新回归系统“谐歌重奏”、全新探索道具“辅助器・射击”",
       "结晶储存系统改版（全新引入结晶团体pt）及手柄·画面（120fps）优化"
-    ]
+    ],
+    "title_en": "“Blessing of Moonlight, Wish of Mankind” Version 1.2",
+    "title_ja": "「月光の祝福、人の願い」Ver.1.2",
+    "title_zhHans": "「月光的祝福，人类的夙愿」1.2版本"
   },
   "1.1": {
     "summary_en": "“The sound of the Awakening of Insects that rang out at Mt. Firmament” — In Version 1.1, the mysterious land “Mt. Firmament,” set in the sea southeast of Jinzhou City, opens as a new area. Companion Quest Chapter 1 Act 7 and an Intertwined Fate quest are newly added, and the anomaly Echoes [Anomaly · Beast of the Black Moon] and [Anomaly · Ding-Dong-Dong], along with the new Tactical Hologram “Crownless,” are also introduced.",
@@ -497,6 +551,9 @@
       "新增交织之星任务“摆脱异化的长生”",
       "新增异常声骸[异常·黑月之兽]、[异常·叮咚咚]",
       "全新全息战略“无冠者”"
-    ]
+    ],
+    "title_en": "Version 1.1 Update",
+    "title_ja": "Ver.1.1 アップデート",
+    "title_zhHans": "1.1版本更新"
   }
 }

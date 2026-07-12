@@ -130,8 +130,10 @@ class GameUpdateSummary(BaseModel):
     highlights_ko: list[str] = Field(default_factory=list)
     source_links: list[str] = Field(default_factory=list)
     image_url: str | None = None
-    # 표시 전용 본문 현지화 (en/ja/zhHans). 없으면 프론트가 _ko로 폴백.
-    # 제목(theme명)은 공식 명칭 리스크로 한국어 유지.
+    # 표시 전용 현지화 (en/ja/zhHans). 없으면 프론트가 _ko로 폴백.
+    title_en: str | None = None
+    title_ja: str | None = None
+    title_zhHans: str | None = None
     summary_en: str | None = None
     summary_ja: str | None = None
     summary_zhHans: str | None = None

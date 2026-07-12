@@ -7,10 +7,11 @@ from .database import get_connection
 
 # Display-only localized bodies (en/ja/zhHans) for each version, authored data
 # file kept next to the code so it survives DB resets/deploys just like the
-# Korean text below. Shape: {version: {summary_en, summary_ja, summary_zhHans,
-# highlights_en, highlights_ja, highlights_zhHans}}. Titles stay Korean.
+# Korean text below. Shape: {version: {title_*, summary_*, highlights_*}} for
+# en/ja/zhHans. Merged into game_update rows by version at startup.
 _I18N_PATH = Path(__file__).resolve().parent.parent / "data" / "curated_updates_i18n.json"
 _LOCALIZED_KEYS = (
+    "title_en", "title_ja", "title_zhHans",
     "summary_en", "summary_ja", "summary_zhHans",
     "highlights_en", "highlights_ja", "highlights_zhHans",
 )

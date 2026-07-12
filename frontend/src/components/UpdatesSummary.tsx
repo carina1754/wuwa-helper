@@ -58,7 +58,7 @@ export function UpdatesSummary() {
                 {featured.release_date_kst} {t.updates.releaseDate}
               </time>
             ) : null}
-            <h2>{featured.title_ko}</h2>
+            <h2>{localizedField(featured, "title", language)}</h2>
             <p>{localizedField(featured, "summary", language)}</p>
             {localizedList(featured, "highlights", language).length > 0 || featured.source_links.length > 0 ? (
               <div className="tags">
@@ -91,11 +91,11 @@ export function UpdatesSummary() {
               className="urow"
               aria-expanded={open}
               onClick={() => setExpandedId(open ? null : update.id)}
-              aria-label={`${update.version} ${update.title_ko}`}
+              aria-label={`${update.version} ${localizedField(update, "title", language)}`}
             >
               <span className="ver">{update.version}</span>
               <span className="um">
-                <b>{update.title_ko}</b>
+                <b>{localizedField(update, "title", language)}</b>
               </span>
               <span className="ud">
                 {update.release_date_kst ?? ""}
