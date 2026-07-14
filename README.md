@@ -8,23 +8,20 @@ AI 빌드 추천(대화형), 추천 기록. Wuthering Waves / Kuro Games 와 무
 
 ## 실행 (Windows)
 
-준비물: [uv](https://docs.astral.sh/uv/) (파이썬 자동 관리), 그리고 최초 1회 빌드용 Node.js.
+**쓰는 사람**: `backend\dist\띵조AI.exe` **더블클릭**. 끝. 파이썬·uv·Node·브라우저 전부 불필요,
+콘솔창 없이 네이티브 창 하나 뜸. 기록은 exe 옆 `wuwa_data\` 에 파일로 저장.
+(Win11 은 WebView2 기본 내장 — 없으면 MS에서 무료 설치.)
+
+**exe 만들기** (개발자, 최초 1회 / 코드 바뀔 때만): [uv](https://docs.astral.sh/uv/) + Node.js 필요.
 
 ```powershell
-# 1) 최초 1회: 프론트 정적 빌드 → backend/static 생성
-.\build.ps1
-
-# 2) 실행 — 이후엔 이것만
+.\build_exe.ps1   # 프론트 빌드 → 리소스 번들 → backend\dist\띵조AI.exe 생성
 ```
 
-- **`띵조AI.vbs` 더블클릭** — 콘솔창 없이 **네이티브 창**으로 뜸(브라우저 X). 권장.
-- 또는 `start.bat` 더블클릭 (콘솔창 같이 뜸, 로그 확인용).
-- 또는 브라우저로 열고 싶으면 backend 폴더에서 `uv run run.py` (기본 `http://127.0.0.1:9000/`).
+개발 중 빠르게 실행(빌드 없이): `backend` 폴더에서 `uv run desktop.py` (창 모드),
+또는 서버만: `WUWA_HEADLESS=1 PORT=9000 uv run desktop.py` 후 브라우저로 접속.
 
-포트는 `desktop.py` 가 빈 포트를 자동으로 잡으므로 프로덕션(8000)과 충돌하지 않습니다.
-Windows 는 WebView2 런타임이 필요한데 Win11 엔 기본 내장입니다(없으면 MS에서 무료 설치).
-
-> 코드(프론트)를 고쳤을 때만 `.\build.ps1` 을 다시 돌리면 됩니다. 데이터·백엔드 수정은 재빌드 불필요.
+포트는 실행 시 빈 포트를 자동으로 잡으므로 프로덕션(8000)과 충돌하지 않습니다.
 
 ## AI 설정 (NVIDIA BYO 키)
 
@@ -47,8 +44,11 @@ Windows 는 WebView2 런타임이 필요한데 Win11 엔 기본 내장입니다(
 
 ## 구조
 
-`run.py` → uvicorn 이 FastAPI(`main:app`) 하나만 띄웁니다.
-API 라우트 뒤에 `backend/static`(빌드된 Next.js export)을 `/` 로 마운트해 **같은 포트에서 프론트+API** 를 서빙합니다. 로컬 LLM·Postgres·Caddy 모두 불필요.
+`desktop.py`(exe 엔트리) → uvicorn 으로 FastAPI(`main:app`) 하나를 스레드에서 띄우고 pywebview 창으로 엽니다.
+API 라우트 뒤에 정적 Next.js export 를 `/` 로 마운트해 **같은 포트에서 프론트+API** 를 서빙합니다.
+PyInstaller onefile 이 정적·데이터(`data/`)·이미지(`media/`)를 exe 안에 번들하고, 실행 시 `_MEIPASS`
+에서 읽습니다(경로는 `STATIC_DIR`/`MEDIA_DIR` env 로 주입). 기록은 exe 옆 `wuwa_data/`(`LOCAL_DATA_DIR`).
+로컬 LLM·Postgres·Caddy·브라우저 모두 불필요.
 
 ## 검증
 
