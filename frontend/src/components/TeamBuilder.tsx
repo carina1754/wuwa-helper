@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Portal } from "./Portal";
-import { signIn, useSession } from "next-auth/react";
 import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation, teamCalculate } from "@/lib/api";
 import { mediaUrl } from "@/lib/constants";
 import { localizedField, localizedName, localizedSkillType, localizedStat, stripTags, useLanguage, type Language } from "@/lib/i18n";
@@ -69,8 +68,7 @@ export function TeamBuilder() {
   const [aiBusy, setAiBusy] = useState(false);
   const [aiStatus, setAiStatus] = useState("");
   const [mainDpsId, setMainDpsId] = useState<number | null>(null); // 사용자가 지정한 메인 딜러(역할 태그 우선)
-  const { data: session } = useSession();
-  const userId = session?.user?.email ?? null;
+  const userId = "local"; // 무로그인 단일 로컬 유저
 
   // 시뮬 조건(파티 전체 공유 — 적 조건·팀 버프)
   const [opts, setOpts] = useState<UiOpts>(DEFAULT_OPTS);
@@ -496,29 +494,16 @@ export function TeamBuilder() {
         <div className="flex flex-wrap items-center justify-between gap-2">
           <div>
             <div className="text-sm font-semibold text-[var(--fg)]">{t.teams.aiPartyAnalysis}</div>
-            <p className="mt-0.5 text-xs text-[var(--muted)]">
-              {t.teams.aiPartyAnalysisHint}
-              {userId ? null : t.teams.aiSaveNeedsLogin}
-            </p>
+            <p className="mt-0.5 text-xs text-[var(--muted)]">{t.teams.aiPartyAnalysisHint}</p>
           </div>
-          {userId ? (
-            <button
-              type="button"
-              onClick={analyzeAndSave}
-              disabled={!partyFilled || aiBusy}
-              className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50"
-            >
-              {aiBusy ? t.teams.analyzing : t.teams.analyzeAndRecord}
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => void signIn("google", { callbackUrl: "/" })}
-              className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90"
-            >
-              {t.teams.signInAndRecord}
-            </button>
-          )}
+          <button
+            type="button"
+            onClick={analyzeAndSave}
+            disabled={!partyFilled || aiBusy}
+            className="rounded-md bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-ink)] hover:opacity-90 disabled:opacity-50"
+          >
+            {aiBusy ? t.teams.analyzing : t.teams.analyzeAndRecord}
+          </button>
         </div>
         {partyFilled ? (
           <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">

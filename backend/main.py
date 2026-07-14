@@ -5,27 +5,24 @@ import re
 import secrets
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
 
 from dotenv import load_dotenv
 
-# backend/.env 를 프로세스 환경에 로드한다. 이게 없으면 INTERNAL_API_SECRET 등이
-# os.getenv 로 안 잡혀 sync-user 가 401 → users 테이블이 비고 → 저장이 FK 위반으로 500난다.
+# backend/.env 를 프로세스 환경에 로드(로컬 LLM 폴백용 LLM_* 등). 없으면 무시.
 load_dotenv(Path(__file__).resolve().parent / ".env")
 
-from fastapi import Depends, FastAPI, File, Header, HTTPException, Response, UploadFile
+from fastapi import FastAPI, Header, HTTPException, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
-from src.database import init_db
-from src.content import load_game_config, load_game_updates, load_pickup_schedule, load_site_updates
-from src.content_refresh import refresh_pickups_and_updates, start_daily_refresh_worker
-from src.curated_updates import apply_curated_update_summaries
-from src.evaluator import choose_rule, evaluate_account, evaluate_character, evaluate_echo
-from src.export_import import export_all, import_all
-from src.history import get_session, list_sessions, save_session
 from src import ai_coach
-from src.ai_store import delete_recommendation, get_recommendation, list_recommendations, save_recommendation
+from src.ai_store import (
+    delete_recommendation,
+    get_recommendation,
+    list_recommendations,
+    save_recommendation,
+)
 from src.catalog import (
     load_codex_echoes,
     load_codex_resonators,
@@ -33,40 +30,26 @@ from src.catalog import (
     load_pickup_banners,
     load_sonata_sets,
 )
+from src.content import (
+    load_game_config,
+    load_game_updates,
+    load_pickup_schedule,
+    load_site_updates,
+)
 from src.media import CATALOG_KINDS, cached_catalog_image_path, cached_image_path
 from src.models import (
     AiChatRequest,
     AiChatResponse,
     AiRecommendationCreate,
     AiRecommendationRecord,
-    AuthUserSyncRequest,
-    AnalysisSession,
-    AnalyzeRequest,
-    AnalyzeResponse,
-    BuildRule,
-    Diagnosis,
     GameUpdateSummary,
     PickupBanner,
-    EchoItem,
     PickupScheduleItem,
     SiteUpdateEntry,
-    VisionExtractionResult,
-    UserRecord,
 )
-from src.report import generate_report
-from src.rules import load_build_rules, save_build_rules
-from src.sim.api import (
-    SnapshotDamageRequest,
-    SnapshotDamageResponse,
-    TeamCalcRequest,
-    TeamCalcResponse,
-    snapshot_damage_api,
-    team_calculate,
-)
-from src.users import sync_user
-from src.vision import extract_from_image
+from src.sim.api import TeamCalcRequest, TeamCalcResponse, team_calculate
 
-app = FastAPI(title="WaWa AI Helper API", version="0.1.0")
+app = FastAPI(title="WaWa AI Helper API", version="0.2.0")
 
 default_origins = [
     "http://localhost:3000",
@@ -90,30 +73,13 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Test clients and short-lived scripts do not always enter FastAPI lifespan.
-init_db()
-apply_curated_update_summaries()
-start_daily_refresh_worker()
-
 
 @app.get("/health")
 def health() -> dict[str, bool]:
     return {"ok": True}
 
 
-def require_internal_secret(x_internal_secret: str | None = Header(default=None)) -> None:
-    expected = os.getenv("INTERNAL_API_SECRET")
-    if not expected or not x_internal_secret or not secrets.compare_digest(x_internal_secret, expected):
-        raise HTTPException(status_code=401, detail="Invalid or missing internal API secret")
-
-
-@app.post("/auth/sync-user", response_model=UserRecord, dependencies=[Depends(require_internal_secret)])
-def post_auth_sync_user(payload: AuthUserSyncRequest) -> UserRecord:
-    return sync_user(payload)
-
-@app.get("/rules", response_model=list[BuildRule])
-def get_rules() -> list[BuildRule]:
-    return load_build_rules()
+# --- Catalog / content (static files, no DB) ---------------------------------
 
 
 @app.get("/pickup-schedule", response_model=list[PickupScheduleItem])
@@ -181,87 +147,39 @@ def get_game_config() -> dict:
     return load_game_config()
 
 
+# --- Party damage sim --------------------------------------------------------
+
+
 @app.post("/sim/team-calculate", response_model=TeamCalcResponse)
 def post_team_calculate(request: TeamCalcRequest) -> TeamCalcResponse:
-    """Server-side party damage calc from real builds (our engine, not phro assumptions)."""
+    """Server-side party damage calc from real builds (our engine)."""
     try:
         return team_calculate(request)
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc))
 
 
-@app.post("/sim/snapshot-damage", response_model=SnapshotDamageResponse)
-def post_snapshot_damage(request: SnapshotDamageRequest) -> SnapshotDamageResponse:
-    """Absolute damage from a real-account OCR snapshot — our '내 실제 빌드 기준' differentiator."""
-    try:
-        return snapshot_damage_api(request)
-    except KeyError as exc:
-        raise HTTPException(status_code=404, detail=str(exc))
-
-
-@app.post("/content/refresh")
-def post_content_refresh() -> dict[str, object]:
-    return refresh_pickups_and_updates(force=True)
-
-
-@app.post("/rules", response_model=list[BuildRule])
-def post_rules(rules: list[BuildRule]) -> list[BuildRule]:
-    return save_build_rules(rules)
-
-
-@app.post("/vision/extract", response_model=VisionExtractionResult)
-async def post_vision_extract(file: UploadFile = File(...)) -> VisionExtractionResult:
-    image_bytes = await file.read()
-    return extract_from_image(image_bytes, file.filename)
-
-
-@app.post("/analyze/echo", response_model=Diagnosis)
-def post_analyze_echo(echo: EchoItem) -> Diagnosis:
-    rule = load_build_rules()[0]
-    return evaluate_echo(echo, rule)
-
-
-@app.post("/analyze/character", response_model=AnalyzeResponse)
-def post_analyze_character(request: AnalyzeRequest) -> AnalyzeResponse:
-    rules = load_build_rules()
-    role = request.snapshot.role or request.fallback_role
-    rule = choose_rule(request.snapshot.character_name, rules, role)
-    diagnoses = evaluate_character(request.snapshot, rule)
-    report = generate_report(request.snapshot, diagnoses)
-    return AnalyzeResponse(snapshot=request.snapshot, diagnoses=diagnoses, report=report)
-
-
-@app.post("/analyze/account", response_model=list[Diagnosis])
-def post_analyze_account(profile: dict[str, Any]) -> list[Diagnosis]:
-    return evaluate_account(profile)
-
-
-@app.post("/report")
-def post_report(payload: AnalyzeResponse) -> dict[str, str]:
-    return {"report": generate_report(payload.snapshot, payload.diagnoses)}
-
-
-@app.get("/history", response_model=list[AnalysisSession])
-def get_history() -> list[AnalysisSession]:
-    return list_sessions()
-
-
-@app.post("/history", response_model=AnalysisSession)
-def post_history(session: AnalysisSession) -> AnalysisSession:
-    return save_session(session)
-
-
-@app.get("/history/{session_id}", response_model=AnalysisSession)
-def get_history_detail(session_id: str) -> AnalysisSession:
-    session = get_session(session_id)
-    if session is None:
-        raise HTTPException(status_code=404, detail="Analysis session not found")
-    return session
+# --- AI coach (BYO NVIDIA key via headers, local-file history) ----------------
 
 
 @app.post("/ai/chat", response_model=AiChatResponse)
-def post_ai_chat(request: AiChatRequest) -> AiChatResponse:
-    return ai_coach.chat(request)
+def post_ai_chat(
+    request: AiChatRequest,
+    x_llm_key: str | None = Header(default=None),
+    x_llm_model: str | None = Header(default=None),
+) -> AiChatResponse:
+    # 키·모델은 헤더로만 받는다(본문/기록에 절대 안 섞음).
+    return ai_coach.chat(request, api_key=x_llm_key, model=x_llm_model)
+
+
+@app.get("/ai/models")
+def get_ai_models(x_llm_key: str | None = Header(default=None)) -> list[str]:
+    if not x_llm_key:
+        raise HTTPException(status_code=400, detail="NVIDIA API 키가 필요합니다 (X-LLM-Key 헤더).")
+    try:
+        return ai_coach.list_models(x_llm_key)
+    except Exception as exc:  # noqa: BLE001 — 외부 API 실패를 502로 표면화
+        raise HTTPException(status_code=502, detail=f"모델 목록 조회 실패: {exc}")
 
 
 @app.get("/ai/recommendations", response_model=list[AiRecommendationRecord])
@@ -298,11 +216,10 @@ def delete_ai_recommendation(recommendation_id: str) -> Response:
     return Response(status_code=204)
 
 
-@app.get("/export")
-def get_export() -> dict[str, Any]:
-    return export_all()
-
-
-@app.post("/import")
-def post_import(payload: dict[str, Any]) -> dict[str, int]:
-    return import_all(payload)
+# --- Static frontend (single-process standalone) -----------------------------
+# Serve the built Next.js export so one process = whole app. MUST be mounted last
+# so the "/" catch-all never shadows an API route above. Absent in dev (frontend
+# runs on :3000); present in the packaged build (STATIC_DIR or ./static).
+_STATIC_DIR = os.getenv("STATIC_DIR") or str(Path(__file__).resolve().parent / "static")
+if os.path.isdir(_STATIC_DIR):
+    app.mount("/", StaticFiles(directory=_STATIC_DIR, html=True), name="static")

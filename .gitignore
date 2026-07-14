@@ -31,3 +31,12 @@ backend/scratchpad/
 /WutheringWaves_Data/
 /WutheringWaves_Data-*/
 /WutheringWaves_Data-*.zip
+
+# Standalone build artifacts (regenerated from frontend/ by build step)
+backend/static/
+# Local-file history/logs (per-user runtime data, not source)
+backend/data/local/
+# Reference clone (bytonylee/free-router) — not part of this repo
+/free-router/
+# Ad-hoc screenshots dropped in repo root
+/*.png

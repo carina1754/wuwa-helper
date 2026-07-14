@@ -1,78 +1,42 @@
+"""AI 추천 기록 저장소 — 로컬 JSON 파일(무DB, 단일 로컬 유저).
+
+user_id 스코프는 단일 로컬 유저라 무시한다(인자는 하위호환용으로만 유지).
+"""
 from __future__ import annotations
 
-import json
+from . import localstore
+from .models import AiRecommendationRecord
 
-from .database import get_connection
-from .models import AiMessage, AiProfile, AiRecommendationRecord, Recommendation
+_FILE = "ai_recommendations.json"
+
+
+def _all() -> list[dict]:
+    return localstore.read_json(_FILE, [])
 
 
 def save_recommendation(record: AiRecommendationRecord) -> AiRecommendationRecord:
-    with get_connection() as conn:
-        conn.execute(
-            """
-            INSERT INTO ai_recommendations
-            (id, user_id, created_at, profile_json, conversation_json, recommendation_json, title)
-            VALUES (%s, %s, %s, %s, %s, %s, %s)
-            ON CONFLICT (id) DO UPDATE SET
-                user_id = EXCLUDED.user_id,
-                created_at = EXCLUDED.created_at,
-                profile_json = EXCLUDED.profile_json,
-                conversation_json = EXCLUDED.conversation_json,
-                recommendation_json = EXCLUDED.recommendation_json,
-                title = EXCLUDED.title
-            """,
-            (
-                record.id,
-                record.user_id,
-                record.created_at,
-                record.profile.model_dump_json(),
-                json.dumps([message.model_dump() for message in record.conversation], ensure_ascii=False),
-                record.recommendation.model_dump_json(),
-                record.title,
-            ),
-        )
-        conn.commit()
+    items = [r for r in _all() if r.get("id") != record.id]
+    items.append(record.model_dump())
+    localstore.write_json(_FILE, items)
     return record
 
 
-def _row_to_record(row) -> AiRecommendationRecord:
-    return AiRecommendationRecord(
-        id=row["id"],
-        user_id=row.get("user_id"),
-        created_at=row["created_at"],
-        profile=AiProfile.model_validate_json(row["profile_json"]),
-        conversation=[AiMessage.model_validate(item) for item in json.loads(row["conversation_json"])],
-        recommendation=Recommendation.model_validate_json(row["recommendation_json"]),
-        title=row.get("title"),
-    )
-
-
 def list_recommendations(user_id: str | None = None, limit: int = 20) -> list[AiRecommendationRecord]:
-    with get_connection() as conn:
-        if user_id:
-            rows = conn.execute(
-                "SELECT * FROM ai_recommendations WHERE user_id = %s ORDER BY created_at DESC LIMIT %s",
-                (user_id, limit),
-            ).fetchall()
-        else:
-            rows = conn.execute(
-                "SELECT * FROM ai_recommendations ORDER BY created_at DESC LIMIT %s",
-                (limit,),
-            ).fetchall()
-    return [_row_to_record(row) for row in rows]
+    items = sorted(_all(), key=lambda r: r.get("created_at", ""), reverse=True)
+    return [AiRecommendationRecord.model_validate(r) for r in items[:limit]]
 
 
 def get_recommendation(recommendation_id: str) -> AiRecommendationRecord | None:
-    with get_connection() as conn:
-        row = conn.execute(
-            "SELECT * FROM ai_recommendations WHERE id = %s", (recommendation_id,)
-        ).fetchone()
-    return _row_to_record(row) if row else None
+    for r in _all():
+        if r.get("id") == recommendation_id:
+            return AiRecommendationRecord.model_validate(r)
+    return None
 
 
 def delete_recommendation(recommendation_id: str) -> bool:
-    """저장된 추천 1건 삭제. 실제로 지워졌으면 True."""
-    with get_connection() as conn:
-        cur = conn.execute("DELETE FROM ai_recommendations WHERE id = %s", (recommendation_id,))
-        conn.commit()
-        return (cur.rowcount or 0) > 0
+    items = _all()
+    kept = [r for r in items if r.get("id") != recommendation_id]
+    if len(kept) == len(items):
+        return False
+    localstore.write_json(_FILE, kept)
+    return True

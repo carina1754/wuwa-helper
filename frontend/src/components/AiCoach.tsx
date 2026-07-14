@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
 import { aiChat, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getSonataSets, saveRecommendation } from "@/lib/api";
 import { AiChat } from "./AiChat";
 import { AiIntake } from "./AiIntake";
@@ -21,8 +20,7 @@ const EMPTY_NAMES: NameMaps = {
 /** AI 코치 탭 컨테이너: 인트로 → 대화 → 추천 카드 → 확정 저장. */
 export function AiCoach() {
   const { t } = useLanguage();
-  const { data: session, status } = useSession();
-  const userId = session?.user?.email ?? null;
+  const userId = "local"; // 무로그인 단일 로컬 유저
 
   const [resonators, setResonators] = useState<CodexResonator[]>([]);
   const [weapons, setWeapons] = useState<CodexWeapon[]>([]);
@@ -101,10 +99,6 @@ export function AiCoach() {
 
   const handleConfirm = async () => {
     if (!recommendation) return;
-    if (!userId) {
-      setError(t.aiCoach.loginToSave);
-      return;
-    }
     setConfirming(true);
     setError("");
     try {
@@ -141,28 +135,6 @@ export function AiCoach() {
     () => (recommendation ? computePartyDamage(recommendation, resoById, weaponById, gameConfig) : null),
     [recommendation, resoById, weaponById, gameConfig],
   );
-
-  if (!userId) {
-    return (
-      <div className="grid max-w-md gap-3">
-        <h2 className="text-lg font-semibold">{t.aiCoach.title}</h2>
-        <p className="text-sm text-slate-500 dark:text-neutral-400">
-          {status === "loading"
-            ? t.aiCoach.checkingLogin
-            : t.aiCoach.loginIntro}
-        </p>
-        {status !== "loading" ? (
-          <button
-            type="button"
-            onClick={() => void signIn("google", { callbackUrl: "/" })}
-            className="justify-self-start rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
-          >
-            {t.aiCoach.signInWithGoogle}
-          </button>
-        ) : null}
-      </div>
-    );
-  }
 
   if (phase === "intake") {
     return <AiIntake resonators={resonators} onStart={handleStart} />;

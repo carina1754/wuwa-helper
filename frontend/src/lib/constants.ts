@@ -9,7 +9,7 @@ export function mediaUrl(path?: string | null): string | undefined {
   return path.startsWith("http") ? path : `${API_BASE_URL}${path}`;
 }
 
-export const TABS = ["Ai", "Planner", "PickupSchedule", "Updates", "Teams", "History"] as const;
+export const TABS = ["Ai", "Planner", "PickupSchedule", "Updates", "Teams", "History", "Settings"] as const;
 export type AppTab = (typeof TABS)[number] | "SiteUpdates";
 
 export function emptyEcho(slot: number): EchoItem {

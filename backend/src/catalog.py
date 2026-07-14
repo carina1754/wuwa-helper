@@ -259,9 +259,10 @@ def refresh_pickup_banners() -> int:
 
 
 def load_pickup_banners() -> list[PickupBanner]:
-    with get_connection() as conn:
-        rows = conn.execute("SELECT data_json FROM pickup_banners").fetchall()
-    banners = [PickupBanner.model_validate_json(row["data_json"]) for row in rows]
+    # 정적 스냅샷 정본(무DB). 재생성: scripts/export_content_to_files.py.
+    path = Path(__file__).resolve().parents[1] / "data" / "content" / "pickup_banners.json"
+    rows = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
+    banners = [PickupBanner.model_validate(row) for row in rows]
     # newest version first, then phase ascending (numeric-aware version sort)
     def sort_key(b: PickupBanner):
         try:

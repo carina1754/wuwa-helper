@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from src import ai_store
-from src.database import get_connection, init_db
 from src.models import (
     AiMessage,
     AiProfile,
@@ -11,8 +10,6 @@ from src.models import (
     TeamPick,
     WeaponPick,
 )
-
-init_db()
 
 
 def _make_record(record_id: str, user_id: str | None) -> AiRecommendationRecord:
@@ -43,26 +40,13 @@ def _make_record(record_id: str, user_id: str | None) -> AiRecommendationRecord:
     )
 
 
-def _ensure_user(user_id: str) -> None:
-    with get_connection() as conn:
-        conn.execute(
-            "INSERT INTO users (id, email) VALUES (%s, %s) ON CONFLICT (id) DO NOTHING",
-            (user_id, f"{user_id}@test.local"),
-        )
-        conn.commit()
-
-
 def _cleanup(record_ids: list[str], user_ids: list[str]) -> None:
-    with get_connection() as conn:
-        for record_id in record_ids:
-            conn.execute("DELETE FROM ai_recommendations WHERE id = %s", (record_id,))
-        for user_id in user_ids:
-            conn.execute("DELETE FROM users WHERE id = %s", (user_id,))
-        conn.commit()
+    # 로컬 파일 스토어(DB 없음) 정리. user_ids 는 무시(FK/유저 테이블 없음).
+    for record_id in record_ids:
+        ai_store.delete_recommendation(record_id)
 
 
 def test_save_and_get_roundtrip():
-    _ensure_user("test-ai-user-1")
     record = _make_record("test-ai-rec-roundtrip", "test-ai-user-1")
     try:
         ai_store.save_recommendation(record)
@@ -78,27 +62,21 @@ def test_save_and_get_roundtrip():
         _cleanup(["test-ai-rec-roundtrip"], ["test-ai-user-1"])
 
 
-def test_list_is_scoped_by_user():
-    _ensure_user("test-ai-user-scope")
-    _ensure_user("test-ai-user-different")
+def test_list_returns_all_records_ignoring_user():
+    # 무로그인 단일 로컬 유저: user_id 스코프 없음(넣어도 무시). 저장된 건 모두 보인다.
     mine = _make_record("test-ai-rec-mine", "test-ai-user-scope")
     other = _make_record("test-ai-rec-other", "test-ai-user-different")
     try:
         ai_store.save_recommendation(mine)
         ai_store.save_recommendation(other)
-        rows = ai_store.list_recommendations(user_id="test-ai-user-scope")
-        ids = {row.id for row in rows}
+        ids = {row.id for row in ai_store.list_recommendations(user_id="test-ai-user-scope")}
         assert "test-ai-rec-mine" in ids
-        assert "test-ai-rec-other" not in ids
+        assert "test-ai-rec-other" in ids  # 스코프 없음 → 다른 user_id 도 보임
     finally:
-        _cleanup(
-            ["test-ai-rec-mine", "test-ai-rec-other"],
-            ["test-ai-user-scope", "test-ai-user-different"],
-        )
+        _cleanup(["test-ai-rec-mine", "test-ai-rec-other"], [])
 
 
 def test_save_is_idempotent_upsert():
-    _ensure_user("test-ai-user-upsert")
     record = _make_record("test-ai-rec-upsert", "test-ai-user-upsert")
     try:
         ai_store.save_recommendation(record)

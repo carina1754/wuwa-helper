@@ -1,0 +1,865 @@
+[
+  {
+    "id": "wuwa-3-5",
+    "version": "3.5",
+    "title_ko": "「남겨진 울림, 검에 기대 꿈속에서 노래하리」 3.5 버전 업데이트",
+    "release_date_kst": "2026-07-10 05:00 KST",
+    "summary_ko": "「검명은 지난날을 스치고, 여운은 시가로 남는다」 3.5 버전에서는 신규 지역 「몽주: 현방의 땅」(현방보루, 동쪽 현봉, 서쪽 방봉, 남쪽 원구릉)이 개방되고 메인 스토리 제4장 제1막·제2막과 막간극이 진행됩니다. 다양한 신규 에코와 화음 세트, 전술 홀로그램·종말 매트릭스 2주기 등 엔드콘텐츠가 추가되며, 탐사 바이크 「클라우드 라이드」와 파이오니어 경험·음성팩 커스터마이징·바이오프린트 등 편의 기능도 개선됩니다.",
+    "highlights_ko": [
+      "신규 지역 \"몽주: 현방의 땅\"(현방보루·동쪽 현봉·서쪽 방봉·남쪽 원구릉) 개방",
+      "메인 스토리 제4장 제1막 \"폭풍 전의 바람\"·제2막 \"현령이 노래하니, 폭풍이 잠잠해지다\" 및 막간극 진행",
+      "신규 화음 세트 3종 및 신규 에코·잔상 필드·군락 추가",
+      "전술 홀로그램 대련 신규 챌린지 개방, 종말 매트릭스 2주기(3.5~3.8 버전) 개방",
+      "탐사 바이크 \"클라우드 라이드\", 파이오니어 경험·음성팩 커스터마이징·바이오프린트 기능 추가"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/5122"
+    ],
+    "image_url": "/updates/image/wuwa-3-5",
+    "title_en": "“Lingering Echoes, Singing in Dreams Leaning on the Sword” Version 3.5",
+    "title_ja": "「遺されし残響、剣に寄り添い夢の中で歌う」Ver.3.5",
+    "title_zhHans": "「遗留的回响，倚剑于梦中歌唱」3.5版本",
+    "summary_en": "“The sword’s cry brushes past bygone days, its lingering echo remains as verse.” Version 3.5 opens the new region “Mengzhou: Land of Xianfang” (Xianfang Bastion, the eastern Xianfeng, the western Fangfeng, and the southern Round Hills) and advances Main Story Chapter 4 Act 1 and Act 2 along with an interlude. A range of new Echoes and Sonata sets arrives alongside endgame content such as the Tactical Hologram and the second cycle of the Doomsday Matrix, while quality-of-life features are also improved—the “Cloud Ride” exploration bike, Pioneer EXP, voice-pack customization, and Bioprint.",
+    "summary_ja": "「剣鳴は過ぎし日をかすめ、余韻は詩となって残る」バージョン3.5では、新規地域「夢洲：弦芳の地」（弦芳堡塁、東の弦峰、西の芳峰、南の円丘陵）が開放され、メインストーリー第4章第1幕・第2幕と幕間劇が進行します。多彩な新規エコーやソナタ、ホログラム戦略や終末マトリックス第2サイクルなどのエンドコンテンツが追加され、探索バイク「クラウドライド」やパイオニア経験値、ボイスパックのカスタマイズ、バイオプリントといった利便性機能も改善されます。",
+    "summary_zhHans": "「剑鸣掠过往昔，余韵化作诗篇」3.5版本开放全新地区「梦洲·弦芳之地」（弦芳堡垒、东部弦峰、西部芳峰、南部圆丘陵），并推进主线剧情第四章第一幕、第二幕及幕间剧。游戏加入多种全新声骸与合鸣效果，以及全息战略、终末矩阵第二周期等终局内容，同时探索摩托「云驰」、先驱经验、语音包自定义、生物打印等便利功能也一并优化。",
+    "highlights_en": [
+      "New region “Mengzhou: Land of Xianfang” opens (Xianfang Bastion, the eastern Xianfeng, the western Fangfeng, and the southern Round Hills)",
+      "Main Story Chapter 4 Act 1 “The Wind Before the Storm” and Act 2 “When Xianling Sings, the Storm Falls Still,” plus an interlude",
+      "Three new Sonata sets, plus new Echoes and new Afterimage fields and clusters",
+      "New Tactical Hologram: Sparring challenge opens; the second cycle of the Doomsday Matrix (Versions 3.5–3.8) opens",
+      "Adds the “Cloud Ride” exploration bike, Pioneer EXP, voice-pack customization, and Bioprint"
+    ],
+    "highlights_ja": [
+      "新規地域「夢洲：弦芳の地」開放（弦芳堡塁・東の弦峰・西の芳峰・南の円丘陵）",
+      "メインストーリー第4章第1幕「嵐の前の風」・第2幕「弦翎が歌えば、嵐は鎮まる」および幕間劇の進行",
+      "新規ソナタ3種、ならびに新規エコー・残像フィールド・群落の追加",
+      "ホログラム戦略・手合わせに新チャレンジ開放、終末マトリックス第2サイクル（3.5〜3.8バージョン）開放",
+      "探索バイク「クラウドライド」、パイオニア経験値・ボイスパックのカスタマイズ・バイオプリント機能を追加"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「梦洲·弦芳之地」（弦芳堡垒·东部弦峰·西部芳峰·南部圆丘陵）",
+      "推进主线剧情第四章第一幕「风暴前之风」·第二幕「弦翎歌起，风暴渐息」及幕间剧",
+      "新增3种全新合鸣效果，以及全新声骸·残像原野·群落",
+      "全息战略·对练开放全新挑战，终末矩阵第二周期（3.5〜3.8版本）开放",
+      "新增探索摩托「云驰」、先驱经验·语音包自定义·生物打印功能"
+    ]
+  },
+  {
+    "id": "wuwa-3-4",
+    "version": "3.4",
+    "title_ko": "「선택하지 않은 꿈」 3.4 버전",
+    "release_date_kst": "2026-06-08 05:00 KST",
+    "summary_ko": "「선택하지 않은 꿈」 3.4 버전에서는 콜라보 지역 「마음의 영역 · 나이트 시티」가 개방되고, 조수 임무 제3장 에필로그 「우리의 선택은 하늘」과 이문 임무 외전 「엣지 드림」이 새롭게 진행됩니다. 신규 화음 세트 「꿈을 깨뜨리는 망령의 악몽」과 [홀로그램 전략 · 동기화] 신규 도전 「이름없는 탐색자」, [주간 여행] 시스템 및 [환상의 놀이공원 · 망상] 콘텐츠가 추가되며, 탐사 바이크 커스텀 프리셋과 촬영 모드 고화질·카메라 세부 조정 등 다양한 편의 기능도 함께 개선됩니다.",
+    "highlights_ko": [
+      "콜라보 지역 「마음의 영역 · 나이트 시티」 개방",
+      "조수 임무 제3장 에필로그 「우리의 선택은 하늘」 + 이문 임무 외전 「엣지 드림」 진행",
+      "신규 화음 세트 「꿈을 깨뜨리는 망령의 악몽」(1세트) 추가",
+      "신규 [주간 여행] 시스템 및 [환상의 놀이공원 · 망상] 콘텐츠 추가, 기존 [수많은 문의 환상] 편입",
+      "[홀로그램 전략 · 동기화] 신규 도전 「이름없는 탐색자」 추가",
+      "탐사 바이크 커스텀 프리셋, 촬영 모드 고화질/카메라 세부 조정 등 편의 기능 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4814"
+    ],
+    "image_url": "/updates/image/wuwa-3-4",
+    "title_en": "“The Dream Left Unchosen” Version 3.4",
+    "title_ja": "「選ばれなかった夢」Ver.3.4",
+    "title_zhHans": "「未被选择的梦」3.4版本",
+    "summary_en": "“The Dream Not Chosen.” Version 3.4 opens the collaboration region “Realm of the Mind · Night City,” and advances the epilogue of Tidal Quest Chapter 3, “Our Choice Is the Sky,” together with the Anecdote Quest side story “Edge Dream.” It adds the new Sonata set “Nightmare of the Dream-Shattering Wraith,” the new Tactical Hologram: Synchronization challenge “The Nameless Seeker,” the “Weekly Journey” system, and the “Illusory Amusement Park · Delusion” content, while a variety of quality-of-life features are also improved, including exploration-bike custom presets and high-resolution Photo Mode with detailed camera adjustments.",
+    "summary_ja": "「選ばれなかった夢」バージョン3.4では、コラボ地域「心の領域・ナイトシティ」が開放され、潮汐クエスト第3章エピローグ「私たちの選択は空」と異聞クエスト外伝「エッジ・ドリーム」が新たに進行します。新規ソナタ「夢を砕く亡霊の悪夢」、[ホログラム戦略・シンクロ]の新チャレンジ「名もなき探索者」、[週間の旅]システム、[幻想の遊園地・妄想]コンテンツが追加され、探索バイクのカスタムプリセットや撮影モードの高画質化・カメラ詳細調整など、さまざまな利便性機能も改善されます。",
+    "summary_zhHans": "「未曾选择的梦」3.4版本开放联动地区「心之领域·夜之城」，并推进潮汐任务第三章尾声「我们的选择是天空」与异闻任务外传「边缘之梦」。游戏新增合鸣效果「碎梦亡灵的噩梦」、[全息战略·同步]全新挑战「无名探索者」、[每周旅程]系统及[幻想游乐园·妄想]内容，同时探索摩托自定义预设、拍照模式高清化与相机细节调整等多项便利功能也一并优化。",
+    "highlights_en": [
+      "Collaboration region “Realm of the Mind · Night City” opens",
+      "Tidal Quest Chapter 3 epilogue “Our Choice Is the Sky” plus the Anecdote Quest side story “Edge Dream”",
+      "New Sonata set “Nightmare of the Dream-Shattering Wraith” (1 set) added",
+      "New “Weekly Journey” system and “Illusory Amusement Park · Delusion” content added, with the existing “Illusions of Countless Doors” folded in",
+      "New Tactical Hologram: Synchronization challenge “The Nameless Seeker” added",
+      "Convenience improvements including exploration-bike custom presets and high-resolution Photo Mode with detailed camera adjustments"
+    ],
+    "highlights_ja": [
+      "コラボ地域「心の領域・ナイトシティ」開放",
+      "潮汐クエスト第3章エピローグ「私たちの選択は空」＋異聞クエスト外伝「エッジ・ドリーム」進行",
+      "新規ソナタ「夢を砕く亡霊の悪夢」（1セット）追加",
+      "新規[週間の旅]システムおよび[幻想の遊園地・妄想]コンテンツ追加、既存の[幾多の扉の幻想]を統合",
+      "[ホログラム戦略・シンクロ]新チャレンジ「名もなき探索者」追加",
+      "探索バイクのカスタムプリセット、撮影モードの高画質化／カメラ詳細調整など利便性機能を改善"
+    ],
+    "highlights_zhHans": [
+      "开放联动地区「心之领域·夜之城」",
+      "推进潮汐任务第三章尾声「我们的选择是天空」＋异闻任务外传「边缘之梦」",
+      "新增合鸣效果「碎梦亡灵的噩梦」（1套）",
+      "新增[每周旅程]系统及[幻想游乐园·妄想]内容，并整合原有[众多之门的幻象]",
+      "新增[全息战略·同步]全新挑战「无名探索者」",
+      "优化探索摩托自定义预设、拍照模式高清化／相机细节调整等便利功能"
+    ]
+  },
+  {
+    "id": "wuwa-3-3",
+    "version": "3.3",
+    "title_ko": "「별바다의 끝에서 닿은 메아리」 3.3 버전",
+    "release_date_kst": "2026-04-30 05:00 KST",
+    "summary_ko": "「별바다의 끝에서 닿은 메아리」 3.3 버전에서는 라하이 로이 지하에 신규 지역 「어둠의 평원」(석양의 섬, 봉인된 땅, 적막의 절벽 등)이 개방되고, 조수 임무 제3장이 에필로그와 제5막을 거쳐 완결됩니다. 신규 화음 세트 2종과 신규 무음구역, 홀로그램 전략 신규 도전 콘텐츠 「시길룸」이 추가되며, 탐사 바이크에는 신규 글라이딩 능력과 확장 모듈이 더해집니다. 2주년을 맞아 다양한 축제 시리즈 이벤트와 콜라보 이벤트도 진행됩니다.",
+    "highlights_ko": [
+      "신규 지역 「어둠의 평원」 개방 (석양의 섬, 봉인된 땅, 적막의 절벽 등 포함)",
+      "조수 임무 제3장 에필로그 및 제5막으로 메인 스토리 완결",
+      "신규 화음 세트 2종 및 신규 무음구역 추가",
+      "탐사 바이크 신규 글라이딩 능력·확장 모듈, 신규 도전 콘텐츠 「시길룸」(홀로그램 전략)",
+      "2주년 축제 시리즈 이벤트 및 다수 콜라보 이벤트 진행"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4615"
+    ],
+    "image_url": "/updates/image/wuwa-3-3",
+    "title_en": "“Echoes Reaching from the Edge of the Star Sea” Version 3.3",
+    "title_ja": "「星海の果てから届く残響」Ver.3.3",
+    "title_zhHans": "「自星海尽头传来的回响」3.3版本",
+    "summary_en": "“An Echo Reaching from the Edge of the Star Sea.” In Version 3.3, the new region “the Dark Plains” (Sunset Isle, the Sealed Land, the Cliffs of Silence, and more) opens beneath Rahai Roy, and Tidal Quest Chapter 3 reaches its conclusion through its epilogue and Act 5. Two new Sonata sets, a new Tacet Field, and the new Tactical Hologram challenge “Sigillum” are added, while the exploration bike gains a new gliding ability and an expansion module. To mark the second anniversary, a variety of festival-series events and collaboration events are also held.",
+    "summary_ja": "「星海の果てから届いた谺」バージョン3.3では、ラハイ・ロイの地下に新規地域「闇の平原」（夕陽の島、封印された地、静寂の崖など）が開放され、潮汐クエスト第3章がエピローグと第5幕を経て完結します。新規ソナタ2種と新規無音地帯、ホログラム戦略の新チャレンジ「シギルム」が追加され、探索バイクには新たなグライディング能力と拡張モジュールが加わります。2周年を記念して、さまざまな祭典シリーズイベントやコラボイベントも開催されます。",
+    "summary_zhHans": "「自星海尽头传来的回响」3.3版本在拉海罗伊地下开放全新地区「暗影平原」（夕阳之岛、被封印之地、寂静之崖等），潮汐任务第三章历经尾声与第五幕迎来完结。游戏新增2种合鸣效果与全新无音区，以及全息战略新挑战内容「西吉鲁姆」，探索摩托也获得全新滑翔能力与拓展模块。适逢两周年，还将举办多种庆典系列活动与联动活动。",
+    "highlights_en": [
+      "New region “the Dark Plains” opens (including Sunset Isle, the Sealed Land, the Cliffs of Silence, and more)",
+      "Main story concludes with Tidal Quest Chapter 3’s epilogue and Act 5",
+      "Two new Sonata sets and a new Tacet Field added",
+      "New exploration-bike gliding ability and expansion module; new challenge content “Sigillum” (Tactical Hologram)",
+      "Second-anniversary festival-series events and numerous collaboration events held"
+    ],
+    "highlights_ja": [
+      "新規地域「闇の平原」開放（夕陽の島、封印された地、静寂の崖などを含む）",
+      "潮汐クエスト第3章エピローグおよび第5幕でメインストーリー完結",
+      "新規ソナタ2種および新規無音地帯を追加",
+      "探索バイクの新グライディング能力・拡張モジュール、新チャレンジコンテンツ「シギルム」（ホログラム戦略）",
+      "2周年祭典シリーズイベントおよび多数のコラボイベント開催"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「暗影平原」（含夕阳之岛、被封印之地、寂静之崖等）",
+      "以潮汐任务第三章尾声及第五幕为主线剧情画上句号",
+      "新增2种合鸣效果及全新无音区",
+      "探索摩托全新滑翔能力·拓展模块，全新挑战内容「西吉鲁姆」（全息战略）",
+      "举办两周年庆典系列活动及多项联动活动"
+    ]
+  },
+  {
+    "id": "wuwa-3-2",
+    "version": "3.2",
+    "title_ko": "「그림자 속에서 밝혀진 결심」 3.2 버전",
+    "release_date_kst": "2026-03-19 05:00 KST",
+    "summary_ko": "「그림자 속에서 밝혀진 결심」 3.2 버전에서는 조수 임무 제3장 제4막 「그림자 아래 떨어지지 않는 황금」과 에필로그 「어두운 면 · 뒤틀린 토끼의 그림자」가 이어지고, 신규 고난도 주기 도전 「종말 매트릭스」가 개방됩니다. 공명자 사이드 스토리를 체험하는 레귤러 이벤트 「뭇별의 속삭임」과 다양한 버전 이벤트가 진행되며, 탐사 바이크 자율주행과 에코 필터·일괄 폐기/잠금 등 편의 기능도 개선됩니다.",
+    "highlights_ko": [
+      "조수 임무 제3장 제4막 「그림자 아래 떨어지지 않는 황금」 및 에필로그 개방",
+      "신규 고난도 주기 도전 「종말 매트릭스」(제1주기 「끝없는 위기」)",
+      "신규 레귤러 이벤트 「뭇별의 속삭임」(공명자 사이드 스토리)",
+      "버전 이벤트 「리듬을 따라 출항」·「라하이 로이 퍼즐」·「황야의 기사」 등",
+      "홀로그램 전략·동기화 「하이와티아」 도전 추가",
+      "탐사 바이크 자율주행·에코 필터/일괄 폐기·잠금 등 편의 기능 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4449"
+    ],
+    "image_url": "/updates/image/wuwa-3-2",
+    "title_en": "“Resolve Revealed Within the Shadows” Version 3.2",
+    "title_ja": "「影の中で明かされた決意」Ver.3.2",
+    "title_zhHans": "「于阴影中揭示的决心」3.2版本",
+    "summary_en": "“A Resolve Unveiled in Shadow.” Version 3.2 continues Tidal Quest Chapter 3 with Act 4 “The Gold That Falls Not Beneath the Shadow” and the epilogue “The Dark Side · Shadow of the Twisted Rabbit,” and opens the new high-difficulty cyclic challenge “the Doomsday Matrix.” The regular event “Whispers of the Myriad Stars,” which lets players experience Resonator side stories, and various version events are held, while quality-of-life features are improved too, including exploration-bike autopilot and Echo filters with batch discard and lock.",
+    "summary_ja": "「影の中で明かされた決意」バージョン3.2では、潮汐クエスト第3章第4幕「影の下に落ちぬ黄金」とエピローグ「暗黒面・ねじれたウサギの影」が続き、新規高難度周期チャレンジ「終末マトリックス」が開放されます。共鳴者のサイドストーリーを体験できる常設イベント「群星のささやき」やさまざまなバージョンイベントが開催され、探索バイクの自動走行やエコーフィルター・一括破棄／ロックなどの利便性機能も改善されます。",
+    "summary_zhHans": "「于阴影中揭晓的决心」3.2版本延续潮汐任务第三章第四幕「阴影之下不坠的黄金」与尾声「暗面·扭曲兔影」，并开放全新高难度周期挑战「终末矩阵」。体验共鸣者支线故事的常驻活动「群星的低语」以及多种版本活动同步开启，探索摩托自动驾驶、声骸筛选与批量弃置/锁定等便利功能也一并优化。",
+    "highlights_en": [
+      "Tidal Quest Chapter 3 Act 4 “The Gold That Falls Not Beneath the Shadow” and its epilogue open",
+      "New high-difficulty cyclic challenge “the Doomsday Matrix” (Cycle 1: “Endless Crisis”)",
+      "New regular event “Whispers of the Myriad Stars” (Resonator side stories)",
+      "Version events including “Set Sail to the Rhythm,” “Rahai Roy Puzzle,” and “Knight of the Wilderness”",
+      "New Tactical Hologram: Synchronization challenge “Haiwatia” added",
+      "Convenience improvements including exploration-bike autopilot and Echo filters with batch discard and lock"
+    ],
+    "highlights_ja": [
+      "潮汐クエスト第3章第4幕「影の下に落ちぬ黄金」およびエピローグ開放",
+      "新規高難度周期チャレンジ「終末マトリックス」（第1サイクル「果てなき危機」）",
+      "新規常設イベント「群星のささやき」（共鳴者サイドストーリー）",
+      "バージョンイベント「リズムに乗って出航」・「ラハイ・ロイパズル」・「荒野の騎士」など",
+      "ホログラム戦略・シンクロ「ハイワティア」チャレンジ追加",
+      "探索バイクの自動走行・エコーフィルター／一括破棄・ロックなど利便性機能を改善"
+    ],
+    "highlights_zhHans": [
+      "开放潮汐任务第三章第四幕「阴影之下不坠的黄金」及尾声",
+      "全新高难度周期挑战「终末矩阵」（第一周期「无尽危机」）",
+      "全新常驻活动「群星的低语」（共鸣者支线故事）",
+      "版本活动「随节奏起航」·「拉海罗伊解谜」·「荒野骑士」等",
+      "新增全息战略·同步「海瓦蒂亚」挑战",
+      "优化探索摩托自动驾驶·声骸筛选／批量弃置·锁定等便利功能"
+    ]
+  },
+  {
+    "id": "wuwa-3-1",
+    "version": "3.1",
+    "title_ko": "「눈 속에 있는 그대에게」 3.1 버전",
+    "release_date_kst": "2026-02-05 05:00 KST",
+    "summary_ko": "「눈 속에 있는 그대에게」 3.1 버전에서는 신규 지역 「로야 빙원 · 빙원 지표면」이 개방되고, 조수 임무 제3장 제3막 「먼 길을 떠나는 별」과 에필로그 「햇살이 머무는 곳」이 이어집니다. 탐사 바이크에는 수면 주행이 가능한 「프로스트 대쉬」 능력과 신규 확장 모듈 「환경 최적화」, 외관 커스텀이 추가되고, 신규 잔상 군락과 화음 세트 3종, 데이터 스테이션의 지정 융합·부음 속성 재구성 기능, 「오랜 여정의 동행」 혜택 시스템 등 육성 편의 기능도 함께 개선됩니다.",
+    "highlights_ko": [
+      "신규 지역 「로야 빙원 · 빙원 지표면」(빙원 운송 항구, 기알라르 산, 눈먼 추락지 등 5개 구역)",
+      "조수 임무 제3장 제3막 「먼 길을 떠나는 별」 및 에필로그 「햇살이 머무는 곳」 개방",
+      "탐사 바이크 「프로스트 대쉬」 수면 주행 능력, 「환경 최적화」 확장 모듈, 바이크 외관 커스텀 추가",
+      "신규 잔상 군락 「눈먼 추락지」 및 신규 화음 세트 3종 추가",
+      "데이터 스테이션 지정 융합·부음 속성 재구성, 「오랜 여정의 동행」 혜택 시스템 등 육성 편의 기능 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/4212"
+    ],
+    "image_url": "/updates/image/wuwa-3-1",
+    "title_en": "“To You Within the Snow” Version 3.1",
+    "title_ja": "「雪の中にいる君へ」Ver.3.1",
+    "title_zhHans": "「致雪中的你」3.1版本",
+    "summary_en": "“To You, Amid the Snow.” Version 3.1 opens the new region “Roya Icefield · Icefield Surface,” and continues with Tidal Quest Chapter 3 Act 3 “The Star That Sets Out on a Long Journey” and the epilogue “Where the Sunlight Lingers.” The exploration bike gains the “Frost Dash” ability for traveling across water, the new expansion module “Environmental Optimization,” and appearance customization, while character-development conveniences are improved as well—new Afterimage clusters and three Sonata sets, the Data Station’s targeted fusion and sub-tune attribute reconfiguration, and the “Companion for the Long Journey” perk system.",
+    "summary_ja": "「雪の中にいる君へ」バージョン3.1では、新規地域「ロヤ氷原・氷原地表」が開放され、潮汐クエスト第3章第3幕「遠き道へ旅立つ星」とエピローグ「陽射しの宿る場所」が続きます。探索バイクには水面走行が可能な「フロストダッシュ」能力と新規拡張モジュール「環境最適化」、外観カスタムが追加され、新規残像群落やソナタ3種、データステーションの指定融合・副音属性再構成機能、「長き旅路の同行」特典システムなど、育成の利便性機能も併せて改善されます。",
+    "summary_zhHans": "「致雪中的你」3.1版本开放全新地区「罗雅冰原·冰原地表」，并延续潮汐任务第三章第三幕「踏上远途的星」与尾声「阳光停留之处」。探索摩托新增可在水面行驶的「霜驰」能力、全新拓展模块「环境优化」及外观自定义，同时新增全新残像群落与3种合鸣效果、数据站的指定融合与副音属性重构功能、「漫漫旅途的同行」福利系统等育成便利功能也一并优化。",
+    "highlights_en": [
+      "New region “Roya Icefield · Icefield Surface” (five zones including the Icefield Transport Harbor, Mount Gjallar, and Blindfall)",
+      "Tidal Quest Chapter 3 Act 3 “The Star That Sets Out on a Long Journey” and the epilogue “Where the Sunlight Lingers” open",
+      "Exploration bike gains the “Frost Dash” water-surface ability, the “Environmental Optimization” expansion module, and bike appearance customization",
+      "New Afterimage cluster “Blindfall” and three new Sonata sets added",
+      "Character-development conveniences improved, including the Data Station’s targeted fusion and sub-tune attribute reconfiguration and the “Companion for the Long Journey” perk system"
+    ],
+    "highlights_ja": [
+      "新規地域「ロヤ氷原・氷原地表」（氷原輸送港、ギャラル山、盲落地など5つのエリア）",
+      "潮汐クエスト第3章第3幕「遠き道へ旅立つ星」およびエピローグ「陽射しの宿る場所」開放",
+      "探索バイク「フロストダッシュ」水面走行能力、「環境最適化」拡張モジュール、バイク外観カスタムを追加",
+      "新規残像群落「盲落地」および新規ソナタ3種を追加",
+      "データステーションの指定融合・副音属性再構成、「長き旅路の同行」特典システムなど育成の利便性機能を改善"
+    ],
+    "highlights_zhHans": [
+      "全新地区「罗雅冰原·冰原地表」（冰原运输港、吉亚拉尔山、盲坠之地等5个区域）",
+      "开放潮汐任务第三章第三幕「踏上远途的星」及尾声「阳光停留之处」",
+      "探索摩托新增「霜驰」水面行驶能力、「环境优化」拓展模块、摩托外观自定义",
+      "新增全新残像群落「盲坠之地」及3种全新合鸣效果",
+      "优化数据站指定融合·副音属性重构、「漫漫旅途的同行」福利系统等育成便利功能"
+    ]
+  },
+  {
+    "id": "wuwa-3-0",
+    "version": "3.0",
+    "title_ko": "「별하늘을 보기 위해 태어난 우리들」 3.0 버전",
+    "release_date_kst": "2025-12-25 05:00 KST",
+    "summary_ko": "「별하늘을 보기 위해 태어난 우리들」 3.0 버전에서는 신규 지역 「라하이 로이」와 「로야 빙원」이 개방되고, 스타토치 아카데미를 배경으로 조수 임무 제3장 「곧 반짝일 별에게」가 시작됩니다. 지역 탐험용 신규 탑승 장비 「탐사 바이크」와 신규 잔상 군락, 신규 화음 세트, 신규 [조화도 파괴] 전투 메커니즘 등이 추가되며, [WavesLine] 시스템과 [지역 가이드] 지도 기능 등 다양한 편의 기능도 함께 개선됩니다.",
+    "highlights_ko": [
+      "신규 지역 「라하이 로이」 + 「로야 빙원」 + 스타토치 아카데미 개방",
+      "조수 임무 제3장 「곧 반짝일 별에게」(서막·제1막·제2막) 개막",
+      "신규 탐색 도구 「탐사 바이크」 및 커스텀 랩핑·확장 모듈",
+      "신규 [잔상 군락 · 라하이 로이] 및 신규 화음 세트 3종",
+      "신규 [조화도 파괴] 전투 메커니즘, [공명 모드 전환] 기능, [WavesLine]·[지역 가이드] 시스템 추가"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/3923"
+    ],
+    "image_url": "/updates/image/wuwa-3-0",
+    "title_en": "“We, Born to Behold the Starry Sky” Version 3.0",
+    "title_ja": "「星空を見るために生まれた私たち」Ver.3.0",
+    "title_zhHans": "「为仰望星空而生的我们」3.0版本",
+    "summary_en": "In Version 3.0, “Born to Behold the Starry Sky,” the new regions “Lahai-Roi” and the “Roya Icefield” open up, and Main Quest Chapter 3, “To the Star That Will Soon Shine,” begins against the backdrop of Startorch Academy. A new ride for exploring the region, the “Exploration Bike,” arrives alongside new Afterimage colonies, new Sonata effects, and a new [Attunement Break] combat mechanic, while a range of quality-of-life features—including the [WavesLine] system and the [Region Guide] map function—are improved as well.",
+    "summary_ja": "「星空を見るために生まれた私たち」Ver3.0では、新エリア「ラハイロイ」と「ロヤ氷原」が開放され、星炬学院を舞台にメインストーリー第3章「まもなく輝く星へ」が幕を開けます。地域探索用の新たな騎乗装備「エクスペディションバイク」をはじめ、新たな残像の群落、新規ソナタ効果、新戦闘メカニクス[調和度破壊]などが追加され、[WavesLine]システムや[地域ガイド]マップ機能など、さまざまな利便機能も併せて改善されます。",
+    "summary_zhHans": "「为仰望星空而生的我们」3.0版本开放全新地区「拉海洛」与「罗伊冰原」，并以星炬学院为舞台，开启潮汐任务第三章「致即将闪耀的星」。用于地区探索的全新载具「科考摩托」，以及全新残像群落、全新合鸣效果、全新[调和度破坏]战斗机制等纷纷加入，同时[WavesLine]系统与[地区指南]地图功能等多项便利功能也一并优化。",
+    "highlights_en": [
+      "New regions “Lahai-Roi” + “Roya Icefield” + Startorch Academy open",
+      "Main Quest Chapter 3, “To the Star That Will Soon Shine” (Prologue, Act 1, Act 2), begins",
+      "New exploration tool “Exploration Bike,” plus custom wraps and expansion modules",
+      "New [Afterimage Colony · Lahai-Roi] and 3 new Sonata effects",
+      "New [Attunement Break] combat mechanic, [Resonance Mode Switching] feature, and [WavesLine] · [Region Guide] systems added"
+    ],
+    "highlights_ja": [
+      "新エリア「ラハイロイ」＋「ロヤ氷原」＋星炬学院が開放",
+      "メインストーリー第3章「まもなく輝く星へ」（序幕・第1幕・第2幕）が開幕",
+      "新探索ツール「エクスペディションバイク」およびカスタムラッピング・拡張モジュール",
+      "新規[残像の群落・ラハイロイ]および新規ソナタ効果3種",
+      "新戦闘メカニクス[調和度破壊]、[共鳴モード切替]機能、[WavesLine]・[地域ガイド]システムを追加"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「拉海洛」＋「罗伊冰原」＋星炬学院",
+      "开启潮汐任务第三章「致即将闪耀的星」（序幕·第一幕·第二幕）",
+      "新增探索道具「科考摩托」及自定义涂装·扩展模块",
+      "新增[残像群落·拉海洛]及3种全新合鸣效果",
+      "新增[调和度破坏]战斗机制、[共鸣模式切换]功能，以及[WavesLine]·[地区指南]系统"
+    ]
+  },
+  {
+    "id": "wuwa-2-8",
+    "version": "2.8",
+    "title_ko": "「호박석에 갇힌 도시로」 2.8 버전",
+    "release_date_kst": "2025-11-20 05:00 KST",
+    "summary_ko": "「호박석에 갇힌 도시로」 2.8 버전에서는 신규 지역 「시간의 폐허」가 개방되며, 조수 임무 제2장 · 제12막 「새벽빛이 황야에 멈추자」와 에필로그 「눈 속에 흐르는 별빛」이 추가됩니다. 신규 악몽 제거 콘텐츠 「호나미 시 악몽 군락」과 화음 세트 「운명을 붕괴시키는 현」이 도입되며, 이상 효과(암흑·불꽃·서리·전자) 밸런스 조정과 에코 추천·에코 일괄 흡수·재료 보충 기능 추가 등 다수의 편의성 개선이 이루어집니다.",
+    "highlights_ko": [
+      "신규 지역 「시간의 폐허」 개방",
+      "조수 임무 제2장 · 제12막 「새벽빛이 황야에 멈추자」 및 에필로그 「눈 속에 흐르는 별빛」",
+      "신규 악몽 제거 「호나미 시 악몽 군락」 및 화음 세트 「운명을 붕괴시키는 현」",
+      "이상 효과(암흑·불꽃·서리·전자) 시스템 조정",
+      "에코 추천(메인 에코 추천)·에코 일괄 흡수·재료 보충 기능 등 편의성 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/3666"
+    ],
+    "image_url": "/updates/image/wuwa-2-8",
+    "title_en": "“To the City Sealed in Amber” Version 2.8",
+    "title_ja": "「琥珀に閉ざされた都市へ」Ver.2.8",
+    "title_zhHans": "「前往被琥珀封存的城市」2.8版本",
+    "summary_en": "In Version 2.8, “To the City Sealed in Amber,” the new region “Ruins of Time” opens, and Main Quest Chapter 2 Act 12, “When Dawnlight Settles on the Wilds,” is added along with its epilogue, “Starlight Flowing Amid the Snow.” A new Nightmare Purge stage, the “Honami City Nightmare Colony,” and the Sonata “Strings that Shatter Fate” are introduced, while numerous quality-of-life improvements arrive—balance adjustments to Anomaly effects (Dark, Flame, Frost, Electro), plus new Echo recommendation, bulk Echo absorption, and material replenishment features.",
+    "summary_ja": "「琥珀に閉ざされた都市へ」Ver2.8では、新エリア「時の廃墟」が開放され、メインストーリー第2章・第12幕「夜明けの光が荒野に留まりて」とエピローグ「雪の中を流れる星光」が追加されます。新たな悪夢討伐コンテンツ「ホナミ市 悪夢の群落」とソナタ「運命を崩す弦」が導入され、異常効果（暗黒・炎・霜・電気）のバランス調整、エコー推薦・エコー一括吸収・素材補充機能の追加など、多数の利便性改善が行われます。",
+    "summary_zhHans": "「向琥珀封存的城市」2.8版本开放全新地区「时隙废都」，并新增潮汐任务第二章·第十二幕「当晨光止于荒野」及尾声「雪中流淌的星光」。同时引入全新梦魇消除内容「霍纳米市梦魇群落」与合鸣效果「崩解命运之弦」，并对异常效果（暗黑·火焰·冰霜·电子）进行平衡调整，新增声骸推荐·声骸一键吸收·材料补充等多项便利性优化。",
+    "highlights_en": [
+      "New region “Ruins of Time” opens",
+      "Main Quest Chapter 2 Act 12, “When Dawnlight Settles on the Wilds,” and epilogue “Starlight Flowing Amid the Snow”",
+      "New Nightmare Purge “Honami City Nightmare Colony” and the Sonata “Strings that Shatter Fate”",
+      "Anomaly effects (Dark, Flame, Frost, Electro) system adjustments",
+      "Quality-of-life improvements including Echo recommendation (main Echo recommendation), bulk Echo absorption, and material replenishment features"
+    ],
+    "highlights_ja": [
+      "新エリア「時の廃墟」が開放",
+      "メインストーリー第2章・第12幕「夜明けの光が荒野に留まりて」およびエピローグ「雪の中を流れる星光」",
+      "新規悪夢討伐「ホナミ市 悪夢の群落」およびソナタ「運命を崩す弦」",
+      "異常効果（暗黒・炎・霜・電気）システムの調整",
+      "エコー推薦（メインエコー推薦）・エコー一括吸収・素材補充機能など利便性を改善"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「时隙废都」",
+      "潮汐任务第二章·第十二幕「当晨光止于荒野」及尾声「雪中流淌的星光」",
+      "新增梦魇消除「霍纳米市梦魇群落」及合鸣效果「崩解命运之弦」",
+      "异常效果（暗黑·火焰·冰霜·电子）系统调整",
+      "新增声骸推荐（主声骸推荐）·声骸一键吸收·材料补充等功能，优化便利性"
+    ]
+  },
+  {
+    "id": "wuwa-2-7",
+    "version": "2.7",
+    "title_ko": "「어두운 물결이 드리울 새벽」 2.7 버전",
+    "release_date_kst": "2025-10-09 05:00 KST",
+    "summary_ko": "「어두운 물결이 드리울 새벽」 2.7 버전에서는 신규 지역 「상귀스 사냥 평원 · 세 영웅의 봉우리」와 「흑조의 영역 · 순회의 천국」이 개방되고, 조수 임무 제2장 제10막·제11막과 에필로그 「홀로 타향에서 나그네 되었네」로 리나시타 스토리가 완결부에 접어듭니다. 매일 갱신되는 「세 영웅의 봉우리 · 악몽 군락」 악몽 제거 콘텐츠와 도전 콘텐츠 「홀로그램 전략 · 고통 · 영광의 사자」가 추가되며, 공명자 육성 제안·단말기 교체·만물 도감(다양한 강적)·방랑의 자취 등 다수의 시스템 편의 기능도 새로 생깁니다.",
+    "highlights_ko": [
+      "신규 지역: 상귀스 사냥 평원 · 세 영웅의 봉우리 / 흑조의 영역 · 순회의 천국",
+      "조수 임무 제2장 제10막·제11막 + 에필로그로 리나시타 스토리 완결부 진행",
+      "매일 갱신되는 세 영웅의 봉우리 · 악몽 군락(악몽 제거 콘텐츠) 추가",
+      "신규 도전 콘텐츠 「홀로그램 전략 · 고통 · 영광의 사자」",
+      "공명자 육성 제안, 단말기 교체, 몬스터 도감(다양한 강적), 방랑의 자취 등 시스템 편의 기능 대거 추가"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/3413"
+    ],
+    "image_url": "/updates/image/wuwa-2-7",
+    "title_en": "“The Dawn Where Dark Tides Loom” Version 2.7",
+    "title_ja": "「暗き波が垂れ込める夜明け」Ver.2.7",
+    "title_zhHans": "「暗潮笼罩的黎明」2.7版本",
+    "summary_en": "In Version 2.7, “Dawn Breaks on Dark Tides,” the new regions “Sanguis Hunting Grounds · Peak of the Three Heroes” and “Domain of the Black Tide · Roving Paradise” open, and with Main Quest Chapter 2 Acts 10 and 11 and the epilogue “A Stranger Alone in a Foreign Land,” the Rinascita storyline enters its finale. A daily-refreshing Nightmare Purge stage, the “Peak of the Three Heroes · Nightmare Colony,” and the challenge content “Tactical Hologram · Anguish · Lion of Glory” are added, along with a host of new system conveniences such as Resonator build suggestions, terminal swapping, an All Things Compendium (various formidable foes), and Traces of Wandering.",
+    "summary_ja": "「暗潮の映る暁」Ver2.7では、新エリア「サングィス狩猟平原・三英雄の峰」と「黒潮の領域・巡遊の天国」が開放され、メインストーリー第2章第10幕・第11幕とエピローグ「独り異郷に在りて異客となる」で、リナシータの物語が完結編へと入ります。毎日更新される悪夢討伐コンテンツ「三英雄の峰・悪夢の群落」と挑戦コンテンツ「ホログラム戦略・幻痛・栄光の獅子」が追加され、共鳴者育成提案・端末の切替・万物図鑑（多彩な強敵）・放浪の足跡など、多数のシステム利便機能も新たに加わります。",
+    "summary_zhHans": "「暗潮将映的黎明」2.7版本开放全新地区「桑古伊斯狩原·三王峰」与「黑潮异域·巡游天国」，并通过潮汐任务第二章第十幕·第十一幕及尾声「独在异乡为异客」，令黎那汐塔的故事迈入完结篇。每日刷新的梦魇消除内容「三王峰·梦魇群落」与挑战内容「全息战略·幻痛·荣耀狮像」随之加入，同时大量新增共鸣者培养建议、终端更换、万物图鉴（多样强敌）、流浪的足迹等系统便利功能。",
+    "highlights_en": [
+      "New regions: Sanguis Hunting Grounds · Peak of the Three Heroes / Domain of the Black Tide · Roving Paradise",
+      "Main Quest Chapter 2 Acts 10 and 11 + epilogue advance the Rinascita storyline into its finale",
+      "Daily-refreshing “Peak of the Three Heroes · Nightmare Colony” (Nightmare Purge content) added",
+      "New challenge content “Tactical Hologram · Anguish · Lion of Glory”",
+      "A wealth of system conveniences added, including Resonator build suggestions, terminal swapping, a Monster Compendium (various formidable foes), and Traces of Wandering"
+    ],
+    "highlights_ja": [
+      "新エリア：サングィス狩猟平原・三英雄の峰／黒潮の領域・巡遊の天国",
+      "メインストーリー第2章第10幕・第11幕＋エピローグでリナシータの物語が完結編へ",
+      "毎日更新される「三英雄の峰・悪夢の群落」（悪夢討伐コンテンツ）を追加",
+      "新挑戦コンテンツ「ホログラム戦略・幻痛・栄光の獅子」",
+      "共鳴者育成提案、端末の切替、モンスター図鑑（多彩な強敵）、放浪の足跡など、システム利便機能を多数追加"
+    ],
+    "highlights_zhHans": [
+      "全新地区：桑古伊斯狩原·三王峰／黑潮异域·巡游天国",
+      "潮汐任务第二章第十幕·第十一幕＋尾声，推进黎那汐塔故事的完结篇",
+      "新增每日刷新的「三王峰·梦魇群落」（梦魇消除内容）",
+      "全新挑战内容「全息战略·幻痛·荣耀狮像」",
+      "大量新增共鸣者培养建议、终端更换、怪物图鉴（多样强敌）、流浪的足迹等系统便利功能"
+    ]
+  },
+  {
+    "id": "wuwa-2-6",
+    "version": "2.6",
+    "title_ko": "「뜨겁게 달구는 햇빛, 청량하게 밝히는 달빛」 2.6 버전",
+    "release_date_kst": "2025-08-28 05:00 KST",
+    "summary_ko": "「뜨겁게 달구는 햇빛, 청량하게 밝히는 달빛」 2.6 버전에서는 신규 지역 「상귀스 사냥 평원」이 개방되고 조수 임무 제2장 제8막·제9막이 이어집니다. 신규 화음 세트 2종과 다수의 신규 에코, 「해식 바위 해안 악몽 군락」·「침식지 악몽 군락」 등 신규 악몽 제거 콘텐츠가 추가되며, 「금주」와 「검은 해안」 지역에 활공 기능이 확장되고 보상 일괄 수령 등 편의 기능이 개선됩니다.",
+    "highlights_ko": [
+      "신규 지역 「상귀스 사냥 평원」 개방",
+      "조수 임무 제2장 제8막·제9막 진행",
+      "신규 화음 세트 2종 및 다수 신규 에코 추가",
+      "신규 악몽 제거 콘텐츠 「해식 바위 해안 악몽 군락」·「침식지 악몽 군락」",
+      "「금주」·「검은 해안」 지역 활공 기능 확장, 보상 일괄 수령 등 시스템 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/3213"
+    ],
+    "image_url": "/updates/image/wuwa-2-6",
+    "title_en": "“Blazing Sunlight, Cooling Moonlight” Version 2.6",
+    "title_ja": "「熱く照らす陽光、涼やかに照らす月光」Ver.2.6",
+    "title_zhHans": "「炽热的阳光，清凉的月光」2.6版本",
+    "summary_en": "In Version 2.6, “Searing Sunlight, Soothing Moonlight,” the new region “Sanguis Hunting Grounds” opens and Main Quest Chapter 2 Acts 8 and 9 continue. Two new Sonata effects and many new Echoes arrive, along with new Nightmare Purge content such as the “Sea-Eroded Rocky Coast Nightmare Colony” and the “Erosion Zone Nightmare Colony,” while gliding is extended to the “Jinzhou” and “Black Shores” regions and conveniences like bulk reward collection are improved.",
+    "summary_ja": "「熱く灼く陽光、清かに照らす月光」Ver2.6では、新エリア「サングィス狩猟平原」が開放され、メインストーリー第2章第8幕・第9幕が続きます。新規ソナタ効果2種と多数の新エコー、「海食岩海岸 悪夢の群落」・「浸食地 悪夢の群落」などの新規悪夢討伐コンテンツが追加され、「今州」と「ブラックショア」地域に滑空機能が拡張されるほか、報酬一括受取など利便機能が改善されます。",
+    "summary_zhHans": "「日以灼锋，月以流明」2.6版本开放全新地区「桑古伊斯狩原」，潮汐任务第二章第八幕·第九幕继续展开。新增2种全新合鸣效果与多个全新声骸，以及「海蚀岩海岸梦魇群落」·「侵蚀地梦魇群落」等全新梦魇消除内容，同时为「今州」与「黑海岸」地区扩展滑翔功能，并优化奖励一键领取等便利功能。",
+    "highlights_en": [
+      "New region “Sanguis Hunting Grounds” opens",
+      "Main Quest Chapter 2 Acts 8 and 9 progress",
+      "2 new Sonata effects and many new Echoes added",
+      "New Nightmare Purge content “Sea-Eroded Rocky Coast Nightmare Colony” · “Erosion Zone Nightmare Colony”",
+      "Gliding extended to the “Jinzhou” · “Black Shores” regions, plus system improvements such as bulk reward collection"
+    ],
+    "highlights_ja": [
+      "新エリア「サングィス狩猟平原」が開放",
+      "メインストーリー第2章第8幕・第9幕を進行",
+      "新規ソナタ効果2種および多数の新エコーを追加",
+      "新規悪夢討伐コンテンツ「海食岩海岸 悪夢の群落」・「浸食地 悪夢の群落」",
+      "「今州」・「ブラックショア」地域の滑空機能を拡張、報酬一括受取などシステムを改善"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「桑古伊斯狩原」",
+      "推进潮汐任务第二章第八幕·第九幕",
+      "新增2种全新合鸣效果及多个全新声骸",
+      "全新梦魇消除内容「海蚀岩海岸梦魇群落」·「侵蚀地梦魇群落」",
+      "扩展「今州」·「黑海岸」地区滑翔功能，优化奖励一键领取等系统"
+    ]
+  },
+  {
+    "id": "wuwa-2-5",
+    "version": "2.5",
+    "title_ko": "「시들지 않는 불멸의 노래」 2.5 버전",
+    "release_date_kst": "2025-07-24 05:00 KST",
+    "summary_ko": "「시들지 않는 불멸의 노래」 2.5 버전에서는 신규 지역 「깊은 바다 실험장」이 개방되고, 신규 탐색 메커니즘 [조율]·[조율 장치]와 함께 조수 임무 제2장 제7막 「비밀 정원에서 꿈을 좇아서」가 이어집니다. 신규 화음 세트와 상시 [악몽 제거] 콘텐츠 「수많은 죽음이 잠든 섬의 악몽 군락」이 추가되며, 파티 편성 슬롯이 5개에서 10개로 확대되는 등 육성 편의 기능도 개선됩니다.",
+    "highlights_ko": [
+      "신규 지역 「깊은 바다 실험장」 + 신규 탐색 메커니즘 [조율]·[조율 장치]",
+      "조수 임무 제2장 제7막 「비밀 정원에서 꿈을 좇아서」 및 조수의 서곡 「녹슨 철, 검 그리고 뜨거운 태양」",
+      "신규 화음 세트 「뒤틀린 피안의 꿈」(3세트) 및 신규 에코 다수 추가",
+      "상시 콘텐츠 [악몽 제거] 「수많은 죽음이 잠든 섬의 악몽 군락」 신설",
+      "파티 편성 슬롯 5개→10개 확대, 에코 관리 제안·옵티마이즈 동기화 등 육성 편의 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/2987"
+    ],
+    "image_url": "/updates/image/wuwa-2-5",
+    "title_en": "“The Unwithering, Undying Song” Version 2.5",
+    "title_ja": "「枯れることなき不滅の歌」Ver.2.5",
+    "title_zhHans": "「永不凋零的不朽之歌」2.5版本",
+    "summary_en": "In Version 2.5, “An Undying Song that Never Withers,” the new region “Deep Sea Testing Grounds” opens, and alongside the new exploration mechanics [Tuning] and the [Tuning Device], Main Quest Chapter 2 Act 7, “Chasing a Dream in the Secret Garden,” continues. A new Sonata and the permanent [Nightmare Purge] content “Nightmare Colony on the Isle of Countless Deaths” are added, while build conveniences are improved—including expanding party formation slots from 5 to 10.",
+    "summary_ja": "「枯れることなき不滅の歌」Ver2.5では、新エリア「深海実験場」が開放され、新たな探索メカニクス[調律]・[調律装置]とともに、メインストーリー第2章第7幕「秘密の庭園で夢を追いて」が続きます。新規ソナタ効果と常設[悪夢討伐]コンテンツ「数多の死が眠る島の悪夢の群落」が追加され、パーティ編成スロットが5枠から10枠に拡張されるなど、育成の利便機能も改善されます。",
+    "summary_zhHans": "「永不凋零的不灭之歌」2.5版本开放全新地区「隐海试验场」，并伴随全新探索机制[调律]·[调律装置]，继续展开潮汐任务第二章第七幕「在秘密庭园追梦」。同时新增全新合鸣效果与常驻[梦魇消除]内容「众多死亡长眠之岛的梦魇群落」，并将队伍编成槽位由5个扩展至10个，优化培养便利功能。",
+    "highlights_en": [
+      "New region “Deep Sea Testing Grounds” + new exploration mechanics [Tuning] · [Tuning Device]",
+      "Main Quest Chapter 2 Act 7, “Chasing a Dream in the Secret Garden,” and the Main Quest prelude “Rusted Iron, the Sword and the Blazing Sun”",
+      "New Sonata “Dream of the Twisted Yonder” (3-piece) and many new Echoes added",
+      "New permanent [Nightmare Purge] content “Nightmare Colony on the Isle of Countless Deaths”",
+      "Party formation slots expanded from 5 to 10, plus build conveniences such as Echo management suggestions and Optimizer sync"
+    ],
+    "highlights_ja": [
+      "新エリア「深海実験場」＋新探索メカニクス[調律]・[調律装置]",
+      "メインストーリー第2章第7幕「秘密の庭園で夢を追いて」およびメインストーリー序曲「錆びた鉄、剣、そして灼熱の太陽」",
+      "新規ソナタ効果「歪んだ彼岸の夢」（3セット）および多数の新エコーを追加",
+      "常設[悪夢討伐]コンテンツ「数多の死が眠る島の悪夢の群落」を新設",
+      "パーティ編成スロットを5枠から10枠に拡張、エコー管理提案・最適化同期など育成の利便性を改善"
+    ],
+    "highlights_zhHans": [
+      "全新地区「隐海试验场」＋全新探索机制[调律]·[调律装置]",
+      "潮汐任务第二章第七幕「在秘密庭园追梦」及潮汐任务序曲「锈铁、剑与炽热的太阳」",
+      "新增全新合鸣效果「扭曲彼岸之梦」（3件套）及多个全新声骸",
+      "新设常驻[梦魇消除]内容「众多死亡长眠之岛的梦魇群落」",
+      "将队伍编成槽位由5个扩展至10个，并优化声骸管理建议·优化同步等培养便利功能"
+    ]
+  },
+  {
+    "id": "wuwa-2-4",
+    "version": "2.4",
+    "title_ko": "「환호 속에서 던져진 영예의 왕관」 2.4 버전",
+    "release_date_kst": "2025-06-12 05:00 KST",
+    "summary_ko": "「환호 속에서 던져진 영예의 왕관」 2.4 버전에서는 신규 지역 「일곱 언덕」이 개방되며, 조수 임무 제2장 5막·6막을 통해 검투 대회를 둘러싼 스토리가 전개됩니다. 「참격」 탐색 기믹과 목욕탕 필드 상호작용, 신규 화음 세트 2종, 「홀로그램 전략·고통」 도전 콘텐츠가 추가되고, 인게임 공식 공략 사이트와 전체 화면 그래픽 필터 등 시스템 개선도 함께 적용됩니다.",
+    "highlights_ko": [
+      "신규 지역 「일곱 언덕」 개방 (탐색 기믹 「참격」, 목욕탕 필드 상호작용)",
+      "조수 임무 제2장 5막 「영광 속 그림자」·6막 「불타는 마음」 및 위험한 임무 시리즈 추가",
+      "신규 화음 세트 「영광이 깃든 바람」·「울부짖는 늑대의 불꽃」, 신규 에코 다수",
+      "인게임 공식 공략 사이트, 「솔라리스의 새출발 축제」 시스템 신설",
+      "그래픽 설정에 전체 화면 필터·초고화질 옵션 추가 등 최적화"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/2813"
+    ],
+    "image_url": "/updates/image/wuwa-2-4",
+    "title_en": "“The Crown of Glory Cast Amid the Cheers” Version 2.4",
+    "title_ja": "「歓声の中で投じられた栄光の王冠」Ver.2.4",
+    "title_zhHans": "「于欢呼中抛出的荣耀之冠」2.4版本",
+    "summary_en": "“The Crown of Glory Cast Amid the Cheers” — Version 2.4 opens the new region of Septimont and, through Main Quest Chapter 2 Acts 5 and 6, unfolds a story surrounding a gladiatorial tournament. It adds the “Slash” exploration gimmick and bathhouse field interactions, two new Sonata effects, and the “Tactical Hologram · Suffering” challenge content, along with system improvements such as an in-game official strategy site and a full-screen graphics filter.",
+    "summary_ja": "「歓声の中で投げられた栄光の王冠」——バージョン2.4では新規地域「セプティモント」が開放され、メインクエスト第2章第5幕・第6幕を通じて剣闘大会をめぐる物語が展開します。「斬撃」の探索ギミックや浴場フィールドのインタラクション、新規ソナタ効果2種、「ホログラム戦略・苦痛」のチャレンジコンテンツが追加され、ゲーム内公式攻略サイトや全画面グラフィックフィルターなどのシステム改善も併せて適用されます。",
+    "summary_zhHans": "「欢呼声中抛起的荣耀王冠」——2.4版本开放全新地区「七丘」，并通过主线任务第2章第5幕·第6幕展开围绕角斗大赛的剧情。新增「斩击」探索机关与浴场场景互动、两种全新合鸣效果，以及「全息战略·苦痛」挑战内容，同时还带来游戏内官方攻略站、全屏画面滤镜等系统优化。",
+    "highlights_en": [
+      "New region “Septimont” opens (exploration gimmick “Slash,” bathhouse field interactions)",
+      "Main Quest Chapter 2 Act 5 “Shadow Within the Glory” and Act 6 “Burning Heart,” plus the new Perilous Mission series",
+      "New Sonata effects “Windward Pilgrimage” and “Flaming Clawprint,” and numerous new Echoes",
+      "New in-game official strategy site and the “Solaris New Beginning Festival” system",
+      "Optimizations including a full-screen filter and an ultra-high-definition option added to graphics settings"
+    ],
+    "highlights_ja": [
+      "新規地域「セプティモント」開放（探索ギミック「斬撃」、浴場フィールドのインタラクション）",
+      "メインクエスト第2章第5幕「栄光の中の影」・第6幕「燃える心」および危険任務シリーズを追加",
+      "新規ソナタ効果「グロリアス・ウィンド」・「ハウリング・フレイム」、新規エコー多数",
+      "ゲーム内公式攻略サイト、「ソラリスの新たな門出フェスティバル」システムを新設",
+      "グラフィック設定に全画面フィルター・超高画質オプションを追加するなど最適化"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「七丘」（探索机关「斩击」、浴场场景互动）",
+      "主线任务第2章第5幕「荣光之影」·第6幕「燃烧之心」及危险任务系列",
+      "全新合鸣效果「愿戴荣光之旅」·「奔狼燎原之焰」，以及多个全新声骸",
+      "新设游戏内官方攻略站、「索拉里斯新启庆典」系统",
+      "画面设置新增全屏滤镜·超高清选项等优化"
+    ]
+  },
+  {
+    "id": "wuwa-2-3",
+    "version": "2.3",
+    "title_ko": "「정열의 노래로 맞이하는 기쁨의 '모임'」 2.3 버전",
+    "release_date_kst": "2025-04-29 05:00 KST",
+    "summary_ko": "「정열의 노래로 맞이하는 기쁨의 '모임'」 2.3 버전에서는 1주년을 맞아 데굴데굴 빙글빙글, 달려라 새알심, 흑금 암시장 등 다양한 기념 이벤트가 진행됩니다. 신규 「데이터 재구성」 시스템으로 5성 에코의 주음 속성을 원하는 속성으로 재설정할 수 있게 되며, 「홀로그램 전략·고통」 도전 콘텐츠와 신규 이상 에코가 추가됩니다. 에코 환영·생일 축복·명사 해설 등 편의 기능이 신설되고 레이 트레이싱·120fps 지원 그래픽 카드가 확대됩니다.",
+    "highlights_ko": [
+      "1주년 축제 시리즈 이벤트(데굴데굴 빙글빙글, 달려라 새알심, 흑금 암시장 등) 진행",
+      "신규 시스템 「데이터 재구성」으로 5성 에코 주음 속성 재설정 가능",
+      "「홀로그램 전략·고통」 도전 콘텐츠 및 신규 이상 에코 추가",
+      "「에코 환영」·「생일 축복」·「명사 해설」 등 편의 기능 신설",
+      "레이 트레이싱·120fps 지원 그래픽 카드 확대 및 모바일 사전 다운로드 기능 추가"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/2576"
+    ],
+    "image_url": "/updates/image/wuwa-2-3",
+    "title_en": "“The Joyous 'Gathering' Greeted with a Song of Passion” Version 2.3",
+    "title_ja": "「情熱の歌で迎える喜びの「集い」」Ver.2.3",
+    "title_zhHans": "「以热情之歌迎接的欢愉「聚会」」2.3版本",
+    "summary_en": "“A Joyful ‘Gathering’ Welcomed with a Song of Passion” — Marking its first anniversary, Version 2.3 runs a variety of commemorative events, including Tumble and Twirl, Run Rice Dumpling, and the Black Gold Black Market. The new “Data Reforge” system lets you reset the main stat of 5★ Echoes to any attribute you want, and it adds the “Tactical Hologram · Suffering” challenge content and new Anomaly Echoes. Convenience features such as Echo Illusion, Birthday Blessing, and Glossary Commentary are newly introduced, while support for ray tracing and 120fps graphics cards is expanded.",
+    "summary_ja": "「情熱の歌で迎える喜びの『集い』」——バージョン2.3では1周年を記念し、コロコロくるくる、走れ白玉、黒金闇市など様々な記念イベントが開催されます。新システム「データ再構成」により5★エコーの主音属性を望みの属性に再設定できるようになり、「ホログラム戦略・苦痛」のチャレンジコンテンツと新規異常エコーが追加されます。エコー幻影・誕生日の祝福・用語解説などの便利機能が新設され、レイトレーシング・120fps対応グラフィックカードが拡大されます。",
+    "summary_zhHans": "「以热情之歌迎接欢乐的『聚会』」——2.3版本迎来一周年，举办滚滚转转、快跑吧小圆子、黑金黑市等多种纪念活动。全新「数据重构」系统可将5★声骸的主音属性重新设定为想要的属性，并新增「全息战略·苦痛」挑战内容与全新异常声骸。同时新设声骸幻影·生日祝福·名词解说等便利功能，并扩大对光线追踪·120fps显卡的支持。",
+    "highlights_en": [
+      "The first-anniversary festival series of events (Tumble and Twirl, Run Rice Dumpling, Black Gold Black Market, and more)",
+      "The new “Data Reforge” system lets you reset the main stat of 5★ Echoes",
+      "The “Tactical Hologram · Suffering” challenge content and new Anomaly Echoes",
+      "New convenience features such as Echo Illusion, Birthday Blessing, and Glossary Commentary",
+      "Expanded ray tracing and 120fps graphics-card support, plus a mobile pre-download feature"
+    ],
+    "highlights_ja": [
+      "1周年記念フェスティバルシリーズイベント（コロコロくるくる、走れ白玉、黒金闇市など）を開催",
+      "新システム「データ再構成」で5★エコーの主音属性を再設定可能",
+      "「ホログラム戦略・苦痛」チャレンジコンテンツおよび新規異常エコーを追加",
+      "「エコー幻影」・「誕生日の祝福」・「用語解説」などの便利機能を新設",
+      "レイトレーシング・120fps対応グラフィックカードの拡大およびモバイル事前ダウンロード機能を追加"
+    ],
+    "highlights_zhHans": [
+      "举办一周年庆典系列活动（滚滚转转、快跑吧小圆子、黑金黑市等）",
+      "全新系统「数据重构」可重设5★声骸的主音属性",
+      "「全息战略·苦痛」挑战内容及全新异常声骸",
+      "新设「声骸幻影」·「生日祝福」·「名词解说」等便利功能",
+      "扩大光线追踪·120fps显卡支持，并新增移动端预下载功能"
+    ]
+  },
+  {
+    "id": "wuwa-2-2",
+    "version": "2.2",
+    "title_ko": "「진위를 가리는 높은 탑」 2.2 버전",
+    "release_date_kst": "2025-03-27 05:00 KST",
+    "summary_ko": "「진위를 가리는 높은 탑」 2.2 버전에서는 신규 지역 「아비놀륨」과 「베오 해역」이 개방되고, 조수 임무 제2장·제4막 「성스러운 자, 거역하는 자, 죽음을 가져오는 자」가 전개됩니다. 「중력 전환기」를 활용한 신규 탐색 메커니즘과 공명자 동행 탐색 콘텐츠, 신규 화음 세트 「끝없는 하늘」 및 다수의 신규 에코가 추가되며, 홀로그램 전략 신규 콘텐츠 「탄식의 고룡」과 칭호 시스템, 이상 에코도 함께 도입됩니다.",
+    "highlights_ko": [
+      "신규 지역 「아비놀륨」 + 「베오 해역」 개방",
+      "신규 탐색 메커니즘 「중력 전환기」 및 공명자 동행 탐색 콘텐츠",
+      "조수 임무 제2장·제4막 전개, 얽힌 별 임무·위험한 임무 등 신규 스토리 추가",
+      "신규 화음 세트 「끝없는 하늘」 및 신규 에코 다수 추가",
+      "홀로그램 전략 신규 콘텐츠 「탄식의 고룡」, 칭호 시스템, 이상 에코 도입"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/2386"
+    ],
+    "image_url": "/updates/image/wuwa-2-2",
+    "title_en": "“The High Tower That Discerns True from False” Version 2.2",
+    "title_ja": "「真偽を分かつ高き塔」Ver.2.2",
+    "title_zhHans": "「辨明真伪的高塔」2.2版本",
+    "summary_en": "“The Tall Tower That Tells Truth from Falsehood” — Version 2.2 opens the new regions of Avinoleum and the Beo Waters, and unfolds Main Quest Chapter 2 Act 4, “The Holy, the Defiant, and the Bringer of Death.” It adds a new exploration mechanic built around the “Gravity Inverter,” Resonator companion exploration content, the new Sonata effect “Gusts of Welkin,” and many new Echoes, while also introducing the new Tactical Hologram content “Lamenting Elder Dragon,” a title system, and Anomaly Echoes.",
+    "summary_ja": "「真偽を見分ける高き塔」——バージョン2.2では新規地域「アヴィノレウム」と「ベオ海域」が開放され、メインクエスト第2章第4幕「聖なる者、背く者、死をもたらす者」が展開します。「重力転換装置」を活用した新規探索メカニズムや共鳴者同行探索コンテンツ、新規ソナタ効果「バウンドレス・スカイ」および多数の新規エコーが追加され、ホログラム戦略の新規コンテンツ「嘆きの古龍」や称号システム、異常エコーも併せて導入されます。",
+    "summary_zhHans": "「明辨真伪的高塔」——2.2版本开放全新地区「阿维诺利姆」与「贝奥海域」，并展开主线任务第2章第4幕「神圣者、悖逆者、招致死亡者」。新增以「重力转换器」为核心的全新探索机制与共鸣者同行探索内容、全新合鸣效果「流云逝尽之空」及大量全新声骸，同时导入全息战略新内容「叹息的古龙」、称号系统与异常声骸。",
+    "highlights_en": [
+      "New regions “Avinoleum” and the “Beo Waters” open",
+      "New exploration mechanic “Gravity Inverter” and Resonator companion exploration content",
+      "Main Quest Chapter 2 Act 4 unfolds, with new stories such as Entangled Star missions and Perilous Missions",
+      "New Sonata effect “Gusts of Welkin” and many new Echoes",
+      "New Tactical Hologram content “Lamenting Elder Dragon,” a title system, and Anomaly Echoes introduced"
+    ],
+    "highlights_ja": [
+      "新規地域「アヴィノレウム」+「ベオ海域」開放",
+      "新規探索メカニズム「重力転換装置」および共鳴者同行探索コンテンツ",
+      "メインクエスト第2章第4幕を展開、もつれた星の任務・危険任務など新規ストーリーを追加",
+      "新規ソナタ効果「バウンドレス・スカイ」および新規エコー多数を追加",
+      "ホログラム戦略の新規コンテンツ「嘆きの古龍」、称号システム、異常エコーを導入"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「阿维诺利姆」+「贝奥海域」",
+      "全新探索机制「重力转换器」及共鸣者同行探索内容",
+      "展开主线任务第2章第4幕，新增交错之星任务·危险任务等全新剧情",
+      "全新合鸣效果「流云逝尽之空」及多个全新声骸",
+      "导入全息战略新内容「叹息的古龙」、称号系统、异常声骸"
+    ]
+  },
+  {
+    "id": "wuwa-2-1",
+    "version": "2.1",
+    "title_ko": "「새의 속삭임, 파도의 노래」 2.1 버전",
+    "release_date_kst": "2025-02-13 05:00 KST",
+    "summary_ko": "「새의 속삭임, 파도의 노래」 2.1 버전에서는 신규 지역 「금고 아래층」과 「리졸리 군도」가 개방되고, [위험한 임무] 「소리없이 떨어진 낙엽」 등 신규 스토리가 진행됩니다. 낚시를 즐길 수 있는 항해 테마 이벤트 [노인, 물고기와 바다]를 비롯해 신규 레귤러 콘텐츠 [죽음의 노래와 바닷속 폐허], 주간 콘텐츠 [수많은 문의 환상]이 열리며, 에코 추천·에코 프리셋 기능과 레이 트레이싱·DLSS3 프레임 보간 등 그래픽 옵션이 추가됩니다.",
+    "highlights_ko": [
+      "신규 지역 \"금고 아래층\" + \"리졸리 군도\"",
+      "신규 스토리: [위험한 임무] \"소리없이 떨어진 낙엽\" 등 조수 임무 연계 퀘스트 진행",
+      "항해 테마 이벤트 [노인, 물고기와 바다] 및 [라이더스 라군나], [모킹 전략 III] 등 기간 한정 이벤트",
+      "신규 레귤러 콘텐츠 [죽음의 노래와 바닷속 폐허], 신규 주간 콘텐츠 [수많은 문의 환상]",
+      "에코 추천·에코 프리셋·촬영 모드 필터 추가, 레이 트레이싱·DLSS3 프레임 보간 등 그래픽 최적화"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/2156"
+    ],
+    "image_url": "/updates/image/wuwa-2-1",
+    "title_en": "“Whispers of Birds, Songs of Waves” Version 2.1",
+    "title_ja": "「鳥のささやき、波の歌」Ver.2.1",
+    "title_zhHans": "「鸟之低语，浪之歌」2.1版本",
+    "summary_en": "“The Whisper of Birds, the Song of the Waves” — Version 2.1 opens the new regions of the Vault’s Lower Levels and the Rizzoli Archipelago, and advances new stories such as the [Perilous Mission] “The Silently Falling Leaves.” Along with the seafaring-themed event [The Old Man, the Fish, and the Sea], where you can enjoy fishing, the new regular content [The Song of Death and the Undersea Ruins] and the weekly content [Illusions of Countless Doors] open, while Echo recommendation and Echo preset features and graphics options such as ray tracing and DLSS3 frame generation are added.",
+    "summary_ja": "「鳥のささやき、波の歌」——バージョン2.1では新規地域「金庫下層」と「リゾーリ諸島」が開放され、[危険任務]「音もなく落ちた枯れ葉」など新規ストーリーが進行します。釣りを楽しめる航海テーマイベント[老人と魚と海]をはじめ、新規レギュラーコンテンツ[死の歌と海底の廃墟]、週間コンテンツ[幾多の扉の幻影]が開放され、エコー推薦・エコープリセット機能やレイトレーシング・DLSS3フレーム生成などのグラフィックオプションが追加されます。",
+    "summary_zhHans": "「鸟儿的低语，海浪的歌声」——2.1版本开放全新地区「下层金库」与「黎乔利群岛」，并推进[危险任务]「悄然飘落的枯叶」等全新剧情。除可体验钓鱼的航海主题活动[老人、鱼与海]外，还开放全新常驻内容[死亡之歌与海底废墟]、周常内容[众多之门的幻象]，并新增声骸推荐·声骸预设功能，以及光线追踪·DLSS3帧生成等画面选项。",
+    "highlights_en": [
+      "New regions “Vault’s Lower Levels” and “Rizzoli Archipelago”",
+      "New story: Main Quest–linked quests such as the [Perilous Mission] “The Silently Falling Leaves”",
+      "Limited-time events such as the seafaring-themed [The Old Man, the Fish, and the Sea], [Riders of Ragunna], and [Mocking Strategy III]",
+      "New regular content [The Song of Death and the Undersea Ruins] and new weekly content [Illusions of Countless Doors]",
+      "Added Echo recommendation, Echo presets, and photo-mode filters, plus graphics optimizations such as ray tracing and DLSS3 frame generation"
+    ],
+    "highlights_ja": [
+      "新規地域「金庫下層」+「リゾーリ諸島」",
+      "新規ストーリー：[危険任務]「音もなく落ちた枯れ葉」などメインクエスト連動クエストを進行",
+      "航海テーマイベント[老人と魚と海]および[ライダーズ・ラグンナ]、[モッキング戦略III]など期間限定イベント",
+      "新規レギュラーコンテンツ[死の歌と海底の廃墟]、新規週間コンテンツ[幾多の扉の幻影]",
+      "エコー推薦・エコープリセット・撮影モードフィルターを追加、レイトレーシング・DLSS3フレーム生成などグラフィック最適化"
+    ],
+    "highlights_zhHans": [
+      "全新地区「下层金库」+「黎乔利群岛」",
+      "全新剧情：[危险任务]「悄然飘落的枯叶」等主线任务关联任务",
+      "航海主题活动[老人、鱼与海]及[里德斯·拉古那]、[摹刻战略III]等限时活动",
+      "全新常驻内容[死亡之歌与海底废墟]、全新周常内容[众多之门的幻象]",
+      "新增声骸推荐·声骸预设·拍摄模式滤镜，光线追踪·DLSS3帧生成等画面优化"
+    ]
+  },
+  {
+    "id": "wuwa-2-0",
+    "version": "2.0",
+    "title_ko": "「침묵에 바치는 노랫소리」2.0 버전",
+    "release_date_kst": "2025-01-02 05:00 KST",
+    "summary_ko": "「침묵에 바치는 노랫소리」 2.0 버전에서는 신규 지역 「리나시타」와 그 남쪽의 항구 도시 구역 「라군나」가 개방되고, 조수 임무 제2장 「침묵에 바치는 노랫소리」(서막~제3막)가 전개됩니다. 신규 도전 콘텐츠 「홀로그램 전략·고통」과 구름 바다 활공, 캐릭터 코스튬·부상 표현·합성·몰입형 모드·레코드 컬렉션 등 다양한 시스템이 추가되며 데이터 스테이션 최대 레벨도 Lv.24로 상향되었습니다.",
+    "highlights_ko": [
+      "신규 지역 「리나시타」 + 항구 도시 「라군나」 개방",
+      "조수 임무 제2장 「침묵에 바치는 노랫소리」(서막~제3막) 전개",
+      "홀로그램 전략 「고통」, 구름 바다 활공 등 신규 도전 콘텐츠 추가",
+      "캐릭터 코스튬·부상 표현·합성·몰입형 모드·레코드 컬렉션 시스템 신규 도입",
+      "데이터 스테이션 최대 레벨 Lv.24로 상향, 탐색 진도 시스템 최적화"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/1937"
+    ],
+    "image_url": "/updates/image/wuwa-2-0",
+    "title_en": "“A Song Offered to the Silence” Version 2.0",
+    "title_ja": "「沈黙に捧げる歌声」Ver.2.0",
+    "title_zhHans": "「献给沉默的歌声」2.0版本",
+    "summary_en": "“A Song Offered to Silence” — Version 2.0 opens the new region of Rinascita and its southern port-city district of Ragunna, and unfolds Main Quest Chapter 2, “A Song Offered to Silence” (Prologue through Act 3). It adds new challenge content such as the “Tactical Hologram · Suffering” and Sea of Clouds gliding, and newly introduces various systems including character costumes, injury depiction, synthesis, immersive mode, and record collection, while the Data Bank’s maximum level is raised to Lv.24.",
+    "summary_ja": "「沈黙に捧げる歌声」——バージョン2.0では新規地域「リナシータ」とその南部の港湾都市エリア「ラグンナ」が開放され、メインクエスト第2章「沈黙に捧げる歌声」（序幕～第3幕）が展開します。新規チャレンジコンテンツ「ホログラム戦略・苦痛」や雲海滑空、キャラクターコスチューム・負傷表現・合成・没入型モード・レコードコレクションなど様々なシステムが追加され、データバンクの最大レベルもLv.24へ引き上げられました。",
+    "summary_zhHans": "「献给沉默的歌声」——2.0版本开放全新地区「黎那汐塔」及其南部的港口城市区域「拉古那」，并展开主线任务第2章「献给沉默的歌声」（序幕～第3幕）。新增「全息战略·苦痛」挑战内容与云海滑翔，以及角色服装·负伤表现·合成·沉浸模式·记录收藏等多种系统，同时数据坞最高等级提升至Lv.24。",
+    "highlights_en": [
+      "New region “Rinascita” and the port city of “Ragunna” open",
+      "Main Quest Chapter 2, “A Song Offered to Silence” (Prologue through Act 3), unfolds",
+      "New challenge content such as the Tactical Hologram “Suffering” and Sea of Clouds gliding",
+      "Newly introduced systems: character costumes, injury depiction, synthesis, immersive mode, and record collection",
+      "Data Bank maximum level raised to Lv.24, and the exploration-progress system optimized"
+    ],
+    "highlights_ja": [
+      "新規地域「リナシータ」+港湾都市「ラグンナ」開放",
+      "メインクエスト第2章「沈黙に捧げる歌声」（序幕～第3幕）を展開",
+      "ホログラム戦略「苦痛」、雲海滑空など新規チャレンジコンテンツを追加",
+      "キャラクターコスチューム・負傷表現・合成・没入型モード・レコードコレクションシステムを新規導入",
+      "データバンクの最大レベルをLv.24へ引き上げ、探索進度システムを最適化"
+    ],
+    "highlights_zhHans": [
+      "开放全新地区「黎那汐塔」+港口城市「拉古那」",
+      "展开主线任务第2章「献给沉默的歌声」（序幕～第3幕）",
+      "新增全息战略「苦痛」、云海滑翔等全新挑战内容",
+      "全新导入角色服装·负伤表现·合成·沉浸模式·记录收藏系统",
+      "数据坞最高等级提升至Lv.24，优化探索进度系统"
+    ]
+  },
+  {
+    "id": "wuwa-1-4",
+    "version": "1.4",
+    "title_ko": "「낮의 문을 두드리는 야밤」 1.4 버전",
+    "release_date_kst": "2024-11-14 05:00 KST",
+    "summary_ko": "「낮의 문을 두드리는 야밤」 1.4 버전에서는 [얽힌 별 임무] 신규 스토리 「끝없이 두 갈래로 갈라지는 별바다」가 열리고, 꿈속의 잠행을 테마로 한 신규 이벤트 「질서를 잃은 꿈의 길」과 신비한 경지 도전 신규 콘텐츠 「꿈들의 만남」이 추가됩니다. 신규 이상 에코 [지옥불 기사]와 무기 외형을 자유롭게 꾸밀 수 있는 신규 시스템 [무기 투영]이 도입되며, 에코 강화 단계별 투입·던전 2배 보상 수령 등 다양한 육성·편의성 개선도 함께 이루어집니다.",
+    "highlights_ko": [
+      "신규 스토리: 얽힌 별 임무 「끝없이 두 갈래로 갈라지는 별바다」 (연각 Lv.14 개방)",
+      "신규 이벤트: 꿈속의 잠행 테마 「질서를 잃은 꿈의 길」 (종료 후 레귤러 이벤트로 상주 예정)",
+      "신비한 경지 도전 신규 콘텐츠 「꿈들의 만남」 개방",
+      "신규 이상 에코 [지옥불 기사] 및 신규 시스템 [무기 투영] 추가",
+      "에코 강화 [단계별 투입] 옵션, 응소의 영역·시뮬레이션 영역·무음 소탕 던전 2배 보상 수령 등 편의성 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/1668"
+    ],
+    "image_url": "/updates/image/wuwa-1-4",
+    "title_en": "“The Night That Knocks on the Door of Day” Version 1.4",
+    "title_ja": "「昼の扉を叩く夜」Ver.1.4",
+    "title_zhHans": "「叩响白昼之门的黑夜」1.4版本",
+    "summary_en": "“The night that knocks at the door of day” — In Version 1.4, the new Intertwined Fate story “The Star-Sea That Endlessly Forks in Two” opens, and a new dream-infiltration-themed event “The Dream Path That Lost Its Order” and new Mysterious Realm Challenge content “Where Dreams Meet” are added. A new anomaly Echo, [Inferno Rider], is introduced alongside a new system, [Weapon Projection], that lets you freely customize weapon appearances, and a range of growth and quality-of-life improvements arrive as well, including staged Echo-enhancement input and double-reward claims from dungeons.",
+    "summary_ja": "「昼の扉を叩く夜」バージョン1.4では、[絡み合う星の任務]の新ストーリー「果てなく二つに分かれる星の海」が開幕し、夢の中の潜行をテーマにした新イベント「秩序を失った夢の道」と、神秘の境地チャレンジの新コンテンツ「夢たちの邂逅」が追加されます。新たな異常エコー[地獄火の騎士]と、武器の外見を自由に着せ替えできる新システム[武器投影]が導入され、エコー強化の段階別投入・ダンジョンの2倍報酬受け取りなど、さまざまな育成・利便性の改善も行われます。",
+    "summary_zhHans": "“叩响白昼之门的夜晚”1.4版本中，[交织之星任务]的全新剧情“无尽分作两岔的星海”正式开启，同时新增以梦中潜行为主题的全新活动“失序的梦之路”与神秘境地挑战的全新内容“众梦的相遇”。全新异常声骸[地狱火骑士]与可自由装扮武器外观的全新系统[武器投影]一同登场，并带来声骸强化分段投入、副本双倍奖励领取等多项养成与便利性改进。",
+    "highlights_en": [
+      "New story: Intertwined Fate “The Star-Sea That Endlessly Forks in Two” (unlocks at Union Level 14)",
+      "New event: dream-infiltration-themed “The Dream Path That Lost Its Order” (to remain as a permanent Regular Event after it ends)",
+      "New Mysterious Realm Challenge content “Where Dreams Meet” opens",
+      "New anomaly Echo [Inferno Rider] and new system [Weapon Projection] added",
+      "Quality-of-life improvements including the Echo-enhancement [Staged Input] option and double-reward claims from the Realm of Response, Simulation Domain, and Silent-Sweep dungeons"
+    ],
+    "highlights_ja": [
+      "新ストーリー：絡み合う星の任務「果てなく二つに分かれる星の海」（ユニオンレベル14で開放）",
+      "新イベント：夢の中の潜行をテーマにした「秩序を失った夢の道」（終了後はレギュラーイベントとして常設予定）",
+      "神秘の境地チャレンジの新コンテンツ「夢たちの邂逅」が開放",
+      "新たな異常エコー[地獄火の騎士]および新システム[武器投影]を追加",
+      "エコー強化の[段階別投入]オプション、応召の領域・シミュレーション領域・無音掃討ダンジョンの2倍報酬受け取りなど、利便性を改善"
+    ],
+    "highlights_zhHans": [
+      "全新剧情：交织之星任务“无尽分作两岔的星海”（联觉等级14开放）",
+      "全新活动：以梦中潜行为主题的“失序的梦之路”（结束后将作为常规活动长期开放）",
+      "神秘境地挑战全新内容“众梦的相遇”开放",
+      "新增全新异常声骸[地狱火骑士]及全新系统[武器投影]",
+      "声骸强化[分段投入]选项，应召领域·模拟领域·无音扫荡副本双倍奖励领取等便利性改进"
+    ]
+  },
+  {
+    "id": "wuwa-1-3",
+    "version": "1.3",
+    "title_ko": "「해안의 끝을 찾아서」 1.3 버전",
+    "release_date_kst": "2024-09-29 05:00 KST",
+    "summary_ko": "「해안의 끝을 찾아서」 1.3 버전에서는 검은 해안을 배경으로 조수 임무 제1장 제8막이 진행되며, 얽힌 별 임무 「작은 양의 대모험」이 새로 개방됩니다. 지역 탐색 이벤트 「뭇별이 잠든 바다」와 기념 촬영 이벤트 「별바다의 그림자」를 비롯해 신규 홀로그램 전략 「지옥불 기사」, 신규 도전 콘텐츠 「게임팩 수집가」, 신규 이상 에코 등이 추가되고, 에코 대량 융합·지도 전환·텔레포트·군생지 추적·스토리 요약 등 다양한 편의 기능과 모바일 컨트롤러 지원이 개선됩니다.",
+    "highlights_ko": [
+      "조수 임무 제1장 제8막 「해안의 끝을 찾아서」 개막",
+      "얽힌 별 임무 「작은 양의 대모험」 신규 개방",
+      "지역 탐색·촬영 이벤트 「뭇별이 잠든 바다」·「별바다의 그림자」",
+      "신규 홀로그램 전략 「지옥불 기사」 및 도전 콘텐츠 「게임팩 수집가」",
+      "에코 대량 융합, 지도 전환·텔레포트, 모바일 컨트롤러 지원 등 시스템 개선"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/1456"
+    ],
+    "image_url": "/updates/image/wuwa-1-3",
+    "title_en": "“In Search of the Shore's End” Version 1.3",
+    "title_ja": "「海岸の果てを求めて」Ver.1.3",
+    "title_zhHans": "「寻觅海岸的尽头」1.3版本",
+    "summary_en": "“In search of the coast's end” — In Version 1.3, Companion Quest Chapter 1 Act 8 unfolds against the backdrop of the Black Shores, and the Intertwined Fate quest “The Little Lamb's Grand Adventure” newly opens. Alongside the regional-exploration event “The Sea Where the Stars Sleep” and the commemorative photo event “Shadow of the Star-Sea,” a new Tactical Hologram “Inferno Rider,” new challenge content “Game Cartridge Collector,” and new anomaly Echoes are added, while various conveniences—bulk Echo fusion, map switching, teleport, habitat tracking, and story recaps—along with mobile controller support are improved.",
+    "summary_ja": "「海岸の果てを求めて」バージョン1.3では、黒海岸を舞台にコンパニオン任務第1章第8幕が進行し、絡み合う星の任務「小さな羊の大冒険」が新たに開放されます。地域探索イベント「星々が眠る海」や記念撮影イベント「星の海の影」をはじめ、新規ホログラム戦略「地獄火の騎士」、新規チャレンジコンテンツ「ゲームパックコレクター」、新たな異常エコーなどが追加され、エコーの大量融合・マップ切り替え・テレポート・群生地の追跡・ストーリー要約といったさまざまな利便機能とモバイルコントローラー対応が改善されます。",
+    "summary_zhHans": "“寻觅海岸的尽头”1.3版本中，以黑海岸为舞台推进同行者任务第1章第8幕，并全新开放交织之星任务“小羊的大冒险”。除地区探索活动“群星沉眠的海”与纪念摄影活动“星海之影”外，还新增全息战略“地狱火骑士”、全新挑战内容“游戏卡带收藏家”以及全新异常声骸等，同时改进声骸批量融合、地图切换、传送、群栖地追踪、剧情摘要等多项便利功能与移动端手柄支持。",
+    "highlights_en": [
+      "Companion Quest Chapter 1 Act 8 “In Search of the Coast's End” begins",
+      "Intertwined Fate “The Little Lamb's Grand Adventure” newly unlocked",
+      "Regional-exploration and photo events “The Sea Where the Stars Sleep” and “Shadow of the Star-Sea”",
+      "New Tactical Hologram “Inferno Rider” and challenge content “Game Cartridge Collector”",
+      "System improvements including bulk Echo fusion, map switching and teleport, and mobile controller support"
+    ],
+    "highlights_ja": [
+      "コンパニオン任務第1章第8幕「海岸の果てを求めて」開幕",
+      "絡み合う星の任務「小さな羊の大冒険」を新たに開放",
+      "地域探索・撮影イベント「星々が眠る海」・「星の海の影」",
+      "新規ホログラム戦略「地獄火の騎士」およびチャレンジコンテンツ「ゲームパックコレクター」",
+      "エコーの大量融合、マップ切り替え・テレポート、モバイルコントローラー対応などのシステム改善"
+    ],
+    "highlights_zhHans": [
+      "同行者任务第1章第8幕“寻觅海岸的尽头”开幕",
+      "全新开放交织之星任务“小羊的大冒险”",
+      "地区探索·摄影活动“群星沉眠的海”·“星海之影”",
+      "全新全息战略“地狱火骑士”及挑战内容“游戏卡带收藏家”",
+      "声骸批量融合、地图切换·传送、移动端手柄支持等系统改进"
+    ]
+  },
+  {
+    "id": "wuwa-1-2",
+    "version": "1.2",
+    "title_ko": "「달빛의 축복, 인간의 염원」 1.2 버전",
+    "release_date_kst": "2024-08-15 07:00 KST",
+    "summary_ko": "「달빛의 축복, 인간의 염원」 1.2 버전에서는 달맞이 축제 테마 이벤트 「달빛의 소원」·「막후의 조력자」와 7일 출석 이벤트 「보름달의 선물」이 진행되며, 신규 콘텐츠 「신비한 경지 도전・꿈나라의 축제」와 판타지 에코 「무망자」, 신규 메타포가 추가됩니다. 신규 복귀 시스템 「해가의 중주」와 신규 탐색 도구 「보조기・사격」이 도입되고, 결정 저장 시스템 개편(결정 단체 pt 신규 도입)과 컨트롤러 조작·그래픽 옵션(120fps 지원) 등 다양한 최적화가 이루어졌습니다.",
+    "highlights_ko": [
+      "달맞이 축제 테마 이벤트 「달빛의 소원」 및 「막후의 조력자」",
+      "7일 출석 이벤트 「보름달의 선물」",
+      "신규 콘텐츠 「신비한 경지 도전・꿈나라의 축제」 + 판타지 에코 「무망자」, 신규 메타포",
+      "신규 복귀 시스템 「해가의 중주」, 신규 탐색 도구 「보조기・사격」",
+      "결정 저장 시스템 개편(결정 단체 pt 신규 도입) 및 컨트롤러·그래픽(120fps) 최적화"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/1192"
+    ],
+    "image_url": "/updates/image/wuwa-1-2",
+    "title_en": "“Blessing of Moonlight, Wish of Mankind” Version 1.2",
+    "title_ja": "「月光の祝福、人の願い」Ver.1.2",
+    "title_zhHans": "「月光的祝福，人类的夙愿」1.2版本",
+    "summary_en": "“Blessing of moonlight, wishes of mankind” — In Version 1.2, the moon-viewing festival events “Moonlight Wish” and “The Helper Behind the Scenes,” together with the 7-day login event “Gift of the Full Moon,” take place, and new content “Mysterious Realm Challenge · Festival of Dreamland,” the fantasy Echo “Dreamless,” and new Metaphors are added. A new returning-player system “Haega's Concerto” and a new exploration tool “Assist Gear · Shooting” are introduced, along with a revamp of the crystal-storage system (introducing the new Crystal Group Points) and various optimizations to controller input and graphics options (120fps support).",
+    "summary_ja": "「月光の祝福、人の願い」バージョン1.2では、月見祭りをテーマにしたイベント「月光の願い」・「幕後の助力者」と、7日間ログインイベント「満月の贈り物」が開催され、新コンテンツ「神秘の境地チャレンジ・夢の国の祭り」やファンタジーエコー「無妄者」、新規メタファーが追加されます。新たな復帰システム「諧歌の重奏」と新規探索ツール「補助器・射撃」が導入され、結晶保管システムの改編（結晶団体ptを新規導入）やコントローラー操作・グラフィックオプション（120fps対応）など、さまざまな最適化が行われました。",
+    "summary_zhHans": "“月光的祝福，人间的祈愿”1.2版本中，将举办以赏月节为主题的活动“月光之愿”·“幕后的助力者”以及7日签到活动“满月的礼物”，并新增全新内容“神秘境地挑战・梦乡的庆典”、幻想声骸“无妄者”和全新隐喻。全新回归系统“谐歌重奏”与全新探索道具“辅助器・射击”一同登场，还带来结晶储存系统改版（全新引入结晶团体pt）以及手柄操作、画面选项（支持120fps）等多项优化。",
+    "highlights_en": [
+      "Moon-viewing festival events “Moonlight Wish” and “The Helper Behind the Scenes”",
+      "7-day login event “Gift of the Full Moon”",
+      "New content “Mysterious Realm Challenge · Festival of Dreamland,” plus the fantasy Echo “Dreamless” and new Metaphors",
+      "New returning-player system “Haega's Concerto” and new exploration tool “Assist Gear · Shooting”",
+      "Crystal-storage system revamp (introducing the new Crystal Group Points) and controller and graphics (120fps) optimizations"
+    ],
+    "highlights_ja": [
+      "月見祭りテーマのイベント「月光の願い」および「幕後の助力者」",
+      "7日間ログインイベント「満月の贈り物」",
+      "新コンテンツ「神秘の境地チャレンジ・夢の国の祭り」＋ファンタジーエコー「無妄者」、新規メタファー",
+      "新たな復帰システム「諧歌の重奏」、新規探索ツール「補助器・射撃」",
+      "結晶保管システムの改編（結晶団体ptを新規導入）およびコントローラー・グラフィック（120fps）の最適化"
+    ],
+    "highlights_zhHans": [
+      "赏月节主题活动“月光之愿”及“幕后的助力者”",
+      "7日签到活动“满月的礼物”",
+      "全新内容“神秘境地挑战・梦乡的庆典”＋幻想声骸“无妄者”、全新隐喻",
+      "全新回归系统“谐歌重奏”、全新探索道具“辅助器・射击”",
+      "结晶储存系统改版（全新引入结晶团体pt）及手柄·画面（120fps）优化"
+    ]
+  },
+  {
+    "id": "wuwa-1-1",
+    "version": "1.1",
+    "title_ko": "1.1 업데이트",
+    "release_date_kst": "2024-06-28 07:00 KST",
+    "summary_ko": "「승소산에서 울렸던 경칩 소리」 1.1 버전에서는 금주성 남동쪽 해역에 자리한 신비의 땅 「승소산」이 신규 구역으로 개방됩니다. 조수 임무 제1장·제7막과 얽힌 별 임무가 새롭게 추가되며, 이상 에코 [이상·흑월의 야수]·[이상·딩동동]과 신규 홀로그램 전략 「크라운리스」도 함께 도입됩니다.",
+    "highlights_ko": [
+      "신규 구역 「승소산」 개방 (금주성 남동쪽 해역)",
+      "조수 임무 제1장・제7막 「승소산에서 울렸던 경칩 소리」",
+      "얽힌 별 임무 「이화로부터 벗어난 장생」 추가",
+      "이상 에코 [이상・흑월의 야수], [이상・딩동동] 추가",
+      "신규 홀로그램 전략 「크라운리스」"
+    ],
+    "source_links": [
+      "https://wutheringwaves.kurogames.com/kr/main/news/detail/951"
+    ],
+    "image_url": "/updates/image/wuwa-1-1",
+    "title_en": "Version 1.1 Update",
+    "title_ja": "Ver.1.1 アップデート",
+    "title_zhHans": "1.1版本更新",
+    "summary_en": "“The sound of the Awakening of Insects that rang out at Mt. Firmament” — In Version 1.1, the mysterious land “Mt. Firmament,” set in the sea southeast of Jinzhou City, opens as a new area. Companion Quest Chapter 1 Act 7 and an Intertwined Fate quest are newly added, and the anomaly Echoes [Anomaly · Beast of the Black Moon] and [Anomaly · Ding-Dong-Dong], along with the new Tactical Hologram “Crownless,” are also introduced.",
+    "summary_ja": "「昇霄山に響いた啓蟄の音」バージョン1.1では、今州城の南東の海域に位置する神秘の地「昇霄山」が新規エリアとして開放されます。コンパニオン任務第1章・第7幕と絡み合う星の任務が新たに追加され、異常エコー[異常・黒月の野獣]・[異常・ディンドンドン]と新規ホログラム戦略「クラウンレス」も併せて導入されます。",
+    "summary_zhHans": "“响彻升霄山的惊蛰之声”1.1版本中，位于今州城东南海域的神秘之地“升霄山”将作为全新区域开放。全新追加同行者任务第1章·第7幕与交织之星任务，同时导入异常声骸[异常·黑月之兽]·[异常·叮咚咚]以及全新全息战略“无冠者”。",
+    "highlights_en": [
+      "New area “Mt. Firmament” opens (in the sea southeast of Jinzhou City)",
+      "Companion Quest Chapter 1 Act 7 “The Sound of the Awakening of Insects that Rang at Mt. Firmament”",
+      "Intertwined Fate “The Longevity That Escaped Estrangement” added",
+      "Anomaly Echoes [Anomaly · Beast of the Black Moon] and [Anomaly · Ding-Dong-Dong] added",
+      "New Tactical Hologram “Crownless”"
+    ],
+    "highlights_ja": [
+      "新規エリア「昇霄山」開放（今州城の南東の海域）",
+      "コンパニオン任務第1章・第7幕「昇霄山に響いた啓蟄の音」",
+      "絡み合う星の任務「異化から逃れた長生」を追加",
+      "異常エコー[異常・黒月の野獣]、[異常・ディンドンドン]を追加",
+      "新規ホログラム戦略「クラウンレス」"
+    ],
+    "highlights_zhHans": [
+      "全新区域“升霄山”开放（今州城东南海域）",
+      "同行者任务第1章·第7幕“响彻升霄山的惊蛰之声”",
+      "新增交织之星任务“摆脱异化的长生”",
+      "新增异常声骸[异常·黑月之兽]、[异常·叮咚咚]",
+      "全新全息战略“无冠者”"
+    ]
+  }
+]

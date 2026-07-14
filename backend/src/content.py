@@ -1,61 +1,37 @@
 from __future__ import annotations
 
 import json
+from pathlib import Path
 
-from .content_refresh import refresh_pickups_and_updates_if_stale
-from .database import get_connection
 from .models import GameUpdateSummary, PickupScheduleItem, SiteUpdateEntry
+
+# 정적 스냅샷 정본(무DB). 재생성: scripts/export_content_to_files.py (DB 살아있을 때 1회).
+_CONTENT_DIR = Path(__file__).resolve().parents[1] / "data" / "content"
+
+
+def _read(name: str):
+    path = _CONTENT_DIR / name
+    if not path.exists():
+        return []
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def load_game_config() -> dict:
     """Game-math constants (echo stat tables etc.) keyed by config id."""
-    with get_connection() as conn:
-        rows = conn.execute("SELECT id, data_json FROM game_config").fetchall()
-    return {row["id"]: json.loads(row["data_json"]) for row in rows}
+    data = _read("game_config.json")
+    return data if isinstance(data, dict) else {}
 
 
 def load_pickup_schedule(year: int | None = None) -> list[PickupScheduleItem]:
-    refresh_pickups_and_updates_if_stale()
-    query = "SELECT data_json FROM pickup_schedule"
-    params: tuple[int, ...] = ()
+    items = [PickupScheduleItem.model_validate(row) for row in _read("pickup_schedule.json")]
     if year is not None:
-        query += " WHERE year = %s"
-        params = (year,)
-    query += (
-        " ORDER BY year DESC, month ASC,"
-        " CASE category"
-        " WHEN 'first_pickup' THEN 1"
-        " WHEN 'rerun_1' THEN 2"
-        " WHEN 'rerun_2' THEN 3"
-        " WHEN 'rerun_3' THEN 4"
-        " ELSE 5"
-        " END"
-    )
-    with get_connection() as conn:
-        rows = conn.execute(query, params).fetchall()
-    return [PickupScheduleItem.model_validate_json(row["data_json"]) for row in rows]
+        items = [it for it in items if it.year == year]
+    return items
 
 
 def load_game_updates() -> list[GameUpdateSummary]:
-    refresh_pickups_and_updates_if_stale()
-    with get_connection() as conn:
-        rows = conn.execute(
-            """
-            SELECT data_json
-            FROM game_updates
-            ORDER BY release_date_kst DESC NULLS LAST, version DESC
-            """
-        ).fetchall()
-    return [GameUpdateSummary.model_validate_json(row["data_json"]) for row in rows]
+    return [GameUpdateSummary.model_validate(row) for row in _read("game_updates.json")]
 
 
 def load_site_updates() -> list[SiteUpdateEntry]:
-    with get_connection() as conn:
-        rows = conn.execute(
-            """
-            SELECT data_json
-            FROM site_updates
-            ORDER BY date DESC, version DESC NULLS LAST, id DESC
-            """
-        ).fetchall()
-    return [SiteUpdateEntry.model_validate_json(row["data_json"]) for row in rows]
+    return [SiteUpdateEntry.model_validate(row) for row in _read("site_updates.json")]

@@ -1,8 +1,6 @@
 from fastapi.testclient import TestClient
 
 from main import app
-from src.database import get_connection
-from src.models import AnalysisSession, VisionExtractionResult
 
 client = TestClient(app)
 
@@ -11,57 +9,6 @@ def test_health_returns_ok():
     response = client.get("/health")
     assert response.status_code == 200
     assert response.json() == {"ok": True}
-
-
-def test_sync_user_rejects_missing_or_wrong_secret(monkeypatch):
-    monkeypatch.setenv("INTERNAL_API_SECRET", "correct-secret")
-    payload = {"email": "no-secret@example.com", "role": "user"}
-
-    response = client.post("/auth/sync-user", json=payload)
-    assert response.status_code == 401
-
-    response = client.post("/auth/sync-user", json=payload, headers={"X-Internal-Secret": "wrong-secret"})
-    assert response.status_code == 401
-
-
-def test_sync_user_accepts_matching_secret(monkeypatch):
-    monkeypatch.setenv("INTERNAL_API_SECRET", "correct-secret")
-    email = "sync-user-test@example.com"
-    with get_connection() as conn:
-        conn.execute("DELETE FROM users WHERE email = %s", (email,))
-        conn.commit()
-
-    response = client.post(
-        "/auth/sync-user",
-        json={"email": email, "name": "Test User", "role": "user"},
-        headers={"X-Internal-Secret": "correct-secret"},
-    )
-    assert response.status_code == 200
-    data = response.json()
-    assert data["email"] == email
-
-    with get_connection() as conn:
-        conn.execute("DELETE FROM users WHERE email = %s", (email,))
-        conn.commit()
-
-
-def test_sync_user_rejects_when_secret_not_configured(monkeypatch):
-    monkeypatch.delenv("INTERNAL_API_SECRET", raising=False)
-    response = client.post(
-        "/auth/sync-user",
-        json={"email": "no-secret@example.com", "role": "user"},
-        headers={"X-Internal-Secret": "anything"},
-    )
-    assert response.status_code == 401
-
-
-def test_rules_endpoint_returns_seed_rules():
-    response = client.get("/rules")
-    assert response.status_code == 200
-    data = response.json()
-    assert isinstance(data, list)
-    assert any(rule["character_name"] == "default_main_dps" for rule in data)
-    assert any(rule["character_name"] == "Changli" for rule in data)
 
 
 def test_pickup_schedule_endpoint_returns_korean_schedule():
@@ -92,64 +39,6 @@ def test_site_updates_endpoint_returns_service_notices():
     assert not any(term in item["description_ko"] for item in data for term in infra_terms)
 
 
-def test_history_round_trip():
-    with get_connection() as conn:
-        conn.execute("DELETE FROM analysis_sessions WHERE id = %s", ("test-session",))
-        conn.commit()
-    session = AnalysisSession(
-        id="test-session",
-        created_at="2026-07-05T00:00:00Z",
-        image_filename=None,
-        extraction=VisionExtractionResult(),
-        diagnoses=[],
-        report="test report",
-        metadata={"source": "test"},
-    )
-    save_response = client.post("/history", json=session.model_dump())
-    assert save_response.status_code == 200
-    assert save_response.json()["id"] == "test-session"
-
-    list_response = client.get("/history")
-    assert list_response.status_code == 200
-    assert any(item["id"] == "test-session" for item in list_response.json())
-
-    detail_response = client.get("/history/test-session")
-    assert detail_response.status_code == 200
-    assert detail_response.json()["report"] == "test report"
-    with get_connection() as conn:
-        conn.execute("DELETE FROM analysis_sessions WHERE id = %s", ("test-session",))
-        conn.commit()
-
-
-def test_vision_extract_uses_mock_without_llm(monkeypatch):
-    monkeypatch.delenv("LLM_BASE_URL", raising=False)
-    response = client.post(
-        "/vision/extract",
-        files={"file": ("sample.png", b"not-a-real-image", "image/png")},
-    )
-    assert response.status_code == 200
-    data = response.json()
-    assert data["screen_type"] in ["character_status", "echo_detail", "weapon_detail", "inventory", "team", "unknown"]
-    assert len(data["snapshot"]["echoes"]) == 5
-    assert any("mock" in warning.lower() for warning in data["warnings"])
-
-
-def test_analyze_character_returns_diagnoses_and_report(monkeypatch):
-    monkeypatch.delenv("LLM_BASE_URL", raising=False)
-    extraction = client.post(
-        "/vision/extract",
-        files={"file": ("sample.png", b"sample", "image/png")},
-    ).json()
-    response = client.post(
-        "/analyze/character",
-        json={"snapshot": extraction["snapshot"], "fallback_role": "main_dps"},
-    )
-    assert response.status_code == 200
-    data = response.json()
-    assert data["diagnoses"]
-    assert "바로 할 일" in data["report"] or "Next actions" in data["report"]
-
-
 def test_update_image_route_serves_cached_file(monkeypatch, tmp_path):
     monkeypatch.setenv("MEDIA_DIR", str(tmp_path))
     updates_dir = tmp_path / "updates"
@@ -168,6 +57,7 @@ def test_update_image_route_404_when_missing(monkeypatch, tmp_path):
 
 
 def test_ai_chat_returns_mock_without_llm(monkeypatch):
+    # 키(BYO 헤더)·LLM_BASE_URL 둘 다 없으면 목 폴백.
     monkeypatch.delenv("LLM_BASE_URL", raising=False)
     response = client.post(
         "/ai/chat",
@@ -209,9 +99,8 @@ def test_ai_recommendation_round_trip():
         assert detail.json()["title"] == "저장 테스트 빌드"
         assert detail.json()["recommendation"]["team"][0]["resonator_id"] == "1402"
     finally:
-        with get_connection() as conn:
-            conn.execute("DELETE FROM ai_recommendations WHERE id = %s", (rec_id,))
-            conn.commit()
+        # 파일 스토어에서 정리(로컬 단일 유저, DB 없음).
+        client.delete(f"/ai/recommendations/{rec_id}")
 
 
 def test_ai_recommendation_detail_404_when_missing():

@@ -32,6 +32,7 @@ const koTable = {
       Updates: "명조 업데이트",
       Teams: "파티",
       History: "기록",
+      Settings: "설정",
     },
     roles: {
       main_dps: "메인 딜러",
@@ -495,14 +496,24 @@ const koTable = {
     },
     settings: {
       title: "설정",
-      apiBaseUrl: "API 기본 URL",
-      openAiKey: "로컬 LLM (비전)",
-      openAiKeyBody: "실제 비전 추출을 사용하려면 백엔드에 LLM_BASE_URL(llama.cpp llama-server)을 설정하세요. 없으면 mock 모드가 사용됩니다.",
-      legalNotice: "법적 안내",
-      legalNoticeBody: "띵조 AI는 비공식 팬 도구이며 Wuthering Waves 또는 Kuro Games와 관련이 없습니다.",
-      exportJson: "JSON 내보내기",
-      importJson: "JSON 가져오기",
-      imported: (rules: number, history: number, characters = 0) => `규칙 ${rules}개, 캐릭터 ${characters}개, 기록 ${history}개를 가져왔습니다.`,
+      intro: "AI 추천 기능은 본인의 NVIDIA API 키로 동작합니다. 키와 모델은 이 브라우저에만 저장되며 서버로 전송·보관되지 않습니다.",
+      nvidiaKeyLabel: "NVIDIA API 키",
+      nvidiaKeyHint: "무료 키 발급:",
+      show: "표시",
+      hide: "숨김",
+      modelLabel: "모델",
+      loadModels: "모델 불러오기",
+      loading: "불러오는 중...",
+      modelPlaceholder: "모델을 선택하세요",
+      modelsLoaded: (n: number) => `모델 ${n}개를 불러왔습니다.`,
+      modelsFailed: "모델 목록을 불러오지 못했습니다. 키를 확인하세요.",
+      howtoTitle: "사용 방법",
+      howto: [
+        "build.nvidia.com 에서 무료 가입 후 API 키(nvapi-...)를 발급받으세요.",
+        "위 입력란에 키를 붙여넣으면 자동 저장됩니다.",
+        "‘모델 불러오기’를 눌러 사용할 모델을 선택하세요.",
+        "이제 AI 탭에서 빌드 추천을 받을 수 있습니다.",
+      ],
     },
     login: {
       title: "로그인",
@@ -550,6 +561,7 @@ const en: LocaleStrings = {
     Updates: "WuWa updates",
     Teams: "Party",
     History: "History",
+    Settings: "Settings",
   },
   roles: { main_dps: "Main DPS", sub_dps: "Sub DPS", support: "Support", healer: "Healer" },
   elements: {
@@ -871,17 +883,25 @@ const en: LocaleStrings = {
   },
   settings: {
     title: "Settings",
-    apiBaseUrl: "API base URL",
-    openAiKey: "Local LLM (vision)",
-    openAiKeyBody:
-      "For real vision extraction, set LLM_BASE_URL (llama.cpp llama-server) on the backend. Without it, mock mode is used.",
-    legalNotice: "Legal notice",
-    legalNoticeBody:
-      "WuWa Helper is an unofficial fan tool and is not affiliated with Wuthering Waves or Kuro Games.",
-    exportJson: "Export JSON",
-    importJson: "Import JSON",
-    imported: (rules: number, history: number, characters = 0) =>
-      `Imported ${rules} rules, ${characters} characters, and ${history} history entries.`,
+    intro:
+      "The AI features run on your own NVIDIA API key. Your key and model are stored only in this browser and are never sent to or kept on any server.",
+    nvidiaKeyLabel: "NVIDIA API key",
+    nvidiaKeyHint: "Get a free key at",
+    show: "Show",
+    hide: "Hide",
+    modelLabel: "Model",
+    loadModels: "Load models",
+    loading: "Loading...",
+    modelPlaceholder: "Select a model",
+    modelsLoaded: (n: number) => `Loaded ${n} models.`,
+    modelsFailed: "Couldn't load the model list. Check your key.",
+    howtoTitle: "How to use",
+    howto: [
+      "Sign up free at build.nvidia.com and create an API key (nvapi-...).",
+      "Paste the key into the field above — it saves automatically.",
+      "Click ‘Load models’ and pick the model you want to use.",
+      "You can now get build recommendations in the AI tab.",
+    ],
   },
   login: {
     title: "Sign in",
@@ -918,6 +938,7 @@ const ja: LocaleStrings = {
     Updates: "鳴潮アップデート",
     Teams: "パーティ",
     History: "履歴",
+    Settings: "設定",
   },
   roles: { main_dps: "メインアタッカー", sub_dps: "サブアタッカー", support: "サポーター", healer: "ヒーラー" },
   elements: {
@@ -1239,17 +1260,25 @@ const ja: LocaleStrings = {
   },
   settings: {
     title: "設定",
-    apiBaseUrl: "APIベースURL",
-    openAiKey: "ローカルLLM（ビジョン）",
-    openAiKeyBody:
-      "実際のビジョン解析を使うには、バックエンドにLLM_BASE_URL（llama.cpp llama-server）を設定してください。未設定の場合はモックモードになります。",
-    legalNotice: "法的通知",
-    legalNoticeBody:
-      "鳴潮ヘルパーは非公式のファンツールであり、Wuthering WavesおよびKuro Gamesとは関係ありません。",
-    exportJson: "JSONをエクスポート",
-    importJson: "JSONをインポート",
-    imported: (rules: number, history: number, characters = 0) =>
-      `ルール${rules}件、キャラクター${characters}件、履歴${history}件をインポートしました。`,
+    intro:
+      "AI機能はご自身のNVIDIA APIキーで動作します。キーとモデルはこのブラウザにのみ保存され、サーバーへ送信・保存されることはありません。",
+    nvidiaKeyLabel: "NVIDIA APIキー",
+    nvidiaKeyHint: "無料キーの取得:",
+    show: "表示",
+    hide: "非表示",
+    modelLabel: "モデル",
+    loadModels: "モデルを読み込む",
+    loading: "読み込み中...",
+    modelPlaceholder: "モデルを選択",
+    modelsLoaded: (n: number) => `モデルを${n}件読み込みました。`,
+    modelsFailed: "モデル一覧を取得できませんでした。キーをご確認ください。",
+    howtoTitle: "使い方",
+    howto: [
+      "build.nvidia.com で無料登録し、APIキー（nvapi-...）を発行します。",
+      "上の入力欄にキーを貼り付けると自動保存されます。",
+      "「モデルを読み込む」を押して使用するモデルを選びます。",
+      "AIタブでビルド推薦を受け取れます。",
+    ],
   },
   login: {
     title: "ログイン",
@@ -1286,6 +1315,7 @@ const zhHans: LocaleStrings = {
     Updates: "鸣潮更新",
     Teams: "队伍",
     History: "记录",
+    Settings: "设置",
   },
   roles: { main_dps: "主C", sub_dps: "副C", support: "辅助", healer: "治疗" },
   elements: {
@@ -1607,17 +1637,25 @@ const zhHans: LocaleStrings = {
   },
   settings: {
     title: "设置",
-    apiBaseUrl: "API基础URL",
-    openAiKey: "本地LLM（视觉）",
-    openAiKeyBody:
-      "要使用真实的视觉识别，请在后端设置LLM_BASE_URL（llama.cpp llama-server）。未设置时将使用mock模式。",
-    legalNotice: "法律声明",
-    legalNoticeBody:
-      "鸣潮助手是非官方粉丝工具，与《鸣潮》或库洛游戏无关。",
-    exportJson: "导出JSON",
-    importJson: "导入JSON",
-    imported: (rules: number, history: number, characters = 0) =>
-      `已导入 ${rules} 条规则、${characters} 个角色、${history} 条记录。`,
+    intro:
+      "AI 功能使用您自己的 NVIDIA API 密钥运行。密钥和模型仅保存在此浏览器中，不会发送或保存到任何服务器。",
+    nvidiaKeyLabel: "NVIDIA API 密钥",
+    nvidiaKeyHint: "免费获取密钥：",
+    show: "显示",
+    hide: "隐藏",
+    modelLabel: "模型",
+    loadModels: "加载模型",
+    loading: "加载中...",
+    modelPlaceholder: "请选择模型",
+    modelsLoaded: (n: number) => `已加载 ${n} 个模型。`,
+    modelsFailed: "无法加载模型列表，请检查密钥。",
+    howtoTitle: "使用方法",
+    howto: [
+      "在 build.nvidia.com 免费注册并创建 API 密钥（nvapi-...）。",
+      "将密钥粘贴到上方输入框，将自动保存。",
+      "点击“加载模型”并选择要使用的模型。",
+      "现在即可在 AI 标签页获取配装推荐。",
+    ],
   },
   login: {
     title: "登录",

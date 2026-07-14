@@ -1,0 +1,214 @@
+{
+  "echo_stats": {
+    "costBudget": 12,
+    "main": {
+      "1": [
+        {
+          "key": "hp",
+          "max": 2280
+        },
+        {
+          "key": "atkPct",
+          "max": 18.0
+        },
+        {
+          "key": "hpPct",
+          "max": 22.8
+        },
+        {
+          "key": "defPct",
+          "max": 18.0
+        }
+      ],
+      "3": [
+        {
+          "key": "atkPct",
+          "max": 30.0
+        },
+        {
+          "key": "hpPct",
+          "max": 30.0
+        },
+        {
+          "key": "defPct",
+          "max": 38.0
+        },
+        {
+          "key": "energyRegen",
+          "max": 32.0
+        },
+        {
+          "key": "glacioDmg",
+          "max": 30.0
+        },
+        {
+          "key": "fusionDmg",
+          "max": 30.0
+        },
+        {
+          "key": "electroDmg",
+          "max": 30.0
+        },
+        {
+          "key": "aeroDmg",
+          "max": 30.0
+        },
+        {
+          "key": "spectroDmg",
+          "max": 30.0
+        },
+        {
+          "key": "havocDmg",
+          "max": 30.0
+        }
+      ],
+      "4": [
+        {
+          "key": "crit",
+          "max": 22.0
+        },
+        {
+          "key": "critDmg",
+          "max": 44.0
+        },
+        {
+          "key": "atkPct",
+          "max": 33.0
+        },
+        {
+          "key": "hpPct",
+          "max": 33.0
+        },
+        {
+          "key": "defPct",
+          "max": 41.8
+        },
+        {
+          "key": "atk",
+          "max": 150
+        },
+        {
+          "key": "healing",
+          "max": 26.4
+        }
+      ]
+    },
+    "sub": [
+      {
+        "key": "hp",
+        "min": 320,
+        "max": 580
+      },
+      {
+        "key": "atk",
+        "min": 30,
+        "max": 70
+      },
+      {
+        "key": "def",
+        "min": 30,
+        "max": 70
+      },
+      {
+        "key": "hpPct",
+        "min": 6.4,
+        "max": 11.6
+      },
+      {
+        "key": "atkPct",
+        "min": 6.4,
+        "max": 11.6
+      },
+      {
+        "key": "defPct",
+        "min": 8.1,
+        "max": 14.7
+      },
+      {
+        "key": "crit",
+        "min": 6.3,
+        "max": 10.5
+      },
+      {
+        "key": "critDmg",
+        "min": 12.6,
+        "max": 21.0
+      },
+      {
+        "key": "energyRegen",
+        "min": 5.6,
+        "max": 14.9
+      },
+      {
+        "key": "skillDmg",
+        "min": 6.4,
+        "max": 12.4
+      },
+      {
+        "key": "basicDmg",
+        "min": 6.4,
+        "max": 11.6
+      },
+      {
+        "key": "heavyDmg",
+        "min": 6.4,
+        "max": 11.6
+      },
+      {
+        "key": "liberationDmg",
+        "min": 6.4,
+        "max": 11.6
+      }
+    ],
+    "subSlots": {
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5
+    }
+  },
+  "anomaly": {
+    "base": {
+      "90": 3674
+    },
+    "types": {
+      "서리": {
+        "mode": "burst",
+        "coef": 2.0377,
+        "maxStack": 10,
+        "overBonus": 0.33
+      },
+      "불꽃": {
+        "mode": "burst",
+        "coef": 6.9863,
+        "maxStack": 10,
+        "overBonus": 0.33
+      },
+      "전자": {
+        "mode": "tick_decay",
+        "coef": 0.41585
+      },
+      "풍식": {
+        "mode": "tick",
+        "stack1": 1654,
+        "perStack": 4134
+      },
+      "광학": {
+        "mode": "tick",
+        "base": 898,
+        "stack1Mult": 1.235,
+        "perStack": 898
+      },
+      "암흑": {
+        "mode": "debuff",
+        "defPerStack": 0.02,
+        "maxDef": 0.06
+      }
+    }
+  },
+  "tune_break": {
+    "base": 10000,
+    "defaultMultiplier": 16.0
+  }
+}

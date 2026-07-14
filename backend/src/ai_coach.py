@@ -383,10 +383,31 @@ def _enforce_pinned_main_dps(
     return resp
 
 
-def chat(request: AiChatRequest) -> AiChatResponse:
-    base_url = os.getenv("LLM_BASE_URL")
-    if not base_url:
+NVIDIA_BASE_URL = "https://integrate.api.nvidia.com/v1"
+DEFAULT_MODEL = "meta/llama-3.3-70b-instruct"
+
+
+def list_models(api_key: str, base_url: str | None = None) -> list[str]:
+    """BYO 키로 NVIDIA(OpenAI 호환) 모델 목록 조회. 채팅 불가 계열은 제외."""
+    client = OpenAI(base_url=base_url or NVIDIA_BASE_URL, api_key=api_key)
+    ids = [m.id for m in client.models.list().data]
+    bad = ("embed", "rerank", "safety", "guard", "nemoretriever", "content-safety")
+    return sorted(i for i in ids if not any(b in i.lower() for b in bad))
+
+
+def chat(
+    request: AiChatRequest,
+    *,
+    api_key: str | None = None,
+    model: str | None = None,
+    base_url: str | None = None,
+) -> AiChatResponse:
+    # BYO 키: 요청(헤더) > env 순. 키 없으면 목업으로 안내(설정 탭에서 NVIDIA 키 등록).
+    key = api_key or os.getenv("LLM_API_KEY")
+    if not key:
         return _mock_chat(request)
+    base = base_url or os.getenv("LLM_BASE_URL") or NVIDIA_BASE_URL
+    chosen_model = model or os.getenv("LLM_MODEL") or DEFAULT_MODEL
 
     catalog = _fetch_catalog()
     index = build_catalog_index(catalog)
@@ -402,22 +423,14 @@ def chat(request: AiChatRequest) -> AiChatResponse:
     if pinned:
         system = system + "\n" + _pinned_constraint_block(pinned, catalog)
 
-    client = OpenAI(base_url=base_url, api_key=os.getenv("LLM_API_KEY", "sk-local"))
-    model = os.getenv("LLM_MODEL", "wuwa-vlm")
+    client = OpenAI(base_url=base, api_key=key)
     messages = [{"role": "system", "content": system}]
     messages += [{"role": m.role, "content": m.content} for m in request.messages]
-    # 이 작업은 규칙·카탈로그를 프롬프트에 주입한 구조화 JSON 추출이라 긴 추론(reasoning)의
-    # 이득보다 지연이 크다. 기본적으로 reasoning을 꺼서 응답을 빠르게 한다(Qwen3 계열 토글).
-    # LLM_ENABLE_REASONING=1 로 다시 켤 수 있다.
-    extra_body: dict = {}
-    if os.getenv("LLM_ENABLE_REASONING", "0") != "1":
-        extra_body["chat_template_kwargs"] = {"enable_thinking": False}
     response = client.chat.completions.create(
-        model=model,
+        model=chosen_model,
         temperature=0.4,
         response_format={"type": "json_object"},
         messages=messages,
-        extra_body=extra_body,
     )
     resp = _parse_reply(response.choices[0].message.content or "", catalog)
     # 후검증(안전망): 유사 이름 오선택 교정 → 지정 메인 딜러 역할 강제.

@@ -1,0 +1,2045 @@
+[
+  {
+    "version": "2.0",
+    "phase": 3,
+    "banner_name": "상자 속 펼쳐지는 무대",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "로코코",
+        "avatar": "/catalog/image/characters/cat-1606",
+        "catalog_id": 1606
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "희비극",
+        "icon": "/catalog/image/weapons/w-457b6734dbc7",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2025-01-23 11:00",
+    "end_date": "2025-02-12 12:59",
+    "id": "2.0-p3"
+  },
+  {
+    "version": "2.0",
+    "phase": 4,
+    "banner_name": "눈 속에 트는 새싹",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "금희",
+        "avatar": "/catalog/image/characters/cat-1304",
+        "catalog_id": 1304
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "태평성대",
+        "icon": "/catalog/image/weapons/w-855580d70669",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2025-01-23 11:00",
+    "end_date": "2025-02-12 12:59",
+    "id": "2.0-p4"
+  },
+  {
+    "version": "2.1",
+    "phase": 1,
+    "banner_name": "고요 속에 들리는 속삭임",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "페비",
+        "avatar": "/catalog/image/characters/cat-1506",
+        "catalog_id": 1506
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "광휘의 찬송가",
+        "icon": "/catalog/image/weapons/w-c58b0c4f13a3",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.1 버전 업데이트 이후",
+    "end_date": "2025-03-06 10:59",
+    "id": "2.1-p1"
+  },
+  {
+    "version": "2.1",
+    "phase": 2,
+    "banner_name": "바다에서 타오르는 불꽃",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "브렌트",
+        "avatar": "/catalog/image/characters/cat-1206",
+        "catalog_id": 1206
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "흔들리지 않는 용기",
+        "icon": "/catalog/image/weapons/w-c62dd4dd904a",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2025-03-06 11:00",
+    "end_date": "2025-03-26 12:59",
+    "id": "2.1-p2"
+  },
+  {
+    "version": "2.1",
+    "phase": 3,
+    "banner_name": "별빛 속의 화염 깃털",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "장리",
+        "avatar": "/catalog/image/characters/cat-1205",
+        "catalog_id": 1205
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "솟아오르는 화염",
+        "icon": "/catalog/image/weapons/w-4181e2116f93",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2025-03-06 11:00",
+    "end_date": "2025-03-26 12:59",
+    "id": "2.1-p3"
+  },
+  {
+    "version": "2.2",
+    "phase": 1,
+    "banner_name": "바다를 비추는 꿈",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "칸타렐라",
+        "avatar": "/catalog/image/characters/cat-1607",
+        "catalog_id": 1607
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "바다의 속삭임",
+        "icon": "/catalog/image/weapons/w-7da389b5b52c",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.2 버전 업데이트 이후",
+    "end_date": "2025-04-17 10:59",
+    "id": "2.2-p1"
+  },
+  {
+    "version": "2.2",
+    "phase": 2,
+    "banner_name": "미로 속에서 마주하는 마음",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카멜리아",
+        "avatar": "/catalog/image/characters/cat-1603",
+        "catalog_id": 1603
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "날카로운 봄",
+        "icon": "/catalog/image/weapons/w-4b0b7bb010b5",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2.2 버전 업데이트 이후",
+    "end_date": "2025-04-17 10:59",
+    "id": "2.2-p2"
+  },
+  {
+    "version": "2.2",
+    "phase": 3,
+    "banner_name": "그윽한 바닷물이 마를 때까지",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "파수인",
+        "avatar": "/catalog/image/characters/cat-1505",
+        "catalog_id": 1505
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "뭇별의 교향곡",
+        "icon": "/catalog/image/weapons/w-258d5003993c",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2025-04-17 11:00",
+    "end_date": "2025-04-28 12:59",
+    "id": "2.2-p3"
+  },
+  {
+    "version": "2.3",
+    "phase": 1,
+    "banner_name": "명암 경계선 사이",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "젠니",
+        "avatar": "/catalog/image/characters/cat-1507",
+        "catalog_id": 1507
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "불빛의 심판",
+        "icon": "/catalog/image/weapons/w-dfafc6e46796",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2.3 버전 업데이트 이후",
+    "end_date": "2025-05-22 10:59",
+    "id": "2.3-p1"
+  },
+  {
+    "version": "2.7",
+    "phase": 3,
+    "banner_name": "끝없는 여정 속 지친 검객",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "구원",
+        "avatar": "/catalog/image/characters/cat-1411",
+        "catalog_id": 1411
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "푸른 의지",
+        "icon": "/catalog/image/weapons/w-05ee2466f95a",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2025-10-30 11:00",
+    "end_date": "2025-11-19 12:59",
+    "id": "2.7-p3"
+  },
+  {
+    "version": "2.3",
+    "phase": 2,
+    "banner_name": "주년 캐릭터 이벤트 튜닝 · 시즌 I",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "기염",
+        "avatar": "/catalog/image/characters/cat-1404",
+        "catalog_id": 1404
+      },
+      {
+        "name_ko": "음림",
+        "avatar": "/catalog/image/characters/cat-1302",
+        "catalog_id": 1302
+      },
+      {
+        "name_ko": "절지",
+        "avatar": "/catalog/image/characters/cat-1105",
+        "catalog_id": 1105
+      },
+      {
+        "name_ko": "상리요",
+        "avatar": "/catalog/image/characters/cat-1305",
+        "catalog_id": 1305
+      },
+      {
+        "name_ko": "페비",
+        "avatar": "/catalog/image/characters/cat-1506",
+        "catalog_id": 1506
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "청룡의 천장",
+        "icon": "/catalog/image/weapons/w-d71fdf71f5c0",
+        "rarity": 5,
+        "weapon_type": "대검"
+      },
+      {
+        "name_ko": "꼭두각시의 손",
+        "icon": "/catalog/image/weapons/w-d21b1bf50252",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      },
+      {
+        "name_ko": "옥수 비단",
+        "icon": "/catalog/image/weapons/w-cf63571c1fb6",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      },
+      {
+        "name_ko": "팔방의 천추",
+        "icon": "/catalog/image/weapons/w-4b88ed5e47a5",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      },
+      {
+        "name_ko": "광휘의 찬송가",
+        "icon": "/catalog/image/weapons/w-c58b0c4f13a3",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.3 버전 업데이트 이후",
+    "end_date": "2025-05-22 10:59",
+    "id": "2.3-p2"
+  },
+  {
+    "version": "2.3",
+    "phase": 3,
+    "banner_name": "시와 음악의 심포니",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "샤콘",
+        "avatar": "/catalog/image/characters/cat-1407",
+        "catalog_id": 1407
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "숲속의 아리아",
+        "icon": "/catalog/image/weapons/w-2341eba6ab14",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2025-05-22 11:00",
+    "end_date": "2025-06-11 12:59",
+    "id": "2.3-p3"
+  },
+  {
+    "version": "2.7",
+    "phase": 4,
+    "banner_name": "명암 경계선 사이",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "젠니",
+        "avatar": "/catalog/image/characters/cat-1507",
+        "catalog_id": 1507
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "불빛의 심판",
+        "icon": "/catalog/image/weapons/w-dfafc6e46796",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2025-10-30 11:00",
+    "end_date": "2025-11-19 12:59",
+    "id": "2.7-p4"
+  },
+  {
+    "version": "3.0",
+    "phase": 1,
+    "banner_name": "언디파인드 스펙트럼",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "린네",
+        "avatar": "/catalog/image/characters/cat-1509",
+        "catalog_id": 1509
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "스펙트럼 블래스터",
+        "icon": "/catalog/image/weapons/w-8f2624eae96d",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "3.0 버전 업데이트 이후",
+    "end_date": "2026-01-15 10:59",
+    "id": "3.0-p1"
+  },
+  {
+    "version": "3.0",
+    "phase": 2,
+    "banner_name": "폭풍이 휩쓴 후에도 계속되는 춤",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카르티시아",
+        "avatar": "/catalog/image/characters/cat-1409",
+        "catalog_id": 1409
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "숙명에 맞서는 관",
+        "icon": "/catalog/image/weapons/w-fe31c541f086",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "3.0 버전 업데이트 이후",
+    "end_date": "2026-01-15 10:59",
+    "id": "3.0-p2"
+  },
+  {
+    "version": "3.0",
+    "phase": 3,
+    "banner_name": "시와 음악의 심포니",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "샤콘",
+        "avatar": "/catalog/image/characters/cat-1407",
+        "catalog_id": 1407
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "숲속의 아리아",
+        "icon": "/catalog/image/weapons/w-2341eba6ab14",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "3.0 버전 업데이트 이후",
+    "end_date": "2026-01-15 10:59",
+    "id": "3.0-p3"
+  },
+  {
+    "version": "3.0",
+    "phase": 4,
+    "banner_name": "별빛이 닿을 수 없는 곳에 있다 해도",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "모니에",
+        "avatar": "/catalog/image/characters/cat-1209",
+        "catalog_id": 1209
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "별하늘 연산 측정기",
+        "icon": "/catalog/image/weapons/w-6c22ae76eea9",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2026-01-15 11:00",
+    "end_date": "2026-02-04 12:59",
+    "id": "3.0-p4"
+  },
+  {
+    "version": "2.3",
+    "phase": 4,
+    "banner_name": "주년 캐릭터 이벤트 튜닝 · 시즌 II",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "금희",
+        "avatar": "/catalog/image/characters/cat-1304",
+        "catalog_id": 1304
+      },
+      {
+        "name_ko": "장리",
+        "avatar": "/catalog/image/characters/cat-1205",
+        "catalog_id": 1205
+      },
+      {
+        "name_ko": "카를로타",
+        "avatar": "/catalog/image/characters/cat-1107",
+        "catalog_id": 1107
+      },
+      {
+        "name_ko": "로코코",
+        "avatar": "/catalog/image/characters/cat-1606",
+        "catalog_id": 1606
+      },
+      {
+        "name_ko": "브렌트",
+        "avatar": "/catalog/image/characters/cat-1206",
+        "catalog_id": 1206
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "태평성대",
+        "icon": "/catalog/image/weapons/w-855580d70669",
+        "rarity": 5,
+        "weapon_type": "대검"
+      },
+      {
+        "name_ko": "솟아오르는 화염",
+        "icon": "/catalog/image/weapons/w-4181e2116f93",
+        "rarity": 5,
+        "weapon_type": "직검"
+      },
+      {
+        "name_ko": "죽음과 춤",
+        "icon": "/catalog/image/weapons/w-3076bc6b37c1",
+        "rarity": 5,
+        "weapon_type": "권총"
+      },
+      {
+        "name_ko": "희비극",
+        "icon": "/catalog/image/weapons/w-457b6734dbc7",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      },
+      {
+        "name_ko": "흔들리지 않는 용기",
+        "icon": "/catalog/image/weapons/w-c62dd4dd904a",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2025-05-22 11:00",
+    "end_date": "2025-06-11 12:59",
+    "id": "2.3-p4"
+  },
+  {
+    "version": "2.4",
+    "phase": 1,
+    "banner_name": "폭풍이 휩쓴 후에도 계속되는 춤",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카르티시아",
+        "avatar": "/catalog/image/characters/cat-1409",
+        "catalog_id": 1409
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "숙명에 맞서는 관",
+        "icon": "/catalog/image/weapons/w-fe31c541f086",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2.4 버전 업데이트 이후",
+    "end_date": "2025-07-03 10:59",
+    "id": "2.4-p1"
+  },
+  {
+    "version": "2.4",
+    "phase": 2,
+    "banner_name": "승리가 날 위해 보내는 환호",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "루파",
+        "avatar": "/catalog/image/characters/cat-1207",
+        "catalog_id": 1207
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "불길",
+        "icon": "/catalog/image/weapons/w-2477022b25d2",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2025-07-03 11:00",
+    "end_date": "2025-07-23 12:59",
+    "id": "2.4-p2"
+  },
+  {
+    "version": "2.5",
+    "phase": 1,
+    "banner_name": "영원히 끝나지 않는 슬픈 노래",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "플로로",
+        "avatar": "/catalog/image/characters/cat-1608",
+        "catalog_id": 1608
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "잊혀진 피안의 슬픈 악장",
+        "icon": "/catalog/image/weapons/w-b3bab964312b",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.5 버전 업데이트 이후",
+    "end_date": "2025-08-14 10:59",
+    "id": "2.5-p1"
+  },
+  {
+    "version": "2.5",
+    "phase": 2,
+    "banner_name": "상자 속 펼쳐지는 무대",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "로코코",
+        "avatar": "/catalog/image/characters/cat-1606",
+        "catalog_id": 1606
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "희비극",
+        "icon": "/catalog/image/weapons/w-457b6734dbc7",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2.5 버전 업데이트 이후",
+    "end_date": "2025-08-14 10:59",
+    "id": "2.5-p2"
+  },
+  {
+    "version": "2.5",
+    "phase": 3,
+    "banner_name": "바다를 비추는 꿈",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "칸타렐라",
+        "avatar": "/catalog/image/characters/cat-1607",
+        "catalog_id": 1607
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "바다의 속삭임",
+        "icon": "/catalog/image/weapons/w-7da389b5b52c",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2025-08-14 11:00",
+    "end_date": "2025-08-27 12:59",
+    "id": "2.5-p3"
+  },
+  {
+    "version": "2.5",
+    "phase": 4,
+    "banner_name": "바다에서 타오르는 불꽃",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "브렌트",
+        "avatar": "/catalog/image/characters/cat-1206",
+        "catalog_id": 1206
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "흔들리지 않는 용기",
+        "icon": "/catalog/image/weapons/w-c62dd4dd904a",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2025-08-14 11:00",
+    "end_date": "2025-08-27 12:59",
+    "id": "2.5-p4"
+  },
+  {
+    "version": "2.6",
+    "phase": 1,
+    "banner_name": "실추되지 않는 태양관",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "아우구스타",
+        "avatar": "/catalog/image/characters/cat-1306",
+        "catalog_id": 1306
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "천둥벼락을 다스리는 권능",
+        "icon": "/catalog/image/weapons/w-6fefbda96d71",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2.6 버전 업데이트 이후",
+    "end_date": "2025-09-17 10:59",
+    "id": "2.6-p1"
+  },
+  {
+    "version": "2.6",
+    "phase": 2,
+    "banner_name": "또 다른 불협화음",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카를로타",
+        "avatar": "/catalog/image/characters/cat-1107",
+        "catalog_id": 1107
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "죽음과 춤",
+        "icon": "/catalog/image/weapons/w-3076bc6b37c1",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2.6 버전 업데이트 이후",
+    "end_date": "2025-09-17 10:59",
+    "id": "2.6-p2"
+  },
+  {
+    "version": "2.6",
+    "phase": 3,
+    "banner_name": "그윽한 바닷물이 마를 때까지",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "파수인",
+        "avatar": "/catalog/image/characters/cat-1505",
+        "catalog_id": 1505
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "뭇별의 교향곡",
+        "icon": "/catalog/image/weapons/w-258d5003993c",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.6 버전 업데이트 이후",
+    "end_date": "2025-09-17 10:59",
+    "id": "2.6-p3"
+  },
+  {
+    "version": "2.6",
+    "phase": 4,
+    "banner_name": "영고성쇠한 달 속을 걷는 나",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "유노",
+        "avatar": "/catalog/image/characters/cat-1410",
+        "catalog_id": 1410
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "세상 만물의 진리",
+        "icon": "/catalog/image/weapons/w-65e83e26dc92",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2025-09-17 11:00",
+    "end_date": "2025-10-08 12:59",
+    "id": "2.6-p4"
+  },
+  {
+    "version": "2.6",
+    "phase": 5,
+    "banner_name": "시와 음악의 심포니",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "샤콘",
+        "avatar": "/catalog/image/characters/cat-1407",
+        "catalog_id": 1407
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "숲속의 아리아",
+        "icon": "/catalog/image/weapons/w-2341eba6ab14",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2025-09-17 11:00",
+    "end_date": "2025-10-08 12:59",
+    "id": "2.6-p5"
+  },
+  {
+    "version": "2.7",
+    "phase": 1,
+    "banner_name": "잿더미 속에서",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "갈브레나",
+        "avatar": "/catalog/image/characters/cat-1208",
+        "catalog_id": 1208
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "얽혀진 빛과 그림자",
+        "icon": "/catalog/image/weapons/w-f90b46862676",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2.7 버전 업데이트 이후",
+    "end_date": "2025-10-30 10:59",
+    "id": "2.7-p1"
+  },
+  {
+    "version": "2.7",
+    "phase": 2,
+    "banner_name": "승리가 날 위해 보내는 환호",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "루파",
+        "avatar": "/catalog/image/characters/cat-1207",
+        "catalog_id": 1207
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "불길",
+        "icon": "/catalog/image/weapons/w-2477022b25d2",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2.7 버전 업데이트 이후",
+    "end_date": "2025-10-30 10:59",
+    "id": "2.7-p2"
+  },
+  {
+    "version": "2.8",
+    "phase": 1,
+    "banner_name": "여명의 지평선",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "치사",
+        "avatar": "/catalog/image/characters/cat-1508",
+        "catalog_id": 1508
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "쿠모키리(曇斬)",
+        "icon": "/catalog/image/weapons/w-4f0f560fdc7c",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2.8 버전 업데이트 이후",
+    "end_date": "2025-12-11 10:59",
+    "id": "2.8-p1"
+  },
+  {
+    "version": "2.8",
+    "phase": 2,
+    "banner_name": "고요 속에 들리는 속삭임",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "페비",
+        "avatar": "/catalog/image/characters/cat-1506",
+        "catalog_id": 1506
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "광휘의 찬송가",
+        "icon": "/catalog/image/weapons/w-c58b0c4f13a3",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.8 버전 업데이트 이후",
+    "end_date": "2025-12-11 10:59",
+    "id": "2.8-p2"
+  },
+  {
+    "version": "2.8",
+    "phase": 3,
+    "banner_name": "영원히 끝나지 않는 슬픈 노래",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "플로로",
+        "avatar": "/catalog/image/characters/cat-1608",
+        "catalog_id": 1608
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "잊혀진 피안의 슬픈 악장",
+        "icon": "/catalog/image/weapons/w-b3bab964312b",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2025-12-11 11:00",
+    "end_date": "2025-12-24 12:59",
+    "id": "2.8-p3"
+  },
+  {
+    "version": "2.8",
+    "phase": 4,
+    "banner_name": "바다를 비추는 꿈",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "칸타렐라",
+        "avatar": "/catalog/image/characters/cat-1607",
+        "catalog_id": 1607
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "바다의 속삭임",
+        "icon": "/catalog/image/weapons/w-7da389b5b52c",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2025-12-11 11:00",
+    "end_date": "2025-12-24 12:59",
+    "id": "2.8-p4"
+  },
+  {
+    "version": "3.4",
+    "phase": 1,
+    "banner_name": "달 위를 거니는 꿈",
+    "is_rerun": false,
+    "is_collab": true,
+    "characters": [
+      {
+        "name_ko": "루시",
+        "avatar": "/catalog/image/characters/cat-1511",
+        "catalog_id": 1511
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "스펙트럴 트리거",
+        "icon": "/catalog/image/weapons/w-9a07ce19547a",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "3.4 버전 업데이트 이후",
+    "end_date": "2026-07-09 12:59",
+    "id": "3.4-collab-p1"
+  },
+  {
+    "version": "3.4",
+    "phase": 2,
+    "banner_name": "잿불 속 다시 깨어난 분노",
+    "is_rerun": false,
+    "is_collab": true,
+    "characters": [
+      {
+        "name_ko": "레베카",
+        "avatar": "/catalog/image/characters/cat-1308",
+        "catalog_id": 1308
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "스컬 스래셔",
+        "icon": "/catalog/image/weapons/w-bbebb3c37fe7",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "3.4 버전 업데이트 이후",
+    "end_date": "2026-07-09 12:59",
+    "id": "3.4-collab-p2"
+  },
+  {
+    "version": "3.0",
+    "phase": 5,
+    "banner_name": "실추되지 않는 태양관",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "아우구스타",
+        "avatar": "/catalog/image/characters/cat-1306",
+        "catalog_id": 1306
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "천둥벼락을 다스리는 권능",
+        "icon": "/catalog/image/weapons/w-6fefbda96d71",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2026-01-15 11:00",
+    "end_date": "2026-02-04 12:59",
+    "id": "3.0-p5"
+  },
+  {
+    "version": "3.0",
+    "phase": 6,
+    "banner_name": "영고성쇠한 달 속을 걷는 나",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "유노",
+        "avatar": "/catalog/image/characters/cat-1410",
+        "catalog_id": 1410
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "세상 만물의 진리",
+        "icon": "/catalog/image/weapons/w-65e83e26dc92",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2026-01-15 11:00",
+    "end_date": "2026-02-04 12:59",
+    "id": "3.0-p6"
+  },
+  {
+    "version": "3.1",
+    "phase": 1,
+    "banner_name": "봄바람을 타고 온 별의 여정",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "에이메스",
+        "avatar": "/catalog/image/characters/cat-1210",
+        "catalog_id": 1210
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "영원한 샛별",
+        "icon": "/catalog/image/weapons/w-cbcc30ce891d",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "3.1 버전 업데이트 이후",
+    "end_date": "2026-02-26 10:59",
+    "id": "3.1-p1"
+  },
+  {
+    "version": "3.1",
+    "phase": 2,
+    "banner_name": "여명의 지평선",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "치사",
+        "avatar": "/catalog/image/characters/cat-1508",
+        "catalog_id": 1508
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "쿠모키리(曇斬)",
+        "icon": "/catalog/image/weapons/w-4f0f560fdc7c",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "3.1 버전 업데이트 이후",
+    "end_date": "2026-02-26 10:59",
+    "id": "3.1-p2"
+  },
+  {
+    "version": "3.1",
+    "phase": 3,
+    "banner_name": "승리가 날 위해 보내는 환호",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "루파",
+        "avatar": "/catalog/image/characters/cat-1207",
+        "catalog_id": 1207
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "불길",
+        "icon": "/catalog/image/weapons/w-2477022b25d2",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "3.1 버전 업데이트 이후",
+    "end_date": "2026-02-26 10:59",
+    "id": "3.1-p3"
+  },
+  {
+    "version": "3.1",
+    "phase": 4,
+    "banner_name": "기나긴 겨울을 넘어",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "루크·헤르센",
+        "avatar": "/catalog/image/characters/cat-1510",
+        "catalog_id": 1510
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "한낮의 의지",
+        "icon": "/catalog/image/weapons/w-53ac86091c7f",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2026-02-26 11:00",
+    "end_date": "2026-03-18 12:59",
+    "id": "3.1-p4"
+  },
+  {
+    "version": "3.1",
+    "phase": 5,
+    "banner_name": "잿더미 속에서",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "갈브레나",
+        "avatar": "/catalog/image/characters/cat-1208",
+        "catalog_id": 1208
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "얽혀진 빛과 그림자",
+        "icon": "/catalog/image/weapons/w-f90b46862676",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2026-02-26 11:00",
+    "end_date": "2026-03-18 12:59",
+    "id": "3.1-p5"
+  },
+  {
+    "version": "3.2",
+    "phase": 1,
+    "banner_name": "룬이 반짝이는 찰나",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "시그리카",
+        "avatar": "/catalog/image/characters/cat-1412",
+        "catalog_id": 1412
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "솔스원의 해석",
+        "icon": "/catalog/image/weapons/w-4ebd19a41e76",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "3.2 버전 업데이트 이후",
+    "end_date": "2026-04-09 10:59",
+    "id": "3.2-p1"
+  },
+  {
+    "version": "3.2",
+    "phase": 2,
+    "banner_name": "끝없는 여정 속 지친 검객",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "구원",
+        "avatar": "/catalog/image/characters/cat-1411",
+        "catalog_id": 1411
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "푸른 의지",
+        "icon": "/catalog/image/weapons/w-05ee2466f95a",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "3.2 버전 업데이트 이후",
+    "end_date": "2026-04-09 10:59",
+    "id": "3.2-p2"
+  },
+  {
+    "version": "3.2",
+    "phase": 3,
+    "banner_name": "언디파인드 스펙트럼",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "린네",
+        "avatar": "/catalog/image/characters/cat-1509",
+        "catalog_id": 1509
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "스펙트럼 블래스터",
+        "icon": "/catalog/image/weapons/w-8f2624eae96d",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2026-04-09 11:00",
+    "end_date": "2026-04-29 12:59",
+    "id": "3.2-p3"
+  },
+  {
+    "version": "3.2",
+    "phase": 4,
+    "banner_name": "명암 경계선 사이",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "젠니",
+        "avatar": "/catalog/image/characters/cat-1507",
+        "catalog_id": 1507
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "불빛의 심판",
+        "icon": "/catalog/image/weapons/w-dfafc6e46796",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2026-04-09 11:00",
+    "end_date": "2026-04-29 12:59",
+    "id": "3.2-p4"
+  },
+  {
+    "version": "3.2",
+    "phase": 5,
+    "banner_name": "고요 속에 들리는 속삭임",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "페비",
+        "avatar": "/catalog/image/characters/cat-1506",
+        "catalog_id": 1506
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "광휘의 찬송가",
+        "icon": "/catalog/image/weapons/w-c58b0c4f13a3",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2026-04-09 11:00",
+    "end_date": "2026-04-29 12:59",
+    "id": "3.2-p5"
+  },
+  {
+    "version": "3.3",
+    "phase": 1,
+    "banner_name": "눈 속에 비친 무수한 미래",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "히유키",
+        "avatar": "/catalog/image/characters/cat-1108",
+        "catalog_id": 1108
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "서린 불꽃",
+        "icon": "/catalog/image/weapons/w-c405b69fbab2",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "3.3 버전 업데이트 이후",
+    "end_date": "2026-05-21 10:59",
+    "id": "3.3-p1"
+  },
+  {
+    "version": "3.3",
+    "phase": 2,
+    "banner_name": "별빛이 닿을 수 없는 곳에 있다 해도",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "모니에",
+        "avatar": "/catalog/image/characters/cat-1209",
+        "catalog_id": 1209
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "별하늘 연산 측정기",
+        "icon": "/catalog/image/weapons/w-6c22ae76eea9",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "3.3 버전 업데이트 이후",
+    "end_date": "2026-05-21 10:59",
+    "id": "3.3-p2"
+  },
+  {
+    "version": "3.3",
+    "phase": 3,
+    "banner_name": "영고성쇠한 달 속을 걷는 나",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "유노",
+        "avatar": "/catalog/image/characters/cat-1410",
+        "catalog_id": 1410
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "세상 만물의 진리",
+        "icon": "/catalog/image/weapons/w-65e83e26dc92",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "3.3 버전 업데이트 이후",
+    "end_date": "2026-05-21 10:59",
+    "id": "3.3-p3"
+  },
+  {
+    "version": "3.3",
+    "phase": 4,
+    "banner_name": "내일에 바치는 거짓말",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "데니아",
+        "avatar": "/catalog/image/characters/cat-1211",
+        "catalog_id": 1211
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "위조된 작은별",
+        "icon": "/catalog/image/weapons/w-a5710286e92f",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2026-05-21 11:00",
+    "end_date": "2026-06-07 12:59",
+    "id": "3.3-p4"
+  },
+  {
+    "version": "3.3",
+    "phase": 5,
+    "banner_name": "여명의 지평선",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "치사",
+        "avatar": "/catalog/image/characters/cat-1508",
+        "catalog_id": 1508
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "쿠모키리(曇斬)",
+        "icon": "/catalog/image/weapons/w-4f0f560fdc7c",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2026-05-21 11:00",
+    "end_date": "2026-06-07 12:59",
+    "id": "3.3-p5"
+  },
+  {
+    "version": "3.3",
+    "phase": 6,
+    "banner_name": "영원히 끝나지 않는 슬픈 노래",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "플로로",
+        "avatar": "/catalog/image/characters/cat-1608",
+        "catalog_id": 1608
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "잊혀진 피안의 슬픈 악장",
+        "icon": "/catalog/image/weapons/w-b3bab964312b",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2026-05-21 11:00",
+    "end_date": "2026-06-07 12:59",
+    "id": "3.3-p6"
+  },
+  {
+    "version": "3.4",
+    "phase": 1,
+    "banner_name": "내일에 인화될 기억",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "루실라",
+        "avatar": "/catalog/image/characters/cat-1109",
+        "catalog_id": 1109
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "프리즈 프레임",
+        "icon": "/catalog/image/weapons/w-0c489661287f",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2026-06-13 11:00",
+    "end_date": "2026-07-09 12:59",
+    "id": "3.4-p1"
+  },
+  {
+    "version": "3.4",
+    "phase": 2,
+    "banner_name": "폭풍이 휩쓴 후에도 계속되는 춤",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카르티시아",
+        "avatar": "/catalog/image/characters/cat-1409",
+        "catalog_id": 1409
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "숙명에 맞서는 관",
+        "icon": "/catalog/image/weapons/w-fe31c541f086",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2026-06-18 11:00",
+    "end_date": "2026-07-09 12:59",
+    "id": "3.4-p2"
+  },
+  {
+    "version": "3.5",
+    "phase": 6,
+    "banner_name": "여정이 남긴 캐릭터 튜닝",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "기염",
+        "avatar": "/catalog/image/characters/cat-1404",
+        "catalog_id": 1404
+      },
+      {
+        "name_ko": "음림",
+        "avatar": "/catalog/image/characters/cat-1302",
+        "catalog_id": 1302
+      },
+      {
+        "name_ko": "금희",
+        "avatar": "/catalog/image/characters/cat-1304",
+        "catalog_id": 1304
+      },
+      {
+        "name_ko": "장리",
+        "avatar": "/catalog/image/characters/cat-1205",
+        "catalog_id": 1205
+      },
+      {
+        "name_ko": "절지",
+        "avatar": "/catalog/image/characters/cat-1105",
+        "catalog_id": 1105
+      },
+      {
+        "name_ko": "상리요",
+        "avatar": "/catalog/image/characters/cat-1305",
+        "catalog_id": 1305
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "청룡의 천장",
+        "icon": "/catalog/image/weapons/w-d71fdf71f5c0",
+        "rarity": 5,
+        "weapon_type": "대검"
+      },
+      {
+        "name_ko": "꼭두각시의 손",
+        "icon": "/catalog/image/weapons/w-d21b1bf50252",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      },
+      {
+        "name_ko": "태평성대",
+        "icon": "/catalog/image/weapons/w-855580d70669",
+        "rarity": 5,
+        "weapon_type": "대검"
+      },
+      {
+        "name_ko": "솟아오르는 화염",
+        "icon": "/catalog/image/weapons/w-4181e2116f93",
+        "rarity": 5,
+        "weapon_type": "직검"
+      },
+      {
+        "name_ko": "옥수 비단",
+        "icon": "/catalog/image/weapons/w-cf63571c1fb6",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      },
+      {
+        "name_ko": "팔방의 천추",
+        "icon": "/catalog/image/weapons/w-4b88ed5e47a5",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "3.5 버전 업데이트 이후",
+    "end_date": "2026-08-19 12:59",
+    "id": "3.5-p6"
+  },
+  {
+    "version": "1.0",
+    "phase": 1,
+    "banner_name": "야밤의 청룡",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "기염",
+        "avatar": "/catalog/image/characters/cat-1404",
+        "catalog_id": 1404
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "청룡의 천장",
+        "icon": "/catalog/image/weapons/w-d71fdf71f5c0",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2024-05-23",
+    "end_date": "2024-06-13",
+    "id": "1.0-p1"
+  },
+  {
+    "version": "1.0",
+    "phase": 2,
+    "banner_name": "뇌우의 광란",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "음림",
+        "avatar": "/catalog/image/characters/cat-1302",
+        "catalog_id": 1302
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "꼭두각시의 손",
+        "icon": "/catalog/image/weapons/w-d21b1bf50252",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2024-06-06 11:00",
+    "end_date": "2024-06-26 12:59",
+    "id": "1.0-p2"
+  },
+  {
+    "version": "1.1",
+    "phase": 1,
+    "banner_name": "눈 속에 트는 새싹",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "금희",
+        "avatar": "/catalog/image/characters/cat-1304",
+        "catalog_id": 1304
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "태평성대",
+        "icon": "/catalog/image/weapons/w-855580d70669",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "1.1 버전 업데이트 이후",
+    "end_date": "2024-07-22 10:59",
+    "id": "1.1-p1"
+  },
+  {
+    "version": "1.1",
+    "phase": 2,
+    "banner_name": "별빛 속의 화염 깃털",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "장리",
+        "avatar": "/catalog/image/characters/cat-1205",
+        "catalog_id": 1205
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "솟아오르는 화염",
+        "icon": "/catalog/image/weapons/w-4181e2116f93",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2024-07-22 11:00",
+    "end_date": "2024-08-14 12:59",
+    "id": "1.1-p2"
+  },
+  {
+    "version": "1.2",
+    "phase": 1,
+    "banner_name": "채색의 운율",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "절지",
+        "avatar": "/catalog/image/characters/cat-1105",
+        "catalog_id": 1105
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "옥수 비단",
+        "icon": "/catalog/image/weapons/w-cf63571c1fb6",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "1.2 버전 업데이트 이후",
+    "end_date": "2024-09-07 10:59",
+    "id": "1.2-p1"
+  },
+  {
+    "version": "1.2",
+    "phase": 2,
+    "banner_name": "별바다의 기관 문명을 찾아서",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "상리요",
+        "avatar": "/catalog/image/characters/cat-1305",
+        "catalog_id": 1305
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "팔방의 천추",
+        "icon": "/catalog/image/weapons/w-4b88ed5e47a5",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2024-09-07 11:00",
+    "end_date": "2024-09-28 12:59",
+    "id": "1.2-p2"
+  },
+  {
+    "version": "1.3",
+    "phase": 1,
+    "banner_name": "그윽한 바닷물이 마를 때까지",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "파수인",
+        "avatar": "/catalog/image/characters/cat-1505",
+        "catalog_id": 1505
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "뭇별의 교향곡",
+        "icon": "/catalog/image/weapons/w-258d5003993c",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "1.3 버전 업데이트 이후",
+    "end_date": "2024-10-24 10:59",
+    "id": "1.3-p1"
+  },
+  {
+    "version": "1.3",
+    "phase": 2,
+    "banner_name": "야밤의 청룡",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "기염",
+        "avatar": "/catalog/image/characters/cat-1404",
+        "catalog_id": 1404
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "청룡의 천장",
+        "icon": "/catalog/image/weapons/w-d71fdf71f5c0",
+        "rarity": 5,
+        "weapon_type": "대검"
+      }
+    ],
+    "start_date": "2024-10-24 11:00",
+    "end_date": "2024-11-13 12:59",
+    "id": "1.3-p2"
+  },
+  {
+    "version": "1.4",
+    "phase": 1,
+    "banner_name": "미로 속에서 마주하는 마음",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카멜리아",
+        "avatar": "/catalog/image/characters/cat-1603",
+        "catalog_id": 1603
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "날카로운 봄",
+        "icon": "/catalog/image/weapons/w-4b0b7bb010b5",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "1.4 버전 업데이트 이후",
+    "end_date": "2024-12-12 10:59",
+    "id": "1.4-p1"
+  },
+  {
+    "version": "3.5",
+    "phase": 2,
+    "banner_name": "언디파인드 스펙트럼",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "린네",
+        "avatar": "/catalog/image/characters/cat-1509",
+        "catalog_id": 1509
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "스펙트럼 블래스터",
+        "icon": "/catalog/image/weapons/w-8f2624eae96d",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "3.5 버전 업데이트 이후",
+    "end_date": "2026-07-30 10:59",
+    "id": "3.5-p2"
+  },
+  {
+    "version": "1.4",
+    "phase": 2,
+    "banner_name": "뇌우의 광란",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "음림",
+        "avatar": "/catalog/image/characters/cat-1302",
+        "catalog_id": 1302
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "꼭두각시의 손",
+        "icon": "/catalog/image/weapons/w-d21b1bf50252",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2024-12-12 11:00",
+    "end_date": "2025-01-01 12:59",
+    "id": "1.4-p2"
+  },
+  {
+    "version": "1.4",
+    "phase": 3,
+    "banner_name": "별바다의 기관 문명을 찾아서",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "상리요",
+        "avatar": "/catalog/image/characters/cat-1305",
+        "catalog_id": 1305
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "팔방의 천추",
+        "icon": "/catalog/image/weapons/w-4b88ed5e47a5",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "2024-12-12 11:00",
+    "end_date": "2025-01-01 12:59",
+    "id": "1.4-p3"
+  },
+  {
+    "version": "2.0",
+    "phase": 1,
+    "banner_name": "또 다른 불협화음",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "카를로타",
+        "avatar": "/catalog/image/characters/cat-1107",
+        "catalog_id": 1107
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "죽음과 춤",
+        "icon": "/catalog/image/weapons/w-3076bc6b37c1",
+        "rarity": 5,
+        "weapon_type": "권총"
+      }
+    ],
+    "start_date": "2.0 버전 업데이트 이후",
+    "end_date": "2025-01-23 10:59",
+    "id": "2.0-p1"
+  },
+  {
+    "version": "2.0",
+    "phase": 2,
+    "banner_name": "채색의 운율",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "절지",
+        "avatar": "/catalog/image/characters/cat-1105",
+        "catalog_id": 1105
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "옥수 비단",
+        "icon": "/catalog/image/weapons/w-cf63571c1fb6",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2.0 버전 업데이트 이후",
+    "end_date": "2025-01-23 10:59",
+    "id": "2.0-p2"
+  },
+  {
+    "version": "3.5",
+    "phase": 1,
+    "banner_name": "깃털에 실은 만물의 소리",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "양양·현령",
+        "avatar": "/catalog/image/characters/1610",
+        "catalog_id": 1610
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "아득히 푸른 하늘",
+        "icon": "/catalog/image/weapons/21020096",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "3.5 버전 업데이트 이후",
+    "end_date": "2026-07-30 10:59",
+    "id": "3.5-p1"
+  },
+  {
+    "version": "3.5",
+    "phase": 3,
+    "banner_name": "기나긴 겨울을 넘어",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "루크·헤르센",
+        "avatar": "/catalog/image/characters/cat-1510",
+        "catalog_id": 1510
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "한낮의 의지",
+        "icon": "/catalog/image/weapons/w-53ac86091c7f",
+        "rarity": 5,
+        "weapon_type": "권갑"
+      }
+    ],
+    "start_date": "3.5 버전 업데이트 이후",
+    "end_date": "2026-07-30 10:59",
+    "id": "3.5-p3"
+  },
+  {
+    "version": "3.5",
+    "phase": 4,
+    "banner_name": "단비에서 전하는 연꽃 바람의 축복",
+    "is_rerun": false,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "수수",
+        "avatar": "/catalog/image/characters/1110",
+        "catalog_id": 1110
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "노을에 깃든 이슬",
+        "icon": "/catalog/image/weapons/21050096",
+        "rarity": 5,
+        "weapon_type": "증폭기"
+      }
+    ],
+    "start_date": "2026-07-30 11:00",
+    "end_date": "2026-08-19 12:59",
+    "id": "3.5-p4"
+  },
+  {
+    "version": "3.5",
+    "phase": 5,
+    "banner_name": "봄바람을 타고 온 별의 여정",
+    "is_rerun": true,
+    "is_collab": false,
+    "characters": [
+      {
+        "name_ko": "에이메스",
+        "avatar": "/catalog/image/characters/cat-1210",
+        "catalog_id": 1210
+      }
+    ],
+    "weapons": [
+      {
+        "name_ko": "영원한 샛별",
+        "icon": "/catalog/image/weapons/w-cbcc30ce891d",
+        "rarity": 5,
+        "weapon_type": "직검"
+      }
+    ],
+    "start_date": "2026-07-30 11:00",
+    "end_date": "2026-08-19 12:59",
+    "id": "3.5-p5"
+  }
+]

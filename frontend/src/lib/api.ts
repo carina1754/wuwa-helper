@@ -1,11 +1,11 @@
 import { API_BASE_URL } from "./constants";
+import { getNvidiaKey, getNvidiaModel } from "./settings";
 import type {
   AiChatResponse,
   AiMessage,
   AiProfile,
   AiRecommendationCreate,
   AiRecommendationRecord,
-  BuildRule,
   CodexEcho,
   CodexResonator,
   CodexWeapon,
@@ -13,11 +13,8 @@ import type {
   PickupBanner,
   SonataSet,
   SiteUpdateEntry,
-  SnapshotDamageRequestBody,
-  SnapshotDamageResult,
   TeamCalcRequestBody,
   TeamCalcResult,
-  VisionExtractionResult,
 } from "./types";
 
 export class ApiError extends Error {
@@ -35,14 +32,14 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   return response.json() as Promise<T>;
 }
 
-export function extractVision(file: File): Promise<VisionExtractionResult> {
-  const form = new FormData();
-  form.append("file", file);
-  return request("/vision/extract", { method: "POST", body: form });
-}
-
-export function getRules(): Promise<BuildRule[]> {
-  return request("/rules");
+/** BYO 키/모델을 헤더로 실어 보낸다. 없으면 서버가 mock/기본값으로 폴백. */
+function aiHeaders(extra?: Record<string, string>): Record<string, string> {
+  const headers: Record<string, string> = { ...extra };
+  const key = getNvidiaKey();
+  const model = getNvidiaModel();
+  if (key) headers["X-LLM-Key"] = key;
+  if (model) headers["X-LLM-Model"] = model;
+  return headers;
 }
 
 export function getPickupBanners(): Promise<PickupBanner[]> {
@@ -86,27 +83,15 @@ export function teamCalculate(body: TeamCalcRequestBody): Promise<TeamCalcResult
   });
 }
 
-// Absolute damage from a real-account OCR snapshot — the "내 실제 빌드 기준" differentiator.
-export function snapshotDamage(body: SnapshotDamageRequestBody): Promise<SnapshotDamageResult> {
-  return request("/sim/snapshot-damage", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
-  });
-}
-
-export function saveRules(rules: BuildRule[]): Promise<BuildRule[]> {
-  return request("/rules", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(rules),
-  });
+/** BYO 키로 NVIDIA(OpenAI 호환) 채팅 모델 목록 조회. */
+export function getModels(): Promise<string[]> {
+  return request("/ai/models", { headers: aiHeaders() });
 }
 
 export function aiChat(messages: AiMessage[], profile: AiProfile): Promise<AiChatResponse> {
   return request("/ai/chat", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: aiHeaders({ "Content-Type": "application/json" }),
     body: JSON.stringify({ messages, profile }),
   });
 }
@@ -130,16 +115,4 @@ export async function deleteRecommendation(id: string): Promise<void> {
     const text = await response.text();
     throw new ApiError(text || "삭제에 실패했습니다.", response.status);
   }
-}
-
-export function exportData(): Promise<Record<string, unknown>> {
-  return request("/export");
-}
-
-export function importData(payload: Record<string, unknown>): Promise<{ rules: number; characters?: number; history: number }> {
-  return request("/import", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
-  });
 }

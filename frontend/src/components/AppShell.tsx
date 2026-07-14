@@ -1,6 +1,5 @@
 "use client";
 
-import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useState, type ReactNode } from "react";
 import { TABS, type AppTab } from "@/lib/constants";
@@ -34,10 +33,7 @@ function toggleTheme() {
 export function AppShell({ renderTab }: AppShellProps) {
   const [activeTab, setActiveTab] = useState<AppTab>("Updates");
   const [supportOpen, setSupportOpen] = useState(false);
-  const { data: session, status } = useSession();
   const { t, language, setLanguage } = useLanguage();
-  const isSignedIn = status === "authenticated";
-  const isAdmin = session?.user?.role === "admin";
 
   const selectTab = (tab: AppTab) => {
     setActiveTab(tab);
@@ -111,33 +107,6 @@ export function AppShell({ renderTab }: AppShellProps) {
                   <path d="m3 11 18-5v12L3 14v-3z" />
                   <path d="M11.6 16.8a3 3 0 1 1-5.8-1.6" />
                 </svg>
-              </button>
-              {isAdmin ? (
-                <Link className="iconbtn" href="/admin" aria-label={t.app.admin} title={t.app.admin}>
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                    <path d="M12 2 4 5v6c0 5 3.4 8.5 8 10 4.6-1.5 8-5 8-10V5l-8-3z" />
-                  </svg>
-                </Link>
-              ) : null}
-              <button
-                type="button"
-                className="login"
-                onClick={() => {
-                  if (isSignedIn) {
-                    void signOut({ callbackUrl: "/" });
-                    return;
-                  }
-
-                  void signIn("google", { callbackUrl: "/" });
-                }}
-              >
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" />
-                  <path d="M10 17l5-5-5-5M15 12H3" />
-                </svg>
-                <span>
-                  {isSignedIn ? session.user?.name ?? session.user?.email ?? t.app.signOut : status === "loading" ? t.app.loading : t.app.signIn}
-                </span>
               </button>
             </div>
           </div>

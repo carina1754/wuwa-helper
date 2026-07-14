@@ -1,0 +1,133 @@
+[
+  {
+    "id": "release-1-0-1-2026-07-12",
+    "date": "2026-07-12",
+    "version": "1.0.1",
+    "title_ko": "1.0.1 · 3.5 신규 에코 · AI 빌딩 개선",
+    "title_en": "1.0.1 · New 3.5 Echoes · AI Build Improvements",
+    "title_ja": "1.0.1・3.5新エコー・AIビルド改善",
+    "title_zhHans": "1.0.1 · 3.5新声骸 · AI搭配优化",
+    "description_en": "Reflects Wuthering Waves 3.5 new content and usability improvements.\n• New 3.5 echoes — added 20 echoes and 3 new sonatas (Song of Feathered Trace, Heart of Evil's Purge, Lamp of Nether Road) to the Codex and party building.\n• Improved stat accuracy — Forte (skill-tree) fixed stat bonuses are now reflected, so Party and measured-damage figures come closer to the in-game panel.\n• AI main-DPS designation — you can pick any character as the main DPS directly in party building (built and evaluated regardless of its role tag).\n• Improved AI name matching — it now precisely tells apart similar names like 'Chisa' and 'Chixia' in chat.\n• Banner schedule fix — corrected the 3.5 banner rotation schedule (July 31 → 30).",
+    "description_ja": "鳴潮3.5の新コンテンツと使いやすさの改善を反映しました。\n• 3.5新エコー — エコー20種と新ソナタ3種(羽舞う塵世の歌・煞を祓う浄心・冥夜を導く灯)を図鑑・パーティビルドに反映しました。\n• ステータス精度向上 — フォルテ(スキルツリー)の固定ステータスボーナスを反映し、パーティ・実測ダメージの数値がゲーム内パネルにより近くなります。\n• AIメインアタッカー指定 — パーティビルドで好きなキャラクターをメインアタッカーに直接指定できます(ロールタグに関係なくビルド・評価)。\n• AI名前識別の改善 — チャットで「チサ」と「熾霞」のような似た名前を正確に区別します。\n• ピックアップ日程の訂正 — 3.5バナーの切り替え日程を修正しました(7月31日 → 30日)。",
+    "description_zhHans": "已反映鸣潮3.5新内容与易用性改进。\n• 3.5新声骸 — 将20种声骸和3种新合鸣(羽落空尘之歌·清邪荡煞之心·冥途夜行之灯)加入图鉴·队伍搭配。\n• 属性准确度提升 — 计入共鸣回路(技能树)的固定属性加成,使队伍·实测伤害数值更接近游戏内面板。\n• AI主C指定 — 可在队伍搭配中直接将任意角色指定为主C(不受职责标签限制进行配装·评估)。\n• AI名称识别优化 — 在对话中能准确区分「奇莎」和「炽霞」等相近的名称。\n• 抽卡日程订正 — 修正了3.5卡池切换日程(7月31日 → 30日)。",
+    "description_ko": "명조 3.5 신규 콘텐츠와 사용성 개선을 반영했습니다.\n• 3.5 신규 에코 — 에코 20종과 신규 소나타 3종(내려앉은 깃털의 노래·악을 씻어내는 마음·황천길을 밝히는 등불)을 도감·파티 빌딩에 반영했습니다.\n• 스탯 정확도 향상 — 포르테(스킬트리) 고정 스탯 보너스를 반영해 파티·실측 딜 수치가 인게임 패널에 더 가깝게 나옵니다.\n• AI 메인 딜러 지정 — 파티 빌딩에서 원하는 캐릭터를 메인 딜러로 직접 지정할 수 있습니다(역할 태그와 무관하게 빌드·평가).\n• AI 이름 구분 개선 — 채팅에서 '치사'와 '치샤'처럼 비슷한 이름을 정확히 구분합니다.\n• 픽업 일정 정정 — 3.5 배너 전환 일정을 바로잡았습니다(7월 31일 → 30일)."
+  },
+  {
+    "id": "release-1-0-0-2026-07-10",
+    "date": "2026-07-10",
+    "version": "1.0.0",
+    "title_ko": "1.0.0 정식 버전 출시",
+    "title_en": "1.0.0 Official Release",
+    "title_ja": "1.0.0 正式版リリース",
+    "title_zhHans": "1.0.0 正式版发布",
+    "description_en": "WuWa Helper has reached its official release. It brings together all the updates so far to provide the features below reliably.\n• Party damage calculation — place 3 Resonators and the server engine calculates total party damage and contributions. Supports automatic team-shared buffs, Resonance Chain (Sequence) reflection, a full-uptime option, and enemy-condition settings.\n• Codex — provides info on all Resonators, weapons, and echoes, along with skill multipliers (per-level totals).\n• Banner schedule — see the pickup banner schedule for each version at a glance.\n• Measured damage — upload a character screenshot and it calculates absolute damage reflecting your actual echo sub-stats.\n• AI Build — tell it your owned characters and goals, and the AI recommends builds and parties and saves them as records. You can search and pick characters by icon, and enter your play style freely.\n• User guide — the ? icon at the top explains how to use every feature, with screenshots.\n• Security & performance — hardened protection for the admin API and greatly reduced initial load size.\nThank you for using it. Please leave improvement requests and bug reports on Discord.",
+    "description_ja": "鳴潮ヘルパーが正式版になりました。これまでのアップデートをまとめ、以下の機能を安定して提供します。\n• パーティダメージ計算 — 共鳴者3人を編成すると、サーバーエンジンがパーティ全体のダメージと貢献度を計算します。チーム共有バフの自動適用、共鳴チェーン(シーケンス)反映、フルアップタイムオプション、敵条件設定に対応します。\n• 図鑑 — 全共鳴者・武器・エコー情報とスキル倍率(レベル別合計)を提供します。\n• ピックアップ日程 — バージョンごとのピックアップバナー日程を一目で確認できます。\n• 実測ダメージ — キャラクター情報のスクリーンショットをアップロードすると、実際のエコーサブステータスを反映した絶対ダメージを計算します。\n• AIビルド — 所持キャラクターと目標を伝えると、AIがビルドとパーティを推薦し、記録として保存します。キャラクターはアイコンで検索・選択でき、プレイスタイルは自由に入力できます。\n• 利用ガイド — 上部の?アイコンから、スクリーンショット付きで全機能の使い方を確認できます。\n• セキュリティ・パフォーマンス — 管理用APIの保護を強化し、初回読み込み容量を大幅に削減しました。\nご利用ありがとうございます。改善のご要望やバグ報告はDiscordへお寄せください。",
+    "description_zhHans": "鸣潮助手已进入正式版。它汇集了此前的所有更新,稳定地提供以下功能。\n• 队伍伤害计算 — 编入3名共鸣者后,服务器引擎会计算队伍整体伤害与贡献度。支持队伍共享增益自动生效、共鸣链(序列)反映、满轴选项及敌人条件设置。\n• 图鉴 — 提供全部共鸣者·武器·声骸信息以及技能倍率(按等级汇总)。\n• 抽卡日程 — 一目了然地查看各版本的抽卡卡池日程。\n• 实测伤害 — 上传角色信息截图,即可计算反映实际声骸副属性的绝对伤害。\n• AI搭配 — 告知持有角色与目标后,AI会推荐配装与队伍并保存为记录。角色可通过图标搜索·选择,游玩风格可自由输入。\n• 使用指南 — 通过顶部的?图标,可查看带截图的全部功能使用方法。\n• 安全·性能 — 强化了管理用API的保护,并大幅减小了首次加载体积。\n感谢使用。改进建议与漏洞反馈请留言至Discord。",
+    "description_ko": "띵조 AI가 정식 버전이 되었습니다. 그동안의 업데이트를 모아 아래 기능을 안정적으로 제공합니다.\n• 파티 딜 계산 — 공명자 3명을 편성하면 서버 엔진이 파티 전체 피해와 기여도를 계산합니다. 팀 공유 버프 자동 적용, 공명 사슬(시퀀스) 반영, 풀 업타임 옵션, 적 조건 설정을 지원합니다.\n• 도감 — 전 공명자·무기·에코 정보와 스킬 배율(레벨별 총합)을 제공합니다.\n• 픽업 일정표 — 버전별 픽업 배너 일정을 한눈에 볼 수 있습니다.\n• 실측 딜 — 캐릭터 정보 스크린샷을 올리면 실제 에코 부가옵션을 반영한 절대 피해를 계산합니다.\n• AI 빌딩 — 보유 캐릭터와 목표를 알려주면 AI가 빌드와 파티를 추천하고 기록으로 저장합니다. 캐릭터는 아이콘으로 검색·선택할 수 있고, 플레이 스타일은 직접 입력할 수 있습니다.\n• 이용 가이드 — 상단 ? 아이콘에서 스크린샷과 함께 모든 기능의 사용법을 확인할 수 있습니다.\n• 보안·성능 — 관리용 API 보호를 강화하고 첫 로딩 용량을 크게 줄였습니다.\n이용해 주셔서 감사합니다. 개선 요청과 버그 제보는 디스코드로 남겨주세요."
+  },
+  {
+    "id": "release-0-4-4-2026-07-10",
+    "date": "2026-07-10",
+    "version": "0.4.4",
+    "title_ko": "0.4.4 업데이트",
+    "title_en": "0.4.4 Update",
+    "title_ja": "0.4.4 アップデート",
+    "title_zhHans": "0.4.4 更新",
+    "description_en": "• Added a 'full uptime' option to party damage calculation (on by default). When on, the conditional buffs from Resonance Chain (Sequence), weapons, and traits are applied on an ideal rotation basis, so the result is close to real maximum damage.\n• Previously these conditional effects were omitted, so total damage showed much lower than reality. In particular, the per-stage damage increase of the Resonance Chain (Sequence) is now reflected correctly, making calculations accurate for characters whose damage rises sharply at higher sequences.\n• If you want a conservative figure closer to a real account, turn 'full uptime' off to calculate with always-on buffs only.",
+    "description_ja": "• パーティダメージ計算に「フルアップタイム」オプションを追加しました(デフォルトON)。ONの場合、共鳴チェーン(シーケンス)・武器・特性の条件付きバフを理想的なローテーション基準で反映し、実際の最大ダメージに近づけて計算します。\n• 以前はこれらの条件付き効果が抜けており、総ダメージが実際よりも大きく低く表示されていました。特に共鳴チェーン(シーケンス)の段階別ダメージ増加が正常に反映され、上位シーケンスでダメージが大きく伸びるキャラクターの計算が正確になりました。\n• 実際のアカウントに近い保守的な数値を見たい場合は、「フルアップタイム」をOFFにして常時発動バフのみで計算できます。",
+    "description_zhHans": "• 在队伍伤害计算中新增「满轴」选项(默认开启)。开启时,会以理想循环为基准计入共鸣链(序列)·武器·特性的条件类增益,使结果更接近实际最大伤害。\n• 此前由于缺少这些条件类效果,总伤害显示得远低于实际。尤其是共鸣链(序列)的分阶段伤害提升现已正常计入,使高序列下伤害大幅提升的角色的计算更加准确。\n• 若想查看更接近真实账号的保守数值,可关闭「满轴」,仅以常驻增益进行计算。",
+    "description_ko": "• 파티 딜 계산에 '풀 업타임' 옵션을 추가했습니다(기본 켜짐). 켜져 있으면 공명 사슬(시퀀스)·무기·특성의 조건부 버프를 이상적인 로테이션 기준으로 반영해 실제 최대 딜에 가깝게 계산합니다.\n• 이전에는 이러한 조건부 효과가 빠져 총딜이 실제보다 크게 낮게 표시됐습니다. 특히 공명 사슬(시퀀스) 단계별 피해 증가가 정상 반영되어, 상위 시퀀스에서 딜이 크게 오르는 캐릭터의 계산이 정확해졌습니다.\n• 실제 계정의 보수적인 수치를 보고 싶다면 '풀 업타임'을 꺼서 상시 발동 버프만으로 계산할 수 있습니다."
+  },
+  {
+    "id": "release-0-4-3-2026-07-10",
+    "date": "2026-07-10",
+    "version": "0.4.3",
+    "title_ko": "0.4.3 업데이트",
+    "title_en": "0.4.3 Update",
+    "title_ja": "0.4.3 アップデート",
+    "title_zhHans": "0.4.3 更新",
+    "description_en": "• Automatic team-shared buffs: just place characters in your party, and the shared buffs each character grants the whole team (Concerto, inherent traits, Forte Circuit, etc.) plus the debuffs they apply to enemies are automatically reflected in damage calculations. Team buffs you used to enter by hand are now handled for you.\n• Organized the team-shared buffs of all 56 Resonators based on real game data. Conditional and summon-mechanic effects that are hard to quantify are shown as separate notes.\n• Buffs are now applied only to their matching skill type (Basic Attack, Heavy Attack, Resonance Skill, Resonance Liberation) to prevent overestimation.\n• Added an 'auto-applied team buffs' section to each member card in the party editor so you can see at a glance which buffs are in effect.",
+    "description_ja": "• チーム共有バフの自動適用:パーティにキャラクターを編成するだけで、各キャラクターがパーティ全体に与える共有バフ(コンチェルト・固有特性・共鳴回路など)と敵に付与するデバフが自動でダメージ計算に反映されます。以前は手動で入力していたチームバフを自動で処理します。\n• 56人全共鳴者のチーム共有バフを実際のゲームデータ基準で整理しました。数値化が難しい条件付き・召喚メカニズム効果は別途の案内で表記します。\n• スキルタイプ別(通常攻撃・強攻撃・共鳴スキル・共鳴解放)のバフは該当タイプのスキルにのみ正確に適用されるようにし、過大計算を防止しました。\n• パーティ編集画面の各メンバーカードに「自動適用チームバフ」項目を追加し、どのバフが反映されたかをすぐ確認できます。",
+    "description_zhHans": "• 队伍共享增益自动生效:只要将角色编入队伍,各角色为全队提供的共享增益(协奏·固有特性·共鸣回路等)以及施加给敌人的减益都会自动计入伤害计算。以往需要手动输入的队伍增益现在会自动处理。\n• 以实际游戏数据为准整理了全部56名共鸣者的队伍共享增益。难以量化的条件类·召唤机制类效果以单独说明标注。\n• 各技能类型(普通攻击·重击·共鸣技能·共鸣解放)的增益现仅精确应用于对应类型的技能,避免了数值高估。\n• 在队伍编辑器的每张成员卡中新增「自动生效队伍增益」项,可一眼查看哪些增益已计入。",
+    "description_ko": "• 팀 공유 버프 자동 적용: 파티에 캐릭터를 편성하기만 하면, 각 캐릭터가 파티 전체에 주는 공유 버프(반주·고유 특성·공명 회로 등)와 적에게 거는 디버프가 자동으로 딜 계산에 반영됩니다. 이전에는 직접 입력해야 했던 팀 버프를 이제 자동으로 처리합니다.\n• 56명 전 공명자의 팀 공유 버프를 실제 게임 데이터 기준으로 정리했습니다. 수치화가 어려운 조건부·소환 메커니즘 효과는 별도 안내로 표기합니다.\n• 스킬 유형별(일반 공격·강공격·공명 스킬·공명 해방) 버프는 해당 유형의 스킬에만 정확히 적용되도록 반영해 과대 계산을 방지했습니다.\n• 파티 편집기의 각 멤버 카드에 '자동 적용 팀 버프' 항목을 추가해, 어떤 버프가 반영됐는지 바로 확인할 수 있습니다."
+  },
+  {
+    "id": "release-0-4-2-2026-07-10",
+    "date": "2026-07-10",
+    "version": "0.4.2",
+    "title_ko": "0.4.2 업데이트",
+    "title_en": "0.4.2 Update",
+    "title_ja": "0.4.2 アップデート",
+    "title_zhHans": "0.4.2 更新",
+    "description_en": "• Resonance Chain applied: each character's Resonance Chain (Sequence) stages S0–S6 are reflected in Party and build damage calculations. The per-stage effect values are based on real game data, and conditional or mechanic effects that are hard to quantify are noted separately.\n• Added a Resonance Chain stage (S0–S6) selector to the party editor.\n• Codex cleanup: merged the duplicated skill descriptions of Rover: Spectro into one.",
+    "description_ja": "• 共鳴チェーン反映:キャラクターごとの共鳴チェーン(シーケンス)S0〜S6段階をパーティ・ビルドのダメージ計算に反映します。各段階の効果数値は実際のゲームデータに基づき、数値化が難しい条件付き・メカニズム効果は別途表記します。\n• パーティ編集画面に共鳴チェーン段階(S0〜S6)の選択機能を追加しました。\n• 図鑑整理:漂泊者・回折で重複表示されていたスキル説明を一つに整理しました。",
+    "description_zhHans": "• 共鸣链生效:将各角色的共鸣链(序列)S0~S6阶段计入队伍·配装伤害计算。各阶段效果数值以实际游戏数据为准,难以量化的条件类·机制类效果另行标注。\n• 在队伍编辑器中新增共鸣链阶段(S0~S6)选择功能。\n• 图鉴整理:将漂泊者·衍射重复显示的技能说明合并为一条。",
+    "description_ko": "• 공명 사슬 반영: 캐릭터별 공명 사슬(시퀀스) S0~S6 단계를 파티·빌드 딜 계산에 반영합니다. 각 단계 효과 수치는 실제 게임 데이터를 기준으로 하며, 수치화가 어려운 조건부·메커니즘 효과는 별도로 표기합니다.\n• 파티 편집기에 공명 사슬 단계(S0~S6) 선택 기능을 추가했습니다.\n• 도감 정리: 방랑자·회절의 중복 표시되던 스킬 설명을 하나로 정리했습니다."
+  },
+  {
+    "id": "release-0-4-1-2026-07-10",
+    "date": "2026-07-10",
+    "version": "0.4.1",
+    "title_ko": "0.4.1 업데이트",
+    "title_en": "0.4.1 Update",
+    "title_ja": "0.4.1 アップデート",
+    "title_zhHans": "0.4.1 更新",
+    "description_en": "• New characters: added Yangyang: Xuanling, Suisui, and Rover: Electro, and tidied up the Rover list.\n• New weapons: added 'Azure Oath' and 'Firstlight's Herald'.\n• Codex icons: replaced character icons with sharper, high-resolution images.\n• Data accuracy: recalibrated character, weapon, echo, and sonata values to the game's 3.5.0 data for more accurate calculations.",
+    "description_ja": "• 新キャラクター:秧秧・玄翎、穂穂、漂泊者・電導を追加し、漂泊者(ローバー)一覧を整理しました。\n• 新武器:「天つ蒼淵」「夕霞の飲露」を追加しました。\n• 図鑑アイコン:キャラクターアイコンをより鮮明な高解像度画像に差し替えました。\n• データ精度:キャラクター・武器・エコー・ソナタの数値をゲーム3.5.0データ基準で再整備し、計算精度を高めました。",
+    "description_zhHans": "• 新角色:新增秧秧·玄翎、穗穗、漂泊者·导电,并整理了漂泊者名单。\n• 新武器:新增「天之苍苍」「栖霞饮露」。\n• 图鉴图标:将角色图标替换为更清晰的高分辨率图片。\n• 数据准确度:以游戏3.5.0数据为准重新整理角色·武器·声骸·合鸣数值,提升计算准确度。",
+    "description_ko": "• 신규 캐릭터: 양양·현령, 수수, 방랑자·전도를 추가하고 방랑자(로버) 목록을 정리했습니다.\n• 신규 무기: '아득히 푸른 하늘', '노을에 깃든 이슬'을 추가했습니다.\n• 도감 아이콘: 캐릭터 아이콘을 더 선명한 고해상도 이미지로 교체했습니다.\n• 데이터 정확도: 캐릭터·무기·에코·소나타 수치를 게임 3.5.0 데이터 기준으로 재정비해 계산 정확도를 높였습니다."
+  },
+  {
+    "id": "release-0-4-0-2026-07-09",
+    "date": "2026-07-09",
+    "version": "0.4.0",
+    "title_ko": "0.4.0 업데이트",
+    "title_en": "0.4.0 Update",
+    "title_ja": "0.4.0 アップデート",
+    "title_zhHans": "0.4.0 更新",
+    "description_en": "• AI Build: get conversational recommendations for characters, weapons, echoes, sonatas, and upgrade order. Upload a screenshot and your owned characters are recognized automatically.\n• Party damage index: computes the relative damage index of a recommended lineup and shows each character's contribution (%). It's a comparison figure based on standard-build assumptions.\n• Save & delete records: save recommendations you like to the 'History' tab and delete the ones you don't need.\n• UI cleanup: removed the in-progress dashboard and renamed the service to 'WuWa Helper'.",
+    "description_ja": "• AIビルド:キャラクター・武器・エコー・ソナタと育成順序を対話形式で提案します。スクリーンショットをアップロードすると所持キャラクターを自動認識します。\n• パーティダメージ指数:推薦編成の相対ダメージ指数を計算し、キャラクターごとの貢献度(%)とともに表示します。標準ビルドを前提とした比較用の数値です。\n• 記録の保存・削除:気に入った推薦を「履歴」タブに保存し、不要な記録は削除できます。\n• 画面整理:準備中だったダッシュボードを整理し、サービス名を「鳴潮ヘルパー」に変更しました。",
+    "description_zhHans": "• AI搭配:以对话形式推荐角色·武器·声骸·合鸣及养成顺序。上传截图即可自动识别持有角色。\n• 队伍伤害指数:计算推荐阵容的相对伤害指数,并显示各角色的贡献度(%)。这是基于标准配装假设的对比数值。\n• 记录保存·删除:可将喜欢的推荐保存到「记录」标签页,并删除不需要的记录。\n• 界面整理:整理了筹备中的仪表盘,并将服务名称更改为「鸣潮助手」。",
+    "description_ko": "• AI 빌딩: 대화형으로 캐릭터·무기·에코·소나타와 업그레이드 순서를 추천받을 수 있습니다. 스크린샷을 올리면 보유 캐릭터를 자동으로 인식합니다.\n• 파티 딜 지수: 추천 조합의 상대 딜 지수를 계산해 캐릭터별 기여도(%)와 함께 보여줍니다. 표준 빌드 가정 기반의 비교용 수치입니다.\n• 기록 저장·삭제: 마음에 드는 추천을 '기록' 탭에 저장하고, 필요 없는 기록은 삭제할 수 있습니다.\n• 화면 정리: 준비 중이던 대시보드를 정리하고 서비스 이름을 '띵조 AI'로 변경했습니다."
+  },
+  {
+    "id": "release-0-3-1-2026-07-08",
+    "date": "2026-07-08",
+    "version": "0.3.1",
+    "title_ko": "0.3.1 업데이트",
+    "title_en": "0.3.1 Update",
+    "title_ja": "0.3.1 アップデート",
+    "title_zhHans": "0.3.1 更新",
+    "description_en": "• Damage calculator: compute normal, anomaly, and Harmony Break damage in the Party tab, and adjust enemy level, resistance, DEF ignore and other conditions yourself.\n• Weapon passives applied: a weapon's always-on buffs are automatically reflected in final stats, while conditional effects are calculated up to max stacks with the 'full uptime' toggle.\n• Refined anomaly effects: the anomaly type is auto-selected by the character's element (e.g. Glacio → Frost), and the dark (DEF-down) debuff is reflected in total party damage.\n• Announcements redesign: update notes are now easier to read.",
+    "description_ja": "• ダメージ計算機:パーティタブで通常・異常・調和度破壊ダメージを計算し、敵レベル・耐性・防御無視などの条件を直接調整できます。\n• 武器パッシブ反映:武器の常時バフが最終ステータスに自動反映され、条件付き効果は「フルアップタイム」トグルで最大スタックまで計算します。\n• 異常効果の精緻化:キャラクターの属性に応じて異常タイプ(凝縮→フロストなど)が自動選択され、暗黒(防御減少)デバフがパーティ全体のダメージに反映されます。\n• お知らせデザイン改善:アップデート内容をより読みやすく整理しました。",
+    "description_zhHans": "• 伤害计算器:在队伍标签页计算普通·异常·谐振破坏伤害,并可自行调整敌人等级·抗性·无视防御等条件。\n• 武器被动生效:武器的常驻增益会自动反映到最终属性,条件类效果则通过「满轴」开关按最大层数计算。\n• 异常效果细化:根据角色属性自动选择异常类型(冷凝→冰霜等),黑暗(减防)减益会计入队伍整体伤害。\n• 公告设计优化:更新内容整理得更易阅读。",
+    "description_ko": "• 데미지 계산기: 파티 탭에서 일반·이상·조화도 파괴 데미지를 계산하고, 적 레벨·저항·방어무시 등 조건을 직접 조정할 수 있습니다.\n• 무기 패시브 반영: 무기의 상시 버프가 최종 스탯에 자동 반영되며, 조건부 효과는 '풀 업타임' 토글로 최대 스택까지 계산합니다.\n• 이상 효과 정교화: 캐릭터 속성에 따라 이상 유형(응결→서리 등)이 자동 선택되고, 암흑(방어 감소) 디버프가 파티 전체 피해에 반영됩니다.\n• 공지사항 디자인 개선: 업데이트 내역을 더 읽기 쉽게 정리했습니다."
+  },
+  {
+    "id": "release-0-3-0-2026-07-07",
+    "date": "2026-07-07",
+    "version": "0.3.0",
+    "title_ko": "0.3.0 업데이트",
+    "title_en": "0.3.0 Update",
+    "title_ja": "0.3.0 アップデート",
+    "title_zhHans": "0.3.0 更新",
+    "description_en": "• Full game-data refresh: replaced character, weapon, and echo stats with complete numeric data.\n• Level slider in Codex & banner details: check ATK, HP, DEF, Crit and other stats at each level (1–90).\n• New Party tab: build a party of 3 Resonators and check role & element synergy.\n• Unified banner details with the Codex: view character and weapon details in the Banner schedule just like in the Codex.\n• Misc: fixed a detail-modal display bug, changed the announcement icon, cleaned up old data.",
+    "description_ja": "• ゲームデータ全面刷新:キャラクター・武器・エコーの完全な数値データに差し替えました。\n• 図鑑・ピックアップ詳細にレベルスライダー追加:レベル(1〜90)ごとに攻撃力・HP・防御力・クリティカルなどのステータスを直接確認できます。\n• パーティタブ新設:共鳴者3人でパーティを編成し、ロール・属性のシナジーを確認できます。\n• ピックアップ詳細を図鑑と統一:ピックアップ日程でもキャラクター・武器の詳細を図鑑と同じように見られます。\n• その他:詳細モーダルの表示バグ修正、お知らせアイコン変更、旧データ整理。",
+    "description_zhHans": "• 游戏数据全面更新:将角色·武器·声骸替换为完整的数值数据。\n• 图鉴·抽卡详情新增等级滑块:可按等级(1~90)直接查看攻击力·HP·防御力·暴击等属性。\n• 新增队伍标签页:用3名共鸣者组队并查看职责·属性的协同。\n• 抽卡详情与图鉴统一:在抽卡日程中也能像图鉴一样查看角色·武器详情。\n• 其他:修复详情弹窗显示问题,更换公告图标,清理旧数据。",
+    "description_ko": "• 게임 데이터 전면 갱신: 캐릭터·무기·에코의 완전한 수치 데이터로 교체했습니다.\n• 도감·픽업 상세에 레벨 슬라이더 추가: 레벨(1~90)별로 공격력·HP·방어력·크리티컬 등 스탯을 직접 확인할 수 있습니다.\n• 파티 탭 신설: 공명자 3명으로 파티를 구성하고 역할·속성 시너지를 확인합니다.\n• 픽업 상세를 도감과 통일: 픽업 일정표에서도 캐릭터·무기 상세를 도감과 동일하게 봅니다.\n• 기타: 상세 모달 표시 버그 수정, 공지 아이콘 변경, 옛 데이터 정리."
+  },
+  {
+    "id": "service-prep-2026-07-06",
+    "date": "2026-07-06",
+    "version": "0.2.0",
+    "title_ko": "실서비스 준비 공지",
+    "description_ko": "명조 업데이트/픽업 일정, 캐릭터 플래너 한글화, 구글 로그인, 공지사항 기능을 정리했습니다. 대시보드, 스크린샷 분석, 팀, 기록 기능은 준비 중이며 안정화 후 순차적으로 열릴 예정입니다."
+  },
+  {
+    "id": "content-service-2026-07-06",
+    "date": "2026-07-06",
+    "version": "0.2.0",
+    "title_ko": "콘텐츠 서비스 제공 항목",
+    "description_ko": "명조 공식 업데이트 기록, 픽업 일정표, 캐릭터 플래너 한글 데이터를 우선 제공합니다."
+  }
+]

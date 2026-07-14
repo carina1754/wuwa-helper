@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
-import { signIn, useSession } from "next-auth/react";
 import { deleteRecommendation, getCodexEchoes, getCodexResonators, getCodexWeapons, getGameConfig, getRecommendations, getSonataSets } from "@/lib/api";
 import { RecommendationCard, type NameMaps } from "./RecommendationCard";
 import type { GameConfig } from "@/lib/build";
@@ -25,9 +24,7 @@ const DATE_LOCALES: Record<string, string> = {
 
 /** 기록 탭: 확정 저장된 AI 추천을 아이콘 카드로 재열람. */
 export function AiHistory() {
-  const { data: session, status } = useSession();
   const { t, language } = useLanguage();
-  const userId = session?.user?.email ?? null;
 
   const [records, setRecords] = useState<AiRecommendationRecord[]>([]);
   const [names, setNames] = useState<NameMaps>(EMPTY_NAMES);
@@ -56,11 +53,6 @@ export function AiHistory() {
 
   useEffect(() => {
     let cancelled = false;
-    if (!userId) {
-      setRecords([]);
-      setLoading(false);
-      return;
-    }
     setLoading(true);
     void (async () => {
       try {
@@ -92,27 +84,7 @@ export function AiHistory() {
     return () => {
       cancelled = true;
     };
-  }, [userId]);
-
-  if (!userId) {
-    return (
-      <div className="grid max-w-md gap-3">
-        <h2 className="text-lg font-semibold">{t.aiHistory.title}</h2>
-        <p className="text-sm text-slate-500 dark:text-neutral-400">
-          {status === "loading" ? t.aiHistory.checkingLogin : t.aiHistory.signInPrompt}
-        </p>
-        {status !== "loading" ? (
-          <button
-            type="button"
-            onClick={() => void signIn("google", { callbackUrl: "/" })}
-            className="justify-self-start rounded-md bg-indigo-600 px-5 py-2 text-sm font-semibold text-white hover:bg-indigo-500"
-          >
-            {t.aiHistory.signInGoogle}
-          </button>
-        ) : null}
-      </div>
-    );
-  }
+  }, []);
 
   if (loading) {
     return <p className="text-sm text-slate-500 dark:text-neutral-400">{t.aiHistory.loading}</p>;
