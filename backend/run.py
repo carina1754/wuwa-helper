@@ -15,7 +15,7 @@ import webbrowser
 import uvicorn
 
 HOST = os.getenv("HOST", "127.0.0.1")
-PORT = int(os.getenv("PORT", "8000"))
+PORT = int(os.getenv("PORT", "9000"))  # 8000 은 라이브 프로덕션이 점유
 
 
 def _open_browser() -> None:
