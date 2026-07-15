@@ -18,6 +18,12 @@ from pathlib import Path
 HOST = "127.0.0.1"
 _FROZEN = getattr(sys, "frozen", False)
 
+# 창모드 exe(console=False)는 sys.stdout/stderr 가 None → isatty() 호출하는 로거 등이 죽음.
+# 실쓰기 스트림으로 대체(devnull)해 std 스트림 가정하는 라이브러리 전부 보호.
+for _name in ("stdout", "stderr"):
+    if getattr(sys, _name) is None:
+        setattr(sys, _name, open(os.devnull, "w"))
+
 
 def _bundle_root() -> Path:
     # PyInstaller onefile 은 리소스를 _MEIPASS 에 풀어놓음. 개발 땐 이 파일 폴더.
