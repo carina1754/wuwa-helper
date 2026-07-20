@@ -1,7 +1,7 @@
 # 띵조 AI
 
-비공식 워더링 웨이브(명조) 팬 도구. **더블클릭 한 번으로 뜨는 네이티브 Windows 프로그램**입니다.
-서버·도메인·로그인·DB 없이 내 PC에서 실행하고, AI 추천은 **내 NVIDIA API 키(BYO)**로 돌립니다.
+비공식 워더링 웨이브(명조) 팬 도구. **네이티브 Windows 프로그램**입니다.
+내 PC에서 실행하고, AI 추천은 **내 NVIDIA API 키(BYO)**로 돌립니다.
 Wuthering Waves / Kuro Games 와 무관합니다.
 
 - UI: PySide6(Qt6) 네이티브 창, 토스(TDS)풍 디자인, 한국어 전용
@@ -12,7 +12,7 @@ Wuthering Waves / Kuro Games 와 무관합니다.
 
 ## 쓰는 사람 (배포)
 
-1. `backend\dist\띵조AI.exe` 를 받아 **더블클릭**. 끝. (파이썬·Node·브라우저 설치 불필요, 콘솔창 없음)
+1. `backend\dist\띵조AI.exe` 를 받아 **더블클릭**. 끝.
 2. AI 기능을 쓰려면 앱 **설정 탭**에 NVIDIA API 키 입력:
    - https://build.nvidia.com 에서 무료 발급 (`nvapi-...`)
    - 키 붙여넣기 → **모델 불러오기** → 모델 선택
@@ -40,7 +40,7 @@ uv run python -m native.tabs.pickup      # 탭별 헤드리스 스모크 (teams 
 
 코드 배치:
 
-- `backend/native/` — 데스크톱 앱 전체 (app·theme·widgets·tabs, 엔진 직접 호출·HTTP 없음)
+- `backend/native/` — 데스크톱 앱 전체
 - `backend/src/` — 딜 시뮬 엔진·카탈로그·AI 코치·로컬 저장소(`localstore`)
 - `backend/data/catalog/*.json` — 캐릭/무기/에코/소나타 **정본 데이터**(datamine 파리티 검증본, DB 불필요)
 - `backend/data/content/*.json` — 픽업 배너·게임 업데이트 콘텐츠
