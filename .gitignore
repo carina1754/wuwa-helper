@@ -43,3 +43,7 @@ backend/data/local/
 /free-router/
 # Ad-hoc screenshots dropped in repo root
 /*.png
+
+# local-only
+.claude/
+docs/

@@ -191,6 +191,10 @@ def flow_of(cells: list[QWidget], spacing: int = 10) -> QWidget:
     lay = FlowLayout(host, spacing=spacing)
     for w in cells:
         lay.addWidget(w)
+    # 부모가 일반 vbox 여도 줄바꿈 높이가 반영되도록 hfw 명시(없으면 겹침)
+    sp = host.sizePolicy()
+    sp.setHeightForWidth(True)
+    host.setSizePolicy(sp)
     return host
 
 

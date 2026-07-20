@@ -4,8 +4,10 @@ from __future__ import annotations
 from PySide6.QtCore import QThread, Signal
 from PySide6.QtWidgets import (
     QButtonGroup,
+    QGridLayout,
     QLineEdit,
     QPushButton,
+    QScrollArea,
     QWidget,
 )
 
@@ -20,7 +22,7 @@ STR = {
         "verify": "키 인증하기", "loading": "인증 중…",
         "no_key": "먼저 API 키를 입력하세요.", "verify_fail": "키 인증 실패: {}",
         "verified": "인증 성공 — 아래에서 모델을 클릭해 선택하세요.",
-        "rec_models": "추천 모델", "howto": "사용 방법",
+        "rec_models": "추천 모델", "all_models": "전체 모델 보기 ({})", "howto": "사용 방법",
         "step1": "1. NVIDIA build.nvidia.com 에서 무료 API 키를 발급받습니다.",
         "step2": "2. 위 칸에 키를 붙여넣으면 자동 저장됩니다.",
         "step3": "3. ‘키 인증하기’를 누르고 추천 모델 중 하나를 클릭합니다.",
@@ -32,7 +34,7 @@ STR = {
         "verify": "Verify key", "loading": "Verifying…",
         "no_key": "Enter an API key first.", "verify_fail": "Key verification failed: {}",
         "verified": "Verified — click a model below to select it.",
-        "rec_models": "Recommended models", "howto": "How to use",
+        "rec_models": "Recommended models", "all_models": "All models ({})", "howto": "How to use",
         "step1": "1. Get a free API key at NVIDIA build.nvidia.com.",
         "step2": "2. Paste it above — it saves automatically.",
         "step3": "3. Click ‘Verify key’, then pick a recommended model.",
@@ -44,7 +46,7 @@ STR = {
         "verify": "キーを認証", "loading": "認証中…",
         "no_key": "先にAPIキーを入力してください。", "verify_fail": "キー認証に失敗しました: {}",
         "verified": "認証成功 — 下のモデルをクリックして選択してください。",
-        "rec_models": "おすすめモデル", "howto": "使い方",
+        "rec_models": "おすすめモデル", "all_models": "全モデル表示 ({})", "howto": "使い方",
         "step1": "1. NVIDIA build.nvidia.com で無料APIキーを取得します。",
         "step2": "2. 上の欄に貼り付けると自動保存されます。",
         "step3": "3. 「キーを認証」を押して、おすすめモデルを選びます。",
@@ -56,7 +58,7 @@ STR = {
         "verify": "验证密钥", "loading": "验证中…",
         "no_key": "请先输入 API 密钥。", "verify_fail": "密钥验证失败：{}",
         "verified": "验证成功 — 点击下方模型进行选择。",
-        "rec_models": "推荐模型", "howto": "使用方法",
+        "rec_models": "推荐模型", "all_models": "全部模型 ({})", "howto": "使用方法",
         "step1": "1. 在 NVIDIA build.nvidia.com 获取免费 API 密钥。",
         "step2": "2. 粘贴到上方，自动保存。",
         "step3": "3. 点击“验证密钥”，然后选择一个推荐模型。",
@@ -114,7 +116,12 @@ class SettingsTab(QWidget):
         self._worker: _ModelsWorker | None = None
         s = settings.load()
 
-        root = vbox(self, margins=(20, 20, 20, 20), spacing=16)
+        # 전체 모델 목록(100+칩)이 길어질 수 있어 스크롤 필수 — 없으면 위젯이 눌려 겹침
+        outer = vbox(self, margins=(0, 0, 0, 0))
+        scroll = QScrollArea()
+        scroll.setWidgetResizable(True)
+        host = QWidget()
+        root = vbox(host, margins=(20, 20, 20, 20), spacing=16)
         self._title = label("", "H1")
         root.addWidget(self._title)
 
@@ -145,6 +152,16 @@ class SettingsTab(QWidget):
         self._chips_host = QWidget()
         self._chips_lay = FlowLayout(self._chips_host, spacing=8)  # 5칩 — 좁으면 줄바꿈
         bl.addWidget(self._chips_host)
+
+        # 전체 모델 — 벤더(회사)별 그룹, 접이식(인증 후 노출)
+        self._all_models: list[str] = []
+        self._all_toggle = chip("", checkable=True)
+        self._all_toggle.toggled.connect(lambda _on: self._render_all())
+        self._all_toggle.setVisible(False)
+        bl.addWidget(self._all_toggle)
+        self._all_host = QWidget()
+        self._all_lay = vbox(self._all_host, spacing=6)
+        bl.addWidget(self._all_host)
         root.addWidget(box)
 
         how = card()
@@ -156,6 +173,8 @@ class SettingsTab(QWidget):
             hl.addWidget(st)
         root.addWidget(how)
         root.addStretch(1)
+        scroll.setWidget(host)
+        outer.addWidget(scroll)
 
         # 인증 전엔 저장된 모델만 칩으로 표시(현재 설정 확인용)
         saved = s.get("model") or ""
@@ -183,10 +202,14 @@ class SettingsTab(QWidget):
         self._status.setText(LANG.m(STR, "verified"))
         top = _top_models(models)
         saved = settings.load().get("model") or ""
-        if not saved or saved not in top:  # 미설정/목록 밖이면 1위를 기본 선택
+        if not saved or saved not in models:  # 미설정/목록 밖이면 1위를 기본 선택
             saved = top[0] if top else ""
             settings.save(model=saved)
         self._set_model_chips(top, saved)
+        self._all_models = sorted(models)
+        self._all_toggle.setVisible(True)
+        self._all_toggle.setText(LANG.m(STR, "all_models").format(len(models)))
+        self._render_all()
 
     def _on_fail(self, msg: str) -> None:
         self._verify_btn.setEnabled(True)
@@ -203,6 +226,34 @@ class SettingsTab(QWidget):
             self._chip_group.addButton(c)
             self._chips_lay.addWidget(c)
 
+    def _render_all(self) -> None:
+        """전체 모델을 벤더별 그룹으로 렌더(토글 켜졌을 때만)."""
+        clear_layout(self._all_lay)
+        if not self._all_toggle.isChecked() or not self._all_models:
+            return
+        saved = settings.load().get("model") or ""
+        groups: dict[str, list[str]] = {}
+        for m in self._all_models:
+            groups.setdefault(m.split("/")[0] if "/" in m else "etc", []).append(m)
+        for vendor in sorted(groups):
+            head = label(vendor, "Muted")
+            head.setStyleSheet("font-weight:700; margin-top:4px;")
+            self._all_lay.addWidget(head)
+            host = QWidget()
+            g = QGridLayout(host)  # FlowLayout 은 중첩 vbox 에서 높이 계산이 깨져 고정 4열 그리드
+            g.setContentsMargins(0, 0, 0, 0)
+            g.setSpacing(6)
+            for i, m in enumerate(groups[vendor]):
+                c = chip(m.split("/", 1)[-1])  # 벤더 헤더가 있으니 모델명만
+                c.setToolTip(m)
+                c.setChecked(m == saved)
+                c.clicked.connect(lambda _=False, mid=m: settings.save(model=mid))
+                self._chip_group.addButton(c)
+                g.addWidget(c, i // 4, i % 4)
+            for col in range(4):
+                g.setColumnStretch(col, 1)
+            self._all_lay.addWidget(host)
+
     def retranslate(self) -> None:
         self._title.setText(LANG.m(STR, "title"))
         self._key_lb.setText(LANG.m(STR, "key_label"))
@@ -210,6 +261,8 @@ class SettingsTab(QWidget):
         self._key_hint.setText(LANG.m(STR, "key_hint"))
         self._verify_btn.setText(LANG.m(STR, "verify"))
         self._model_lb.setText(LANG.m(STR, "rec_models"))
+        if self._all_models:
+            self._all_toggle.setText(LANG.m(STR, "all_models").format(len(self._all_models)))
         self._howto.setText(LANG.m(STR, "howto"))
         for i, st in enumerate(self._steps, 1):
             st.setText(LANG.m(STR, f"step{i}"))

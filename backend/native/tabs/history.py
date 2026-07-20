@@ -41,6 +41,11 @@ STR = {
 }
 
 
+def _when(rec) -> str:
+    """저장 시각 — 분 단위까지("2026-07-20 23:15")."""
+    return (rec.created_at or "")[:16].replace("T", " ")
+
+
 class _RecordCard(QFrame):
     """클릭 가능한 기록 카드(제목 + 날짜). clicked 로 id 전달."""
 
@@ -53,7 +58,7 @@ class _RecordCard(QFrame):
         self.setCursor(Qt.PointingHandCursor)
         lay = vbox(self, margins=(12, 10, 12, 10), spacing=3)
         lay.addWidget(label(rec.title or rec.id, "H2", wrap=True))
-        lay.addWidget(label((rec.created_at or "")[:10], "Faint"))
+        lay.addWidget(label(_when(rec), "Faint"))
 
     def mousePressEvent(self, event) -> None:  # noqa: N802 (Qt signature)
         if event.button() == Qt.LeftButton:
@@ -102,7 +107,7 @@ class HistoryTab(QWidget):
         for c in self._cards:
             c.deleteLater()
         self._cards.clear()
-        records = engine.ai_list()
+        records = sorted(engine.ai_list(), key=lambda r: r.created_at or "", reverse=True)  # 최신순
         self._empty.setVisible(not records)
         insert_at = self._list.count() - 1  # stretch 앞
         for rec in records:
@@ -142,7 +147,7 @@ class HistoryTab(QWidget):
         del_btn.clicked.connect(lambda: self._confirm_delete(rec.id))
         header.addWidget(del_btn)
         self._detail.addLayout(header)
-        self._detail.addWidget(label((rec.created_at or "")[:10], "Faint"))
+        self._detail.addWidget(label(_when(rec), "Faint"))
         self._detail.addWidget(hsep())
 
         recc = rec.recommendation
