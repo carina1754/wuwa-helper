@@ -34,7 +34,7 @@ STR = {
         "rank": "정제", "skill": "스킬 레벨", "full_uptime": "풀 업타임", "sonata": "소나타",
         "mains": "메인 옵션", "subs": "서브 옵션(합산)", "calculate": "딜 계산",
         "team_total": "팀 총딜", "share": "지분", "skills": "스킬 딜", "situational": "상황부(총딜 제외)",
-        "saved_history": "기록 탭에 자동 저장됨",
+        "saved_history": "기록 탭에 자동 저장됨", "reset": "초기화",
         "anomaly": "이상", "tune_break": "조화도 파괴", "team_buffs": "적용 팀 버프",
         "need_member": "멤버를 1명 이상 추가하세요.",
         "empty_hint": "파티를 구성하고 '딜 계산'을 누르면\n결과가 여기에 표시됩니다.",
@@ -47,7 +47,7 @@ STR = {
         "rank": "Refine", "skill": "Skill Lv", "full_uptime": "Full uptime", "sonata": "Sonata",
         "mains": "Main Stats", "subs": "Sub Stats (summed)", "calculate": "Calculate",
         "team_total": "Team Total", "share": "Share", "skills": "Skill DMG", "situational": "Situational (excl. total)",
-        "saved_history": "Saved to History tab",
+        "saved_history": "Saved to History tab", "reset": "Reset",
         "anomaly": "Anomaly", "tune_break": "Tune Break", "team_buffs": "Applied team buffs",
         "need_member": "Add at least one member.",
         "empty_hint": "Build your party and hit Calculate\nto see damage results here.",
@@ -60,7 +60,7 @@ STR = {
         "rank": "精錬", "skill": "スキルレベル", "full_uptime": "フルアップ", "sonata": "ソナタ",
         "mains": "メイン", "subs": "サブ(合算)", "calculate": "計算",
         "team_total": "編成総ダメージ", "share": "割合", "skills": "スキルダメージ", "situational": "状況(総ダメージ除外)",
-        "saved_history": "履歴タブに自動保存",
+        "saved_history": "履歴タブに自動保存", "reset": "リセット",
         "anomaly": "異常", "tune_break": "調和度破壊", "team_buffs": "適用チームバフ",
         "need_member": "メンバーを1人以上追加してください。",
         "empty_hint": "パーティを編成して「計算」を押すと\nここに結果が表示されます。",
@@ -73,7 +73,7 @@ STR = {
         "rank": "精炼", "skill": "技能等级", "full_uptime": "满打", "sonata": "合鸣",
         "mains": "主属性", "subs": "副属性(合计)", "calculate": "计算",
         "team_total": "队伍总伤害", "share": "占比", "skills": "技能伤害", "situational": "情境(不计入总伤)",
-        "saved_history": "已自动保存到记录",
+        "saved_history": "已自动保存到记录", "reset": "重置",
         "anomaly": "异常", "tune_break": "谐振破坏", "team_buffs": "生效队伍增益",
         "need_member": "请至少添加一名成员。",
         "empty_hint": "组建队伍并点击「计算」\n结果将显示在此处。",
@@ -215,7 +215,13 @@ class _MemberEditor(QFrame):
             ecb.setMinimumWidth(0)
             for e in self._echoes:
                 if int(e["cost"]) == cost:
-                    ecb.addItem(LANG.name(e), str(e["id"]))
+                    # "공명의 메아리 · 데니아" 처럼 앞이 공통이라 잘리면 구분 불가 →
+                    # 표시=마지막 세그먼트(고유 이름), 전체명은 툴팁으로
+                    full = LANG.name(e)
+                    short = full.split("·")[-1].strip() or full
+                    ecb.addItem(short, str(e["id"]))
+                    ecb.setItemData(ecb.count() - 1, full, Qt.ToolTipRole)
+            ecb.view().setMinimumWidth(220)  # 팝업은 여유 폭
             self._echo_combos.append(ecb)
             cb = QComboBox()
             cb.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
@@ -443,11 +449,15 @@ class TeamsTab(QWidget):
         btns = hbox(spacing=8)
         self._add_btn = chip("", checkable=False)
         self._add_btn.clicked.connect(self._add_member)
+        self._reset_btn = QPushButton()
+        self._reset_btn.setObjectName("Ghost")
+        self._reset_btn.clicked.connect(self._reset)
         self._calc_btn = QPushButton()
         self._calc_btn.setObjectName("Accent")
         self._calc_btn.clicked.connect(self._calculate)
         btns.addWidget(self._add_btn)
         btns.addStretch(1)
+        btns.addWidget(self._reset_btn)
         btns.addWidget(self._calc_btn)
         self._left.addLayout(btns)
         self._left.addStretch(1)
@@ -483,6 +493,14 @@ class TeamsTab(QWidget):
         bl.addWidget(hint)
         self._results.addWidget(box)
         self._results.addStretch(1)
+
+    def _reset(self) -> None:
+        """파티 초기화 — 멤버 전부 제거 후 기본 1명, 결과 비움(전투 조건은 유지)."""
+        for m in list(self._members):
+            self._remove_member(m)
+        self._add_member()
+        self._has_result = False
+        self._show_empty()
 
     # --- 멤버 관리 ---------------------------------------------------------
     def _add_member(self) -> None:
@@ -658,6 +676,7 @@ class TeamsTab(QWidget):
             cell.layout().itemAt(0).widget().setText(LANG.m(STR, key))
         self._add_btn.setText(LANG.m(STR, "add_member"))
         self._calc_btn.setText(LANG.m(STR, "calculate"))
+        self._reset_btn.setText(LANG.m(STR, "reset"))
         for m in self._members:
             m.retranslate()
         if not self._has_result:

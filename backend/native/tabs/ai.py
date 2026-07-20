@@ -30,6 +30,7 @@ STR = {
         "rec": "추천 빌드", "team": "추천 팀", "upgrade": "성장 우선순위", "save": "저장", "saved": "저장됨",
         "weapon": "무기", "echo": "에코", "main": "메인", "sub": "추옵", "no_key_hint": "설정 탭에서 API 키를 넣으면 실제 AI를 사용합니다.",
         "main_dps": "메인 딜러", "sub_dps": "서브 딜러", "support": "서포터", "healer": "힐러",
+        "reset": "초기화", "model_unavailable": "선택한 모델을 이 계정에서 사용할 수 없어요. 설정 탭에서 다른 추천 모델을 골라주세요.",
     },
     "en": {
         "title": "AI Coach", "profile": "My Profile",
@@ -39,6 +40,7 @@ STR = {
         "rec": "Recommended Build", "team": "Team", "upgrade": "Upgrade Priority", "save": "Save", "saved": "Saved",
         "weapon": "Weapon", "echo": "Echo", "main": "Main", "sub": "Subs", "no_key_hint": "Add an API key in Settings to use the real AI.",
         "main_dps": "Main DPS", "sub_dps": "Sub DPS", "support": "Support", "healer": "Healer",
+        "reset": "Reset", "model_unavailable": "This model isn't available for your account. Pick another recommended model in Settings.",
     },
     "ja": {
         "title": "AIコーチ", "profile": "プロフィール",
@@ -48,6 +50,7 @@ STR = {
         "rec": "おすすめビルド", "team": "編成", "upgrade": "育成優先度", "save": "保存", "saved": "保存しました",
         "weapon": "武器", "echo": "エコー", "main": "メイン", "sub": "サブ", "no_key_hint": "設定でAPIキーを入れると実AIを使用します。",
         "main_dps": "メインアタッカー", "sub_dps": "サブアタッカー", "support": "サポーター", "healer": "ヒーラー",
+        "reset": "リセット", "model_unavailable": "このモデルはアカウントで利用できません。設定で別のモデルを選んでください。",
     },
     "zhHans": {
         "title": "AI教练", "profile": "我的资料",
@@ -57,6 +60,7 @@ STR = {
         "rec": "推荐配装", "team": "推荐队伍", "upgrade": "养成优先级", "save": "保存", "saved": "已保存",
         "weapon": "武器", "echo": "声骸", "main": "主属性", "sub": "副属性", "no_key_hint": "在设置中填入 API 密钥即可使用真实 AI。",
         "main_dps": "主C", "sub_dps": "副C", "support": "辅助", "healer": "治疗",
+        "reset": "重置", "model_unavailable": "该模型在您的账户中不可用，请在设置中选择其他推荐模型。",
     },
 }
 _STYLES = ["style_meta", "style_fun", "style_balanced", "style_free"]
@@ -163,12 +167,16 @@ class AiTab(QWidget):
         cl.addWidget(self._hint)
 
         bar = hbox(spacing=8)
+        self._reset_btn = QPushButton()
+        self._reset_btn.setObjectName("Ghost")
+        self._reset_btn.clicked.connect(self._reset_chat)
         self._input = QLineEdit()
         self._input.setObjectName("ChatInput")  # 카드 위에서도 또렷한 입력칸
         self._input.returnPressed.connect(self._send)
         self._send_btn = QPushButton()
         self._send_btn.setObjectName("Accent")
         self._send_btn.clicked.connect(self._send)
+        bar.addWidget(self._reset_btn)
         bar.addWidget(self._input, 1)
         bar.addWidget(self._send_btn)
         cl.addLayout(bar)
@@ -189,6 +197,13 @@ class AiTab(QWidget):
             play_style=LANG.m(STR, self._style.currentData() or _STYLES[0]),
             note="반드시 한국어로만 답변하세요.",
         )
+
+    def _reset_chat(self) -> None:
+        """대화 초기화 — 로그/메시지/추천 상태 비움(프로필 선택은 유지)."""
+        self._messages.clear()
+        self._last_rec = None
+        clear_layout(self._log)
+        self._log.addStretch(1)
 
     # --- chat ---------------------------------------------------------------
     def _send(self) -> None:
@@ -225,6 +240,9 @@ class AiTab(QWidget):
 
     def _on_fail(self, msg: str) -> None:
         self._set_busy(False)
+        # NVIDIA 404(Function not found) = 이 계정에서 호출 불가한 모델 — 원문 대신 안내
+        if "404" in msg or "Not Found" in msg:
+            msg = LANG.m(STR, "model_unavailable")
         self._append_bubble("assistant", f"⚠ {msg}")
 
     def _set_busy(self, busy: bool) -> None:
@@ -328,6 +346,7 @@ class AiTab(QWidget):
         self._style_lb.setText(LANG.m(STR, "play_style"))
         self._pick_lb.setText(LANG.m(STR, "pick"))
         self._send_btn.setText(LANG.m(STR, "send"))
+        self._reset_btn.setText(LANG.m(STR, "reset"))
         self._input.setPlaceholderText(LANG.m(STR, "chat_ph"))
         if not (self._worker and self._worker.isRunning()):
             self._hint.setText(LANG.m(STR, "no_key_hint"))

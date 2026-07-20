@@ -64,19 +64,17 @@ STR = {
     },
 }
 
-# 추천 랭킹 — OpenRouter 리더보드식 등급(프론티어 추론 > OSS 플래그십 > 대형 MoE > 고속 비추론).
-# 키로 조회한 실제 모델 목록과 부분일치로 매칭해 상위 3개만 노출.
+# 추천 랭킹 — 비추론(instruct) 전용. 추론 모델(gpt-oss/r1 등)은 사고 토큰 과식이라 제외.
+# 전 항목 실키 1토큰 probe 로 invoke 가능(200) 검증됨(2026-07-20) — 목록에 있어도
+# 계정에서 404(Function not found) 나는 모델이 많아 커레이션은 검증본만.
 _RANK = [
-    "deepseek-ai/deepseek-r1",
-    "openai/gpt-oss-120b",
-    "qwen/qwen3-235b",
-    "meta/llama-3.1-405b",
-    "deepseek-ai/deepseek-v3",
-    "meta/llama-3.3-70b",
-    "qwen/qwen3-32b",
-    "openai/gpt-oss-20b",
-    "mistralai/mistral-large",
+    "meta/llama-3.3-70b-instruct",
+    "nvidia/llama-3.3-nemotron-super-49b-v1",
+    "meta/llama-3.1-70b-instruct",
+    "meta/llama-3.1-8b-instruct",
 ]
+# 목록 폴백 채움에서도 추론 모델은 걸러냄
+_REASONING_HINTS = ("gpt-oss", "deepseek-r1", "qwq", "-r1", "thinking", "qwen3")
 
 
 _TOP_N = 5
@@ -90,8 +88,9 @@ def _top_models(models: list[str]) -> list[str]:
             picked.append(hit)
         if len(picked) == _TOP_N:
             return picked
-    for m in models:  # 랭킹 매칭이 모자라면 목록 앞에서 채움
-        if m not in picked:
+    for m in models:  # 랭킹 매칭이 모자라면 목록 앞에서 채움(추론 모델 제외)
+        low = m.lower()
+        if m not in picked and not any(h in low for h in _REASONING_HINTS):
             picked.append(m)
         if len(picked) == _TOP_N:
             break
@@ -231,14 +230,14 @@ if __name__ == "__main__":  # smoke: build + top5 ranking + chip select headless
     tab = SettingsTab()
     got = _top_models([
         "meta/llama-3.3-70b-instruct", "openai/gpt-oss-20b", "openai/gpt-oss-120b",
-        "qwen/qwen3-235b-a22b", "deepseek-ai/deepseek-r1", "x/tiny",
+        "meta/llama-3.1-8b-instruct", "nvidia/llama-3.3-nemotron-super-49b-v1", "x/tiny",
     ])
     assert got == [
-        "deepseek-ai/deepseek-r1", "openai/gpt-oss-120b", "qwen/qwen3-235b-a22b",
-        "meta/llama-3.3-70b-instruct", "openai/gpt-oss-20b",
-    ], got
+        "meta/llama-3.3-70b-instruct", "nvidia/llama-3.3-nemotron-super-49b-v1",
+        "meta/llama-3.1-8b-instruct", "x/tiny",
+    ], got  # gpt-oss(추론 모델)는 폴백 채움에서도 제외
     tab._on_models(["openai/gpt-oss-120b", "meta/llama-3.3-70b-instruct", "deepseek-ai/deepseek-r1"])
-    assert len(tab._chip_group.buttons()) == 3  # 목록이 3개뿐이면 3칩
+    assert len(tab._chip_group.buttons()) == 1  # 추론 모델 2종 걸러지고 llama 만 남음
     for code in ("ko", "en", "ja", "zhHans"):
         LANG.set(code)
         tab.retranslate()
