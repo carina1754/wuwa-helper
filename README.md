@@ -1,61 +1,60 @@
-# 띵조 AI (WaWa AI Helper) — 스탠드얼론
+# 띵조 AI
 
-비공식 워더링 웨이브(명조) 팬 도구. **한 프로세스로 도는 로컬 프로그램**입니다.
+비공식 워더링 웨이브(명조) 팬 도구. **더블클릭 한 번으로 뜨는 네이티브 Windows 프로그램**입니다.
 서버·도메인·로그인·DB 없이 내 PC에서 실행하고, AI 추천은 **내 NVIDIA API 키(BYO)**로 돌립니다.
+Wuthering Waves / Kuro Games 와 무관합니다.
 
-기능: 도감(캐릭/무기/에코/소나타), 픽업 일정표, 캐릭터 플래너, 파티 딜 계산(자동 팀 버프),
-AI 빌드 추천(대화형), 추천 기록. Wuthering Waves / Kuro Games 와 무관합니다.
+- UI: PySide6(Qt6) 네이티브 창, 토스(TDS)풍 디자인, 한국어 전용
+- 탭: **AI 빌딩**(대화형 빌드 추천) · **도감**(캐릭/무기/에코) · **픽업 일정**(배너 그룹·D-day) ·
+  **업데이트**(패치 요약) · **파티**(팀 딜 계산 — 공명 사슬·팀 버프 자동, 결과는 기록 탭에 자동 저장) ·
+  **기록** · **설정**
+- 딜 계산은 로컬 시뮬 엔진(`backend/src/sim`)을 직접 호출 — 네트워크 불필요
 
-## 실행 (Windows)
+## 쓰는 사람 (배포)
 
-**쓰는 사람**: `backend\dist\띵조AI.exe` **더블클릭**. 끝. 파이썬·uv·Node·브라우저 전부 불필요,
-콘솔창 없이 네이티브 창 하나 뜸. 기록은 exe 옆 `wuwa_data\` 에 파일로 저장.
-(Win11 은 WebView2 기본 내장 — 없으면 MS에서 무료 설치.)
+1. `backend\dist\띵조AI.exe` 를 받아 **더블클릭**. 끝. (파이썬·Node·브라우저 설치 불필요, 콘솔창 없음)
+2. AI 기능을 쓰려면 앱 **설정 탭**에 NVIDIA API 키 입력:
+   - https://build.nvidia.com 에서 무료 발급 (`nvapi-...`)
+   - 키 붙여넣기 → **모델 불러오기** → 모델 선택
+   - 키·모델·기록 등 내 데이터는 전부 이 PC 의 `%LOCALAPPDATA%\띵조AI` 에 JSON 으로만 저장(외부 전송 없음, 폴더 삭제 = 초기화)
+3. 키가 없어도 AI 빌딩 탭만 안내 모드일 뿐, 나머지 기능은 전부 오프라인으로 정상 동작
 
-**exe 만들기** (개발자, 최초 1회 / 코드 바뀔 때만): [uv](https://docs.astral.sh/uv/) + Node.js 필요.
+**배포 = 이 exe 파일 하나를 전달하면 끝.** 설치 과정 없음.
 
-```powershell
-.\build_exe.ps1   # 프론트 빌드 → 리소스 번들 → backend\dist\띵조AI.exe 생성
-```
+## 개발 환경
 
-개발 중 빠르게 실행(빌드 없이): `backend` 폴더에서 `uv run desktop.py` (창 모드),
-또는 서버만: `WUWA_HEADLESS=1 PORT=9000 uv run desktop.py` 후 브라우저로 접속.
-
-포트는 실행 시 빈 포트를 자동으로 잡으므로 프로덕션(8000)과 충돌하지 않습니다.
-
-## AI 설정 (NVIDIA BYO 키)
-
-로그인이 없으므로 AI 기능은 앱 안 **'설정' 탭**에서 키를 넣어야 동작합니다.
-
-1. https://build.nvidia.com 에서 API 키 발급 (`nvapi-...`)
-2. 앱 → **설정** 탭 → 키 붙여넣기 → **모델 불러오기** → 모델 선택
-3. 키·모델은 **브라우저 localStorage 에만** 저장됩니다(서버에 저장/전송·기록 안 됨).
-   요청 시 `X-LLM-Key` / `X-LLM-Model` 헤더로만 실려 나갑니다.
-
-키가 없으면 AI 탭은 목(mock) 폴백 응답을 돌려줍니다.
-
-## 데이터 저장 (파일, DB 없음)
-
-- 카탈로그 정본: `backend/data/catalog/*.json`
-- 콘텐츠(공지·픽업 등): `backend/data/content/*.json`
-- AI 추천 기록: `backend/data/local/ai_recommendations.json` (실행 중 생성, git 제외)
-
-`LOCAL_DATA_DIR` 로 기록 경로를 옮길 수 있습니다.
-
-## 구조
-
-`desktop.py`(exe 엔트리) → uvicorn 으로 FastAPI(`main:app`) 하나를 스레드에서 띄우고 pywebview 창으로 엽니다.
-API 라우트 뒤에 정적 Next.js export 를 `/` 로 마운트해 **같은 포트에서 프론트+API** 를 서빙합니다.
-PyInstaller onefile 이 정적·데이터(`data/`)·이미지(`media/`)를 exe 안에 번들하고, 실행 시 `_MEIPASS`
-에서 읽습니다(경로는 `STATIC_DIR`/`MEDIA_DIR` env 로 주입). 기록은 exe 옆 `wuwa_data/`(`LOCAL_DATA_DIR`).
-로컬 LLM·Postgres·Caddy·브라우저 모두 불필요.
-
-## 검증
+Windows 11 + [uv](https://docs.astral.sh/uv/) (Python 3.13 자동 관리). Node 불필요.
 
 ```powershell
-cd backend; uv run pytest -q
-cd frontend; npm run lint
+cd backend
+uv sync                          # 의존성 설치 (PySide6 포함)
+uv run python run_native.py      # 개발 실행 — 빌드 없이 네이티브 창
 ```
+
+검증:
+
+```powershell
+uv run pytest -q                         # 엔진/API 테스트
+uv run python -m native.tabs.pickup      # 탭별 헤드리스 스모크 (teams / codex / ai / updates / history 동일)
+```
+
+코드 배치:
+
+- `backend/native/` — 데스크톱 앱 전체 (app·theme·widgets·tabs, 엔진 직접 호출·HTTP 없음)
+- `backend/src/` — 딜 시뮬 엔진·카탈로그·AI 코치·로컬 저장소(`localstore`)
+- `backend/data/catalog/*.json` — 캐릭/무기/에코/소나타 **정본 데이터**(datamine 파리티 검증본, DB 불필요)
+- `backend/data/content/*.json` — 픽업 배너·게임 업데이트 콘텐츠
+- `frontend/`, `backend/src/api/`, `backend/desktop.py` — 구 웹 서비스(wuwahelper.com) 레거시. 신규 개발은 `native/` 에서
+
+## exe 빌드 (배포판 만들기)
+
+```powershell
+.\build_exe.ps1     # PyInstaller onefile → backend\dist\띵조AI.exe (약 130MB)
+```
+
+- 스펙: `backend/app.spec` — 데이터(`data/`)·이미지(`media/`) 번들, 콘솔 없음(windowed)
+- `build_exe.ps1` 은 ASCII 전용(PowerShell 5.1 이 비ASCII 소스를 오파싱) — 한글 제품명은 spec 안에만
+- 빌드 후 exe 더블클릭으로 부트 확인 권장
 
 ## 안내
 
