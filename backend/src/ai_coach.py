@@ -438,6 +438,7 @@ def chat(
         response_format={"type": "json_object"},
         messages=messages,
     )
+    _debug_log(chosen_model, response)
     resp = _parse_reply(response.choices[0].message.content or "", catalog)
     # 후검증(안전망): 유사 이름 오선택 교정 → 지정 메인 딜러 역할 강제 → 파티 정원 3명 클램프.
     if mentioned:
@@ -464,11 +465,34 @@ def _clamp_party_size(resp: AiChatResponse, profile: AiProfile, catalog: dict) -
     return resp
 
 
+def _debug_log(model: str, response) -> None:
+    """마지막 LLM 원문 응답을 로컬 파일에 기록(문제 재현용). API 키/프롬프트는 저장 안 함."""
+    try:
+        from datetime import datetime
+
+        from . import localstore
+
+        path = localstore.data_dir() / "ai_debug.log"
+        if path.exists() and path.stat().st_size > 1_000_000:  # 1MB 넘으면 리셋
+            path.unlink()
+        ch = response.choices[0]
+        with path.open("a", encoding="utf-8") as f:
+            f.write(f"--- {datetime.now().isoformat(timespec='seconds')} model={model} finish={ch.finish_reason}\n")
+            f.write((ch.message.content or "(empty content)") + "\n")
+    except Exception:  # noqa: BLE001 — 로그 실패가 대화를 막으면 안 됨
+        pass
+
+
 def _parse_reply(raw: str, catalog: dict[str, dict[str, dict]]) -> AiChatResponse:
     try:
         data = extract_json_object(raw)
     except json.JSONDecodeError:
-        return AiChatResponse(reply=raw.strip() or "응답을 이해하지 못했습니다.", recommendation=None, is_final=False)
+        # JSON 강제 모드에서 파싱 실패 = 응답 잘림/추론 텍스트 누출 — 원문(영어 사고문) 노출 금지
+        return AiChatResponse(
+            reply="응답이 중간에 잘렸어요. 다시 한번 보내주시면 이어서 답할게요.",
+            recommendation=None,
+            is_final=False,
+        )
 
     reply = str(data.get("reply", "")).strip()
     is_final = bool(data.get("is_final", False))
