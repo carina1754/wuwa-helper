@@ -11,7 +11,7 @@ from PySide6.QtWidgets import (
 
 from .. import engine, settings
 from ..lang import LANG
-from ..widgets import card, chip, clear_layout, hbox, hsep, label, vbox
+from ..widgets import FlowLayout, card, chip, clear_layout, hbox, hsep, label, vbox
 
 STR = {
     "ko": {
@@ -79,18 +79,21 @@ _RANK = [
 ]
 
 
-def _top3(models: list[str]) -> list[str]:
+_TOP_N = 5
+
+
+def _top_models(models: list[str]) -> list[str]:
     picked: list[str] = []
     for want in _RANK:
         hit = next((m for m in models if want in m and m not in picked), None)
         if hit:
             picked.append(hit)
-        if len(picked) == 3:
+        if len(picked) == _TOP_N:
             return picked
     for m in models:  # 랭킹 매칭이 모자라면 목록 앞에서 채움
         if m not in picked:
             picked.append(m)
-        if len(picked) == 3:
+        if len(picked) == _TOP_N:
             break
     return picked
 
@@ -141,7 +144,7 @@ class SettingsTab(QWidget):
         self._chip_group = QButtonGroup(self)
         self._chip_group.setExclusive(True)
         self._chips_host = QWidget()
-        self._chips_lay = hbox(self._chips_host, spacing=8)
+        self._chips_lay = FlowLayout(self._chips_host, spacing=8)  # 5칩 — 좁으면 줄바꿈
         bl.addWidget(self._chips_host)
         root.addWidget(box)
 
@@ -179,7 +182,7 @@ class SettingsTab(QWidget):
     def _on_models(self, models: list) -> None:
         self._verify_btn.setEnabled(True)
         self._status.setText(LANG.m(STR, "verified"))
-        top = _top3(models)
+        top = _top_models(models)
         saved = settings.load().get("model") or ""
         if not saved or saved not in top:  # 미설정/목록 밖이면 1위를 기본 선택
             saved = top[0] if top else ""
@@ -200,7 +203,6 @@ class SettingsTab(QWidget):
             c.clicked.connect(lambda _=False, mid=m: settings.save(model=mid))
             self._chip_group.addButton(c)
             self._chips_lay.addWidget(c)
-        self._chips_lay.addStretch(1)
 
     def retranslate(self) -> None:
         self._title.setText(LANG.m(STR, "title"))
@@ -214,7 +216,7 @@ class SettingsTab(QWidget):
             st.setText(LANG.m(STR, f"step{i}"))
 
 
-if __name__ == "__main__":  # smoke: build + top3 ranking + chip select headless
+if __name__ == "__main__":  # smoke: build + top5 ranking + chip select headless
     import os
     import sys
     import tempfile
@@ -227,13 +229,16 @@ if __name__ == "__main__":  # smoke: build + top3 ranking + chip select headless
 
     app = QApplication([])
     tab = SettingsTab()
-    got = _top3([
+    got = _top_models([
         "meta/llama-3.3-70b-instruct", "openai/gpt-oss-20b", "openai/gpt-oss-120b",
         "qwen/qwen3-235b-a22b", "deepseek-ai/deepseek-r1", "x/tiny",
     ])
-    assert got == ["deepseek-ai/deepseek-r1", "openai/gpt-oss-120b", "qwen/qwen3-235b-a22b"], got
+    assert got == [
+        "deepseek-ai/deepseek-r1", "openai/gpt-oss-120b", "qwen/qwen3-235b-a22b",
+        "meta/llama-3.3-70b-instruct", "openai/gpt-oss-20b",
+    ], got
     tab._on_models(["openai/gpt-oss-120b", "meta/llama-3.3-70b-instruct", "deepseek-ai/deepseek-r1"])
-    assert len(tab._chip_group.buttons()) == 3
+    assert len(tab._chip_group.buttons()) == 3  # 목록이 3개뿐이면 3칩
     for code in ("ko", "en", "ja", "zhHans"):
         LANG.set(code)
         tab.retranslate()

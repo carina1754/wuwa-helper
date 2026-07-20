@@ -26,6 +26,7 @@ exe = EXE(
     a.datas,
     [],
     name="띵조AI",
+    icon="app.ico",         # 탐색기/작업표시줄 exe 아이콘(로고)
     console=False,          # 콘솔창 없음(진짜 프로그램)
     disable_windowed_traceback=False,
     upx=False,
