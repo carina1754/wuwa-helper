@@ -58,6 +58,53 @@ def _curve_value(curve: list, level: int) -> float:
 
 
 # --- 상세 다이얼로그 ---------------------------------------------------------
+class _SkillBlock(QWidget):
+    """스킬 1개: 제목 + 레벨 슬라이더 + name 그룹별 배율 합산(%는 %끼리, 고정치는 별도)."""
+
+    def __init__(self, sk: dict) -> None:
+        super().__init__()
+        self._sk = sk
+        lay = vbox(self, spacing=3)
+        title = f"{LANG.field(sk, 'SkillName')}  ·  {LANG.skill_type(sk.get('SkillType'))}"
+        lay.addWidget(label(title, "Accent", wrap=True))
+        if sk.get("damage"):
+            self._sl = LabeledSlider(LANG.t("skill"), 1, 10, 10)
+            self._sl.valueChanged.connect(self._render)
+            lay.addWidget(self._sl)
+            self._rows_host = QWidget()
+            self._rows = vbox(self._rows_host, spacing=2)
+            lay.addWidget(self._rows_host)
+            self._render(10)
+
+    def _render(self, level: int) -> None:
+        clear_layout(self._rows)
+        idx = level - 1
+        groups: dict[str, list] = {}  # name → [pct 합, flat 합, 히트 수]
+        for dmg in self._sk.get("damage") or []:
+            rates = dmg.get("rates") or []
+            raw = str(rates[idx] if idx < len(rates) else (rates[-1] if rates else "")).strip()
+            if not raw:
+                continue
+            g = groups.setdefault(dmg.get("name", ""), [0.0, 0.0, 0])
+            try:
+                if raw.endswith("%"):
+                    g[0] += float(raw.rstrip("%"))
+                else:  # 고정치(현 데이터엔 없음 — 방어)
+                    g[1] += float(raw)
+            except ValueError:
+                continue
+            g[2] += 1
+        for name, (pct, flat, hits) in groups.items():
+            txt = f"{pct:,.2f}%"
+            if flat:
+                txt += f" +{flat:,.0f}"
+            r = hbox()
+            r.addWidget(label(f"{name} ×{hits}" if hits > 1 else name, "Muted"))
+            r.addStretch(1)
+            r.addWidget(label(txt, "Gold"))
+            self._rows.addLayout(r)
+
+
 class _Detail(QDialog):
     def __init__(self, parent=None) -> None:
         super().__init__(parent)
@@ -108,16 +155,11 @@ class ResonatorDetail(_Detail):
             parts = ", ".join(f"{LANG.stat(k)} +{v}%" for k, v in fb.items())
             self.body.addWidget(label(f"{LANG.m(STR,'forte')}: {parts}", "Accent", wrap=True))
 
-        # 스킬 레벨 슬라이더 → 스킬 배율
+        # 스킬 — 스킬마다 레벨 슬라이더 + 히트 배율 합산 표시
         self.body.addWidget(hsep())
         self.body.addWidget(label(LANG.m(STR, "skills"), "H2"))
-        self._sk_lvl = LabeledSlider(LANG.t("skill"), 1, 10, 10)
-        self.body.addWidget(self._sk_lvl)
-        self._skills_box = QWidget()
-        self._skills_lay = vbox(self._skills_box, spacing=10)
-        self.body.addWidget(self._skills_box)
-        self._sk_lvl.valueChanged.connect(self._render_skills)
-        self._render_skills(10)
+        for sk in reso.get("skills") or []:
+            self.body.addWidget(_SkillBlock(sk))
 
         # 공명 사슬
         chain = reso.get("resonance_chain") or []
@@ -143,23 +185,6 @@ class ResonatorDetail(_Detail):
             row.addWidget(label(txt, "Gold"))
             self._stat_lay.addLayout(row)
 
-    def _render_skills(self, sk_level: int) -> None:
-        clear_layout(self._skills_lay)
-        idx = sk_level - 1
-        for sk in self._reso.get("skills") or []:
-            block = vbox(spacing=3)
-            title = f"{LANG.field(sk, 'SkillName')}  ·  {LANG.skill_type(sk.get('SkillType'))}"
-            block.addWidget(label(title, "Accent", wrap=True))
-            for dmg in sk.get("damage") or []:
-                rates = dmg.get("rates") or []
-                rate = rates[idx] if idx < len(rates) else (rates[-1] if rates else "")
-                if rate:
-                    r = hbox()
-                    r.addWidget(label(dmg.get("name", ""), "Muted"))
-                    r.addStretch(1)
-                    r.addWidget(label(rate, "Faint"))
-                    block.addLayout(r)
-            self._skills_lay.addLayout(block)
 
 
 class WeaponDetail(_Detail):
