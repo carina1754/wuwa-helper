@@ -30,6 +30,7 @@ STR = {
         "send": "보내기", "chat_ph": "메시지를 입력하세요…", "thinking": "생각 중…",
         "rec": "추천 빌드", "team": "추천 팀", "upgrade": "성장 우선순위", "save": "저장", "saved": "저장됨",
         "weapon": "무기", "echo": "에코", "main": "메인", "sub": "추옵", "no_key_hint": "설정 탭에서 API 키를 넣으면 실제 AI를 사용합니다.",
+        "main_dps": "메인 딜러", "sub_dps": "서브 딜러", "support": "서포터", "healer": "힐러",
     },
     "en": {
         "title": "AI Coach", "profile": "My Profile", "union": "Union Level",
@@ -38,6 +39,7 @@ STR = {
         "send": "Send", "chat_ph": "Type a message…", "thinking": "Thinking…",
         "rec": "Recommended Build", "team": "Team", "upgrade": "Upgrade Priority", "save": "Save", "saved": "Saved",
         "weapon": "Weapon", "echo": "Echo", "main": "Main", "sub": "Subs", "no_key_hint": "Add an API key in Settings to use the real AI.",
+        "main_dps": "Main DPS", "sub_dps": "Sub DPS", "support": "Support", "healer": "Healer",
     },
     "ja": {
         "title": "AIコーチ", "profile": "プロフィール", "union": "ユニオンレベル",
@@ -46,6 +48,7 @@ STR = {
         "send": "送信", "chat_ph": "メッセージを入力…", "thinking": "考え中…",
         "rec": "おすすめビルド", "team": "編成", "upgrade": "育成優先度", "save": "保存", "saved": "保存しました",
         "weapon": "武器", "echo": "エコー", "main": "メイン", "sub": "サブ", "no_key_hint": "設定でAPIキーを入れると実AIを使用します。",
+        "main_dps": "メインアタッカー", "sub_dps": "サブアタッカー", "support": "サポーター", "healer": "ヒーラー",
     },
     "zhHans": {
         "title": "AI教练", "profile": "我的资料", "union": "联盟等级",
@@ -54,6 +57,7 @@ STR = {
         "send": "发送", "chat_ph": "输入消息…", "thinking": "思考中…",
         "rec": "推荐配装", "team": "推荐队伍", "upgrade": "养成优先级", "save": "保存", "saved": "已保存",
         "weapon": "武器", "echo": "声骸", "main": "主属性", "sub": "副属性", "no_key_hint": "在设置中填入 API 密钥即可使用真实 AI。",
+        "main_dps": "主C", "sub_dps": "副C", "support": "辅助", "healer": "治疗",
     },
 }
 _STYLES = ["style_meta", "style_fun", "style_balanced", "style_free"]
@@ -118,6 +122,8 @@ class AiTab(QWidget):
         super().__init__()
         self._resos = _name_map(engine.resonators)
         self._weapons = _name_map(engine.weapons)
+        self._echoes = _name_map(engine.echoes)
+        self._sonatas = _name_map(engine.sonata_sets)
         self._messages: list[dict] = []  # {"role","content"}
         self._last_rec = None
         self._worker: _ChatWorker | None = None
@@ -279,8 +285,8 @@ class AiTab(QWidget):
         reso = self._resos.get(str(pick.resonator_id))
         name = LANG.name(reso) if reso else str(pick.resonator_id)
         parts = [name]
-        if pick.role:
-            parts.append(str(pick.role))
+        if pick.role:  # LLM 은 영문 역할 키(main_dps 등) — 화면엔 현지화명
+            parts.append(LANG.m(STR, pick.role) if pick.role in STR["ko"] else str(pick.role))
         if pick.weapon and pick.weapon.id:
             w = self._weapons.get(str(pick.weapon.id))
             if w:
@@ -293,8 +299,13 @@ class AiTab(QWidget):
             wl.addWidget(label(pick.reason, "Muted", wrap=True))
         if pick.echo and (pick.echo.sonata_ids or pick.echo.main_stats):
             bits = []
-            if pick.echo.sonata_ids:
-                bits.append(", ".join(pick.echo.sonata_ids))
+            if pick.echo.main_echo_id:  # 메인 에코는 id 대신 이름
+                e = self._echoes.get(str(pick.echo.main_echo_id))
+                if e:
+                    bits.append(LANG.name(e))
+            if pick.echo.sonata_ids:  # 소나타 세트 id(s-xxx) → 세트 이름
+                names = [LANG.name(s) for sid in pick.echo.sonata_ids if (s := self._sonatas.get(str(sid)))]
+                bits.append(", ".join(names) if names else ", ".join(pick.echo.sonata_ids))
             if pick.echo.main_stats:
                 bits.append(f"{LANG.m(STR,'main')} " + ", ".join(f"{k}:{v}" for k, v in pick.echo.main_stats.items()))
             if pick.echo.sub_stats:
