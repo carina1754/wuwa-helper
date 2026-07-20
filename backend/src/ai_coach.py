@@ -432,6 +432,9 @@ def chat(
     response = client.chat.completions.create(
         model=chosen_model,
         temperature=0.4,
+        # 추론(reasoning) 모델은 사고 토큰이 completion 한도를 공유 — 기본 한도(≈1k)면
+        # 사고만 하다 본문이 빈 채로 잘려 "응답을 이해하지 못했습니다"가 됨. 넉넉히.
+        max_tokens=8192,
         response_format={"type": "json_object"},
         messages=messages,
     )
