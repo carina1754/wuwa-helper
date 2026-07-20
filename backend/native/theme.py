@@ -108,6 +108,12 @@ QPushButton#Link { background: transparent; border: none; color: $accent; paddin
 /* text inputs — 토스 필드: 필 배경 + 포커스 파랑 아웃라인 */
 QLineEdit, QTextEdit, QPlainTextEdit { background: $surface2; border: 1px solid transparent; border-radius: 12px; padding: 9px 13px; color: $fg; selection-background-color: $sel; selection-color: $fg; }
 QLineEdit:focus, QTextEdit:focus, QPlainTextEdit:focus { border: 1px solid $accent; }
+/* 채팅 입력칸 — 카드 위에서도 또렷하게(상시 보더 + 한 단계 밝은 필) */
+QLineEdit#ChatInput { background: $surface3; border: 1px solid $line2; border-radius: 14px; padding: 11px 15px; font-size: 15px; }
+QLineEdit#ChatInput:focus { border: 1px solid $accent; }
+
+/* 채팅 말풍선 — 내 메시지(파랑 틴트) */
+QFrame#BubbleMe { background: $sel; border: none; border-radius: 14px; }
 
 /* combo box + popup + asset-free triangle arrow */
 QComboBox { background: $surface2; border: 1px solid transparent; border-radius: 12px; padding: 8px 13px; padding-right: 27px; color: $fg; min-height: 20px; font-weight: 600; }

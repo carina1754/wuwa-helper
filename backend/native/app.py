@@ -1,10 +1,9 @@
-"""메인 윈도우 셸 — 헤더(테마/언어) + 7탭. 웹 App 셸 대체."""
+"""메인 윈도우 셸 — 탭바 한 줄(우측 테마 토글) + 7탭. 웹 App 셸 대체."""
 from __future__ import annotations
 
 from PySide6.QtCore import Qt
 from PySide6.QtWidgets import (
     QApplication,
-    QHBoxLayout,
     QMainWindow,
     QPushButton,
     QTabWidget,
@@ -20,7 +19,7 @@ from .tabs.pickup import PickupTab
 from .tabs.settings import SettingsTab
 from .tabs.teams import TeamsTab
 from .tabs.updates import UpdatesTab
-from .widgets import label, vbox
+from .widgets import vbox
 
 # (title_key, factory). 순서 = 탭 순서. 기본 선택 = 업데이트.
 _TABS = [
@@ -41,11 +40,16 @@ class MainWindow(QMainWindow):
         self.resize(1180, 820)
         central = QWidget()
         self.setCentralWidget(central)
-        root = vbox(central, margins=(0, 0, 0, 0), spacing=0)
+        root = vbox(central, margins=(0, 6, 0, 0), spacing=0)
 
-        root.addWidget(self._build_header())
-
+        # 제목줄 없음(창 타이틀바가 앱명) — 탭바 오른쪽 코너에 테마 토글만 얹어 한 줄 구성
         self._tabs = QTabWidget()
+        self._theme_btn = QPushButton()
+        self._theme_btn.setObjectName("IconBtn")
+        self._theme_btn.setCursor(Qt.PointingHandCursor)
+        self._theme_btn.clicked.connect(THEME.toggle)
+        self._tabs.setCornerWidget(self._theme_btn, Qt.TopRightCorner)
+
         self._tab_widgets: list[QWidget] = []
         self._tab_keys = [k for k, _ in _TABS]
         for _key, factory in _TABS:
@@ -62,23 +66,6 @@ class MainWindow(QMainWindow):
         self._apply_theme()
         self._retranslate()
 
-    def _build_header(self) -> QWidget:
-        bar = QWidget()
-        lay = QHBoxLayout(bar)
-        lay.setContentsMargins(20, 12, 20, 12)
-        lay.setSpacing(10)
-
-        self._brand = label("", "Brand")
-        lay.addWidget(self._brand)
-        lay.addStretch(1)
-
-        self._theme_btn = QPushButton()
-        self._theme_btn.setObjectName("IconBtn")
-        self._theme_btn.setCursor(Qt.PointingHandCursor)
-        self._theme_btn.clicked.connect(THEME.toggle)
-        lay.addWidget(self._theme_btn)
-        return bar
-
     # --- reactive wiring ----------------------------------------------------
     def _on_tab_changed(self, index: int) -> None:
         fn = getattr(self._tabs.widget(index), "refresh", None)
@@ -91,7 +78,6 @@ class MainWindow(QMainWindow):
         self._theme_btn.setText("☀" if THEME.dark else "🌙")
 
     def _retranslate(self) -> None:
-        self._brand.setText(LANG.t("app_title"))
         for i, key in enumerate(self._tab_keys):
             self._tabs.setTabText(i, LANG.t(key))
         for w in self._tab_widgets:

@@ -25,7 +25,7 @@ from ..widgets import FlowLayout, card, chip, clear_layout, hbox, hsep, label, v
 STR = {
     "ko": {
         "title": "AI 빌딩", "profile": "내 프로필", "union": "유니온 레벨",
-        "pick": "공명자 선택 (최대 3명)", "play_style": "플레이 성향", "note": "메모",
+        "pick": "공명자 선택 (최대 3명)", "play_style": "플레이 성향",
         "style_meta": "메타/고점", "style_fun": "애정캐 위주", "style_balanced": "밸런스", "style_free": "자유롭게",
         "send": "보내기", "chat_ph": "메시지를 입력하세요…", "thinking": "생각 중…",
         "rec": "추천 빌드", "team": "추천 팀", "upgrade": "성장 우선순위", "save": "저장", "saved": "저장됨",
@@ -34,7 +34,7 @@ STR = {
     },
     "en": {
         "title": "AI Coach", "profile": "My Profile", "union": "Union Level",
-        "pick": "Select Resonators (up to 3)", "play_style": "Play Style", "note": "Note",
+        "pick": "Select Resonators (up to 3)", "play_style": "Play Style",
         "style_meta": "Meta / Ceiling", "style_fun": "Favorites", "style_balanced": "Balanced", "style_free": "Flexible",
         "send": "Send", "chat_ph": "Type a message…", "thinking": "Thinking…",
         "rec": "Recommended Build", "team": "Team", "upgrade": "Upgrade Priority", "save": "Save", "saved": "Saved",
@@ -43,7 +43,7 @@ STR = {
     },
     "ja": {
         "title": "AIコーチ", "profile": "プロフィール", "union": "ユニオンレベル",
-        "pick": "共鳴者を選択（最大3名）", "play_style": "プレイ傾向", "note": "メモ",
+        "pick": "共鳴者を選択（最大3名）", "play_style": "プレイ傾向",
         "style_meta": "メタ/火力", "style_fun": "推し優先", "style_balanced": "バランス", "style_free": "自由",
         "send": "送信", "chat_ph": "メッセージを入力…", "thinking": "考え中…",
         "rec": "おすすめビルド", "team": "編成", "upgrade": "育成優先度", "save": "保存", "saved": "保存しました",
@@ -52,7 +52,7 @@ STR = {
     },
     "zhHans": {
         "title": "AI教练", "profile": "我的资料", "union": "联盟等级",
-        "pick": "选择共鸣者（最多3名）", "play_style": "游玩风格", "note": "备注",
+        "pick": "选择共鸣者（最多3名）", "play_style": "游玩风格",
         "style_meta": "版本强度", "style_fun": "喜好优先", "style_balanced": "平衡", "style_free": "自由",
         "send": "发送", "chat_ph": "输入消息…", "thinking": "思考中…",
         "rec": "推荐配装", "team": "推荐队伍", "upgrade": "养成优先级", "save": "保存", "saved": "已保存",
@@ -153,34 +153,33 @@ class AiTab(QWidget):
         pl.addWidget(self._pick_lb)
         self._picker = ChipPicker()
         pl.addWidget(self._picker)
-        self._note_lb = label("")
-        self._note = QLineEdit()
-        pl.addWidget(self._note_lb)
-        pl.addWidget(self._note)
         root.addWidget(prof)
 
-        # 대화 로그(스크롤)
+        # 채팅 영역 — 카드 박스(로그 + 안내 + 입력줄 묶음)
+        chat_box = card()
+        cl = vbox(chat_box, margins=(14, 12, 14, 12), spacing=8)
         self._log_scroll = QScrollArea()
         self._log_scroll.setWidgetResizable(True)
         log_host = QWidget()
         self._log = vbox(log_host, margins=(4, 4, 4, 4), spacing=8)
         self._log.addStretch(1)
         self._log_scroll.setWidget(log_host)
-        root.addWidget(self._log_scroll, 1)
+        cl.addWidget(self._log_scroll, 1)
 
         self._hint = label("", "Faint")
-        root.addWidget(self._hint)
+        cl.addWidget(self._hint)
 
-        # 입력줄
         bar = hbox(spacing=8)
         self._input = QLineEdit()
+        self._input.setObjectName("ChatInput")  # 카드 위에서도 또렷한 입력칸
         self._input.returnPressed.connect(self._send)
         self._send_btn = QPushButton()
         self._send_btn.setObjectName("Accent")
         self._send_btn.clicked.connect(self._send)
         bar.addWidget(self._input, 1)
         bar.addWidget(self._send_btn)
-        root.addLayout(bar)
+        cl.addLayout(bar)
+        root.addWidget(chat_box, 1)
 
         self.retranslate()
 
@@ -188,15 +187,14 @@ class AiTab(QWidget):
     def _build_profile(self):
         from src.models import AiProfile
 
-        note = self._note.text().strip()
         # LLM이 중국어 등으로 새는 것 방지: 프로필 note는 매 요청 시스템 프롬프트에 실림
-        force_ko = "반드시 한국어로만 답변하세요."
+        # (메모 입력칸은 폐기 — 하단 채팅 입력으로 충분)
         return AiProfile(
             union_level=self._union.value(),
             owned_characters=self._picker.selected(),
             desired_characters=[],  # UI 폐기 — 요청 스키마 호환용 빈 리스트
             play_style=LANG.m(STR, self._style.currentData() or _STYLES[0]),
-            note=f"{note} / {force_ko}" if note else force_ko,
+            note="반드시 한국어로만 답변하세요.",
         )
 
     # --- chat ---------------------------------------------------------------
@@ -243,7 +241,8 @@ class AiTab(QWidget):
 
     # --- render -------------------------------------------------------------
     def _append_bubble(self, role: str, text: str) -> None:
-        box = card("Card2" if role == "user" else "Card")
+        # 채팅이 카드 안이라 내 메시지=파랑 틴트, AI=톤 박스로 구분
+        box = card("BubbleMe" if role == "user" else "Card2")
         bl = vbox(box, margins=(12, 10, 12, 10))
         bl.addWidget(label(text, wrap=True))
         wrap = hbox()
@@ -336,7 +335,6 @@ class AiTab(QWidget):
         self._union_lb.setText(LANG.m(STR, "union"))
         self._style_lb.setText(LANG.m(STR, "play_style"))
         self._pick_lb.setText(LANG.m(STR, "pick"))
-        self._note_lb.setText(LANG.m(STR, "note"))
         self._send_btn.setText(LANG.m(STR, "send"))
         self._input.setPlaceholderText(LANG.m(STR, "chat_ph"))
         if not (self._worker and self._worker.isRunning()):
