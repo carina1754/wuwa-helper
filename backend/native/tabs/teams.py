@@ -1,7 +1,7 @@
 """파티 탭 — 최대 3인 팀 딜 시뮬. 권위 엔진(engine.calculate) 단일 소스.
 
-에코는 접어서 표시: 엔진이 서브옵션을 배치와 무관하게 멤버 풀에 합산하므로
-멤버당 서브옵션 한 패널로 축약. 소나타 5피스는 같은 세트 에코 5개 id로 발동.
+에코는 슬롯 5개(C4/C3/C3/C1/C1) 개별 선택 + 소나타 콤보는 세트 일괄 적용 프리셋.
+서브옵션은 엔진이 배치와 무관하게 멤버 풀에 합산하므로 멤버당 한 패널로 축약.
 """
 from __future__ import annotations
 
@@ -112,6 +112,7 @@ class _MemberEditor(QFrame):
     """멤버 한 명 빌드 에디터. build() → engine.MemberIn."""
 
     removed = Signal(object)
+    resoChanged = Signal()
 
     def __init__(self, index: int) -> None:
         super().__init__()
@@ -119,14 +120,8 @@ class _MemberEditor(QFrame):
         self._resos = engine.resonators()
         self._weapons = engine.weapons()
         self._sonatas = engine.sonata_sets()
+        self._echoes = engine.echoes()
         self._gc = engine.game_config()
-        # 소나타명 → 소속 에코 id 목록(5피스 발동용)
-        self._echo_ids_by_sonata: dict[str, list[str]] = {}
-        for s in self._sonatas:
-            nm = s.get("name_ko")
-            self._echo_ids_by_sonata[nm] = [
-                str(e["id"]) for e in engine.echoes() if nm in (e.get("sonata") or [])
-            ]
 
         lay = vbox(self, margins=(16, 14, 16, 14), spacing=8)
 
@@ -184,10 +179,15 @@ class _MemberEditor(QFrame):
         r2.addWidget(self._rank)
         lay.addLayout(r2)
 
-        # 스킬 레벨
-        self._skill = _spin(1, 10, 10)
-        self._skill_row = _labeled("", self._skill)
-        lay.addWidget(self._skill_row)
+        # 스킬별 개별 레벨(damage 있는 스킬만) — _on_reso 에서 재구성
+        self._skill_lb = label("", "Muted")
+        lay.addWidget(self._skill_lb)
+        self._skill_grid = QGridLayout()
+        self._skill_grid.setContentsMargins(0, 0, 0, 0)
+        self._skill_grid.setHorizontalSpacing(6)
+        self._skill_grid.setVerticalSpacing(4)
+        self._skill_spins: list[tuple[int, QSpinBox]] = []  # (skill_index, spin)
+        lay.addLayout(self._skill_grid)
 
         lay.addWidget(hsep())
 
@@ -200,21 +200,42 @@ class _MemberEditor(QFrame):
 
         self._mains_lb = label("", "Muted")
         lay.addWidget(self._mains_lb)
+        # 슬롯 5개: [에코 콤보 + 메인스탯 콤보] 세로 묶음 셀, 3열 그리드
+        self._echo_combos: list[QComboBox] = []
         self._main_combos: list[QComboBox] = []
-        mains_grid = QGridLayout()
-        mains_grid.setContentsMargins(0, 0, 0, 0)
-        mains_grid.setHorizontalSpacing(6)
-        mains_grid.setVerticalSpacing(6)
+        slots_grid = QGridLayout()
+        slots_grid.setContentsMargins(0, 0, 0, 0)
+        slots_grid.setHorizontalSpacing(6)
+        slots_grid.setVerticalSpacing(6)
         for i, cost in enumerate(_SLOT_COSTS):
+            ecb = QComboBox()
+            # sizeHint 가 최장 에코명 기준으로 커져 가로 오버플로 → 최소 길이 기준으로 축소
+            ecb.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
+            ecb.setMinimumContentsLength(6)
+            ecb.setMinimumWidth(0)
+            for e in self._echoes:
+                if int(e["cost"]) == cost:
+                    ecb.addItem(LANG.name(e), str(e["id"]))
+            self._echo_combos.append(ecb)
             cb = QComboBox()
-            cb.setMinimumWidth(0)  # 그리드 셀에 맞춰 축소(가로 오버플로 방지)
+            cb.setSizeAdjustPolicy(QComboBox.AdjustToMinimumContentsLengthWithIcon)
+            cb.setMinimumContentsLength(6)
+            cb.setMinimumWidth(0)
             for opt in calc.echo_main_options(self._gc, cost):
                 cb.addItem(f"{LANG.stat(opt['key'])}·C{cost}", opt["key"])
             self._main_combos.append(cb)
-            mains_grid.addWidget(cb, i // 3, i % 3)
+            cell = QWidget()
+            clay = vbox(cell, spacing=2)
+            clay.addWidget(label(f"C{cost}", "Faint"))
+            clay.addWidget(ecb)
+            clay.addWidget(cb)
+            slots_grid.addWidget(cell, i // 3, i % 3)
         for c in range(3):
-            mains_grid.setColumnStretch(c, 1)
-        lay.addLayout(mains_grid)
+            slots_grid.setColumnStretch(c, 1)
+        lay.addLayout(slots_grid)
+        # 소나타 = 세트 일괄 적용 프리셋(이후 슬롯별 오버라이드 가능)
+        self._sonata.currentIndexChanged.connect(self._apply_sonata)
+        self._apply_sonata()
 
         # 축약 서브옵션
         self._subs_lb = label("", "Muted")
@@ -244,9 +265,40 @@ class _MemberEditor(QFrame):
         for w in self._weapons:
             if wt is None or w.get("weapon_type") == wt:
                 self._weap.addItem(LANG.name(w), str(w["id"]))
+        self._rebuild_skills(reso)
         # 소나타 메인 기본값: C4=크리 피해, C3=속성 피해%, C1=공격력%
         if reso:
             self._apply_default_mains(reso.get("element"))
+        self.resoChanged.emit()
+
+    def _rebuild_skills(self, reso: dict | None) -> None:
+        """damage 있는 스킬만 개별 레벨 스핀(2열). 라벨은 엔진 규약 SkillType 그대로."""
+        clear_layout(self._skill_grid)
+        self._skill_spins = []
+        for idx, sk in enumerate((reso.get("skills") or []) if reso else []):
+            if not sk.get("damage"):
+                continue
+            sp = _spin(1, 10, 10)
+            cell = QWidget()
+            clay = hbox(cell, spacing=6)
+            clay.addWidget(label(sk.get("SkillType") or "", "Faint"))
+            clay.addStretch(1)
+            clay.addWidget(sp)
+            pos = len(self._skill_spins)
+            self._skill_spins.append((idx, sp))
+            self._skill_grid.addWidget(cell, pos // 2, pos % 2)
+
+    def _apply_sonata(self) -> None:
+        """소나타 일괄 적용: 각 슬롯을 세트 소속 + cost 일치 첫 에코로 설정."""
+        set_name = self._sonata.currentData()
+        for slot, cost in enumerate(_SLOT_COSTS):
+            e = next((e for e in self._echoes
+                      if int(e["cost"]) == cost and set_name in (e.get("sonata") or [])), None)
+            if e is None:
+                continue
+            i = self._echo_combos[slot].findData(str(e["id"]))
+            if i >= 0:
+                self._echo_combos[slot].setCurrentIndex(i)
 
     def _apply_default_mains(self, element: str | None) -> None:
         edmg = ELEMENT_DMG_KEY.get(element or "")
@@ -259,11 +311,8 @@ class _MemberEditor(QFrame):
     def build(self):
         rid = self._reso.currentData()
         reso = next((r for r in self._resos if str(r["id"]) == rid), None)
-        n_skills = len(reso.get("skills") or []) if reso else 8
-        sk = self._skill.value()
+        skills = (reso.get("skills") or []) if reso else []
 
-        set_name = self._sonata.currentData()
-        pool = self._echo_ids_by_sonata.get(set_name) or ["0"]
         subs = [
             engine.SubIn(key=key, value=sp.value())
             for key, sp in self._sub_spins.items()
@@ -272,11 +321,15 @@ class _MemberEditor(QFrame):
         echoes = []
         for slot, cost in enumerate(_SLOT_COSTS):
             echoes.append(engine.EchoIn(
-                echo_id=pool[slot % len(pool)],
+                echo_id=self._echo_combos[slot].currentData() or "0",
                 cost=cost,
                 main=self._main_combos[slot].currentData(),
                 subs=subs if slot == 0 else [],  # 배치 무관 → 첫 슬롯에 합산
             ))
+        # 기본 10 + 노출된 스핀 값으로 덮기(damage 없는 스킬은 10 고정)
+        skill_levels = {i: 10 for i in range(len(skills))}
+        for idx, sp in self._skill_spins:
+            skill_levels[idx] = sp.value()
         return engine.MemberIn(
             reso_id=rid,
             level=self._lvl.value(),
@@ -284,7 +337,7 @@ class _MemberEditor(QFrame):
             weapon_level=self._wlv.value(),
             weapon_rank=self._rank.currentData(),
             echoes=echoes,
-            skill_levels={i: sk for i in range(n_skills)},
+            skill_levels=skill_levels,
             full_uptime=self._full.isChecked(),
             sequence=self._seq.currentData(),
         )
@@ -300,7 +353,7 @@ class _MemberEditor(QFrame):
         self._weap_lb.setText(LANG.m(STR, "weapon"))
         self._wlv_lb.setText(LANG.m(STR, "wlv"))
         self._rank_lb.setText(LANG.m(STR, "rank"))
-        self._skill_row.layout().itemAt(0).widget().setText(LANG.m(STR, "skill"))
+        self._skill_lb.setText(LANG.m(STR, "skill"))
         self._reso_row.layout().itemAt(0).widget().setText(LANG.t("codex_resonators"))
         self._sonata_row.layout().itemAt(0).widget().setText(LANG.m(STR, "sonata"))
         self._mains_lb.setText(LANG.m(STR, "mains"))
@@ -437,8 +490,15 @@ class TeamsTab(QWidget):
             return
         m = _MemberEditor(len(self._members))
         m.removed.connect(self._remove_member)
+        m.resoChanged.connect(self._sync_reso_locks)
         self._members.append(m)
         self._members_lay.addWidget(m)
+        # 새 멤버는 아직 안 뽑힌 첫 공명자로(중복 방지)
+        taken = {x._reso.currentData() for x in self._members if x is not m}
+        for i in range(m._reso.count()):
+            if m._reso.itemData(i) not in taken:
+                m._reso.setCurrentIndex(i)
+                break
         self._reindex()
 
     def _remove_member(self, m: _MemberEditor) -> None:
@@ -453,6 +513,18 @@ class TeamsTab(QWidget):
         for i, m in enumerate(self._members):
             m.set_index(i)
         self._add_btn.setVisible(len(self._members) < 3)  # 3명 차면 추가 버튼 숨김
+        self._sync_reso_locks()
+
+    def _sync_reso_locks(self) -> None:
+        """다른 멤버가 이미 고른 공명자는 콤보 아이템 비활성(자기 선택은 유지)."""
+        taken = {m._reso.currentData() for m in self._members}
+        for m in self._members:
+            cb = m._reso
+            own = cb.currentData()
+            model = cb.model()  # QComboBox 기본 = QStandardItemModel
+            for i in range(cb.count()):
+                rid = cb.itemData(i)
+                model.item(i).setEnabled(rid == own or rid not in taken)
 
     # --- 계산 --------------------------------------------------------------
     def _opts(self):
@@ -606,6 +678,12 @@ if __name__ == "__main__":  # smoke: build 2 members + real engine calc + all la
     app = QApplication([])
     tab = TeamsTab()
     tab._add_member()  # 2 members
+    m1, m2 = tab._members
+    assert m1._reso.currentData() != m2._reso.currentData(), "새 멤버는 다른 공명자로 자동 배정"
+    j = m2._reso.findData(m1._reso.currentData())
+    assert not m2._reso.model().item(j).isEnabled(), "멤버1 선택이 멤버2 콤보에서 disabled"
+    assert m1._skill_spins, "스킬별 레벨 스핀 존재"
+    assert len(m1._echo_combos) == 5 and all(c.count() for c in m1._echo_combos), "에코 콤보 5개"
     for code in ("ko", "en", "ja", "zhHans"):
         LANG.set(code)
         tab.retranslate()

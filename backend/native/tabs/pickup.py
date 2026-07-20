@@ -166,8 +166,7 @@ class PickupTab(QWidget):
         nm = label(w.name_ko or "", None)
         nm.setStyleSheet("font-size:14px; font-weight:600;")
         h.addWidget(nm)
-        if w.rarity:
-            h.addWidget(label("★" * int(w.rarity), "Gold"))
+        # ★ 등급 생략 — 픽업 무기는 전부 5성
         if w.weapon_type:
             h.addWidget(label(w.weapon_type, "Faint"))
         return f

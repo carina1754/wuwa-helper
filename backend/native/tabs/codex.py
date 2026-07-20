@@ -302,11 +302,12 @@ class CodexTab(QWidget):
         items = self._items()
         # 레어리티 칩
         rarities = sorted({it.get("rarity") for it in items if it.get("rarity")}, reverse=True)
+        # exclusive 그룹은 재클릭 해제가 안 됨 → 비배타 + 핸들러에서 나머지 끄기(토글 가능)
         rg = QButtonGroup(self._filter_host)
+        rg.setExclusive(False)
         for r in rarities:
             b = chip(f"{r}★")
-            b.clicked.connect(lambda _c, rr=r, bb=None: None)
-            b.toggled.connect(lambda on, rr=r: self._on_rarity(rr, on))
+            b.toggled.connect(lambda on, rr=r, btn=b: self._on_rarity(rr, on, btn))
             rg.addButton(b)
             self._filter_lay.addWidget(b)
         self._filter_lay.addSpacing(10)
@@ -315,9 +316,10 @@ class CodexTab(QWidget):
         vals = sorted({it.get(fk) for it in items if it.get(fk) is not None},
                       key=lambda x: (str(type(x)), x))
         fg = QButtonGroup(self._filter_host)
+        fg.setExclusive(False)
         for v in vals:
             b = chip(self._facet_label(fk, v))
-            b.toggled.connect(lambda on, vv=v: self._on_facet(vv, on))
+            b.toggled.connect(lambda on, vv=v, btn=b: self._on_facet(vv, on, btn))
             fg.addButton(b)
             self._filter_lay.addWidget(b)
         self._filter_lay.addStretch(1)
@@ -333,11 +335,21 @@ class CodexTab(QWidget):
             return f"{LANG.m(STR,'cost')} {value}"
         return str(value)
 
-    def _on_rarity(self, rarity: int, on: bool) -> None:
+    def _on_rarity(self, rarity: int, on: bool, btn=None) -> None:
+        if on:
+            # 수동 배타: 다른 칩을 먼저 끔(toggled(False)→필터 None 덮음) → 마지막에 내 값 대입
+            for b in self._rarity_group.buttons():
+                if b is not btn and b.isChecked():
+                    b.setChecked(False)
         self._rarity_filter = rarity if on else None
         self._render_grid()
 
-    def _on_facet(self, value, on: bool) -> None:
+    def _on_facet(self, value, on: bool, btn=None) -> None:
+        if on:
+            # 수동 배타: 위와 동일 순서(끄기 먼저, 대입 마지막)
+            for b in self._facet_group.buttons():
+                if b is not btn and b.isChecked():
+                    b.setChecked(False)
         self._facet_filter = value if on else None
         self._render_grid()
 
@@ -399,4 +411,21 @@ if __name__ == "__main__":  # smoke
     WeaponDetail(engine.weapons()[0])
     EchoDetail(engine.echoes()[0])
     app.processEvents()
+    # 필터 칩 토글: 적용 → 재클릭 해제 → 다른 칩 클릭 시 수동 배타
+    LANG.set("ko")
+    t.retranslate()
+    total = len(t._items())
+    c5 = next(b for b in t._rarity_group.buttons() if b.text() == "5★")
+    c4 = next(b for b in t._rarity_group.buttons() if b.text() == "4★")
+    c5.click()
+    assert t._rarity_filter == 5 and c5.isChecked()
+    assert len(t._grid_host.findChildren(GridCell)) == sum(
+        1 for it in t._items() if it.get("rarity") == 5
+    )
+    c5.click()  # 재클릭 → 해제 + 전체 노출
+    assert t._rarity_filter is None and not c5.isChecked()
+    assert len(t._grid_host.findChildren(GridCell)) == total
+    c5.click()
+    c4.click()  # 수동 배타: 5★ 자동 해제
+    assert t._rarity_filter == 4 and c4.isChecked() and not c5.isChecked()
     print("codex ok")

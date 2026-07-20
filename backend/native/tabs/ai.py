@@ -14,7 +14,6 @@ from PySide6.QtWidgets import (
     QLineEdit,
     QPushButton,
     QScrollArea,
-    QSpinBox,
     QWidget,
 )
 
@@ -24,7 +23,7 @@ from ..widgets import FlowLayout, card, chip, clear_layout, hbox, hsep, label, v
 
 STR = {
     "ko": {
-        "title": "AI 빌딩", "profile": "내 프로필", "union": "유니온 레벨",
+        "title": "AI 빌딩", "profile": "내 프로필",
         "pick": "공명자 선택 (최대 3명)", "play_style": "플레이 성향",
         "style_meta": "메타/고점", "style_fun": "애정캐 위주", "style_balanced": "밸런스", "style_free": "자유롭게",
         "send": "보내기", "chat_ph": "메시지를 입력하세요…", "thinking": "생각 중…",
@@ -33,7 +32,7 @@ STR = {
         "main_dps": "메인 딜러", "sub_dps": "서브 딜러", "support": "서포터", "healer": "힐러",
     },
     "en": {
-        "title": "AI Coach", "profile": "My Profile", "union": "Union Level",
+        "title": "AI Coach", "profile": "My Profile",
         "pick": "Select Resonators (up to 3)", "play_style": "Play Style",
         "style_meta": "Meta / Ceiling", "style_fun": "Favorites", "style_balanced": "Balanced", "style_free": "Flexible",
         "send": "Send", "chat_ph": "Type a message…", "thinking": "Thinking…",
@@ -42,7 +41,7 @@ STR = {
         "main_dps": "Main DPS", "sub_dps": "Sub DPS", "support": "Support", "healer": "Healer",
     },
     "ja": {
-        "title": "AIコーチ", "profile": "プロフィール", "union": "ユニオンレベル",
+        "title": "AIコーチ", "profile": "プロフィール",
         "pick": "共鳴者を選択（最大3名）", "play_style": "プレイ傾向",
         "style_meta": "メタ/火力", "style_fun": "推し優先", "style_balanced": "バランス", "style_free": "自由",
         "send": "送信", "chat_ph": "メッセージを入力…", "thinking": "考え中…",
@@ -51,7 +50,7 @@ STR = {
         "main_dps": "メインアタッカー", "sub_dps": "サブアタッカー", "support": "サポーター", "healer": "ヒーラー",
     },
     "zhHans": {
-        "title": "AI教练", "profile": "我的资料", "union": "联盟等级",
+        "title": "AI教练", "profile": "我的资料",
         "pick": "选择共鸣者（最多3名）", "play_style": "游玩风格",
         "style_meta": "版本强度", "style_fun": "喜好优先", "style_balanced": "平衡", "style_free": "自由",
         "send": "发送", "chat_ph": "输入消息…", "thinking": "思考中…",
@@ -138,12 +137,6 @@ class AiTab(QWidget):
         self._prof_lb = label("", "H2")
         pl.addWidget(self._prof_lb)
         row = hbox(spacing=10)
-        self._union_lb = label("")
-        self._union = QSpinBox()
-        self._union.setRange(1, 90)
-        self._union.setValue(60)
-        row.addWidget(self._union_lb)
-        row.addWidget(self._union)
         self._style_lb = label("")
         self._style = QComboBox()
         row.addWidget(self._style_lb)
@@ -190,7 +183,7 @@ class AiTab(QWidget):
         # LLM이 중국어 등으로 새는 것 방지: 프로필 note는 매 요청 시스템 프롬프트에 실림
         # (메모 입력칸은 폐기 — 하단 채팅 입력으로 충분)
         return AiProfile(
-            union_level=self._union.value(),
+            union_level=None,  # 입력칸 폐기 — 스키마 호환용
             owned_characters=self._picker.selected(),
             desired_characters=[],  # UI 폐기 — 요청 스키마 호환용 빈 리스트
             play_style=LANG.m(STR, self._style.currentData() or _STYLES[0]),
@@ -332,7 +325,6 @@ class AiTab(QWidget):
     def retranslate(self) -> None:
         self._title.setText(LANG.m(STR, "title"))
         self._prof_lb.setText(LANG.m(STR, "profile"))
-        self._union_lb.setText(LANG.m(STR, "union"))
         self._style_lb.setText(LANG.m(STR, "play_style"))
         self._pick_lb.setText(LANG.m(STR, "pick"))
         self._send_btn.setText(LANG.m(STR, "send"))
@@ -375,7 +367,7 @@ if __name__ == "__main__":  # smoke: build + max-3 chip enforce + mock chat (no 
     LANG.set("ko")
     # profile builds + one mock turn (no API key → ai_coach returns Korean stub)
     prof = t._build_profile()
-    assert prof.union_level == 60 and len(prof.owned_characters) == 3 and prof.desired_characters == []
+    assert prof.union_level is None and len(prof.owned_characters) == 3 and prof.desired_characters == []
     assert "한국어" in (prof.note or "")  # 한국어 강제 지시 포함
     resp = engine.ai_chat(engine.AiChatRequest(messages=[t._to_msg({"role": "user", "content": "추천해줘"})], profile=prof))
     assert resp.reply
