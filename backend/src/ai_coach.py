@@ -19,7 +19,9 @@ RULES_SUMMARY = """[빌드/데미지 규칙 요약]
 - 크리티컬 기대값: 크리율×2 + 크리피해 ≈ 200(예: 크리율 70 / 크리피해 130) 을 목표로 서브스탯 배분.
 - 메인 에코(cost 4)는 속성피해% 또는 역할별 주요 스탯을 메인스탯으로 선택.
 - 소나타 세트: 2세트 효과는 조합 가능, 5세트(주 세트)는 캐릭터 역할/속성에 맞춰 1개 선택.
-- 역할: main_dps(주 딜러)·sub_dps(보조 딜러)·support(버퍼/디버퍼)·healer(힐러). 팀은 보통 주딜1+보조/서폿1+힐/서폿1.
+- 역할: main_dps(주 딜러)·sub_dps(보조 딜러)·support(버퍼/디버퍼)·healer(힐러).
+- 파티는 **정확히 3명**(게임 규칙상 4명 이상 불가). 주딜1+보조/서폿1+힐/서폿1 구성을 기본으로 한다.
+- 사용자가 보유(owned_characters)로 지정한 공명자를 우선 사용하고, 임의로 다른 캐릭터로 대체하지 않는다.
 - 무기는 캐릭터 무기 타입(weapon_type)이 일치해야 장착 가능. 예산 대안(alt_ids)을 함께 제시.
 - 에코 추가옵션(추옵): 캐릭터마다 우선순위가 높은 추옵을 한국어 스탯명으로 최대 5개까지 제시(예: 크리 피해·크리율·공격력%·공명 스킬 피해·공격력). 크리 기대값 목표를 우선하되 역할에 맞게 조정.
 - 업그레이드 순서: 보유/희망 주딜의 무기·에코 → 서폿 → 힐러 순으로 자원 투자 권장.
@@ -46,6 +48,7 @@ OUTPUT_CONTRACT = """[출력 계약]
   }
 }
 규칙:
+- team 배열은 **최대 3개**(게임 파티 정원 3명). 4명 이상 절대 금지.
 - 모든 id는 반드시 아래 카탈로그 인덱스에 존재하는 값만 사용한다(환각 금지).
 - echo.sub_stats에는 추천 추가옵션(추옵)을 우선순위 순 한국어 스탯명으로 최대 5개까지 넣는다(id 금지).
 - upgrade_order의 각 문자열은 한국어 이름만 쓰고 id·괄호숫자를 넣지 않는다(예: "루시 무기 → 에코").
@@ -433,11 +436,28 @@ def chat(
         messages=messages,
     )
     resp = _parse_reply(response.choices[0].message.content or "", catalog)
-    # 후검증(안전망): 유사 이름 오선택 교정 → 지정 메인 딜러 역할 강제.
+    # 후검증(안전망): 유사 이름 오선택 교정 → 지정 메인 딜러 역할 강제 → 파티 정원 3명 클램프.
     if mentioned:
         resp = _enforce_mentioned_resonators(resp, mentioned, catalog)
     if pinned:
         resp = _enforce_pinned_main_dps(resp, pinned, catalog)
+    resp = _clamp_party_size(resp, request.profile, catalog)
+    return resp
+
+
+def _clamp_party_size(resp: AiChatResponse, profile: AiProfile, catalog: dict) -> AiChatResponse:
+    """게임 파티 정원 3명 강제(LLM 이 4명+ 반환 시 결정적 컷). 보유 지정 공명자 우선 유지."""
+    rec = resp.recommendation
+    if not rec or len(rec.team) <= 3:
+        return resp
+    owned = {n.strip() for n in (profile.owned_characters or []) if n and n.strip()}
+
+    def _is_owned(pick) -> bool:
+        r = catalog["resonators"].get(pick.resonator_id)
+        return bool(r and (r.get("name_ko") or "").strip() in owned)
+
+    kept = [p for p in rec.team if _is_owned(p)] + [p for p in rec.team if not _is_owned(p)]
+    rec.team = kept[:3]
     return resp
 
 
