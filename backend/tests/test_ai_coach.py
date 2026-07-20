@@ -61,8 +61,10 @@ def test_parse_reply_filters_unknown_ids():
     assert team[0].echo.sonata_ids == []
 
 
-def test_parse_reply_handles_plain_text():
+def test_parse_reply_hides_non_json_output():
+    # JSON 강제 모드에서 비JSON = 잘림/추론 누출 — 원문 대신 한국어 재시도 안내
     catalog = {"resonators": {}, "weapons": {}, "echoes": {}, "sonatas": {}}
-    resp = ai_coach._parse_reply("이건 그냥 텍스트", catalog)
+    resp = ai_coach._parse_reply('We need to respond with JSON only. The user says "', catalog)
     assert resp.recommendation is None
-    assert "텍스트" in resp.reply
+    assert "We need" not in resp.reply
+    assert "잘렸" in resp.reply
